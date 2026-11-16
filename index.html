@@ -10,74 +10,122 @@
       font-size: 16px;
     }
 
-    /* 使用 rem 設定標題與內文 */
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      padding: 2rem;
+      background-color: #121212;
+      color: #e0e0e0;
+    }
+
     .main-title {
       font-size: 2rem; /* 相當於 32px */
     }
 
     .content-text {
       font-size: 1rem; /* 相當於 16px */
+      margin-bottom: 1.5rem;
     }
 
-    .small-note {
-      font-size: 0.875rem; /* 相當於 14px */
+    /* 使用 CSS Grid 建立 5 個對齊欄位 */
+    .resource-grid {
+      display: grid;
+      grid-template-columns: minmax(300px, max-content) 40px minmax(180px, max-content) 40px minmax(180px, max-content);
+      align-items: center;
+      row-gap: 0.6rem;
+    }
+
+    .resource-grid a {
+      font-size: 14px;
+      color: #8ab4f8; /* 調整為清晰的連結顏色 */
+      text-decoration: none;
+    }
+
+    .resource-grid a:hover {
+      text-decoration: underline;
+    }
+
+    .dot {
+      text-align: center;
+      color: #888;
     }
   </style>
 </head>
 <body>
   <h1 class="main-title">品稦! 妳好</h1>
   <p class="content-text">英文測驗卷</p>
+
+  <div class="resource-grid">
+    <!-- 英語 Lesson 3 -->
+    <a href="國中英語_Lesson3_RoomGPT_50題綜合自我評量測驗與詳解-單字.html">國中英語_Lesson3_單字</a>
+    <span class="dot">...</span>
+    <a href="國中英語_Lesson3_RoomGPT_50題綜合自我評量測驗與詳解.docx">Lesson3_單字.docx</a>
+    <span></span><span></span>
+
+    <a href="國中英語_Lesson3_50題綜合模擬試卷與詳解-文法.html">國中英語_Lesson3_文法</a>
+    <span class="dot">...</span>
+    <a href="國中英語_Lesson3_50題綜合模擬試卷與詳解-文法.docx">Lesson3_文法.docx</a>
+    <span></span><span></span>
+
+    <!-- 英語 Lesson 4 -->
+    <a href="國中英語_Lesson4_50題綜合自我評量測驗卷與詳解-單字.html">國中英語_Lesson4_單字</a>
+    <span class="dot">...</span>
+    <a href="國中英語_Lesson4_50題綜合模擬試卷與詳解-單字.docx">Lesson4_單字.docx</a>
+    <span></span><span></span>
+
+    <a href="國中英語_Lesson4_50題綜合模擬試卷與詳解-文法.html">國中英語_Lesson4_文法</a>
+    <span class="dot">...</span>
+    <a href="國中英語_Lesson4_50題綜合模擬試卷與詳解-文法.docx">Lesson4_文法.docx</a>
+    <span></span><span></span>
+
+    <!-- 七年級生物 -->
+    <a href="七年級生物_2-2酵素_50題綜合模擬試卷.html">國中生物_2-2酵素</a>
+    <span class="dot">...</span>
+    <a href="七年級生物_2-2酵素_50題綜合模擬試卷.docx">2-2酵素.docx</a>
+    <span></span><span></span>
+
+    <a href="七年級生物_2-3植物如何製造養分_50題綜合模擬試卷與詳解.html">國中生物_2-3植物如何製造養分</a>
+    <span class="dot">...</span>
+    <a href="七年級生物_2-3植物如何製造養分_50題綜合模擬試卷與詳解.docx">2-3植物如何製造養分.docx</a>
+    <span></span><span></span>
+
+    <a href="七年級生物_2-4人體如何獲得養分_50題綜合模擬試卷.html">國中生物_2-4人體如何獲得養分</a>
+    <span class="dot">...</span>
+    <a href="七年級生物_2-4人體如何獲得養分_50題綜合模擬試卷.docx">2-4人體如何獲得養分.docx</a>
+    <span></span><span></span>
+
+    <a href="七年級生物_3-1植物的運輸構造_50題綜合模擬試卷與詳解.html">國中生物_3-1植物的運輸構造</a>
+    <span class="dot">...</span>
+    <a href="七年級生物_3-1植物的運輸構造_50題綜合模擬試卷與詳解.docx">3-1植物的運輸構造.docx</a>
+    <span></span><span></span>
+
+    <a href="七年級生物_3-2人體的循環_50題綜合模擬試卷與詳解.html">國中生物_3-2人體的循環</a>
+    <span class="dot">...</span>
+    <a href="七年級生物_3-2人體的循環_50題綜合模擬試卷與詳解.docx">3-2人體的循環.docx</a>
+    <span></span><span></span>
+
+    <a href="七年級生物_3-3人體的防禦.html">國中生物3-3人體的防禦</a>
+    <span class="dot">...</span>
+    <a href="七年級生物_3-3人體的防禦.docx">3-3人體的防禦.docx</a>
+    <span></span><span></span>
+
+    <!-- 國中數學 (包含 PDF，佔滿 5 個欄位) -->
+    <a href="國中數學2-1質因數分解_50題綜合模擬試卷與詳解.html">國中數學2-1質因數分解</a>
+    <span class="dot">...</span>
+    <a href="國中數學2-1質因數分解_50題綜合模擬試卷與詳解.docx">2-1質因數分解.docx</a>
+    <span class="dot">...</span>
+    <a href="國中數學2-1質因數分解_50題綜合模擬試卷與詳解.pdf">2-1質因數分解.pdf</a>
+
+    <a href="國中數學2-2_公因數與公倍數_會考模擬試卷50題_原生公式版.html">國中數學2-2_公因數與公倍數</a>
+    <span class="dot">...</span>
+    <a href="國中數學2-2_公因數與公倍數_會考模擬試卷50題_原生公式版.docx">2-2_公因數與公倍數.docx</a>
+    <span class="dot">...</span>
+    <a href="國中數學2-2_公因數與公倍數_會考模擬試卷50題_原生公式版.pdf">2-2_公因數與公倍數.pdf</a>
+
+    <a href="國中數學一_2-3分數的四則運算_50題綜合模擬試卷與詳解.html">國中數學2-3_分數的四則運算</a>
+    <span class="dot">...</span>
+    <a href="國中數學一_2-3分數的四則運算_50題綜合模擬試卷與詳解.docx">2-3_分數的四則運算.docx</a>
+    <span class="dot">...</span>
+    <a href="國中數學一_2-3分數的四則運算_50題綜合模擬試卷與詳解.pdf">2-3_分數的四則運算.pdf</a>
+  </div>
 </body>
-
-<a href="國中英語_Lesson3_RoomGPT_50題綜合自我評量測驗與詳解-單字.html" style="font-size: 14px;">國中英語_Lesson3_單字</a>
-&nbsp; <span>...</span> &nbsp;
-<a href="國中英語_Lesson3_RoomGPT_50題綜合自我評量測驗與詳解.docx" download  style="font-size: 14px;">Lesson3_單字.docx</a><br>
-
-<a href="國中英語_Lesson3_50題綜合自我評量測驗卷與詳解-文法.html" style="font-size: 14px;">國中英語_Lesson3_文法</a>
-&nbsp; <span>...</span> &nbsp;
-<a href="國中英語_Lesson3_50題綜合自我評量測驗卷與詳解-文法.docx" download style="font-size: 14px;">Lesson3_文法.docx</a><br>
-
-<a href="國中英語_Lesson4_50題綜合自我評量測驗卷與詳解-單字.html" style="font-size: 14px;">國中英語_Lesson4_單字</a>
-&nbsp; <span>...</span> &nbsp;
-<a href="國中英語_Lesson4_50題綜合自我評量測驗卷與詳解-單字.docx" download style="font-size: 14px;">Lesson4_單字.docx</a><br>
-
-<a href="國中英語_Lesson4_50題綜合自我評量測驗與詳解-文法.html" style="font-size: 14px;">國中英語_Lesson4_文法</a>
-&nbsp; <span>...</span> &nbsp;
-<a href="國中英語_Lesson4_50題綜合自我評量測驗與詳解-文法.docx" download style="font-size: 14px;">Lesson4_文法.docx</a><br><br>
-
-<a href="七年級生物_2-2酵素_50題綜合模擬試卷.html" style="font-size: 14px;">國中生物_2-2酵素</a>
-&nbsp; <span>...</span> &nbsp;
-<a href="七年級生物_2-2酵素_50題綜合模擬試卷.docx" download style="font-size: 14px;">2-2酵素.docx</a><br>
-
-<a href="七年級生物_2-3植物如何製造養分_50題綜合模擬試卷與詳解.html" style="font-size: 14px;">國中生物_2-3植物如何製造養分</a>
-&nbsp; <span>...</span> &nbsp;
-<a href="七年級生物_2-3植物如何製造養分_50題綜合模擬試卷與詳解.docx" download style="font-size: 14px;">2-3植物如何製造養分.docx</a><br>
-
-<a href="七年級生物_2-4人體如何獲得養分_50題綜合模擬試卷.html" style="font-size: 14px;">國中生物_2-4人體如何獲得養分</a>
-&nbsp; <span>...</span> &nbsp;
-<a href="七年級生物_2-4人體如何獲得養分_50題綜合模擬試卷.docx" download style="font-size: 14px;">2-4人體如何獲得養分.docx</a><br>
-
-<a href="七年級生物_3-1植物的運輸構造_50題綜合模擬試卷與詳解.html" style="font-size: 14px;">國中生物_3-1植物的運輸構造</a>
-&nbsp; <span>...</span> &nbsp;
-<a href="七年級生物_3-1植物的運輸構造_50題綜合模擬試卷與詳解.docx" download style="font-size: 14px;">3-1植物的運輸構造.docx</a><br>
-
-<a href="七年級生物_3-2人體的循環_50題綜合模擬試卷與詳解.html" style="font-size: 14px;">國中生物_3-2人體的循環</a>
-&nbsp; <span>...</span> &nbsp;
-<a href="七年級生物_3-2人體的循環_50題綜合模擬試卷與詳解.docx" download style="font-size: 14px;">3-2人體的循環.docx</a><br>
-
-<a href="七年級生物_3-3人體的防禦.html" style="font-size: 14px;">國中生物3-3人體的防禦</a>
-&nbsp; <span>...</span> &nbsp;
-<a href="七年級生物_3-3人體的防禦.docx" download style="font-size: 14px;">3-3人體的防禦.docx</a><br><br>
-
-<a href="國中數學2-1質因數分解_50題綜合模擬試卷與詳解.html" style="font-size: 14px;">國中數學2-1質因數分解</a>
-&nbsp; <span>...</span> &nbsp;
-<a href="國中數學2-1質因數分解_50題綜合模擬試卷與詳解.docx" download style="font-size: 14px;">2-1質因數分解.docx</a><br>
-
-<a href="國中數學2-2_公因數與公倍數_會考模擬試卷50題_原生公式版.mht" style="font-size: 14px;">國中數學2-2_公因數與公倍數</a>
-&nbsp; <span>...</span> &nbsp;
-<a href="國中數學2-2_公因數與公倍數_會考模擬試卷50題_原生公式版.docx" download style="font-size: 14px;">2-2_公因數與公倍數.docx</a><br>
-
-<a href="國中數學一_2-3分數的四則運算_50題綜合模擬試卷與詳解.html" style="font-size: 14px;">國中數學2-3_分數的四則運算</a>
-&nbsp; <span>...</span> &nbsp;
-<a href="國中數學一_2-3分數的四則運算_50題綜合模擬試卷與詳解.docx" download style="font-size: 14px;">2-3_分數的四則運算.docx</a><br>
 </html>
