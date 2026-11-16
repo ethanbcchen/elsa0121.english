@@ -29,7 +29,7 @@
     /* 使用 CSS Grid 建立 5 個對齊欄位 */
     .resource-grid {
       display: grid;
-      grid-template-columns: minmax(300px, max-content) 40px minmax(180px, max-content) 40px minmax(180px, max-content);
+      grid-template-columns: minmax(230px, max-content) 40px minmax(180px, max-content) 135px minmax(380px, max-content);
       align-items: center;
       row-gap: 0.6rem;
     }
@@ -63,13 +63,31 @@
     border-style: inset;
     border-width: 1px;
     }
+
+    /* 加上簡單的 CSS 讓邊框與間距更美觀 */
+    table {
+    width: 100%;
+    border-collapse: collapse; /* 讓相鄰邊框合併成單一線條 */
+    margin: 20px 0;
+    }
+    th, td {
+      border: 1px solid #333; /* 設定黑色細邊框 */
+      padding: 10px;          /* 設定文字與邊框的內距 */
+      text-align: left;       /* 文字靠左對齊 */
+      font-size: 12px;
+    }
+    th {
+      background-color: #f2f2f2; /* 表頭加上淺灰色底色 */
+      text-align: center;       /* 文字左右（水平）置中 */
+      vertical-align: middle;   /* 文字上下（垂直）置中 */
+    }
   </style>
 </head>
 <body>
   <h1 class="main-title">品稦! 妳好</h1>
-  <p class="content-text">測驗卷</p>
-
-  <div class="resource-grid">
+  
+  <p class="content-text">綜合測驗卷</p>
+  <div class="resource-grid">  
     <!-- 英語 Lesson 3 -->
     <a href="國中英語_一上_L3-單字.html">國中英語_一上_L3-單字</a>
     <span class="dot">...</span>
@@ -96,14 +114,49 @@
     <a href="國中英語_一上_L4-文法.docx">國中英語_一上_L4-文法.docx</a>
     <span class="dot">...</span>
     <a href="國中英語_一上_L4-文法.pdf#view=FitH">國中英語_一上_L4-文法.pdf</a>
-
+  </div>
+    
+    <table>
+      <!-- 第一列：表頭 -->
+      <tr>
+        <th>英文測驗卷 HTML</th>
+        <th>Word</th>
+        <th>Pdf</th>
+      </tr>
+      <!-- 第二列：資料列 -->
+      <tr>
+        <td><a href="國中英語_一上_L3-單字.html">國中英語_一上_L3-單字</a></td>
+        <td><a href="國中英語_一上_L3-單字.docx#view=FitH">國中英語_一上_L3-單字.docx</a></td>
+        <td><a href="國中英語_一上_L3-單字.pdf#view=FitH">國中英語_一上_L3-單字.pdf</a></td>
+      </tr>
+      <!-- 第三列：資料列 -->
+      <tr>
+        <td><a href="國中英語_一上_L3-文法.html">國中英語_一上_L3-文法</a></td>
+        <td><a href="國中英語_一上_L3-文法.docx#view=FitH">國中英語_一上_L3-文法.docx</a></td>
+        <td><a href="國中英語_一上_L3-文法.pdf#view=FitH">國中英語_一上_L3-文法.pdf</a></td>
+      </tr>
+      <!-- 第四列：資料列 -->
+      <tr>
+        <td><a href="國中英語_一上_L4-單字.html">國中英語_一上_L4-單字</a></td>
+        <td><a href="國中英語_一上_L4-單字.docx#view=FitH">國中英語_一上_L4-單字.docx</a></td>
+        <td><a href="國中英語_一上_L4-單字.pdf#view=FitH">國中英語_一上_L4-單字.pdf</a></td>
+      </tr>
+      <!-- 第五列：資料列 -->
+      <tr>
+        <td><a href="國中英語_一上_L4-文法.html">國中英語_一上_L4-文法</a></td>
+        <td><a href="國中英語_一上_L4-文法.docx#view=FitH">國中英語_一上_L4-文法.docx</a></td>
+        <td><a href="國中英語_一上_L4-文法.pdf#view=FitH">國中英語_一上_L4-文法.pdf</a></td>
+      </tr>
+    </table>
+    
+    <!--
     <hr class="custom-line">
     <span class="dot"></span>
     <hr class="custom-line">
     <span class="dot"></span>
     <hr class="custom-line">
 
-    <!-- 七年級生物 -->
+
     <a href="國中生物_一上_2-2.酵素.html">國中生物_一上_2-2.酵素</a>
     <span class="dot">...</span>
     <a href="國中生物_一上_2-2.酵素.docx">國中生物_一上_2-2.酵素.docx</a>
@@ -139,14 +192,61 @@
     <a href="國中生物_一上_3-3.人體的防禦.docx">國中生物_一上_3-3.人體的防禦.docx</a>
     <span class="dot">...</span>
     <a href="國中生物_一上_3-3.人體的防禦.pdf#view=FitH">國中生物_一上_3-3.人體的防禦.pdf</a>
+    -->
 
+    <table>
+      <!-- 第一列：表頭 -->
+      <tr>
+        <th>生物科學測驗卷 HTML</th>
+        <th>Word</th>
+        <th>Pdf</th>
+      </tr>
+      <!-- 第二列：資料列 -->
+      <tr>
+        <td><a href="國中生物_一上_2-2.酵素.html">國中生物_一上_2-2.酵素</a></td>
+        <td><a href="國中生物_一上_2-2.酵素.docx#view=FitH">國中生物_一上_2-2.酵素.docx</a></td>
+        <td><a href="國中生物_一上_2-2.酵素.pdf#view=FitH">國中生物_一上_2-2.酵素.pdf</a></td>
+      </tr>
+      <!-- 第三列：資料列 -->
+      <tr>
+        <td><a href="國中生物_一上_2-3.植物如何製造養分.html">國中生物_一上_2-3.植物如何製造養分</a></td>
+        <td><a href="國中生物_一上_2-3.植物如何製造養分.docx#view=FitH">國中生物_一上_2-3.植物如何製造養分.docx</a></td>
+        <td><a href="國中生物_一上_2-3.植物如何製造養分.pdf#view=FitH">國中生物_一上_2-3.植物如何製造養分.pdf</a></td>
+      </tr>
+      <!-- 第四列：資料列 -->
+      <tr>
+        <td><a href="國中生物_一上_2-4.人體如何獲得養分.html">國中生物_一上_2-4.人體如何獲得養分</a></td>
+        <td><a href="國中生物_一上_2-4.人體如何獲得養分.docx#view=FitH">國中生物_一上_2-4.人體如何獲得養分.docx</a></td>
+        <td><a href="國中生物_一上_2-4.人體如何獲得養分.pdf#view=FitH">國中生物_一上_2-4.人體如何獲得養分.pdf</a></td>
+      </tr>
+      <!-- 第五列：資料列 -->
+      <tr>
+        <td><a href="國中生物_一上_3-1.植物的運輸構造.html">國中生物_一上_3-1.植物的運輸構造</a></td>
+        <td><a href="國中生物_一上_3-1.植物的運輸構造.docx#view=FitH">國中生物_一上_3-1.植物的運輸構造.docx</a></td>
+        <td><a href="國中生物_一上_3-1.植物的運輸構造.pdf#view=FitH">國中生物_一上_3-1.植物的運輸構造.pdf</a></td>
+      </tr>
+      <!-- 第六列：資料列 -->
+      <tr>
+        <td><a href="國中生物_一上_3-2.人體的循環.html">國中生物_一上_3-2.人體的循環</a></td>
+        <td><a href="國中生物_一上_3-2.人體的循環.docx#view=FitH">國中生物_一上_3-2.人體的循環.docx</a></td>
+        <td><a href="國中生物_一上_3-2.人體的循環.pdf#view=FitH">國中生物_一上_3-2.人體的循環.pdf</a></td>
+      </tr>
+      <!-- 第七列：資料列 -->
+      <tr>
+        <td><a href="國中生物_一上_3-3.人體的防禦.html">國中生物_一上_3-3.人體的防禦</a></td>
+        <td><a href="國中生物_一上_3-3.人體的防禦.docx#view=FitH">國中生物_一上_3-3.人體的防禦.docx</a></td>
+        <td><a href="國中生物_一上_3-3.人體的防禦.pdf#view=FitH">國中生物_一上_3-3.人體的防禦.pdf</a></td>
+      </tr>
+    </table>
+
+    <!--
     <hr class="custom-line">
     <span class="dot"></span>
     <hr class="custom-line">
     <span class="dot"></span>
     <hr class="custom-line">
 
-    <!-- 國中數學 (包含 PDF，佔滿 5 個欄位) -->
+     國中數學 (包含 PDF，佔滿 5 個欄位) 
     <a href="國中數學_一上_2-1.質因數分解.html">國中數學_一上_2-1.質因數分解</a>
     <span class="dot">...</span>
     <a href="國中數學_一上_2-1.質因數分解.docx">國中數學_一上_2-1.質因數分解.docx</a>
@@ -171,6 +271,40 @@
     <a href="國中數學_一上_2-4.分數運算與指數律.docx#view=FitH">國中數學_一上_2-4.分數運算與指數律.docx</a>
     <span class="dot">...</span>
     <a href="國中數學_一上_2-4.分數運算與指數律.pdf#view=FitH">國中數學_一上_2-4.分數運算與指數律.pdf</a>
-  </div>
+    -->
+
+
+  <table>
+    <!-- 第一列：表頭 -->
+    <tr>
+      <th>數學 HTML</th>
+      <th>Word</th>
+      <th>Pdf</th>
+    </tr>
+    <!-- 第二列：資料列 -->
+    <tr>
+      <td><a href="國中數學_一上_2-1.質因數分解.html">國中數學_一上_2-1.質因數分解</a></td>
+      <td><a href="國中數學_一上_2-1.質因數分解.docx#view=FitH">國中數學_一上_2-1.質因數分解.docx</a></td>
+      <td><a href="國中數學_一上_2-1.質因數分解.pdf#view=FitH">國中數學_一上_2-1.質因數分解.pdf</a></td>
+    </tr>
+    <!-- 第三列：資料列 -->
+    <tr>
+      <td><a href="國中數學_一上_2-2.公因數與公倍數.html">國中數學_一上_2-2.公因數與公倍數</a></td>
+      <td><a href="國中數學_一上_2-2.公因數與公倍數.docx#view=FitH">國中數學_一上_2-2.公因數與公倍數.docx</a></td>
+      <td><a href="國中數學_一上_2-2.公因數與公倍數.pdf#view=FitH">國中數學_一上_2-2.公因數與公倍數.pdf</a></td>
+    </tr>
+    <!-- 第四列：資料列 -->
+    <tr>
+      <td><a href="國中數學_一上_2-3.分數的四則運算.html">國中數學_一上_2-3.分數的四則運算</a></td>
+      <td><a href="國中數學_一上_2-3.分數的四則運算.docx#view=FitH">國中數學_一上_2-3.分數的四則運算.docx</a></td>
+      <td><a href="國中數學_一上_2-3.分數的四則運算.pdf#view=FitH">國中數學_一上_2-3.分數的四則運算.pdf</a></td>
+    </tr>
+    <!-- 第五列：資料列 -->
+    <tr>
+      <td><a href="國中數學_一上_2-4.分數運算與指數律.html">國中數學_一上_2-4.分數運算與指數律</a></td>
+      <td><a href="國中數學_一上_2-4.分數運算與指數律.docx#view=FitH">國中數學_一上_2-4.分數運算與指數律.docx</a></td>
+      <td><a href="國中數學_一上_2-4.分數運算與指數律.pdf#view=FitH">國中數學_一上_2-4.分數運算與指數律.pdf</a></td>
+    </tr>
+  </table>
 </body>
 </html>
