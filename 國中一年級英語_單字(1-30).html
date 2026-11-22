@@ -1,0 +1,1837 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>國中一年級英文科精熟評量測驗卷</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      --bg-color: #f4f6f9;
+      --card-bg: #ffffff;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --primary-light: #eff6ff;
+      --border-color: #e2e8f0;
+      --correct-bg: #dcfce7;
+      --correct-border: #22c55e;
+      --correct-text: #15803d;
+      --wrong-bg: #fee2e2;
+      --wrong-border: #ef4444;
+      --wrong-text: #b91c1c;
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+
+    /* Header */
+    header {
+      background-color: var(--card-bg);
+      border-bottom: 1px solid var(--border-color);
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+    }
+
+    .header-title h1 {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .header-title p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .header-controls {
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .progress-badge {
+      background-color: var(--primary-light);
+      color: var(--primary);
+      padding: 0.4rem 0.85rem;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    button {
+      cursor: pointer;
+      border: none;
+      border-radius: 8px;
+      padding: 0.55rem 1.1rem;
+      font-size: 0.92rem;
+      font-weight: 600;
+      transition: all 0.2s ease;
+      font-family: inherit;
+    }
+
+    .btn-primary {
+      background-color: var(--primary);
+      color: #ffffff;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--primary-hover);
+    }
+
+    .btn-secondary {
+      background-color: #f1f5f9;
+      color: var(--text-main);
+      border: 1px solid #cbd5e1;
+    }
+
+    .btn-secondary:hover {
+      background-color: #e2e8f0;
+    }
+
+    .btn-success {
+      background-color: #16a34a;
+      color: #ffffff;
+    }
+
+    .btn-success:hover {
+      background-color: #15803d;
+    }
+
+    /* Result Dashboard */
+    #result-dashboard {
+      display: none;
+      max-width: 1400px;
+      margin: 1.5rem auto 0;
+      padding: 0 1.5rem;
+    }
+
+    .dashboard-card {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 1.75rem;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border-color);
+      display: grid;
+      grid-template-columns: 1fr 1.2fr 1fr;
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    .score-box {
+      text-align: center;
+      padding: 1rem;
+      background: var(--primary-light);
+      border-radius: 10px;
+    }
+
+    .score-number {
+      font-size: 3.2rem;
+      font-weight: 800;
+      color: var(--primary);
+      line-height: 1.1;
+    }
+
+    .score-detail {
+      margin-top: 0.5rem;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+    }
+
+    .chart-container {
+      position: relative;
+      height: 240px;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+
+    .diagnostic-box h3 {
+      font-size: 1.05rem;
+      margin-bottom: 0.75rem;
+      color: var(--text-main);
+    }
+
+    .stat-row {
+      margin-bottom: 0.6rem;
+    }
+
+    .stat-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.88rem;
+      margin-bottom: 0.25rem;
+      font-weight: 500;
+    }
+
+    .stat-bar-bg {
+      height: 8px;
+      background-color: #e2e8f0;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .stat-bar-fill {
+      height: 100%;
+      background-color: var(--primary);
+      border-radius: 4px;
+      transition: width 0.6s ease;
+    }
+
+    .dashboard-actions {
+      grid-column: 1 / -1;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border-color);
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .filter-group {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .filter-btn.active {
+      background-color: var(--text-main);
+      color: #ffffff;
+    }
+
+    /* Main Split Layout */
+    .main-container {
+      max-width: 1400px;
+      margin: 1.5rem auto;
+      padding: 0 1.5rem;
+      display: grid;
+      grid-template-columns: 42% 58%;
+      gap: 1.5rem;
+      align-items: start;
+    }
+
+    /* Left Column: Passages & Reference */
+    .left-pane {
+      position: sticky;
+      top: 85px;
+      max-height: calc(100vh - 105px);
+      overflow-y: auto;
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border-color);
+    }
+
+    .left-pane::-webkit-scrollbar,
+    .right-pane::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .left-pane::-webkit-scrollbar-thumb,
+    .right-pane::-webkit-scrollbar-thumb {
+      background-color: #cbd5e1;
+      border-radius: 3px;
+    }
+
+    .passage-card {
+      margin-bottom: 1.75rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .passage-card:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .passage-tag {
+      display: inline-block;
+      background-color: #f1f5f9;
+      color: #334155;
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      margin-bottom: 0.5rem;
+    }
+
+    .passage-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      color: var(--primary);
+    }
+
+    .passage-content {
+      font-size: 0.98rem;
+      line-height: 1.8;
+      color: #334155;
+      background-color: #f8fafc;
+      padding: 1rem;
+      border-radius: 8px;
+      border-left: 3px solid var(--primary);
+    }
+
+    .blank-marker {
+      font-weight: 700;
+      color: var(--primary);
+      text-decoration: underline;
+      padding: 0 0.25rem;
+    }
+
+    /* Right Column: Questions */
+    .right-pane {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .section-header {
+      background-color: #e2e8f0;
+      padding: 0.75rem 1.25rem;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: #1e293b;
+    }
+
+    .question-card {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 1.4rem;
+      box-shadow: var(--shadow);
+      border: 1.5px solid var(--border-color);
+      transition: border-color 0.2s ease;
+    }
+
+    .question-card.status-correct {
+      border-color: var(--correct-border);
+    }
+
+    .question-card.status-wrong {
+      border-color: var(--wrong-border);
+    }
+
+    .question-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.6rem;
+      font-size: 0.82rem;
+    }
+
+    .q-number {
+      font-weight: 700;
+      color: var(--primary);
+      font-size: 0.95rem;
+    }
+
+    .q-category {
+      background-color: #f1f5f9;
+      color: var(--text-muted);
+      padding: 0.15rem 0.55rem;
+      border-radius: 4px;
+    }
+
+    .question-stem {
+      font-size: 1.02rem;
+      font-weight: 500;
+      margin-bottom: 1rem;
+      color: var(--text-main);
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.65rem;
+    }
+
+    .option-label {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.65rem 0.9rem;
+      border: 1.5px solid var(--border-color);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      font-size: 0.95rem;
+    }
+
+    .option-label:hover:not(.disabled) {
+      background-color: #f8fafc;
+      border-color: #94a3b8;
+    }
+
+    .option-label.selected {
+      background-color: var(--primary-light);
+      border-color: var(--primary);
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    .option-label.opt-correct {
+      background-color: var(--correct-bg) !important;
+      border-color: var(--correct-border) !important;
+      color: var(--correct-text) !important;
+      font-weight: 700;
+    }
+
+    .option-label.opt-wrong {
+      background-color: var(--wrong-bg) !important;
+      border-color: var(--wrong-border) !important;
+      color: var(--wrong-text) !important;
+      font-weight: 600;
+    }
+
+    .option-label.disabled {
+      cursor: default;
+    }
+
+    .option-letter {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background-color: #f1f5f9;
+      font-size: 0.82rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .selected .option-letter {
+      background-color: var(--primary);
+      color: #ffffff;
+    }
+
+    .opt-correct .option-letter {
+      background-color: var(--correct-border);
+      color: #ffffff;
+    }
+
+    .opt-wrong .option-letter {
+      background-color: var(--wrong-border);
+      color: #ffffff;
+    }
+
+    /* Explanation Box */
+    .explanation-box {
+      display: none;
+      margin-top: 1.1rem;
+      padding: 1.1rem;
+      background-color: #f8fafc;
+      border-radius: 8px;
+      border-left: 4px solid #64748b;
+      font-size: 0.92rem;
+      line-height: 1.65;
+    }
+
+    .status-correct .explanation-box {
+      border-left-color: var(--correct-border);
+      background-color: #f0fdf4;
+    }
+
+    .status-wrong .explanation-box {
+      border-left-color: var(--wrong-border);
+      background-color: #fef2f2;
+    }
+
+    .exp-title {
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+      color: var(--text-main);
+    }
+
+    .exp-item {
+      margin-bottom: 0.4rem;
+    }
+
+    .exp-distractors {
+      margin-top: 0.5rem;
+      padding-left: 1.2rem;
+      color: #475569;
+    }
+
+    /* Responsive */
+    @media (max-width: 992px) {
+      .main-container {
+        grid-template-columns: 1fr;
+      }
+      .left-pane {
+        position: static;
+        max-height: none;
+      }
+      .dashboard-card {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .options-grid {
+        grid-template-columns: 1fr;
+      }
+      header {
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-title">
+      <h1>國中一年級英文科精熟評量測驗卷</h1>
+      <p>核心範圍：居家空間與方位介系詞、祈使句與數位操作指令（共 50 題，每題 2 分）</p>
+    </div>
+    <div class="header-controls">
+      <span class="progress-badge" id="progress-text">作答進度：0 / 50</span>
+      <button class="btn-primary" id="submit-btn" onclick="submitQuiz()">提交試卷</button>
+      <button class="btn-secondary" id="reset-btn" onclick="resetQuiz()">重新測驗（選項洗牌）</button>
+    </div>
+  </header>
+
+  <section id="result-dashboard">
+    <div class="dashboard-card">
+      <div class="score-box">
+        <div style="font-size: 0.95rem; font-weight: 600; color: #475569;">測驗總分</div>
+        <div class="score-number" id="final-score">0</div>
+        <div class="score-detail" id="correct-count-text">答對 0 / 50 題</div>
+      </div>
+
+      <div class="chart-container">
+        <canvas id="radarChart"></canvas>
+      </div>
+
+      <div class="diagnostic-box">
+        <h3>弱點診斷統計（各維度得分率）</h3>
+        <div id="diagnostic-bars"></div>
+      </div>
+
+      <div class="dashboard-actions">
+        <div class="filter-group">
+          <button class="btn-secondary filter-btn active" id="filter-all" onclick="filterQuestions('all')">顯示全部試題 (50)</button>
+          <button class="btn-secondary filter-btn" id="filter-wrong" onclick="filterQuestions('wrong')">只看錯題 (0)</button>
+        </div>
+        <button class="btn-success" id="copy-md-btn" onclick="copyWrongNotes()">一鍵複製錯題筆記（Markdown 格式）</button>
+      </div>
+    </div>
+  </section>
+
+  <main class="main-container">
+    <!-- Left Column: Reference Passages -->
+    <aside class="left-pane" id="passages-container">
+      <div class="passage-card">
+        <span class="passage-tag">測驗指引與題組文本</span>
+        <div class="passage-title">題組文本區（第 31–50 題對照閱讀）</div>
+        <p style="font-size: 0.9rem; color: var(--text-muted);">
+          作答第 1 至 30 題單題時，可直接於右側作答區點選答案。作答第 31 至 50 題「綜合克漏字」與「閱讀理解」時，請對照下方四篇文本進行語意與細節推論。
+        </p>
+      </div>
+    </aside>
+
+    <!-- Right Column: Questions List -->
+    <section class="right-pane" id="questions-container"></section>
+  </main>
+
+  <script>
+    // =========================================================================
+    // 題組文本資料 (Passages Data)
+    // =========================================================================
+    const passagesData = [
+      {
+        id: "cloze-1",
+        tag: "三、綜合克漏字測驗（第一篇：第 31–35 題）",
+        title: "Designing Your Dream House App",
+        content: `Do you want to design your own dream <span class="blank-marker">(31)</span>? Let's use a new tool on your smartphone! It is very easy and free—not <span class="blank-marker">(32)</span> at all. First, please <span class="blank-marker">(33)</span> a photo of an empty room. Next, choose your favorite <span class="blank-marker">(34)</span>, like a warm wood look or a modern white look. Then, type in the things you need, such as a big sofa for the living room or a soft bed for the bedroom. Just <span class="blank-marker">(35)</span> for ten seconds, and a wonderful picture of your new home is ready on your screen!`
+      },
+      {
+        id: "cloze-2",
+        tag: "三、綜合克漏字測驗（第二篇：第 36–40 題）",
+        title: "A Quiet Afternoon at Home",
+        content: `It is Sunday afternoon, and our home is very <span class="blank-marker">(36)</span>. Everyone is doing their own things. My dad is sitting on the sofa <span class="blank-marker">(37)</span> my mom and my little sister in the living room. They are looking at some old family photos. Look at our pet dog, Lucky! He is sleeping <span class="blank-marker">(38)</span> the dining room table, so you can only see his tail. Where is my brother? He is in the study <span class="blank-marker">(39)</span> the bathroom. He has a math <span class="blank-marker">(40)</span> and is asking our older cousin for help online.`
+      },
+      {
+        id: "reading-1",
+        tag: "四、閱讀理解測驗（第一篇：第 41–45 題）",
+        title: "Smart Home Helper: Step-by-Step Guide",
+        content: `Welcome to Smart Home Helper! With this app on your smartphone, you can plan every room in your house without spending a lot of money. Follow these four simple steps to start:<br><br>
+        <strong>Step 1:</strong> Choose a room type, such as a living room, a dining room, a bedroom, or a bathroom.<br>
+        <strong>Step 2:</strong> Upload a clear photo of your room. Make sure the room is bright.<br>
+        <strong>Step 3:</strong> Pick a theme and style you like. We have some great ideas for small houses!<br>
+        <strong>Step 4:</strong> Type your question in the box if you need help, and wait a few seconds for our smart tool to show your new room.<br><br>
+        <em>Note: Please keep your smartphone near a strong Wi-Fi signal when you upload photos.</em>`
+      },
+      {
+        id: "reading-2",
+        tag: "四、閱讀理解測驗（第二篇：第 46–50 題）",
+        title: "Leo's New House Tour",
+        content: `Hi, I am Leo! Let me show you my family's new house. It is not very big, and it was not expensive, but it is clean and quiet. When you walk in the front door, you see a bright living room. A big blue sofa is in front of the window, and a small table is next to the sofa. Behind the living room is our dining room. My mom loves cooking, and we enjoy dinner there every evening. There are two bedrooms on the second floor. My bedroom is between my parents' bedroom and the bathroom. My desk is near the window, so I can see the green trees outside when I study. I really love my new house!`
+      }
+    ];
+
+    // =========================================================================
+    // 50 題完整題庫 (Structured JSON Array)
+    // =========================================================================
+    const quizData = [
+      // 一、核心詞彙與片語運用 (1-15)
+      {
+        id: 1,
+        section: "一、核心詞彙與片語運用 (Vocabulary & Idioms)",
+        dimension: "字彙",
+        category: "單字字義辨析",
+        stem: "Please be ______ in the library. Everyone is reading and studying.",
+        translation: "在圖書館請保持安靜。每個人都在閱讀和唸書。",
+        options: ["quiet", "expensive", "near", "some"],
+        answer: "quiet",
+        explanation: "根據後句「每個人都在閱讀和唸書」，圖書館內應保持「安靜的（quiet）」。",
+        distractors: {
+          "expensive": "意為「昂貴的」，通常用來形容價格，不符合圖書館禮儀語境。",
+          "near": "意為「在……附近」，為介系詞或形容詞，語意不合。",
+          "some": "意為「一些」（注意字彙表常見拼字誤植為 somr，正確拼法為 some），後接可數複數或不可數名詞。"
+        }
+      },
+      {
+        id: 2,
+        section: "一、核心詞彙與片語運用 (Vocabulary & Idioms)",
+        dimension: "字彙",
+        category: "居家空間名詞",
+        stem: "My mother is cooking dinner in the kitchen, and we are waiting for her in the ______.",
+        translation: "我媽媽正在廚房煮晚餐，而我們正在飯廳等她。",
+        options: ["dining room", "bathroom", "bedroom", "smartphone"],
+        answer: "dining room",
+        explanation: "等待吃晚餐的居家空間應為「飯廳（dining room）」。",
+        distractors: {
+          "bathroom": "意為「浴室；洗手間」，是用來洗澡或如廁的地方。",
+          "bedroom": "意為「臥室」，是用來睡覺休息的房間。",
+          "smartphone": "意為「智慧型手機」，並非房間名稱。"
+        }
+      },
+      {
+        id: 3,
+        section: "一、核心詞彙與片語運用 (Vocabulary & Idioms)",
+        dimension: "字彙",
+        category: "動詞語意辨析",
+        stem: "You can ______ a photo of your pet dog to our class website.",
+        translation: "你可以上傳一張你寵物狗的照片到我們班級的網站。",
+        options: ["upload", "wait", "choose", "type"],
+        answer: "upload",
+        explanation: "將照片傳送到網站上的動作稱為「上傳（upload）」。",
+        distractors: {
+          "wait": "意為「等待」，常與 for 連用（wait for），不能直接接照片作受詞。",
+          "choose": "意為「選擇」，若說選擇一張照片到網站上，語意不完整。",
+          "type": "意為「打字」，受詞通常是文字、名字或問題，而非照片。"
+        }
+      },
+      {
+        id: 4,
+        section: "一、核心詞彙與片語運用 (Vocabulary & Idioms)",
+        dimension: "字彙",
+        category: "名詞語意辨析",
+        stem: "I don't know how to fix this bike. Do you have any good ______?",
+        translation: "我不知道怎麼修理這台腳踏車。你有任何好點子嗎？",
+        options: ["ideas", "steps", "themes", "types"],
+        answer: "ideas",
+        explanation: "詢問解決問題的「主意、點子」，應選用 idea 的複數形 ideas（搭配 any）。",
+        distractors: {
+          "steps": "意為「步驟；台階」，語意上問「好步驟」不如「好點子（good ideas）」自然。",
+          "themes": "意為「主題」，多用於派對、報告或設計風格。",
+          "types": "意為「類型；種類」，與語境不符。"
+        }
+      },
+      {
+        id: 5,
+        section: "一、核心詞彙與片語運用 (Vocabulary & Idioms)",
+        dimension: "字彙",
+        category: "日常對話慣用語",
+        stem: "A: Put your books in the box, and then close it.<br>B: ______. That's very easy!",
+        translation: "A：把你的書放進盒子裡，然後把它關起來。 B：我懂了。那非常簡單！",
+        options: ["I see", "Let's", "Please", "Question"],
+        answer: "I see",
+        explanation: "表示聽懂對方的說明或指示時，口語上常用「I see.（我明白了／我懂了。）」。",
+        distractors: {
+          "Let's": "意為「讓我們……」，後必須接原形動詞，不能單獨成句。",
+          "Please": "意為「請」，用於禮貌請求，不適合用於回應已理解指令。",
+          "Question": "意為「問題」，單一名詞無法表達「我懂了」的完整語意。"
+        }
+      },
+      {
+        id: 6,
+        section: "一、核心詞彙與片語運用 (Vocabulary & Idioms)",
+        dimension: "字彙",
+        category: "形容詞語意辨析",
+        stem: "This watch is too ______. I don't have enough money to buy it.",
+        translation: "這支手錶太貴了。我沒有足夠的錢買它。",
+        options: ["expensive", "quiet", "near", "behind"],
+        answer: "expensive",
+        explanation: "由後句「我沒有足夠的錢買它」可推知，這支手錶價格「昂貴（expensive）」。",
+        distractors: {
+          "quiet": "意為「安靜的」，無法用來形容手錶價格。",
+          "near": "意為「靠近的」，與金錢不足無關。",
+          "behind": "意為「在……後面」，為介系詞，不可接在 be 動詞後形容價格。"
+        }
+      },
+      {
+        id: 7,
+        section: "一、核心詞彙與片語運用 (Vocabulary & Idioms)",
+        dimension: "字彙",
+        category: "動詞語意辨析",
+        stem: "There are three colors—red, blue, and yellow. Which one do you ______?",
+        translation: "這裡有三種顏色——紅色、藍色和黃色。你選擇哪一個？",
+        options: ["choose", "wait", "upload", "get"],
+        answer: "choose",
+        explanation: "從多個選項中挑選一個，應使用動詞「選擇（choose）」。",
+        distractors: {
+          "wait": "意為「等待」，不及物動詞，語意不合。",
+          "upload": "意為「上傳」，不能用來挑選顏色。",
+          "get": "意為「得到；拿取」，在三選一的情境中不如 choose 精確。"
+        }
+      },
+      {
+        id: 8,
+        section: "一、核心詞彙與片語運用 (Vocabulary & Idioms)",
+        dimension: "字彙",
+        category: "名詞語意辨析",
+        stem: "A hammer is a useful ______ for fixing tables and chairs.",
+        translation: "鐵鎚是修理桌椅時非常有用的工具。",
+        options: ["tool", "photo", "style", "bathroom"],
+        answer: "tool",
+        explanation: "鐵鎚（hammer）屬於修理物品的「工具（tool）」。",
+        distractors: {
+          "photo": "意為「照片」，無法用來修理桌椅。",
+          "style": "意為「風格；款式」，語意不合。",
+          "bathroom": "意為「浴室」，與句意完全無關。"
+        }
+      },
+      {
+        id: 9,
+        section: "一、核心詞彙與片語運用 (Vocabulary & Idioms)",
+        dimension: "字彙",
+        category: "動詞搭配與片語",
+        stem: "Please ______ your name and phone number on this paper.",
+        translation: "請在這張紙上寫下（打字輸入）你的名字和電話號碼。",
+        options: ["type", "wait", "let's", "see"],
+        answer: "type",
+        explanation: "在表單或電腦欄位輸入姓名與電話，可用動詞「type（打字；輸入）」。",
+        distractors: {
+          "wait": "意為「等待」，無法直接接名詞片語作受詞。",
+          "let's": "為 Let us 的縮寫，不可接在 Please 之後。",
+          "see": "意為「看見」，在此語境中不符合填寫資料的動作。"
+        }
+      },
+      {
+        id: 10,
+        section: "一、核心詞彙與片語運用 (Vocabulary & Idioms)",
+        dimension: "字彙",
+        category: "名詞語意辨析",
+        stem: "Follow these three ______: first, wash the apples; second, cut them; third, eat them.",
+        translation: "跟著這三個步驟：第一，洗蘋果；第二，切蘋果；第三，吃蘋果。",
+        options: ["steps", "houses", "questions", "smartphones"],
+        answer: "steps",
+        explanation: "後面列舉了第一、第二、第三的順序動作，因此前面應為三個「步驟（steps）」。",
+        distractors: {
+          "houses": "意為「房子」，與切蘋果的順序無關。",
+          "questions": "意為「問題」，後文並非疑問句。",
+          "smartphones": "意為「智慧型手機」，語意不合。"
+        }
+      },
+      {
+        id: 11,
+        section: "一、核心詞彙與片語運用 (Vocabulary & Idioms)",
+        dimension: "字彙",
+        category: "名詞語意辨析",
+        stem: "If you have any ______ about the homework, you can ask Ms. Lin after class.",
+        translation: "如果你對這份作業有任何問題，你可以下課後問林老師。",
+        options: ["questions", "styles", "living rooms", "tools"],
+        answer: "questions",
+        explanation: "與動詞 ask（詢問）搭配，且關於作業的疑問，應選用「問題（questions）」。",
+        distractors: {
+          "styles": "意為「風格」，與詢問作業無關。",
+          "living rooms": "意為「客廳」，語意完全不符。",
+          "tools": "意為「工具」，與作業疑問無關。"
+        }
+      },
+      {
+        id: 12,
+        section: "一、核心詞彙與片語運用 (Vocabulary & Idioms)",
+        dimension: "字彙",
+        category: "名詞語意辨析",
+        stem: "Today, almost everyone uses a ______ to call friends, take photos, and surf the Net.",
+        translation: "現今，幾乎每個人都使用智慧型手機來打電話給朋友、拍照和上網。",
+        options: ["smartphone", "dining room", "theme", "step"],
+        answer: "smartphone",
+        explanation: "具備通話、拍照與上網功能的隨身裝置為「智慧型手機（smartphone）」。",
+        distractors: {
+          "dining room": "意為「飯廳」，無法用來打電話與上網。",
+          "theme": "意為「主題」，語意不合。",
+          "step": "意為「步驟」，語意不合。"
+        }
+      },
+      {
+        id: 13,
+        section: "一、核心詞彙與片語運用 (Vocabulary & Idioms)",
+        dimension: "字彙",
+        category: "固定片語搭配",
+        stem: "The bus is coming soon. Let's ______ for it at the bus stop.",
+        translation: "公車快來了。我們在公車站等它吧。",
+        options: ["wait", "get", "choose", "upload"],
+        answer: "wait",
+        explanation: "「wait for + 人/物」為固定片語，意為「等待……」。",
+        distractors: {
+          "get": "get for 並非「等待」之意（get to 表到達）。",
+          "choose": "choose for 語意不合，且公車快來了應是等待。",
+          "upload": "upload 意為「上傳」，不能與公車搭配。"
+        }
+      },
+      {
+        id: 14,
+        section: "一、核心詞彙與片語運用 (Vocabulary & Idioms)",
+        dimension: "字彙",
+        category: "名詞語意辨析",
+        stem: "The ______ of our school fair this year is 'Green Earth.'",
+        translation: "我們今年校慶園遊會的主題是「綠色地球」。",
+        options: ["theme", "bedroom", "photo", "idea"],
+        answer: "theme",
+        explanation: "活動或派對的核心主軸稱為「主題（theme）」，如 'Green Earth'。",
+        distractors: {
+          "bedroom": "意為「臥室」，語意不合。",
+          "photo": "意為「照片」，不能說照片是「綠色地球」這個活動名稱。",
+          "idea": "意為「點子」，通常不會說「園遊會的點子是……」，用 theme（主題）最精準。"
+        }
+      },
+      {
+        id: 15,
+        section: "一、核心詞彙與片語運用 (Vocabulary & Idioms)",
+        dimension: "字彙",
+        category: "名詞語意辨析",
+        stem: "I like the ______ of this jacket. It looks very cool and modern.",
+        translation: "我喜歡這件夾克的款式（風格）。它看起來非常酷又現代。",
+        options: ["style", "question", "bathroom", "house"],
+        answer: "style",
+        explanation: "形容服裝的外型設計與「風格；款式」，應使用「style」。",
+        distractors: {
+          "question": "意為「問題」，無法用來形容夾克的外觀。",
+          "bathroom": "意為「浴室」，語意完全不符。",
+          "house": "意為「房子」，與夾克無關。"
+        }
+      },
+
+      // 二、文法與句型結構 (16-30)
+      {
+        id: 16,
+        section: "二、文法與句型結構 (Grammar & Sentence Patterns)",
+        dimension: "文法",
+        category: "祈使句與 Let's 句型",
+        stem: "______ quiet, boys and girls. The test is starting now.",
+        translation: "各位同學，請安靜。測驗現在要開始了。",
+        options: ["Be", "Do", "Are", "To be"],
+        answer: "Be",
+        explanation: "祈使句以「原形動詞」開頭，quiet 為形容詞，前面須搭配 be 動詞的原形「Be」。",
+        distractors: {
+          "Do": "Do 後面須接一般原形動詞，不能直接接形容詞 quiet。",
+          "Are": "Are 為現在式變化形，祈使句必須用原形動詞 Be。",
+          "To be": "不定詞不能作為祈使句的句首動詞。"
+        }
+      },
+      {
+        id: 17,
+        section: "二、文法與句型結構 (Grammar & Sentence Patterns)",
+        dimension: "文法",
+        category: "Let's 祈使句結構",
+        stem: "It's a sunny day. Let's ______ to the park and take some photos.",
+        translation: "今天是個晴天。我們一起去公園拍些照片吧。",
+        options: ["go", "going", "to go", "goes"],
+        answer: "go",
+        explanation: "Let's (= Let us) 後面必須接「原形動詞」，故選 go。",
+        distractors: {
+          "going": "受中式習慣影響常誤用 V-ing，但使役動詞 let 後須接原形動詞。",
+          "to go": "let 為使役動詞，後接原形動詞，不可加 to。",
+          "goes": "不可因主詞聯想而加 -es，必須維持原形。"
+        }
+      },
+      {
+        id: 18,
+        section: "二、文法與句型結構 (Grammar & Sentence Patterns)",
+        dimension: "文法",
+        category: "方位介系詞辨析",
+        stem: "Look at the picture. The tall boy is standing ______ the two short girls.",
+        translation: "看這張照片。那個高個子男孩正站在兩個矮個子女孩的中間。",
+        options: ["between", "next", "in front", "near to"],
+        answer: "between",
+        explanation: "表示在兩者（the two short girls）之間，應使用介系詞「between」。",
+        distractors: {
+          "next": "須搭配 to 形成「next to（在……隔壁）」，單獨使用語法錯誤。",
+          "in front": "須搭配 of 形成「in front of（在……前面）」，缺少 of 為錯誤結構。",
+          "near to": "near 本身即為介系詞，後面直接加受詞，不可多加 to（常見中式英文錯誤）。"
+        }
+      },
+      {
+        id: 19,
+        section: "二、文法與句型結構 (Grammar & Sentence Patterns)",
+        dimension: "文法",
+        category: "方位介系詞片語",
+        stem: "The cat is hiding ______ the door, so we can't see it from the front.",
+        translation: "那隻貓正躲在門後面，所以我們從前面看不到它。",
+        options: ["behind", "in front of", "between", "with"],
+        answer: "behind",
+        explanation: "由「從前面看不到它」可知貓躲在門的「後面（behind）」。",
+        distractors: {
+          "in front of": "意為「在……前面」，若在門前就會被看到，與後句邏輯矛盾。",
+          "between": "意為「在兩者之間」，後接單數名詞 the door 語法與語意皆不合。",
+          "with": "意為「和……一起；用」，無法表達躲藏的空間位置。"
+        }
+      },
+      {
+        id: 20,
+        section: "二、文法與句型結構 (Grammar & Sentence Patterns)",
+        dimension: "文法",
+        category: "方位介系詞搭配",
+        stem: "My school is ______ my house. It only takes me three minutes to walk there.",
+        translation: "我的學校在我家附近。走路去那裡只要花我三分鐘。",
+        options: ["near", "next", "between", "in front"],
+        answer: "near",
+        explanation: "表示「在……附近」，直接使用介系詞「near + 地點」即可。",
+        distractors: {
+          "next": "缺少介系詞 to，正確片語應為 next to。",
+          "between": "必須用於兩者之間（between A and B），此處只有 my house 一個地點。",
+          "in front": "缺少介系詞 of，正確片語應為 in front of。"
+        }
+      },
+      {
+        id: 21,
+        section: "二、文法與句型結構 (Grammar & Sentence Patterns)",
+        dimension: "文法",
+        category: "禮貌祈使句標點與位置",
+        stem: "______ the door for me, please. My hands are full of books.",
+        translation: "請幫我開門。我的雙手拿滿了書。",
+        options: ["Open", "Opens", "Opening", "To open"],
+        answer: "Open",
+        explanation: "祈使句不論句尾是否有 please，句首皆須使用「原形動詞（Open）」。",
+        distractors: {
+          "Opens": "不可加 -s，祈使句一律用原形動詞。",
+          "Opening": "動名詞或分詞不可直接作為祈使句開頭。",
+          "To open": "不定詞不可直接作為祈使句開頭。"
+        }
+      },
+      {
+        id: 22,
+        section: "二、文法與句型結構 (Grammar & Sentence Patterns)",
+        dimension: "文法",
+        category: "介系詞 with 的用法",
+        stem: "The girl ______ big eyes and long hair is my cousin, Amy.",
+        translation: "那個有著大眼睛和長頭髮的女孩是我的表妹 Amy。",
+        options: ["with", "in", "near", "behind"],
+        answer: "with",
+        explanation: "表示人「具有、帶著」某種身體特徵或配件，應使用介系詞「with」。",
+        distractors: {
+          "in": "in 後面通常接「衣物或顏色」，如 in a red dress，不可接身體器官。",
+          "near": "意為「在……附近」，語意不通。",
+          "behind": "意為「在……後面」，語意不通。"
+        }
+      },
+      {
+        id: 23,
+        section: "二、文法與句型結構 (Grammar & Sentence Patterns)",
+        dimension: "文法",
+        category: "不定代名詞 some 與 any",
+        stem: "We don't have ______ milk in the kitchen. Let's go get ______.",
+        translation: "我們廚房裡沒有任何牛奶了。我們去買一些吧。",
+        options: ["any; some", "some; any", "any; any", "some; some"],
+        answer: "any; some",
+        explanation: "第一句為否定句（don't have），修飾不可數名詞 milk 須用「any」；第二句為肯定提議句（Let's...），須用「some」（注意原始字表中的 somr 為 some 之拼字誤植）。",
+        distractors: {
+          "some; any": "位置顛倒，否定句通常用 any，肯定句用 some。",
+          "any; any": "第二句為肯定祈使句，應用 some 而非 any。",
+          "some; some": "第一句為否定句，應用 any 取代 some。"
+        }
+      },
+      {
+        id: 24,
+        section: "二、文法與句型結構 (Grammar & Sentence Patterns)",
+        dimension: "文法",
+        category: "否定祈使句",
+        stem: "______ your smartphone in class! Listen to the teacher carefully.",
+        translation: "上課不要用你的智慧型手機！專心聽老師講課。",
+        options: ["Don't use", "Not use", "No use", "Doesn't use"],
+        answer: "Don't use",
+        explanation: "否定祈使句的標準結構為「Don't + 原形動詞」，故選 Don't use。",
+        distractors: {
+          "Not use": "中式英文直譯錯誤，否定祈使句必須借用助動詞 Don't。",
+          "No use": "No + V-ing（如 No smoking）用於標語，後接原形動詞 use 為錯誤文法。",
+          "Doesn't use": "祈使句主詞為隱藏的 you，助動詞必須用原形 Don't，不可用 Doesn't。"
+        }
+      },
+      {
+        id: 25,
+        section: "二、文法與句型結構 (Grammar & Sentence Patterns)",
+        dimension: "文法",
+        category: "方位介系詞辨析",
+        stem: "The teacher is standing ______ the blackboard and writing some new words.",
+        translation: "老師正站在黑板前面寫一些新單字。",
+        options: ["in front of", "between", "behind", "next"],
+        answer: "in front of",
+        explanation: "老師寫黑板時一定是站在黑板的「前面（in front of）」。",
+        distractors: {
+          "between": "意為「在兩者之間」，blackboard 只有一個物品。",
+          "behind": "意為「在……後面」，站在黑板後面無法寫字。",
+          "next": "缺少介系詞 to，文法不完整。"
+        }
+      },
+      {
+        id: 26,
+        section: "二、文法與句型結構 (Grammar & Sentence Patterns)",
+        dimension: "文法",
+        category: "There is / There are 句型",
+        stem: "______ a living room, a dining room, and two bedrooms in my house.",
+        translation: "我家裡有一間客廳、一間飯廳和兩間臥室。",
+        options: ["There is", "There are", "Have", "They are"],
+        answer: "There is",
+        explanation: "There be 句型採取「就近原則」，最靠近空格的名詞為單數 a living room，故動詞用單數「There is」。",
+        distractors: {
+          "There are": "學生常將所有房間加總視為複數而誤選，但 There be 須依最靠近的第一個名詞決定單複數。",
+          "Have": "表示「某地有某物」必須用 There is/are，不可直接用 Have 開頭。",
+          "They are": "語意不符，無法表達「某處存在某物」。"
+        }
+      },
+      {
+        id: 27,
+        section: "二、文法與句型結構 (Grammar & Sentence Patterns)",
+        dimension: "文法",
+        category: "疑問詞 Where 與方位回答",
+        stem: "A: ______ is the bathroom?<br>B: It is ______ the kitchen and the bedroom.",
+        translation: "A：浴室在哪裡？ B：它在廚房和臥室之間。",
+        options: ["Where; between", "What; next to", "Where; in front", "Who; near"],
+        answer: "Where; between",
+        explanation: "詢問地點用疑問詞「Where」；回答「在 A 和 B 之間」用「between」。",
+        distractors: {
+          "What; next to": "What 詢問事物名稱，與回答地點不符。",
+          "Where; in front": "in front 後面缺少 of，文法不完整。",
+          "Who; near": "Who 詢問人物身份，不適用於詢問浴室位置。"
+        }
+      },
+      {
+        id: 28,
+        section: "二、文法與句型結構 (Grammar & Sentence Patterns)",
+        dimension: "文法",
+        category: "Let's 否定句型",
+        stem: "It's raining outside. Let's ______ out today.",
+        translation: "外面正在下雨。我們今天不要出去了吧。",
+        options: ["not go", "don't go", "no go", "not to go"],
+        answer: "not go",
+        explanation: "Let's 的否定形式為「Let's not + 原形動詞」，故選 not go。",
+        distractors: {
+          "don't go": "學生常受一般否定句影響誤用 Let's don't，正式文法應為 Let's not。",
+          "no go": "no 不能直接修飾原形動詞。",
+          "not to go": "let 為使役動詞，後接原形動詞，不可加 to。"
+        }
+      },
+      {
+        id: 29,
+        section: "二、文法與句型結構 (Grammar & Sentence Patterns)",
+        dimension: "文法",
+        category: "名詞單複數與冠詞",
+        stem: "Can you get ______ water for me? I am very thirsty after running.",
+        translation: "你可以幫我拿一些水嗎？我跑步後非常口渴。",
+        options: ["some", "a", "many", "an"],
+        answer: "some",
+        explanation: "water 為「不可數名詞」，在表示請求且預期對方會答應的疑問句中，常用「some」修飾。",
+        distractors: {
+          "a": "不定冠詞 a 只能接單數可數名詞。",
+          "many": "many 只能修飾複數可數名詞。",
+          "an": "不定冠詞 an 只能接母音開頭的單數可數名詞。"
+        }
+      },
+      {
+        id: 30,
+        section: "二、文法與句型結構 (Grammar & Sentence Patterns)",
+        dimension: "文法",
+        category: "介系詞片語 next to",
+        stem: "The bookstore is ______ the post office. You can see both of them on Main Street.",
+        translation: "書店就在郵局隔壁。你可以在主要大街上同時看到它們兩間。",
+        options: ["next to", "between", "with", "under"],
+        answer: "next to",
+        explanation: "兩棟建築物相鄰在旁，應使用介系詞片語「next to（在……隔壁）」。",
+        distractors: {
+          "between": "後僅接 the post office 一個地點，缺少另一端對象。",
+          "with": "意為「和……一起」，不用于建築物方位描述。",
+          "under": "意為「在……下面」，書店不可能在郵局正下方。"
+        }
+      },
+
+      // 三、綜合克漏字測驗 (31-40)
+      {
+        id: 31,
+        section: "三、綜合克漏字測驗 (Cloze Test)",
+        dimension: "語意邏輯",
+        category: "上下文名詞推理",
+        stem: "(第 31 題) Do you want to design your own dream ______?",
+        translation: "你想要設計你自己的夢想房子嗎？",
+        options: ["house", "question", "step", "photo"],
+        answer: "house",
+        explanation: "由後文提到的 empty room（空房間）、living room（客廳）、bedroom（臥室）及 new home 可推知，此處是指設計夢想中的「房子（house）」。",
+        distractors: {
+          "question": "意為「問題」，與設計房間的上下文無關。",
+          "step": "意為「步驟」，無法與設計客廳、臥室搭配。",
+          "photo": "意為「照片」，後文才提到要上傳照片，此處主軸是設計房子。"
+        }
+      },
+      {
+        id: 32,
+        section: "三、綜合克漏字測驗 (Cloze Test)",
+        dimension: "語意邏輯",
+        category: "轉折語氣與形容詞推理",
+        stem: "(第 32 題) It is very easy and free—not ______ at all.",
+        translation: "它非常簡單而且免費——一點也不貴。",
+        options: ["expensive", "quiet", "near", "behind"],
+        answer: "expensive",
+        explanation: "破折號前的關鍵字為「free（免費的）」，因此破折號後補充說明「一點也不昂貴（not expensive at all）」。",
+        distractors: {
+          "quiet": "意為「安靜的」，與免費無語意關聯。",
+          "near": "意為「靠近的」，與價格無關。",
+          "behind": "意為「在……後面」，詞性與語意皆不合。"
+        }
+      },
+      {
+        id: 33,
+        section: "三、綜合克漏字測驗 (Cloze Test)",
+        dimension: "文法",
+        category: "祈使句動詞運用",
+        stem: "(第 33 題) First, please ______ a photo of an empty room.",
+        translation: "首先，請上傳一張空房間的照片。",
+        options: ["upload", "wait", "let's", "see"],
+        answer: "upload",
+        explanation: "在手機應用程式（app）中操作設計房間，第一步是「上傳（upload）」空房間的照片。",
+        distractors: {
+          "wait": "意為「等待」，無法直接接 a photo 作受詞。",
+          "let's": "不可放在 please 後面。",
+          "see": "意為「看見」，不符合 app 操作步驟邏輯。"
+        }
+      },
+      {
+        id: 34,
+        section: "三、綜合克漏字測驗 (Cloze Test)",
+        dimension: "語意邏輯",
+        category: "上下文名詞推理",
+        stem: "(第 34 題) Next, choose your favorite ______, like a warm wood look or a modern white look.",
+        translation: "接著，選擇你最喜歡的風格，像是溫暖木質風或現代純白風。",
+        options: ["style", "bathroom", "smartphone", "dining room"],
+        answer: "style",
+        explanation: "後文舉例「溫暖木質風（warm wood look）」與「現代純白風（modern white look）」，皆屬於裝潢「風格（style）」。",
+        distractors: {
+          "bathroom": "意為「浴室」，木質風與純白風並非房間名稱。",
+          "smartphone": "意為「智慧型手機」，語意不合。",
+          "dining room": "意為「飯廳」，與後方舉例不符。"
+        }
+      },
+      {
+        id: 35,
+        section: "三、綜合克漏字測驗 (Cloze Test)",
+        dimension: "文法",
+        category: "固定片語與祈使句",
+        stem: "(第 35 題) Just ______ for ten seconds, and a wonderful picture of your new home is ready on your screen!",
+        translation: "只要等待十秒鐘，一張你新家的精彩圖片就會在你的螢幕上準備好了！",
+        options: ["wait", "get", "choose", "type"],
+        answer: "wait",
+        explanation: "後面有時間長度「for ten seconds（十秒鐘）」，搭配祈使句原形動詞「wait（等待）」，意為「等待十秒鐘」。",
+        distractors: {
+          "get": "get for 無法表達「等待時間」。",
+          "choose": "選擇不需要花十秒鐘等待螢幕生成圖片。",
+          "type": "前面已經打字輸入需求了，此處是等待結果。"
+        }
+      },
+      {
+        id: 36,
+        section: "三、綜合克漏字測驗 (Cloze Test)",
+        dimension: "語意邏輯",
+        category: "上下文形容詞推理",
+        stem: "(第 36 題) It is Sunday afternoon, and our home is very ______.",
+        translation: "現在是週日下午，我們家非常安靜。",
+        options: ["quiet", "expensive", "between", "next to"],
+        answer: "quiet",
+        explanation: "後文描述大家各自看照片、狗狗在睡覺、哥哥在線上問問題，整體居家氛圍是「安靜的（quiet）」。",
+        distractors: {
+          "expensive": "意為「昂貴的」，無法描述週日下午的居家氣氛。",
+          "between": "介系詞，不可單獨接在 very 之後。",
+          "next to": "介系詞片語，不可接在 very 之後。"
+        }
+      },
+      {
+        id: 37,
+        section: "三、綜合克漏字測驗 (Cloze Test)",
+        dimension: "文法",
+        category: "方位介系詞與連接詞 and",
+        stem: "(第 37 題) My dad is sitting on the sofa ______ my mom and my little sister in the living room.",
+        translation: "我爸爸正坐在客廳沙發上，位置在我媽媽和我小妹的中間。",
+        options: ["between", "in front of", "behind", "near"],
+        answer: "between",
+        explanation: "空格後出現「my mom and my little sister（兩個人）」，配合連接詞 and，必須使用「between A and B」。",
+        distractors: {
+          "in front of": "若坐在媽媽和妹妹前面，三人無法一起在沙發上看舊照片，語意不合理。",
+          "behind": "坐在沙發上不會在媽媽和妹妹的「後面」。",
+          "near": "雖然語法可通，但在描述沙發座位排列時，between A and B 是最精準的考點搭配。"
+        }
+      },
+      {
+        id: 38,
+        section: "三、綜合克漏字測驗 (Cloze Test)",
+        dimension: "語意邏輯",
+        category: "方位介系詞推理",
+        stem: "(第 38 題) He is sleeping ______ the dining room table, so you can only see his tail.",
+        translation: "牠正睡在飯廳桌子後面（或下方），所以你只能看到牠的尾巴。",
+        options: ["behind", "on", "in front of", "with"],
+        answer: "behind",
+        explanation: "因為「只能看到牠的尾巴（only see his tail）」，表示身體被桌子遮住了，故選「behind（在……後面）」。",
+        distractors: {
+          "on": "若睡在桌子上，整隻狗都會被看到。",
+          "in front of": "若睡在桌子前面，也會被完整看到。",
+          "with": "意為「和……一起」，不合語意。"
+        }
+      },
+      {
+        id: 39,
+        section: "三、綜合克漏字測驗 (Cloze Test)",
+        dimension: "文法",
+        category: "介系詞片語結構",
+        stem: "(第 39 題) He is in the study ______ the bathroom.",
+        translation: "他在浴室隔壁的書房裡。",
+        options: ["next to", "next", "in front", "between"],
+        answer: "next to",
+        explanation: "空格後直接接名詞片語 the bathroom，表示「在……隔壁」，必須使用完整的介系詞片語「next to」。",
+        distractors: {
+          "next": "缺少介系詞 to，無法直接接名詞。",
+          "in front": "缺少介系詞 of，無法直接接名詞。",
+          "between": "後方只有 the bathroom 一個地點，缺乏另一對象。"
+        }
+      },
+      {
+        id: 40,
+        section: "三、綜合克漏字測驗 (Cloze Test)",
+        dimension: "語意邏輯",
+        category: "上下文名詞推理",
+        stem: "(第 40 題) He has a math ______ and is asking our older cousin for help online.",
+        translation: "他有一個數學問題，正在線上向我們的表哥尋求協助。",
+        options: ["question", "house", "style", "photo"],
+        answer: "question",
+        explanation: "由後文「asking... for help（尋求協助）」可知，他遇到了一個數學「問題（question）」。",
+        distractors: {
+          "house": "意為「房子」，與數學無關。",
+          "style": "意為「風格」，與數學無關。",
+          "photo": "意為「照片」，不如 question 貼切尋求解答的語境。"
+        }
+      },
+
+      // 四、閱讀理解測驗 (41-50)
+      {
+        id: 41,
+        section: "四、閱讀理解測驗 (Reading Comprehension)",
+        dimension: "細節理解",
+        category: "主旨與功能理解",
+        stem: "What is 'Smart Home Helper'?",
+        translation: "「Smart Home Helper」是什麼？",
+        options: [
+          "A smartphone app for planning rooms.",
+          "A store that sells expensive houses.",
+          "A book about how to take good photos.",
+          "A tool for fixing broken bathrooms."
+        ],
+        answer: "A smartphone app for planning rooms.",
+        explanation: "根據第一段第二句「With this app on your smartphone, you can plan every room in your house」，可知它是一款用來規劃房間的手機應用程式。",
+        distractors: {
+          "A store that sells expensive houses.": "文中明確提到 without spending a lot of money（不用花大錢），且它不是賣房子的商店。",
+          "A book about how to take good photos.": "它是手機 app，不是教拍照的書。",
+          "A tool for fixing broken bathrooms.": "它是規劃房間設計的工具，不是水電修繕工具。"
+        }
+      },
+      {
+        id: 42,
+        section: "四、閱讀理解測驗 (Reading Comprehension)",
+        dimension: "細節理解",
+        category: "步驟順序判讀",
+        stem: "According to the guide, what do you do right after you choose a room type?",
+        translation: "根據指南，在你選擇房間類型之後緊接著要做什麼？",
+        options: [
+          "Upload a clear photo of the room.",
+          "Type your question in the box.",
+          "Pick a theme and style you like.",
+          "Wait a few seconds for the new room."
+        ],
+        answer: "Upload a clear photo of the room.",
+        explanation: "Step 1 是選擇房間類型（Choose a room type），緊接著 Step 2 就是「上傳房間的清晰照片（Upload a clear photo of your room）」。",
+        distractors: {
+          "Type your question in the box.": "這是 Step 4 的動作。",
+          "Pick a theme and style you like.": "這是 Step 3 的動作。",
+          "Wait a few seconds for the new room.": "這也是 Step 4 最後的動作。"
+        }
+      },
+      {
+        id: 43,
+        section: "四、閱讀理解測驗 (Reading Comprehension)",
+        dimension: "細節理解",
+        category: "條件與注意事項",
+        stem: "What should your room be like when you take a photo for Step 2?",
+        translation: "當你為步驟二拍照時，你的房間應該是什麼樣子？",
+        options: [
+          "It should be bright.",
+          "It should be very expensive.",
+          "It should be quiet and dark.",
+          "It should be next to a park."
+        ],
+        answer: "It should be bright.",
+        explanation: "Step 2 明確指示「Make sure the room is bright.（確保房間是明亮的。）」。",
+        distractors: {
+          "It should be very expensive.": "文中未要求房間必須昂貴。",
+          "It should be quiet and dark.": "與原文要求的 bright（明亮）相反。",
+          "It should be next to a park.": "文中未提及公園。"
+        }
+      },
+      {
+        id: 44,
+        section: "四、閱讀理解測驗 (Reading Comprehension)",
+        dimension: "語意邏輯",
+        category: "文意推論",
+        stem: "What can we know about Smart Home Helper from the reading?",
+        translation: "從這篇閱讀中，我們可以得知關於 Smart Home Helper 的什麼資訊？",
+        options: [
+          "It needs Wi-Fi when users upload photos.",
+          "It only works for big and new houses.",
+          "Users must wait two hours to see the room.",
+          "Users cannot ask any questions on the app."
+        ],
+        answer: "It needs Wi-Fi when users upload photos.",
+        explanation: "文末 Note 指出「Please keep your smartphone near a strong Wi-Fi signal when you upload photos.」，可知上傳照片時需要 Wi-Fi 訊號。",
+        distractors: {
+          "It only works for big and new houses.": "Step 3 提到 We have some great ideas for small houses!，並非只適用於大房子。",
+          "Users must wait two hours to see the room.": "Step 4 提到只需等待幾秒鐘（wait a few seconds），而非兩小時。",
+          "Users cannot ask any questions on the app.": "Step 4 明確說明可以輸入問題（Type your question in the box）。"
+        }
+      },
+      {
+        id: 45,
+        section: "四、閱讀理解測驗 (Reading Comprehension)",
+        dimension: "細節理解",
+        category: "細節資訊核對",
+        stem: "Which room type is **NOT** mentioned in Step 1?",
+        translation: "步驟一中「沒有」提到哪一種房間類型？",
+        options: [
+          "A kitchen.",
+          "A living room.",
+          "A dining room.",
+          "A bathroom."
+        ],
+        answer: "A kitchen.",
+        explanation: "Step 1 列舉了 a living room, a dining room, a bedroom, or a bathroom，唯獨「沒有提到廚房（A kitchen）」。",
+        distractors: {
+          "A living room.": "Step 1 中有明確提及。",
+          "A dining room.": "Step 1 中有明確提及。",
+          "A bathroom.": "Step 1 中有明確提及。"
+        }
+      },
+      {
+        id: 46,
+        section: "四、閱讀理解測驗 (Reading Comprehension)",
+        dimension: "細節理解",
+        category: "文章細節判讀",
+        stem: "How is Leo's family's new house?",
+        translation: "Leo 家人新買的房子怎麼樣？",
+        options: [
+          "It is clean, quiet, and not expensive.",
+          "It is very big and next to a school.",
+          "It is noisy and has three floors.",
+          "It is expensive and has no windows."
+        ],
+        answer: "It is clean, quiet, and not expensive.",
+        explanation: "文章第二句明確提到「It is not very big, and it was not expensive, but it is clean and quiet.」。",
+        distractors: {
+          "It is very big and next to a school.": "原文說 not very big，且未提及學校。",
+          "It is noisy and has three floors.": "原文說房子很安靜（quiet），且只有二樓（on the second floor）。",
+          "It is expensive and has no windows.": "原文說 not expensive，且客廳與臥室都有窗戶。"
+        }
+      },
+      {
+        id: 47,
+        section: "四、閱讀理解測驗 (Reading Comprehension)",
+        dimension: "細節理解",
+        category: "空間方位判讀",
+        stem: "Where is the dining room in Leo's house?",
+        translation: "Leo 家的飯廳在哪裡？",
+        options: [
+          "Behind the living room.",
+          "In front of the big blue sofa.",
+          "On the second floor.",
+          "Between the two bedrooms."
+        ],
+        answer: "Behind the living room.",
+        explanation: "根據文章第五句「Behind the living room is our dining room.（客廳後面是我們的飯廳。）」。",
+        distractors: {
+          "In front of the big blue sofa.": "藍色沙發在窗戶前面，並非飯廳位置。",
+          "On the second floor.": "二樓是兩間臥室和浴室。",
+          "Between the two bedrooms.": "飯廳在一樓客廳後方，不在兩間臥室之間。"
+        }
+      },
+      {
+        id: 48,
+        section: "四、閱讀理解測驗 (Reading Comprehension)",
+        dimension: "細節理解",
+        category: "空間方位判讀",
+        stem: "Where is Leo's bedroom?",
+        translation: "Leo 的臥室在哪裡？",
+        options: [
+          "Between his parents' bedroom and the bathroom.",
+          "Next to the front door on the first floor.",
+          "Behind the dining room and the kitchen.",
+          "In front of the living room window."
+        ],
+        answer: "Between his parents' bedroom and the bathroom.",
+        explanation: "根據文章倒數第三句「My bedroom is between my parents' bedroom and the bathroom.」。",
+        distractors: {
+          "Next to the front door on the first floor.": "大門進來是客廳，臥室在二樓。",
+          "Behind the dining room and the kitchen.": "原文未提及廚房，且臥室在二樓。",
+          "In front of the living room window.": "這是藍色沙發的位置。"
+        }
+      },
+      {
+        id: 49,
+        section: "四、閱讀理解測驗 (Reading Comprehension)",
+        dimension: "細節理解",
+        category: "家具擺設判讀",
+        stem: "What is next to the big blue sofa in the living room?",
+        translation: "客廳裡大藍色沙發的隔壁是什麼？",
+        options: [
+          "A small table.",
+          "Leo's study desk.",
+          "The front door.",
+          "Green trees."
+        ],
+        answer: "A small table.",
+        explanation: "根據文章第四句「A big blue sofa is in front of the window, and a small table is next to the sofa.」。",
+        distractors: {
+          "Leo's study desk.": "書桌在二樓 Leo 臥室的窗戶附近。",
+          "The front door.": "大門在客廳入口，並非緊鄰沙發。",
+          "Green trees.": "綠樹在二樓書桌窗戶的外面。"
+        }
+      },
+      {
+        id: 50,
+        section: "四、閱讀理解測驗 (Reading Comprehension)",
+        dimension: "語意邏輯",
+        category: "因果關係推論",
+        stem: "Why can Leo see the green trees outside when he studies?",
+        translation: "為什麼 Leo 唸書時可以看到外面的綠樹？",
+        options: [
+          "Because his desk is near the window.",
+          "Because he studies in the dining room.",
+          "Because there are trees in his bedroom.",
+          "Because his house has no walls."
+        ],
+        answer: "Because his desk is near the window.",
+        explanation: "根據文章倒數第二句「My desk is near the window, so I can see the green trees outside when I study.」，因書桌靠近窗戶所以能看見窗外綠樹。",
+        distractors: {
+          "Because he studies in the dining room.": "他在自己二樓臥室的書桌唸書。",
+          "Because there are trees in his bedroom.": "樹在外面（outside），不在臥室裡面。",
+          "Because his house has no walls.": "不合常理的錯誤推論。"
+        }
+      }
+    ];
+
+    // =========================================================================
+    // 應用程式狀態管理 (App State)
+    // =========================================================================
+    let currentQuestions = [];
+    let userAnswers = {};
+    let isSubmitted = false;
+    let radarChartInstance = null;
+
+    // 陣列洗牌演算法 (Fisher-Yates Shuffle)
+    function shuffleArray(array) {
+      const arr = [...array];
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    }
+
+    // 初始化測驗
+    function initQuiz(shuffleOptions = false) {
+      userAnswers = {};
+      isSubmitted = false;
+
+      currentQuestions = quizData.map(q => ({
+        ...q,
+        displayOptions: shuffleOptions ? shuffleArray(q.options) : [...q.options]
+      }));
+
+      document.getElementById("result-dashboard").style.display = "none";
+      document.getElementById("submit-btn").disabled = false;
+      document.getElementById("submit-btn").style.opacity = "1";
+      updateProgress();
+      renderPassages();
+      renderQuestions();
+    }
+
+    // 渲染左側文本區
+    function renderPassages() {
+      const container = document.getElementById("passages-container");
+      let html = `
+        <div class="passage-card">
+          <span class="passage-tag">測驗指引與題組文本</span>
+          <div class="passage-title">題組文本區（第 31–50 題對照閱讀）</div>
+          <p style="font-size: 0.9rem; color: var(--text-muted);">
+            作答第 1 至 30 題單題時，可直接於右側作答區點選答案。作答第 31 至 50 題「綜合克漏字」與「閱讀理解」時，請對照下方四篇文本進行語意與細節推論。
+          </p>
+        </div>
+      `;
+
+      passagesData.forEach(p => {
+        html += `
+          <div class="passage-card" id="${p.id}">
+            <span class="passage-tag">${p.tag}</span>
+            <div class="passage-title">${p.title}</div>
+            <div class="passage-content">${p.content}</div>
+          </div>
+        `;
+      });
+
+      container.innerHTML = html;
+    }
+
+    // 渲染右側試題區
+    function renderQuestions() {
+      const container = document.getElementById("questions-container");
+      let html = "";
+      let lastSection = "";
+      const letters = ["A", "B", "C", "D"];
+
+      currentQuestions.forEach((q, idx) => {
+        if (q.section !== lastSection) {
+          html += `<div class="section-header">${q.section}</div>`;
+          lastSection = q.section;
+        }
+
+        const optionsHtml = q.displayOptions.map((opt, optIdx) => {
+          const letter = letters[optIdx];
+          const escapedOpt = opt.replace(/"/g, '&quot;');
+          return `
+            <div class="option-label" id="opt-${q.id}-${optIdx}" onclick="selectOption(${q.id}, '${escapedOpt}', ${optIdx})">
+              <span class="option-letter">${letter}</span>
+              <span>${opt}</span>
+            </div>
+          `;
+        }).join("");
+
+        // 組合解析內容
+        const distractorList = Object.entries(q.distractors)
+          .map(([key, reason]) => `<li><strong>${key}</strong>：${reason}</li>`)
+          .join("");
+
+        html += `
+          <div class="question-card" id="q-card-${q.id}" data-qid="${q.id}">
+            <div class="question-meta">
+              <span class="q-number">第 ${q.id} 題</span>
+              <span class="q-category">${q.dimension}｜${q.category}</span>
+            </div>
+            <div class="question-stem">${q.stem}</div>
+            <div class="options-grid">${optionsHtml}</div>
+            <div class="explanation-box" id="exp-${q.id}">
+              <div class="exp-title">【試題詳解與弱點分析】</div>
+              <div class="exp-item"><strong>原題題幹：</strong>${q.stem}</div>
+              <div class="exp-item"><strong>中文翻譯：</strong>${q.translation}</div>
+              <div class="exp-item"><strong>正確答案：</strong><span style="color: var(--correct-text); font-weight: 700;">${q.answer}</span></div>
+              <div class="exp-item"><strong>核心考點說明：</strong>${q.explanation}</div>
+              <div class="exp-item"><strong>干擾項錯誤剖析：</strong>
+                <ul class="exp-distractors">${distractorList}</ul>
+              </div>
+            </div>
+          </div>
+        `;
+      });
+
+      container.innerHTML = html;
+    }
+
+    // 選擇選項
+    function selectOption(qId, optionText, optIdx) {
+      if (isSubmitted) return;
+
+      // 解碼 HTML 實體
+      const tempDiv = document.createElement("div");
+      tempDiv.innerHTML = optionText;
+      const decodedOption = tempDiv.textContent || tempDiv.innerText || "";
+
+      userAnswers[qId] = decodedOption;
+
+      // 更新選項樣式
+      const qObj = currentQuestions.find(q => q.id === qId);
+      qObj.displayOptions.forEach((_, i) => {
+        const el = document.getElementById(`opt-${qId}-${i}`);
+        if (i === optIdx) {
+          el.classList.add("selected");
+        } else {
+          el.classList.remove("selected");
+        }
+      });
+
+      updateProgress();
+    }
+
+    // 更新作答進度
+    function updateProgress() {
+      const answeredCount = Object.keys(userAnswers).length;
+      document.getElementById("progress-text").textContent = `作答進度：${answeredCount} / ${currentQuestions.length}`;
+    }
+
+    // 提交試卷
+    function submitQuiz() {
+      if (isSubmitted) return;
+
+      const answeredCount = Object.keys(userAnswers).length;
+      if (answeredCount < currentQuestions.length) {
+        const confirmSubmit = confirm(`您還有 ${currentQuestions.length - answeredCount} 題尚未作答，確定要現在交卷嗎？`);
+        if (!confirmSubmit) return;
+      }
+
+      isSubmitted = true;
+      document.getElementById("submit-btn").disabled = true;
+      document.getElementById("submit-btn").style.opacity = "0.5";
+
+      let correctTotal = 0;
+      const dimensionStats = {
+        "字彙": { correct: 0, total: 0 },
+        "文法": { correct: 0, total: 0 },
+        "語意邏輯": { correct: 0, total: 0 },
+        "細節理解": { correct: 0, total: 0 }
+      };
+
+      currentQuestions.forEach(q => {
+        const userChoice = userAnswers[q.id];
+        const isCorrect = userChoice === q.answer;
+        const card = document.getElementById(`q-card-${q.id}`);
+        const expBox = document.getElementById(`exp-${q.id}`);
+
+        // 統計維度
+        if (dimensionStats[q.dimension]) {
+          dimensionStats[q.dimension].total += 1;
+          if (isCorrect) dimensionStats[q.dimension].correct += 1;
+        }
+
+        if (isCorrect) {
+          correctTotal += 1;
+          card.classList.add("status-correct");
+          card.dataset.result = "correct";
+        } else {
+          card.classList.add("status-wrong");
+          card.dataset.result = "wrong";
+        }
+
+        // 標記選項顏色並鎖定點擊
+        q.displayOptions.forEach((opt, i) => {
+          const optEl = document.getElementById(`opt-${q.id}-${i}`);
+          optEl.classList.add("disabled");
+          optEl.classList.remove("selected");
+
+          if (opt === q.answer) {
+            optEl.classList.add("opt-correct");
+          } else if (opt === userChoice && !isCorrect) {
+            optEl.classList.add("opt-wrong");
+          }
+        });
+
+        // 顯示解析
+        expBox.style.display = "block";
+      });
+
+      const score = correctTotal * 2;
+      const wrongTotal = currentQuestions.length - correctTotal;
+
+      document.getElementById("final-score").textContent = `${score} 分`;
+      document.getElementById("correct-count-text").textContent = `答對 ${correctTotal} / ${currentQuestions.length} 題（答錯 ${wrongTotal} 題）`;
+      document.getElementById("filter-wrong").textContent = `只看錯題 (${wrongTotal})`;
+
+      renderDiagnosticBars(dimensionStats);
+      renderRadarChart(dimensionStats);
+
+      const dashboard = document.getElementById("result-dashboard");
+      dashboard.style.display = "block";
+      dashboard.scrollIntoView({ behavior: "smooth" });
+    }
+
+    // 繪製弱點診斷進度條
+    function renderDiagnosticBars(stats) {
+      const container = document.getElementById("diagnostic-bars");
+      let html = "";
+      Object.entries(stats).forEach(([dim, data]) => {
+        const pct = data.total > 0 ? Math.round((data.correct / data.total) * 100) : 0;
+        const barColor = pct >= 80 ? "#16a34a" : pct >= 60 ? "#2563eb" : "#ef4444";
+        html += `
+          <div class="stat-row">
+            <div class="stat-label">
+              <span>${dim}（${data.correct}/${data.total} 題）</span>
+              <span style="color: ${barColor}; font-weight: 700;">${pct}%</span>
+            </div>
+            <div class="stat-bar-bg">
+              <div class="stat-bar-fill" style="width: ${pct}%; background-color: ${barColor};"></div>
+            </div>
+          </div>
+        `;
+      });
+      container.innerHTML = html;
+    }
+
+    // 繪製 Chart.js 雷達圖
+    function renderRadarChart(stats) {
+      const ctx = document.getElementById("radarChart").getContext("2d");
+      if (radarChartInstance) {
+        radarChartInstance.destroy();
+      }
+
+      const labels = Object.keys(stats);
+      const dataValues = labels.map(label => {
+        const d = stats[label];
+        return d.total > 0 ? Math.round((d.correct / d.total) * 100) : 0;
+      });
+
+      radarChartInstance = new Chart(ctx, {
+        type: "radar",
+        data: {
+          labels: labels,
+          datasets: [{
+            label: "得分率 (%)",
+            data: dataValues,
+            backgroundColor: "rgba(37, 99, 235, 0.2)",
+            borderColor: "rgba(37, 99, 235, 1)",
+            pointBackgroundColor: "rgba(37, 99, 235, 1)",
+            pointBorderColor: "#fff",
+            pointHoverBackgroundColor: "#fff",
+            pointHoverBorderColor: "rgba(37, 99, 235, 1)",
+            borderWidth: 2
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            r: {
+              min: 0,
+              max: 100,
+              ticks: {
+                stepSize: 20,
+                font: { size: 10 }
+              },
+              pointLabels: {
+                font: { size: 12, weight: "bold" },
+                color: "#1e293b"
+              }
+            }
+          },
+          plugins: {
+            legend: { display: false }
+          }
+        }
+      });
+    }
+
+    // 篩選試題（全部 / 只看錯題）
+    function filterQuestions(mode) {
+      const btnAll = document.getElementById("filter-all");
+      const btnWrong = document.getElementById("filter-wrong");
+
+      if (mode === "all") {
+        btnAll.classList.add("active");
+        btnWrong.classList.remove("active");
+      } else {
+        btnWrong.classList.add("active");
+        btnAll.classList.remove("active");
+      }
+
+      const cards = document.querySelectorAll(".question-card");
+      cards.forEach(card => {
+        if (mode === "all") {
+          card.style.display = "block";
+        } else {
+          card.style.display = card.dataset.result === "wrong" ? "block" : "none";
+        }
+      });
+    }
+
+    // 一鍵複製錯題筆記（Markdown 格式）
+    function copyWrongNotes() {
+      if (!isSubmitted) return;
+
+      const wrongQuestions = currentQuestions.filter(q => userAnswers[q.id] !== q.answer);
+      let mdText = `# 國中一年級英文科測驗錯題複習筆記\n\n`;
+      mdText += `- **測驗總分**：${document.getElementById("final-score").textContent}\n`;
+      mdText += `- **錯題總數**：${wrongQuestions.length} 題\n\n---\n\n`;
+
+      if (wrongQuestions.length === 0) {
+        mdText += `太棒了！本次測驗全數答對，沒有任何錯題！\n`;
+      } else {
+        wrongQuestions.forEach(q => {
+          const cleanStem = q.stem.replace(/<br\s*\/?>/gi, " ").replace(/<[^>]+>/g, "");
+          const myAns = userAnswers[q.id] || "未作答";
+          mdText += `### 第 ${q.id} 題【${q.dimension} - ${q.category}】\n`;
+          mdText += `- **題目**：${cleanStem}\n`;
+          mdText += `- **中文翻譯**：${q.translation}\n`;
+          mdText += `- **我的作答**：~~${myAns}~~\n`;
+          mdText += `- **正確答案**：**${q.answer}**\n`;
+          mdText += `- **核心考點**：${q.explanation}\n`;
+          mdText += `- **干擾項解析**：\n`;
+          Object.entries(q.distractors).forEach(([opt, reason]) => {
+            mdText += `  - \`${opt}\`：${reason}\n`;
+          });
+          mdText += `\n`;
+        });
+      }
+
+      navigator.clipboard.writeText(mdText).then(() => {
+        const btn = document.getElementById("copy-md-btn");
+        const originalText = btn.textContent;
+        btn.textContent = "✅ 已成功複製 Markdown 錯題筆記！";
+        setTimeout(() => {
+          btn.textContent = originalText;
+        }, 2500);
+      }).catch(() => {
+        alert("複製失敗，請確認瀏覽器剪貼簿權限。");
+      });
+    }
+
+    // 重新測驗（選項隨機洗牌）
+    function resetQuiz() {
+      if (Object.keys(userAnswers).length > 0 && !isSubmitted) {
+        if (!confirm("確定要清空目前作答並重新開始測驗嗎？")) return;
+      }
+      initQuiz(true);
+      filterQuestions("all");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    // 頁面載入時初始化
+    window.addEventListener("DOMContentLoaded", () => {
+      initQuiz(false);
+    });
+  </script>
+</body>
+</html>
