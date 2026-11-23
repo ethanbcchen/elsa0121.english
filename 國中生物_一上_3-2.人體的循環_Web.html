@@ -1,0 +1,2549 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>國中七年級自然科學（生物）全真模擬測驗（50題）</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+  <style>
+    :root {
+      --bg-main: #0f172a;
+      --bg-panel: #162032;
+      --bg-card: #1e293b;
+      --bg-card-hover: #263349;
+      --border-color: #334155;
+      --text-primary: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --accent-blue: #3b82f6;
+      --accent-blue-hover: #2563eb;
+      --accent-green: #10b981;
+      --accent-green-bg: rgba(16, 185, 129, 0.15);
+      --accent-red: #ef4444;
+      --accent-red-bg: rgba(239, 68, 68, 0.15);
+      --accent-amber: #f59e0b;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+      background-color: var(--bg-main);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Header Bar */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background-color: #0b1120;
+      border-bottom: 1px solid var(--border-color);
+      padding: 10px 20px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .secret-verify-btn {
+      color: #334155;
+      cursor: pointer;
+      user-select: none;
+      font-size: 16px;
+      padding: 2px 6px;
+      border-radius: 4px;
+      transition: color 0.2s;
+    }
+    .secret-verify-btn:hover {
+      color: #64748b;
+    }
+
+    .timer-box {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      padding: 5px 12px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .timer-display {
+      color: #4ade80;
+      font-variant-numeric: tabular-nums;
+      font-size: 1.05rem;
+    }
+
+    .timer-input {
+      width: 54px;
+      background: var(--bg-main);
+      color: var(--text-primary);
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      padding: 3px 6px;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    .btn {
+      border: none;
+      border-radius: 6px;
+      padding: 6px 14px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-dark {
+      background: #334155;
+    }
+    .btn-dark:hover {
+      background: #475569;
+    }
+
+    .btn-status {
+      background: rgba(59, 130, 246, 0.15);
+      border: 1px solid #3b82f6;
+      color: #60a5fa;
+      cursor: default;
+    }
+
+    .btn-submit {
+      background: var(--accent-green);
+    }
+    .btn-submit:hover {
+      background: #059669;
+    }
+    .btn-submit:disabled {
+      background: #334155;
+      color: #94a3b8;
+      cursor: not-allowed;
+    }
+
+    .btn-shuffle {
+      background: #1e293b;
+      border: 1px solid #475569;
+    }
+    .btn-shuffle:hover {
+      background: #334155;
+    }
+
+    .header-right {
+      text-align: right;
+      user-select: none;
+      cursor: pointer;
+    }
+
+    .header-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #f8fafc;
+    }
+
+    .header-subtitle {
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+    }
+
+    /* Main Two-Column Layout */
+    .main-container {
+      display: flex;
+      height: calc(100vh - 64px);
+      overflow: hidden;
+    }
+
+    .left-pane, .right-pane {
+      width: 50%;
+      height: 100%;
+      overflow-y: auto;
+      padding: 20px;
+    }
+
+    .left-pane {
+      border-right: 1px solid var(--border-color);
+      background-color: #0d1424;
+    }
+
+    .right-pane {
+      background-color: var(--bg-main);
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0f172a;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #334155;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #475569;
+    }
+
+    /* Cards in Left Pane */
+    .panel-card {
+      background: var(--bg-panel);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 18px;
+      margin-bottom: 20px;
+    }
+
+    .panel-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #fbbf24;
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .legend-text {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      font-weight: normal;
+    }
+
+    /* Result Dashboard */
+    #result-dashboard {
+      display: none;
+      border: 1px solid #3b82f6;
+      background: linear-gradient(145deg, #162238 0%, #0f172a 100%);
+    }
+
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 16px;
+      align-items: center;
+      margin-top: 10px;
+    }
+
+    .score-summary-box {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 16px;
+      text-align: center;
+    }
+
+    .score-big {
+      font-size: 3rem;
+      font-weight: 800;
+      color: #38bdf8;
+      line-height: 1.1;
+      margin: 6px 0;
+    }
+
+    .dim-list {
+      margin-top: 14px;
+      text-align: left;
+      font-size: 0.85rem;
+    }
+
+    .dim-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 4px 0;
+      border-bottom: 1px dashed #334155;
+    }
+
+    .radar-wrapper {
+      position: relative;
+      height: 240px;
+      width: 100%;
+    }
+
+    .filter-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    /* Quick Nav Grid */
+    .nav-grid {
+      display: grid;
+      grid-template-columns: repeat(10, 1fr);
+      gap: 6px;
+    }
+
+    .nav-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
+      border-radius: 6px;
+      padding: 7px 0;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+      text-align: center;
+    }
+
+    .nav-btn:hover {
+      border-color: var(--accent-blue);
+    }
+
+    .nav-btn.answered {
+      background: var(--accent-blue);
+      border-color: var(--accent-blue);
+      color: #fff;
+    }
+
+    .nav-btn.correct {
+      background: var(--accent-green) !important;
+      border-color: var(--accent-green) !important;
+      color: #fff !important;
+    }
+
+    .nav-btn.wrong {
+      background: var(--accent-red) !important;
+      border-color: var(--accent-red) !important;
+      color: #fff !important;
+    }
+
+    /* Reference Passages & Data Tables */
+    .ref-group {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+
+    .ref-badge {
+      display: inline-block;
+      background: rgba(59, 130, 246, 0.2);
+      color: #60a5fa;
+      border: 1px solid rgba(59, 130, 246, 0.4);
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 4px;
+      margin-bottom: 8px;
+    }
+
+    .ref-group h3 {
+      font-size: 1.05rem;
+      color: #f8fafc;
+      margin-bottom: 8px;
+    }
+
+    .ref-group p {
+      font-size: 0.92rem;
+      color: #cbd5e1;
+      margin-bottom: 10px;
+    }
+
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 10px 0;
+      font-size: 0.88rem;
+    }
+
+    .data-table th, .data-table td {
+      border: 1px solid #334155;
+      padding: 8px 10px;
+      text-align: center;
+    }
+
+    .data-table th {
+      background: #0f172a;
+      color: #93c5fd;
+      font-weight: 600;
+    }
+
+    .data-table td {
+      background: #162032;
+      color: #e2e8f0;
+    }
+
+    .ascii-diagram {
+      background: #0b1120;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      padding: 12px;
+      font-family: "Courier New", Consolas, monospace;
+      font-size: 0.85rem;
+      color: #38bdf8;
+      overflow-x: auto;
+      white-space: pre;
+      line-height: 1.45;
+      margin: 10px 0;
+    }
+
+    /* Right Pane Questions */
+    .section-banner {
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 10px;
+      margin-bottom: 18px;
+    }
+
+    .section-banner h2 {
+      font-size: 1.15rem;
+      color: #60a5fa;
+    }
+
+    .section-banner p {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+
+    .question-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
+      transition: border-color 0.2s;
+    }
+
+    .question-card.card-correct {
+      border-color: var(--accent-green);
+    }
+
+    .question-card.card-wrong {
+      border-color: var(--accent-red);
+    }
+
+    .q-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      gap: 8px;
+    }
+
+    .q-number {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #38bdf8;
+    }
+
+    .q-tag {
+      font-size: 0.78rem;
+      background: #0f172a;
+      color: var(--text-secondary);
+      border: 1px solid var(--border-color);
+      padding: 3px 10px;
+      border-radius: 6px;
+    }
+
+    .q-stem {
+      font-size: 1rem;
+      color: #f8fafc;
+      margin-bottom: 16px;
+      line-height: 1.7;
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .option-btn {
+      background: #131c2e;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      padding: 12px 14px;
+      color: #e2e8f0;
+      font-size: 0.95rem;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      transition: all 0.15s;
+    }
+
+    .option-btn:hover:not(:disabled) {
+      background: var(--bg-card-hover);
+      border-color: #60a5fa;
+    }
+
+    .option-btn.selected {
+      background: rgba(59, 130, 246, 0.2);
+      border-color: #3b82f6;
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .option-btn.opt-correct {
+      background: var(--accent-green-bg) !important;
+      border-color: var(--accent-green) !important;
+      color: #4ade80 !important;
+      font-weight: 700;
+    }
+
+    .option-btn.opt-wrong {
+      background: var(--accent-red-bg) !important;
+      border-color: var(--accent-red) !important;
+      color: #f87171 !important;
+      text-decoration: line-through;
+    }
+
+    .opt-radio {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      border: 2px solid #64748b;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 3px;
+    }
+
+    .option-btn.selected .opt-radio {
+      border-color: #3b82f6;
+      background: #3b82f6;
+    }
+    .option-btn.selected .opt-radio::after {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #fff;
+    }
+
+    .option-btn.opt-correct .opt-radio {
+      border-color: var(--accent-green);
+      background: var(--accent-green);
+    }
+    .option-btn.opt-wrong .opt-radio {
+      border-color: var(--accent-red);
+      background: var(--accent-red);
+    }
+
+    /* Explanation Box */
+    .explanation-box {
+      display: none;
+      margin-top: 16px;
+      background: #0f172a;
+      border: 1px solid #334155;
+      border-radius: 10px;
+      padding: 16px;
+      font-size: 0.92rem;
+    }
+
+    .exp-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 12px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #1e293b;
+    }
+
+    .ans-badge {
+      background: var(--accent-green);
+      color: #fff;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.88rem;
+    }
+
+    .exp-block {
+      margin-bottom: 10px;
+      color: #cbd5e1;
+      line-height: 1.65;
+    }
+
+    .exp-block strong {
+      color: #f8fafc;
+    }
+
+    .distractor-list {
+      list-style: disc;
+      padding-left: 20px;
+      margin-top: 6px;
+      color: #94a3b8;
+    }
+
+    .distractor-list li {
+      margin-bottom: 4px;
+    }
+
+    /* Modals */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      z-index: 999;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-content {
+      background: #1e293b;
+      border: 1px solid #475569;
+      border-radius: 12px;
+      width: 100%;
+      max-width: 900px;
+      max-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .modal-header {
+      padding: 16px 20px;
+      background: #0f172a;
+      border-bottom: 1px solid #334155;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .modal-body {
+      padding: 20px;
+      overflow-y: auto;
+    }
+
+    /* Responsive */
+    @media (max-width: 960px) {
+      .main-container {
+        flex-direction: column;
+        height: auto;
+        overflow: visible;
+      }
+      .left-pane, .right-pane {
+        width: 100%;
+        height: auto;
+        overflow: visible;
+        border-right: none;
+      }
+      .options-grid {
+        grid-template-columns: 1fr;
+      }
+      .dashboard-grid {
+        grid-template-columns: 1fr;
+      }
+      .nav-grid {
+        grid-template-columns: repeat(5, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation & Timer Bar -->
+  <header>
+    <div class="header-left">
+      <span id="secret-verify-trigger" class="secret-verify-btn" title="題庫檢核">❖</span>
+      <div class="timer-box">
+        <span>⏱ 倒數：</span>
+        <span id="timer-display" class="timer-display">50:00</span>
+        <input type="number" id="timer-minutes" class="timer-input" value="50" min="1" max="240" />
+        <span>分</span>
+        <button id="btn-set-timer" class="btn btn-dark">設定</button>
+        <button id="btn-pause-timer" class="btn btn-dark">暫停</button>
+      </div>
+      <div id="progress-badge" class="btn btn-status">已作答：0 / 20</div>
+      <button id="btn-submit" class="btn btn-submit">提交試卷</button>
+      <button id="btn-shuffle" class="btn btn-shuffle">重新測驗 (洗牌)</button>
+    </div>
+    <div class="header-right" id="secret-history-trigger" title="點擊標題">
+      <div class="header-title">國中七年級自然科學（生物）全真模擬測驗</div>
+      <div class="header-subtitle">單元 3-2 人體的循環（心血管系統、實驗3-2、實驗3-3、淋巴系統）綜合實力評量</div>
+    </div>
+  </header>
+
+  <!-- Main Two-Column Workspace -->
+  <div class="main-container">
+    <!-- Left Pane: Dashboard, Nav Grid, Reference Passages & Diagrams -->
+    <div class="left-pane">
+      
+      <!-- Result & Diagnostic Dashboard (Shown after submission) -->
+      <div id="result-dashboard" class="panel-card">
+        <div class="panel-title">
+          <span>📊 測驗成績與弱點診斷分析報告</span>
+        </div>
+        <div class="dashboard-grid">
+          <div class="score-summary-box">
+            <div style="font-size: 0.85rem; color: #94a3b8;">總得分（滿分 100 分）</div>
+            <div id="final-score" class="score-big">0</div>
+            <div id="final-correct-count" style="font-size: 0.9rem; color: #e2e8f0; font-weight: 600;">答對 0 / 20 題</div>
+            <div id="dimension-stats" class="dim-list"></div>
+          </div>
+          <div class="radar-wrapper">
+            <canvas id="radarChart"></canvas>
+          </div>
+        </div>
+        <div class="filter-actions">
+          <button id="btn-show-all" class="btn btn-dark" style="background:#3b82f6;">顯示全部題目</button>
+          <button id="btn-show-wrong" class="btn btn-dark">只看錯題 (0)</button>
+          <button id="btn-copy-md" class="btn btn-dark" style="background:#0284c7;">📋 一鍵複製錯題筆記 (Markdown)</button>
+          <button id="btn-download-doc" class="btn btn-dark" style="background:#0d9488;">📄 下載錯題複習卷 (.doc)</button>
+        </div>
+      </div>
+
+      <!-- Quick Navigation Grid -->
+      <div class="panel-card">
+        <div class="panel-title">
+          <span>🧭 題號快速導覽（點擊跳轉至該題）</span>
+          <span class="legend-text">藍：已答 ｜ 綠：答對 ｜ 紅：答錯</span>
+        </div>
+        <div id="nav-grid" class="nav-grid"></div>
+      </div>
+
+      <!-- Left Reference Data, Experiments & Diagrams -->
+      <div class="panel-card">
+        <div class="panel-title">
+          <span>🔬 實驗數據、圖表與閱讀題組文本區</span>
+          <span class="legend-text">作答時請對照下方實驗紀錄與圖表資訊</span>
+        </div>
+
+        <!-- Reference Group 1 -->
+        <div class="ref-group">
+          <span class="ref-badge">圖表與實驗組（一）｜心臟構造、血管比較與血球抹片</span>
+          <h3>人體心血管系統構造與物質含量對照</h3>
+          <p><strong>【圖一：心臟四腔室與相連血管代號】</strong><br>
+          面對人體正面解剖圖時，左右與自身相反：<strong>甲</strong>為右心房（連接上、下大靜脈）、<strong>乙</strong>為右心室（連接肺動脈）、<strong>丙</strong>為左心房（連接肺靜脈）、<strong>丁</strong>為左心室（連接主動脈）。心房與心室之間有房室瓣，心室與動脈之間有半月瓣，皆可防止血液逆流。</p>
+          <div class="ascii-diagram">        [上大靜脈] ──┐             ┌── [主動脈] (至全身組織)
+                     ▼             ▲
+  (來自肺部) ──► [丙:左心房]   [甲:右心房] ◄── [下大靜脈]
+                     │ (瓣膜)      │ (瓣膜)
+                     ▼             ▼
+                 [丁:左心室]   [乙:右心室] ──► [肺動脈] (至肺部)</div>
+          <p><strong>【表一：三種血管特性與小腸絨毛血液成分變化】</strong></p>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>比較項目</th>
+                <th>動脈</th>
+                <th>微血管</th>
+                <th>靜脈</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>血液流向</td>
+                <td>離開心臟（連接心室）</td>
+                <td>小動脈 → 微血管 → 小靜脈</td>
+                <td>流回心臟（連接心房）</td>
+              </tr>
+              <tr>
+                <td>管壁厚薄</td>
+                <td>最厚、富有彈性</td>
+                <td>最薄，僅一層細胞厚</td>
+                <td>次之，彈性較小</td>
+              </tr>
+              <tr>
+                <td>血流速率 / 血壓</td>
+                <td>速率最快 / 血壓最大</td>
+                <td>速率最慢 / 血壓次之</td>
+                <td>速率次之 / 血壓最小</td>
+              </tr>
+              <tr>
+                <td>瓣膜與臨床應用</td>
+                <td>無（心室與動脈間有）；量脈搏、血壓</td>
+                <td>無；組織細胞物質交換場所</td>
+                <td>有（防止血液逆流）；抽血、打點滴</td>
+              </tr>
+            </tbody>
+          </table>
+          <p><strong>【血液抹片代號】</strong>：<strong>X</strong> 為雙凹圓盤狀、無細胞核且數量最多的紅血球；<strong>Y</strong> 為球形、有細胞核、體積最大且數量最少的白血球；<strong>Z</strong> 為不規則狀、無細胞核、體積最小的血小板；<strong>W</strong> 為淡黃色液體的血漿。</p>
+        </div>
+
+        <!-- Reference Group 2 -->
+        <div class="ref-group">
+          <span class="ref-badge">實驗題組（二）｜實驗 3-2 探測心音與脈搏</span>
+          <h3>運動前後心搏與脈搏測量紀錄表</h3>
+          <p><strong>【實驗原理與步驟】</strong>：心室收縮時，房室瓣關閉產生第一心音；心室舒張時，半月瓣關閉產生第二心音。「撲、通」兩聲合為一次心搏。測量脈搏時，以食指和中指輕按受測者大拇指內側手腕（橈動脈）。甲、乙兩位同學在靜止與原地運動 2 分鐘後的測量數據如下：</p>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th rowspan="2">受測同學</th>
+                <th colspan="2">脈搏次數（次 / 分鐘）</th>
+                <th colspan="2">心搏次數（次 / 分鐘）</th>
+              </tr>
+              <tr>
+                <th>運動前</th>
+                <th>運動後</th>
+                <th>運動前</th>
+                <th>運動後</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>甲同學</td>
+                <td>68</td>
+                <td>91</td>
+                <td>68</td>
+                <td>91</td>
+              </tr>
+              <tr>
+                <td>乙同學</td>
+                <td>71</td>
+                <td>95</td>
+                <td>71</td>
+                <td>95</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Reference Group 3 -->
+        <div class="ref-group">
+          <span class="ref-badge">實驗題組（三）｜實驗 3-3 血液流動的觀察</span>
+          <h3>複式顯微鏡下小魚尾鰭血管觀察</h3>
+          <p><strong>【操作要點】</strong>：選用尾鰭扁平透光的小魚置於培養皿中，以沾溼的脫脂棉花（或化妝棉）覆蓋魚頭與鰓蓋，使尾鰭完整露出。先以低倍物鏡觀察，調高放大倍率時切勿壓到魚腹。觀察到血管內一顆顆移動的橘紅色顆粒主要為<strong>紅血球</strong>。</p>
+          <div class="ascii-diagram">  [血管 P (較粗)] ═══► 分支匯入 ═══► [血管 Q (最細，僅容單列紅血球通過)]
+                                              │
+  [血管 R (較粗)] ◄═══ 匯流集中 ◄═════════════┘
+  ※ 註：複式顯微鏡下成像為上下顛倒、左右相反（旋轉180度）。</div>
+        </div>
+
+        <!-- Reference Group 4 -->
+        <div class="ref-group">
+          <span class="ref-badge">概念圖組（四）｜體循環、肺循環與淋巴系統</span>
+          <h3>人體雙循環路徑與體液循環連結</h3>
+          <p><strong>【循環口訣與路徑】</strong>：「左體右肺、要換邊」。<br>
+          1. <strong>體循環</strong>：左心室 → 主動脈 → 小動脈 → 組織微血管（充氧血變缺氧血）→ 小靜脈 → 上、下大靜脈 → 右心房。<br>
+          2. <strong>肺循環</strong>：右心室 → 肺動脈 → 肺泡微血管（缺氧血變充氧血）→ 肺靜脈 → 左心房。<br>
+          3. <strong>淋巴系統</strong>：血漿自微血管滲出形成<strong>組織液</strong> → 流入末端封閉的<strong>淋巴管</strong>成為<strong>淋巴</strong> → 經<strong>淋巴結</strong>過濾病原體（內含特殊白血球：淋巴球）→ 最後注入鎖骨下方的<strong>靜脈</strong>重回心血管系統。</p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Right Pane: Questions & Interactive Options -->
+    <div class="right-pane" id="right-pane">
+      <div class="section-banner">
+        <h2>單元 3-2 人體的循環｜核心定義、實驗探究與素養整合試題</h2>
+        <p>請點選最符合課本定義與實驗數據的正確選項（作答後左側題號導覽列將自動標記藍色）</p>
+      </div>
+      <div id="questions-container"></div>
+    </div>
+  </div>
+
+  <!-- Parent History Modal (Ctrl+Shift+P or 5 clicks on title) -->
+  <div id="history-modal" class="modal-overlay">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 style="color:#38bdf8;">🔒 家長監控中心：歷次測驗歷史紀錄表</h3>
+        <button class="btn btn-dark" onclick="closeModal('history-modal')">關閉</button>
+      </div>
+      <div class="modal-body">
+        <div style="margin-bottom:12px; display:flex; justify-content:space-between; align-items:center;">
+          <span style="font-size:0.88rem; color:#94a3b8;">系統自動記錄每次交卷時間、作答耗時、總得分與錯題明細</span>
+          <button class="btn btn-dark" style="background:#dc2626;" onclick="clearHistory()">清除所有紀錄</button>
+        </div>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>交卷時間</th>
+              <th>作答耗時</th>
+              <th>總得分</th>
+              <th>各維度得分率</th>
+              <th>錯題題號清單</th>
+            </tr>
+          </thead>
+          <tbody id="history-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Secret Verification Answer Key Modal (5 clicks on ❖) -->
+  <div id="verify-modal" class="modal-overlay">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 style="color:#fbbf24;">❖ 命題教師檢核專用：答案分布統計與題目總表</h3>
+        <button class="btn btn-dark" onclick="closeModal('verify-modal')">關閉</button>
+      </div>
+      <div class="modal-body">
+        <div id="answer-dist-summary" style="background:#0f172a; padding:12px; border-radius:8px; margin-bottom:14px; font-size:0.9rem; color:#4ade80;"></div>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>題號</th>
+              <th>認知維度</th>
+              <th>核心考點</th>
+              <th>正確答案</th>
+              <th>題幹摘要</th>
+            </tr>
+          </thead>
+          <tbody id="verify-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // =========================================================================
+    // 結構化題庫資料陣列 (第 1～20 題完整收錄，含公式/結構解析與誘答剖析)
+    // 維度分類：'基礎定義' | '實驗變因' | '圖表判讀' | '跨章整合'
+    // =========================================================================
+    const rawQuestionBank = [
+      {
+        id: 1,
+        dimension: "基礎定義",
+        topic: "心血管系統組成與心臟構造",
+        stem: "人體的心血管系統主要由心臟、血管與血液三部分組成。關於心臟構造與血液流動的敘述，下列何者正確？",
+        options: [
+          "心臟主要由肌肉構成，其規律的收縮與舒張是推動血液流動的主要動力",
+          "左心房與右心房之間具有瓣膜相通，可讓左右兩側的血液互相混合",
+          "心房與動脈直接相連，當心房收縮時會將血液直接擠入動脈中",
+          "心室與靜脈之間具有瓣膜，可防止靜脈內的血液逆流回心室"
+        ],
+        answerIndex: 0,
+        explanation: "心臟位於胸腔內，主要由心肌構成，透過規律的收縮與舒張產生壓力差，成為推動全身血液循環的動力中樞。",
+        formulaOrVisual: "$$\\text{血液流向：靜脈} \\longrightarrow \\text{心房} \\xrightarrow{\\text{房室瓣}} \\text{心室} \\xrightarrow{\\text{半月瓣}} \\text{動脈}$$",
+        distractors: [
+          "(B) 左右心房之間有中隔完全隔開，並無瓣膜相通，充氧血與缺氧血不會在心臟內混合。",
+          "(C) 心房連接的是「靜脈」，心室連接的才是「動脈」；心房收縮是將血液送入心室。",
+          "(D) 瓣膜位於「心房與心室之間」及「心室與動脈之間」，靜脈是連接心房而非心室。"
+        ]
+      },
+      {
+        id: 2,
+        dimension: "基礎定義",
+        topic: "血液組成與血漿功能",
+        stem: "人體儲存於肝臟中的肝糖經酵素分解為葡萄糖後，主要是藉由血液中的哪一種成分運送至全身組織細胞利用？",
+        options: [
+          "紅血球",
+          "白血球",
+          "血漿",
+          "血小板"
+        ],
+        answerIndex: 2,
+        explanation: "血液由血漿（約佔 55%）與血球（約佔 45%）組成。血漿的主要成分是水，負責運送葡萄糖、胺基酸等養分，以及二氧化碳、尿素等代謝廢物、抗體與激素。",
+        formulaOrVisual: "血漿成分 $\\approx 90\\%\\text{ 水} + 10\\%\\text{ 溶解物質（養分、廢物、激素、抗體）}$",
+        distractors: [
+          "(A) 紅血球內含血紅素，主要功能為結合並運送氧氣，而非運送葡萄糖等養分。",
+          "(B) 白血球的主要功能是吞噬外來病原體及產生抗體，負責身體的免疫防禦。",
+          "(D) 血小板的主要功能是在血管破損時促使血液凝固、阻塞傷口以止血。"
+        ]
+      },
+      {
+        id: 3,
+        dimension: "圖表判讀",
+        topic: "血液抹片三種血球辨識",
+        stem: "請對照左側【圖一：血液抹片代號】，下列關於人體三種血球構造與功能的配對，何者完全正確？",
+        options: [
+          "X 具有細胞核，數量最多，可攜帶氧氣供給全身細胞",
+          "Y 體積最大且具有細胞核，可穿過微血管壁間隙吞噬細菌",
+          "Z 呈雙凹圓盤狀且無細胞核，受傷時可協助血液凝固",
+          "W 為淡黃色液體，體積最小且數量居三種血球之次"
+        ],
+        answerIndex: 1,
+        explanation: "在血液抹片中：X 為紅血球（雙凹圓盤狀、無細胞核、數量最多）；Y 為白血球（球形、有細胞核、體積最大、數量最少，能做變形蟲運動穿過微血管壁吞噬病原體）；Z 為血小板（不規則狀、無細胞核、體積最小）。",
+        formulaOrVisual: "數量多寡：$\\text{紅血球 (X)} > \\text{血小板 (Z)} > \\text{白血球 (Y)}$；體積大小：$\\text{白血球 (Y)} > \\text{紅血球 (X)} > \\text{血小板 (Z)}$",
+        distractors: [
+          "(A) X（紅血球）成熟後「不具有」細胞核，以騰出更多空間容納血紅素。",
+          "(C) Z 為血小板，其形狀為「不規則狀」，呈雙凹圓盤狀的是紅血球。",
+          "(D) W 為血漿，屬於液體成分而非血球。"
+        ]
+      },
+      {
+        id: 4,
+        dimension: "基礎定義",
+        topic: "三種血管構造與特性比較",
+        stem: "參考左側【表一：三種血管特性比較】，下列關於動脈、微血管與靜脈的敘述，何者【錯誤】？",
+        options: [
+          "動脈管壁最厚且富有彈性，能承受心室收縮時擠出血液的高壓",
+          "微血管管壁僅由一層細胞構成，血流速率最慢，有利於物質交換",
+          "靜脈內的血壓最小，所有靜脈管腔內皆具有瓣膜以防止血液逆流",
+          "醫院進行抽血或靜脈注射點滴時，護理師通常是從靜脈進行操作"
+        ],
+        answerIndex: 2,
+        explanation: "靜脈的血壓最小，部分靜脈（尤其是四肢靜脈）管腔內具有瓣膜以防止血液逆流，但並非「所有」靜脈皆有瓣膜（例如上大靜脈、頭頸部部分靜脈無瓣膜）。",
+        formulaOrVisual: "血壓大小：$\\text{動脈} > \\text{微血管} > \\text{靜脈}$；血流速率：$\\text{動脈} > \\text{靜脈} > \\text{微血管}$",
+        distractors: [
+          "(A) 敘述正確，動脈直接承受心室收縮的強大推力，因此管壁最厚且最具彈性。",
+          "(B) 敘述正確，微血管極薄且流速最慢，能讓氧氣、養分與廢物充分擴散交換。",
+          "(D) 敘述正確，靜脈位置較淺且血壓低、易止血，適合抽血與打點滴。"
+        ]
+      },
+      {
+        id: 5,
+        dimension: "圖表判讀",
+        topic: "心臟四腔室與體肺循環起終點",
+        stem: "請對照左側【圖一：心臟四腔室代號】，當人體進行「體循環」與「肺循環」時，其起點與終點的配對下列何者正確？",
+        options: [
+          "體循環起點為丁（左心室），終點為甲（右心房）",
+          "體循環起點為乙（右心室），終點為丙（左心房）",
+          "肺循環起點為丁（左心室），終點為丙（左心房）",
+          "肺循環起點為甲（右心房），終點為乙（右心室）"
+        ],
+        answerIndex: 0,
+        explanation: "依據「左體右肺、要換邊」口訣：體循環由左心室（丁）出發，經主動脈流遍全身組織微血管後，由大靜脈流回右心房（甲）；肺循環則由右心室（乙）出發，經肺動脈至肺泡微血管，再由肺靜脈流回左心房（丙）。",
+        formulaOrVisual: "$$\\text{體循環：丁（左心室）} \\longrightarrow \\text{全身組織} \\longrightarrow \\text{甲（右心房）}$$",
+        distractors: [
+          "(B) 起點為乙（右心室）、終點為丙（左心房）的是「肺循環」，而非體循環。",
+          "(C) 血液循環路徑必須換邊（左出右回、右出左回），不可能同在左側的丁與丙之間循環。",
+          "(D) 甲（右心房）與乙（右心室）為同側上下腔室，並非肺循環的起終點。"
+        ]
+      },
+      {
+        id: 6,
+        dimension: "基礎定義",
+        topic: "充氧血與缺氧血的血管分布迷思",
+        stem: "下列關於人體各血管與心臟腔室內血液含氧量高低的敘述，何者完全正確？",
+        options: [
+          "所有動脈內流動的都是鮮紅色的充氧血，所有靜脈內流動的都是暗紅色的缺氧血",
+          "肺動脈內流動的是缺氧血，而肺靜脈內流動的則是充氧血",
+          "人體左心房與右心室內的血液為充氧血，右心房與左心室內的血液為缺氧血",
+          "所有流回心臟的血液都含有大量二氧化碳，所有離開心臟的血液都含有大量氧氣"
+        ],
+        answerIndex: 1,
+        explanation: "動脈與靜脈是依據「血流方向（離心或回心）」定義，而非含氧量。肺動脈將右心室的缺氧血送往肺部進行氣體交換，故為缺氧血；肺靜脈將肺部交換後的充氧血送回左心房，故為充氧血。",
+        formulaOrVisual: "左心（左心房、左心室、主動脈、肺靜脈）$=$ 充氧血；右心（右心房、右心室、大靜脈、肺動脈）$=$ 缺氧血",
+        distractors: [
+          "(A) 忽略了肺循環的例外：肺動脈流缺氧血、肺靜脈流充氧血。",
+          "(C) 人體左半心（左心房、左心室）皆為充氧血；右半心（右心房、右心室）皆為缺氧血。",
+          "(D) 肺靜脈流回左心房但富含氧氣；肺動脈離開右心室但富含二氧化碳。"
+        ]
+      },
+      {
+        id: 7,
+        dimension: "圖表判讀",
+        topic: "小腸絨毛血管的物質濃度變化",
+        stem: "血液流經小腸絨毛的微血管網前後，小動脈與小靜脈內的物質含量會發生顯著改變。下列關於小腸絨毛中「小靜脈」相較於「小動脈」的物質含量比較，何者正確？",
+        options: [
+          "氧氣較多、二氧化碳較少、葡萄糖較多",
+          "氧氣較少、二氧化碳較多、葡萄糖較多",
+          "氧氣較多、二氧化碳較多、代謝廢物較少",
+          "氧氣較少、二氧化碳較少、代謝廢物較少"
+        ],
+        answerIndex: 1,
+        explanation: "小腸絨毛細胞會消耗氧氣進行呼吸作用並產生二氧化碳，因此小靜脈的氧氣減少、二氧化碳增加；同時小腸絨毛吸收大量消化後的養分（如葡萄糖、胺基酸）進入微血管，故小靜脈的葡萄糖含量大幅增加。",
+        formulaOrVisual: "小腸絨毛：$\\text{小動脈} \\xrightarrow{\\text{釋出 } O_2\\text{，吸收 } CO_2 \\text{ 與養分}} \\text{小靜脈（} O_2\\downarrow,\\; CO_2\\uparrow,\\; \\text{養分}\\uparrow\\text{）}$",
+        distractors: [
+          "(A) 氧氣在流經小腸組織時會擴散進入細胞供呼吸作用使用，因此小靜脈氧氣應較少。",
+          "(C) 小腸並非排泄器官，且細胞代謝會產生廢物，故小靜脈的廢物與二氧化碳皆增加。",
+          "(D) 小腸吸收養分使葡萄糖增加，但呼吸作用使二氧化碳增加，兩者並非皆減少。"
+        ]
+      },
+      {
+        id: 8,
+        dimension: "實驗變因",
+        topic: "實驗 3-2 心音與脈搏計算",
+        stem: "參考左側【實驗題組（二）】，小華在體育課慢跑後測量自己的脈搏，發現 30 秒內脈搏跳動了 64 次。試推算此時小華的心跳速率約為每分鐘幾次？且在此 30 秒內他若用聽診器聽心音，理論上可聽到幾聲心音？",
+        options: [
+          "心跳每分鐘 64 次；可聽到 64 聲心音",
+          "心跳每分鐘 128 次；可聽到 64 聲心音",
+          "心跳每分鐘 128 次；可聽到 128 聲心音",
+          "心跳每分鐘 64 次；可聽到 128 聲心音"
+        ],
+        answerIndex: 2,
+        explanation: "因為一次心搏會引起動脈管壁一次搏動（脈搏），故「心搏次數＝脈搏次數」。30 秒脈搏 64 次，換算每分鐘心跳為 $64 \\times 2 = 128$ 次。又因每次心搏包含心室收縮（房室瓣關閉）與心室舒張（半月瓣關閉）兩個心音（「撲、通」兩聲），故 30 秒內共有 $64 \\times 2 = 128$ 聲心音。",
+        formulaOrVisual: "$$\\text{每分鐘心搏} = \\frac{64\\text{ 次}}{0.5\\text{ 分鐘}} = 128\\text{ 次/分} \\quad ; \\quad 30\\text{秒心音數} = 64\\text{ 次心搏} \\times 2\\text{ 聲/次} = 128\\text{ 聲}$$",
+        distractors: [
+          "(A) 忘記將 30 秒的次數乘以 2 換算成「每分鐘」的心跳次數。",
+          "(B) 正確算出每分鐘心跳 128 次，但誤以為一次心搏只產生一聲心音。",
+          "(D) 混淆了每分鐘心跳次數與 30 秒心音總聲數的計算倍率。"
+        ]
+      },
+      {
+        id: 9,
+        dimension: "實驗變因",
+        topic: "實驗 3-2 運動對心搏與脈搏的生理意義",
+        stem: "根據左側【實驗題組（二）】甲、乙兩位同學的實驗紀錄表，運動後兩人的脈搏與心搏次數皆顯著上升。下列關於此生理變化的推論與意義，何者正確？",
+        options: [
+          "同一人同一時間內，運動後的脈搏次數會明顯大於心搏次數",
+          "運動使心搏加快、血流加速，可加速運送養分與氧氣至肌肉細胞",
+          "運動後心跳加快的主要目的是為了減少細胞產生二氧化碳與廢物",
+          "測量脈搏時，應以大拇指緊壓受測者手腕內側的靜脈進行計數"
+        ],
+        answerIndex: 1,
+        explanation: "運動時肌肉細胞需要大量能量，心搏與脈搏加快能使血液循環速率提升，加速將氧氣與養分送達細胞，同時加速帶走細胞呼吸產生的二氧化碳與代謝廢物。",
+        formulaOrVisual: "$$\\text{運動} \\longrightarrow \\text{耗能增加} \\longrightarrow \\text{心搏與脈搏}\\uparrow \\longrightarrow \\text{加速 } O_2\\text{/養分供應與 } CO_2\\text{/廢物移除}$$",
+        distractors: [
+          "(A) 脈搏是由心室收縮擠血入動脈引起，同一人同一分鐘內心搏與脈搏次數理論上相等（68=68, 91=91）。",
+          "(C) 運動時細胞代謝更旺盛，產生的二氧化碳與廢物反而「增加」，心搏加快是為了加速「排除」而非減少產生。",
+          "(D) 測量脈搏應以「食指與中指」輕按大拇指內側手腕的「動脈」，大拇指本身有明顯脈動會干擾測量。"
+        ]
+      },
+      {
+        id: 10,
+        dimension: "實驗變因",
+        topic: "實驗 3-3 觀察小魚尾鰭的步驟與操縱控制",
+        stem: "進行左側【實驗題組（三）：血液流動的觀察】時，下列關於實驗操作步驟與原因的配對，何者【錯誤】？",
+        options: [
+          "選用小魚的尾鰭進行觀察——因為尾鰭扁平且較為透明，易於光線穿透觀察",
+          "用沾溼的脫脂棉花蓋住魚頭與鰓蓋——維持魚鰓溼潤以利呼吸，並減少小魚跳動",
+          "先使用低倍物鏡找到血管位置——若需換高倍鏡時，須注意避免物鏡壓傷小魚腹部",
+          "在顯微鏡下觀察到移動的橘紅色顆粒——主要為體積最大的白血球在血管中滾動"
+        ],
+        answerIndex: 3,
+        explanation: "血液中數量最多且富含紅色血紅素的細胞是「紅血球」，因此在複式顯微鏡下觀察到一顆顆快速移動的橘紅色顆粒為紅血球（白血球無色透明且數量極少，未染色不易直接看見）。",
+        formulaOrVisual: "實驗關鍵：$\\text{溼棉花蓋鰓} \\rightarrow \\text{維持氣體交換} \\quad ; \\quad \\text{尾鰭透光} \\rightarrow \\text{觀察紅血球流向}$",
+        distractors: [
+          "(A) 敘述正確，動物體型大不透光，魚類尾鰭薄而透明是絕佳的活體觀察部位。",
+          "(B) 敘述正確，魚類離水時間有限，溼棉花可保溼協助魚鰓換氣並安撫魚隻。",
+          "(C) 敘述正確，遵循顯微鏡由低倍到高倍的操作原則，並保護活體安全。"
+        ]
+      },
+      {
+        id: 11,
+        dimension: "圖表判讀",
+        topic: "實驗 3-3 複式顯微鏡下血管種類與心臟方位判讀",
+        stem: "承左側【實驗題組（三）】的 ASCII 血管示意圖，若小魚頭朝左、尾朝右放置於載玻片上，在複式顯微鏡視野中觀察到血液由血管 P 分支流向最細的血管 Q，再匯流至血管 R。下列推論何者正確？",
+        options: [
+          "血管 P 為小靜脈，血管 R 為小動脈",
+          "血管 Q 內血流速率最快，血壓最低",
+          "判斷血管種類的主要依據是血管內的血流方向與分支匯流情形",
+          "若視野中血管 P 位於左側、血管 R 位於右側，則小魚心臟的實際位置在視野的右方"
+        ],
+        answerIndex: 2,
+        explanation: "在顯微鏡下判斷動脈與靜脈的標準依據是「血流方向」：由主幹分支流向微血管（Q）的血管 P 為小動脈；由微血管匯流集中的血管 R 為小靜脈。因題幹已說明小魚頭朝左（心臟位於頭部後方靠近左側），故實際心臟位置仍在左方。",
+        formulaOrVisual: "$$\\text{小動脈 (P)} \\xrightarrow{\\text{分支}} \\text{微血管 (Q，最細最慢)} \\xrightarrow{\\text{匯流}} \\text{小靜脈 (R)}$$",
+        distractors: [
+          "(A) 血液由動脈流向微血管再流向靜脈，故 P 為小動脈、R 為小靜脈，兩者顛倒。",
+          "(B) Q 為微血管，管徑最細（僅容紅血球單列通過），其血流速率「最慢」，血壓最低的是靜脈。",
+          "(D) 題幹明確告知「小魚頭朝左放置」，小魚心臟位於靠頭部一側，因此實際位置在左方（視野中動脈血液流向亦反映實際生理方向）。"
+        ]
+      },
+      {
+        id: 12,
+        dimension: "基礎定義",
+        topic: "淋巴系統的組成與循環路徑",
+        stem: "參考左側【概念圖組（四）】，人體的體液在心血管系統與淋巴系統之間不斷循環。下列關於「血漿、組織液與淋巴」三者轉變順序的敘述，何者正確？",
+        options: [
+          "血漿由微血管滲出成為組織液 → 組織液流入淋巴管成為淋巴 → 淋巴最後注入靜脈變回血漿",
+          "血漿由動脈滲出成為淋巴 → 淋巴流入微血管成為組織液 → 組織液注入動脈變回血漿",
+          "組織液由淋巴管滲出成為血漿 → 血漿流入微血管成為淋巴 → 淋巴注入心房變回組織液",
+          "淋巴由靜脈滲出成為組織液 → 組織液流入動脈成為血漿 → 血漿注入淋巴管變回淋巴"
+        ],
+        answerIndex: 0,
+        explanation: "血液流經微血管時，部分血漿會從微血管壁細胞間隙滲出，充滿於組織細胞之間形成「組織液」；部分組織液會進入末端封閉的淋巴管成為「淋巴」；淋巴經淋巴結過濾後，最終在鎖骨下方注入「靜脈」重新成為血漿。",
+        formulaOrVisual: "$$\\text{血漿} \\xrightarrow{\\text{微血管滲出}} \\text{組織液} \\xrightarrow{\\text{進入淋巴管}} \\text{淋巴} \\xrightarrow{\\text{注入靜脈}} \\text{血漿}$$",
+        distractors: [
+          "(B) 血漿只能從管壁極薄的「微血管」滲出，無法從管壁厚實的動脈滲出，且最終是注入靜脈而非動脈。",
+          "(C) 淋巴管是一端封閉的回收管道，負責回收組織液而非滲出組織液。",
+          "(D) 靜脈血壓低且管壁較厚，血漿不會從靜脈滲出。"
+        ]
+      },
+      {
+        id: 13,
+        dimension: "基礎定義",
+        topic: "淋巴系統的功能與組成成分比較",
+        stem: "下列關於人體淋巴系統的構造、成分與生理功能的敘述，何者【錯誤】？",
+        options: [
+          "淋巴管一端封閉，分布於組織細胞間，可回收滲漏的組織液維持體液平衡",
+          "淋巴結是淋巴管膨大的構造，內含特殊的白血球（淋巴球）可過濾並吞噬病原體",
+          "淋巴液的組成成分與血液完全相同，皆含有紅血球、白血球、血小板與血漿",
+          "淋巴流動的動力主要來自淋巴管管壁的收縮以及周圍骨骼肌收縮的推擠力"
+        ],
+        answerIndex: 2,
+        explanation: "淋巴是由組織液進入淋巴管形成，而組織液是由「血漿」滲出微血管而來。正常情況下，紅血球與血小板體積較大無法穿過微血管壁，因此淋巴中「不含」紅血球與血小板，顏色呈透明微黃而非紅色。",
+        formulaOrVisual: "成分差異：$\\text{血液} = \\text{血漿} + \\text{紅血球} + \\text{白血球} + \\text{血小板}$ ； $\\text{淋巴} \\approx \\text{血漿成分} + \\text{淋巴球（無紅血球）}$",
+        distractors: [
+          "(A) 敘述正確，回收滲漏血漿（組織液）是淋巴系統兩大核心功能之一。",
+          "(B) 敘述正確，淋巴結能過濾異物並藉由淋巴球執行免疫防禦。",
+          "(D) 敘述正確，淋巴系統沒有像心臟一樣的幫浦，依賴管壁與周圍肌肉收縮推動。"
+        ]
+      },
+      {
+        id: 14,
+        dimension: "圖表判讀",
+        topic: "淋巴注入心血管系統的第一個心臟腔室",
+        stem: "人體的淋巴最後會匯入鎖骨下方的靜脈，重新回到心血管系統中。這些重回心血管系統的淋巴，最先會進入左側【圖一】心臟的哪一個腔室？",
+        options: [
+          "甲（右心房）",
+          "乙（右心室）",
+          "丙（左心房）",
+          "丁（左心室）"
+        ],
+        answerIndex: 0,
+        explanation: "淋巴匯入鎖骨下方的靜脈（屬於體循環的靜脈系統），接著會順著上大靜脈的血流方向，最先流回心臟的「右心房（甲）」。",
+        formulaOrVisual: "$$\\text{淋巴管} \\longrightarrow \\text{鎖骨下方靜脈} \\longrightarrow \\text{上大靜脈} \\longrightarrow \\text{甲（右心房）}$$",
+        distractors: [
+          "(B) 乙為右心室，血液必須先進入右心房後才會流向右心室。",
+          "(C) 丙為左心房，負責接收來自肺靜脈的充氧血，不接收體循環靜脈血。",
+          "(D) 丁為左心室，是體循環的出發點，不直接接收靜脈回流。"
+        ]
+      },
+      {
+        id: 15,
+        dimension: "跨章整合",
+        topic: "淋巴系統與消化吸收、免疫及臨床醫學連結",
+        stem: "結合課本「學習概念連結」與相關章節知識，下列關於淋巴系統在人體生理與醫學上的應用敘述，何者【錯誤】？",
+        options: [
+          "小腸絨毛內的淋巴管又稱為乳糜管，主要負責吸收脂肪酸與甘油等脂溶性養分",
+          "施打疫苗可使淋巴結內的特殊白血球先認識病原體，當相同病原體再次入侵時能快速消滅",
+          "癌症手術時若切除癌細胞周圍的淋巴組織，可能導致組織液難以回收而使局部肢體水腫",
+          "人體防禦病原體時，血小板會大量產生抗體以中和細菌分泌的毒素"
+        ],
+        answerIndex: 3,
+        explanation: "產生抗體與記憶病原體是「特殊白血球（淋巴球）」的功能；血小板的功能僅限於受傷時的「血液凝固」，無法產生抗體。",
+        formulaOrVisual: "防禦三道防線：$\\text{皮膚黏膜阻擋} \\rightarrow \\text{白血球吞噬} \\rightarrow \\text{淋巴球產生抗體與記憶}$",
+        distractors: [
+          "(A) 敘述正確，脂溶性養分由小腸絨毛的乳糜管吸收，水溶性養分則由微血管吸收。",
+          "(B) 敘述正確，此為疫苗誘發專一性免疫記憶的原理。",
+          "(C) 敘述正確，淋巴管受阻或切除會使組織液堆積在組織細胞間，引發淋巴水腫。"
+        ]
+      },
+      {
+        id: 16,
+        dimension: "基礎定義",
+        topic: "心音產生的成因與瓣膜開閉",
+        stem: "當醫師使用聽診器聽取受測者的心音時，可聽到規律的「撲、通、撲、通」聲響。關於「撲、通」心音產生的直接原因，下列何者正確？",
+        options: [
+          "心臟肌肉強力摩擦胸腔肋骨所發出的聲音",
+          "血液流經主動脈時衝擊動脈管壁所產生的聲音",
+          "心室收縮與舒張時，血液撞擊關閉的瓣膜所產生的聲音",
+          "肺泡擴張與收縮時氣流進出氣管所產生的聲音"
+        ],
+        answerIndex: 2,
+        explanation: "心室收縮時，心房與心室間的房室瓣關閉（防止血液逆流回心房），血液撞擊關閉的瓣膜產生第一心音（「撲」）；心室舒張時，心室與動脈間的半月瓣關閉（防止血液逆流回心室），血液撞擊關閉的瓣膜產生第二心音（「通」）。",
+        formulaOrVisual: "$$\\text{第一心音（撲）} = \\text{心室收縮、房室瓣關閉} \\quad ; \\quad \\text{第二心音（通）} = \\text{心室舒張、半月瓣關閉}$$",
+        distractors: [
+          "(A) 心音並非心臟摩擦胸骨或肋骨產生，心包膜內有液體可減少摩擦。",
+          "(B) 血液衝擊動脈管壁造成管壁彈性擴張與恢復，形成的是「脈搏」，而非心音。",
+          "(D) 氣流進出氣管產生的是呼吸音，與心音無關。"
+        ]
+      },
+      {
+        id: 17,
+        dimension: "跨章整合",
+        topic: "藥物注射後的體循環與肺循環完整路徑追蹤",
+        stem: "某病患因細菌感染，護理師從其右手臂靜脈注射抗生素。若此藥物分子要隨血液循環送達「左腳趾的組織細胞」發揮作用，則藥物分子依序必須經過心臟各腔室的正確順序為何？",
+        options: [
+          "右心房 → 右心室 → 左心房 → 左心室",
+          "左心房 → 左心室 → 右心房 → 右心室",
+          "右心室 → 右心房 → 左心室 → 左心房",
+          "右心房 → 左心房 → 右心室 → 左心室"
+        ],
+        answerIndex: 0,
+        explanation: "手臂靜脈注射的藥物會先進入上大靜脈 → 流入「右心房」 → 「右心室」 → 經肺動脈進入肺部微血管（進行肺循環） → 經肺靜脈流入「左心房」 → 「左心室」 → 經主動脈送往全身（體循環）抵達左腳趾。",
+        formulaOrVisual: "$$\\text{手臂靜脈} \\rightarrow \\text{上大靜脈} \\rightarrow \\mathbf{\\text{右心房}} \\rightarrow \\mathbf{\\text{右心室}} \\rightarrow \\text{肺部} \\rightarrow \\mathbf{\\text{左心房}} \\rightarrow \\mathbf{\\text{左心室}} \\rightarrow \\text{主動脈} \\rightarrow \\text{左腳趾}$$",
+        distractors: [
+          "(B) 靜脈血回心是先進入「右心房」，而非左心房。",
+          "(C) 血液在心臟內是由「心房流向心室」，不可能由右心室逆流回右心房。",
+          "(D) 左右心房之間有中隔阻隔，血液無法直接從右心房流向左心房，必須先經過肺循環。"
+        ]
+      },
+      {
+        id: 18,
+        dimension: "實驗變因",
+        topic: "實驗 3-2 變因控制與實驗設計邏輯",
+        stem: "在「實驗 3-2 探測心音與脈搏」中，甲、乙兩位同學先測量安靜坐姿下 1 分鐘的心搏與脈搏，接著原地跑步運動 2 分鐘後再次測量。在此實驗設計中，下列關於實驗變因的配對何者正確？",
+        options: [
+          "操縱變因：受測者的性別與年齡；應變變因：運動時間長短",
+          "操縱變因：是否有進行原地運動；應變變因：每分鐘的心搏與脈搏次數",
+          "控制變因：每分鐘的心搏次數；應變變因：測量脈搏的手指部位",
+          "操縱變因：聽診器放置的胸前位置；應變變因：受測者的體重"
+        ],
+        answerIndex: 1,
+        explanation: "本實驗目的為「觀察運動對心音與脈搏的影響」，因此人為改變的條件（操縱變因）為「運動狀態（運動前 vs. 運動後）」；隨之改變並測量記錄的結果（應變變因）為「每分鐘心搏與脈搏次數」；受測者本人、測量時間（1分鐘）與測量部位皆須保持不變（控制變因）。",
+        formulaOrVisual: "實驗變因關係：$\\text{操縱變因（運動與否）} \\xrightarrow{\\text{影響}} \\text{應變變因（心搏、脈搏次數）}$",
+        distractors: [
+          "(A) 受測者本身為同一人前後對照，屬於控制變因；運動時間為固定 2 分鐘亦為控制變因。",
+          "(C) 每分鐘心搏次數是實驗測得的結果，屬於「應變變因」，而非控制變因。",
+          "(D) 聽診器放置位置必須固定在左胸前，屬於「控制變因」。"
+        ]
+      },
+      {
+        id: 19,
+        dimension: "圖表判讀",
+        topic: "血液與淋巴成分集合關係圖判讀",
+        stem: "若以文氏圖表示「甲液體（血液）」與「乙液體（淋巴）」的組成成分關係，已知乙液體所含的成分種類比甲液體少。下列關於甲、乙兩種液體成分的比較，何者【錯誤】？",
+        options: [
+          "甲與乙皆含有大量的水分與溶解的養分",
+          "甲含有紅血球，而正常情況下的乙則沒有紅血球",
+          "甲與乙皆含有白血球（淋巴內含特殊的白血球：淋巴球）",
+          "甲沒有血小板，而乙含有大量血小板以維持凝血功能"
+        ],
+        answerIndex: 3,
+        explanation: "甲為血液，含有血漿與三種血球（紅血球、白血球、血小板）；乙為淋巴，由組織液進入淋巴管形成，含有水分、部分養分及特殊白血球（淋巴球），但「不含」紅血球與血小板。",
+        formulaOrVisual: "$$\\text{乙（淋巴）} \\subset \\text{甲（血液）} \\quad ; \\quad \\text{甲獨有成分} = \\{\\text{紅血球、血小板、大分子血漿蛋白}\\}$$",
+        distractors: [
+          "(A) 敘述正確，兩者皆以水為主要溶劑，並含有葡萄糖等小分子溶質。",
+          "(B) 敘述正確，紅血球無法穿過微血管壁，故僅存在於甲（血液）中。",
+          "(C) 敘述正確，白血球可變形穿過微血管壁，淋巴結內亦富含白血球（淋巴球）。"
+        ]
+      },
+      {
+        id: 20,
+        dimension: "跨章整合",
+        topic: "肺泡與組織微血管氣體交換方向比較",
+        stem: "人體呼吸時吸入的氧氣與細胞代謝產生的二氧化碳，皆需透過微血管與周圍構造進行氣體交換。下列關於「肺泡微血管」與「組織細胞微血管」氣體擴散方向的敘述，何者完全正確？",
+        options: [
+          "肺泡微血管：氧氣由微血管擴散進入肺泡；二氧化碳由肺泡擴散進入微血管",
+          "肺泡微血管：氧氣由肺泡擴散進入微血管；二氧化碳由微血管擴散進入肺泡",
+          "組織微血管：氧氣由組織細胞擴散進入微血管；二氧化碳由微血管擴散進入組織細胞",
+          "無論在肺泡或組織微血管，氧氣與二氧化碳皆是同時由微血管擴散進入周圍細胞"
+        ],
+        answerIndex: 1,
+        explanation: "氣體交換完全依賴「擴散作用」（由高濃度往低濃度移動）。肺泡內氧氣濃度高、微血管內缺氧血二氧化碳濃度高，故在肺泡處「氧氣由肺泡進入微血管，二氧化碳由微血管進入肺泡」；在組織細胞處則完全相反。",
+        formulaOrVisual: "$$\\text{肺泡處：} O_2\\text{（肺泡} \\rightarrow \\text{微血管），} CO_2\\text{（微血管} \\rightarrow \\text{肺泡）} \\quad \\Longrightarrow \\quad \\text{缺氧血變充氧血}$$",
+        distractors: [
+          "(A) 把肺泡處的氣體交換方向寫反了，若如此血液將永遠無法獲得氧氣。",
+          "(C) 組織細胞消耗氧氣產生二氧化碳，故組織處是「氧氣由微血管進入細胞，二氧化碳由細胞進入微血管」。",
+          "(D) 氧氣與二氧化碳的濃度梯度在肺泡與組織處剛好相反，擴散方向也相反。"
+        ]
+      },
+      {
+        id: 21,
+        dimension: "基礎定義",
+        topic: "心臟四腔室與瓣膜功能",
+        stem: "觀察人體心臟的構造與血流方向時，下列關於心房、心室與瓣膜的敘述，何者正確？",
+        options: [
+          "心房位於心臟上方，心室位於心臟下方，血液由心房流向心室",
+          "左心室壁比右心室壁薄，因為左心室只需將血液送往肺部",
+          "房室瓣位於心室與動脈之間，可防止動脈內的血液逆流回心室",
+          "當心室收縮時，心房與心室之間的瓣膜會打開，讓血液流入心室"
+        ],
+        answerIndex: 0,
+        explanation: "心臟上方為左、右心房，下方為左、右心室，血液在心臟內單向流動，由心房流向心室。心房與心室之間有瓣膜，心室與動脈之間也有瓣膜，皆能防止血液逆流。",
+        formulaOrVisual: "$$\\text{心臟單向血流：心房} \\xrightarrow{\\text{心房→心室}} \\text{心室} \\xrightarrow{\\text{心室→動脈}} \\text{動脈}$$",
+        distractors: [
+          "(B) 左心室負責推動體循環，將血液送往全身最遠處，因此左心室肌壁比右心室厚。",
+          "(C) 房室瓣位於「心房與心室之間」；位於心室與動脈之間的是半月瓣。",
+          "(D) 心室收縮時內部壓力升高，會將房室瓣推向關閉，防止血液逆流回心房。"
+        ]
+      },
+      {
+        id: 22,
+        dimension: "圖表判讀",
+        topic: "心臟四腔室與相連血管代號判讀",
+        stem: "對照左側【圖一：心臟四腔室與相連血管代號】，下列關於心臟各腔室與所連接血管的配對，何者正確？",
+        options: [
+          "甲（右心房）直接連接主動脈，將充氧血送往全身",
+          "乙（右心室）直接連接肺動脈，將缺氧血送往肺部",
+          "丙（左心房）直接連接上、下大靜脈，接收缺氧血",
+          "丁（左心室）直接連接肺靜脈，接收來自肺部的充氧血"
+        ],
+        answerIndex: 1,
+        explanation: "在心臟解剖圖中，乙為右心室，連接肺動脈，負責將缺氧血送往肺部進行氣體交換。甲（右心房）連接上、下大靜脈；丙（左心房）連接肺靜脈；丁（左心室）連接主動脈。",
+        formulaOrVisual: "$$\\text{乙（右心室）} \\longrightarrow \\text{肺動脈} \\longrightarrow \\text{肺部微血管}$$",
+        distractors: [
+          "(A) 甲（右心房）連接的是上、下大靜脈，而非主動脈；主動脈連接的是丁（左心室）。",
+          "(C) 丙（左心房）連接的是肺靜脈，接收充氧血；上、下大靜脈連接的是甲（右心房）。",
+          "(D) 丁（左心室）連接的是主動脈，將充氧血送出；肺靜脈連接的是丙（左心房）。"
+        ]
+      },
+      {
+        id: 23,
+        dimension: "基礎定義",
+        topic: "紅血球構造與血紅素特性",
+        stem: "關於人體血液中「紅血球」的構造與功能，下列敘述何者【錯誤】？",
+        options: [
+          "紅血球呈雙凹圓盤狀，可增加表面積以利氣體交換",
+          "成熟的紅血球不具有細胞核，在三種血球中數量最多",
+          "紅血球內含有血紅素，使血液呈現紅色，並可運送氧氣",
+          "血紅素在氧氣濃度高的地方容易與氧氣結合，在氧氣濃度低的地方容易釋出氧氣"
+        ],
+        answerIndex: 3,
+        explanation: "血紅素具有可逆性結合與釋放氧氣的特性：在「氧氣濃度高」的肺泡微血管處容易與氧氣結合；在「氧氣濃度低」的組織微血管處則容易釋出氧氣供細胞利用。",
+        formulaOrVisual: "$$\\text{肺泡（高 } O_2\\text{）：血紅素} + O_2 \\longrightarrow \\text{氧合血紅素} \\quad ; \\quad \\text{組織（低 } O_2\\text{）：釋出 } O_2$$",
+        distractors: [
+          "(A) 雙凹圓盤狀能增大表面積並縮短氣體擴散距離，敘述正確。",
+          "(B) 哺乳類成熟紅血球無細胞核，且數量居三種血球之冠，敘述正確。",
+          "(C) 紅血球含血紅素，既賦予血液紅色，又負責攜帶氧氣，敘述正確。"
+        ]
+      },
+      {
+        id: 24,
+        dimension: "基礎定義",
+        topic: "白血球與血小板的功能區辨",
+        stem: "當人體皮膚不慎被利器割傷流血，隨後傷口逐漸止血並防止細菌感染。此過程中，血球所扮演的角色下列何者正確？",
+        options: [
+          "血小板可吞噬入侵的細菌，白血球可促使血液凝固",
+          "血小板可促使血液凝固阻塞傷口，白血球可吞噬病原體",
+          "紅血球可促使血液凝固，血小板可產生抗體對抗細菌",
+          "白血球可促使血液凝固，紅血球可吞噬入侵的細菌"
+        ],
+        answerIndex: 1,
+        explanation: "受傷出血時，血小板會聚集並促使血液凝固、阻塞傷口以止血；同時白血球可穿過微血管壁進入組織，吞噬入侵的病原體，降低感染風險。",
+        formulaOrVisual: "$$\\text{傷口止血：血小板} \\rightarrow \\text{凝血封閉} \\quad ; \\quad \\text{防禦感染：白血球} \\rightarrow \\text{吞噬病原體}$$",
+        distractors: [
+          "(A) 血小板與白血球的功能剛好寫反了。",
+          "(C) 紅血球主要功能是運送氧氣，不負責凝血；產生抗體的是特殊的白血球（淋巴球）。",
+          "(D) 白血球負責免疫防禦而非凝血；紅血球不具吞噬細菌的功能。"
+        ]
+      },
+      {
+        id: 25,
+        dimension: "圖表判讀",
+        topic: "三種血管血流速率與血壓比較",
+        stem: "對照左側【表一：三種血管特性比較】，關於動脈、微血管與靜脈中「血流速率」與「血壓」的敘述，下列何者正確？",
+        options: [
+          "血流速率由快到慢依序為：動脈＞微血管＞靜脈",
+          "血壓大小由大到小依序為：動脈＞微血管＞靜脈",
+          "微血管因管徑最細，所以管內血流速率最快、血壓最大",
+          "靜脈因管壁最薄，所以管內血壓最大、血流速率最慢"
+        ],
+        answerIndex: 1,
+        explanation: "血液自心室流出後，血壓隨循環路徑逐步下降，故血壓大小為「動脈＞微血管＞靜脈」；而血流速率則是「動脈最快、靜脈次之、微血管最慢」（微血管總截面積最大且管徑最細，流速最慢有利物質交換）。",
+        formulaOrVisual: "$$\\text{血壓：動脈} > \\text{微血管} > \\text{靜脈} \\quad ; \\quad \\text{流速：動脈} > \\text{靜脈} > \\text{微血管}$$",
+        distractors: [
+          "(A) 微血管流速最慢而非靜脈，正確流速排序應為動脈＞靜脈＞微血管。",
+          "(C) 微血管血流速率「最慢」，並非最快、血壓最大。",
+          "(D) 管壁最薄的是微血管，且靜脈血壓最小、流速居次，並非血壓最大。"
+        ]
+      },
+      {
+        id: 26,
+        dimension: "實驗變因",
+        topic: "實驗 3-2 測量心搏與脈搏的正確操作",
+        stem: "在「實驗 3-2 探測心音與脈搏」中，甲、乙兩位同學進行互測。下列關於測量心音與脈搏操作方式的敘述，何者【錯誤】？",
+        options: [
+          "利用聽診器薄膜的一面置於受測者左胸前，可聽取心音",
+          "測量脈搏時，以食指和中指輕按受測者大拇指內側手腕",
+          "受測者原地運動 2 分鐘後，應立即測量運動後 1 分鐘內的心搏與脈搏次數",
+          "測量脈搏時應大力按壓手腕血管，直到完全感受不到搏動為止"
+        ],
+        answerIndex: 3,
+        explanation: "測量脈搏時應「輕按」受測者大拇指內側手腕的動脈，感受動脈管壁隨心跳擴張與恢復的搏動；若過度用力按壓可能壓扁血管或造成不適，影響正常測量。",
+        formulaOrVisual: "$$\\text{測脈搏要訣：食指＋中指} \\longrightarrow \\text{輕按大拇指內側手腕（橈動脈）}$$",
+        distractors: [
+          "(A) 將聽診器薄膜置於左胸前可清楚聽見心音，敘述正確。",
+          "(B) 脈搏可在手腕大拇指內側處探測，使用食指與中指最準確，敘述正確。",
+          "(C) 運動後立即記錄 1 分鐘內次數，可反映運動對心搏與脈搏的即時影響，敘述正確。"
+        ]
+      },
+      {
+        id: 27,
+        dimension: "實驗變因",
+        topic: "實驗 3-2 數據判讀與心搏脈搏關聯",
+        stem: "參考左側【實驗題組（二）】的實驗結果紀錄表，甲同學運動前脈搏為 68 次/分、心搏為 68 次/分；運動後脈搏為 91 次/分、心搏為 91 次/分。由此數據可推論下列何者正確？",
+        options: [
+          "心搏次數與脈搏次數完全無關，兩者數值相同只是巧合",
+          "每一次心搏都會引起動脈管壁一次搏動，因此同一人同一時間內心搏與脈搏次數理論上相同",
+          "運動後脈搏上升幅度比心搏大，顯示運動只會加快脈搏而不會加快心跳",
+          "乙同學運動前心搏 71 次/分，代表乙同學每分鐘會聽到 71 次「撲、通」合聲，共 71 聲心音"
+        ],
+        answerIndex: 1,
+        explanation: "脈搏的成因是心室收縮將血液擠入動脈，使動脈管壁發生彈性擴張與恢復。心臟跳動一次，動脈就會搏動一次，因此同一人同一時段的心搏次數與脈搏次數理論上相等。",
+        formulaOrVisual: "$$\\text{心搏次數（次/分）} = \\text{脈搏次數（次/分）} \\quad （\\text{甲：} 68=68,\\; 91=91\\text{ ； 乙：} 71=71,\\; 95=95\\text{）}$$",
+        distractors: [
+          "(A) 脈搏直接源自心臟的搏動，甲、乙兩人運動前後皆呈現一致相等，並非巧合。",
+          "(C) 乙同學運動後脈搏 95 次/分、心搏也是 95 次/分，兩者同步上升。",
+          "(D) 心跳 71 次代表有 71 次「撲、通」合聲，每次合聲包含兩聲心音，故共有 $71 \\times 2 = 142$ 聲心音。"
+        ]
+      },
+      {
+        id: 28,
+        dimension: "實驗變因",
+        topic: "實驗 3-3 小魚尾鰭實驗的注意事項",
+        stem: "在「實驗 3-3 血液流動的觀察」中，若實驗過程中「沾溼的脫脂棉花沒有覆蓋住小魚的鰓蓋」，最可能發生下列哪一種情況？",
+        options: [
+          "小魚尾鰭的微血管會變粗，使紅血球流速變快",
+          "小魚因鰓部缺水無法順利進行氣體交換，可能缺氧窒息或跳動掙扎",
+          "血液中的紅血球會變成白血球，失去攜帶氧氣的能力",
+          "顯微鏡視野中的血流方向會由靜脈流向動脈"
+        ],
+        answerIndex: 1,
+        explanation: "魚類主要靠「鰓」在水中進行氣體交換。若棉花未覆蓋並保持鰓蓋溼潤，小魚容易因缺水呼吸困難而躁動跳出培養皿，甚至缺氧死亡；實驗結束後應盡快將小魚放回飼養缸。",
+        formulaOrVisual: "$$\\text{鰓蓋保持溼潤} \\Longrightarrow \\text{維持氣體交換} \\Longrightarrow \\text{避免小魚缺氧或跳動受傷}$$",
+        distractors: [
+          "(A) 血管粗細與分布由構造決定，不會因鰓蓋未蓋棉花而使微血管變粗。",
+          "(C) 紅血球與白血球為不同血球類型，不會因此互相轉變。",
+          "(D) 血流方向由心臟搏動與血管路徑決定，不會逆轉為靜脈流向動脈。"
+        ]
+      },
+      {
+        id: 29,
+        dimension: "圖表判讀",
+        topic: "實驗 3-3 血管粗細與血流方向判斷",
+        stem: "對照左側【實驗題組（三）】的 ASCII 血管示意圖，在觀察小魚尾鰭血管時，若發現某條血管中紅血球是「單列、緩慢地逐一通過」，這條血管最可能是圖中的哪一種血管？",
+        options: [
+          "小動脈（血管 P）",
+          "微血管（血管 Q）",
+          "小靜脈（血管 R）",
+          "肺靜脈"
+        ],
+        answerIndex: 1,
+        explanation: "微血管管徑最細，僅容紅血球單行排隊通過，且血流速率最慢，有助於血液與周圍組織細胞進行充分的物質交換。",
+        formulaOrVisual: "$$\\text{管徑最細、流速最慢} \\Longleftrightarrow \\text{微血管（僅容單列紅血球通過）}$$",
+        distractors: [
+          "(A) 小動脈管徑較粗且血流較快，紅血球不會單列緩慢移動。",
+          "(C) 小靜脈是由微血管匯流而成，管徑較微血管粗且流速較快。",
+          "(D) 小魚尾鰭觀察的是體循環微血管網，且肺靜脈位於心臟與肺部之間，不在尾鰭。"
+        ]
+      },
+      {
+        id: 30,
+        dimension: "基礎定義",
+        topic: "體循環與肺循環的功能比較",
+        stem: "關於人體「體循環」與「肺循環」功能的比較，下列敘述何者正確？",
+        options: [
+          "體循環主要在肺泡進行氣體交換，使缺氧血變成充氧血",
+          "肺循環主要將充氧血送至全身組織細胞，進行養分與廢物交換",
+          "體循環可將充氧血送至全身組織，並帶走細胞產生的代謝廢物",
+          "體循環與肺循環是分段依序進行的，體循環結束後才開始肺循環"
+        ],
+        answerIndex: 2,
+        explanation: "體循環將左心室的充氧血送往全身各處組織微血管，供應養分與氧氣並帶走二氧化碳與廢物，最後回到右心房；肺循環則將右心室的缺氧血送至肺泡微血管進行氣體交換，變為充氧血後回到左心房。兩者是「同時進行」的。",
+        formulaOrVisual: "$$\\text{體循環：充氧血} \\rightarrow \\text{全身組織} \\rightarrow \\text{缺氧血} \\quad ; \\quad \\text{肺循環：缺氧血} \\rightarrow \\text{肺泡} \\rightarrow \\text{充氧血}$$",
+        distractors: [
+          "(A) 在肺泡進行氣體交換、使缺氧血變充氧血的是「肺循環」，而非體循環。",
+          "(B) 將充氧血送至全身組織的是「體循環」，肺循環送出的是缺氧血。",
+          "(D) 體循環與肺循環是「同時進行」的，共同維持全身物質運輸。"
+        ]
+      },
+      {
+        id: 31,
+        dimension: "圖表判讀",
+        topic: "血液循環路徑與含氧量變化判讀",
+        stem: "參考左側【概念圖組（四）】的人體血液循環路徑，下列哪一段血管路徑中，血液的含氧量是由「充氧血」轉變為「缺氧血」？",
+        options: [
+          "右心室 → 肺動脈 → 肺泡微血管",
+          "肺泡微血管 → 肺靜脈 → 左心房",
+          "左心室 → 主動脈 → 組織微血管 → 大靜脈",
+          "肺靜脈 → 左心房 → 左心室 → 主動脈"
+        ],
+        answerIndex: 2,
+        explanation: "血液流經「組織微血管」時，會將氧氣擴散釋放給組織細胞使用，並吸收二氧化碳，因此血液會由充氧血轉變為缺氧血，再經由小靜脈、大靜脈流回右心房。",
+        formulaOrVisual: "$$\\text{組織微血管處：充氧血（高 } O_2\\text{）} \\xrightarrow{\\text{釋出 } O_2\\text{、吸收 } CO_2} \\text{缺氧血（低 } O_2\\text{）}$$",
+        distractors: [
+          "(A) 肺動脈內流動的是缺氧血，流經肺泡微血管後會轉變為「充氧血」。",
+          "(B) 肺泡微血管至肺靜脈之間流動的皆為「充氧血」。",
+          "(D) 肺靜脈、左心房、左心室與主動脈內流動的皆為「充氧血」，尚未經過組織細胞耗氧。"
+        ]
+      },
+      {
+        id: 32,
+        dimension: "基礎定義",
+        topic: "組織液的形成與功能",
+        stem: "當血液流經全身各處的微血管時，部分血漿會滲出微血管壁，包圍在組織細胞周圍形成「組織液」。下列關於組織液的敘述，何者正確？",
+        options: [
+          "組織液是血液與組織細胞之間進行物質交換的媒介",
+          "組織液中含有大量紅血球，因此呈現鮮紅色",
+          "組織液無法進入淋巴管，只能全部逆流回動脈中",
+          "組織液的成分與尿液完全相同，主要用來排出體內廢物"
+        ],
+        answerIndex: 0,
+        explanation: "組織液位於微血管與組織細胞之間，血液中的氧氣與養分先進入組織液再擴散至細胞，細胞產生的廢物與二氧化碳則先進入組織液再擴散入微血管或淋巴管。",
+        formulaOrVisual: "$$\\text{微血管} \\Longleftrightarrow \\text{組織液} \\Longleftrightarrow \\text{組織細胞（物質交換媒介）}$$",
+        distractors: [
+          "(B) 紅血球體積大無法穿過微血管壁，正常組織液不含紅血球，不是鮮紅色。",
+          "(C) 部分組織液會進入末端封閉的淋巴管成為淋巴，不會逆流回動脈。",
+          "(D) 組織液含有養分與氧氣以供養細胞，與排泄廢物的尿液成分不同。"
+        ]
+      },
+      {
+        id: 33,
+        dimension: "基礎定義",
+        topic: "淋巴結的構造與免疫功能",
+        stem: "人體淋巴系統中，沿著淋巴管分布有許多膨大的構造稱為「淋巴結」。關於淋巴結功能的敘述，下列何者正確？",
+        options: [
+          "淋巴結的主要功能是製造紅血球，以補充血液中的氧氣攜帶量",
+          "淋巴結可過濾淋巴中的病原體與異物，內含特殊的白血球（淋巴球）具防禦功能",
+          "淋巴結的功能是將淋巴液轉變為尿液，送往腎臟排出體外",
+          "淋巴結內充滿瓣膜，主要功能是阻止血液從動脈流向靜脈"
+        ],
+        answerIndex: 1,
+        explanation: "淋巴結是淋巴系統的過濾與防禦站，當淋巴流經淋巴結時，可過濾病原體與異物，並由淋巴結內特殊的白血球（淋巴球）吞噬或產生抗體對抗病原體。",
+        formulaOrVisual: "$$\\text{淋巴} \\longrightarrow \\text{淋巴結（過濾異物、淋巴球吞噬/產生抗體）} \\longrightarrow \\text{靜脈}$$",
+        distractors: [
+          "(A) 淋巴結不含紅血球，也不負責製造紅血球。",
+          "(C) 淋巴液最後會匯入靜脈回到心血管系統，並非轉變為尿液。",
+          "(D) 淋巴管內流動的是淋巴而非動脈血，淋巴結的主要功能是免疫過濾與防禦。"
+        ]
+      },
+      {
+        id: 34,
+        dimension: "跨章整合",
+        topic: "人體防禦病原體的三道防線概念",
+        stem: "下列關於人體防禦外來病原體機制的敘述，何者【錯誤】？",
+        options: [
+          "皮膚與黏膜能阻擋病原體入侵，屬於人體第一道防線",
+          "血液中的白血球可吞噬入侵的病原體，具有防禦疾病的功能",
+          "特殊的白血球能記憶病原體，當相同病原體再次入侵時可快速消滅",
+          "血小板能直接辨識並吞噬病毒，是人體最重要的免疫細胞"
+        ],
+        answerIndex: 3,
+        explanation: "血小板的功能是協助血液凝固止血，並不具有吞噬病原體或免疫辨識的功能；吞噬病原體與產生抗體、記憶病原體的是白血球。",
+        formulaOrVisual: "$$\\text{病原體防禦：皮膚/黏膜阻擋} + \\text{白血球吞噬} + \\text{淋巴球記憶/抗體}$$",
+        distractors: [
+          "(A) 完整的皮膚與呼吸道、消化道等黏膜可阻擋病原體進入體內，敘述正確。",
+          "(B) 白血球可吞噬細菌等病原體，保護身體健康，敘述正確。",
+          "(C) 特殊白血球具免疫記憶性，再次接觸相同病原體時反應更快更強，敘述正確。"
+        ]
+      },
+      {
+        id: 35,
+        dimension: "圖表判讀",
+        topic: "心臟收縮與舒張狀態判讀",
+        stem: "觀察心臟的跳動週期，當「心室收縮、心房舒張」時，心臟內部瓣膜的開關與血液流向情形，下列何者正確？",
+        options: [
+          "房室瓣關閉、半月瓣打開，血液由心室流入動脈",
+          "房室瓣打開、半月瓣關閉，血液由靜脈流入心房",
+          "房室瓣與半月瓣皆關閉，血液在心臟內完全停止流動",
+          "房室瓣與半月瓣皆打開，血液由動脈逆流回心室"
+        ],
+        answerIndex: 0,
+        explanation: "當心室收縮時，心室內壓力大於心房，使心房與心室間的「房室瓣關閉」（防止血液逆流回心房）；同時心室內壓力大於動脈，推開「半月瓣」，將血液擠入動脈。",
+        formulaOrVisual: "$$\\text{心室收縮：房室瓣關閉（防逆流）} + \\text{半月瓣開啟} \\Longrightarrow \\text{血液：心室} \\rightarrow \\text{動脈}$$",
+        distractors: [
+          "(B) 心室收縮時房室瓣是關閉的，不會打開讓血液由心房流入心室。",
+          "(C) 心室收縮時半月瓣會開啟推動血液進入動脈，並非完全停止流動。",
+          "(D) 半月瓣的作用正是防止動脈血液逆流回心室，正常情況下血液不會逆流。"
+        ]
+      },
+      {
+        id: 36,
+        dimension: "實驗變因",
+        topic: "實驗 3-2 運動前後數據比較與推論",
+        stem: "依據左側【實驗題組（二）】的紀錄表，乙同學運動前脈搏為 71 次/分，運動後增加至 95 次/分。乙同學運動前後每分鐘脈搏次數的差值為多少？若以每分鐘心跳次數估算，乙同學運動後 1 分鐘內心臟共跳動幾次？",
+        options: [
+          "差值 24 次/分；運動後 1 分鐘心跳 95 次",
+          "差值 24 次/分；運動後 1 分鐘心跳 190 次",
+          "差值 95 次/分；運動後 1 分鐘心跳 71 次",
+          "差值 71 次/分；運動後 1 分鐘心跳 95 次"
+        ],
+        answerIndex: 0,
+        explanation: "乙同學運動前後脈搏差值為 $95 - 71 = 24$ 次/分；由於心搏次數等於脈搏次數，運動後每分鐘脈搏 95 次，代表運動後 1 分鐘內心臟跳動 95 次。",
+        formulaOrVisual: "$$\\Delta\\text{脈搏} = 95 - 71 = 24\\text{（次/分）} \\quad ; \\quad \\text{運動後每分鐘心搏} = 95\\text{ 次/分}$$",
+        distractors: [
+          "(B) 95 次/分已是「每分鐘」的心跳次數，無需再乘以 2。",
+          "(C) 95 次/分是運動後的數值，並非運動前後的差值。",
+          "(D) 71 次/分是運動前的數值，並非差值。"
+        ]
+      },
+      {
+        id: 37,
+        dimension: "實驗變因",
+        topic: "實驗 3-3 顯微鏡放大倍率與操作安全",
+        stem: "在「實驗 3-3 血液流動的觀察」中，小安先用低倍物鏡（例如 10×）觀察小魚尾鰭的血液流動，接著想換成高倍物鏡（例如 40×）觀察更清楚的紅血球移動。下列操作何者正確？",
+        options: [
+          "轉換高倍物鏡時，直接大幅轉動粗調節輪將載物臺往下調，再重新對焦",
+          "先將欲觀察的血管移至視野中央，再轉動旋轉盤換上高倍物鏡，僅微調細調節輪",
+          "換上高倍物鏡後，若視野太暗，應將反光鏡改用平面鏡並關小光圈",
+          "使用高倍物鏡時，可直接用手指將小魚尾鰭用力壓平在載玻片上"
+        ],
+        answerIndex: 1,
+        explanation: "由低倍換高倍時，應先將目標移至視野中央，轉動鼻輪（旋轉盤）換上高倍物鏡，再輕轉細調節輪使影像清晰；高倍鏡下視野較暗，應調大光圈或改用凹面鏡增加亮度，且不可用力壓迫小魚。",
+        formulaOrVisual: "$$\\text{低倍轉高倍：移至中央} \\rightarrow \\text{換高倍鏡} \\rightarrow \\text{調光圈/凹面鏡} \\rightarrow \\text{僅轉細調節輪}$$",
+        distractors: [
+          "(A) 高倍鏡下不可隨意大幅轉動粗調節輪，以免壓碎玻片或壓傷小魚。",
+          "(C) 換高倍鏡後視野變暗，應「開大光圈」或使用「凹面鏡」聚光，而非關小光圈。",
+          "(D) 用力壓平會傷害小魚尾鰭與血管，影響正常血液流動。"
+        ]
+      },
+      {
+        id: 38,
+        dimension: "跨章整合",
+        topic: "消化系統吸收與心血管、淋巴系統運輸分工",
+        stem: "小腸是人體吸收養分的主要器官，小腸絨毛內同時分布著微血管與乳糜管（淋巴管）。當食物中的澱粉、蛋白質與脂質被消化分解後，下列關於養分吸收路徑的敘述，何者正確？",
+        options: [
+          "葡萄糖與胺基酸主要由小腸絨毛的微血管吸收，先隨血液循環運輸",
+          "脂肪酸與甘油主要由小腸絨毛的微血管吸收，先進入肝門靜脈",
+          "葡萄糖主要由乳糜管吸收，脂肪酸與甘油主要由微血管吸收",
+          "所有養分都必須先進入乳糜管成為淋巴，再經由肺動脈送往全身"
+        ],
+        answerIndex: 0,
+        explanation: "小腸絨毛內的「微血管」負責吸收水溶性養分（如葡萄糖、胺基酸、水分、礦物質、維生素B與C）；「乳糜管（淋巴管）」則負責吸收脂溶性養分（如脂肪酸、甘油、脂溶性維生素）。",
+        formulaOrVisual: "$$\\text{微血管：葡萄糖、胺基酸} \\quad ; \\quad \\text{乳糜管（淋巴管）：脂肪酸、甘油}$$",
+        distractors: [
+          "(B) 脂肪酸與甘油等脂溶性養分主要由乳糜管吸收，而非微血管。",
+          "(C) 葡萄糖為水溶性養分，由微血管吸收；脂肪酸與甘油由乳糜管吸收。",
+          "(D) 水溶性養分直接進入微血管，不會先進入乳糜管，且血液循環不經由肺動脈送往全身。"
+        ]
+      },
+      {
+        id: 39,
+        dimension: "圖表判讀",
+        topic: "體循環與肺循環心臟左右側分工",
+        stem: "依據課本循環口訣「左體右肺、要換邊」，下列關於心臟左、右兩側腔室所推動的循環與血液性質，何者正確？",
+        options: [
+          "心臟左側推動體循環，泵出的是充氧血；心臟右側推動肺循環，泵出的是缺氧血",
+          "心臟左側推動肺循環，泵出的是缺氧血；心臟右側推動體循環，泵出的是充氧血",
+          "心臟左側與右側皆推動體循環，且兩側腔室內的血液皆為充氧血",
+          "心臟左側與右側皆推動肺循環，且兩側腔室內的血液皆為缺氧血"
+        ],
+        answerIndex: 0,
+        explanation: "「左體右肺」指左心室將充氧血送出進行「體循環」，右心室將缺氧血送出進行「肺循環」；「要換邊」指左心室出發的血液最終會回到右心房，右心室出發的血液最終會回到左心房。",
+        formulaOrVisual: "$$\\text{左心室} \\xrightarrow{\\text{體循環（充氧血）}} \\text{右心房} \\quad ; \\quad \\text{右心室} \\xrightarrow{\\text{肺循環（缺氧血）}} \\text{左心房}$$",
+        distractors: [
+          "(B) 左側對應體循環（充氧血），右側對應肺循環（缺氧血），敘述完全相反。",
+          "(C) 右側推動的是肺循環，且右心房、右心室流的是缺氧血。",
+          "(D) 左側推動的是體循環，且左心房、左心室流的是充氧血。"
+        ]
+      },
+      {
+        id: 40,
+        dimension: "基礎定義",
+        topic: "血液成分中血漿的主要作用",
+        stem: "下列關於血液中「血漿」的敘述，何者【錯誤】？",
+        options: [
+          "血漿約佔血液體積的 55%，主要成分是水",
+          "血漿可運送葡萄糖、胺基酸等養分至全身細胞",
+          "血漿可運送二氧化碳、尿素等細胞代謝產生的廢物",
+          "血漿內含有大量紅血球，負責與氧氣結合並運送氧氣"
+        ],
+        answerIndex: 3,
+        explanation: "血液分為「血漿」與「血球」兩大類，紅血球屬於「血球」而非血漿；血漿本身不含紅血球，負責運送養分、廢物、激素與抗體等物質。",
+        formulaOrVisual: "$$\\text{血液} = \\text{血漿（液體、運載物質）} + \\text{血球（紅血球、白血球、血小板）}$$",
+        distractors: [
+          "(A) 血漿約佔血液一半多（約 55%），水分佔大宗，敘述正確。",
+          "(B) 消化吸收後的養分溶於血漿中被運送至全身，敘述正確。",
+          "(C) 細胞代謝產生的廢物可藉由血漿運往排泄器官排出，敘述正確。"
+        ]
+      },
+      {
+        id: 41,
+        dimension: "跨章整合",
+        topic: "淋巴回流受阻與組織水腫成因",
+        stem: "若人體某部位的淋巴管因發炎或手術切除而阻塞，導致該部位的組織液無法順利回收進入淋巴系統，最可能出現下列哪一種現象？",
+        options: [
+          "該部位組織液積聚，造成局部組織腫脹",
+          "該部位的動脈血壓會立刻下降為零",
+          "該部位的紅血球數量會大量增加並破裂",
+          "該部位的肌肉會完全失去收縮能力"
+        ],
+        answerIndex: 0,
+        explanation: "淋巴管的功能之一是回收微血管滲出的組織液。當淋巴管阻塞無法回收組織液時，多餘的組織液會滯留在組織細胞間隙，導致局部組織出現腫脹現象。",
+        formulaOrVisual: "$$\\text{淋巴管阻塞} \\Longrightarrow \\text{組織液回收受阻} \\Longrightarrow \\text{組織液滯留} \\Longrightarrow \\text{局部腫脹}$$",
+        distractors: [
+          "(B) 淋巴管阻塞不會使全身或該處動脈血壓立刻降為零。",
+          "(C) 紅血球在血管內流動，淋巴管阻塞不會直接使紅血球大量增加。",
+          "(D) 局部腫脹可能造成不適或活動受限，但不會使肌肉直接喪失收縮能力。"
+        ]
+      },
+      {
+        id: 42,
+        dimension: "圖表判讀",
+        topic: "心臟腔室與大血管連線辨識",
+        stem: "若某條血管直接與「左心室」相連，且管壁最厚、富有彈性，內部流動著鮮紅色的充氧血，則這條血管應為下列何者？",
+        options: [
+          "主動脈",
+          "肺動脈",
+          "肺靜脈",
+          "下大靜脈"
+        ],
+        answerIndex: 0,
+        explanation: "左心室收縮時將充氧血擠入「主動脈」，主動脈是體循環的主幹，管壁最厚、彈性最好，承受最高血壓，並將充氧血分送至全身。",
+        formulaOrVisual: "$$\\text{左心室} \\xrightarrow{\\text{半月瓣}} \\text{主動脈（充氧血、管壁最厚、血壓最高）}$$",
+        distractors: [
+          "(B) 肺動脈連接的是「右心室」，且內部流動的是缺氧血。",
+          "(C) 肺靜脈連接的是「左心房」，屬於靜脈而非心室射出的動脈。",
+          "(D) 下大靜脈連接的是「右心房」，流動的是來自下半身的缺氧血。"
+        ]
+      },
+      {
+        id: 43,
+        dimension: "實驗變因",
+        topic: "實驗 3-2 心音與心跳次數換算",
+        stem: "在「實驗 3-2 探測心音與脈搏」中，若受測者在安靜狀態下 1 分鐘內共聽到了 140 聲心音（包含第一心音與第二心音），則該受測者此時每分鐘的心跳次數約為多少次？",
+        options: [
+          "35 次/分",
+          "70 次/分",
+          "140 次/分",
+          "280 次/分"
+        ],
+        answerIndex: 1,
+        explanation: "心臟跳動一次（一次心搏）會產生兩個心音（「撲、通」兩聲）。因此聽到 140 聲心音，代表心臟跳動了 $140 \\div 2 = 70$ 次。",
+        formulaOrVisual: "$$\\text{心跳次數} = \\frac{\\text{心音總聲數}}{2} = \\frac{140\\text{ 聲}}{2\\text{ 聲/次}} = 70\\text{ 次/分}$$",
+        distractors: [
+          "(A) 誤將 140 除以 4，忽略一次心搏對應兩個心音的關係。",
+          "(C) 140 是心音的總聲數，而非心跳（心搏）次數。",
+          "(D) 誤將 140 乘以 2，將心音聲數反向放大。"
+        ]
+      },
+      {
+        id: 44,
+        dimension: "基礎定義",
+        topic: "靜脈瓣膜的功能與分布",
+        stem: "下列關於人體「靜脈瓣膜」的敘述，何者正確？",
+        options: [
+          "靜脈瓣膜的主要功能是防止靜脈內的血液逆流",
+          "靜脈瓣膜位於心房與心室之間，可防止血液倒流回心房",
+          "所有的靜脈（包含上、下大靜脈與肺靜脈）都具有瓣膜",
+          "靜脈瓣膜打開時，血液會由心臟流向微血管"
+        ],
+        answerIndex: 0,
+        explanation: "靜脈內的血壓較低，部分靜脈（如四肢靜脈）管腔內具有瓣膜，當血液試圖往回流時瓣膜會關閉，藉此防止血液逆流，協助血液順利流回心臟。",
+        formulaOrVisual: "$$\\text{靜脈瓣膜功能：血液順流時開啟} \\quad ; \\quad \\text{血液欲逆流時關閉（防止逆流）}$$",
+        distractors: [
+          "(B) 位於心房與心室之間的是「房室瓣」，不是靜脈瓣膜。",
+          "(C) 並非所有靜脈都有瓣膜，課本明確指出「部分靜脈沒有」瓣膜。",
+          "(D) 靜脈是將血液送「回」心臟，而非由心臟流向微血管。"
+        ]
+      },
+      {
+        id: 45,
+        dimension: "跨章整合",
+        topic: "運動後呼吸與循環系統的協同作用",
+        stem: "當人進行劇烈運動時，除了心跳與脈搏加快外，呼吸速率與深度也會增加。下列關於循環系統與呼吸系統在此情境下協同合作的敘述，何者正確？",
+        options: [
+          "呼吸加快可吸入更多氧氣並排出更多二氧化碳，再由循環系統加速運送",
+          "呼吸加快的主要目的是降低體溫，與血液循環的氣體運輸無關",
+          "劇烈運動時，肺循環會暫停運作，只由體循環負責供應肌肉氧氣",
+          "血液中的二氧化碳主要由紅血球結合運送，完全不溶於血漿"
+        ],
+        answerIndex: 0,
+        explanation: "運動時肌肉細胞耗氧量大、產生的二氧化碳多。呼吸系統負責與外界進行氣體交換（吸進氧氣、排出二氧化碳），循環系統則負責在肺部與全身組織間快速運送這些氣體，兩者密切配合。",
+        formulaOrVisual: "$$\\text{外界} \\underset{\\text{呼吸系統}}{\\overset{O_2 / CO_2}{\\Longleftrightarrow}} \\text{肺泡微血管} \\underset{\\text{循環系統}}{\\overset{\\text{血液運送}}{\\Longleftrightarrow}} \\text{全身肌肉細胞}$$",
+        distractors: [
+          "(B) 呼吸加快直接與氣體交換有關，並與循環系統共同維持氧氣供應與二氧化碳排除。",
+          "(C) 體循環與肺循環同時進行，肺循環不會暫停。",
+          "(D) 二氧化碳主要藉由血漿運送，並有部分與血紅素結合或以其他形式運送，並非完全不溶於血漿。"
+        ]
+      },
+      {
+        id: 46,
+        dimension: "圖表判讀",
+        topic: "小腸絨毛血液中養分與氧氣變化綜合判讀",
+        stem: "飯後一段時間，血液流經小腸絨毛微血管網時，下列關於血管內「葡萄糖含量」與「氧氣含量」變化的敘述，何者正確？",
+        options: [
+          "葡萄糖含量增加，氧氣含量減少",
+          "葡萄糖含量減少，氧氣含量增加",
+          "葡萄糖含量增加，氧氣含量增加",
+          "葡萄糖含量減少，氧氣含量減少"
+        ],
+        answerIndex: 0,
+        explanation: "小腸絨毛吸收消化後的葡萄糖進入血液，使血液中葡萄糖含量增加；同時小腸絨毛細胞進行呼吸作用消耗氧氣，使血液中氧氣含量減少。",
+        formulaOrVisual: "$$\\text{流經小腸絨毛：葡萄糖}\\uparrow\\text{（吸收養分）} \\quad ; \\quad O_2\\downarrow\\text{（細胞呼吸耗氧）}$$",
+        distractors: [
+          "(B) 小腸是吸收養分的場所，葡萄糖應增加；小腸非氣體交換器官，氧氣會被細胞消耗而減少。",
+          "(C) 小腸組織細胞不會產生氧氣，血液流經小腸時氧氣不會增加。",
+          "(D) 飯後小腸吸收大量葡萄糖，血液中葡萄糖含量會增加而非減少。"
+        ]
+      },
+      {
+        id: 47,
+        dimension: "基礎定義",
+        topic: "血液循環系統與淋巴系統的關係",
+        stem: "下列關於人體「心血管系統」與「淋巴系統」關係的敘述，何者正確？",
+        options: [
+          "兩者彼此獨立運作，淋巴液永遠不會回到心血管系統中",
+          "淋巴系統可回收微血管滲出的組織液，最後匯入靜脈回到心血管系統",
+          "心血管系統負責免疫防禦，淋巴系統只負責運送氧氣與二氧化碳",
+          "淋巴液是由紅血球破裂後釋出的液體流入淋巴管而成"
+        ],
+        answerIndex: 1,
+        explanation: "淋巴系統與心血管系統密切相連：微血管滲出的組織液進入淋巴管成為淋巴，經淋巴結過濾後，最後匯入鎖骨下方的靜脈，重新回到心血管系統。",
+        formulaOrVisual: "$$\\text{心血管系統} \\xrightarrow{\\text{微血管滲出}} \\text{組織液} \\xrightarrow{\\text{淋巴管}} \\text{淋巴} \\xrightarrow{\\text{匯入靜脈}} \\text{心血管系統}$$",
+        distractors: [
+          "(A) 淋巴最後會匯入靜脈回到心血管系統，並非彼此完全獨立永不交會。",
+          "(C) 運送氧氣主要由紅血球負責，淋巴系統主要功能是回收組織液與免疫防禦。",
+          "(D) 淋巴是由組織液進入淋巴管形成，並非紅血球破裂所致。"
+        ]
+      },
+      {
+        id: 48,
+        dimension: "實驗變因",
+        topic: "實驗 3-3 小魚尾鰭實驗的血管辨識綜合應用",
+        stem: "在「實驗 3-3 血液流動的觀察」中，若某條血管內血液流速較快，且沿途不斷「分支」成較細的血管，則此血管最可能連接在心臟的哪一個腔室附近（以血液流動上游方向推論）？",
+        options: [
+          "心室（將血液送出心臟的腔室）",
+          "心房（接收血液回流的腔室）",
+          "淋巴結",
+          "肺泡"
+        ],
+        answerIndex: 0,
+        explanation: "由主幹分支流向微血管的是「動脈」，而動脈是直接與「心室」相連，負責將血液送出心臟。",
+        formulaOrVisual: "$$\\text{心室} \\longrightarrow \\text{動脈（分支變細）} \\longrightarrow \\text{微血管} \\longrightarrow \\text{靜脈（匯流變粗）} \\longrightarrow \\text{心房}$$",
+        distractors: [
+          "(B) 心房連接的是靜脈（接收回流血液），靜脈是由微血管「匯流」而成，而非分支。",
+          "(C) 淋巴結屬於淋巴系統，與動脈分支無關。",
+          "(D) 肺泡是氣體交換構造，不是心臟腔室。"
+        ]
+      },
+      {
+        id: 49,
+        dimension: "跨章整合",
+        topic: "體循環與肺循環路徑錯誤辨識",
+        stem: "小智整理了人體血液循環路徑的筆記，下列哪一組路徑的先後順序完全正確？",
+        options: [
+          "左心室 → 主動脈 → 組織微血管 → 大靜脈 → 右心房",
+          "右心室 → 肺靜脈 → 肺泡微血管 → 肺動脈 → 左心房",
+          "左心房 → 左心室 → 肺動脈 → 肺泡微血管 → 右心房",
+          "右心房 → 右心室 → 主動脈 → 組織微血管 → 左心房"
+        ],
+        answerIndex: 0,
+        explanation: "體循環的正確路徑為：左心室 → 主動脈 → 小動脈 → 組織微血管 → 小靜脈 → 大靜脈 → 右心房，完全符合選項 (A)。",
+        formulaOrVisual: "$$\\text{體循環：左心室} \\rightarrow \\text{主動脈} \\rightarrow \\text{組織微血管} \\rightarrow \\text{大靜脈} \\rightarrow \\text{右心房}$$",
+        distractors: [
+          "(B) 肺循環應是「右心室 → 肺動脈 → 肺泡微血管 → 肺靜脈 → 左心房」，肺動脈與肺靜脈位置顛倒。",
+          "(C) 左心室連接的是主動脈而非肺動脈，且肺循環血液會回到左心房而非右心房。",
+          "(D) 右心室連接的是肺動脈而非主動脈，且體循環血液會回到右心房而非左心房。"
+        ]
+      },
+      {
+        id: 50,
+        dimension: "跨章整合",
+        topic: "循環系統構造與功能綜合素養題",
+        stem: "下列關於人體「心臟、血管、血液與淋巴系統」的綜合敘述，何者完全正確？",
+        options: [
+          "心臟跳動一次會產生兩個心音與一次脈搏，因此測量同一人同一分鐘的心搏與脈搏次數理論上相等",
+          "血液中的紅血球有細胞核、白血球無細胞核、血小板可吞噬細菌並產生抗體",
+          "肺動脈流充氧血、肺靜脈流缺氧血，因為動脈都流充氧血、靜脈都流缺氧血",
+          "淋巴管末端開口於組織細胞內以吸收養分，最後直接注入左心房完成循環"
+        ],
+        answerIndex: 0,
+        explanation: "一次心搏包含房室瓣關閉（第一心音）與半月瓣關閉（第二心音），共兩個心音，同時引起動脈搏動一次（脈搏），故同一人同一時間內心搏與脈搏次數理論上相同。",
+        formulaOrVisual: "$$1\\text{ 次心搏} = 2\\text{ 聲心音（撲、通）} = 1\\text{ 次脈搏} \\quad \\Longrightarrow \\quad \\text{心搏次數} = \\text{脈搏次數}$$",
+        distractors: [
+          "(B) 成熟紅血球無細胞核、白血球有細胞核；吞噬細菌與產生抗體的是白血球/淋巴球，血小板負責凝血。",
+          "(C) 肺動脈流缺氧血、肺靜脈流充氧血，且動脈與靜脈是以血流方向（離心/回心）定義，非含氧量。",
+          "(D) 淋巴管末端是「封閉」的，且淋巴最後匯入鎖骨下方靜脈，先回到右心房而非左心房。"
+        ]
+      }
+    ];
+
+    // =========================================================================
+    // 系統狀態與變數初始化
+    // =========================================================================
+    let currentQuestions = [];
+    let userAnswers = {}; // { questionId: selectedOptionIndex }
+    let isSubmitted = false;
+    let timerSeconds = 50 * 60;
+    let initialSetSeconds = 50 * 60;
+    let timerInterval = null;
+    let isPaused = false;
+    let radarChartInstance = null;
+
+    // 隱蔽入口計數器
+    let verifyClickCount = 0;
+    let verifyClickTimer = null;
+    let historyClickCount = 0;
+    let historyClickTimer = null;
+
+    // 初始化測驗
+    function initExam(shuffle = false) {
+      isSubmitted = false;
+      userAnswers = {};
+      
+      // 深拷貝題庫
+      currentQuestions = JSON.parse(JSON.stringify(rawQuestionBank));
+      
+      if (shuffle) {
+        // 洗牌題目順序
+        for (let i = currentQuestions.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [currentQuestions[i], currentQuestions[j]] = [currentQuestions[j], currentQuestions[i]];
+        }
+        // 洗牌每題選項順序並重新定位正確答案索引
+        currentQuestions.forEach(q => {
+          const correctText = q.options[q.answerIndex];
+          for (let i = q.options.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [q.options[i], q.options[j]] = [q.options[j], q.options[i]];
+          }
+          q.answerIndex = q.options.indexOf(correctText);
+        });
+      }
+
+      // 重置介面狀態
+      document.getElementById('result-dashboard').style.display = 'none';
+      const submitBtn = document.getElementById('btn-submit');
+      submitBtn.disabled = false;
+      submitBtn.textContent = '提交試卷';
+      submitBtn.className = 'btn btn-submit';
+
+      renderNavGrid();
+      renderQuestions();
+      updateProgressBadge();
+      resetTimer();
+
+      if (window.MathJax && window.MathJax.typesetPromise) {
+        window.MathJax.typesetPromise();
+      }
+    }
+
+    // 渲染左側題號快速導覽
+    function renderNavGrid() {
+      const navGrid = document.getElementById('nav-grid');
+      navGrid.innerHTML = '';
+      currentQuestions.forEach((q, idx) => {
+        const btn = document.createElement('button');
+        btn.className = 'nav-btn';
+        btn.id = `nav-btn-${idx}`;
+        btn.textContent = idx + 1;
+        btn.onclick = () => {
+          const target = document.getElementById(`q-card-${idx}`);
+          if (target) {
+            target.style.display = 'block';
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        };
+        navGrid.appendChild(btn);
+      });
+    }
+
+    // 渲染右側題目列表
+    function renderQuestions() {
+      const container = document.getElementById('questions-container');
+      container.innerHTML = '';
+      const labels = ['(A)', '(B)', '(C)', '(D)'];
+
+      currentQuestions.forEach((q, idx) => {
+        const card = document.createElement('div');
+        card.className = 'question-card';
+        card.id = `q-card-${idx}`;
+
+        let optionsHtml = '';
+        q.options.forEach((optText, optIdx) => {
+          optionsHtml += `
+            <button class="option-btn" id="opt-${idx}-${optIdx}" onclick="selectOption(${idx}, ${optIdx})">
+              <span class="opt-radio"></span>
+              <span><strong>${labels[optIdx]}</strong> ${optText}</span>
+            </button>
+          `;
+        });
+
+        let distractorsHtml = q.distractors.map(d => `<li>${d}</li>`).join('');
+
+        card.innerHTML = `
+          <div class="q-header">
+            <span class="q-number">第 ${idx + 1} 題</span>
+            <span class="q-tag">${q.dimension} ｜ ${q.topic}</span>
+          </div>
+          <div class="q-stem">${q.stem}</div>
+          <div class="options-grid">
+            ${optionsHtml}
+          </div>
+          <div class="explanation-box" id="exp-box-${idx}">
+            <div class="exp-header">
+              <span class="ans-badge">正確答案：${labels[q.answerIndex]} ${q.options[q.answerIndex]}</span>
+              <span class="q-tag">考點歸類：${q.dimension} - ${q.topic}</span>
+            </div>
+            <div class="exp-block"><strong>【原題重現】</strong>${q.stem}</div>
+            <div class="exp-block"><strong>【中文解釋與核心考點】</strong>${q.explanation}</div>
+            <div class="exp-block"><strong>【公式與結構解析】</strong><br>${q.formulaOrVisual}</div>
+            <div class="exp-block">
+              <strong>【誘答剖析（為什麼其他選項錯誤）】</strong>
+              <ul class="distractor-list">${distractorsHtml}</ul>
+            </div>
+          </div>
+        `;
+
+        container.appendChild(card);
+      });
+    }
+
+    // 選擇選項
+    function selectOption(qIdx, optIdx) {
+      if (isSubmitted) return;
+      userAnswers[qIdx] = optIdx;
+
+      // 更新選項視覺狀態
+      for (let i = 0; i < 4; i++) {
+        const btn = document.getElementById(`opt-${qIdx}-${i}`);
+        if (i === optIdx) {
+          btn.classList.add('selected');
+        } else {
+          btn.classList.remove('selected');
+        }
+      }
+
+      // 更新左側導覽列顏色（已作答跳藍色）
+      const navBtn = document.getElementById(`nav-btn-${qIdx}`);
+      if (navBtn) navBtn.classList.add('answered');
+
+      updateProgressBadge();
+    }
+
+    function updateProgressBadge() {
+      const answeredCount = Object.keys(userAnswers).length;
+      document.getElementById('progress-badge').textContent = `已作答：${answeredCount} / ${currentQuestions.length}`;
+    }
+
+    // =========================================================================
+    // 倒數計時器邏輯
+    // =========================================================================
+    function startTimer() {
+      clearInterval(timerInterval);
+      timerInterval = setInterval(() => {
+        if (!isPaused && !isSubmitted) {
+          if (timerSeconds > 0) {
+            timerSeconds--;
+            updateTimerDisplay();
+          } else {
+            clearInterval(timerInterval);
+            alert('測驗時間到！系統將自動提交試卷。');
+            submitExam(true);
+          }
+        }
+      }, 1000);
+    }
+
+    function updateTimerDisplay() {
+      const mins = Math.floor(timerSeconds / 60);
+      const secs = timerSeconds % 60;
+      const display = document.getElementById('timer-display');
+      display.textContent = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+      if (timerSeconds <= 300) {
+        display.style.color = '#f87171';
+      } else {
+        display.style.color = '#4ade80';
+      }
+    }
+
+    function resetTimer() {
+      const inputMins = parseInt(document.getElementById('timer-minutes').value, 10) || 50;
+      const clampedMins = Math.min(240, Math.max(1, inputMins));
+      document.getElementById('timer-minutes').value = clampedMins;
+      initialSetSeconds = clampedMins * 60;
+      timerSeconds = initialSetSeconds;
+      isPaused = false;
+      document.getElementById('btn-pause-timer').textContent = '暫停';
+      updateTimerDisplay();
+      startTimer();
+    }
+
+    document.getElementById('btn-set-timer').onclick = () => {
+      if (isSubmitted) return;
+      resetTimer();
+    };
+
+    document.getElementById('btn-pause-timer').onclick = () => {
+      if (isSubmitted) return;
+      isPaused = !isPaused;
+      document.getElementById('btn-pause-timer').textContent = isPaused ? '繼續' : '暫停';
+    };
+
+    // =========================================================================
+    // 交卷批改、雷達圖分析、localStorage 記錄與 Telegram API 通知
+    // =========================================================================
+    function submitExam(autoSubmit = false) {
+      if (isSubmitted) return;
+      const answeredCount = Object.keys(userAnswers).length;
+      if (!autoSubmit && answeredCount < currentQuestions.length) {
+        const confirmSubmit = confirm(`您目前尚有 ${currentQuestions.length - answeredCount} 題未作答，確定要提前提交試卷嗎？`);
+        if (!confirmSubmit) return;
+      }
+
+      isSubmitted = true;
+      clearInterval(timerInterval);
+
+      const submitBtn = document.getElementById('btn-submit');
+      submitBtn.disabled = true;
+      submitBtn.textContent = '已交卷';
+
+      let correctCount = 0;
+      const wrongList = [];
+      const dimStats = {
+        '基礎定義': { total: 0, correct: 0 },
+        '實驗變因': { total: 0, correct: 0 },
+        '圖表判讀': { total: 0, correct: 0 },
+        '跨章整合': { total: 0, correct: 0 }
+      };
+
+      const labels = ['(A)', '(B)', '(C)', '(D)'];
+
+      currentQuestions.forEach((q, idx) => {
+        const userChoice = userAnswers[idx];
+        const isCorrect = (userChoice === q.answerIndex);
+
+        if (dimStats[q.dimension]) {
+          dimStats[q.dimension].total++;
+          if (isCorrect) dimStats[q.dimension].correct++;
+        }
+
+        const card = document.getElementById(`q-card-${idx}`);
+        const navBtn = document.getElementById(`nav-btn-${idx}`);
+        const expBox = document.getElementById(`exp-box-${idx}`);
+
+        // 鎖定選項並標記綠/紅
+        for (let i = 0; i < 4; i++) {
+          const optBtn = document.getElementById(`opt-${idx}-${i}`);
+          optBtn.disabled = true;
+          if (i === q.answerIndex) {
+            optBtn.classList.add('opt-correct');
+          } else if (i === userChoice && !isCorrect) {
+            optBtn.classList.add('opt-wrong');
+          }
+        }
+
+        if (isCorrect) {
+          correctCount++;
+          card.classList.add('card-correct');
+          navBtn.classList.add('correct');
+        } else {
+          card.classList.add('card-wrong');
+          navBtn.classList.add('wrong');
+          wrongList.push({
+            num: idx + 1,
+            topic: q.topic,
+            stem: q.stem,
+            userAns: userChoice !== undefined ? `${labels[userChoice]} ${q.options[userChoice]}` : '未作答',
+            correctAns: `${labels[q.answerIndex]} ${q.options[q.answerIndex]}`,
+            explanation: q.explanation,
+            formula: q.formulaOrVisual
+          });
+        }
+
+        // 展開詳解
+        expBox.style.display = 'block';
+      });
+
+      // 計算 100 分制得分
+      const score = Math.round((correctCount / currentQuestions.length) * 100);
+      const wrongCount = currentQuestions.length - correctCount;
+
+      document.getElementById('final-score').textContent = score;
+      document.getElementById('final-correct-count').textContent = `答對 ${correctCount} / ${currentQuestions.length} 題（答錯 ${wrongCount} 題）`;
+      document.getElementById('btn-show-wrong').textContent = `只看錯題 (${wrongCount})`;
+
+      // 顯示各維度統計
+      const dimContainer = document.getElementById('dimension-stats');
+      dimContainer.innerHTML = '';
+      const radarLabels = [];
+      const radarData = [];
+      const dimSummaryStrings = [];
+
+      Object.keys(dimStats).forEach(dim => {
+        const d = dimStats[dim];
+        const pct = d.total > 0 ? Math.round((d.correct / d.total) * 100) : 0;
+        radarLabels.push(dim);
+        radarData.push(pct);
+        dimSummaryStrings.push(`${dim}(${d.correct}/${d.total}, ${pct}%)`);
+
+        dimContainer.innerHTML += `
+          <div class="dim-item">
+            <span>${dim} (${d.correct}/${d.total})</span>
+            <strong style="color:${pct >= 80 ? '#4ade80' : pct >= 60 ? '#fbbf24' : '#f87171'};">${pct}%</strong>
+          </div>
+        `;
+      });
+
+      // 顯示成績儀表板並捲動左側至頂部
+      const dashboard = document.getElementById('result-dashboard');
+      dashboard.style.display = 'block';
+      document.querySelector('.left-pane').scrollTo({ top: 0, behavior: 'smooth' });
+
+      // 繪製 Chart.js 雷達圖
+      renderRadarChart(radarLabels, radarData);
+
+      // 重新渲染 MathJax 公式
+      if (window.MathJax && window.MathJax.typesetPromise) {
+        window.MathJax.typesetPromise();
+      }
+
+      // 整理時間與耗時資訊
+      const nowStr = new Date().toLocaleString('zh-TW', { hour12: false });
+      const elapsedSec = Math.max(0, initialSetSeconds - timerSeconds);
+      const elapsedStr = `${Math.floor(elapsedSec / 60)}分${elapsedSec % 60}秒`;
+      const wrongNumsStr = wrongList.length > 0 ? wrongList.map(w => `第${w.num}題`).join('、') : '無（全對）';
+
+      // 儲存至 localStorage
+      saveHistoryRecord({
+        time: nowStr,
+        duration: elapsedStr,
+        score: `${score} 分 (${correctCount}/${currentQuestions.length})`,
+        dimensions: dimSummaryStrings.join(' ｜ '),
+        wrongNums: wrongNumsStr
+      });
+
+      // 發送 Telegram 通知
+      sendTelegramReport(nowStr, elapsedStr, score, correctCount, currentQuestions.length, dimSummaryStrings.join('\n'), wrongNumsStr);
+    }
+
+    function renderRadarChart(labels, data) {
+      const ctx = document.getElementById('radarChart').getContext('2d');
+      if (radarChartInstance) {
+        radarChartInstance.destroy();
+      }
+      radarChartInstance = new Chart(ctx, {
+        type: 'radar',
+        data: {
+          labels: labels,
+          datasets: [{
+            label: '各維度得分率 (%)',
+            data: data,
+            backgroundColor: 'rgba(56, 189, 248, 0.25)',
+            borderColor: '#38bdf8',
+            pointBackgroundColor: '#38bdf8',
+            pointBorderColor: '#fff',
+            borderWidth: 2
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            r: {
+              min: 0,
+              max: 100,
+              ticks: {
+                stepSize: 20,
+                color: '#94a3b8',
+                backdropColor: 'transparent'
+              },
+              grid: { color: '#334155' },
+              angleLines: { color: '#334155' },
+              pointLabels: {
+                color: '#f1f5f9',
+                font: { size: 12, weight: 'bold' }
+              }
+            }
+          },
+          plugins: {
+            legend: { display: false }
+          }
+        }
+      });
+    }
+
+    // =========================================================================
+    // Telegram Bot API 通知
+    // =========================================================================
+    function sendTelegramReport(time, duration, score, correctCount, totalCount, dimText, wrongNums) {
+      const chatId = '8049812362';
+      const token = 'AAEqHmvEEMDFOYtggE4FxpHFoAWUGHX7Aq4';
+      // 支援標準 Bot Token 格式與直接呼叫
+      const botPath = token.includes(':') ? `bot${token}` : `bot${chatId}:${token}`;
+      const url = `https://api.telegram.org/${botPath}/sendMessage`;
+
+      const message = [
+        `📘 【國中生物 3-2 人體的循環 測驗成績報告】`,
+        `01. 交卷時間：${time}`,
+        `02. 作答耗時：${duration}`,
+        `03. 測驗得分：${score} 分（答對 ${correctCount} / ${totalCount} 題）`,
+        `04. 各維度統計：\n${dimText}`,
+        `05. 錯題清單：${wrongNums}`
+      ].join('\n');
+
+      fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          chat_id: chatId,
+          text: message
+        })
+      }).catch(err => {
+        console.warn('Telegram 通知發送狀態：', err);
+      });
+    }
+
+    // =========================================================================
+    // 錯題篩選與匯出功能 (Markdown 複製 & Word 下載)
+    // =========================================================================
+    document.getElementById('btn-show-all').onclick = () => {
+      currentQuestions.forEach((_, idx) => {
+        document.getElementById(`q-card-${idx}`).style.display = 'block';
+      });
+      document.getElementById('btn-show-all').style.background = '#3b82f6';
+      document.getElementById('btn-show-wrong').style.background = '#334155';
+    };
+
+    document.getElementById('btn-show-wrong').onclick = () => {
+      currentQuestions.forEach((q, idx) => {
+        const isCorrect = (userAnswers[idx] === q.answerIndex);
+        document.getElementById(`q-card-${idx}`).style.display = isCorrect ? 'none' : 'block';
+      });
+      document.getElementById('btn-show-wrong').style.background = '#ef4444';
+      document.getElementById('btn-show-all').style.background = '#334155';
+    };
+
+    function generateWrongNotesMarkdown() {
+      const labels = ['(A)', '(B)', '(C)', '(D)'];
+      let md = `# 國中七年級自然科學（生物）3-2 人體的循環｜錯題複習筆記\n\n`;
+      md += `- 紀錄時間：${new Date().toLocaleString('zh-TW', { hour12: false })}\n\n---\n\n`;
+      let wrongCount = 0;
+
+      currentQuestions.forEach((q, idx) => {
+        const userChoice = userAnswers[idx];
+        if (userChoice !== q.answerIndex) {
+          wrongCount++;
+          const userStr = userChoice !== undefined ? `${labels[userChoice]} ${q.options[userChoice]}` : '未作答';
+          const ansStr = `${labels[q.answerIndex]} ${q.options[q.answerIndex]}`;
+          md += `### 第 ${idx + 1} 題（${q.dimension}｜${q.topic}）\n`;
+          md += `- **題目**：${q.stem}\n`;
+          md += `- **你的作答**：${userStr}\n`;
+          md += `- **正確答案**：${ansStr}\n`;
+          md += `- **核心解析**：${q.explanation}\n`;
+          md += `- **誘答剖析**：\n${q.distractors.map(d => `  - ${d}`).join('\n')}\n\n`;
+        }
+      });
+
+      if (wrongCount === 0) {
+        md += `🎉 恭喜！本次測驗全數答對，無錯題紀錄！\n`;
+      }
+      return md;
+    }
+
+    document.getElementById('btn-copy-md').onclick = () => {
+      const mdText = generateWrongNotesMarkdown();
+      navigator.clipboard.writeText(mdText).then(() => {
+        alert('✅ 錯題複習筆記（Markdown 格式）已成功複製到剪貼簿！');
+      }).catch(() => {
+        alert('複製失敗，請確認瀏覽器剪貼簿權限。');
+      });
+    };
+
+    document.getElementById('btn-download-doc').onclick = () => {
+      const mdText = generateWrongNotesMarkdown().replace(/\n/g, '<br>');
+      const htmlContent = `
+        <html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
+        <head><meta charset='utf-8'><title>生物錯題複習筆記</title></head>
+        <body style="font-family: 'Microsoft JhengHei', sans-serif; line-height: 1.6;">${mdText}</body>
+        </html>
+      `;
+      const blob = new Blob(['\ufeff', htmlContent], { type: 'application/msword' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `國中生物3-2_錯題複習筆記_${new Date().toISOString().slice(0,10)}.doc`;
+      a.click();
+      URL.revokeObjectURL(url);
+    };
+
+    // =========================================================================
+    // localStorage 歷次測驗歷史紀錄與家長密碼驗證 (1234)
+    // =========================================================================
+    const STORAGE_KEY = 'bio_3_2_exam_history_v1';
+
+    function saveHistoryRecord(record) {
+      const list = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+      list.unshift(record);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+    }
+
+    function openParentHistory() {
+      const pwd = prompt('請輸入家長監控密碼：');
+      if (pwd === null) return;
+      if (pwd !== '1234') {
+        alert('❌ 密碼錯誤！');
+        return;
+      }
+      const list = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+      const tbody = document.getElementById('history-tbody');
+      tbody.innerHTML = '';
+      if (list.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="6">尚無任何交卷歷史紀錄</td></tr>';
+      } else {
+        list.forEach((item, i) => {
+          tbody.innerHTML += `
+            <tr>
+              <td>${list.length - i}</td>
+              <td>${item.time}</td>
+              <td>${item.duration}</td>
+              <td style="color:#38bdf8; font-weight:bold;">${item.score}</td>
+              <td style="text-align:left; font-size:0.8rem;">${item.dimensions}</td>
+              <td style="color:#f87171;">${item.wrongNums}</td>
+            </tr>
+          `;
+        });
+      }
+      document.getElementById('history-modal').style.display = 'flex';
+    }
+
+    function clearHistory() {
+      if (confirm('確定要清除所有歷次測驗歷史紀錄嗎？')) {
+        localStorage.removeItem(STORAGE_KEY);
+        document.getElementById('history-tbody').innerHTML = '<tr><td colspan="6">尚無任何交卷歷史紀錄</td></tr>';
+      }
+    }
+
+    // 連點標題 5 下開啟家長歷史紀錄
+    document.getElementById('secret-history-trigger').onclick = () => {
+      historyClickCount++;
+      clearTimeout(historyClickTimer);
+      if (historyClickCount >= 5) {
+        historyClickCount = 0;
+        openParentHistory();
+      } else {
+        historyClickTimer = setTimeout(() => { historyClickCount = 0; }, 1500);
+      }
+    };
+
+    // 快捷鍵 Ctrl + Shift + P 開啟家長歷史紀錄
+    document.addEventListener('keydown', (e) => {
+      if (e.ctrlKey && e.shiftKey && (e.key === 'P' || e.key === 'p')) {
+        e.preventDefault();
+        openParentHistory();
+      }
+    });
+
+    // =========================================================================
+    // 隱蔽驗証按鈕 (❖ 連點 5 下開啟答案分布與題目總表)
+    // =========================================================================
+    function openVerifyModal() {
+      const labels = ['(A)', '(B)', '(C)', '(D)'];
+      const counts = [0, 0, 0, 0];
+      const tbody = document.getElementById('verify-tbody');
+      tbody.innerHTML = '';
+
+      currentQuestions.forEach((q, idx) => {
+        counts[q.answerIndex]++;
+        tbody.innerHTML += `
+          <tr>
+            <td>第 ${idx + 1} 題</td>
+            <td>${q.dimension}</td>
+            <td>${q.topic}</td>
+            <td style="color:#4ade80; font-weight:bold;">${labels[q.answerIndex]}</td>
+            <td style="text-align:left;">${q.stem.slice(0, 36)}...</td>
+          </tr>
+        `;
+      });
+
+      document.getElementById('answer-dist-summary').innerHTML = `
+        <strong>目前題庫共 ${currentQuestions.length} 題｜選項答案分布統計：</strong>
+        (A)：${counts[0]} 題 ｜ (B)：${counts[1]} 題 ｜ (C)：${counts[2]} 題 ｜ (D)：${counts[3]} 題
+      `;
+      document.getElementById('verify-modal').style.display = 'flex';
+    }
+
+    document.getElementById('secret-verify-trigger').onclick = () => {
+      verifyClickCount++;
+      clearTimeout(verifyClickTimer);
+      if (verifyClickCount >= 5) {
+        verifyClickCount = 0;
+        openVerifyModal();
+      } else {
+        verifyClickTimer = setTimeout(() => { verifyClickCount = 0; }, 1500);
+      }
+    };
+
+    function closeModal(id) {
+      document.getElementById(id).style.display = 'none';
+    }
+
+    // 綁定頂部按鈕事件
+    document.getElementById('btn-submit').onclick = () => submitExam(false);
+    document.getElementById('btn-shuffle').onclick = () => {
+      if (confirm('確定要重新洗牌題目與選項順序並重新開始測驗嗎？')) {
+        initExam(true);
+      }
+    };
+
+    // 啟動頁面初始化
+    window.onload = () => initExam(false);
+  </script>
+</body>
+</html>

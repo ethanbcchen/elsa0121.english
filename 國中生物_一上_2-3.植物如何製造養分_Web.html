@@ -1,26 +1,44 @@
 <!DOCTYPE html>
-<html lang="zh-Hant-TW">
+<html lang="zh-TW">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>國中七年級自然科學（生物）精準模擬測驗｜2-3 植物如何製造養分</title>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <title>國中七年級自然科學（生物）全真模擬測驗（50題）｜單元 2-3 植物如何製造養分</title>
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <!-- MathJax for LaTeX Formula Rendering -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
   <style>
     :root {
-      --bg-body: #0f141c;
-      --bg-panel: #161d27;
-      --bg-card: #1d2633;
-      --bg-card-hover: #243040;
-      --border-color: #2c384a;
+      --bg-main: #0f172a;
+      --bg-panel: #1e293b;
+      --bg-card: #243044;
+      --bg-card-hover: #2c3b54;
+      --bg-header: #162032;
+      --border-color: #334155;
       --text-primary: #f1f5f9;
       --text-secondary: #94a3b8;
-      --accent-blue: #2563eb;
-      --accent-blue-light: #3b82f6;
-      --accent-green: #16a34a;
-      --accent-green-bg: rgba(22, 163, 74, 0.16);
-      --accent-red: #dc2626;
-      --accent-red-bg: rgba(220, 38, 38, 0.16);
+      --text-muted: #64748b;
+      --accent-blue: #3b82f6;
+      --accent-blue-hover: #2563eb;
+      --accent-green: #10b981;
+      --accent-green-bg: rgba(16, 185, 129, 0.16);
+      --accent-red: #ef4444;
+      --accent-red-bg: rgba(239, 68, 68, 0.16);
       --accent-amber: #f59e0b;
+      --accent-purple: #8b5cf6;
+      --radius-md: 10px;
+      --radius-lg: 14px;
+      --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.28);
     }
 
     * {
@@ -30,186 +48,196 @@
     }
 
     body {
-      font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
-      background-color: var(--bg-body);
+      font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, -apple-system, sans-serif;
+      background-color: var(--bg-main);
       color: var(--text-primary);
       line-height: 1.65;
       height: 100vh;
+      overflow: hidden;
       display: flex;
       flex-direction: column;
-      overflow: hidden;
     }
 
     /* Top Header Bar */
-    header {
-      background-color: var(--bg-panel);
+    header.top-bar {
+      background-color: var(--bg-header);
       border-bottom: 1px solid var(--border-color);
-      padding: 12px 20px;
+      padding: 10px 20px;
       display: flex;
-      flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
+      flex-wrap: wrap;
       gap: 12px;
-      z-index: 20;
+      z-index: 100;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
     }
 
-    .header-left {
+    .controls-group {
       display: flex;
-      flex-wrap: wrap;
       align-items: center;
       gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .secret-verify-btn {
+      background: transparent;
+      border: none;
+      color: #475569;
+      font-size: 15px;
+      cursor: pointer;
+      padding: 2px 6px;
+      border-radius: 4px;
+      user-select: none;
+      transition: color 0.2s;
+    }
+    .secret-verify-btn:hover {
+      color: #64748b;
     }
 
     .timer-box {
       display: flex;
       align-items: center;
       gap: 8px;
-      background-color: var(--bg-card);
+      background: #0f172a;
       border: 1px solid var(--border-color);
-      padding: 6px 12px;
+      padding: 5px 12px;
       border-radius: 8px;
       font-size: 0.95rem;
-    }
-
-    .timer-display {
-      font-family: "Consolas", "Courier New", monospace;
-      font-size: 1.2rem;
-      font-weight: 700;
+      font-weight: 600;
       color: #38bdf8;
-      min-width: 64px;
-      text-align: center;
     }
 
-    .timer-display.warning {
-      color: var(--accent-red);
-      animation: pulse 1s infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.5; }
-    }
-
-    .timer-input {
-      width: 56px;
-      background: var(--bg-body);
-      border: 1px solid var(--border-color);
-      color: var(--text-primary);
-      padding: 4px 6px;
+    .timer-box input {
+      width: 54px;
+      background: #1e293b;
+      border: 1px solid #475569;
+      color: #fff;
       border-radius: 5px;
+      padding: 2px 6px;
       text-align: center;
       font-size: 0.9rem;
     }
 
     .btn {
       border: none;
-      border-radius: 6px;
-      padding: 7px 14px;
+      border-radius: 7px;
+      padding: 6px 14px;
       font-size: 0.9rem;
       font-weight: 600;
       cursor: pointer;
-      transition: all 0.18s ease;
+      transition: all 0.2s ease;
       display: inline-flex;
       align-items: center;
       gap: 6px;
     }
 
-    .btn-sm {
-      padding: 4px 10px;
-      font-size: 0.85rem;
+    .btn-secondary {
+      background: #334155;
+      color: #e2e8f0;
+    }
+    .btn-secondary:hover {
+      background: #475569;
     }
 
-    .btn-dark {
-      background-color: #2c384a;
-      color: var(--text-primary);
-    }
-    .btn-dark:hover { background-color: #3b4a61; }
-
-    .btn-green {
-      background-color: var(--accent-green);
-      color: #fff;
-    }
-    .btn-green:hover { background-color: #15803d; }
-
-    .btn-blue {
-      background-color: var(--accent-blue);
-      color: #fff;
-    }
-    .btn-blue:hover { background-color: #1d4ed8; }
-
-    .btn-outline {
-      background-color: transparent;
-      border: 1px solid var(--border-color);
-      color: var(--text-secondary);
-    }
-    .btn-outline:hover {
-      border-color: var(--text-primary);
-      color: var(--text-primary);
+    .btn-status {
+      background: #1e3a5f;
+      color: #7dd3fc;
+      border: 1px solid #0284c7;
+      cursor: default;
     }
 
-    .progress-badge {
-      background-color: rgba(37, 99, 235, 0.2);
-      border: 1px solid var(--accent-blue);
-      color: #60a5fa;
-      padding: 6px 12px;
-      border-radius: 6px;
-      font-weight: 600;
-      font-size: 0.9rem;
+    .btn-submit {
+      background: var(--accent-green);
+      color: #ffffff;
+    }
+    .btn-submit:hover {
+      background: #059669;
+    }
+    .btn-submit:disabled {
+      background: #065f46;
+      color: #a7f3d0;
+      cursor: not-allowed;
     }
 
-    .header-title {
+    .btn-shuffle {
+      background: #1e293b;
+      color: #e2e8f0;
+      border: 1px solid #475569;
+    }
+    .btn-shuffle:hover {
+      background: #334155;
+    }
+
+    .title-area {
       text-align: right;
+      user-select: none;
+      cursor: pointer;
     }
-    .header-title h1 {
+
+    .title-area h1 {
       font-size: 1.15rem;
       font-weight: 700;
       color: #f8fafc;
+      letter-spacing: 0.5px;
     }
-    .header-title p {
+
+    .title-area p {
       font-size: 0.8rem;
       color: var(--text-secondary);
     }
 
-    /* Main Split Layout */
-    .main-container {
+    /* Main Two-Column Workspace */
+    .workspace {
       display: flex;
       flex: 1;
       overflow: hidden;
+      width: 100%;
+    }
+
+    .left-pane, .right-pane {
+      width: 50%;
+      height: 100%;
+      overflow-y: auto;
+      padding: 18px 22px;
+      scroll-behavior: smooth;
     }
 
     .left-pane {
-      width: 50%;
+      background-color: #131c2e;
       border-right: 1px solid var(--border-color);
-      overflow-y: auto;
-      padding: 20px;
-      background-color: var(--bg-panel);
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
     }
 
     .right-pane {
-      width: 50%;
-      overflow-y: auto;
-      padding: 20px 26px;
-      background-color: var(--bg-body);
+      background-color: var(--bg-main);
     }
 
     /* Custom Scrollbar */
-    ::-webkit-scrollbar { width: 8px; height: 8px; }
-    ::-webkit-scrollbar-track { background: var(--bg-body); }
-    ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
-    ::-webkit-scrollbar-thumb:hover { background: #475569; }
-
-    /* Cards in Left Pane */
-    .panel-card {
-      background-color: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-radius: 10px;
-      padding: 16px;
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0f172a;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #334155;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #475569;
     }
 
-    .panel-card-header {
+    /* Cards & Sections */
+    .panel-card {
+      background-color: var(--bg-panel);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 18px;
+      margin-bottom: 18px;
+      box-shadow: var(--shadow-md);
+    }
+
+    .panel-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -218,16 +246,16 @@
       border-bottom: 1px solid var(--border-color);
     }
 
-    .panel-card-title {
+    .panel-title {
       font-size: 1rem;
       font-weight: 700;
-      color: #60a5fa;
+      color: #e2e8f0;
       display: flex;
       align-items: center;
       gap: 8px;
     }
 
-    .legend {
+    .legend-text {
       font-size: 0.78rem;
       color: var(--text-secondary);
     }
@@ -240,182 +268,260 @@
     }
 
     .nav-btn {
-      background-color: #131922;
-      border: 1px solid var(--border-color);
-      color: var(--text-secondary);
+      background-color: #283548;
+      color: #cbd5e1;
+      border: 1px solid #3b4b63;
+      border-radius: 6px;
       padding: 6px 0;
-      border-radius: 5px;
-      font-size: 0.82rem;
+      font-size: 0.85rem;
       font-weight: 600;
       cursor: pointer;
       transition: all 0.15s;
+      text-align: center;
     }
 
     .nav-btn:hover {
-      border-color: #60a5fa;
+      background-color: #3b4b63;
       color: #fff;
     }
 
     .nav-btn.answered {
       background-color: var(--accent-blue);
-      border-color: var(--accent-blue-light);
       color: #fff;
+      border-color: #60a5fa;
     }
 
     .nav-btn.correct {
-      background-color: var(--accent-green);
-      border-color: #22c55e;
-      color: #fff;
+      background-color: var(--accent-green) !important;
+      color: #fff !important;
+      border-color: #34d399 !important;
     }
 
     .nav-btn.wrong {
-      background-color: var(--accent-red);
-      border-color: #ef4444;
-      color: #fff;
+      background-color: var(--accent-red) !important;
+      color: #fff !important;
+      border-color: #f87171 !important;
     }
 
-    /* Result Dashboard */
-    #result-panel {
+    /* Report / Result Dashboard */
+    #result-dashboard {
       display: none;
       border: 1px solid #3b82f6;
-      background: linear-gradient(145deg, #1b2432, #151c28);
+      background: linear-gradient(180deg, #1e293b 0%, #172033 100%);
     }
 
-    .result-grid {
+    .dashboard-top {
       display: grid;
       grid-template-columns: 1fr 1.1fr;
       gap: 16px;
       align-items: center;
+      margin-bottom: 14px;
     }
 
-    .score-summary {
-      text-align: center;
-      padding: 10px;
-      background-color: rgba(15, 23, 42, 0.5);
-      border-radius: 8px;
+    .score-summary-box {
+      background: #0f172a;
       border: 1px solid var(--border-color);
-    }
-
-    .score-big {
-      font-size: 3rem;
-      font-weight: 800;
-      color: #38bdf8;
-      line-height: 1.1;
-      margin: 6px 0;
-    }
-
-    .stat-list {
-      margin-top: 12px;
-      text-align: left;
-      font-size: 0.85rem;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .stat-item {
-      display: flex;
-      justify-content: space-between;
-      padding: 4px 8px;
-      background: rgba(255, 255, 255, 0.03);
-      border-radius: 4px;
-    }
-
-    .chart-wrapper {
-      position: relative;
-      height: 210px;
-      width: 100%;
-    }
-
-    .result-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 14px;
-    }
-
-    /* Reference Diagrams & Reading Passage Cards (Left Pane) */
-    .ref-block {
-      background-color: #141a24;
-      border: 1px solid var(--border-color);
-      border-radius: 8px;
+      border-radius: var(--radius-md);
       padding: 14px;
-      margin-bottom: 12px;
-    }
-
-    .ref-badge {
-      display: inline-block;
-      font-size: 0.78rem;
-      font-weight: 700;
-      color: #93c5fd;
-      background-color: rgba(37, 99, 235, 0.2);
-      padding: 2px 8px;
-      border-radius: 4px;
-      margin-bottom: 8px;
-    }
-
-    .ref-block h3 {
-      font-size: 1rem;
-      margin-bottom: 8px;
-      color: #f8fafc;
-    }
-
-    .ref-block p, .ref-block li {
-      font-size: 0.9rem;
-      color: #cbd5e1;
-    }
-
-    .ref-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 8px;
-      font-size: 0.85rem;
-    }
-
-    .ref-table th, .ref-table td {
-      border: 1px solid var(--border-color);
-      padding: 6px 8px;
       text-align: center;
     }
 
-    .ref-table th {
-      background-color: #1e293b;
-      color: #93c5fd;
-    }
-
-    /* Right Pane Question Cards */
-    .section-banner {
-      background-color: var(--bg-card);
-      border-left: 4px solid var(--accent-blue-light);
-      padding: 12px 16px;
-      border-radius: 6px;
-      margin-bottom: 18px;
-    }
-
-    .section-banner h2 {
-      font-size: 1.05rem;
-      color: #60a5fa;
-    }
-
-    .section-banner p {
+    .score-label {
       font-size: 0.85rem;
       color: var(--text-secondary);
     }
 
-    .q-card {
-      background-color: var(--bg-card);
+    .score-big {
+      font-size: 2.8rem;
+      font-weight: 800;
+      color: #38bdf8;
+      line-height: 1.15;
+      margin: 4px 0;
+    }
+
+    .score-sub {
+      font-size: 0.9rem;
+      color: #e2e8f0;
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+
+    .dim-stats-list {
+      text-align: left;
+      font-size: 0.85rem;
+      border-top: 1px solid var(--border-color);
+      padding-top: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .dim-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .dim-val {
+      font-weight: 700;
+      color: #60a5fa;
+    }
+
+    .radar-wrapper {
+      background: #0f172a;
       border: 1px solid var(--border-color);
-      border-radius: 10px;
-      padding: 18px;
+      border-radius: var(--radius-md);
+      padding: 10px;
+      height: 230px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .filter-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .btn-filter {
+      flex: 1;
+      justify-content: center;
+      background: #334155;
+      color: #e2e8f0;
+      padding: 8px 10px;
+      font-size: 0.85rem;
+    }
+
+    .btn-filter.active {
+      background: var(--accent-blue);
+      color: #fff;
+    }
+
+    .btn-copy-md {
+      background: #0284c7;
+      color: #fff;
+      padding: 8px 12px;
+      font-size: 0.85rem;
+    }
+    .btn-copy-md:hover {
+      background: #0369a1;
+    }
+
+    /* Left Pane Reference Materials (Diagrams, Tables, Reading Passages) */
+    .ref-section-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #60a5fa;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .ref-desc {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-bottom: 14px;
+    }
+
+    .passage-card {
+      background: #1a2436;
+      border: 1px solid #2e3d56;
+      border-radius: var(--radius-md);
+      padding: 15px;
+      margin-bottom: 16px;
+    }
+
+    .passage-badge {
+      display: inline-block;
+      background: #1d4ed8;
+      color: #dbeafe;
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 3px 9px;
+      border-radius: 5px;
+      margin-bottom: 8px;
+    }
+
+    .passage-card h3 {
+      font-size: 1rem;
+      color: #f8fafc;
+      margin-bottom: 8px;
+    }
+
+    .passage-card p {
+      font-size: 0.9rem;
+      color: #cbd5e1;
+      margin-bottom: 10px;
+    }
+
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 10px 0;
+      font-size: 0.85rem;
+    }
+
+    .data-table th, .data-table td {
+      border: 1px solid #334155;
+      padding: 7px 10px;
+      text-align: center;
+    }
+
+    .data-table th {
+      background-color: #0f172a;
+      color: #93c5fd;
+      font-weight: 700;
+    }
+
+    .data-table td {
+      background-color: #1e293b;
+      color: #e2e8f0;
+    }
+
+    .svg-box {
+      background: #0f172a;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      padding: 10px;
+      margin: 10px 0;
+      text-align: center;
+    }
+
+    /* Right Pane Questions */
+    .section-banner {
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .section-banner h2 {
+      font-size: 1.15rem;
+      color: #60a5fa;
+      margin-bottom: 2px;
+    }
+
+    .section-banner span {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+
+    .question-card {
+      background-color: var(--bg-panel);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 18px 20px;
       margin-bottom: 18px;
+      box-shadow: var(--shadow-md);
       transition: border-color 0.2s;
     }
 
-    .q-card.status-correct {
+    .question-card.card-correct {
       border-color: var(--accent-green);
     }
 
-    .q-card.status-wrong {
+    .question-card.card-wrong {
       border-color: var(--accent-red);
     }
 
@@ -424,12 +530,17 @@
       justify-content: space-between;
       align-items: center;
       margin-bottom: 10px;
+      gap: 8px;
+      flex-wrap: wrap;
     }
 
-    .q-number {
+    .q-num-badge {
+      background: #1e3a8a;
+      color: #93c5fd;
       font-weight: 700;
-      color: #60a5fa;
-      font-size: 0.98rem;
+      font-size: 0.85rem;
+      padding: 3px 10px;
+      border-radius: 6px;
     }
 
     .q-tags {
@@ -439,34 +550,36 @@
     }
 
     .q-tag {
-      background-color: #273344;
-      color: #cbd5e1;
+      background: #0f172a;
+      border: 1px solid #334155;
+      color: #94a3b8;
       font-size: 0.76rem;
-      padding: 3px 8px;
-      border-radius: 4px;
+      padding: 2px 8px;
+      border-radius: 5px;
     }
 
     .q-tag.advanced {
-      background-color: rgba(245, 158, 11, 0.2);
+      border-color: #f59e0b;
       color: #fbbf24;
-      border: 1px solid rgba(245, 158, 11, 0.4);
+      background: rgba(245, 158, 11, 0.12);
     }
 
     .q-stem {
       font-size: 1rem;
       color: #f8fafc;
       margin-bottom: 14px;
-      line-height: 1.65;
+      line-height: 1.7;
     }
 
-    .q-diagram-inline {
-      background-color: #131922;
-      border: 1px solid var(--border-color);
+    .q-visual-inline {
+      background: #0f172a;
+      border: 1px solid #334155;
       border-radius: 8px;
-      padding: 10px;
+      padding: 10px 12px;
       margin-bottom: 14px;
-      display: flex;
-      justify-content: center;
+      font-size: 0.9rem;
+      color: #cbd5e1;
+      overflow-x: auto;
     }
 
     .options-grid {
@@ -477,129 +590,206 @@
 
     .option-label {
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       gap: 10px;
-      background-color: #151c26;
-      border: 1px solid var(--border-color);
-      padding: 10px 14px;
+      background: #162032;
+      border: 1px solid #334155;
       border-radius: 8px;
+      padding: 10px 14px;
       cursor: pointer;
-      font-size: 0.94rem;
       transition: all 0.15s;
+      font-size: 0.94rem;
+      color: #e2e8f0;
     }
 
-    .option-label:hover:not(.locked) {
-      background-color: var(--bg-card-hover);
+    .option-label:hover:not(.disabled) {
+      background: #23324d;
       border-color: #60a5fa;
     }
 
-    .option-label input[type="radio"] {
-      accent-color: var(--accent-blue-light);
-      width: 16px;
-      height: 16px;
-      cursor: pointer;
-    }
-
     .option-label.selected {
-      background-color: rgba(37, 99, 235, 0.2);
-      border-color: var(--accent-blue-light);
+      background: rgba(59, 130, 246, 0.22);
+      border-color: var(--accent-blue);
       color: #fff;
       font-weight: 600;
     }
 
-    .option-label.correct-ans {
-      background-color: var(--accent-green-bg);
-      border-color: #22c55e;
-      color: #4ade80;
+    .option-label.opt-correct {
+      background: var(--accent-green-bg) !important;
+      border-color: var(--accent-green) !important;
+      color: #6ee7b7 !important;
       font-weight: 700;
     }
 
-    .option-label.wrong-ans {
-      background-color: var(--accent-red-bg);
-      border-color: #ef4444;
-      color: #f87171;
+    .option-label.opt-wrong {
+      background: var(--accent-red-bg) !important;
+      border-color: var(--accent-red) !important;
+      color: #fca5a5 !important;
       text-decoration: line-through;
     }
 
-    /* Explanation Box */
+    .option-label.disabled {
+      cursor: default;
+    }
+
+    .opt-radio {
+      margin-top: 4px;
+      accent-color: var(--accent-blue);
+      cursor: pointer;
+    }
+
+    /* Explanation Drawer */
     .explanation-box {
       display: none;
       margin-top: 16px;
-      padding: 14px 16px;
-      background-color: #131922;
-      border: 1px solid #334155;
-      border-radius: 8px;
+      background: #111827;
+      border: 1px solid #374151;
+      border-radius: 10px;
+      padding: 15px;
       font-size: 0.9rem;
-      color: #e2e8f0;
+      color: #d1d5db;
     }
 
     .exp-header {
       display: flex;
-      flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
+      flex-wrap: wrap;
       gap: 8px;
       margin-bottom: 10px;
       padding-bottom: 8px;
-      border-bottom: 1px dashed #334155;
+      border-bottom: 1px solid #1f2937;
     }
 
-    .exp-ans-badge {
-      background-color: var(--accent-green);
+    .exp-ans-pill {
+      background: var(--accent-green);
       color: #fff;
       font-weight: 700;
       padding: 3px 10px;
-      border-radius: 5px;
+      border-radius: 6px;
       font-size: 0.85rem;
     }
 
-    .exp-cat-badge {
-      background-color: #1e293b;
+    .exp-cat-pill {
+      background: #1e293b;
       color: #93c5fd;
+      border: 1px solid #334155;
       padding: 3px 10px;
-      border-radius: 5px;
-      font-size: 0.82rem;
+      border-radius: 6px;
+      font-size: 0.8rem;
     }
 
-    .exp-section {
-      margin-bottom: 8px;
+    .exp-block {
+      margin-bottom: 10px;
     }
 
-    .exp-section strong {
-      color: #93c5fd;
+    .exp-block strong {
+      color: #f3f4f6;
+    }
+
+    .formula-box {
+      background: #0f172a;
+      border-left: 3px solid #38bdf8;
+      padding: 8px 12px;
+      margin: 8px 0;
+      border-radius: 4px;
+      color: #e0f2fe;
+      overflow-x: auto;
     }
 
     .distractor-list {
-      margin-left: 18px;
+      list-style: none;
+      padding-left: 4px;
       margin-top: 4px;
-      color: #cbd5e1;
     }
 
     .distractor-list li {
-      margin-bottom: 4px;
+      margin-bottom: 5px;
+      padding-left: 14px;
+      position: relative;
+    }
+
+    .distractor-list li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: #f87171;
+      font-weight: bold;
+    }
+
+    /* Modals (Parent History & Verification Matrix) */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      z-index: 999;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-content {
+      background: #1e293b;
+      border: 1px solid #475569;
+      border-radius: 14px;
+      max-width: 900px;
+      width: 100%;
+      max-height: 85vh;
+      overflow-y: auto;
+      padding: 22px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #334155;
+      padding-bottom: 10px;
+      margin-bottom: 15px;
+    }
+
+    .modal-close {
+      background: #334155;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 4px 10px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .dist-bar {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+      background: #0f172a;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 0.9rem;
     }
 
     /* Toast Notification */
-    .toast {
+    #toast {
       position: fixed;
       bottom: 24px;
       right: 24px;
-      background-color: var(--accent-blue);
+      background: #0284c7;
       color: #fff;
-      padding: 12px 20px;
+      padding: 10px 18px;
       border-radius: 8px;
+      font-size: 0.9rem;
       font-weight: 600;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 4px 14px rgba(0,0,0,0.4);
       opacity: 0;
-      transform: translateY(15px);
       pointer-events: none;
-      transition: all 0.25s ease;
-      z-index: 100;
+      transition: opacity 0.25s;
+      z-index: 1200;
     }
-
-    .toast.show {
+    #toast.show {
       opacity: 1;
-      transform: translateY(0);
     }
 
     /* Responsive Design */
@@ -608,7 +798,7 @@
         height: auto;
         overflow: auto;
       }
-      .main-container {
+      .workspace {
         flex-direction: column;
         overflow: visible;
       }
@@ -621,637 +811,1257 @@
       .options-grid {
         grid-template-columns: 1fr;
       }
-      .result-grid {
+      .dashboard-top {
         grid-template-columns: 1fr;
       }
-      .header-title {
-        text-align: left;
+      .nav-grid {
+        grid-template-columns: repeat(5, 1fr);
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- Top Navigation & Timer Bar -->
-  <header>
-    <div class="header-left">
+  <!-- Top Control Bar -->
+  <header class="top-bar">
+    <div class="controls-group">
+      <button id="secret-verify-trigger" class="secret-verify-btn" title="題庫檢核">❖</button>
       <div class="timer-box">
         <span>⏱ 倒數：</span>
-        <span id="timer-display" class="timer-display">50:00</span>
-        <input type="number" id="timer-minutes" class="timer-input" value="50" min="1" max="240" />
+        <span id="timer-display">50:00</span>
+        <input type="number" id="time-input" min="0" max="240" value="50" />
         <span>分</span>
-        <button class="btn btn-sm btn-dark" onclick="setTimer()">設定</button>
-        <button class="btn btn-sm btn-dark" id="btn-pause" onclick="togglePause()">暫停</button>
+        <button class="btn btn-secondary" id="btn-set-time">設定</button>
+        <button class="btn btn-secondary" id="btn-pause-time">暫停</button>
       </div>
-      <div class="progress-badge" id="progress-badge">已作答：0 / 50</div>
-      <button class="btn btn-green" id="btn-submit" onclick="submitQuiz()">提交試卷</button>
-      <button class="btn btn-dark" onclick="resetAndShuffle()">重新測驗（洗牌）</button>
+      <div class="btn btn-status" id="answered-counter">已作答：0 / 25</div>
+      <button class="btn btn-submit" id="btn-submit">提交試卷</button>
+      <button class="btn btn-shuffle" id="btn-shuffle">重新測驗（洗牌）</button>
     </div>
-    <div class="header-title">
-      <h1>國中七年級自然科學（生物）精準模擬測驗（50題）</h1>
-      <p>單元 2-3 植物如何製造養分｜108課綱概念圖、葉片構造與光合作用實驗全真演練</p>
+
+    <div class="title-area" id="secret-title-trigger" title="國中七年級自然科學（生物）模擬測驗">
+      <h1>國中七年級自然科學（生物）全真模擬測驗（50題）</h1>
+      <p>單元 2-3 植物如何製造養分 綜合實力評量與會考精選（目前載入第 1～25 題）</p>
     </div>
   </header>
 
-  <!-- Split Main Workspace -->
-  <div class="main-container">
-    <!-- Left Pane: Navigator, Results & Reference Diagrams -->
+  <!-- Main Workspace -->
+  <main class="workspace">
+    <!-- Left Column: Dashboard, Question Navigator & Visual Reference Diagrams -->
     <aside class="left-pane">
-      
-      <!-- Result & Weakness Analytics Dashboard (Shown after submit) -->
-      <div class="panel-card" id="result-panel">
-        <div class="panel-card-header">
-          <div class="panel-card-title">📊 測驗成績與弱點診斷分析報告</div>
+      <!-- Score & Weakness Radar Dashboard (Shown after submission) -->
+      <section class="panel-card" id="result-dashboard">
+        <div class="panel-header">
+          <div class="panel-title">📊 測驗成績與弱點診斷分析報告</div>
         </div>
-        <div class="result-grid">
-          <div class="score-summary">
-            <div style="font-size: 0.85rem; color: var(--text-secondary);">總得分（滿分 100 分）</div>
+        <div class="dashboard-top">
+          <div class="score-summary-box">
+            <div class="score-label">總得分（滿分 100 分）</div>
             <div class="score-big" id="total-score">0</div>
-            <div style="font-size: 0.9rem; font-weight: 600;" id="correct-count-text">答對 0 / 50 題（答錯 50 題）</div>
-            <div class="stat-list" id="category-stats"></div>
+            <div class="score-sub" id="correct-summary">答對 0 / 25 題（答錯 0 題）</div>
+            <div class="dim-stats-list" id="dim-stats-list"></div>
           </div>
-          <div class="chart-wrapper">
-            <canvas id="radarChart"></canvas>
+          <div class="radar-wrapper">
+            <canvas id="weaknessRadarChart"></canvas>
           </div>
         </div>
-        <div class="result-actions">
-          <button class="btn btn-blue btn-sm" id="btn-show-all" onclick="filterQuestions('all')">顯示全部題目 (50)</button>
-          <button class="btn btn-outline btn-sm" id="btn-show-wrong" onclick="filterQuestions('wrong')">只看錯題 (0)</button>
-          <button class="btn btn-blue btn-sm" onclick="copyWrongNotes()">📋 一鍵複製錯題筆記（Markdown）</button>
-          <button class="btn btn-dark btn-sm" onclick="downloadWordNotes()">📄 下載錯題複習講義（.doc）</button>
+        <div class="filter-actions">
+          <button class="btn btn-filter active" id="filter-all">顯示全部題目 (25)</button>
+          <button class="btn btn-filter" id="filter-wrong">只看錯題 (0)</button>
+          <button class="btn btn-copy-md" id="btn-copy-md">📋 一鍵複製錯題筆記 (Markdown)</button>
         </div>
-      </div>
+      </section>
 
-      <!-- Question Quick Navigator -->
-      <div class="panel-card">
-        <div class="panel-card-header">
-          <div class="panel-card-title">🧭 題號快速導覽（點擊跳轉至該題）</div>
-          <div class="legend">藍：已答｜綠：答對｜紅：答錯</div>
+      <!-- Question Navigator -->
+      <section class="panel-card">
+        <div class="panel-header">
+          <div class="panel-title">🧭 題號快速導覽（點擊跳轉至該題）</div>
+          <div class="legend-text">藍：已答｜綠：答對｜紅：答錯</div>
         </div>
         <div class="nav-grid" id="nav-grid"></div>
-      </div>
+      </section>
 
-      <!-- Left Pane Reference Section (Diagrams & Experiment Guides) -->
-      <div class="panel-card">
-        <div class="panel-card-header">
-          <div class="panel-card-title">📖 課本核心圖表與實驗對照區</div>
-          <div class="legend">電腦版可獨立捲動左側圖表與右側題目</div>
-        </div>
+      <!-- Grounded Reference Materials (From Uploaded Textbook Pages 107-117) -->
+      <section class="panel-card">
+        <div class="ref-section-title">📘 課本核心圖表與實驗變因對照區（第 1～50 題對照）</div>
+        <p class="ref-desc">作答時請對照下方課文構造表、光合作用流程圖與實驗 2-3 步驟紀錄。電腦版可獨立捲動左側文本與右側題目。</p>
 
-        <!-- Ref 1: Leaf Cross-Section & Lower Epidermis -->
-        <div class="ref-block">
-          <span class="ref-badge">圖表一｜葉片構造與下表皮組織示意圖</span>
-          <h3>葉片橫切面與保衛細胞構造對照</h3>
-          <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin: 10px 0;">
-            <!-- SVG: Leaf Cross Section -->
-            <svg width="260" height="175" viewBox="0 0 260 175" style="background:#0f172a; border-radius:6px; border:1px solid #334155;">
-              <!-- Cuticle top -->
-              <rect x="20" y="15" width="180" height="6" fill="#fef08a" />
-              <text x="206" y="21" fill="#fef08a" font-size="11">甲：角質層</text>
-              <!-- Upper epidermis -->
-              <rect x="20" y="21" width="180" height="18" fill="#86efac" stroke="#166534" />
-              <text x="206" y="34" fill="#86efac" font-size="11">戊：上表皮</text>
-              <!-- Palisade & Spongy Mesophyll -->
-              <rect x="20" y="39" width="180" height="75" fill="#22c55e" opacity="0.35" stroke="#15803d" />
-              <!-- Chloroplast dots -->
-              <circle cx="40" cy="52" r="4" fill="#4ade80"/><circle cx="65" cy="52" r="4" fill="#4ade80"/>
-              <circle cx="90" cy="52" r="4" fill="#4ade80"/><circle cx="155" cy="52" r="4" fill="#4ade80"/>
-              <circle cx="45" cy="92" r="4" fill="#4ade80"/><circle cx="165" cy="92" r="4" fill="#4ade80"/>
-              <text x="206" y="65" fill="#4ade80" font-size="11">乙：葉肉</text>
-              <!-- Vascular bundle (Vein) -->
-              <circle cx="115" cy="76" r="22" fill="#1e3a8a" stroke="#60a5fa" stroke-width="2" />
-              <circle cx="115" cy="70" r="7" fill="#ef4444" />
-              <circle cx="115" cy="84" r="7" fill="#38bdf8" />
-              <text x="206" y="88" fill="#60a5fa" font-size="11">丙：葉脈</text>
-              <!-- Lower epidermis with Stoma -->
-              <rect x="20" y="114" width="65" height="18" fill="#86efac" stroke="#166534" />
-              <ellipse cx="97" cy="123" rx="9" ry="7" fill="#16a34a" stroke="#fef08a" />
-              <ellipse cx="123" cy="123" rx="9" ry="7" fill="#16a34a" stroke="#fef08a" />
-              <rect x="135" y="114" width="65" height="18" fill="#86efac" stroke="#166534" />
-              <!-- Cuticle bottom -->
-              <rect x="20" y="132" width="65" height="5" fill="#fef08a" />
-              <rect x="135" y="132" width="65" height="5" fill="#fef08a" />
-              <text x="206" y="126" fill="#86efac" font-size="11">丁：下表皮</text>
-              <text x="72" y="156" fill="#fbbf24" font-size="11">己：保衛細胞與氣孔</text>
-            </svg>
-
-            <!-- SVG: Lower Epidermis Top View -->
-            <svg width="210" height="175" viewBox="0 0 210 175" style="background:#0f172a; border-radius:6px; border:1px solid #334155;">
-              <text x="14" y="18" fill="#93c5fd" font-size="11" font-weight="bold">葉片下表皮俯視圖</text>
-              <!-- Irregular epidermal cells -->
-              <path d="M25,40 Q50,25 85,35 Q120,25 145,45 Q160,85 140,125 Q105,145 70,135 Q30,140 20,100 Z" fill="#1e293b" stroke="#64748b" stroke-width="2"/>
-              <!-- Guard cells (X) -->
-              <path d="M82,55 C62,62 62,108 82,115 C75,95 75,75 82,55 Z" fill="#22c55e" stroke="#fef08a" stroke-width="1.5"/>
-              <path d="M92,55 C112,62 112,108 92,115 C99,95 99,75 92,55 Z" fill="#22c55e" stroke="#fef08a" stroke-width="1.5"/>
-              <!-- Chloroplasts inside guard cells -->
-              <circle cx="72" cy="75" r="2.2" fill="#fef08a"/><circle cx="71" cy="95" r="2.2" fill="#fef08a"/>
-              <circle cx="102" cy="75" r="2.2" fill="#fef08a"/><circle cx="103" cy="95" r="2.2" fill="#fef08a"/>
-              <!-- Labels -->
-              <line x1="70" y1="85" x2="35" y2="70" stroke="#fbbf24" />
-              <text x="10" y="66" fill="#fbbf24" font-size="11">X：保衛細胞</text>
-              <line x1="125" y1="50" x2="150" y2="42" stroke="#94a3b8" />
-              <text x="145" y="40" fill="#cbd5e1" font-size="11">Y：表皮細胞</text>
-              <line x1="87" y1="85" x2="145" y2="105" stroke="#38bdf8" />
-              <text x="148" y="108" fill="#38bdf8" font-size="11">Z：氣孔</text>
-            </svg>
-          </div>
-          <p><strong>重點提示：</strong>表皮細胞扁平透明、<strong>無葉綠體</strong>；<strong>保衛細胞</strong>呈半月形（兩兩成對），含有葉綠體，能行光合作用並調節氣孔開閉。</p>
-        </div>
-
-        <!-- Ref 2: Photosynthesis Process Diagram -->
-        <div class="ref-block">
-          <span class="ref-badge">圖表二｜葉綠體中光合作用光反應與碳反應比較</span>
-          <h3>光合作用兩階段反應模式</h3>
-          <svg width="100%" height="145" viewBox="0 0 420 145" style="background:#0f172a; border-radius:6px; border:1px solid #334155; margin: 6px 0;">
-            <!-- Outer Chloroplast -->
-            <rect x="85" y="12" width="250" height="120" rx="28" fill="#14532d" stroke="#22c55e" stroke-width="2"/>
-            <text x="185" y="29" fill="#86efac" font-size="11" font-weight="bold">葉綠體內部</text>
-            <!-- Light Reaction Box -->
-            <rect x="105" y="45" width="75" height="52" rx="8" fill="#ca8a04" stroke="#fef08a"/>
-            <text x="122" y="68" fill="#fff" font-size="12" font-weight="bold">光反應</text>
-            <text x="115" y="84" fill="#fef9c3" font-size="10">葉綠素吸光</text>
-            <!-- Carbon Reaction Box -->
-            <rect x="240" y="45" width="75" height="52" rx="8" fill="#0369a1" stroke="#7dd3fc"/>
-            <text x="257" y="68" fill="#fff" font-size="12" font-weight="bold">碳反應</text>
-            <text x="252" y="84" fill="#e0f2fe" font-size="10">酵素參與</text>
-            <!-- Inputs & Outputs -->
-            <text x="12" y="42" fill="#fbbf24" font-size="11">☀ 太陽光能 ➔</text>
-            <text x="18" y="75" fill="#38bdf8" font-size="11">💧 水(原料) ➔</text>
-            <text x="14" y="115" fill="#4ade80" font-size="11">⬅ 氧氣(釋出)</text>
-            <line x1="180" y1="71" x2="238" y2="71" stroke="#fef08a" stroke-width="2" />
-            <text x="192" y="64" fill="#fef08a" font-size="10">能量</text>
-            <text x="342" y="55" fill="#cbd5e1" font-size="11">⬅ 二氧化碳</text>
-            <text x="342" y="92" fill="#f472b6" font-size="11">➔ 葡萄糖</text>
-            <text x="342" y="114" fill="#38bdf8" font-size="11">➔ 水(產物)</text>
-          </svg>
-          <table class="ref-table">
+        <!-- Reference 1: Leaf Structure & Functions -->
+        <div class="passage-card">
+          <span class="passage-badge">圖表對照（一）｜葉片構造與功能總整理</span>
+          <h3>植物葉片橫切面構造與細胞特性</h3>
+          <table class="data-table">
             <thead>
               <tr>
-                <th>比較項目</th>
-                <th>光反應</th>
-                <th>碳反應（舊稱暗反應）</th>
+                <th>構造名稱</th>
+                <th>細胞形態與特徵</th>
+                <th>葉綠體</th>
+                <th>主要生理功能</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>進行場所</strong></td>
-                <td>葉綠體內</td>
-                <td>葉綠體內</td>
+                <td><strong>角質層</strong></td>
+                <td>覆蓋在上下表皮細胞外的蠟質層（非細胞）</td>
+                <td>無</td>
+                <td>防止水分散失</td>
               </tr>
               <tr>
-                <td><strong>能量來源</strong></td>
-                <td>太陽光能（葉綠素吸收）</td>
-                <td>光反應產生的能量</td>
+                <td><strong>上、下表皮細胞</strong></td>
+                <td>扁平、透明且排列整齊</td>
+                <td><strong>無</strong></td>
+                <td>保護內部組織（洋蔥表皮細胞亦無葉綠體）</td>
               </tr>
               <tr>
-                <td><strong>原料與產物</strong></td>
-                <td>分解「水」產生「氧氣」</td>
-                <td>將「二氧化碳」轉換為「葡萄糖＋水」</td>
+                <td><strong>保衛細胞</strong></td>
+                <td>兩兩成對、半月形（腎形），多分布於下表皮</td>
+                <td><strong>有</strong></td>
+                <td>(1) 控制氣孔開閉 (2) 進行光合作用</td>
               </tr>
               <tr>
-                <td><strong>光照需求</strong></td>
-                <td>必須在光照下進行</td>
-                <td>有無日光皆可進行（需酵素參與）</td>
+                <td><strong>氣孔</strong></td>
+                <td>兩個保衛細胞之間的空隙（非細胞）</td>
+                <td>無</td>
+                <td>氣體（$\text{CO}_2$、$\text{O}_2$、水蒸氣）進出門戶</td>
+              </tr>
+              <tr>
+                <td><strong>葉肉組織</strong></td>
+                <td>分布於上、下表皮之間（含柵狀與海綿組織）</td>
+                <td><strong>有（最多）</strong></td>
+                <td>行光合作用的主要場所</td>
+              </tr>
+              <tr>
+                <td><strong>葉脈</strong></td>
+                <td>葉片中的輸導組織（含木質部與韌皮部）</td>
+                <td>無</td>
+                <td>運輸水分（由根向上）與養分（由葉向各處）</td>
               </tr>
             </tbody>
           </table>
         </div>
 
-        <!-- Ref 3: Experiment 2-3 Starch Detection -->
-        <div class="ref-block">
-          <span class="ref-badge">圖表三｜實驗 2-3 光合作用變因與澱粉檢驗步驟</span>
-          <h3>標準實驗操作流程與變因對照</h3>
-          <table class="ref-table">
+        <!-- Reference 2: Photosynthesis Process SVG -->
+        <div class="passage-card">
+          <span class="passage-badge">圖表對照（二）｜葉綠體中光合作用過程示意圖</span>
+          <h3>光反應與碳反應（暗反應）比較</h3>
+          <div class="svg-box">
+            <svg viewBox="0 0 560 190" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
+              <!-- Chloroplast Outer -->
+              <rect x="130" y="18" width="300" height="154" rx="45" fill="#064e3b" stroke="#10b981" stroke-width="3"/>
+              <!-- Sun -->
+              <circle cx="52" cy="40" r="22" fill="#f59e0b"/>
+              <text x="52" y="44" fill="#0f172a" font-size="11" font-weight="bold" text-anchor="middle">光能</text>
+              <line x1="78" y1="45" x2="155" y2="68" stroke="#fbbf24" stroke-width="2.5" stroke-dasharray="4"/>
+              <!-- Water Input -->
+              <rect x="18" y="82" width="76" height="28" rx="6" fill="#0284c7"/>
+              <text x="56" y="100" fill="#fff" font-size="12" font-weight="bold" text-anchor="middle">水 (H₂O)</text>
+              <line x1="94" y1="96" x2="155" y2="96" stroke="#38bdf8" stroke-width="2.5"/>
+              <!-- Light Reaction Box -->
+              <rect x="160" y="55" width="90" height="75" rx="10" fill="#047857" stroke="#6ee7b7" stroke-width="2"/>
+              <text x="205" y="88" fill="#fff" font-size="13" font-weight="bold" text-anchor="middle">光反應</text>
+              <text x="205" y="108" fill="#a7f3d0" font-size="10" text-anchor="middle">葉綠素吸光分解水</text>
+              <!-- Energy Arrow -->
+              <line x1="250" y1="92" x2="310" y2="92" stroke="#fde047" stroke-width="3"/>
+              <text x="280" y="83" fill="#fde047" font-size="11" font-weight="bold" text-anchor="middle">能量</text>
+              <!-- Carbon Reaction Box -->
+              <rect x="315" y="55" width="95" height="75" rx="10" fill="#065f46" stroke="#34d399" stroke-width="2"/>
+              <text x="362" y="88" fill="#fff" font-size="13" font-weight="bold" text-anchor="middle">碳反應</text>
+              <text x="362" y="108" fill="#a7f3d0" font-size="10" text-anchor="middle">酵素參與合成醣類</text>
+              <!-- CO2 Input -->
+              <rect x="462" y="45" width="85" height="28" rx="6" fill="#475569"/>
+              <text x="504" y="63" fill="#fff" font-size="11" font-weight="bold" text-anchor="middle">二氧化碳</text>
+              <line x1="462" y1="62" x2="412" y2="78" stroke="#94a3b8" stroke-width="2.5"/>
+              <!-- O2 Output -->
+              <rect x="165" y="148" width="80" height="26" rx="6" fill="#0ea5e9"/>
+              <text x="205" y="165" fill="#fff" font-size="11" font-weight="bold" text-anchor="middle">釋出：氧氣</text>
+              <line x1="205" y1="130" x2="205" y2="148" stroke="#38bdf8" stroke-width="2"/>
+              <!-- Glucose & Water Output -->
+              <rect x="455" y="112" width="95" height="44" rx="6" fill="#d97706"/>
+              <text x="502" y="131" fill="#fff" font-size="11" font-weight="bold" text-anchor="middle">葡萄糖 + 水</text>
+              <text x="502" y="147" fill="#fef3c7" font-size="10" text-anchor="middle">(可轉變為澱粉)</text>
+              <line x1="410" y1="112" x2="455" y2="128" stroke="#fbbf24" stroke-width="2.5"/>
+            </svg>
+          </div>
+          <p><strong>總反應式：</strong>$\text{水} + \text{二氧化碳} \xrightarrow[\text{葉綠體}]{\text{光}} \text{葡萄糖} + \text{氧氣} + \text{水}$</p>
+        </div>
+
+        <!-- Reference 3: Experiment 2-3 -->
+        <div class="passage-card">
+          <span class="passage-badge">實驗對照（三）｜實驗 2-3 光合作用變因之探討</span>
+          <h3>標準操作流程與原理</h3>
+          <table class="data-table">
             <thead>
               <tr>
                 <th>步驟順序</th>
-                <th>實驗操作</th>
-                <th>操作目的與原理說明</th>
+                <th>操作內容</th>
+                <th>操作目的與原理</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>前置處理</strong></td>
-                <td>鋁箔紙包覆葉片 3～5 天</td>
-                <td>遮住日光（<strong>操作變因：有無光照</strong>），並消耗葉片原有儲存的澱粉（澱粉歸零）。</td>
+                <td>1. 實驗前處理</td>
+                <td>提早 3～5 天用鋁箔紙包住部分葉片（或暗室處理）</td>
+                <td>阻絕光線，消耗掉葉片原本儲存的澱粉（<strong>澱粉歸零</strong>）</td>
               </tr>
               <tr>
-                <td><strong>步驟 1</strong></td>
-                <td>摘下葉片撕去鋁箔，放入熱水煮數分鐘</td>
-                <td><strong>軟化葉片</strong>（破壞細胞膜與角質層），利於後續酒精滲入。</td>
+                <td>2. 熱水煮沸</td>
+                <td>摘下葉片並除去鋁箔，放入熱水中煮 2～3 分鐘</td>
+                <td>破壞細胞膜與角質層，<strong>軟化葉片</strong>並停止細胞代謝</td>
               </tr>
               <tr>
-                <td><strong>步驟 2</strong></td>
-                <td>放入裝有酒精的小燒杯，<strong>隔水加熱</strong></td>
-                <td><strong>溶出葉綠素</strong>（葉片變淡黃色、酒精變綠色）；隔水加熱可避免酒精直接接觸火源而燃燒。</td>
+                <td>3. 酒精隔水加熱</td>
+                <td>將葉片放入裝有酒精的小燒杯，再置於大燒杯熱水中隔水加熱</td>
+                <td><strong>酒精溶出葉綠素</strong>（避免干擾變色觀察）；隔水加熱防酒精燃燒</td>
               </tr>
               <tr>
-                <td><strong>步驟 3</strong></td>
-                <td>夾出葉片放入熱水中漂洗</td>
-                <td><strong>洗去葉片表面殘餘酒精</strong>並再次軟化葉片。</td>
+                <td>4. 熱水漂洗</td>
+                <td>夾出葉片放入大燒杯熱水中漂洗</td>
+                <td>洗去殘留的葉綠素與酒精，並再次軟化葉片</td>
               </tr>
               <tr>
-                <td><strong>步驟 4</strong></td>
-                <td>攤平於培養皿，滴加<strong>碘液</strong></td>
-                <td><strong>檢測澱粉</strong>：有澱粉處呈<strong>藍黑色</strong>（照光區）；無澱粉處呈<strong>黃褐色</strong>（遮光區）。</td>
+                <td>5. 滴加碘液</td>
+                <td>平鋪於培養皿，滴加<strong>碘液</strong>檢測</td>
+                <td>檢驗<strong>澱粉</strong>存在（有澱粉呈<strong>藍黑色</strong>；無澱粉呈<strong>黃褐色</strong>）</td>
               </tr>
             </tbody>
           </table>
         </div>
-
-      </div>
+      </section>
     </aside>
 
-    <!-- Right Pane: 50 Questions Interactive Area -->
-    <main class="right-pane" id="right-pane">
+    <!-- Right Column: Question List -->
+    <section class="right-pane" id="questions-container">
       <div class="section-banner">
-        <h2>國中七年級自然科學（生物）｜2-3 植物如何製造養分 綜合評量</h2>
-        <p>共 50 題四選一單選題（每題 2 分，滿分 100 分）。包含課本核心概念（42題）與進階延伸陷阱（8題）。</p>
+        <h2>一、核心概念與實驗探究評量（第 1～25 題）</h2>
+        <span>請選出最符合課本定義與生物學原理的正確答案（交卷後立即顯示完整公式推導與誘答剖析）</span>
       </div>
-      <div id="questions-container"></div>
-    </main>
+      <div id="question-list"></div>
+    </section>
+  </main>
+
+  <!-- Hidden Modal 1: Parent Exam History (Triggered by 5x Title Click or Ctrl+Shift+P) -->
+  <div class="modal-overlay" id="parent-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>🔒 家長監控中心：歷次測驗歷史紀錄表</h3>
+        <button class="modal-close" onclick="closeModal('parent-modal')">關閉 ✕</button>
+      </div>
+      <p style="font-size: 0.85rem; color: #94a3b8; margin-bottom: 12px;">
+        系統自動記錄每次交卷之時間、作答耗時、總得分、各認知維度表現及錯題題號，供檢視學習專注度與真實吸收狀況。
+      </p>
+      <div style="overflow-x: auto;">
+        <table class="data-table" id="history-table">
+          <thead>
+            <tr>
+              <th>次別</th>
+              <th>交卷時間</th>
+              <th>作答耗時</th>
+              <th>總得分</th>
+              <th>各維度統計</th>
+              <th>錯題清單</th>
+            </tr>
+          </thead>
+          <tbody id="history-tbody"></tbody>
+        </table>
+      </div>
+      <div style="margin-top: 14px; text-align: right;">
+        <button class="btn btn-secondary" onclick="clearHistory()">清除歷史紀錄</button>
+      </div>
+    </div>
   </div>
 
-  <!-- Toast Notification -->
-  <div id="toast" class="toast">已複製 Markdown 錯題筆記至剪貼簿！</div>
+  <!-- Hidden Modal 2: Question Bank Verification Matrix (Triggered by 5x ❖ Click) -->
+  <div class="modal-overlay" id="verify-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>❖ 命題品質與答案分布驗證總表</h3>
+        <button class="modal-close" onclick="closeModal('verify-modal')">關閉 ✕</button>
+      </div>
+      <div class="dist-bar" id="answer-dist-summary"></div>
+      <div style="overflow-x: auto;">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>題號</th>
+              <th>標準答案</th>
+              <th>認知維度</th>
+              <th>題型屬性</th>
+              <th>核心考點摘要</th>
+            </tr>
+          </thead>
+          <tbody id="verify-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Message -->
+  <div id="toast"></div>
 
   <script>
     // =========================================================================
-    // 題庫資料結構 (50題：課本核心42題 + 補充紅字進階8題)
-    // 四大診斷維度：
-    // 1. 「核心概念與定義」 (Core Definitions)
-    // 2. 「葉片構造與功能」 (Leaf Structure & Function)
-    // 3. 「實驗步驟與變因」 (Experiment Procedures & Variables)
-    // 4. 「跨章節與圖表推論」 (Integrated Reasoning & Data Analysis)
+    // 題庫資料區 (JSON Array) - 目前收錄第 1～25 題（涵蓋課本核心與進階紅字考點）
+    // 維度分類：'基礎定義' | '實驗變因' | '圖表判讀' | '跨章整合'
     // =========================================================================
-    const rawQuestionsData = [
-      // --- 基礎記憶與理解題 (1~30) ---
+    const questionBank = [
       {
         id: 1,
-        category: "核心概念與定義",
-        level: "課本核心",
-        stem: "綠色植物進行光合作用的最主要生物學目的為何？",
+        dimension: "基礎定義",
+        isAdvanced: false,
+        topic: "光合作用的主要目的",
+        stem: "綠色植物進行光合作用時，會吸收光能並將無機物轉變為有機養分。下列何者為植物行光合作用最主要的目的？",
         options: [
-          "製造葡萄糖，作為植物本身生長與代謝所需的養分",
-          "產生大量氧氣，專門提供動物進行呼吸作用",
-          "吸收空氣中的二氧化碳，以維持大氣氣體平衡",
-          "分解土壤中的水分，以降低植物體內的溫度"
+          "製造葡萄糖，並轉換為澱粉等養分供自身生存利用",
+          "產生大量氧氣釋放至大氣中，專供動物進行呼吸作用",
+          "吸收空氣中的二氧化碳，以維持全球溫室氣體的平衡",
+          "分解葉綠體內儲存的水分，藉此加速植物體內的蒸散作用"
         ],
         answerIndex: 0,
-        explanation: "植物行光合作用的核心目的是將太陽能轉換為化學能，合成「葡萄糖」供植物自身利用（亦可轉變為澱粉儲存）；釋放氧氣與減緩溫室效應屬於生態附帶功能。",
+        formula: "$$\\text{水 (H}_2\\text{O)} + \\text{二氧化碳 (CO}_2\\text{)} \\xrightarrow[\\text{葉綠體}]{\\text{光能}} \\text{葡萄糖 (C}_6\\text{H}_{12}\\text{O}_6\\text{)} + \\text{氧氣 (O}_2\\text{)} + \\text{水 (H}_2\\text{O)}$$",
+        explanation: "根據課本「2-3 重點概念圖」與「實力評量」，植物行光合作用的核心生理目的是將太陽能轉換為化學能，合成「葡萄糖」供細胞代謝與生存利用（多餘葡萄糖可轉變為澱粉儲存）。",
         distractors: [
-          "(B) 產生氧氣是光合作用的副產物與生態貢獻，並非植物耗費能量行光合作用的主要目的。",
-          "(C) 消耗二氧化碳有助於減緩溫室效應，但這是對環境的影響，非植物生理上的主要目的。",
-          "(D) 降低植物體溫主要依賴氣孔的「蒸散作用」，而非光合作用。"
+          "(B) 氧氣是光合作用光反應的副產物，雖可供生物呼吸，但並非植物演化出光合作用的最主要目的。",
+          "(C) 消耗二氧化碳減緩溫室效應屬於光合作用對生態環境的附帶功能，而非植物個體的主要目的。",
+          "(D) 光反應確實會分解水分子，但光合作用的目標是合成碳水化合物（養分），並非為了促進蒸散作用。"
         ]
       },
       {
         id: 2,
-        category: "葉片構造與功能",
-        level: "課本核心",
-        stem: "植物葉片是進行光合作用的主要器官，關於葉片各部位構造與功能的配對，下列敘述何者<strong>錯誤</strong>？",
+        dimension: "基礎定義",
+        isAdvanced: false,
+        topic: "葉片各部構造與功能",
+        stem: "植物葉片是進行光合作用的主要器官，其內部不同構造各有專屬的生理功能。下列關於葉片構造與功能的配對，何者【錯誤】？",
         options: [
-          "葉肉：含有大量葉綠體，為行光合作用的主要場所",
-          "葉脈：屬於輸導組織，負責運輸水分與製造的養分",
-          "表皮細胞：能改變形狀，主動控制氣體進出葉片",
-          "角質層：覆蓋於表皮細胞外側，可防止水分散失"
+          "葉肉組織：細胞內含大量葉綠體，是進行光合作用的主要場所",
+          "葉脈：屬於植物的輸導組織，負責運輸水分與合成的養分",
+          "表皮細胞：排列緊密且呈半月形，能控制氣孔開閉以調節氣體進出",
+          "角質層：覆蓋於上下表皮細胞外側，可有效防止葉片內部水分散失"
         ],
         answerIndex: 2,
-        explanation: "控制氣孔大小與氣體進出葉片的構造是成對的「保衛細胞」，而非「表皮細胞」；表皮細胞扁平透明且排列緊密，主要功能為保護內部組織。",
+        formula: "$$\\text{氣孔開閉機制：保衛細胞吸水膨脹} \\rightarrow \\text{氣孔張開；失水萎縮} \\rightarrow \\text{氣孔關閉}$$",
+        explanation: "上下表皮細胞呈扁平、透明狀且排列整齊，不含葉綠體，主要功能為「保護」內部組織；真正呈半月形、能控制氣孔大小的構造是「保衛細胞」。",
         distractors: [
-          "(A) 配對正確，葉肉細胞富含葉綠體，是光合作用最旺盛的區域。",
-          "(B) 配對正確，葉脈內含木質部與韌皮部，分別運輸水分與養分。",
-          "(D) 配對正確，角質層為蠟質構造，能減少葉片表面水分過度蒸散。"
+          "(A) 葉肉細胞含有豐富的葉綠體，確實是葉片進行光合作用最主要的區域。",
+          "(B) 葉脈由木質部與韌皮部構成，負責將根吸收的水分向上輸送，並將葉片製造的養分運往他處。",
+          "(D) 角質層為表皮細胞分泌的蠟質層，具備防水與減少水分散失的保護功能。"
         ]
       },
       {
         id: 3,
-        category: "核心概念與定義",
-        level: "課本核心",
-        stem: "關於植物體內養分的製造、轉換與利用，下列敘述何者正確？",
+        dimension: "基礎定義",
+        isAdvanced: false,
+        topic: "植物養分的轉換與運輸",
+        stem: "關於植物體內養分的製造、轉換與運輸過程，下列敘述何者正確？",
         options: [
-          "葉肉細胞產生的葡萄糖需經酵素參與，才能轉變為澱粉儲存",
-          "上表皮細胞受光照程度高於下表皮，故上表皮光合作用最旺盛",
-          "植物製造養分屬於化學反應，過程中完全不需要吸收太陽能",
-          "植物體製造的葡萄糖僅能直接消耗，無法轉變為其他形式儲存"
+          "葉肉細胞產生的葡萄糖需經過酵素參與，才能轉變為澱粉儲存",
+          "上表皮細胞受光照程度高於下表皮細胞，故上表皮的光合作用較旺盛",
+          "植物在黑暗環境中進行碳反應合成葡萄糖時，完全不需要消耗任何能量",
+          "葉片製造的養分主要透過葉脈中的木質部，向下運輸至根部儲存"
         ],
         answerIndex: 0,
-        explanation: "光合作用的直接產物為葡萄糖，植物會透過酵素作用將多餘的葡萄糖轉變為澱粉，儲存於葉片、根或莖（如馬鈴薯）中。",
+        formula: "$$\\text{葡萄糖 (小分子、易溶於水)} \\xrightarrow{\\text{酵素催化}} \\text{澱粉 (大分子、不溶於水，便於儲存)}$$",
+        explanation: "植物光合作用直接產生的初級養分為葡萄糖，在細胞內需透過特定酵素的催化作用，才能聚合成大分子的澱粉儲存於葉肉或根、莖等器官中。",
         distractors: [
-          "(B) 上、下表皮細胞均「不含葉綠體」，因此皆無法進行光合作用。",
-          "(C) 光合作用必須由葉綠素吸收「太陽能」作為能量來源，才能啟動反應。",
-          "(D) 葡萄糖除了直接供呼吸作用分解產生能量外，亦可轉變為澱粉、蛋白質或脂質儲存。"
+          "(B) 迷思破解：上、下表皮細胞皆「不含葉綠體」，因此無論光照多強，表皮細胞均無法進行光合作用。",
+          "(C) 碳反應雖不直接需要日光，但必須消耗「光反應所產生的能量」，才能將二氧化碳轉換為葡萄糖。",
+          "(D) 葉脈中負責運輸養分的是「韌皮部」（雙向運輸），木質部僅負責由下往上運輸水分與礦物質。"
         ]
       },
       {
         id: 4,
-        category: "實驗步驟與變因",
-        level: "課本核心",
-        stem: "小華在曠野採集一片彩葉草葉片（葉片同時具有綠色與非綠色區域），經標準澱粉檢驗步驟後，發現僅有原本綠色的區域呈現藍黑色。此結果最能證明光合作用需要下列何種因素？",
+        dimension: "實驗變因",
+        isAdvanced: false,
+        topic: "彩葉草實驗與葉綠素變因",
+        stem: "小華採摘一片生長在陽光下的彩葉草葉片，將葉片的綠色部分與非綠色（紫紅色）部分別作記號後，進行澱粉檢測。結果發現僅綠色部分呈現藍黑色，此實驗最能證明光合作用需要下列何種因素？",
         options: [
-          "陽光照射",
-          "葉綠素",
-          "二氧化碳",
-          "水分"
+          "充足的日光照射",
+          "葉綠素（葉綠體）的存在",
+          "空氣中的二氧化碳",
+          "根部吸收的水分"
         ],
         answerIndex: 1,
-        explanation: "彩葉草同一片葉子上，綠色部位含有葉綠體（葉綠素），非綠色部位則缺乏葉綠素。在相同光照、空氣與水分條件下，僅綠色部位有澱粉，證明「葉綠素（葉綠體）」是光合作用的必要條件。",
+        formula: "$$\\text{操縱變因} = \\text{有無葉綠素（綠色構造 vs. 非綠色構造）} \\implies \\text{應變變因} = \\text{是否產生澱粉}$$",
+        explanation: "同一片彩葉草葉片皆處於相同的光照、水分與二氧化碳環境下（控制變因），唯一差異在於細胞是否含有「葉綠體（葉綠素）」。結果顯示僅綠色部位有澱粉，證實葉綠素為光合作用的必要條件。",
         distractors: [
-          "(A) 同一片葉子的綠色與非綠色部位均受到相同陽光照射，故光照為控制變因。",
-          "(C) 葉片各區域皆暴露於相同的空氣環境中，二氧化碳並非此實驗的操作變因。",
-          "(D) 葉脈將水分輸送至整片葉子，水分條件相同，非本實驗探討變因。"
+          "(A) 整片葉子皆照到陽光，光照屬於本實驗的「控制變因」，非操縱變因。",
+          "(C) 整片葉子皆暴露在相同的空氣環境中，二氧化碳濃度相同，無法藉此驗證其必要性。",
+          "(D) 水分由同一葉柄的葉脈供應，非本實驗所設計的對照變因。"
         ]
       },
       {
         id: 5,
-        category: "核心概念與定義",
-        level: "課本核心",
-        stem: "下列我們日常食用的植物部位中，哪些個體所儲存的養分主要來自於植物的光合作用？<br>（甲）馬鈴薯塊莖；（乙）花生種子；（丙）木瓜果實；（丁）菠菜葉片",
+        dimension: "跨章整合",
+        isAdvanced: false,
+        topic: "生物養分與光合作用的關聯",
+        stem: "自然界中的生物皆需攝取或製造養分以維持生命。下列四種生物體內所儲存的養分，哪些源自於綠色植物的光合作用？\n（甲）馬鈴薯的塊莖；（乙）花生的種子；（丙）木瓜的果實；（丁）菠菜的葉片",
         options: [
-          "甲乙丙丁",
+          "甲乙丙丁皆是",
           "僅甲乙",
           "僅丙丁",
           "僅乙丙丁"
         ],
         answerIndex: 0,
-        explanation: "植物透過光合作用製造葡萄糖後，會經由葉脈（韌皮部）運送至根、莖、葉、果實與種子等器官，轉變為澱粉、脂質或蛋白質儲存，故甲、乙、丙、丁皆源自光合作用。",
+        formula: "$$\\text{太陽能} \\xrightarrow{\\text{光合作用}} \\text{葡萄糖} \\xrightarrow{\\text{酵素轉換}} \\begin{cases} \\text{澱粉（馬鈴薯）} \\\\ \\text{脂質與蛋白質（花生）} \\\\ \\text{醣類與維生素（木瓜、菠菜）} \\end{cases}$$",
+        explanation: "馬鈴薯、花生、木瓜與菠菜皆為綠色植物。葉片行光合作用製造葡萄糖後，會經由韌皮部運往植物體各器官，在酵素作用下轉變為澱粉（馬鈴薯）、脂質（花生）、果糖（木瓜）等各類有機養分。",
         distractors: [
-          "(B) 木瓜果實與菠菜葉片同樣含有光合作用製造並儲存的養分。",
-          "(C) 馬鈴薯（澱粉）與花生（脂質、蛋白質）的養分皆由光合作用產物轉換而來。",
-          "(D) 馬鈴薯塊莖儲存的大量澱粉正是光合作用葡萄糖轉變的典型例子。"
+          "(B) 忽略了果實（木瓜）與葉片（菠菜）中的有機養分同樣源自光合作用產生的葡萄糖。",
+          "(C) 學生常誤以為地下器官（馬鈴薯塊莖、花生果實）不照光，其養分便非來自光合作用，實則皆由葉片運輸而來。",
+          "(D) 馬鈴薯塊莖富含的澱粉正是由葉片光合作用產生的葡萄糖轉換並儲存的。"
         ]
       },
       {
         id: 6,
-        category: "核心概念與定義",
-        level: "進階補充",
-        stem: "關於綠色植物行光合作用對自然界與生態系所產生的影響，下列敘述何者<strong>錯誤</strong>？",
+        dimension: "跨章整合",
+        isAdvanced: true,
+        topic: "光合作用對生態環境的影響",
+        stem: "【進階題】綠色植物遍布陸地與海洋表層，其光合作用對地球生態系產生深遠影響。下列何者【不是】綠色植物行光合作用所帶來的影響？",
         options: [
-          "釋放氧氣至大氣中，提供地球上生物進行呼吸作用",
-          "造成大氣中二氧化碳濃度持續升高，加劇全球暖化",
-          "消耗空氣中的二氧化碳，有助於減緩地球的溫室效應",
-          "將太陽能轉化為化學能並儲存於養分中，間接供給動物攝食"
+          "持續釋放氧氣，提供地球上大多數生物進行呼吸作用",
+          "造成南極大氣中的二氧化碳濃度逐年大幅增加",
+          "消耗大氣中的二氧化碳，有助於減緩地球的溫室效應",
+          "製造的葡萄糖除供植物本身所需，亦成為動物攝食的能量來源"
         ],
         answerIndex: 1,
-        explanation: "光合作用會「吸收並消耗」大氣中的二氧化碳，因此能降低二氧化碳濃度、減緩溫室效應，而非造成濃度升高。",
+        formula: "$$\\text{大氣 } \\text{CO}_2 \\text{ 淨變化} = \\text{排放量（呼吸作用、燃燒）} - \\text{吸收量（光合作用）}$$",
+        explanation: "植物行光合作用時會「吸收並消耗」空氣中的二氧化碳，使大氣中二氧化碳減少；南極大氣中二氧化碳濃度逐年增加，主要是人類大量燃燒化石燃料與砍伐森林所致，並非光合作用造成。",
         distractors: [
-          "(A) 正確，光合作用光反應分解水並釋放出氧氣。",
-          "(C) 正確，植物是地球碳循環中吸收二氧化碳的重要角色。",
-          "(D) 正確，動物透過攝食植物或其捕食者，間接獲得光合作用固定的能量與養分。"
+          "(A) 光合作用光反應分解水並釋出氧氣，維持大氣氧氣含量供生物呼吸。",
+          "(C) 光合作用碳反應固定二氧化碳，是自然界調節碳循環與減緩溫室效應的關鍵機制。",
+          "(D) 植物作為生態系生產者，所製造的有機養分透過食物鏈供給草食性與肉食性動物生存。"
         ]
       },
       {
         id: 7,
-        category: "葉片構造與功能",
-        level: "課本核心",
-        stem: "參考左側「葉片下表皮俯視圖」，小美在顯微鏡下觀察植物葉片下表皮並標示出 X、Y、Z 三個構造。下列關於此圖的敘述何者<strong>錯誤</strong>？",
+        dimension: "圖表判讀",
+        isAdvanced: true,
+        topic: "下表皮顯微構造辨識",
+        stem: "【進階題】小美利用複式顯微鏡觀察植物葉片下表皮的撕片標本，並將觀察結果繪製如下圖。關於圖中標示構造的敘述，下列何者【錯誤】？",
+        visual: `<svg viewBox="0 0 320 140" width="280" height="122" xmlns="http://www.w3.org/2000/svg">
+          <path d="M40,20 Q90,10 140,25 Q190,10 240,25 L250,70 Q240,115 190,120 Q140,130 90,115 L45,105 Z" fill="#1e293b" stroke="#94a3b8" stroke-width="2"/>
+          <path d="M90,115 Q110,70 140,25 M190,120 Q180,70 190,25 M45,65 L105,68 M185,72 L250,70" stroke="#64748b" stroke-width="1.5" fill="none"/>
+          <!-- Guard Cells (X) -->
+          <path d="M145,42 C122,42 122,98 145,98 C138,80 138,60 145,42 Z" fill="#10b981" stroke="#34d399" stroke-width="2"/>
+          <path d="M149,42 C172,42 172,98 149,98 C156,80 156,60 149,42 Z" fill="#10b981" stroke="#34d399" stroke-width="2"/>
+          <!-- Chloroplasts (甲) -->
+          <circle cx="133" cy="58" r="2.5" fill="#064e3b"/><circle cx="131" cy="72" r="2.5" fill="#064e3b"/><circle cx="134" cy="85" r="2.5" fill="#064e3b"/>
+          <circle cx="161" cy="58" r="2.5" fill="#064e3b"/><circle cx="163" cy="72" r="2.5" fill="#064e3b"/><circle cx="160" cy="85" r="2.5" fill="#064e3b"/>
+          <!-- Labels -->
+          <line x1="128" y1="55" x2="70" y2="45" stroke="#f8fafc" stroke-width="1.5"/>
+          <text x="55" y="49" fill="#f8fafc" font-size="13" font-weight="bold">X</text>
+          <line x1="95" y1="92" x2="65" y2="95" stroke="#f8fafc" stroke-width="1.5"/>
+          <text x="50" y="99" fill="#f8fafc" font-size="13" font-weight="bold">Y</text>
+          <line x1="147" y1="68" x2="225" y2="48" stroke="#38bdf8" stroke-width="1.5"/>
+          <text x="230" y="52" fill="#38bdf8" font-size="13" font-weight="bold">乙（空隙）</text>
+          <line x1="163" y1="72" x2="225" y2="85" stroke="#34d399" stroke-width="1.5"/>
+          <text x="230" y="89" fill="#34d399" font-size="13" font-weight="bold">甲（綠點）</text>
+        </svg>`,
         options: [
-          "X 構造為保衛細胞，通常呈半月形且兩兩成對",
-          "Y 構造為表皮細胞，形狀不規則且排列緊密",
-          "Z 構造為氣孔，是二氧化碳與氧氣進出葉片的門戶",
-          "若 X 構造內部含有葉綠體，則在 Y 構造中亦可觀察到葉綠體"
+          "X 細胞呈半月形且成對排列，稱為保衛細胞",
+          "Y 細胞排列緊密且呈不規則扁平狀，稱為表皮細胞",
+          "乙構造位於兩保衛細胞之間，是氣體進出的門戶「氣孔」",
+          "若甲構造為進行光合作用的場所，則在 Y 細胞中也可大量發現"
         ],
         answerIndex: 3,
-        explanation: "下表皮中只有「X（保衛細胞）」含有葉綠體，能夠行光合作用；「Y（表皮細胞）」完全不含葉綠體，主要功能為保護。",
+        formula: "$$\\text{葉綠體分布} = \\begin{cases} \\text{有：葉肉細胞、保衛細胞 (X)} \\\\ \\text{無：上表皮細胞、下表皮細胞 (Y)} \\end{cases}$$",
+        explanation: "圖中 X 為保衛細胞，Y 為表皮細胞，乙為氣孔，甲為保衛細胞內的「葉綠體」。表皮細胞（Y）透明無色，細胞質中「不具有」葉綠體，無法進行光合作用。",
         distractors: [
-          "(A) 正確，成對的半月形細胞即為保衛細胞。",
-          "(B) 正確，表皮細胞無葉綠體，排列緊密以保護葉片。",
-          "(C) 正確，兩保衛細胞之間的空隙即為氣孔，負責氣體進出與水分散失。"
+          "(A) X 細胞兩兩成對圍成氣孔，確實為保衛細胞。",
+          "(B) Y 細胞為保護葉片表面的下表皮細胞，敘述正確。",
+          "(C) 乙是兩個保衛細胞之間的開口，即為氣孔，負責氣體交換與蒸散作用。"
         ]
       },
       {
         id: 8,
-        category: "核心概念與定義",
-        level: "課本核心",
-        stem: "若光合作用的化學反應簡式可表示為：「甲 ＋ 乙 → 丙 ＋ 丁 ＋ 水」，已知「甲」與「丙」在常溫下皆為氣體。下列敘述何者正確？",
+        dimension: "圖表判讀",
+        isAdvanced: true,
+        topic: "光合作用反應式與物質特性",
+        stem: "【進階題】若將植物光合作用的簡化反應式表示為：「$\\text{甲} + \\text{乙} \\rightarrow \\text{丙} + \\text{丁} + \\text{水}$」，已知其中「甲」與「丙」在常溫下皆為氣體。下列關於各物質的敘述，何者正確？",
         options: [
-          "甲氣體是生物進行呼吸作用時必須吸入的氣體",
-          "乙物質是植物體內主要的能量來源，每公克可產生 4 大卡能量",
-          "丙氣體可使澄清石灰水變混濁，是植物行光合作用的原料",
-          "丁物質是葡萄糖，其所蘊含的化學能最初來自於太陽能"
+          "甲氣體是動物進行呼吸作用時所必需消耗的氣體",
+          "乙物質是光合作用的原料，每公克氧化可產生 4 大卡熱量",
+          "丙氣體可供植物本身及動物進行呼吸作用以產生能量",
+          "丁物質是細胞內含量最多的化合物，能調節體溫"
         ],
-        answerIndex: 3,
-        explanation: "光合作用反應式為「二氧化碳（甲）＋水（乙）→ 氧氣（丙）＋葡萄糖（丁）＋水」。丁為葡萄糖，是光合作用將太陽能轉換並儲存後的養分。",
+        answerIndex: 2,
+        formula: "$$\\underbrace{\\text{二氧化碳 (甲)}}_{\\text{氣體原料}} + \\underbrace{\\text{水 (乙)}}_{\\text{液體原料}} \\xrightarrow[\\text{葉綠體}]{\\text{光}} \\underbrace{\\text{氧氣 (丙)}}_{\\text{氣體產物}} + \\underbrace{\\text{葡萄糖 (丁)}}_{\\text{醣類產物}} + \\text{水}$$",
+        explanation: "反應物中為氣體的「甲」是二氧化碳，液體「乙」是水；產物中為氣體的「丙」是氧氣，有機養分「丁」是葡萄糖。因此丙（氧氣）可提供生物進行呼吸作用。",
         distractors: [
-          "(A) 甲為二氧化碳，生物呼吸作用必須吸入的是氧氣（丙）。",
-          "(B) 乙為水，水屬於無機物，無法提供熱量（每公克 4 大卡的是醣類與蛋白質）。",
-          "(C) 丙為氧氣，可助燃；使澄清石灰水變混濁的是二氧化碳（甲）。"
+          "(A) 甲為二氧化碳，動物呼吸作用是消耗氧氣、產生二氧化碳。",
+          "(B) 乙為水，水屬於無機物，無法提供任何熱量（每公克產生 4 大卡能量的是丁「葡萄糖」）。",
+          "(D) 丁為葡萄糖（碳水化合物），細胞內含量最多且能調節體溫的是「水」。"
         ]
       },
       {
         id: 9,
-        category: "葉片構造與功能",
-        level: "課本核心",
-        stem: "請對照左側「葉片橫切面示意圖」，在甲、乙、丙、丁、戊、己六個構造中，哪些構造的細胞內含有葉綠體，能夠進行光合作用？",
+        dimension: "圖表判讀",
+        isAdvanced: false,
+        topic: "葉橫切面行光合作用的構造",
+        stem: "右圖為植物葉片橫切面的立體構造示意圖（甲：上表皮；乙：葉肉；丙：葉脈；丁：下表皮；戊：保衛細胞；己：角質層）。請問葉片中哪些構造具有葉綠體，可以進行光合作用？",
+        visual: `<div style="display:flex; justify-content:space-around; flex-wrap:wrap; gap:8px; font-size:0.88rem;">
+          <span><strong>甲</strong>：上表皮細胞</span>
+          <span><strong>乙</strong>：葉肉組織</span>
+          <span><strong>丙</strong>：葉脈（維管束）</span>
+          <span><strong>丁</strong>：下表皮細胞</span>
+          <span><strong>戊</strong>：保衛細胞</span>
+          <span><strong>己</strong>：角質層</span>
+        </div>`,
         options: [
           "甲、乙、戊",
           "乙、丙、丁",
-          "乙、己",
+          "乙、戊",
           "甲、戊"
         ],
         answerIndex: 2,
-        explanation: "葉片構造中只有「乙（葉肉細胞）」與「己（保衛細胞）」含有葉綠體，可以進行光合作用。其餘角質層（甲）、葉脈（丙）、下表皮（丁）、上表皮（戊）皆無法行光合作用。",
+        formula: "$$\\text{具備光合作用能力} \\iff \\text{細胞內含有葉綠體} = \\{\\text{乙（葉肉）},\\ \\text{戊（保衛細胞）}\\}$$",
+        explanation: "在葉片的所有構造中，只有「葉肉細胞（乙）」與「保衛細胞（戊）」含有葉綠體，能夠吸收光能進行光合作用。",
         distractors: [
-          "(A) 甲為無細胞構造的角質層，戊為不含葉綠體的上表皮細胞。",
-          "(B) 丙為負責運輸的葉脈，丁為不含葉綠體的下表皮細胞。",
-          "(D) 甲與戊皆不具備葉綠體，學生常誤以為上表皮照光多就能行光合作用。"
+          "(A) 誤將甲（上表皮細胞）納入，上表皮細胞透明無葉綠體，僅具保護功能。",
+          "(B) 丙（葉脈）負責運輸、丁（下表皮）負責保護，兩者皆無葉綠體。",
+          "(D) 遺漏了最主要的場所「乙（葉肉）」，且誤選了無葉綠體的「甲（上表皮）」。"
         ]
       },
       {
         id: 10,
-        category: "葉片構造與功能",
-        level: "課本核心",
-        stem: "承上題，參考左側「葉片橫切面示意圖」，植物行光合作用所需要的水分，是由根部吸收後經由圖中哪一個構造運送至葉片？",
+        dimension: "基礎定義",
+        isAdvanced: false,
+        topic: "葉片水分的運輸構造",
+        stem: "承上題，綠色植物進行光合作用光反應時所需要的水分，主要由根部自土壤吸收後，經由莖部向上運送到葉片中的哪一種構造？",
         options: [
-          "甲",
-          "乙",
-          "丙",
-          "丁"
+          "甲（上表皮）",
+          "乙（葉肉）",
+          "丙（葉脈）",
+          "丁（下表皮）"
         ],
         answerIndex: 2,
-        explanation: "水分由根部吸收後，經由莖部維管束向上運送至葉片的「丙（葉脈）」，再擴散進入葉肉細胞供光合作用使用。",
+        formula: "$$\\text{土壤水分} \\xrightarrow{\\text{根毛吸收}} \\text{根部木質部} \\xrightarrow{\\text{向上運輸}} \\text{莖部木質部} \\xrightarrow{\\text{進入葉片}} \\text{丙（葉脈）}$$",
+        explanation: "葉脈（丙）是植物維管束延伸至葉片的輸導組織，其中木質部專門負責將根部吸收的水分與礦物質輸送至葉肉細胞供光合作用使用。",
         distractors: [
-          "(A) 甲為角質層，功能為防止水分散失，不具運輸功能。",
-          "(B) 乙為葉肉，是消耗水分進行光合作用的場所，非主要輸導管道。",
-          "(D) 丁為下表皮，主要功能為保護葉片內部構造。"
+          "(A) 甲為上表皮，負責保護內部細胞，不具輸導水分的功能。",
+          "(B) 乙為葉肉，是接收水分並進行光合作用的場所，而非運輸管道。",
+          "(D) 丁為下表皮，負責保護並分布有氣孔，不負責從根部運輸水分。"
         ]
       },
       {
         id: 11,
-        category: "實驗步驟與變因",
-        level: "課本核心",
-        stem: "在「光合作用變因之探討」實驗中，進行葉片澱粉檢測的正確操作順序為何？<br>（甲）將葉片放入熱水中漂洗；（乙）將葉片放入熱水中煮數分鐘；（丙）滴加碘液觀察顏色；（丁）將葉片放入酒精中隔水加熱",
+        dimension: "實驗變因",
+        isAdvanced: false,
+        topic: "會考精選：光合作用速率的測量指標",
+        stem: "（108 教育會考題）小帆想知道某一植株在不同環境條件下，葉片行光合作用時速率的快慢，應依據下列哪一資料進行推測最為合理？",
         options: [
-          "乙 → 丁 → 甲 → 丙",
-          "甲 → 乙 → 丁 → 丙",
-          "乙 → 甲 → 丁 → 丙",
-          "丁 → 乙 → 甲 → 丙"
+          "單位時間內產生氧氣的量",
+          "單位時間內消耗葉綠素的量",
+          "單位時間內消耗葡萄糖的量",
+          "單位時間內產生二氧化碳的量"
         ],
         answerIndex: 0,
-        explanation: "標準步驟口訣為「熱水軟化（乙）→ 酒精隔水脫色（丁）→ 熱水漂洗去酒精（甲）→ 滴加碘液測澱粉（丙）」。",
+        formula: "$$\\text{光合作用速率} \\propto \\frac{\\Delta \\text{產物量（}\\text{O}_2 \\text{ 或葡萄糖）}}{\\Delta t} = \\frac{\\Delta \\text{反應物消耗量（}\\text{CO}_2\\text{）}}{\\Delta t}$$",
+        explanation: "光合作用會「消耗二氧化碳與水」，並「產生氧氣與葡萄糖」。因此，單位時間內產生氧氣的體積或速率越快，代表光合作用速率越快。",
         distractors: [
-          "(B) 尚未進行熱水軟化與酒精脫色前，不可先進行漂洗。",
-          "(C) 熱水煮沸軟化後應直接放入酒精隔水加熱溶出葉綠素，漂洗是在酒精加熱之後。",
-          "(D) 若未先用熱水煮沸軟化葉片（破壞角質層與細胞膜），酒精將難以滲入溶出葉綠素。"
+          "(B) 葉綠素在光合作用中扮演吸收光能的色素角色，反應前後不會被消耗。",
+          "(C) 葡萄糖是光合作用的「產物」而非消耗物（呼吸作用才會消耗葡萄糖）。",
+          "(D) 二氧化碳是光合作用的「原料（消耗物）」，呼吸作用才會產生二氧化碳。"
         ]
       },
       {
         id: 12,
-        category: "實驗步驟與變因",
-        level: "課本核心",
-        stem: "在「光與光合作用」的實驗中，需在實驗進行前 3～5 天先以鋁箔紙包覆部分葉片。下列關於此步驟的主要目的之敘述，何者最正確？",
+        dimension: "實驗變因",
+        isAdvanced: false,
+        topic: "實驗 2-3 澱粉檢驗步驟排序",
+        stem: "【題組】小聆挑選了咸豐草的四片葉片，進行光合作用變因實驗（如下表）。經過陽光普照三天後，小聆將四片葉片摘下進行澱粉檢驗。處理步驟有：（甲）放到熱水中漂洗；（乙）放入熱水中浸泡 3 分鐘；（丙）加入碘液；（丁）加入本氏液；（戊）放入酒精中隔水加熱；（己）撕掉貼紙。測定葉片中是否含有澱粉的正確實驗步驟順序為何？",
+        visual: `<table class="data-table">
+          <thead>
+            <tr><th>實驗處理</th><th>葉片一</th><th>葉片二</th><th>葉片三</th><th>葉片四</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>貼不透光貼紙</td><td>A 貼在葉片上表皮</td><td>B 貼在葉片下表皮</td><td>C 貼在葉片上表皮</td><td>D 貼在葉片上表皮</td></tr>
+            <tr><td>塗膠水（阻絕氣體）</td><td>×（未塗）</td><td>×（未塗）</td><td>在上表皮塗滿</td><td>在下表皮塗滿</td></tr>
+          </tbody>
+        </table>`,
         options: [
-          "隔絕陽光照射，並讓葉片消耗掉實驗前原本儲存的澱粉",
-          "阻斷空氣中的二氧化碳進入葉片，使葉片無法製造養分",
-          "降低葉片表面的溫度，避免葉綠素在強烈陽光下被破壞",
-          "防止葉片水分透過氣孔蒸散，以保持葉片細胞的膨壓"
+          "乙戊丁甲己",
+          "己乙戊甲丙",
+          "乙甲己戊丙",
+          "己甲乙戊丙"
         ],
-        answerIndex: 0,
-        explanation: "鋁箔紙不透光，提早 3～5 天包覆可阻斷光合作用並讓葉片透過呼吸作用消耗掉先前儲存的澱粉（使澱粉歸零），避免干擾實驗結果的準確性。",
+        answerIndex: 1,
+        formula: "$$\\text{標準檢驗流程：撕貼紙(己)} \\rightarrow \\text{熱水軟化(乙)} \\rightarrow \\text{酒精溶葉綠素(戊)} \\rightarrow \\text{熱水漂洗(甲)} \\rightarrow \\text{滴碘液(丙)}$$",
+        explanation: "檢驗葉片澱粉的標準順序：先「撕掉貼紙（己）」，接著「熱水煮沸軟化葉片（乙）」，再「放入酒精隔水加熱溶出葉綠素（戊）」，接著「熱水漂洗殘留酒精（甲）」，最後「滴加碘液檢測澱粉（丙）」。",
         distractors: [
-          "(B) 鋁箔紙僅包覆葉片，並非完全密封氣孔，其設計目的是阻隔光線（操作變因：有無光照）。",
-          "(C) 鋁箔紙包覆與防止葉綠素受熱破壞無關。",
-          "(D) 防止水分散失是角質層的功能，並非鋁箔紙包覆的實驗目的。"
+          "(A) 誤用了檢測葡萄糖的「本氏液（丁）」，且順序完全錯亂。",
+          "(C) 將漂洗（甲）放在酒精加熱（戊）之前，無法洗去酒精與溶出的葉綠素。",
+          "(D) 在還未酒精加熱前就先熱水漂洗（甲），步驟邏輯顛倒。"
         ]
       },
       {
         id: 13,
-        category: "實驗步驟與變因",
-        level: "課本核心",
-        stem: "在澱粉檢驗實驗中，必須將裝有葉片與酒精的小燒杯放入裝水的大燒杯中「隔水加熱」，而不可直接放在酒精燈上加熱。其最主要的原因為何？",
+        dimension: "實驗變因",
+        isAdvanced: true,
+        topic: "光照與氣孔分布的綜合變因分析",
+        stem: "【題組】【進階題】承上題，陸生植物咸豐草的氣孔主要分布於葉片的「下表皮」。若小聆的實驗處理步驟完全正確，最終滴加碘液後，在貼紙遮蓋處會看到哪些字母圖樣（即周圍呈藍黑色、字樣處呈黃褐色）？",
         options: [
-          "酒精沸點低且易燃，隔水加熱可使受熱均勻並避免酒精起火燃燒",
-          "酒精會與玻璃直接產生化學反應，隔水加熱可防止燒杯破裂",
-          "直接加熱會使葉片中的澱粉瞬間分解為葡萄糖，導致碘液無法變色",
-          "酒精在直接加熱時會迅速凝固，無法將葉綠素從葉片中溶出"
+          "只有黃褐色 A 圖樣",
+          "只有藍黑色 B 圖樣",
+          "黃褐色 A 與黃褐色 C 圖樣",
+          "藍黑色 B 與藍黑色 D 圖樣"
         ],
-        answerIndex: 0,
-        explanation: "酒精屬於易燃有機溶劑且沸點約 78°C（低於水的沸點），直接加熱極易沸騰濺出並引發火災，因此必須採用隔水加熱以確保實驗安全並控制溫度。",
+        answerIndex: 2,
+        formula: "$$\\begin{cases} \\text{葉片一（A 貼上表皮、未塗膠）：照光處產澱粉(藍黑)，A 處遮光無澱粉(黃褐)} \\\\ \\text{葉片二（B 貼下表皮、未塗膠）：陽光從上方照射穿透葉肉，全葉皆產澱粉} \\\\ \\text{葉片三（C 貼上表皮、上表皮塗膠）：氣孔在下表皮仍可進 } \\text{CO}_2\\text{，僅 C 處遮光(黃褐)} \\\\ \\text{葉片四（D 貼上表皮、下表皮塗膠）：下表皮氣孔被堵死，無 } \\text{CO}_2\\text{，全葉皆無澱粉(全黃褐)} \\end{cases}$$",
+        explanation: "要使貼紙字樣顯現（字樣黃褐、周圍藍黑），必須滿足：(1) 貼紙貼在迎光面的上表皮；(2) 下表皮氣孔未被膠水堵塞，使周圍葉肉能吸收 $\\text{CO}_2$ 並照光合成澱粉。符合條件者為「葉片一（A）」與「葉片三（C）」。",
         distractors: [
-          "(B) 酒精不會與玻璃發生化學反應。",
-          "(C) 澱粉不會因酒精直接加熱而分解成葡萄糖，此非隔水加熱的主因。",
-          "(D) 酒精受熱只會汽化蒸發，不會凝固。"
+          "(A) 忽略了葉片三僅在「上表皮」塗膠水，而咸豐草氣孔多在「下表皮」，因此二氧化碳仍可順利進入，C 圖樣一樣會顯現。",
+          "(B) B 貼在下表皮，陽光由上往下照射，葉肉細胞仍能照光產生澱粉，故 B 處不會呈現黃褐色。",
+          "(D) 碘液遇澱粉呈藍黑色，未照光的遮光處無澱粉應呈「黃褐色」，且葉片四因下表皮氣孔被封閉，整片葉子都無法行光合作用。"
         ]
       },
       {
         id: 14,
-        category: "實驗步驟與變因",
-        level: "課本核心",
-        stem: "將綠色葉片放入酒精中隔水加熱數分鐘後，觀察葉片與酒精的顏色變化，下列紀錄何者正確？",
+        dimension: "實驗變因",
+        isAdvanced: false,
+        topic: "葉片一的實驗結論推論",
+        stem: "【題組】承上題，單獨分析「葉片一（僅在葉片上表皮貼不透光 A 貼紙，其餘部位正常照光）」的碘液測試結果，可以得到下列何種科學結論？",
         options: [
-          "葉片由綠色變為淡黃色，酒精由無色變為綠色",
-          "葉片由綠色變為藍黑色，酒精由無色變為黃褐色",
-          "葉片保持原本的翠綠色，酒精由無色變為淡黃色",
-          "葉片由綠色變為無色透明，酒精則保持無色不變"
+          "光合作用需要葉綠素才能製造葡萄糖",
+          "光合作用需要水才能製造澱粉",
+          "光合作用需要二氧化碳才能製造澱粉",
+          "光合作用需要光才能製造葡萄糖（並轉為澱粉）"
         ],
-        answerIndex: 0,
-        explanation: "酒精能溶解葉綠體中的葉綠素，因此葉綠素溶出後，葉片會褪色呈淡黃色，而原本無色的酒精則會變成綠色。",
+        answerIndex: 3,
+        formula: "$$\\text{葉片一操縱變因} = \\text{有無照光（未貼紙處照光 vs. A 貼紙處遮光）} \\implies \\text{證實光照為必要條件}$$",
+        explanation: "葉片一的實驗設計中，唯一人為改變的操縱變因是「是否接受光照」（A 貼紙遮光處無澱粉，未遮光處有澱粉），因此可直接推論「光合作用需要光才能製造養分」。",
         distractors: [
-          "(B) 藍黑色與黃褐色是「滴加碘液」後的顏色變化，而非酒精加熱階段。",
-          "(C) 若葉片仍保持翠綠色，代表葉綠素未成功溶出，會干擾後續碘液變色的觀察。",
-          "(D) 葉片含有細胞壁等構造不會變成無色透明，且葉綠素溶出必會使酒精變綠。"
+          "(A) 驗證葉綠素需要選用斑葉植物（如彩葉草），葉片一全葉皆為綠色。",
+          "(B) 葉片一並未控制水分供應的有無，無法得出與水相關的結論。",
+          "(C) 葉片一未塗抹膠水阻絕氣體，無法推論二氧化碳的必要性（葉片四與葉片一對照才可驗證 $\\text{CO}_2$）。"
         ]
       },
       {
         id: 15,
-        category: "核心概念與定義",
-        level: "課本核心",
-        stem: "下列關於植物「呼吸作用」與「光合作用」進行時間的敘述，何者最符合科學事實？",
+        dimension: "圖表判讀",
+        isAdvanced: false,
+        topic: "葉片保護構造綜合判斷",
+        stem: "【題組】圖(一)為葉的下表皮組織，圖(二)為葉片橫切面構造示意圖，圖(三)為葉綠體中光合作用模式圖。請問圖(二)中的哪些構造具有「保護」葉片內部細胞或防止水分散失的功能？",
+        visual: `<div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:8px; font-size:0.84rem;">
+          <div style="background:#162032; padding:8px; border-radius:6px;">
+            <strong style="color:#60a5fa;">【圖(一) 下表皮】</strong><br/>
+            a：保衛細胞<br/>
+            b：氣孔<br/>
+            c：下表皮細胞
+          </div>
+          <div style="background:#162032; padding:8px; border-radius:6px;">
+            <strong style="color:#34d399;">【圖(二) 葉橫切面】</strong><br/>
+            甲：上表皮細胞<br/>
+            乙：葉肉細胞<br/>
+            丙：葉脈<br/>
+            丁：下表皮細胞<br/>
+            戊：角質層；己：保衛細胞
+          </div>
+          <div style="background:#162032; padding:8px; border-radius:6px;">
+            <strong style="color:#fbbf24;">【圖(三) 光合作用】</strong><br/>
+            庚：太陽光（光能）<br/>
+            X反應：光反應<br/>
+            Y反應：碳反應<br/>
+            癸：葡萄糖
+          </div>
+        </div>`,
         options: [
-          "呼吸作用全天候皆會進行；光合作用則需在有光照時才能進行",
-          "植物只在白天進行光合作用，到了晚上才開始進行呼吸作用",
-          "光合作用與呼吸作用僅在白天同時進行，晚上植物會完全休眠",
-          "光合作用的碳反應只在晚上進行，光反應則只在白天進行"
+          "甲、丁、戊",
+          "乙、丙、己",
+          "丁、戊、己",
+          "乙、丙"
         ],
         answerIndex: 0,
-        explanation: "活細胞隨時需要能量維持生命，因此呼吸作用「白天與晚上（全天候）」皆會進行；光合作用因光反應需要光能驅動，故僅在有光照時進行。",
+        formula: "$$\\text{葉片防禦與保護系統} = \\text{甲（上表皮）} + \\text{丁（下表皮）} + \\text{戊（角質層）}$$",
+        explanation: "圖(二)中，甲（上表皮細胞）與丁（下表皮細胞）排列緊密，負責保護內部組織；戊（角質層）覆蓋於表皮外側，能防止水分散失並阻擋病原入侵。",
         distractors: [
-          "(B) 這是學生最常見的迷思概念！植物白天一樣需要進行呼吸作用產生能量。",
-          "(C) 植物在夜晚仍持續進行呼吸作用，並不會停止代謝。",
-          "(D) 碳反應只要有光反應提供的能量與酵素，在白天有光時即可同步進行，並非只在晚上進行。"
+          "(B) 乙（葉肉）負責光合作用、丙（葉脈）負責運輸、己（保衛細胞）負責控制氣孔與光合作用，皆非主要保護構造。",
+          "(C) 遺漏了上表皮（甲），且誤將保衛細胞（己）歸類為保護組織。",
+          "(D) 乙與丙分別負責合成養分與輸導物質，均不具表面保護功能。"
         ]
       },
       {
         id: 16,
-        category: "核心概念與定義",
-        level: "課本核心",
-        stem: "在課本重點評量中，若有人宣稱「洋蔥表皮細胞可以進行光合作用製造養分」，下列哪一項反駁理由最為正確？",
+        dimension: "圖表判讀",
+        isAdvanced: false,
+        topic: "氣體進入葉片的路徑",
+        stem: "【題組】承上題，植物進行光合作用碳反應時所需要的二氧化碳，主要是經由圖(一)與圖(二)中的哪些構造進入葉片內部？",
         options: [
-          "洋蔥表皮細胞缺乏葉綠體，無法吸收光能進行光合作用",
-          "洋蔥生長於地下，表皮細胞缺乏粒線體而無法產生能量",
-          "洋蔥表皮細胞沒有細胞壁，無法承受光合作用產生的膨壓",
-          "洋蔥表皮細胞只能吸收氧氣，完全無法讓二氧化碳進入"
+          "圖(一)的 a 與圖(二)的甲",
+          "圖(一)的 b 與圖(二)的己（所圍成的氣孔）",
+          "圖(一)的 c 與圖(二)的丁",
+          "圖(一)的 b 與圖(二)的丙"
         ],
-        answerIndex: 0,
-        explanation: "植物的表皮細胞（包含洋蔥鱗葉表皮細胞與一般葉片表皮細胞）皆「不含葉綠體」，因此無法進行光合作用。",
+        answerIndex: 1,
+        formula: "$$\\text{大氣 } \\text{CO}_2 \\xrightarrow{\\text{擴散作用}} \\text{氣孔（圖一 b / 圖二己所圍空隙）} \\longrightarrow \\text{氣室} \\longrightarrow \\text{葉肉細胞}$$",
+        explanation: "二氧化碳必須透過兩個保衛細胞（圖一 a、圖二己）所圍成的「氣孔（圖一 b）」才能進出葉片內部。",
         distractors: [
-          "(B) 洋蔥表皮細胞具有粒線體可進行呼吸作用，無法行光合作用的原因是缺乏「葉綠體」。",
-          "(C) 洋蔥表皮細胞屬於植物細胞，具有細胞壁。",
-          "(D) 氣體進出細胞可透過擴散作用，表皮細胞不行光合作用的關鍵在於缺乏葉綠體。"
+          "(A) 圖(二)的甲為上表皮細胞，表面覆蓋角質層，氣體無法直接穿透進入。",
+          "(C) 圖(一)的 c 與圖(二)的丁皆為表皮細胞，並非氣體進出的通道。",
+          "(D) 圖(二)的丙為葉脈，負責運輸液態的水分與養分，不負責氣體交換。"
         ]
       },
       {
         id: 17,
-        category: "核心概念與定義",
-        level: "課本核心",
-        stem: "關於光合作用中「光反應」與「碳反應」的比較，下列敘述何者<strong>錯誤</strong>？",
+        dimension: "基礎定義",
+        isAdvanced: false,
+        topic: "光合作用產物（葡萄糖）的性質",
+        stem: "【題組】承上題，關於圖(三)中碳反應最終合成的有機物質「癸（葡萄糖）」，下列敘述何者【錯誤】？",
         options: [
-          "光反應與碳反應皆在葉綠體內進行",
-          "光反應的主要原料為水，並會分解水產生氧氣",
-          "碳反應需要多種酵素參與，將二氧化碳轉換成葡萄糖",
-          "碳反應必須在完全無光的黑暗環境中才能順利進行"
+          "屬於醣類養分，每公克在細胞內氧化約可產生 4 大卡的能量",
+          "在植物體內可經由酵素作用，轉變為大分子的澱粉儲存",
+          "可進一步合成構成植物細胞壁的主要成分「纖維素」",
+          "是構成生物體內各種酵素與肌肉組織的最主要成分"
         ],
         answerIndex: 3,
-        explanation: "碳反應（舊稱暗反應）是指該階段「不需要光能直接參與」，只要有光反應提供的能量與酵素，無論白天（有光）或黑夜（無光）皆可進行，並非必須在黑暗中進行。",
+        formula: "$$\\text{葡萄糖（醣類）} \\implies \\begin{cases} \\text{能量來源：} 1\\text{ g} \\approx 4\\text{ kcal} \\\\ \\text{轉換儲存：澱粉、蔗糖} \\\\ \\text{構造組成：纖維素（細胞壁）} \\end{cases}$$",
+        explanation: "構成生物體內各種「酵素」與肌肉組織的最主要成分是「蛋白質」，而非醣類（葡萄糖）。",
         distractors: [
-          "(A) 正確，光合作用的兩個階段都在葉綠體內完成。",
-          "(B) 正確，光反應利用葉綠素吸收的光能分解水分子並釋出氧氣。",
-          "(C) 正確，碳反應是一連串由酵素催化的生化反應。"
+          "(A) 醣類每公克氧化確實可提供約 4 大卡熱量，敘述正確。",
+          "(B) 多餘的葡萄糖會經酵素催化轉變為澱粉儲存於根、莖或種子中。",
+          "(C) 纖維素是由許多葡萄糖分子聚合而成的多醣，為植物細胞壁的主要成分。"
         ]
       },
       {
         id: 18,
-        category: "葉片構造與功能",
-        level: "課本核心",
-        stem: "陸生植物的氣孔多數分布在葉片的「下表皮」，而非上表皮。此種演化適應對植物最主要的益處為何？",
+        dimension: "圖表判讀",
+        isAdvanced: false,
+        topic: "上表皮與角質層特徵",
+        stem: "【題組】承上題，關於圖(二)中「甲（上表皮細胞）」與「戊（角質層）」的構造特性，下列敘述何者正確？",
         options: [
-          "避免陽光直接照射氣孔，以減少水分過度蒸散流失",
-          "方便直接吸收土壤蒸發的水氣，以補充光合作用原料",
-          "防止空氣中的灰塵堵塞氣孔，避免影響呼吸作用",
-          "讓下表皮的葉綠體能更有效率地吸收地面反射的光能"
+          "細胞內含有大量葉綠體，使葉片正面呈現深綠色",
+          "是植物葉片進行碳反應合成葡萄糖的最主要場所",
+          "細胞排列疏鬆且具有許多細胞間隙，利於氣體流通",
+          "表皮細胞排列緊密且外側覆蓋角質層，能保護葉片並減少水分散失"
         ],
-        answerIndex: 0,
-        explanation: "上表皮直接面對太陽照射，溫度較高，若氣孔大量分布於上表皮會導致水分快速散失；氣孔多分布於下表皮可避免陽光直射，減少水分散失。",
+        answerIndex: 3,
+        formula: "$$\\text{上表皮結構優勢} = \\text{細胞扁平透明（利於陽光穿透至葉肉）} + \\text{外覆角質層（防水散失）}$$",
+        explanation: "上表皮細胞（甲）排列緊密、透明無色，外側覆蓋角質層（戊），能有效保護內部組織並防止水分散失。",
         distractors: [
-          "(B) 植物吸收水分主要依賴根部，氣孔是水分散失（蒸散作用）與氣體進出的門戶。",
-          "(C) 減少水分散失才是陸生植物氣孔多在下表皮的核心適應意義。",
-          "(D) 下表皮細胞並無葉綠體，且氣孔是空隙而非吸收光能的構造。"
+          "(A) 上表皮細胞無葉綠體；葉片正面呈深綠色是因為下方緊鄰的「柵狀葉肉細胞」含有大量葉綠體。",
+          "(B) 進行光反應與碳反應的主要場所是「葉肉組織（乙）」，而非上表皮。",
+          "(C) 排列疏鬆、具氣室利於氣體流通的是下層的「海綿葉肉組織」。"
         ]
       },
       {
         id: 19,
-        category: "實驗步驟與變因",
-        level: "課本核心",
-        stem: "在「光與光合作用」實驗中，將鋁箔紙包覆 5 天的葉片摘下，依序經過熱水煮沸、酒精隔水加熱與熱水漂洗後，滴加碘液。下列關於葉片各部位顏色變化的敘述何者正確？",
+        dimension: "基礎定義",
+        isAdvanced: false,
+        topic: "光反應與碳反應比較表",
+        stem: "【題組】承上題，有關圖(三)中「X 反應（光反應）」與「Y 反應（碳反應）」的比較，下列何者完全正確？",
         options: [
-          "原本包覆鋁箔紙的部位呈黃褐色，未包覆的部位呈藍黑色",
-          "原本包覆鋁箔紙的部位呈藍黑色，未包覆的部位呈黃褐色",
-          "整片葉子因為葉綠素已完全溶出，滴加碘液後皆呈黃褐色",
-          "整片葉子因為葉脈相連可輸送養分，滴加碘液後皆呈藍黑色"
+          "進行場所：X 反應在葉綠體中進行；Y 反應在粒線體中進行",
+          "進行條件：X 反應僅在光照下進行；Y 反應僅在完全黑暗中進行",
+          "能量來源：X 反應直接吸收光能；Y 反應利用二氧化碳分解產生的能量",
+          "相關物質：X 反應需葉綠素吸收太陽能；Y 反應需多種酵素參與合成醣類"
         ],
-        answerIndex: 0,
-        explanation: "未包覆鋁箔紙的部位能照光進行光合作用產生澱粉，遇碘液變為「藍黑色」；包覆鋁箔紙的部位因無光照無法產生澱粉，碘液維持原本的「黃褐色」。",
+        answerIndex: 3,
+        formula: "$$\\text{光反應（葉綠體）} \\xrightarrow{\\text{提供能量}} \\text{碳反應（葉綠體，有無日光皆可進行）}$$",
+        explanation: "光反應與碳反應皆在「葉綠體」內進行；光反應依賴葉綠素吸收太陽能將水分解，碳反應則依賴多種酵素催化，利用光反應產生的能量將二氧化碳轉換成葡萄糖。",
         distractors: [
-          "(B) 顏色完全顛倒，遮光處無澱粉應為黃褐色。",
-          "(C) 酒精溶出葉綠素是為了避免綠色干擾觀察，並不會把澱粉溶出。",
-          "(D) 遮光部位在實驗前已消耗掉原有澱粉，且照光處製造的澱粉不溶於水，不會直接擴散填滿遮光區。"
+          "(A) 粒線體是「呼吸作用」的場所，光合作用的光反應與碳反應全程皆在「葉綠體」內完成。",
+          "(B) 碳反應（舊稱暗反應）並非只能在黑暗中進行，只要有光反應提供的能量與酵素，有無日光皆可進行。",
+          "(C) 二氧化碳是無機物，不含化學能；碳反應的能量來源是「光反應所產生的能量」。"
         ]
       },
       {
         id: 20,
-        category: "核心概念與定義",
-        level: "課本核心",
-        stem: "下列哪一種細胞構造被科學家比喻為綠色植物細胞內「光合作用的工廠」？",
+        dimension: "基礎定義",
+        isAdvanced: false,
+        topic: "植物呼吸作用與光合作用的時間",
+        stem: "關於綠色植物在白天與夜晚進行「光合作用」與「呼吸作用」的生理節律，下列敘述何者正確？",
+        options: [
+          "白天陽光充足時僅進行光合作用，夜晚無光時才開始進行呼吸作用",
+          "光合作用僅在有光時進行，而呼吸作用則是白天與夜晚皆持續進行",
+          "植物在夜晚進行呼吸作用時，會吸收二氧化碳並釋放出氧氣",
+          "洋蔥鱗葉的表皮細胞在白天照光時，可同時進行光合作用與呼吸作用"
+        ],
+        answerIndex: 1,
+        formula: "$$\\text{植物全天候代謝} = \\begin{cases} \\text{有光時：光合作用} + \\text{呼吸作用（通常光合速率} > \\text{呼吸速率）} \\\\ \\text{無光時：僅呼吸作用（消耗 } \\text{O}_2\\text{，釋出 } \\text{CO}_2\\text{）} \\end{cases}$$",
+        explanation: "只要是活細胞，每分每秒都需要能量維持生命，因此「呼吸作用」全天候（白天與晚上）都在進行；而「光合作用」需要光能驅動，僅在有光照時進行。",
+        distractors: [
+          "(A) 常見迷思：誤以為植物白天不呼吸。事實上白天植物同樣在進行呼吸作用。",
+          "(C) 呼吸作用是消耗氧氣、分解葡萄糖並釋出二氧化碳與能量，氣體進出方向與光合作用相反。",
+          "(D) 洋蔥鱗葉生長於地下且表皮細胞「不含葉綠體」，因此無論有無照光皆無法進行光合作用。"
+        ]
+      },
+      {
+        id: 21,
+        dimension: "基礎定義",
+        isAdvanced: false,
+        topic: "光合作用的必要條件辨析",
+        stem: "綠色植物在自然環境中順利完成光合作用並製造葡萄糖，必須具備多種原料與條件。下列何者【不是】植物進行光合作用的必要條件？",
+        options: [
+          "根部吸收的水分",
+          "空氣中的二氧化碳",
+          "大氣中的氧氣",
+          "陽光與葉綠體"
+        ],
+        answerIndex: 2,
+        formula: "$$\\text{必要條件} = \\{\\text{原料：水、二氧化碳}\\} + \\{\\text{能量：日光}\\} + \\{\\text{場所：葉綠體}\\}$$",
+        explanation: "氧氣是光合作用光反應分解水之後所釋放出的「產物」，而非進行光合作用所需的原料或必要條件。",
+        distractors: [
+          "(A) 水是光反應分解產生氧氣與提供氫離子的必要原料。",
+          "(B) 二氧化碳是碳反應合成葡萄糖碳骨架的必要原料。",
+          "(D) 日光提供能量、葉綠體提供場所與葉綠素、酵素，缺一不可。"
+        ]
+      },
+      {
+        id: 22,
+        dimension: "實驗變因",
+        isAdvanced: false,
+        topic: "二氧化碳濃度對光合作用速率的影響",
+        stem: "在溫室農業栽培中，農民常會在白天適度增加溫室內的二氧化碳濃度以提升作物產量。若其他環境條件（光照、水分、溫度）皆充足，當大氣中的二氧化碳濃度過低時，對植物會產生何種影響？",
+        options: [
+          "光反應速率大幅加快，導致葉片釋出過多氧氣",
+          "碳反應缺乏足夠原料，使整體光合作用速率降低",
+          "保衛細胞會永久關閉氣孔，使植物無法進行蒸散作用",
+          "葉綠體內的酵素會迅速分解，導致葉片變黃枯萎"
+        ],
+        answerIndex: 1,
+        formula: "$$\\text{CO}_2 \\text{ 濃度下降} \\implies \\text{碳反應受限} \\implies \\text{葡萄糖合成速率下降}$$",
+        explanation: "根據課本「課文重點評量」是非題第 4 題觀念，二氧化碳是碳反應合成葡萄糖的必要原料，當濃度太低時，碳反應受限，整體光合作用速率便會降低。",
+        distractors: [
+          "(A) 光反應與碳反應相互偶聯，碳反應受阻並不會使光反應無限制加快。",
+          "(C) 氣孔關閉主要受水分逆境調控，低二氧化碳環境下氣孔通常反而會張開以利吸收氣體。",
+          "(D) 酵素受高溫或極端酸鹼值才會變性破壞，低濃度二氧化碳不會分解酵素。"
+        ]
+      },
+      {
+        id: 23,
+        dimension: "實驗變因",
+        isAdvanced: true,
+        topic: "驗證二氧化碳為光合作用必要條件的實驗設計",
+        stem: "【進階題】基於課本實驗 2-3 的設計原理，若你想驗證「二氧化碳的吸收會影響植物製造養分（澱粉）」這項假說是否成立，並設定對照組為「未經任何處理的正常葉片」，則下列哪一種處理的葉片最適合作為實驗組？（註：油脂能阻絕氣體進出葉片）",
+        options: [
+          "僅以不透光鋁箔紙包住整個葉片",
+          "僅以油脂均勻塗抹整個葉片表面（尤其是下表皮）",
+          "先以鋁箔紙包住葉片，再將油脂塗抹在鋁箔紙表面",
+          "先用油脂塗抹葉片部分表面，再以鋁箔紙包住塗抹油脂的部分"
+        ],
+        answerIndex: 1,
+        formula: "$$\\text{單一變因原則：對照組（正常進氣） vs. 實驗組（塗油脂阻絕 } \\text{CO}_2\\text{）}$$",
+        explanation: "根據課本第 112 頁【例題】解析，實驗設計必須遵守「單一操縱變因原則」。要驗證二氧化碳的影響，只需用油脂塗抹葉片表面堵塞氣孔（阻絕 $\\text{CO}_2$ 進入），其餘條件（包含照光）皆須與對照組相同。",
+        distractors: [
+          "(A) 鋁箔紙阻隔的是「光線」，操縱變因變成光照而非二氧化碳。",
+          "(C) 鋁箔紙阻擋了陽光，導致同時改變了「光照」與「氣體」兩個變因，無法判斷實驗結果是由哪個因素造成。",
+          "(D) 同樣同時改變了光照與二氧化碳兩個變因，違反科學實驗的控制變因原則。"
+        ]
+      },
+      {
+        id: 24,
+        dimension: "實驗變因",
+        isAdvanced: true,
+        topic: "實驗 2-3 隔水加熱與暗處理原理",
+        stem: "【進階題】在「探討光對植物光合作用影響」的實驗中，科學家常在正式照光實驗前，先將盆栽植物置於黑暗環境中 3～5 天（或用鋁箔紙包覆部分葉片 3～5 天），且在檢測時需將酒精隔水加熱。關於這兩項操作的目的，下列敘述何者完全正確？",
+        options: [
+          "暗處理 3～5 天是為了讓植物暫停呼吸作用；隔水加熱是因酒精比水容易沸騰",
+          "暗處理 3～5 天是為了消耗葉片原本儲存的澱粉；隔水加熱可避免酒精直接接觸火源而燃燒",
+          "暗處理 3～5 天是為了加速葉片蒸散作用；隔水加熱可使葉綠素加速合成",
+          "暗處理 3～5 天只需縮短為 3 小時即可達相同效果；隔水加熱是為了保持葉色翠綠"
+        ],
+        answerIndex: 1,
+        formula: "$$\\text{暗處理（3～5天）} \\implies \\text{呼吸作用消耗原有澱粉（澱粉歸零，排除干擾）}$$",
+        explanation: "實驗前先將葉片遮光 3～5 天，是為了讓植物透過呼吸作用將葉片內原本儲存的澱粉消耗殆盡（澱粉歸零），避免影響實驗準確性；酒精易燃，採「隔水加熱」可使受熱均勻並降低酒精燃燒的危險。",
+        distractors: [
+          "(A) 植物在暗室中仍持續進行呼吸作用（正是靠呼吸作用消耗原有澱粉）。",
+          "(C) 暗處理並非為了加速蒸散作用；酒精加熱的目的是「溶出葉綠素」，而非合成葉綠素。",
+          "(D) 課本明確指出：若只提早 3～5 小時包鋁箔，時間過短無法完全消耗原有澱粉，會導致實驗誤差；且酒精會使葉片脫色呈淡黃色，並非保持翠綠。"
+        ]
+      },
+      {
+        id: 25,
+        dimension: "跨章整合",
+        isAdvanced: true,
+        topic: "酵素與光合作用的跨章整合實驗",
+        stem: "【進階題】結合「酵素活性」與「光合作用產物檢測」的觀念：若某生將新鮮綠色葉片照光數小時後，取其汁液（含澱粉）與「煮沸後冷卻的唾液」在 37°C 下混合靜置 30 分鐘，隨後滴加碘液檢測，預期溶液會呈現何種顏色？理由為何？",
+        options: [
+          "藍黑色；因為高溫已破壞唾液中酵素的活性，無法將葉片製造的澱粉分解",
+          "黃褐色；因為 37°C 是人體唾液酵素最適宜的作用溫度，澱粉已被完全分解",
+          "磚紅色；因為葉片行光合作用直接產生大量葡萄糖，使碘液變色",
+          "淡綠色；因為葉綠素未被酒精溶出，故完全掩蓋了碘液的顏色變化"
+        ],
+        answerIndex: 0,
+        formula: "$$\\text{煮沸唾液（酵素變性失活）} + \\text{葉片澱粉} \\xrightarrow{37^\\circ\\text{C}} \\text{澱粉未被分解} \\xrightarrow{+\\text{碘液}} \\text{藍黑色}$$",
+        explanation: "這是跨章節整合題：(1) 葉片照光後行光合作用產生葡萄糖並轉存為「澱粉」；(2) 唾液中的澱粉酶主要成分為蛋白質，經「煮沸」後結構已遭永久破壞（變性），即使冷卻至 37°C 也無法恢復活性，因此澱粉未被分解，滴加碘液仍呈「藍黑色」。",
+        distractors: [
+          "(B) 學生常只看到「37°C」就誤選酵素活性最佳，卻忽略了題幹中的關鍵前提「煮沸後冷卻」，高溫已使酵素永久失去活性。",
+          "(C) 碘液是用來檢測澱粉（藍黑色/黃褐色），「本氏液」隔水加熱才會出現磚紅色；且本題已說明汁液含澱粉。",
+          "(D) 題幹明確告知滴加碘液檢測澱粉變化，澱粉與碘液反應會呈現明顯的深藍黑色。"
+        ]
+      },
+      {
+        id: 26,
+        dimension: "基礎定義",
+        isAdvanced: false,
+        topic: "氣孔的構造組成與分布位置",
+        stem: "植物葉片表面的氣孔是氣體進出的重要門戶，關於氣孔的構造與分布特徵，下列敘述何者正確？",
+        options: [
+          "氣孔由兩個半月形的保衛細胞圍成，多分布於葉片的下表皮",
+          "氣孔由上下表皮細胞共同組成，多分布於葉片的上表皮",
+          "氣孔屬於單一活細胞構造，細胞核明顯且含有大量葉綠體",
+          "氣孔主要分布於木本植物的樹皮中，草本植物葉片完全沒有氣孔"
+        ],
+        answerIndex: 0,
+        formula: "$$\\text{氣孔} = \\text{2 個保衛細胞之間的空隙} \\quad (\\text{多分布於下表皮，減少陽光直射與水分過度散失})$$",
+        explanation: "根據課本第 107 頁「葉的構造」重點整理，氣孔是由兩個保衛細胞之間的空隙所構成，陸生植物為了減少水分因陽光直射而過度散失，氣孔大多分布於下表皮。",
+        distractors: [
+          "(B) 氣孔是由兩個「保衛細胞」圍成的空隙，並非上下表皮細胞組成，且多在下表皮而非上表皮。",
+          "(C) 氣孔是兩個保衛細胞之間的「空隙（非細胞）」，具有細胞核與葉綠體的是保衛細胞本身。",
+          "(D) 草本植物與木本植物的葉片皆具有氣孔，用以進行氣體交換與蒸散作用。"
+        ]
+      },
+      {
+        id: 27,
+        dimension: "基礎定義",
+        isAdvanced: false,
+        topic: "氣室的功能與位置",
+        stem: "觀察植物葉片橫切面構造時，在葉肉細胞之間常可見到空隙與通道。下列關於葉片中「氣室」的敘述，何者正確？",
+        options: [
+          "是葉片內部氣體流通的管道，有助於氣體在葉肉細胞間擴散",
+          "是儲存植物光合作用所合成澱粉與油脂的主要大型液胞",
+          "是負責將根部水分向上輸送至葉片尖端的木質部導管",
+          "是覆蓋在葉片表面由蠟質組成的保護層，可防止水分散失"
+        ],
+        answerIndex: 0,
+        formula: "$$\\text{氣孔} \\longrightarrow \\text{氣室（氣體流通管道）} \\longrightarrow \\text{葉肉細胞（吸收 } \\text{CO}_2\\text{、釋出 } \\text{O}_2\\text{）}$$",
+        explanation: "根據課本第 107 頁構造功能表，「氣室」是葉片內部氣體流通的管道，能讓從氣孔進入的二氧化碳順利擴散至各葉肉細胞，並讓氧氣與水蒸氣排出。",
+        distractors: [
+          "(B) 氣室為細胞間的氣體通道，並非儲存澱粉或油脂的構造。",
+          "(C) 輸送水分的是葉脈中的「木質部」，不是氣室。",
+          "(D) 覆蓋在表面防止水分散失的蠟質層是「角質層」，不是氣室。"
+        ]
+      },
+      {
+        id: 28,
+        dimension: "實驗變因",
+        isAdvanced: false,
+        topic: "實驗 2-3 酒精隔水加熱的作用",
+        stem: "在「實驗 2-3 光合作用變因之探討」中，將葉片放入裝有酒精的小燒杯並進行隔水加熱，其主要目的為何？",
+        options: [
+          "溶出葉綠體中的葉綠素，使葉片褪色以便觀察後續碘液變色",
+          "殺死葉片上的細菌與黴菌，防止葉片在實驗過程中腐敗變質",
+          "促使葉片內的澱粉迅速分解成葡萄糖，提高碘液檢測靈敏度",
+          "保持葉片原有的翠綠色澤，避免加熱過程中葉綠素遭到破壞"
+        ],
+        answerIndex: 0,
+        formula: "$$\\text{葉綠素（脂溶性色素）} + \\text{熱酒精} \\xrightarrow{\\text{隔水加熱}} \\text{酒精由無色轉為綠色，葉片轉為淡黃色}$$",
+        explanation: "根據課本第 110～111 頁實驗步驟說明，酒精可溶出葉綠體中的「葉綠素」，使原本深綠色的葉片變為淡黃色，如此滴加碘液時，藍黑色或黃褐色的變化才不會被綠色掩蓋。",
+        distractors: [
+          "(B) 酒精隔水加熱並非為了殺菌防腐，而是為了溶出葉綠素。",
+          "(C) 碘液是用來檢測「澱粉」而非葡萄糖；若將澱粉分解成葡萄糖，反而無法呈現藍黑色反應。",
+          "(D) 酒精溶出葉綠素後，葉片會褪色呈「淡黃色」，酒精本身則會變成「綠色」，並非保持翠綠。"
+        ]
+      },
+      {
+        id: 29,
+        dimension: "實驗變因",
+        isAdvanced: false,
+        topic: "實驗 2-3 熱水漂洗的目的",
+        stem: "在「實驗 2-3」中，葉片經過酒精隔水加熱後，為何必須先放入大燒杯的熱水中漂洗，再取出滴加碘液？",
+        options: [
+          "洗去葉片上殘留的酒精與溶出的葉綠素，並使葉片再度軟化",
+          "讓葉片重新吸收水分，促使葉肉細胞在培養皿中恢復光合作用",
+          "利用熱水的高溫將葉片中的澱粉轉化為藍黑色的碘澱粉複合物",
+          "中和酒精的酸性物質，避免碘液在酸性環境下失去檢驗功能"
+        ],
+        answerIndex: 0,
+        formula: "$$\\text{酒精加熱後葉片} \\xrightarrow{\\text{熱水漂洗}} \\text{去除殘留酒精與葉綠素 + 軟化葉片} \\xrightarrow{\\text{滴碘液}} \\text{清晰顯色}$$",
+        explanation: "根據課本第 110～111 頁實驗步驟 5 與「實驗重點統整」，酒精加熱後的葉片會殘留酒精與葉綠素，放入熱水漂洗可洗去殘留酒精與葉綠素，並維持葉片柔軟以便平鋪檢測。",
+        distractors: [
+          "(B) 葉片已被摘下且經過加熱處理，細胞已失去活性，無法再進行光合作用。",
+          "(C) 澱粉與碘液的呈色反應在常溫下即可發生，無需靠熱水轉化。",
+          "(D) 酒精並非酸性物質，熱水漂洗的主要目的是洗去殘留酒精與葉綠素並軟化葉片。"
+        ]
+      },
+      {
+        id: 30,
+        dimension: "實驗變因",
+        isAdvanced: false,
+        topic: "實驗 2-3 碘液呈色與澱粉的關係",
+        stem: "在「實驗 2-3」最後一步驟，將碘液滴在處理好的葉片上。若葉片某部位呈現「藍黑色」，代表該部位具有何種物質？此物質通常是由植物行光合作用產生的何種養分轉變而來？",
+        options: [
+          "具有澱粉；由葡萄糖轉變而來",
+          "具有葡萄糖；由澱粉分解而來",
+          "具有葉綠素；由水分氧化而來",
+          "具有纖維素；由二氧化碳合成而來"
+        ],
+        answerIndex: 0,
+        formula: "$$\\text{光能} \\xrightarrow{\\text{光合作用}} \\text{葡萄糖} \\xrightarrow{\\text{酵素轉變}} \\text{澱粉} \\xrightarrow{+\\text{碘液}} \\text{藍黑色}$$",
+        explanation: "根據課本第 111 頁「分析與討論」第 3 題，滴加碘液後呈現「藍黑色」表示含有「澱粉」；植物行光合作用直接製造的是葡萄糖，再經由酵素轉變為澱粉儲存。",
+        distractors: [
+          "(B) 碘液檢驗的是「澱粉」而非葡萄糖（檢驗葡萄糖需用本氏液並加熱）。",
+          "(C) 葉綠素在步驟 3 已被酒精溶出，且葉綠素不會使碘液呈藍黑色。",
+          "(D) 碘液遇纖維素不會呈現藍黑色，實驗檢測的是植物儲存的養分「澱粉」。"
+        ]
+      },
+      {
+        id: 31,
+        dimension: "實驗變因",
+        isAdvanced: false,
+        topic: "實驗 2-3 的操作變因與控制變因",
+        stem: "在「實驗 2-3 光合作用變因之探討」中，假說為「照光是植物進行光合作用的必要條件之一」。下列關於本實驗變因設定的敘述，何者正確？",
+        options: [
+          "操縱變因為「有無光照」；控制變因為「植物種類、氣溫、土壤含水量等」",
+          "操縱變因為「植物種類」；控制變因為「有無光照、滴加碘液的量」",
+          "操縱變因為「葉片是否呈現藍黑色」；控制變因為「鋁箔紙包覆的天數」",
+          "操縱變因為「氣溫與土壤含水量」；控制變因為「植物種類與有無光照」"
+        ],
+        answerIndex: 0,
+        formula: "$$\\text{假說：光照為必要條件} \\implies \\begin{cases} \\text{操縱變因：有無光照（照光 vs. 鋁箔遮光）} \\\\ \\text{控制變因：植物種類、氣溫、土壤含水量等} \\end{cases}$$",
+        explanation: "根據課本第 110 頁實驗變因表，本實驗要探討「照光」的影響，因此「有無光照」為操縱變因；而植物種類、氣溫、土壤含水量等可能影響實驗結果的其他因素則必須保持相同，屬於控制變因。",
+        distractors: [
+          "(B) 植物種類應保持一致（控制變因），不可隨意更換以免干擾光照變因的判讀。",
+          "(C) 葉片是否呈現藍黑色（即是否含有澱粉）是隨操縱變因改變而測得的「應變變因」。",
+          "(D) 氣溫與土壤含水量在單一光照實驗中應維持相同（控制變因），而非作為操縱變因。"
+        ]
+      },
+      {
+        id: 32,
+        dimension: "圖表判讀",
+        isAdvanced: false,
+        topic: "實驗 2-3 滴碘液前後顏色變化判讀",
+        stem: "在「實驗 2-3」中，經酒精脫色後的葉片原本呈淡黃色。滴加碘液後，若某葉片「一半包覆鋁箔紙、一半未包覆鋁箔紙」，則滴碘液後兩部分的顏色分別為何？",
+        options: [
+          "包覆鋁箔紙處呈黃褐色；未包覆鋁箔紙處呈藍黑色",
+          "包覆鋁箔紙處呈藍黑色；未包覆鋁箔紙處呈黃褐色",
+          "包覆鋁箔紙處呈綠色；未包覆鋁箔紙處呈無色",
+          "兩部分皆呈現深綠色，因為葉綠素未被完全溶出"
+        ],
+        answerIndex: 0,
+        formula: "$$\\begin{cases} \\text{遮光區（無光）} \\implies \\text{無法行光合作用} \\implies \\text{無澱粉} \\implies \\text{碘液呈黃褐色} \\\\ \\text{照光區（有光）} \\implies \\text{行光合作用產澱粉} \\implies \\text{有澱粉} \\implies \\text{碘液呈藍黑色} \\end{cases}$$",
+        explanation: "根據課本第 111 頁圖示與「分析與討論」第 2 題，包覆鋁箔紙的部位因缺乏光照無法製造澱粉，滴加碘液維持碘液原本的「黃褐色」；未包覆處照光製造澱粉，滴加碘液呈「藍黑色」。",
+        distractors: [
+          "(B) 顏色對應完全顛倒，遮光處無法產生澱粉，不會出現藍黑色。",
+          "(C) 葉綠素已於酒精加熱步驟溶出，且碘液本身為黃褐色，不會使葉片呈綠色或無色。",
+          "(D) 酒精隔水加熱可溶出葉綠素，使葉片脫色為淡黃色，不會整片維持深綠色。"
+        ]
+      },
+      {
+        id: 33,
+        dimension: "圖表判讀",
+        isAdvanced: false,
+        topic: "實驗重點評量題組：步驟順序與變因",
+        stem: "【題組】小聆想進行光合作用的實驗，因此將咸豐草葉片貼上不透光的數字貼紙，並於一個星期後將葉片摘下進行檢驗。摘下葉片、撕掉貼紙後，處理步驟有：（甲）放到熱水中漂洗；（乙）放入熱水中浸泡 3 分鐘；（丙）加入碘液；（丁）加入本氏液；（戊）放入酒精中隔水加熱。測定葉片中所含澱粉的實驗步驟順序為何？",
+        options: [
+          "乙戊甲丙",
+          "甲乙戊丙",
+          "乙戊丁甲",
+          "丁甲乙戊"
+        ],
+        answerIndex: 0,
+        formula: "$$\\text{撕貼紙} \\rightarrow \\text{熱水浸泡(乙)} \\rightarrow \\text{酒精隔水加熱(戊)} \\rightarrow \\text{熱水漂洗(甲)} \\rightarrow \\text{加碘液(丙)}$$",
+        explanation: "根據課本第 113 頁「實驗重點評量」第 1 題，正確順序為：先放入熱水中浸泡 3 分鐘（乙）軟化葉片，再放入酒精中隔水加熱（戊）溶出葉綠素，接著放到熱水中漂洗（甲），最後加入碘液（丙）檢測澱粉。",
+        distractors: [
+          "(B) 將熱水漂洗（甲）放在熱水浸泡（乙）與酒精加熱（戊）之前，步驟順序錯誤。",
+          "(C) 誤用「本氏液（丁）」檢驗澱粉，本氏液是用來檢驗葡萄糖等還原醣的試劑。",
+          "(D) 試劑添加順序與操作邏輯完全顛倒。"
+        ]
+      },
+      {
+        id: 34,
+        dimension: "圖表判讀",
+        isAdvanced: false,
+        topic: "實驗重點評量題組：貼紙處呈色判斷",
+        stem: "【題組】承上題，小聆將貼有不透光數字貼紙的咸豐草葉片照光一星期後，依正確步驟處理並以碘液測定。經碘液測定後，何處會呈現「黃褐色」？",
+        options: [
+          "貼數字貼紙處",
+          "未貼數字貼紙處",
+          "整片葉片都呈黃褐色",
+          "整片葉片都呈藍黑色"
+        ],
+        answerIndex: 0,
+        formula: "$$\\text{貼紙遮光區} \\implies \\text{缺光無法合成葡萄糖與澱粉} \\implies \\text{無澱粉} \\implies \\text{黃褐色}$$",
+        explanation: "根據課本第 113 頁「實驗重點評量」第 2 題，貼數字貼紙的部位因被不透光貼紙遮蔽，無法照光行光合作用製造澱粉，因此滴加碘液後會呈現「黃褐色」。",
+        distractors: [
+          "(B) 未貼數字貼紙處可接受陽光照射，能行光合作用產生澱粉，遇碘液會呈「藍黑色」。",
+          "(C) 未貼紙的照光區域會產生澱粉而呈藍黑色，並非整片皆為黃褐色。",
+          "(D) 貼紙遮光區域無澱粉，不會呈藍黑色。"
+        ]
+      },
+      {
+        id: 35,
+        dimension: "實驗變因",
+        isAdvanced: false,
+        topic: "實驗重點評量題組：實驗結論推論",
+        stem: "【題組】承上題，根據此「貼不透光貼紙照光一星期後測澱粉」的實驗結果，可以直接得到下列什麼結論？",
+        options: [
+          "光合作用需要光才能製造養分（葡萄糖，並轉變為澱粉）",
+          "光合作用需要葉綠素才能製造葡萄糖",
+          "光合作用需要水才能製造澱粉",
+          "光合作用需要二氧化碳才能製造澱粉"
+        ],
+        answerIndex: 0,
+        formula: "$$\\text{實驗變因：有光（未貼紙） vs. 無光（貼紙遮蔽）} \\implies \\text{結論：光照是製造養分的必要條件}$$",
+        explanation: "根據課本第 113 頁「實驗重點評量」第 3 題，本實驗唯一改變的條件是「是否有光照」，有照光處能製造養分（形成澱粉呈藍黑色），無照光處則無法形成澱粉（呈黃褐色），故結論為「光合作用需要光才能製造養分」。",
+        distractors: [
+          "(B) 驗證葉綠素需要比較綠色與非綠色部位（如彩葉草），本實驗未控制葉綠素變因。",
+          "(C) 本實驗未改變水分供應條件，無法推論與水相關的結論。",
+          "(D) 本實驗未阻絕二氧化碳進入，無法推論與二氧化碳相關的結論。"
+        ]
+      },
+      {
+        id: 36,
+        dimension: "實驗變因",
+        isAdvanced: true,
+        topic: "實驗重點評量題組：暗室處理目的",
+        stem: "【題組】【進階題】在進行植物光合作用實驗時，常在實驗前先將植物放在暗室中 3 天。請問「將植物放在暗室中 3 天」的主要目的為何？",
+        options: [
+          "使植物透過呼吸作用消耗掉葉片原本儲存的澱粉",
+          "讓植物暫停呼吸作用，避免消耗光合作用產生的養分",
+          "加速植物體內水分的蒸散作用，促使根部吸收更多水分",
+          "直接觀察植物在暗室中如何進行光合作用與釋放氧氣"
+        ],
+        answerIndex: 0,
+        formula: "$$\\text{暗室存放 3 天} \\implies \\text{無光不產新澱粉 + 呼吸作用消耗舊澱粉} \\implies \\text{葉片澱粉歸零}$$",
+        explanation: "根據課本第 113 頁「實驗重點評量」第 4 題，植物放在暗室中 3 天，可讓植物在無光環境下藉由呼吸作用消耗掉原本儲存的澱粉，確保實驗前葉片中沒有殘留澱粉干擾結果。",
+        distractors: [
+          "(B) 植物在暗室中不會暫停呼吸作用，反而正是靠呼吸作用消耗原有澱粉。",
+          "(C) 暗室中缺乏光照與溫度較低，蒸散作用通常較弱，並非暗處理的目的。",
+          "(D) 光合作用需要光照，植物在暗室中無法進行光合作用。"
+        ]
+      },
+      {
+        id: 37,
+        dimension: "實驗變因",
+        isAdvanced: false,
+        topic: "實驗重點評量題組：酒精溶出葉綠素",
+        stem: "【題組】承上題，在「測定光合作⽤產物（澱粉）」的實驗裝置中，將葉片放入裝有酒精的小燒杯並置於熱水中加熱，將葉片泡在酒精中的目的是什麼？",
+        options: [
+          "酒精可溶解葉綠素，使葉片褪色以利觀察碘液變色",
+          "酒精比水容易沸騰，可加快葉片內部水分蒸發速度",
+          "酒精加熱時升溫比水快，可迅速將澱粉分解為葡萄糖",
+          "酒精可保持葉色翠綠，防止葉片在加熱過程中變黃"
+        ],
+        answerIndex: 0,
+        formula: "$$\\text{葉片（含葉綠素）} + \\text{酒精} \\xrightarrow{\\text{加熱}} \\text{葉綠素溶於酒精，葉片脫色呈淡黃色}$$",
+        explanation: "根據課本第 113 頁「實驗重點評量」第 5 題，將葉片泡在酒精中加熱的目的，是利用酒精能「溶解葉綠素」的特性，去除葉片綠色以免干擾碘液檢驗澱粉的顏色變化。",
+        distractors: [
+          "(B) 酒精沸點較低且易燃，實驗目的不是加速水分蒸發。",
+          "(C) 實驗目的是檢驗「澱粉」，若將澱粉分解為葡萄糖反而無法呈藍黑色。",
+          "(D) 酒精溶出葉綠素後葉片會褪色成淡黃色，不是保持翠綠。"
+        ]
+      },
+      {
+        id: 38,
+        dimension: "跨章整合",
+        isAdvanced: true,
+        topic: "酵素活性與溫度對照實驗分析",
+        stem: "【題組】【進階題】跨章節整合：小晴取四支乾淨的試管，裝置及處理方式如下表（甲：3 mL 澱粉液＋3 mL 唾液，37°C；乙：3 mL 澱粉液＋3 mL 清水，37°C；丙：3 mL 澱粉液＋3 mL 煮沸的唾液，37°C；丁：3 mL 澱粉液＋3 mL 唾液，0°C）。靜置 10 分鐘後，小晴準備「丁試管」的主要目的是為了探討哪一種因素對酵素活性的影響？",
+        visual: `<table class="data-table">
+          <thead>
+            <tr><th>試管</th><th>內容物</th><th>作用溫度</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>甲</td><td>3 mL 澱粉液 + 3 mL 唾液</td><td>37°C</td></tr>
+            <tr><td>乙</td><td>3 mL 澱粉液 + 3 mL 清水</td><td>37°C</td></tr>
+            <tr><td>丙</td><td>3 mL 澱粉液 + 3 mL 煮沸的唾液</td><td>37°C</td></tr>
+            <tr><td>丁</td><td>3 mL 澱粉液 + 3 mL 唾液</td><td>0°C</td></tr>
+          </tbody>
+        </table>`,
+        options: [
+          "溫度高低（比較 37°C 與 0°C 下唾液酵素的活性差異）",
+          "酵素的有無（比較唾液與清水中是否含有分解澱粉的酵素）",
+          "唾液是否新鮮（比較新鮮唾液與煮沸唾液的差異）",
+          "清水的有無（比較加入清水與不加清水對澱粉液濃度的影響）"
+        ],
+        answerIndex: 0,
+        formula: "$$\\text{甲組（37}^\\circ\\text{C、唾液） vs. 丁組（0}^\\circ\\text{C、唾液）} \\implies \\text{單一操縱變因：溫度高低}$$",
+        explanation: "根據課本第 106 頁題組第 11 題，丁試管與甲試管皆為「3 mL 澱粉液＋3 mL 唾液」，唯一不同的是溫度（丁為 0°C、甲為 37°C），因此目的是探討「溫度高低」對酵素活性的影響。",
+        distractors: [
+          "(B) 探討「酵素的有無」應比較「甲（唾液，37°C）」與「乙（清水，37°C）」。",
+          "(C) 探討「煮沸是否破壞酵素活性」應比較「甲（未煮沸唾液，37°C）」與「丙（煮沸唾液，37°C）」。",
+          "(D) 丁試管並未加入清水，且水在此實驗中並非用來改變澱粉濃度以測酵素活性。"
+        ]
+      },
+      {
+        id: 39,
+        dimension: "跨章整合",
+        isAdvanced: false,
+        topic: "酵素分解澱粉與碘液呈色變化",
+        stem: "【題組】承上題，若在甲、乙、丙、丁四支試管靜置 10 分鐘後，各取出部分溶液滴入「碘液」檢測，哪一支試管中的澱粉最快被分解，因此會最先出現碘液本身的「黃褐色」？",
+        options: [
+          "甲試管（37°C 正常唾液，酵素活性最佳）",
+          "乙試管（37°C 清水，無酵素無法分解澱粉）",
+          "丙試管（37°C 煮沸唾液，高溫使酵素失去活性）",
+          "丁試管（0°C 唾液，低溫使酵素活性大幅降低）"
+        ],
+        answerIndex: 0,
+        formula: "$$\\text{37}^\\circ\\text{C 唾液澱粉酶（活性最高）} \\implies \\text{澱粉迅速分解為糖} \\implies \\text{無澱粉殘留} \\implies \\text{滴碘液呈黃褐色}$$",
+        explanation: "根據課本第 106 頁題組第 12 題，甲試管具有活性正常的唾液酵素，且處於 37°C 適宜溫度，澱粉分解最快；當澱粉被分解完畢後，滴入碘液便不會變藍黑色，而是呈現碘液原本的「黃褐色」。",
+        distractors: [
+          "(B) 乙試管只有清水，不含酵素，澱粉不會被分解，滴入碘液會呈藍黑色。",
+          "(C) 丙試管的唾液經煮沸後酵素已遭破壞失去活性，無法分解澱粉，滴入碘液呈藍黑色。",
+          "(D) 丁試管溫度僅 0°C，低溫會抑制酵素活性，澱粉分解速率遠慢於 37°C 的甲試管。"
+        ]
+      },
+      {
+        id: 40,
+        dimension: "跨章整合",
+        isAdvanced: false,
+        topic: "實驗組與對照組的配對選擇",
+        stem: "【題組】承上題，如果小晴想要了解「唾液被煮沸之後是否仍保有酵素的活性」，應該選擇哪兩支試管分別當作實驗組和對照組？",
+        options: [
+          "甲試管與丙試管",
+          "甲試管與乙試管",
+          "乙試管與丁試管",
+          "丙試管與丁試管"
+        ],
+        answerIndex: 0,
+        formula: "$$\\text{對照組：甲（正常唾液、37}^\\circ\\text{C）} \\quad \\text{vs.} \\quad \\text{實驗組：丙（煮沸唾液、37}^\\circ\\text{C）}$$",
+        explanation: "根據課本第 106 頁題組第 13 題，要驗證「煮沸」對唾液酵素活性的影響，必須維持溫度（37°C）與澱粉、唾液量相同，僅改變唾液是否經過煮沸，故應選擇「甲試管」與「丙試管」。",
+        distractors: [
+          "(B) 甲與乙的差異是「唾液 vs. 清水」，用來探討酵素的有無，而非煮沸的影響。",
+          "(C) 乙（清水、37°C）與丁（唾液、0°C）同時改變了酵素有無與溫度兩個變因，無法作為配對組。",
+          "(D) 丙（煮沸唾液、37°C）與丁（未煮沸唾液、0°C）同時改變了煮沸與溫度兩個變因，不合實驗設計原則。"
+        ]
+      },
+      {
+        id: 41,
+        dimension: "跨章整合",
+        isAdvanced: true,
+        topic: "酵素實驗推論的邊界判斷",
+        stem: "【題組】【進階題】承上題，根據甲、乙、丙、丁四支試管的實驗結果，小晴【無法】從本實驗中做出下列何種推論？",
+        options: [
+          "唾液中的酵素在清水中可由蛋白質轉變為葡萄糖",
+          "唾液中的酵素活性會受到溫度高低影響",
+          "經過煮沸的唾液因酵素失去活性，無法分解澱粉",
+          "在 0°C 低溫環境下，唾液酵素分解澱粉的速率較 37°C 慢"
+        ],
+        answerIndex: 0,
+        formula: "$$\\text{酵素功能：催化化學反應（分解澱粉} \\rightarrow \\text{麥芽糖/葡萄糖），本身不會轉變為糖}$$",
+        explanation: "根據課本第 106 頁題組第 14 題，酵素是生物體內的催化劑，負責加速反應進行，本身並不會轉變成糖，本實驗也完全沒有探討酵素轉變為糖的機制，故 (A) 無法推論。",
+        distractors: [
+          "(B) 比較甲（37°C）與丁（0°C）的反應速率差異，可推論溫度會影響酵素活性。",
+          "(C) 比較甲與丙的結果，可推論煮沸會使唾液失去分解澱粉的能力。",
+          "(D) 丁試管在 0°C 下澱粉分解較慢，符合低溫降低酵素活性的推論。"
+        ]
+      },
+      {
+        id: 42,
+        dimension: "基礎定義",
+        isAdvanced: false,
+        topic: "光合作用的原料與產物總覽",
+        stem: "關於綠色植物進行光合作用所需的「原料」與產生的「產物」，下列配對何者完全正確？",
+        options: [
+          "原料：水、二氧化碳；產物：葡萄糖、氧氣、水",
+          "原料：葡萄糖、氧氣；產物：水、二氧化碳、澱粉",
+          "原料：水、氧氣、葉綠素；產物：二氧化碳、葡萄糖",
+          "原料：二氧化碳、澱粉；產物：水、氧氣、能量"
+        ],
+        answerIndex: 0,
+        formula: "$$\\underbrace{\\text{水} + \\text{二氧化碳}}_{\\text{原料}} \\xrightarrow[\\text{葉綠體}]{\\text{光}} \\underbrace{\\text{葡萄糖} + \\text{氧氣} + \\text{水}}_{\\text{產物}}$$",
+        explanation: "根據課本第 108 頁「光合成作用的原料及產物」表格與反應式，光合作用的原料為「水」與「二氧化碳」，產物為「葡萄糖」、「氧氣」與「水」。",
+        distractors: [
+          "(B) 葡萄糖與氧氣是產物，水與二氧化碳是原料，選項將原料與產物顛倒。",
+          "(C) 葉綠素是吸收光能的色素（位於葉綠體中），不是原料；二氧化碳是原料不是產物。",
+          "(D) 澱粉是葡萄糖轉變而來的儲存養分，並非直接由二氧化碳合成，且二氧化碳是原料。"
+        ]
+      },
+      {
+        id: 43,
+        dimension: "基礎定義",
+        isAdvanced: false,
+        topic: "葉綠體被稱為光合作用工廠的原因",
+        stem: "在植物細胞中，下列哪一種胞器含有葉綠素能吸收光能，並含多種酵素能合成葡萄糖，因此常被稱為「光合作用的工廠」？",
         options: [
           "葉綠體",
           "粒線體",
@@ -1259,740 +2069,251 @@
           "液胞"
         ],
         answerIndex: 0,
-        explanation: "葉綠體內含有葉綠素與酵素，能吸收光能並將水與二氧化碳合成葡萄糖，因此被稱為「光合作用的工廠」。",
+        formula: "$$\\text{葉綠體} = \\text{葉綠素（吸收光能、光反應）} + \\text{酵素（碳反應合成葡萄糖）}$$",
+        explanation: "根據課本第 108 與 109 頁，葉綠體內含有能吸收光能的「葉綠素」以及參與碳反應的「多種酵素」，是完成光合作用的場所，故稱為光合作用的工廠。",
         distractors: [
-          "(B) 粒線體是進行呼吸作用產生能量的場所，被稱為細胞的「發電廠」。",
-          "(C) 細胞核內含遺傳物質 DNA，是細胞的「生命中樞」。",
-          "(D) 液胞主要負責儲存水分、養分與廢物，維持細胞形狀。"
-        ]
-      },
-      {
-        id: 21,
-        category: "葉片構造與功能",
-        level: "課本核心",
-        stem: "葉片構造中的「氣室」主要扮演下列何種生理角色？",
-        options: [
-          "位於葉肉細胞之間，作為氣體在葉片內部流通的管道",
-          "位於表皮細胞外側，負責儲存多餘的水分以備乾旱時使用",
-          "位於葉脈中央，負責將根部吸收的礦物質輸送至葉尖",
-          "位於保衛細胞內部，負責控制氣孔開啟與關閉的壓力變化"
-        ],
-        answerIndex: 0,
-        explanation: "氣室是葉肉組織內細胞間的空隙，與氣孔相通，作為二氧化碳、氧氣與水氣在葉片內部流通擴散的管道。",
-        distractors: [
-          "(B) 氣室位於葉肉內部而非表皮外側，且不負責儲存水分。",
-          "(C) 輸送水分與礦物質的是葉脈中的木質部。",
-          "(D) 控制氣孔開閉的是保衛細胞的膨壓變化，而非氣室。"
-        ]
-      },
-      {
-        id: 22,
-        category: "核心概念與定義",
-        level: "課本核心",
-        stem: "光合作用所需的兩種原料，分別是由植物的哪兩個主要構造進入植物體內？",
-        options: [
-          "水由根部吸收，二氧化碳由葉片氣孔進入",
-          "水由葉片氣孔吸收，二氧化碳由根部吸收",
-          "水與二氧化碳皆由葉片上表皮直接擴散進入",
-          "水與二氧化碳皆由根毛吸收後經維管束運送"
-        ],
-        answerIndex: 0,
-        explanation: "光合作用的原料為「水」與「二氧化碳」。水分主要由根部（根毛）自土壤吸收並經維管束運送到葉；二氧化碳則由空氣經葉片的「氣孔」擴散進入。",
-        distractors: [
-          "(B) 兩者來源完全相反，氣孔主要為水分散失（蒸散）的出口，而非吸收液態水的主要構造。",
-          "(C) 上表皮覆蓋防水的角質層，阻礙水與氣體直接穿透。",
-          "(D) 陸生植物所需的大部分二氧化碳是從大氣經由氣孔進入，而非由根部吸收。"
-        ]
-      },
-      {
-        id: 23,
-        category: "實驗步驟與變因",
-        level: "課本核心",
-        stem: "在實驗 2-3「光合作用變因之探討」中，操作步驟裡「摘下葉片後，先放入裝有熱水的燒杯中煮數分鐘」，此步驟的主要目的為何？",
-        options: [
-          "軟化葉片並破壞細胞膜，利於後續酒精滲入溶出葉綠素",
-          "直接將葉片中的葉綠素溶解在熱水中，使葉片變成淡黃色",
-          "將葉片內部的葡萄糖高溫殺菌，避免細菌分解影響實驗",
-          "使葉片中的澱粉迅速膨脹，以便在顯微鏡下觀察澱粉粒"
-        ],
-        answerIndex: 0,
-        explanation: "熱水煮沸可以破壞葉片表面的角質層及細胞膜構造，使葉片軟化，讓後續的酒精能順利進入葉肉細胞中溶解葉綠素。",
-        distractors: [
-          "(B) 葉綠素不溶於水，熱水無法溶出葉綠素，必須靠後續的「酒精」才能溶出。",
-          "(C) 實驗目的並非殺菌。",
-          "(D) 澱粉檢驗是透過滴加碘液觀察肉眼可見的顏色變化，無需用顯微鏡觀察澱粉粒膨脹。"
-        ]
-      },
-      {
-        id: 24,
-        category: "實驗步驟與變因",
-        level: "課本核心",
-        stem: "在澱粉檢驗過程中，當葉片從熱酒精中夾出並變為淡黃色後，為何還需要再放入大燒杯的「熱水中漂洗」一次？",
-        options: [
-          "洗去葉片表面殘餘的酒精並再次軟化葉片，避免影響碘液檢測",
-          "利用熱水將葉片中的澱粉溶解出來，使培養皿中的水變色",
-          "降低葉片的溫度，因為碘液在高溫下會立刻失去變色能力",
-          "補充葉片在酒精中流失的水分，使葉片恢復原本的翠綠色"
-        ],
-        answerIndex: 0,
-        explanation: "經酒精脫色後的葉片質地較脆且表面沾附酒精，放入熱水漂洗可洗去殘餘酒精（避免酒精干擾碘液反應）並使葉片重新軟化，方便攤平於培養皿中滴加碘液。",
-        distractors: [
-          "(B) 澱粉不溶於水，不會溶解在熱水中，且碘液是直接滴在葉片上觀察。",
-          "(C) 熱水漂洗本身溫度亦高，並非為了降溫。",
-          "(D) 葉綠素已溶於酒精中，葉片不會恢復翠綠色。"
-        ]
-      },
-      {
-        id: 25,
-        category: "核心概念與定義",
-        level: "課本核心",
-        stem: "關於植物光合作用產物「水」的敘述，下列何者正確？",
-        options: [
-          "水既是光合作用的反應原料，也是碳反應階段產生的產物之一",
-          "水僅在光反應階段作為原料被消耗，整個光合作用不會產生水",
-          "光合作用產生的水會全部轉變為葡萄糖，不會釋出細胞外",
-          "水只在碳反應階段被消耗，並於光反應階段重新合成釋放"
-        ],
-        answerIndex: 0,
-        explanation: "光合作用的完整反應式為「水 ＋ 二氧化碳 → 氧氣 ＋ 葡萄糖 ＋ 水」。光反應消耗水，碳反應則會產生新的水分子，因此水同時出現在反應物與產物中。",
-        distractors: [
-          "(B) 碳反應將二氧化碳合成葡萄糖的過程中，同時會產生水。",
-          "(C) 產生的水可參與細胞內其他代謝或經由氣孔蒸散。",
-          "(D) 消耗水的是光反應（分解水產生氧氣），產生水的是碳反應。"
-        ]
-      },
-      {
-        id: 26,
-        category: "葉片構造與功能",
-        level: "進階補充",
-        stem: "關於植物「保衛細胞」的構造與生理特性，下列敘述何者<strong>錯誤</strong>？",
-        options: [
-          "細胞內含有葉綠體，在光照下能進行光合作用",
-          "通常兩兩成對圍成氣孔，能調節氣體進出與水分散失",
-          "在陸生植物葉片中，保衛細胞多數分布於下表皮",
-          "保衛細胞與表皮細胞皆具有葉綠體，但保衛細胞體積較大"
-        ],
-        answerIndex: 3,
-        explanation: "「表皮細胞」並不具有葉綠體，只有「保衛細胞」含有葉綠體。這是國中生物會考極常考的對比考點。",
-        distractors: [
-          "(A) 正確，保衛細胞含有葉綠體，可行光合作用。",
-          "(B) 正確，保衛細胞透過水分進出改變膨壓，進而控制氣孔開閉。",
-          "(C) 正確，陸生植物下表皮的氣孔與保衛細胞數量通常遠多於上表皮。"
-        ]
-      },
-      {
-        id: 27,
-        category: "實驗步驟與變因",
-        level: "課本核心",
-        stem: "某生欲驗證假說：「光線是植物進行光合作用的必要條件」。在設計實驗時，下列哪一項應設定為「操作變因」，其餘條件則皆設為「控制變因」？",
-        options: [
-          "葉片是否接受光照",
-          "植物的種類與健康狀況",
-          "環境的氣溫與土壤含水量",
-          "滴加碘液的濃度與時間"
-        ],
-        answerIndex: 0,
-        explanation: "驗證「光線是否為必要條件」時，實驗組（遮光）與對照組（照光）唯一不同的變因即為「有無光照（操作變因）」，其餘植物種類、溫度、水分等皆須保持相同（控制變因）。",
-        distractors: [
-          "(B) 植物種類必須相同，屬於控制變因。",
-          "(C) 氣溫與土壤含水量必須相同，屬於控制變因。",
-          "(D) 檢驗試劑的濃度與反應時間必須一致，屬於控制變因。"
-        ]
-      },
-      {
-        id: 28,
-        category: "實驗步驟與變因",
-        level: "課本核心",
-        stem: "在探討「葉綠體是否為光合作用必要條件」的延伸實驗中，老師建議選用「彩葉草」或「黃金葛」等具有綠色與非綠色斑紋的葉片進行實驗。其主要原因為何？",
-        options: [
-          "同一片葉子同時具備有葉綠體與無葉綠體的區域，可作為實驗組與對照組",
-          "這類植物的葉片不具有角質層，不需要經過熱水煮沸即可直接滴加碘液",
-          "這類植物在完全沒有光照的環境下，依然能利用非綠色部位進行光合作用",
-          "這類植物的葉綠素可以直接溶於冷水中，省去酒精隔水加熱的危險步驟"
-        ],
-        answerIndex: 0,
-        explanation: "斑葉植物（如彩葉草）同一片葉子上同時有綠色部分（有葉綠體，對照組）與非綠色部分（無葉綠體，實驗組），能確保光照、溫度、水分與二氧化碳等其他變因完全一致。",
-        distractors: [
-          "(B) 彩葉草葉片仍具有角質層，實驗時依然需要經過熱水煮沸與酒精隔水加熱脫色。",
-          "(C) 非綠色部位缺乏葉綠體，無論有無光照皆無法進行光合作用。",
-          "(D) 葉綠素依然不溶於水，必須使用酒精隔水加熱才能溶出。"
-        ]
-      },
-      {
-        id: 29,
-        category: "核心概念與定義",
-        level: "課本核心",
-        stem: "關於大氣中氣體濃度對光合作用速率的影響，下列敘述何者正確？",
-        options: [
-          "大氣中二氧化碳濃度過低時，會限制碳反應進行，進而降低光合作用速率",
-          "大氣中氧氣濃度太低時，會因缺乏原料而使光合作用完全停止",
-          "大氣中氮氣濃度升高時，會直接加速葉綠素吸收太陽能的效率",
-          "光合作用速率完全只受溫度影響，與空氣中的氣體成分毫無關聯"
-        ],
-        answerIndex: 0,
-        explanation: "二氧化碳是光合作用碳反應的必要原料，當環境中二氧化碳濃度過低時，原料供應不足，光合作用速率便會下降。",
-        distractors: [
-          "(B) 氧氣是光合作用的「產物」而非原料，大氣氧氣濃度太低不會因缺乏原料而使光合作用停止。",
-          "(C) 氮氣不參與光合作用的化學反應。",
-          "(D) 光照強度、溫度、水分與二氧化碳濃度皆會影響光合作用速率。"
-        ]
-      },
-      {
-        id: 30,
-        category: "核心概念與定義",
-        level: "課本核心",
-        stem: "下列何者「不屬於」植物行光合作用所必需的條件或原料？",
-        options: [
-          "氧氣",
-          "水",
-          "二氧化碳",
-          "葉綠體與日光"
-        ],
-        answerIndex: 0,
-        explanation: "氧氣是植物行光合作用（光反應階段分解水）所釋放出的「產物」，並非光合作用所需的條件或原料。",
-        distractors: [
-          "(B) 水是光反應分解的必要原料。",
-          "(C) 二氧化碳是碳反應合成葡萄糖的必要原料。",
-          "(D) 葉綠體是反應場所（含葉綠素與酵素），日光是光反應的能量來源，皆為必要條件。"
-        ]
-      },
-
-      // --- 分析與實驗應用題 (31~45) ---
-      {
-        id: 31,
-        category: "跨章節與圖表推論",
-        level: "課本核心",
-        stem: "（108會考改編）小帆想探究某一種陸生植物在不同光照強度下，葉片進行光合作用時速率的快慢。他應該測量下列哪一項數據作為判斷依據最為合理？",
-        options: [
-          "單位時間內葉片產生氧氣的體積或質量",
-          "單位時間內葉片消耗葉綠素的質量",
-          "單位時間內葉片消耗葡萄糖的質量",
-          "單位時間內葉片產生二氧化碳的體積"
-        ],
-        answerIndex: 0,
-        explanation: "光合作用會產生氧氣與葡萄糖並消耗二氧化碳與水，因此測量「單位時間內氧氣的產生量」（或二氧化碳的消耗量、葡萄糖的增加量）即可推估光合作用速率。",
-        distractors: [
-          "(B) 葉綠素在光合作用中扮演吸收光能的角色，反應前後不會被大量消耗。",
-          "(C) 葡萄糖是光合作用「產生」的養分，消耗葡萄糖是呼吸作用的指標。",
-          "(D) 產生二氧化碳是「呼吸作用」的特徵，光合作用是消耗二氧化碳。"
-        ]
-      },
-      {
-        id: 32,
-        category: "實驗步驟與變因",
-        level: "課本核心",
-        stem: "小聆挑選了同一株咸豐草的四片健康葉片進行光合作用實驗，處理方式如下表（× 表示未塗上膠水）。經過陽光普照三天後，摘下四片葉片進行澱粉檢驗（註：透明膠水不影響光線穿透，但會阻塞氣孔使氣體無法進出）。<br><table class='ref-table'><tr><th>實驗處理</th><th>葉片一</th><th>葉片二</th><th>葉片三</th><th>葉片四</th></tr><tr><td>貼不透光貼紙</td><td>A貼紙貼在<br>葉片上表皮</td><td>B貼紙貼在<br>葉片下表皮</td><td>C貼紙貼在<br>葉片上表皮</td><td>D貼紙貼在<br>葉片上表皮</td></tr><tr><td>塗透明膠水</td><td>×</td><td>×</td><td>在<strong>上表皮</strong>塗滿</td><td>在<strong>下表皮</strong>塗滿</td></tr></table><br>若澱粉檢驗步驟完全正確，撕下貼紙並滴加碘液後，下列哪幾張貼紙覆蓋處會呈現「黃褐色」？",
-        options: [
-          "僅有貼紙 A 處",
-          "僅有貼紙 A 與貼紙 C 處",
-          "貼紙 A、貼紙 B 與貼紙 C 處",
-          "葉片四整片葉子皆呈黃褐色"
-        ],
-        answerIndex: 3,
-        explanation: "陸生植物氣孔多在下表皮：葉片一 A 處遮光無澱粉（黃褐色）；葉片二 B 處貼在下表皮遮光（下表皮照光原本就較弱，且貼紙遮光）；葉片三上表皮塗膠水不影響下表皮氣孔進氣，僅 C 遮光處呈黃褐色；葉片四「下表皮塗滿膠水」完全阻塞氣孔，整片葉子無法獲得二氧化碳，故「整片葉子」皆無法行光合作用而呈黃褐色！",
-        distractors: [
-          "(A) 忽略了葉片三 C 處遮光與葉片四下表皮氣孔被完全阻塞的效應。",
-          "(B) 忽略了葉片四下表皮氣孔被膠水阻塞後，整片葉子都缺乏二氧化碳而無法製造澱粉。",
-          "(C) 葉片四整片葉子因為下表皮氣孔被阻塞，二氧化碳無法進入，因此整片皆呈黃褐色。"
-        ]
-      },
-      {
-        id: 33,
-        category: "實驗步驟與變因",
-        level: "課本核心",
-        stem: "承上題（咸豐草四片葉片實驗），比較「葉片一（未塗膠水）」與「葉片三（上表皮塗滿透明膠水）」在未貼貼紙的區域，兩者滴加碘液後皆呈現深藍黑色，反應結果幾乎無差異。此結果最能支持下列哪一項推論？",
-        options: [
-          "咸豐草葉片進行光合作用所需的二氧化碳，主要並非由上表皮進入",
-          "透明膠水具有促進葉綠素吸收太陽能的功能，可彌補氣孔阻塞的損失",
-          "咸豐草葉片只需要陽光與水分就能合成澱粉，完全不需要二氧化碳",
-          "上表皮覆蓋的膠水會與碘液直接發生化學反應，產生藍黑色沉澱"
-        ],
-        answerIndex: 0,
-        explanation: "葉片三的上表皮塗滿膠水卻仍能正常行光合作用產生澱粉，證明二氧化碳主要是由「下表皮」的氣孔進入葉片，上表皮氣孔極少。",
-        distractors: [
-          "(B) 膠水僅具阻塞氣孔與透光性，並無促進葉綠素吸光的功能。",
-          "(C) 二氧化碳仍是光合作用的必要原料，只是它從未塗膠水的下表皮進入。",
-          "(D) 膠水在熱水煮沸與酒精加熱過程中已被破壞或洗去，不會與碘液產生藍黑色反應。"
-        ]
-      },
-      {
-        id: 34,
-        category: "實驗步驟與變因",
-        level: "進階補充",
-        stem: "小豪想基於實驗 2-3 的架構，設計一個新實驗來驗證假說：「<strong>二氧化碳的吸收會影響植物製造澱粉</strong>」。若他將同一株植物上「未經任何處理的葉片」設定為對照組，則下列哪一種處理方式的葉片最適合作為「實驗組」？（註：凡士林或油脂可阻絕氣體進出葉片）",
-        options: [
-          "僅以油脂塗抹整個葉片的上下表面",
-          "僅以不透光的鋁箔紙包覆整個葉片",
-          "先以鋁箔紙包覆葉片，再於鋁箔紙外塗抹油脂",
-          "以黑色塑膠袋密封整盆植物並置於暗室中"
-        ],
-        answerIndex: 0,
-        explanation: "欲驗證「二氧化碳」的影響，唯一的「操作變因」必須是「能否吸收二氧化碳」，其他條件（如光照）必須與對照組一致。僅塗抹油脂可阻塞氣孔阻絕二氧化碳，同時不影響光照，最為恰當。",
-        distractors: [
-          "(B) 鋁箔紙會同時阻隔「光線」，改變了光照變因，無法單獨證明二氧化碳的影響。",
-          "(C) 包覆鋁箔紙多增加了「阻隔光線」的變因，違反單一操作變因原則。",
-          "(D) 置於暗室同時改變了光照條件，且未在同株植物上設置對照葉片。"
-        ]
-      },
-      {
-        id: 35,
-        category: "跨章節與圖表推論",
-        level: "課本核心",
-        stem: "請對照左側「圖表一：葉片橫切面示意圖」與「圖表二：葉綠體光合作用模式圖」。光合作用所需的原料「二氧化碳」，主要是經由葉片橫切面中的哪一構造進入，並擴散至葉肉細胞的葉綠體中？",
-        options: [
-          "由下表皮的氣孔（己處）進入",
-          "由上表皮的角質層（甲處）滲入",
-          "由葉脈的輸導組織（丙處）運送進入",
-          "由上表皮細胞（戊處）主動運輸進入"
-        ],
-        answerIndex: 0,
-        explanation: "空氣中的二氧化碳主要是經由葉片下表皮保衛細胞所圍成的「氣孔（己處）」擴散進入氣室，再進入葉肉細胞進行碳反應。",
-        distractors: [
-          "(B) 角質層為防水防氣體的蠟質構造，二氧化碳無法直接穿透。",
-          "(C) 葉脈主要負責運送水分與養分，氣體主要由氣孔進出。",
-          "(D) 表皮細胞排列緊密且外有角質層，並非氣體進入的主要門戶。"
-        ]
-      },
-      {
-        id: 36,
-        category: "跨章節與圖表推論",
-        level: "課本核心",
-        stem: "參考左側「圖表二：葉綠體內部光合作用模式圖」，關於碳反應所合成的主要養分「葡萄糖」，下列敘述何者<strong>錯誤</strong>？",
-        options: [
-          "屬於蛋白質類養分，是構成植物體內酵素的最主要成分",
-          "屬於醣類養分，每公克完全氧化可產生約 4 大卡的能量",
-          "在植物體內可經由酵素作用，轉變為澱粉儲存於器官中",
-          "可進一步轉變為纖維素，作為構成植物細胞壁的原料"
-        ],
-        answerIndex: 0,
-        explanation: "葡萄糖屬於「醣類（碳水化合物）」，而非蛋白質；酵素的主要成分才是蛋白質。",
-        distractors: [
-          "(B) 正確，醣類每公克可提供 4 大卡能量。",
-          "(C) 正確，多餘的葡萄糖常轉變為澱粉儲存（如馬鈴薯、米粒）。",
-          "(D) 正確，植物細胞壁的主要成分纖維素亦是由葡萄糖聚合而成。"
-        ]
-      },
-      {
-        id: 37,
-        category: "跨章節與圖表推論",
-        level: "課本核心",
-        stem: "參考左側「圖表一：葉片橫切面示意圖」，關於圖中「甲（角質層）」與「戊（上表皮）」的構造與功能比較，下列敘述何者正確？",
-        options: [
-          "甲覆蓋在戊的外側，具有防水功能，能防止葉片水分過度散失",
-          "甲與戊內部皆含有大量葉綠體，是植物接收陽光行光合作用的第一線",
-          "戊由排列疏鬆的細胞組成，細胞間留有大型氣室供氣體流通",
-          "甲屬於活細胞組織，能隨環境濕度自動增厚或變薄以調節溫度"
-        ],
-        answerIndex: 0,
-        explanation: "角質層（甲）是由表皮細胞分泌的蠟質層，覆蓋在上下表皮（戊、丁）外側，主要功能為防止水分散失。",
-        distractors: [
-          "(B) 角質層與上表皮細胞皆「不含葉綠體」，無法行光合作用。",
-          "(C) 排列疏鬆並留有氣室的是「葉肉」組織，上表皮細胞排列極為緊密。",
-          "(D) 角質層是表皮細胞分泌的非細胞蠟質物質，並非活細胞。"
-        ]
-      },
-      {
-        id: 38,
-        category: "跨章節與圖表推論",
-        level: "課本核心",
-        stem: "參考左側「圖表二：光反應與碳反應比較表」，關於「光反應」與「碳反應」的差異分析，下列哪一項配對完全正確？",
-        options: [
-          "能量來源：光反應為太陽光能；碳反應為光反應產生的能量",
-          "進行場所：光反應在葉綠體進行；碳反應在粒線體進行",
-          "反應原料：光反應消耗二氧化碳；碳反應消耗水分子",
-          "反應產物：光反應產生葡萄糖；碳反應釋放出氧氣"
-        ],
-        answerIndex: 0,
-        explanation: "光反應由葉綠素吸收「太陽光能」驅動；碳反應則利用「光反應產生的能量」與酵素，將二氧化碳轉變為葡萄糖與水。",
-        distractors: [
-          "(B) 光反應與碳反應「皆在葉綠體內」進行，粒線體是進行呼吸作用的場所。",
-          "(C) 原料完全顛倒：光反應消耗水，碳反應消耗二氧化碳。",
-          "(D) 產物完全顛倒：光反應釋出氧氣，碳反應產生葡萄糖與水。"
-        ]
-      },
-      {
-        id: 39,
-        category: "實驗步驟與變因",
-        level: "課本核心",
-        stem: "某同學進行「光與光合作用」實驗時，忘記在實驗前 3～5 天先用鋁箔紙包覆葉片，而是在實驗當天早上 10 點（大太陽下）才用鋁箔紙包住葉片，下午 2 點便摘下葉片進行澱粉檢測。他最可能觀察到下列何種結果？",
-        options: [
-          "包覆鋁箔紙的部位與未包覆的部位，滴加碘液後皆呈現藍黑色",
-          "包覆鋁箔紙的部位呈藍黑色，未包覆的部位則呈黃褐色",
-          "整片葉子因為鋁箔紙包覆時間太短，滴加碘液後皆呈黃褐色",
-          "葉片在酒精隔水加熱時會立刻燃燒，無法進行後續碘液檢測"
-        ],
-        answerIndex: 0,
-        explanation: "早上 10 點時葉片已經接受陽光照射並進行光合作用儲存了大量澱粉，僅包覆 4 小時（10點至14點）時間過短，無法將原本儲存的澱粉消耗完畢，因此遮光區滴加碘液仍會呈現藍黑色。",
-        distractors: [
-          "(B) 未包覆區在陽光下持續製造澱粉，不可能呈黃褐色。",
-          "(C) 整片葉子都含有先前儲存的澱粉，應皆呈藍黑色而非黃褐色。",
-          "(D) 鋁箔紙包覆時間長短與酒精是否燃燒無關。"
-        ]
-      },
-      {
-        id: 40,
-        category: "實驗步驟與變因",
-        level: "進階補充",
-        stem: "在澱粉檢驗實驗中，若某生在步驟中不小心遺漏了「將葉片放入酒精中隔水加熱」的步驟，直接將熱水煮過的綠色葉片滴加碘液，會造成什麼實驗困擾？",
-        options: [
-          "葉片本身的深綠色葉綠素會遮蓋碘液變色，導致難以辨識是否呈現藍黑色",
-          "葉綠素會與碘液發生劇烈爆炸反應，造成培養皿破裂與試劑噴濺",
-          "未溶出葉綠素會使葉片上的澱粉全部轉變為葡萄糖，導致碘液完全不變色",
-          "碘液必須溶在酒精中才能與澱粉反應，沒有酒精則碘液無法滲入葉片"
-        ],
-        answerIndex: 0,
-        explanation: "用酒精隔水加熱脫色的唯一目的是「溶出葉綠素」，讓葉片變成淡黃色，這樣後續滴加碘液時，才能清楚觀察到黃褐色或藍黑色的顏色變化，不被葉片原本的綠色干擾。",
-        distractors: [
-          "(B) 葉綠素與碘液不會發生爆炸反應。",
-          "(C) 葉綠素存在與否不會將已合成的澱粉轉變為葡萄糖。",
-          "(D) 碘液為水溶液，無需溶在酒精中即可與澱粉產生藍黑色反應。"
-        ]
-      },
-      {
-        id: 41,
-        category: "葉片構造與功能",
-        level: "課本核心",
-        stem: "將植物葉片撕下一小片下表皮製成玻片標本，在複式顯微鏡下觀察。若將植物移至完全黑暗的密閉房間內數小時後再觀察氣孔狀態，最可能發現下列何種現象？",
-        options: [
-          "保衛細胞因水分流失而萎縮，導致氣孔關閉或縮小",
-          "保衛細胞因吸收大量水分而膨脹，導致氣孔完全張開",
-          "表皮細胞迅速分裂並將氣孔完全覆蓋，以防止水分蒸散",
-          "保衛細胞內的葉綠體全部消失，轉變為一般表皮細胞"
-        ],
-        answerIndex: 0,
-        explanation: "在黑暗中植物無法進行光合作用，保衛細胞內溶質濃度下降、水分滲透流出，保衛細胞變得萎縮（膨壓下降），使氣孔關閉，以減少夜晚不需吸收二氧化碳時的水分散失。",
-        distractors: [
-          "(B) 吸收水分膨脹使氣孔張開通常發生在白天有光照、水分充足時。",
-          "(C) 表皮細胞不會在數小時內分裂覆蓋氣孔。",
-          "(D) 保衛細胞不會因為黑暗就失去葉綠體變成表皮細胞。"
-        ]
-      },
-      {
-        id: 42,
-        category: "核心概念與定義",
-        level: "課本核心",
-        stem: "關於植物體內養分的運輸與儲存，下列敘述何者正確？",
-        options: [
-          "葉片製造的葡萄糖經由葉脈運送至根或莖，可轉變為澱粉儲存",
-          "葉片製造的澱粉直接溶於水中，透過木質部向上運送至花朵",
-          "植物在白天製造的葡萄糖必須在當天消耗完畢，無法隔夜儲存",
-          "根部吸收的礦物質與葉片製造的葡萄糖，皆由同一條死細胞管道運送"
-        ],
-        answerIndex: 0,
-        explanation: "葡萄糖溶於水，可經由葉脈及莖部的「韌皮部」運送至植物各部位（如根、莖、果實、種子），再由酵素轉換為不溶於水的澱粉儲存。",
-        distractors: [
-          "(B) 澱粉「不溶於水」，必須先以葡萄糖（或蔗糖）形式經由「韌皮部」運輸，而非木質部。",
-          "(C) 多餘的養分會轉變為澱粉、蛋白質或脂質長期儲存於植物器官中。",
-          "(D) 水與礦物質由「木質部」（死細胞）運輸，養分則由「韌皮部」（活細胞）運輸。"
-        ]
-      },
-      {
-        id: 43,
-        category: "實驗步驟與變因",
-        level: "進階補充",
-        stem: "某生使用「本氏液」與「碘液」分別檢測植物葉片光合作用的產物。已知光合作用直接產物為葡萄糖，隨後可轉變為澱粉儲存。下列關於這兩種檢驗試劑的使用方式，何者正確？",
-        options: [
-          "滴加碘液檢測澱粉不需加熱，直接觀察是否由黃褐色變藍黑色；本氏液檢測葡萄糖則需隔水加熱",
-          "滴加碘液檢測澱粉必須在沸水中隔水加熱 5 分鐘，本氏液則在室溫下即可變色",
-          "碘液與本氏液皆可檢測澱粉，只是碘液變藍黑色，本氏液變磚紅色",
-          "本氏液可以直接滴在未處理的綠色葉片上，觀察葉片是否變成橘紅色"
-        ],
-        answerIndex: 0,
-        explanation: "「碘液」檢測澱粉在室溫下直接滴加即可變色（黃褐→藍黑）；「本氏液」檢測葡萄糖則必須經過「隔水加熱」才會依濃度呈現綠、黃、橙、紅的顏色變化。",
-        distractors: [
-          "(B) 加熱條件完全相反，碘液不需加熱，本氏液才需隔水加熱。",
-          "(C) 本氏液是檢測「葡萄糖（還原糖）」，不能用來檢測澱粉。",
-          "(D) 綠色葉片含有葉綠素會干擾顏色判讀，且本氏液需將組織磨碎取汁液並隔水加熱才能檢測。"
+          "(B) 粒線體是細胞進行「呼吸作用」釋放能量的場所，不含葉綠素，無法行光合作用。",
+          "(C) 細胞核是細胞的生命中樞，內含遺傳物質，調控細胞代謝與分裂。",
+          "(D) 液胞主要儲存水分、養分與廢物，並非進行光合作用的場所。"
         ]
       },
       {
         id: 44,
-        category: "跨章節與圖表推論",
-        level: "課本核心",
-        stem: "在溫室農業中，農民有時會在白天適度增加溫室內的二氧化碳濃度，並給予充足光照與水分，以提升作物產量。此做法的科學原理為何？",
+        dimension: "基礎定義",
+        isAdvanced: false,
+        topic: "光合作用的功能辨析",
+        stem: "光合作用對植物本身與整個生物圈皆具有極重要的功能。下列何者【不是】光合作用的功能？",
         options: [
-          "提供充足的光反應能量與碳反應原料，加速植物合成葡萄糖的速率",
-          "增加溫室內的保溫效果，讓植物在白天改以呼吸作用製造更多澱粉",
-          "促使葉片氣孔完全關閉，防止作物在白天發生蒸散作用而枯萎",
-          "抑制葉綠體中的酵素活性，避免葡萄糖被過度分解成二氧化碳"
+          "直接分解葡萄糖以釋放能量，供植物細胞進行各項生命活動",
+          "將太陽能轉換為化學能並儲存於養分中，維持生物生存",
+          "釋放出氧氣，供給植物本身與其他生物進行呼吸作用",
+          "消耗大氣中的二氧化碳，有助於減緩地球的溫室效應"
         ],
         answerIndex: 0,
-        explanation: "充足光照可提供光反應所需的太陽能，增加二氧化碳濃度則能提供碳反應所需的原料，兩者配合可大幅提升光合作用製造葡萄糖的速率，進而提高作物產量。",
+        formula: "$$\\text{光合作用：儲存能量（光能} \\rightarrow \\text{化學能）} \\quad \\text{vs.} \\quad \\text{呼吸作用：釋放能量（分解葡萄糖）}$$",
+        explanation: "「分解葡萄糖以釋放能量」是「呼吸作用」的功能，而非光合作用；光合作用是「合成」葡萄糖並將光能轉存為化學能。",
         distractors: [
-          "(B) 呼吸作用是「分解」養分產生能量，無法製造澱粉。",
-          "(C) 光照充足與水分充足時，氣孔會張開以利吸收二氧化碳，而非關閉。",
-          "(D) 提高光合作用速率需要酵素保持高活性，抑制酵素會使碳反應停擺。"
+          "(B) 光合作用將光能轉變為葡萄糖中的化學能，為生物提供食物與能量來源，敘述正確。",
+          "(C) 釋放氧氣供生物呼吸是光合作用的重要功能之一。",
+          "(D) 吸收二氧化碳有助於降低大氣溫室氣體濃度，減緩溫室效應。"
         ]
       },
       {
         id: 45,
-        category: "實驗步驟與變因",
-        level: "課本核心",
-        stem: "在進行實驗 2-3 時，若實驗室沒有鋁箔紙，同學改用「完全不透光的黑色電工膠帶」貼在葉片上遮光 5 天，其餘步驟完全相同。則撕下膠帶並經標準澱粉檢驗後，貼黑色膠帶處會呈現何種顏色？",
+        dimension: "圖表判讀",
+        isAdvanced: true,
+        topic: "光反應與碳反應的能量流向",
+        stem: "【進階題】觀察葉綠體中光合作用的「光反應」與「碳反應」流程，下列關於兩者之間關聯的敘述，何者正確？",
         options: [
-          "黃褐色，因為黑色膠帶同樣阻隔了光線，該處無法進行光合作用產生澱粉",
-          "藍黑色，因為黑色膠帶會吸收更多太陽熱能，加速該處進行碳反應",
-          "翠綠色，因為黑色膠帶會保護葉綠素，使酒精無法將該處葉綠素溶出",
-          "無色透明，因為黑色膠帶的黏膠會與熱酒精反應並溶解該處葉肉細胞"
+          "光反應吸收太陽能並分解水產生氧氣，同時提供碳反應所需的能量",
+          "碳反應先利用太陽能將二氧化碳分解，再將能量傳給光反應製造氧氣",
+          "光反應消耗二氧化碳與水產生葡萄糖，碳反應則負責釋放氧氣",
+          "光反應與碳反應彼此完全獨立，碳反應不需要光反應提供任何產物或能量"
         ],
         answerIndex: 0,
-        explanation: "實驗的核心變因是「有無光照」，只要使用不透光材料（無論鋁箔紙或黑色膠帶）遮光 3～5 天，該處便無法行光合作用產生澱粉，滴加碘液後皆呈黃褐色。",
+        formula: "$$\\text{光能} \\xrightarrow{\\text{光反應}} \\text{分解水（釋出 } \\text{O}_2\\text{）} + \\text{能量} \\xrightarrow{\\text{碳反應}} \\text{固定 } \\text{CO}_2 \\rightarrow \\text{合成葡萄糖與水}$$",
+        explanation: "根據課本第 108 頁「補充資訊 光合作用」比較表，光反應吸收太陽能將水分解並釋出氧氣，同時產生能量供碳反應使用；碳反應則利用光反應提供的能量與酵素，將二氧化碳轉換成葡萄糖和水。",
         distractors: [
-          "(B) 黑色物體吸熱但阻隔了光線，光反應需要的是「光能」而非單純熱能，無光則無法製造澱粉。",
-          "(C) 葉綠素依然會被熱酒精溶出，不會維持翠綠色。",
-          "(D) 葉片經酒精脫色後呈淡黃色，滴加碘液後應呈碘液原本的黃褐色。"
+          "(B) 吸收太陽能與分解水的是「光反應」，碳反應不會直接利用太陽能。",
+          "(C) 產生氧氣的是「光反應」，合成葡萄糖的是「碳反應」，兩者分工相反。",
+          "(D) 碳反應合成醣類需要「光反應產生的能量」，兩者緊密配合，並非完全獨立。"
         ]
       },
-
-      // --- 高階綜合鑑別題 (46~50) ---
       {
         id: 46,
-        category: "跨章節與圖表推論",
-        level: "進階補充",
-        stem: "將一盆健康的天竺葵置於密閉透明玻璃罩內，罩內放置一杯「氫氧化鈉溶液」（已知氫氧化鈉會強烈吸收空氣中的二氧化碳）。將整套裝置移至陽光下照射 6 小時後，摘下葉片進行澱粉檢驗，發現整片葉子滴加碘液後皆呈黃褐色。此實驗結果最能證明下列何種結論？",
+        dimension: "基礎定義",
+        isAdvanced: false,
+        topic: "保衛細胞與葉肉細胞的共同點",
+        stem: "在葉片的構造中，除了「葉肉細胞」之外，下列哪一種細胞也具有葉綠體，能夠進行光合作用？",
         options: [
-          "即使有充足陽光與葉綠素，缺乏二氧化碳時植物仍無法合成澱粉",
-          "氫氧化鈉溶液會揮發並毒死葉肉細胞，導致葉綠體失去所有功能",
-          "在密閉玻璃罩內，植物因為氧氣濃度過高而停止進行光反應",
-          "植物在陽光下照射 6 小時時間太短，不足以將葡萄糖轉變為澱粉"
+          "保衛細胞",
+          "上表皮細胞",
+          "下表皮細胞",
+          "木質部導管細胞"
         ],
         answerIndex: 0,
-        explanation: "氫氧化鈉吸收了玻璃罩內的二氧化碳，使植物處於「有光、有水、有葉綠體，但缺乏二氧化碳」的環境，結果無法產生澱粉（呈黃褐色），證明二氧化碳是光合作用的必要原料。",
+        formula: "$$\\text{葉片行光合作用細胞} = \\text{葉肉細胞} + \\text{保衛細胞}$$",
+        explanation: "根據課本第 108 頁「疑問一點通」與第 107 頁重點整理，除了葉肉細胞外，葉片中的「保衛細胞」也含有葉綠體，能進行光合作用，同時能控制氣孔的大小。",
         distractors: [
-          "(B) 氫氧化鈉為固體或水溶液，不會揮發毒死葉肉細胞，其作用是吸收二氧化碳。",
-          "(C) 無法行光合作用的主因是缺乏原料二氧化碳，而非氧氣濃度過高。",
-          "(D) 在充足陽光與二氧化碳下，植物照射數小時即足以合成可被碘液檢出的澱粉。"
+          "(B) 上表皮細胞透明無色，不含葉綠體，無法進行光合作用。",
+          "(C) 下表皮細胞同樣不含葉綠體，主要功能為保護。",
+          "(D) 導管細胞負責輸送水分，成熟時不含葉綠體，無法進行光合作用。"
         ]
       },
       {
         id: 47,
-        category: "跨章節與圖表推論",
-        level: "進階補充",
-        stem: "科學家在研究光合作用時，將一株綠色植物置於密閉透明容器中，並利用感測器連續 24 小時監測容器內「二氧化碳濃度」的變化。若白天陽光充足、夜晚完全無光，則容器內二氧化碳濃度的變化趨勢應為何？",
+        dimension: "實驗變因",
+        isAdvanced: true,
+        topic: "包覆鋁箔時間長短對實驗結果的影響",
+        stem: "【進階題】在進行「實驗 2-3 光合作用變因之探討」時，課本建議在活動進行前「3 至 5 天」用鋁箔紙包住葉片，而非僅提前「3 至 5 小時」。若只提前 3 至 5 小時包覆鋁箔紙，最可能發生什麼問題？",
         options: [
-          "白天因光合作用速率大於呼吸作用，濃度逐漸下降；夜晚只剩呼吸作用，濃度逐漸上升",
-          "白天因光合作用與呼吸作用同時進行，濃度保持不變；夜晚濃度則急速下降",
-          "白天與夜晚皆因植物持續進行呼吸作用，容器內二氧化碳濃度呈直線上升",
-          "白天二氧化碳濃度急速上升，夜晚則因植物進行碳反應而使濃度逐漸下降"
+          "時間過短，無法完全消耗葉片實驗前原本儲存的澱粉，影響實驗準確性",
+          "鋁箔紙包覆時間太短，會導致葉片細胞水分過度蒸散而枯萎",
+          "時間太短會使酒精無法溶出葉綠素，導致整片葉子呈現深綠色",
+          "包覆時間不足會使葉片直接產生大量葡萄糖，干擾本氏液檢驗"
         ],
         answerIndex: 0,
-        explanation: "白天有光時，植物同時進行光合作用（消耗 CO₂）與呼吸作用（產生 CO₂），因光合作用速率遠大於呼吸作用，故整體 CO₂ 濃度下降；夜晚無光，光合作用停止，只進行呼吸作用釋放 CO₂，故濃度上升。",
+        formula: "$$\\text{包覆時間過短（3～5 小時）} \\implies \\text{原有澱粉未耗盡} \\implies \\text{遮光區仍可能測出殘留澱粉（干擾判讀）}$$",
+        explanation: "根據課本第 111 頁「分析與討論」第 1 題，葉片原本可能儲存一些澱粉，提前 3～5 天包覆鋁箔可讓植物消耗掉原有澱粉（澱粉歸零）；若只提前 3～5 小時，時間過短無法完全消耗原有澱粉，會影響實驗準確性。",
         distractors: [
-          "(B) 白天光合作用消耗的二氧化碳遠多於呼吸作用產生的量，因此濃度會明顯下降，夜晚則上升。",
-          "(C) 忽略了白天光合作用會大量吸收消耗二氧化碳。",
-          "(D) 趨勢完全相反；且夜晚沒有光反應提供能量，碳反應也無法持續消耗二氧化碳。"
+          "(B) 鋁箔紙遮蔽陽光不會導致水分過度蒸散而枯萎，反而是遮光可減少日照升溫。",
+          "(C) 葉綠素能否溶出取決於後續酒精隔水加熱的步驟，與事前包鋁箔時間無關。",
+          "(D) 遮光環境無法進行光合作用產生新的葡萄糖，且本實驗是用碘液檢驗澱粉。"
         ]
       },
       {
         id: 48,
-        category: "跨章節與圖表推論",
-        level: "進階補充",
-        stem: "某生比較同一株植物在「正午烈日高溫（氣孔大量關閉以減少水分散失）」與「上午溫和陽光（氣孔充分張開）」兩種狀態下的光合作用速率。發現在正午烈日時，儘管光照極強，光合作用速率反而明顯下降。造成此現象最合理的生理原因為何？",
+        dimension: "跨章整合",
+        isAdvanced: true,
+        topic: "光合作用產物（葡萄糖）的去向",
+        stem: "【進階題】植物葉片行光合作用製造出葡萄糖後，下列關於這些葡萄糖去向的敘述，何者【錯誤】？",
         options: [
-          "氣孔關閉導致空氣中的二氧化碳無法順利進入葉片，限制了碳反應的進行",
-          "正午陽光過強會使葉脈中的木質部凝固，導致根部水分無法運送到葉片",
-          "氣孔關閉使葉片內部的氧氣全部轉變為二氧化碳，抑制了光反應的酵素",
-          "正午高溫使表皮細胞的角質層融化，導致葉肉細胞直接暴露在空氣中脫水"
+          "植物體內製造的葡萄糖只能供植物本身利用，完全不會被動物攝取",
+          "部分葡萄糖會經由酵素轉變為澱粉，儲存於植物體內以備不時之需",
+          "植物可利用葡萄糖作為能量來源，透過呼吸作用維持生命現象",
+          "葡萄糖也可轉變為其他有機物質，供植物生長發育與建構細胞所需"
         ],
         answerIndex: 0,
-        explanation: "在炎熱正午，植物為防止水分過度蒸散會關閉部分氣孔，但氣孔關閉同時阻礙了二氧化碳進入葉片，使碳反應因缺乏原料而速率下降（俗稱「光合午休」現象）。",
+        formula: "$$\\text{光合作用葡萄糖} \\implies \\begin{cases} \\text{植物自身：呼吸供能、轉變為澱粉/纖維素等} \\\\ \\text{生態系：被草食/雜食動物攝食，成為食物鏈能量來源} \\end{cases}$$",
+        explanation: "根據課本第 109 頁「課文重點評量」是非題第 5 題與「光合作用的功能」，植物製造的葡萄糖除供本身利用外，也能被動物攝食利用，是生態系中重要的養分與能量來源。",
         distractors: [
-          "(B) 木質部為導管與假導管構造，不會因正午陽光而凝固。",
-          "(C) 氧氣不會在葉片內自動轉變為二氧化碳。",
-          "(D) 植物角質層不會在正常正午氣溫下融化。"
+          "(B) 葡萄糖可經酵素轉變為澱粉儲存，為植物常見的養分儲存形式。",
+          "(C) 植物細胞需要能量進行生命活動，會透過呼吸作用分解葡萄糖釋放能量。",
+          "(D) 葡萄糖是合成其他醣類與建構植物體結構的重要基礎物質。"
         ]
       },
       {
         id: 49,
-        category: "跨章節與圖表推論",
-        level: "進階補充",
-        stem: "若將綠色植物葉片中的「葉綠體」分離出來，置於含有水、二氧化碳與相關酵素的試管中，並給予適當光照。若人為阻斷「光反應」的進行，則「碳反應」在短時間內也會隨之停止。其最直接的因果關係為何？",
+        dimension: "圖表判讀",
+        isAdvanced: false,
+        topic: "葉片構造與功能綜合配對",
+        stem: "某生整理了植物葉片各構造的功能筆記，如下表所示。請問筆記中哪一欄的配對完全正確？",
+        visual: `<table class="data-table">
+          <thead>
+            <tr><th>選項</th><th>構造名稱</th><th>主要功能</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>(A)</td><td>氣孔</td><td>合成葡萄糖並儲存澱粉</td></tr>
+            <tr><td>(B)</td><td>保衛細胞</td><td>控制氣孔開閉，並可行光合作用</td></tr>
+            <tr><td>(C)</td><td>葉脈</td><td>吸收空氣中的二氧化碳與水分</td></tr>
+            <tr><td>(D)</td><td>角質層</td><td>運輸水分與養分至葉片各處</td></tr>
+          </tbody>
+        </table>`,
         options: [
-          "光反應無法產生能量供應給碳反應，導致碳反應缺乏驅動所需的能量",
-          "光反應無法產生二氧化碳，導致碳反應缺乏合成葡萄糖的碳源",
-          "光反應無法分解葡萄糖，導致試管內酸鹼值過高而破壞酵素結構",
-          "光反應無法開啟葉綠體的氣孔，導致二氧化碳無法進入葉綠體內部"
+          "(A) 氣孔：合成葡萄糖並儲存澱粉",
+          "(B) 保衛細胞：控制氣孔開閉，並可行光合作用",
+          "(C) 葉脈：吸收空氣中的二氧化碳與水分",
+          "(D) 角質層：運輸水分與養分至葉片各處"
         ],
-        answerIndex: 0,
-        explanation: "從左側圖表二可知，碳反應雖然不直接吸收太陽能，但必須依賴「光反應產生的能量」才能將二氧化碳轉變為葡萄糖。一旦光反應受阻，能量供應中斷，碳反應隨即停止。",
+        answerIndex: 1,
+        formula: "$$\\text{保衛細胞} \\implies \\text{調節氣孔開關 + 含葉綠體可行光合作用}$$",
+        explanation: "根據課本第 107 頁重點整理，保衛細胞不僅能控制氣孔的大小（開閉），細胞內也含有葉綠體，能進行光合作用，故 (B) 完全正確。",
         distractors: [
-          "(B) 二氧化碳是由外界空氣供應，並非由光反應產生。",
-          "(C) 分解葡萄糖是呼吸作用的功能，光反應是分解水分子。",
-          "(D) 氣孔位於葉片表皮細胞之間，葉綠體是細胞內的胞器，並不具有氣孔構造。"
+          "(A) 氣孔是氣體進出的通道，本身不合成葡萄糖也不儲存澱粉。",
+          "(C) 葉脈是輸導組織，負責運輸水分與養分；吸收氣體的是氣孔，吸收水分的是根部。",
+          "(D) 角質層的功能是防止水分散失，運輸水分與養分的是葉脈。"
         ]
       },
       {
         id: 50,
-        category: "跨章節與圖表推論",
-        level: "進階補充",
-        stem: "綜合本單元所學，關於綠色植物在地球生態系中「能量轉換」與「物質循環」的角色，下列敘述何者最為精確？",
+        dimension: "跨章整合",
+        isAdvanced: true,
+        topic: "光合作用與呼吸作用的綜合情境應用",
+        stem: "【進階題】在陽光普照的白天，一株健康的綠色植物同時進行著光合作用與呼吸作用。若此時環境中的水分與二氧化碳皆充足，且光合作用速率大於呼吸作用速率，則下列關於該植物體內物質變化的敘述，何者正確？",
         options: [
-          "透過葉綠素將太陽的光能轉換為儲存在葡萄糖中的化學能，並將無機物合成有機物",
-          "透過粒線體將太陽的光能轉換為熱能，並將土壤中的澱粉分解為二氧化碳與水",
-          "透過表皮細胞吸收空氣中的氧氣，將水分子直接合成為可供動物吸收的蛋白質",
-          "透過氣孔吸收太陽能與土壤水分，在葉脈中直接將二氧化碳轉化為無機礦物質"
+          "植物整體呈現「消耗二氧化碳、釋放氧氣」並「累積有機養分」的狀態",
+          "植物整體呈現「消耗氧氣、釋放二氧化碳」並「消耗儲存澱粉」的狀態",
+          "葉片中的光合作用完全停止，僅由根部細胞進行呼吸作用",
+          "光合作用產生的氧氣全部留在葉綠體內，不會擴散至大氣中"
         ],
         answerIndex: 0,
-        explanation: "植物行光合作用的本質是能量轉換（太陽能 ➔ 葡萄糖中的化學能）與物質合成（無機物「水與二氧化碳」 ➔ 有機物「葡萄糖」），是生態系中生產者的核心功能。",
+        formula: "$$\\text{當光合速率} > \\text{呼吸速率時：} \\quad \\text{CO}_2 \\text{ 淨吸收量} > 0,\\quad \\text{O}_2 \\text{ 淨釋出量} > 0,\\quad \\text{養分淨累積} > 0$$",
+        explanation: "白天光照充足時，光合作用速率通常大於呼吸作用速率。此時光合作用消耗的二氧化碳多於呼吸作用產生的二氧化碳，產生的氧氣多於呼吸作用消耗的氧氣，因此整體表現為吸收 $\\text{CO}_2$、釋出 $\\text{O}_2$，並累積葡萄糖與澱粉等養分。",
         distractors: [
-          "(B) 粒線體是進行呼吸作用的胞器，無法吸收太陽能；土壤中亦無澱粉供植物吸收。",
-          "(C) 表皮細胞無葉綠體，且光合作用吸收的是二氧化碳而非氧氣，直接產物是葡萄糖而非蛋白質。",
-          "(D) 氣孔是氣體進出的門戶（無法吸收太陽能），葉脈負責運輸，且二氧化碳轉化的是有機養分（葡萄糖）而非無機礦物質。"
+          "(B) 「消耗氧氣、釋放二氧化碳並消耗儲存澱粉」是光合速率小於呼吸速率（如夜晚或重度遮光）時的淨表現。",
+          "(C) 白天光照充足時葉片光合作用旺盛，且植物所有活細胞皆會進行呼吸作用。",
+          "(D) 光合作用產生的氧氣除了供細胞呼吸利用外，多餘部分會經由氣孔擴散釋放到大氣中。"
         ]
       }
     ];
 
     // =========================================================================
-    // Application State
+    // 應用程式狀態管理 (State Management)
     // =========================================================================
     let currentQuestions = [];
-    let userAnswers = {}; // key: questionIndex (0..49), value: selectedOptionIndex (0..3)
+    let userAnswers = {}; // { questionId: selectedOriginalOptionIndex }
     let isSubmitted = false;
-    let timerSeconds = 50 * 60;
+    let totalSeconds = 50 * 60;
+    let remainingSeconds = 50 * 60;
     let timerInterval = null;
     let isPaused = false;
     let radarChartInstance = null;
-
-    const optionLetters = ["(A)", "(B)", "(C)", "(D)"];
+    let currentFilter = 'all'; // 'all' | 'wrong'
 
     // =========================================================================
-    // Initialization & Shuffle Logic
+    // 初始化與洗牌邏輯
     // =========================================================================
-    function cloneAndPrepareQuestions(shuffle = false) {
-      // Deep copy
-      let list = JSON.parse(JSON.stringify(rawQuestionsData));
-      if (shuffle) {
-        // Shuffle question order
-        for (let i = list.length - 1; i > 0; i--) {
-          const j = Math.floor(Math.random() * (i + 1));
-          [list[i], list[j]] = [list[j], list[i]];
-        }
-        // Shuffle options inside each question while tracking the correct answer
-        list.forEach(q => {
-          const correctText = q.options[q.answerIndex];
-          // Map distractor explanations to their original option text
-          let distractorMap = {};
-          let dIdx = 0;
-          for (let idx = 0; idx < 4; idx++) {
-            if (idx !== q.answerIndex) {
-              // Strip leading "(X) " if present
-              const rawReason = q.distractors[dIdx] ? q.distractors[dIdx].replace(/^\([A-D]\)\s*/, "") : "";
-              distractorMap[q.options[idx]] = rawReason;
-              dIdx++;
-            }
-          }
-
-          // Fisher-Yates shuffle options
-          for (let i = q.options.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [q.options[i], q.options[j]] = [q.options[j], q.options[i]];
-          }
-
-          // Update answerIndex and rebuild ordered distractors with new option letters
-          q.answerIndex = q.options.indexOf(correctText);
-          let newDistractors = [];
-          for (let idx = 0; idx < 4; idx++) {
-            if (idx !== q.answerIndex) {
-              newDistractors.push(`${optionLetters[idx]} ${distractorMap[q.options[idx]]}`);
-            }
-          }
-          q.distractors = newDistractors;
-        });
-      }
-      return list;
-    }
-
-    function initQuiz(shuffle = false) {
-      currentQuestions = cloneAndPrepareQuestions(shuffle);
-      userAnswers = {};
+    function initExam(shuffle = false) {
       isSubmitted = false;
+      userAnswers = {};
+      currentFilter = 'all';
 
-      document.getElementById("result-panel").style.display = "none";
-      document.getElementById("btn-submit").disabled = false;
-      document.getElementById("btn-submit").style.opacity = "1";
-      updateProgressBadge();
+      // 深拷貝題庫並處理選項洗牌
+      currentQuestions = questionBank.map(q => {
+        const indexedOptions = q.options.map((text, idx) => ({ text, origIdx: idx }));
+        if (shuffle) {
+          for (let i = indexedOptions.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [indexedOptions[i], indexedOptions[j]] = [indexedOptions[j], indexedOptions[i]];
+          }
+        }
+        return {
+          ...q,
+          displayOptions: indexedOptions
+        };
+      });
+
+      if (shuffle) {
+        for (let i = currentQuestions.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [currentQuestions[i], currentQuestions[j]] = [currentQuestions[j], currentQuestions[i]];
+        }
+      }
+
+      // 重置介面狀態
+      document.getElementById('result-dashboard').style.display = 'none';
+      const submitBtn = document.getElementById('btn-submit');
+      submitBtn.disabled = false;
+      submitBtn.textContent = '提交試卷';
+      updateAnsweredCounter();
+
       renderNavigator();
       renderQuestions();
-      startTimer();
-    }
+      resetTimer();
 
-    // =========================================================================
-    // Timer Controls
-    // =========================================================================
-    function formatTime(sec) {
-      const m = Math.floor(sec / 60);
-      const s = sec % 60;
-      return `${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
-    }
-
-    function updateTimerUI() {
-      const display = document.getElementById("timer-display");
-      display.textContent = formatTime(timerSeconds);
-      if (timerSeconds <= 300 && timerSeconds > 0 && !isSubmitted) {
-        display.classList.add("warning");
-      } else {
-        display.classList.remove("warning");
+      if (window.MathJax && MathJax.typesetPromise) {
+        MathJax.typesetPromise();
       }
     }
 
-    function startTimer() {
-      clearInterval(timerInterval);
-      isPaused = false;
-      document.getElementById("btn-pause").textContent = "暫停";
-      updateTimerUI();
-      timerInterval = setInterval(() => {
-        if (!isPaused && !isSubmitted) {
-          if (timerSeconds > 0) {
-            timerSeconds--;
-            updateTimerUI();
-          } else {
-            clearInterval(timerInterval);
-            showToast("測驗時間到！系統已自動為您交卷批改。");
-            submitQuiz(true);
-          }
-        }
-      }, 1000);
-    }
-
-    function setTimer() {
-      const inputVal = parseInt(document.getElementById("timer-minutes").value, 10);
-      if (isNaN(inputVal) || inputVal < 0 || inputVal > 240) {
-        showToast("請輸入 0 ～ 240 之間的有效分鐘數！");
-        return;
-      }
-      timerSeconds = inputVal * 60;
-      updateTimerUI();
-      if (!isSubmitted) {
-        startTimer();
-      }
-      showToast(`已設定倒數時間為 ${inputVal} 分鐘`);
-    }
-
-    function togglePause() {
-      if (isSubmitted) return;
-      isPaused = !isPaused;
-      document.getElementById("btn-pause").textContent = isPaused ? "繼續" : "暫停";
-    }
-
     // =========================================================================
-    // Render Navigator & Questions
+    // 渲染題號導覽與試題列表
     // =========================================================================
     function renderNavigator() {
-      const navGrid = document.getElementById("nav-grid");
-      navGrid.innerHTML = "";
+      const navGrid = document.getElementById('nav-grid');
+      navGrid.innerHTML = '';
       currentQuestions.forEach((q, idx) => {
-        const btn = document.createElement("button");
-        btn.className = "nav-btn";
-        btn.id = `nav-btn-${idx}`;
+        const btn = document.createElement('button');
+        btn.className = 'nav-btn';
+        btn.id = `nav-btn-${q.id}`;
         btn.textContent = idx + 1;
         btn.onclick = () => {
-          const target = document.getElementById(`q-card-${idx}`);
+          const target = document.getElementById(`q-card-${q.id}`);
           if (target) {
-            // If hidden by filter, switch back to all
-            if (target.style.display === "none") {
-              filterQuestions("all");
+            if (target.style.display === 'none') {
+              setFilter('all');
             }
-            target.scrollIntoView({ behavior: "smooth", block: "center" });
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
           }
         };
         navGrid.appendChild(btn);
@@ -2000,199 +2321,312 @@
     }
 
     function renderQuestions() {
-      const container = document.getElementById("questions-container");
-      container.innerHTML = "";
+      const listEl = document.getElementById('question-list');
+      listEl.innerHTML = '';
+      const optionLetters = ['A', 'B', 'C', 'D'];
 
-      currentQuestions.forEach((q, qIdx) => {
-        const card = document.createElement("div");
-        card.className = "q-card";
-        card.id = `q-card-${qIdx}`;
+      currentQuestions.forEach((q, idx) => {
+        const displayNum = idx + 1;
+        const card = document.createElement('article');
+        card.className = 'question-card';
+        card.id = `q-card-${q.id}`;
 
-        const levelTagClass = q.level === "進階補充" ? "q-tag advanced" : "q-tag";
+        const advBadge = q.isAdvanced
+          ? `<span class="q-tag advanced">進階紅字題</span>`
+          : `<span class="q-tag">課本核心題</span>`;
 
-        let optionsHtml = "";
-        q.options.forEach((optText, optIdx) => {
+        const visualBlock = q.visual
+          ? `<div class="q-visual-inline">${q.visual}</div>`
+          : '';
+
+        let optionsHtml = '';
+        q.displayOptions.forEach((optObj, optIdx) => {
+          const letter = optionLetters[optIdx];
           optionsHtml += `
-            <label class="option-label" id="opt-label-${qIdx}-${optIdx}">
-              <input type="radio" name="q-${qIdx}" value="${optIdx}" onchange="selectOption(${qIdx}, ${optIdx})" />
-              <span><strong>${optionLetters[optIdx]}</strong> ${optText}</span>
+            <label class="option-label" id="opt-label-${q.id}-${optObj.origIdx}" onclick="selectOption(${q.id}, ${optObj.origIdx})">
+              <input type="radio" class="opt-radio" name="q_${q.id}" value="${optObj.origIdx}" />
+              <span><strong>(${letter})</strong> ${optObj.text}</span>
             </label>
           `;
         });
 
-        const correctLetter = optionLetters[q.answerIndex];
-        const correctOptText = q.options[q.answerIndex];
-        const distractorsHtml = q.distractors.map(d => `<li>${d}</li>`).join("");
+        // 找出目前顯示順序中正確答案對應的字母
+        const correctDisplayIdx = q.displayOptions.findIndex(o => o.origIdx === q.answerIndex);
+        const correctLetter = optionLetters[correctDisplayIdx];
+        const correctText = q.options[q.answerIndex];
+
+        const distractorsHtml = q.distractors.map(d => `<li>${d}</li>`).join('');
 
         card.innerHTML = `
           <div class="q-header">
-            <span class="q-number">第 ${qIdx + 1} 題</span>
+            <span class="q-num-badge">第 ${displayNum} 題</span>
             <div class="q-tags">
-              <span class="${levelTagClass}">${q.level}</span>
-              <span class="q-tag">${q.category}</span>
+              ${advBadge}
+              <span class="q-tag">${q.dimension} ｜ ${q.topic}</span>
             </div>
           </div>
-          <div class="q-stem">${q.stem}</div>
-          <div class="options-grid">${optionsHtml}</div>
-          <div class="explanation-box" id="exp-box-${qIdx}">
+          <div class="q-stem">${q.stem.replace(/\n/g, '<br/>')}</div>
+          ${visualBlock}
+          <div class="options-grid">
+            ${optionsHtml}
+          </div>
+          <div class="explanation-box" id="exp-box-${q.id}">
             <div class="exp-header">
-              <span class="exp-ans-badge">正確答案：${correctLetter} ${correctOptText}</span>
-              <span class="exp-cat-badge">考點歸類：${q.category}（${q.level}）</span>
+              <span class="exp-ans-pill">正確答案：(${correctLetter}) ${correctText}</span>
+              <span class="exp-cat-pill">考點歸類：${q.dimension}・${q.topic}</span>
             </div>
-            <div class="exp-section"><strong>【原題重現】</strong>${q.stem}</div>
-            <div class="exp-section"><strong>【核心解析與考點說明】</strong>${q.explanation}</div>
-            <div class="exp-section">
-              <strong>【誘答剖析（為何其他選項錯誤）】</strong>
+            <div class="exp-block">
+              <strong>【原題重現】</strong>第 ${displayNum} 題：${q.stem.replace(/\n/g, ' ')}
+            </div>
+            <div class="exp-block">
+              <strong>【中文解釋與核心考點】</strong>${q.explanation}
+            </div>
+            <div class="formula-box">
+              <strong>【生物學公式與邏輯推導】</strong>
+              <div>${q.formula}</div>
+            </div>
+            <div class="exp-block">
+              <strong>【誘答剖析（為什麼其他選項錯誤）】</strong>
               <ul class="distractor-list">${distractorsHtml}</ul>
             </div>
           </div>
         `;
 
-        container.appendChild(card);
+        listEl.appendChild(card);
       });
     }
 
-    function selectOption(qIdx, optIdx) {
+    function selectOption(questionId, origOptionIndex) {
       if (isSubmitted) return;
-      userAnswers[qIdx] = optIdx;
+      userAnswers[questionId] = origOptionIndex;
 
-      // Highlight selected option label
-      for (let i = 0; i < 4; i++) {
-        const lbl = document.getElementById(`opt-label-${qIdx}-${i}`);
-        if (i === optIdx) {
-          lbl.classList.add("selected");
+      // 更新選項高亮
+      const q = currentQuestions.find(item => item.id === questionId);
+      q.displayOptions.forEach(opt => {
+        const lbl = document.getElementById(`opt-label-${questionId}-${opt.origIdx}`);
+        const radio = lbl.querySelector('input');
+        if (opt.origIdx === origOptionIndex) {
+          lbl.classList.add('selected');
+          radio.checked = true;
         } else {
-          lbl.classList.remove("selected");
+          lbl.classList.remove('selected');
+          radio.checked = false;
         }
-      }
+      });
 
-      // Mark navigator button blue
-      const navBtn = document.getElementById(`nav-btn-${qIdx}`);
-      if (navBtn) {
-        navBtn.classList.add("answered");
-      }
+      // 更新左側導覽按鈕為藍色（已答）
+      const navBtn = document.getElementById(`nav-btn-${questionId}`);
+      if (navBtn) navBtn.classList.add('answered');
 
-      updateProgressBadge();
+      updateAnsweredCounter();
     }
 
-    function updateProgressBadge() {
+    function updateAnsweredCounter() {
       const answeredCount = Object.keys(userAnswers).length;
-      document.getElementById("progress-badge").textContent = `已作答：${answeredCount} / ${currentQuestions.length}`;
+      document.getElementById('answered-counter').textContent = `已作答：${answeredCount} / ${currentQuestions.length}`;
     }
 
     // =========================================================================
-    // Submit & Grading
+    // 倒數計時器功能
     // =========================================================================
-    function submitQuiz(autoSubmit = false) {
+    function formatTime(sec) {
+      const m = Math.floor(sec / 60);
+      const s = sec % 60;
+      return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+    }
+
+    function startTimer() {
+      clearInterval(timerInterval);
+      timerInterval = setInterval(() => {
+        if (isPaused || isSubmitted) return;
+        if (remainingSeconds > 0) {
+          remainingSeconds--;
+          document.getElementById('timer-display').textContent = formatTime(remainingSeconds);
+        } else {
+          clearInterval(timerInterval);
+          showToast("⏰ 作答時間到！系統自動為您交卷批改。");
+          submitExam(true);
+        }
+      }, 1000);
+    }
+
+    function resetTimer() {
+      const mins = Math.max(0, Math.min(240, parseInt(document.getElementById('time-input').value, 10) || 50));
+      totalSeconds = mins * 60;
+      remainingSeconds = totalSeconds;
+      isPaused = false;
+      document.getElementById('btn-pause-time').textContent = '暫停';
+      document.getElementById('timer-display').textContent = formatTime(remainingSeconds);
+      startTimer();
+    }
+
+    document.getElementById('btn-set-time').onclick = () => {
+      if (isSubmitted) return;
+      resetTimer();
+      showToast("⏱ 已重設倒數計時時間");
+    };
+
+    document.getElementById('btn-pause-time').onclick = () => {
+      if (isSubmitted) return;
+      isPaused = !isPaused;
+      document.getElementById('btn-pause-time').textContent = isPaused ? '繼續' : '暫停';
+    };
+
+    // =========================================================================
+    // 交卷批改、雷達圖繪製、Telegram 通知與 localStorage 紀錄
+    // =========================================================================
+    document.getElementById('btn-submit').onclick = () => submitExam(false);
+
+    function submitExam(autoSubmit = false) {
       if (isSubmitted) return;
       const answeredCount = Object.keys(userAnswers).length;
       if (!autoSubmit && answeredCount < currentQuestions.length) {
-        const confirmSubmit = confirm(`您目前尚有 ${currentQuestions.length - answeredCount} 題未作答，確定要直接提交試卷嗎？`);
+        const confirmSubmit = confirm(`目前尚有 ${currentQuestions.length - answeredCount} 題未作答，確定要現在提交試卷嗎？`);
         if (!confirmSubmit) return;
       }
 
       isSubmitted = true;
       clearInterval(timerInterval);
-      document.getElementById("btn-submit").disabled = true;
-      document.getElementById("btn-submit").style.opacity = "0.5";
+
+      const submitBtn = document.getElementById('btn-submit');
+      submitBtn.disabled = true;
+      submitBtn.textContent = '已交卷';
 
       let correctCount = 0;
-      const categories = ["核心概念與定義", "葉片構造與功能", "實驗步驟與變因", "跨章節與圖表推論"];
-      const catStats = {};
-      categories.forEach(c => { catStats[c] = { total: 0, correct: 0 }; });
+      const wrongList = [];
+      const dimStats = {
+        "基礎定義": { total: 0, correct: 0 },
+        "實驗變因": { total: 0, correct: 0 },
+        "圖表判讀": { total: 0, correct: 0 },
+        "跨章整合": { total: 0, correct: 0 }
+      };
 
-      currentQuestions.forEach((q, qIdx) => {
-        const userAns = userAnswers[qIdx];
-        const isCorrect = userAns === q.answerIndex;
-        if (isCorrect) correctCount++;
+      currentQuestions.forEach((q, idx) => {
+        const displayNum = idx + 1;
+        const userChoice = userAnswers[q.id];
+        const isCorrect = userChoice === q.answerIndex;
 
-        if (catStats[q.category]) {
-          catStats[q.category].total++;
-          if (isCorrect) catStats[q.category].correct++;
+        if (!dimStats[q.dimension]) {
+          dimStats[q.dimension] = { total: 0, correct: 0 };
         }
+        dimStats[q.dimension].total++;
 
-        // Update Question Card & Option styling
-        const card = document.getElementById(`q-card-${qIdx}`);
-        card.classList.add(isCorrect ? "status-correct" : "status-wrong");
+        const card = document.getElementById(`q-card-${q.id}`);
+        const navBtn = document.getElementById(`nav-btn-${q.id}`);
+        const expBox = document.getElementById(`exp-box-${q.id}`);
 
-        // Lock radios and highlight answers
-        const radios = card.querySelectorAll('input[type="radio"]');
-        radios.forEach(r => r.disabled = true);
+        // 鎖定選項並標記對錯
+        q.displayOptions.forEach(opt => {
+          const lbl = document.getElementById(`opt-label-${q.id}-${opt.origIdx}`);
+          const radio = lbl.querySelector('input');
+          lbl.classList.add('disabled');
+          radio.disabled = true;
 
-        for (let i = 0; i < 4; i++) {
-          const lbl = document.getElementById(`opt-label-${qIdx}-${i}`);
-          lbl.classList.add("locked");
-          lbl.classList.remove("selected");
-          if (i === q.answerIndex) {
-            lbl.classList.add("correct-ans");
-          } else if (i === userAns && !isCorrect) {
-            lbl.classList.add("wrong-ans");
+          if (opt.origIdx === q.answerIndex) {
+            lbl.classList.add('opt-correct');
+          } else if (opt.origIdx === userChoice && !isCorrect) {
+            lbl.classList.add('opt-wrong');
           }
+        });
+
+        if (isCorrect) {
+          correctCount++;
+          dimStats[q.dimension].correct++;
+          card.classList.add('card-correct');
+          navBtn.classList.add('correct');
+        } else {
+          wrongList.push(`第${displayNum}題(${q.topic})`);
+          card.classList.add('card-wrong');
+          navBtn.classList.add('wrong');
         }
 
-        // Show Explanation Box
-        document.getElementById(`exp-box-${qIdx}`).style.display = "block";
-
-        // Update Navigator Button color
-        const navBtn = document.getElementById(`nav-btn-${qIdx}`);
-        navBtn.classList.remove("answered");
-        navBtn.classList.add(isCorrect ? "correct" : "wrong");
+        // 展開解析
+        expBox.style.display = 'block';
       });
 
-      const score = correctCount * 2;
+      // 計算百分制總分
+      const score = Math.round((correctCount / currentQuestions.length) * 100);
       const wrongCount = currentQuestions.length - correctCount;
 
-      document.getElementById("total-score").textContent = score;
-      document.getElementById("correct-count-text").textContent = `答對 ${correctCount} / 50 題（答錯 ${wrongCount} 題）`;
-      document.getElementById("btn-show-wrong").textContent = `只看錯題 (${wrongCount})`;
+      // 計算耗時
+      const elapsedSec = Math.max(0, totalSeconds - remainingSeconds);
+      const elapsedMin = Math.floor(elapsedSec / 60);
+      const elapsedRemSec = elapsedSec % 60;
+      const elapsedStr = `${elapsedMin} 分 ${elapsedRemSec} 秒`;
 
-      // Render Category Breakdown List
-      const statListEl = document.getElementById("category-stats");
-      statListEl.innerHTML = "";
-      const radarLabels = [];
-      const radarData = [];
+      // 交卷時間
+      const now = new Date();
+      const submitTimeStr = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')} ${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}:${String(now.getSeconds()).padStart(2,'0')}`;
 
-      categories.forEach(cat => {
-        const { total, correct } = catStats[cat];
-        const pct = total > 0 ? Math.round((correct / total) * 100) : 0;
-        radarLabels.push(cat);
-        radarData.push(pct);
+      // 渲染成績儀表板
+      document.getElementById('result-dashboard').style.display = 'block';
+      document.getElementById('total-score').textContent = score;
+      document.getElementById('correct-summary').textContent = `答對 ${correctCount} / ${currentQuestions.length} 題（答錯 ${wrongCount} 題）`;
+      document.getElementById('filter-all').textContent = `顯示全部題目 (${currentQuestions.length})`;
+      document.getElementById('filter-wrong').textContent = `只看錯題 (${wrongCount})`;
 
-        const color = pct >= 80 ? "#4ade80" : (pct >= 60 ? "#fbbf24" : "#f87171");
-        statListEl.innerHTML += `
-          <div class="stat-item">
-            <span>${cat} (${correct}/${total})</span>
-            <strong style="color:${color}">${pct}%</strong>
-          </div>
-        `;
+      // 渲染各維度統計文字
+      const dimListEl = document.getElementById('dim-stats-list');
+      dimListEl.innerHTML = '';
+      const dimLabels = ["基礎定義", "實驗變因", "圖表判讀", "跨章整合"];
+      const dimRates = [];
+      const dimSummaryStrings = [];
+
+      dimLabels.forEach(label => {
+        const st = dimStats[label] || { total: 0, correct: 0 };
+        const rate = st.total > 0 ? Math.round((st.correct / st.total) * 100) : 0;
+        dimRates.push(rate);
+        dimSummaryStrings.push(`${label}: ${rate}% (${st.correct}/${st.total})`);
+
+        const row = document.createElement('div');
+        row.className = 'dim-row';
+        row.innerHTML = `<span>${label} (${st.correct}/${st.total})</span><span class="dim-val">${rate}%</span>`;
+        dimListEl.appendChild(row);
       });
 
-      // Render Radar Chart
-      renderRadarChart(radarLabels, radarData);
+      // 繪製 Chart.js 雷達圖
+      renderRadarChart(dimLabels, dimRates);
 
-      // Reveal Dashboard & Scroll Left Pane Top
-      const resultPanel = document.getElementById("result-panel");
-      resultPanel.style.display = "block";
-      document.querySelector(".left-pane").scrollTo({ top: 0, behavior: "smooth" });
-      showToast(`批改完成！您的總分為 ${score} 分。`);
+      // 捲動左側面板至頂部檢視報告
+      document.querySelector('.left-pane').scrollTo({ top: 0, behavior: 'smooth' });
+
+      // 重新渲染 MathJax 公式
+      if (window.MathJax && MathJax.typesetPromise) {
+        MathJax.typesetPromise();
+      }
+
+      // 寫入 localStorage 歷史紀錄
+      const record = {
+        time: submitTimeStr,
+        duration: elapsedStr,
+        score: `${score} 分 (${correctCount}/${currentQuestions.length})`,
+        dimensions: dimSummaryStrings.join(' ｜ '),
+        wrongQuestions: wrongList.length > 0 ? wrongList.join('、') : '全對無錯題'
+      };
+      saveHistoryRecord(record);
+
+      // 發送 Telegram 通知
+      sendTelegramNotification(record);
     }
 
-    function renderRadarChart(labels, data) {
-      const ctx = document.getElementById("radarChart").getContext("2d");
+    function renderRadarChart(labels, dataValues) {
+      const ctx = document.getElementById('weaknessRadarChart').getContext('2d');
       if (radarChartInstance) {
         radarChartInstance.destroy();
       }
       radarChartInstance = new Chart(ctx, {
-        type: "radar",
+        type: 'radar',
         data: {
           labels: labels,
           datasets: [{
-            label: "得分率 (%)",
-            data: data,
-            backgroundColor: "rgba(56, 189, 248, 0.25)",
-            borderColor: "#38bdf8",
-            pointBackgroundColor: "#38bdf8",
-            pointBorderColor: "#fff",
+            label: '得分率 (%)',
+            data: dataValues,
+            backgroundColor: 'rgba(56, 189, 248, 0.25)',
+            borderColor: '#38bdf8',
+            pointBackgroundColor: '#38bdf8',
+            pointBorderColor: '#fff',
+            pointHoverBackgroundColor: '#fff',
+            pointHoverBorderColor: '#38bdf8',
             borderWidth: 2
           }]
         },
@@ -2205,15 +2639,15 @@
               max: 100,
               ticks: {
                 stepSize: 20,
-                color: "#94a3b8",
-                backdropColor: "transparent",
+                color: '#94a3b8',
+                backdropColor: 'transparent',
                 font: { size: 10 }
               },
-              grid: { color: "rgba(148, 163, 184, 0.2)" },
-              angleLines: { color: "rgba(148, 163, 184, 0.2)" },
+              grid: { color: '#334155' },
+              angleLines: { color: '#334155' },
               pointLabels: {
-                color: "#e2e8f0",
-                font: { size: 11, weight: "600" }
+                color: '#e2e8f0',
+                font: { size: 12, weight: 'bold' }
               }
             }
           },
@@ -2225,158 +2659,230 @@
     }
 
     // =========================================================================
-    // Filtering & Reset
+    // 錯題篩選與一鍵複製 Markdown 筆記
     // =========================================================================
-    function filterQuestions(mode) {
-      const btnAll = document.getElementById("btn-show-all");
-      const btnWrong = document.getElementById("btn-show-wrong");
+    document.getElementById('filter-all').onclick = () => setFilter('all');
+    document.getElementById('filter-wrong').onclick = () => setFilter('wrong');
 
-      if (mode === "all") {
-        btnAll.className = "btn btn-blue btn-sm";
-        btnWrong.className = "btn btn-outline btn-sm";
-      } else {
-        btnAll.className = "btn btn-outline btn-sm";
-        btnWrong.className = "btn btn-blue btn-sm";
-      }
+    function setFilter(mode) {
+      currentFilter = mode;
+      document.getElementById('filter-all').classList.toggle('active', mode === 'all');
+      document.getElementById('filter-wrong').classList.toggle('active', mode === 'wrong');
 
-      currentQuestions.forEach((q, qIdx) => {
-        const card = document.getElementById(`q-card-${qIdx}`);
-        const isCorrect = userAnswers[qIdx] === q.answerIndex;
-        if (mode === "wrong" && isCorrect) {
-          card.style.display = "none";
+      currentQuestions.forEach(q => {
+        const card = document.getElementById(`q-card-${q.id}`);
+        const isCorrect = userAnswers[q.id] === q.answerIndex;
+        if (mode === 'wrong' && isCorrect) {
+          card.style.display = 'none';
         } else {
-          card.style.display = "block";
+          card.style.display = 'block';
         }
       });
     }
 
-    function resetAndShuffle() {
-      if (!isSubmitted && Object.keys(userAnswers).length > 0) {
-        if (!confirm("確定要清空目前作答紀錄並重新洗牌測驗嗎？")) return;
-      }
-      const inputVal = parseInt(document.getElementById("timer-minutes").value, 10) || 50;
-      timerSeconds = inputVal * 60;
-      initQuiz(true);
-      document.getElementById("right-pane").scrollTo({ top: 0, behavior: "smooth" });
-      showToast("試題與選項已重新隨機洗牌！");
-    }
-
-    // =========================================================================
-    // Export Wrong Notes (Markdown & Word .doc)
-    // =========================================================================
-    function stripHtml(html) {
-      const tmp = document.createElement("div");
-      tmp.innerHTML = html;
-      return tmp.textContent || tmp.innerText || "";
-    }
-
-    function generateWrongNotesMarkdown() {
-      let md = `# 國中七年級自然科學（生物）｜2-3 植物如何製造養分 錯題複習筆記\n\n`;
-      md += `- **測驗得分**：${document.getElementById("total-score").textContent} 分\n`;
-      md += `- **診斷結果**：${document.getElementById("correct-count-text").textContent}\n\n---\n\n`;
+    document.getElementById('btn-copy-md').onclick = () => {
+      const optionLetters = ['A', 'B', 'C', 'D'];
+      let mdLines = [
+        `# 國中七年級自然科學（生物）錯題複習筆記`,
+        `> 單元：2-3 植物如何製造養分｜總得分：${document.getElementById('total-score').textContent} 分\n`
+      ];
 
       let wrongCount = 0;
-      currentQuestions.forEach((q, qIdx) => {
-        const userAns = userAnswers[qIdx];
-        if (userAns !== q.answerIndex) {
+      currentQuestions.forEach((q, idx) => {
+        const userChoice = userAnswers[q.id];
+        if (userChoice !== q.answerIndex) {
           wrongCount++;
-          const userStr = userAns !== undefined ? `${optionLetters[userAns]} ${q.options[userAns]}` : "未作答";
-          const correctStr = `${optionLetters[q.answerIndex]} ${q.options[q.answerIndex]}`;
-          md += `### 第 ${qIdx + 1} 題｜[${q.category} / ${q.level}]\n`;
-          md += `**題目**：${stripHtml(q.stem)}\n\n`;
-          md += `- **你的作答**：~~${userStr}~~\n`;
-          md += `- **正確答案**：**${correctStr}**\n`;
-          md += `- **核心解析**：${q.explanation}\n`;
-          md += `- **誘答剖析**：\n`;
-          q.distractors.forEach(d => {
-            md += `  - ${d}\n`;
-          });
-          md += `\n---\n\n`;
+          const correctDisplayIdx = q.displayOptions.findIndex(o => o.origIdx === q.answerIndex);
+          const correctLetter = optionLetters[correctDisplayIdx];
+          const userDisplayIdx = q.displayOptions.findIndex(o => o.origIdx === userChoice);
+          const userLetter = userDisplayIdx >= 0 ? optionLetters[userDisplayIdx] : '未作答';
+
+          mdLines.push(`## 第 ${idx + 1} 題【${q.dimension}｜${q.topic}】`);
+          mdLines.push(`- **題目**：${q.stem.replace(/\n/g, ' ')}`);
+          mdLines.push(`- **你的作答**：(${userLetter}) ｜ **正確答案**：(${correctLetter}) ${q.options[q.answerIndex]}`);
+          mdLines.push(`- **核心解析**：${q.explanation}`);
+          mdLines.push(`- **誘答剖析**：`);
+          q.distractors.forEach(d => mdLines.push(`  - ${d}`));
+          mdLines.push('');
         }
       });
 
       if (wrongCount === 0) {
-        md += `🎉 恭喜！本次測驗全數答對，無錯題紀錄！\n`;
+        mdLines.push(`🎉 本次測驗全數答對，無錯題紀錄！`);
       }
-      return md;
-    }
 
-    function copyWrongNotes() {
-      const md = generateWrongNotesMarkdown();
-      navigator.clipboard.writeText(md).then(() => {
-        showToast("已成功複製 Markdown 錯題筆記至剪貼簿！");
+      navigator.clipboard.writeText(mdLines.join('\n')).then(() => {
+        showToast("📋 已將錯題筆記（Markdown 格式）複製到剪貼簿！");
       }).catch(() => {
-        showToast("複製失敗，請檢查瀏覽器剪貼簿權限。");
+        showToast("⚠️ 複製失敗，請手動選取內容複製");
+      });
+    };
+
+    // =========================================================================
+    // 重新測驗（洗牌）
+    // =========================================================================
+    document.getElementById('btn-shuffle').onclick = () => {
+      if (!isSubmitted && Object.keys(userAnswers).length > 0) {
+        if (!confirm("確定要清空目前作答並重新洗牌測驗嗎？")) return;
+      }
+      initExam(true);
+      showToast("🔀 題目與選項順序已重新洗牌！");
+    };
+
+    // =========================================================================
+    // Telegram 通知整合
+    // =========================================================================
+    function sendTelegramNotification(record) {
+      const chatId = "8049812362";
+      const token = "AAEqHmvEEMDFOYtggE4FxpHFoAWUGHX7Aq4";
+      // 若為完整 bot_id:token 格式可直接呼叫，若僅為 token 後半段亦安全處理不阻斷前端流程
+      const botEndpoint = token.includes(":")
+        ? `https://api.telegram.org/bot${token}/sendMessage`
+        : `https://api.telegram.org/bot${chatId}:${token}/sendMessage`;
+
+      const messageText = [
+        `📘【國中生物 2-3 全真模擬測驗交卷通知】`,
+        `01. 交卷時間：${record.time}`,
+        `02. 作答耗時：${record.duration}`,
+        `03. 測驗得分：${record.score}`,
+        `04. 各維度統計：${record.dimensions}`,
+        `05. 錯題清單：${record.wrongQuestions}`
+      ].join('\n');
+
+      fetch(botEndpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          chat_id: chatId,
+          text: messageText
+        })
+      }).catch(err => {
+        console.warn("Telegram notification skipped or network restricted:", err);
       });
     }
 
-    function downloadWordNotes() {
-      let htmlContent = `
-        <html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
-        <head><meta charset='utf-8'><title>生物錯題複習講義</title>
-        <style>
-          body { font-family: "Microsoft JhengHei", sans-serif; line-height: 1.6; }
-          h1 { color: #1e3a8a; border-bottom: 2px solid #1e3a8a; padding-bottom: 6px; }
-          .q-box { border: 1px solid #cbd5e1; padding: 12px; margin-bottom: 16px; border-radius: 6px; }
-          .correct { color: #15803d; font-weight: bold; }
-          .wrong { color: #b91c1c; text-decoration: line-through; }
-        </style></head><body>
-        <h1>國中七年級自然科學（生物）｜2-3 植物如何製造養分 錯題複習講義</h1>
-        <p><strong>總得分：</strong>${document.getElementById("total-score").textContent} 分｜${document.getElementById("correct-count-text").textContent}</p>
-        <hr/>
-      `;
+    // =========================================================================
+    // localStorage 歷史紀錄與家長隱藏入口 (連點標題 5 下 / Ctrl+Shift+P)
+    // =========================================================================
+    const STORAGE_KEY = "bio_grade7_2_3_exam_history";
 
-      let wrongCount = 0;
-      currentQuestions.forEach((q, qIdx) => {
-        const userAns = userAnswers[qIdx];
-        if (userAns !== q.answerIndex) {
-          wrongCount++;
-          const userStr = userAns !== undefined ? `${optionLetters[userAns]} ${q.options[userAns]}` : "未作答";
-          const correctStr = `${optionLetters[q.answerIndex]} ${q.options[q.answerIndex]}`;
-          htmlContent += `
-            <div class="q-box">
-              <p><strong>第 ${qIdx + 1} 題【${q.category}｜${q.level}】</strong></p>
-              <p>${q.stem}</p>
-              <p>你的作答：<span class="wrong">${userStr}</span></p>
-              <p>正確答案：<span class="correct">${correctStr}</span></p>
-              <p><strong>【核心解析】</strong>${q.explanation}</p>
-              <p><strong>【誘答剖析】</strong></p>
-              <ul>${q.distractors.map(d => `<li>${d}</li>`).join("")}</ul>
-            </div>
-          `;
+    function saveHistoryRecord(record) {
+      const existing = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+      existing.unshift(record);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(existing));
+    }
+
+    function openParentModal() {
+      const pwd = prompt("請輸入家長監控密碼：");
+      if (pwd === "1234") {
+        const tbody = document.getElementById('history-tbody');
+        const records = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+        if (records.length === 0) {
+          tbody.innerHTML = `<tr><td colspan="6" style="color:#94a3b8;">尚無任何交卷紀錄</td></tr>`;
+        } else {
+          tbody.innerHTML = records.map((r, i) => `
+            <tr>
+              <td>#${records.length - i}</td>
+              <td>${r.time}</td>
+              <td>${r.duration}</td>
+              <td style="color:#38bdf8; font-weight:bold;">${r.score}</td>
+              <td style="text-align:left; font-size:0.8rem;">${r.dimensions}</td>
+              <td style="text-align:left; font-size:0.8rem; color:#fca5a5;">${r.wrongQuestions}</td>
+            </tr>
+          `).join('');
         }
-      });
-
-      if (wrongCount === 0) {
-        htmlContent += `<p>恭喜！本次測驗 50 題全數答對！</p>`;
+        document.getElementById('parent-modal').style.display = 'flex';
+      } else if (pwd !== null) {
+        alert("密碼錯誤！");
       }
+    }
 
-      htmlContent += `</body></html>`;
+    function clearHistory() {
+      if (confirm("確定要清除所有歷次測驗紀錄嗎？")) {
+        localStorage.removeItem(STORAGE_KEY);
+        document.getElementById('history-tbody').innerHTML = `<tr><td colspan="6" style="color:#94a3b8;">已清除所有紀錄</td></tr>`;
+      }
+    }
 
-      const blob = new Blob(["\ufeff", htmlContent], { type: "application/msword;charset=utf-8" });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = "國一生物_2-3植物如何製造養分_錯題複習講義.doc";
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
-      showToast("已開始下載 Word 錯題複習講義（.doc）！");
+    // 連點標題 5 下觸發家長入口
+    let titleClickCount = 0;
+    let titleClickTimer = null;
+    document.getElementById('secret-title-trigger').addEventListener('click', () => {
+      titleClickCount++;
+      clearTimeout(titleClickTimer);
+      titleClickTimer = setTimeout(() => { titleClickCount = 0; }, 1500);
+      if (titleClickCount >= 5) {
+        titleClickCount = 0;
+        openParentModal();
+      }
+    });
+
+    // 快捷鍵 Ctrl + Shift + P 觸發家長入口
+    document.addEventListener('keydown', (e) => {
+      if (e.ctrlKey && e.shiftKey && (e.key === 'P' || e.key === 'p')) {
+        e.preventDefault();
+        openParentModal();
+      }
+    });
+
+    // =========================================================================
+    // 隱藏驗證總表入口 (連點左上角 ❖ 5 下)
+    // =========================================================================
+    let verifyClickCount = 0;
+    let verifyClickTimer = null;
+    document.getElementById('secret-verify-trigger').addEventListener('click', () => {
+      verifyClickCount++;
+      clearTimeout(verifyClickTimer);
+      verifyClickTimer = setTimeout(() => { verifyClickCount = 0; }, 1500);
+      if (verifyClickCount >= 5) {
+        verifyClickCount = 0;
+        openVerifyModal();
+      }
+    });
+
+    function openVerifyModal() {
+      const letters = ['A', 'B', 'C', 'D'];
+      const counts = { A: 0, B: 0, C: 0, D: 0 };
+      const tbody = document.getElementById('verify-tbody');
+
+      tbody.innerHTML = questionBank.map((q, idx) => {
+        const ansLetter = letters[q.answerIndex];
+        counts[ansLetter]++;
+        return `
+          <tr>
+            <td>第 ${idx + 1} 題</td>
+            <td style="color:#34d399; font-weight:bold;">(${ansLetter})</td>
+            <td>${q.dimension}</td>
+            <td>${q.isAdvanced ? '進階紅字題' : '課本核心題'}</td>
+            <td style="text-align:left;">${q.topic}</td>
+          </tr>
+        `;
+      }).join('');
+
+      document.getElementById('answer-dist-summary').innerHTML = `
+        <span><strong>總題數：</strong>${questionBank.length} 題</span>
+        <span><strong>(A)：</strong>${counts.A} 題</span>
+        <span><strong>(B)：</strong>${counts.B} 題</span>
+        <span><strong>(C)：</strong>${counts.C} 題</span>
+        <span><strong>(D)：</strong>${counts.D} 題</span>
+      `;
+      document.getElementById('verify-modal').style.display = 'flex';
+    }
+
+    function closeModal(modalId) {
+      document.getElementById(modalId).style.display = 'none';
     }
 
     function showToast(msg) {
-      const toast = document.getElementById("toast");
+      const toast = document.getElementById('toast');
       toast.textContent = msg;
-      toast.classList.add("show");
-      setTimeout(() => {
-        toast.classList.remove("show");
-      }, 2800);
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2800);
     }
 
-    // Boot application
-    window.addEventListener("DOMContentLoaded", () => {
-      initQuiz(false);
+    // 啟動初始化
+    window.addEventListener('DOMContentLoaded', () => {
+      initExam(false);
     });
   </script>
 </body>

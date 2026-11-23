@@ -1,0 +1,2785 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>國中自然科學（生物科）第3章 生物體內的運輸｜108課綱模擬測驗系統</title>
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <!-- KaTeX CDN for LaTeX rendering -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});"></script>
+  <style>
+    :root {
+      --bg-main: #f3f5f8;
+      --bg-card: #ffffff;
+      --bg-panel: #f8fafc;
+      --primary: #1e40af;
+      --primary-light: #dbeafe;
+      --primary-hover: #1d4ed8;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --border-color: #cbd5e1;
+      --success: #15803d;
+      --success-bg: #dcfce7;
+      --danger: #b91c1c;
+      --danger-bg: #fee2e2;
+      --warning: #b45309;
+      --warning-bg: #fef3c7;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+      --radius: 10px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Noto Sans TC", "Microsoft JhengHei", -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      line-height: 1.65;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    /* Top Header & Timer Bar */
+    header {
+      background-color: var(--bg-card);
+      border-bottom: 1px solid var(--border-color);
+      padding: 10px 20px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      box-shadow: var(--shadow-sm);
+      z-index: 20;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .verify-trigger {
+      cursor: pointer;
+      user-select: none;
+      color: #94a3b8;
+      font-size: 15px;
+      padding: 2px 5px;
+      border-radius: 4px;
+      transition: color 0.2s;
+    }
+    .verify-trigger:hover {
+      color: var(--primary);
+    }
+
+    .exam-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #0f172a;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .timer-box {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--bg-panel);
+      border: 1px solid var(--border-color);
+      padding: 5px 12px;
+      border-radius: 8px;
+      font-size: 0.92rem;
+    }
+
+    .timer-display {
+      font-family: "Courier New", monospace;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--primary);
+      min-width: 72px;
+      text-align: center;
+    }
+
+    .timer-display.warning {
+      color: var(--danger);
+      animation: pulse 1s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    .timer-input {
+      width: 58px;
+      padding: 3px 6px;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      font-size: 0.88rem;
+      text-align: center;
+    }
+
+    .btn {
+      padding: 7px 14px;
+      border: none;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-sm {
+      padding: 4px 9px;
+      font-size: 0.82rem;
+    }
+
+    .btn-primary {
+      background-color: var(--primary);
+      color: #fff;
+    }
+    .btn-primary:hover {
+      background-color: var(--primary-hover);
+    }
+    .btn-primary:disabled {
+      background-color: #94a3b8;
+      cursor: not-allowed;
+    }
+
+    .btn-outline {
+      background-color: #fff;
+      color: var(--text-main);
+      border: 1px solid var(--border-color);
+    }
+    .btn-outline:hover {
+      background-color: #f1f5f9;
+    }
+
+    .btn-success {
+      background-color: var(--success);
+      color: #fff;
+    }
+    .btn-success:hover {
+      background-color: #166534;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    /* Main Split Screen Container */
+    .main-container {
+      display: flex;
+      flex: 1;
+      overflow: hidden;
+      width: 100%;
+    }
+
+    /* Left Pane: Navigation + Long / Group / Diagram Questions */
+    .left-pane {
+      width: 50%;
+      height: 100%;
+      overflow-y: auto;
+      padding: 18px 22px;
+      border-right: 2px solid var(--border-color);
+      background-color: #f8fafc;
+    }
+
+    /* Right Pane: Short Questions & Answer Sheet / Results */
+    .right-pane {
+      width: 50%;
+      height: 100%;
+      overflow-y: auto;
+      padding: 18px 22px;
+      background-color: var(--bg-main);
+    }
+
+    /* Question Navigator Grid */
+    .nav-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      margin-bottom: 18px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .nav-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: #334155;
+    }
+
+    .nav-legend {
+      display: flex;
+      gap: 10px;
+      font-size: 0.78rem;
+      font-weight: 400;
+      color: var(--text-muted);
+    }
+
+    .legend-dot {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 2px;
+      margin-right: 4px;
+      vertical-align: middle;
+    }
+
+    .nav-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(36px, 1fr));
+      gap: 6px;
+    }
+
+    .nav-btn {
+      height: 34px;
+      border: 1px solid var(--border-color);
+      background: #fff;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-main);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .nav-btn:hover {
+      border-color: var(--primary);
+      background: #eff6ff;
+    }
+
+    .nav-btn.answered {
+      background-color: #2563eb;
+      color: #ffffff;
+      border-color: #1d4ed8;
+    }
+
+    .nav-btn.correct {
+      background-color: var(--success) !important;
+      color: #fff !important;
+      border-color: #14532d !important;
+    }
+
+    .nav-btn.wrong {
+      background-color: var(--danger) !important;
+      color: #fff !important;
+      border-color: #7f1d1d !important;
+    }
+
+    .pane-section-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #1e3a8a;
+      margin-bottom: 14px;
+      padding-bottom: 6px;
+      border-bottom: 2px solid #bfdbfe;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* Question Card */
+    .q-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 18px 20px;
+      margin-bottom: 18px;
+      box-shadow: var(--shadow-sm);
+      transition: border-color 0.2s, box-shadow 0.2s;
+      scroll-margin-top: 16px;
+    }
+
+    .q-card.highlight-jump {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+    }
+
+    .q-card.result-correct {
+      border-left: 5px solid var(--success);
+    }
+
+    .q-card.result-wrong {
+      border-left: 5px solid var(--danger);
+    }
+
+    .q-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      font-size: 0.82rem;
+    }
+
+    .q-badge {
+      background: #e2e8f0;
+      color: #334155;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+
+    .q-badge.advanced {
+      background: #fef3c7;
+      color: #92400e;
+    }
+
+    .q-status-tag {
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 4px;
+      display: none;
+    }
+
+    .q-card.result-correct .q-status-tag {
+      display: inline-block;
+      background: var(--success-bg);
+      color: var(--success);
+    }
+
+    .q-card.result-wrong .q-status-tag {
+      display: inline-block;
+      background: var(--danger-bg);
+      color: var(--danger);
+    }
+
+    .q-stem {
+      font-size: 1.02rem;
+      font-weight: 600;
+      color: #0f172a;
+      margin-bottom: 12px;
+    }
+
+    .q-visual {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 12px;
+      margin-bottom: 14px;
+      font-size: 0.9rem;
+      overflow-x: auto;
+    }
+
+    .q-visual pre {
+      font-family: "Courier New", Consolas, monospace;
+      line-height: 1.45;
+      color: #1e293b;
+      margin: 0;
+    }
+
+    .q-visual table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 4px;
+    }
+
+    .q-visual th, .q-visual td {
+      border: 1px solid #cbd5e1;
+      padding: 6px 10px;
+      text-align: center;
+    }
+
+    .q-visual th {
+      background: #e2e8f0;
+      font-weight: 700;
+    }
+
+    /* Options */
+    .options-list {
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+
+    .option-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 10px 14px;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 8px;
+      cursor: pointer;
+      background: #fff;
+      transition: all 0.15s;
+      font-size: 0.96rem;
+    }
+
+    .option-item:hover:not(.locked) {
+      background: #f1f5f9;
+      border-color: #94a3b8;
+    }
+
+    .option-item.selected {
+      background: var(--primary-light);
+      border-color: var(--primary);
+      font-weight: 600;
+    }
+
+    .option-item.locked {
+      cursor: default;
+    }
+
+    .option-item.opt-correct {
+      background: var(--success-bg) !important;
+      border-color: var(--success) !important;
+      color: #14532d;
+      font-weight: 700;
+    }
+
+    .option-item.opt-wrong {
+      background: var(--danger-bg) !important;
+      border-color: var(--danger) !important;
+      color: #7f1d1d;
+      text-decoration: line-through;
+    }
+
+    .opt-prefix {
+      font-weight: 700;
+      min-width: 28px;
+    }
+
+    /* Explanation Box (Hidden until submitted) */
+    .explanation-box {
+      display: none;
+      margin-top: 16px;
+      padding: 14px 16px;
+      background: #f8fafc;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 0.92rem;
+    }
+
+    .explanation-box.visible {
+      display: block;
+    }
+
+    .exp-header {
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 8px;
+      padding-bottom: 6px;
+      border-bottom: 1px dashed #cbd5e1;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .exp-section {
+      margin-bottom: 8px;
+    }
+
+    .exp-label {
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .distractor-list {
+      margin-top: 6px;
+      padding-left: 18px;
+      color: #334155;
+    }
+
+    .distractor-list li {
+      margin-bottom: 4px;
+    }
+
+    /* Results Dashboard */
+    .result-dashboard {
+      display: none;
+      background: var(--bg-card);
+      border: 2px solid var(--primary);
+      border-radius: var(--radius);
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow-md);
+    }
+
+    .result-dashboard.visible {
+      display: block;
+    }
+
+    .result-top-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .score-summary {
+      text-align: center;
+      padding: 16px;
+      background: #eff6ff;
+      border-radius: 10px;
+      border: 1px solid #bfdbfe;
+    }
+
+    .score-big {
+      font-size: 2.8rem;
+      font-weight: 800;
+      color: var(--primary);
+      line-height: 1.1;
+    }
+
+    .score-sub {
+      font-size: 0.92rem;
+      color: #475569;
+      margin-top: 6px;
+    }
+
+    .dim-stats-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+      font-size: 0.88rem;
+    }
+
+    .dim-stats-table th, .dim-stats-table td {
+      border: 1px solid #cbd5e1;
+      padding: 6px 10px;
+      text-align: center;
+    }
+
+    .dim-stats-table th {
+      background: #f1f5f9;
+    }
+
+    .radar-wrapper {
+      max-width: 290px;
+      margin: 0 auto;
+    }
+
+    .result-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding-top: 14px;
+      border-top: 1px solid #e2e8f0;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .filter-group {
+      display: flex;
+      gap: 8px;
+    }
+
+    /* Modals (Parent Monitor & Verification Table) */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.6);
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal-box {
+      background: #fff;
+      border-radius: 12px;
+      max-width: 860px;
+      width: 100%;
+      max-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+
+    .modal-header {
+      padding: 14px 20px;
+      border-bottom: 1px solid #e2e8f0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 700;
+      font-size: 1.05rem;
+    }
+
+    .modal-body {
+      padding: 18px 20px;
+      overflow-y: auto;
+      font-size: 0.9rem;
+    }
+
+    .modal-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .modal-table th, .modal-table td {
+      border: 1px solid #cbd5e1;
+      padding: 8px 10px;
+      text-align: left;
+    }
+
+    .modal-table th {
+      background: #f1f5f9;
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #0f172a;
+      color: #fff;
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s;
+      z-index: 200;
+    }
+    .toast.show {
+      opacity: 1;
+    }
+
+    /* Responsive Design (RWD) */
+    @media (max-width: 960px) {
+      body {
+        height: auto;
+        overflow: auto;
+      }
+      .main-container {
+        flex-direction: column;
+        overflow: visible;
+      }
+      .left-pane, .right-pane {
+        width: 100%;
+        height: auto;
+        overflow: visible;
+        border-right: none;
+      }
+      .left-pane {
+        border-bottom: 2px solid var(--border-color);
+      }
+      .result-top-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header Bar -->
+  <header>
+    <div class="header-left">
+      <span id="verifyBtn" class="verify-trigger" title="題庫檢核">❖</span>
+      <h1 id="examTitle" class="exam-title">國中自然科學（生物）第3章 生物體內的運輸｜108課綱模擬測驗</h1>
+      <div class="timer-box">
+        <span>⏱️ 剩餘時間：</span>
+        <span id="timerDisplay" class="timer-display">50:00</span>
+        <input type="number" id="customMinutes" class="timer-input" min="1" max="240" value="50" title="設定分鐘數 (1~240)">
+        <span>分</span>
+        <button id="setTimerBtn" class="btn btn-outline btn-sm">設定</button>
+      </div>
+    </div>
+    <div class="header-right">
+      <span id="progressText" style="font-size: 0.88rem; color: #475569; font-weight: 600;">已作答：0 / 20 題</span>
+      <button id="shuffleBtn" class="btn btn-outline">🔀 重新測驗（洗牌）</button>
+      <button id="submitBtn" class="btn btn-primary">📝 提交試卷</button>
+    </div>
+  </header>
+
+  <!-- Main Split-Screen Workspace -->
+  <div class="main-container">
+    <!-- Left Pane: Navigator + Long/Diagram/Group Questions -->
+    <div class="left-pane" id="leftPane">
+      <div class="nav-card">
+        <div class="nav-header">
+          <span>🧭 題號快速導覽（點擊跳轉）</span>
+          <div class="nav-legend">
+            <span><i class="legend-dot" style="background:#fff;border:1px solid #cbd5e1;"></i>未答</span>
+            <span><i class="legend-dot" style="background:#2563eb;"></i>已答</span>
+            <span><i class="legend-dot" style="background:#15803d;"></i>答對</span>
+            <span><i class="legend-dot" style="background:#b91c1c;"></i>答錯</span>
+          </div>
+        </div>
+        <div class="nav-grid" id="navGrid"></div>
+      </div>
+
+      <div class="pane-section-title">
+        <span>📊 圖表判讀、實驗探究與情境題組區</span>
+        <span style="font-size:0.8rem;font-weight:400;color:#64748b;">對照右側短題與解析進行研讀</span>
+      </div>
+      <div id="leftQuestionsContainer"></div>
+    </div>
+
+    <!-- Right Pane: Score Dashboard + Short Concept Questions -->
+    <div class="right-pane" id="rightPane">
+      <!-- Score & Weakness Analysis Dashboard (Visible after submission) -->
+      <div class="result-dashboard" id="resultDashboard">
+        <div class="result-top-grid">
+          <div>
+            <div class="score-summary">
+              <div style="font-size:0.9rem;font-weight:700;color:#1e3a8a;margin-bottom:4px;">本次測驗總成績</div>
+              <div class="score-big"><span id="scoreValue">0</span> <span style="font-size:1.2rem;">分</span></div>
+              <div class="score-sub" id="scoreDetail">答對 0 題 / 共 20 題（耗時 00:00）</div>
+            </div>
+            <table class="dim-stats-table">
+              <thead>
+                <tr>
+                  <th>核心認知維度</th>
+                  <th>答對/總題</th>
+                  <th>得分率</th>
+                </tr>
+              </thead>
+              <tbody id="dimTableBody"></tbody>
+            </table>
+          </div>
+          <div class="radar-wrapper">
+            <canvas id="radarChart"></canvas>
+          </div>
+        </div>
+
+        <div class="result-actions">
+          <div class="filter-group">
+            <button id="filterAllBtn" class="btn btn-primary btn-sm">顯示全部試題</button>
+            <button id="filterWrongBtn" class="btn btn-outline btn-sm">🔍 只看錯題</button>
+          </div>
+          <div class="filter-group">
+            <button id="copyMarkdownBtn" class="btn btn-success btn-sm">📋 一鍵複製錯題筆記 (Markdown)</button>
+            <button id="downloadWordBtn" class="btn btn-outline btn-sm">📄 下載 Word 複習卷 (.doc)</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="pane-section-title">
+        <span>✍️ 核心觀念與基礎定義測驗區</span>
+        <span style="font-size:0.8rem;font-weight:400;color:#64748b;">請直接點選最適合的選項</span>
+      </div>
+      <div id="rightQuestionsContainer"></div>
+    </div>
+  </div>
+
+  <!-- Modal 1: Parent Monitoring History -->
+  <div class="modal-overlay" id="parentModal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <span>🔒 家長監控中心｜歷次測驗歷史紀錄表</span>
+        <button class="btn btn-outline btn-sm" onclick="closeModal('parentModal')">關閉 ✕</button>
+      </div>
+      <div class="modal-body">
+        <div style="margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;">
+          <span style="color:#475569;">以下資料儲存於本機瀏覽器，可檢視每次交卷時間、作答耗時與得分紀錄：</span>
+          <button class="btn btn-outline btn-sm" style="color:#b91c1c;border-color:#fca5a5;" onclick="clearParentHistory()">清除紀錄</button>
+        </div>
+        <table class="modal-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>交卷時間</th>
+              <th>作答耗時</th>
+              <th>測驗得分</th>
+              <th>各維度統計</th>
+              <th>錯題題號清單</th>
+            </tr>
+          </thead>
+          <tbody id="parentHistoryBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 2: Question Bank Verification Table -->
+  <div class="modal-overlay" id="verifyModal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <span>❖ 命題審題與答案分佈視覺化檢核總表</span>
+        <button class="btn btn-outline btn-sm" onclick="closeModal('verifyModal')">關閉 ✕</button>
+      </div>
+      <div class="modal-body">
+        <div id="answerDistSummary" style="margin-bottom:12px;padding:10px;background:#f1f5f9;border-radius:6px;font-weight:600;"></div>
+        <table class="modal-table">
+          <thead>
+            <tr>
+              <th>題號</th>
+              <th>類型 / 認知維度</th>
+              <th>正解</th>
+              <th>題幹摘要與核心考點</th>
+            </tr>
+          </thead>
+          <tbody id="verifyTableBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast"></div>
+
+  <script>
+    // =========================================================================
+    // 結構化題庫陣列（源自上傳教材：第3章 生物體內的運輸 3-1 ~ 3-3 與會考專區）
+    // 維度分類：'基礎定義' | '實驗變因' | '圖表判讀' | '跨章整合'
+    // 排版分類：pane: 'left' (圖表/實驗/多字數題組) | 'right' (短題幹/核心概念題)
+    // =========================================================================
+    const rawQuestionBank = [
+      {
+        id: 1,
+        pane: "left",
+        tier: "課本核心",
+        dimension: "圖表判讀",
+        stem: "小美利用複式顯微鏡觀察小魚尾鰭的血液流動情形，觀察結果如圖所示（甲為管徑最細的血管，乙血管血液流向甲，丙血管收集來自甲的血液）。關於此實驗觀察的敘述，下列何者正確？",
+        visual: `<pre>【小魚尾鰭血液流動方向示意圖】
+  乙（小動脈） ═══════▶ 血液流入微血管網
+       │
+       ▼
+  甲（微血管） ─── 紅血球呈「單行」緩慢通過 ───┐
+       │                                      ▼
+  丙（小靜脈） ◀═══════ 血液匯集流回心臟</pre>`,
+        options: [
+          "在血管中流動的細小顆粒主要是無細胞核的血小板",
+          "圖中甲為微血管、乙為小動脈、丙為小靜脈",
+          "判斷小動脈與小靜脈的主要依據是血管壁的顏色深淺",
+          "實驗時須將小魚尾鰭完全乾燥後再置於載玻片上觀察"
+        ],
+        answer: 1,
+        concept: "3-2 血液循環與複式顯微鏡觀察小魚尾鰭血液流動（課本 P.174 題組 1、2）。",
+        formula: "血液流動方向：$\\text{小動脈（乙）} \\rightarrow \\text{微血管（甲）} \\rightarrow \\text{小靜脈（丙）}$",
+        explanation: "在複式顯微鏡下，管徑最細、僅容紅血球單行通過的甲為微血管；血液由主幹分支流向微血管的乙為小動脈；血液由微血管匯集流回心臟的丙為小靜脈。",
+        distractors: [
+          "(A) 錯誤：血管中流動且最易觀察到的顆粒是「紅血球」，血小板體積極小且無色，一般光學顯微鏡不易直接觀察。",
+          "(C) 錯誤：判斷小動脈與小靜脈的標準是「血液流動方向（分支或匯集）」，而非血管顏色。",
+          "(D) 錯誤：觀察時必須用「沾濕的棉花」覆蓋魚鰓與魚身，以維持魚體呼吸與濕潤，不可乾燥。"
+        ]
+      },
+      {
+        id: 2,
+        pane: "right",
+        tier: "課本核心",
+        dimension: "基礎定義",
+        stem: "人體的血管可分為動脈、靜脈與微血管三種。關於這三種血管構造與功能的比較，下列敘述何者正確？",
+        visual: "",
+        options: [
+          "動脈的管壁最厚且富有彈性，能承受心室收縮時的高血壓",
+          "所有靜脈內部皆具有瓣膜，可防止血液因重力而發生逆流",
+          "微血管管壁由多層細胞構成，有利於白血球穿出吞噬細菌",
+          "測量脈搏時通常按壓手腕處的靜脈，因其位置較淺且搏動明顯"
+        ],
+        answer: 0,
+        concept: "3-2 人體三種血管（動脈、靜脈、微血管）的構造與功能比較（課本 P.173 第 12 題、P.175 第 3~6 題）。",
+        formula: "管壁厚度與彈性：$\\text{動脈} > \\text{靜脈} > \\text{微血管（僅單層細胞）}$",
+        explanation: "動脈負責將血液帶離心臟，需承受心室收縮產生的強大壓力，因此管壁最厚、肌肉層發達且富有彈性。",
+        distractors: [
+          "(B) 錯誤：僅「較大的靜脈（如四肢靜脈）」具有瓣膜，並非所有靜脈皆有。",
+          "(C) 錯誤：微血管管壁僅由「單層細胞」構成，管壁極薄以利物質交換，白血球可變形穿出單層細胞間隙。",
+          "(D) 錯誤：脈搏是由心室收縮傳導至「動脈」管壁產生的彈性搏動，因此測量脈搏應按壓動脈（如橈動脈）；靜脈則用於抽血或靜脈注射。"
+        ]
+      },
+      {
+        id: 3,
+        pane: "left",
+        tier: "課本核心",
+        dimension: "圖表判讀",
+        stem: "附圖為人體肺部微血管的氣體交換示意圖，箭頭代表血液流動方向（由血管 A 流經肺泡微血管 C 再流向血管 B）。下列關於此循環路徑的敘述，何者正確？",
+        visual: `<pre>【人體肺部氣體交換模式圖】
+  心臟右心室 ──▶ [血管 A：肺動脈] ──▶ [微血管 C] ──▶ [血管 B：肺靜脈] ──▶ 心臟左心房
+                                        │ ▲
+                                   CO₂  │ │  O₂（擴散作用）
+                                        ▼ │
+                                     [ 肺 泡 ]</pre>`,
+        options: [
+          "血管 A 與心臟的左心室相連接，內含鮮紅色的充氧血",
+          "血管 B 將血液帶回心臟的左心房，其血液含氧量高於血管 A",
+          "氣體進出肺泡與微血管 C 的主要動力來自細胞的主動運輸",
+          "微血管 C 進行氣體交換後，血液中的二氧化碳濃度會顯著上升"
+        ],
+        answer: 1,
+        concept: "3-2 肺循環路徑與肺泡氣體交換機制（課本 P.175 第 7~10 題、P.179 第 14 題）。",
+        formula: "肺循環氣體變化：$\\text{缺氧血（血管 A）} \\xrightarrow{\\text{擴散作用吸收 } O_2\\text{、排出 } CO_2} \\text{充氧血（血管 B）}$",
+        explanation: "肺循環中，缺氧血由右心室經肺動脈（A）送至肺部微血管（C），藉由擴散作用吸收氧氣並排出二氧化碳後，轉變為充氧血經肺靜脈（B）流回左心房，故含氧量 B > A。",
+        distractors: [
+          "(A) 錯誤：血管 A 為肺動脈，連接「右心室」，內含暗紅色的缺氧血。",
+          "(C) 錯誤：氧氣與二氧化碳進出肺泡與微血管是順著濃度梯度進行「擴散作用」，不需消耗細胞能量進行主動運輸。",
+          "(D) 錯誤：血液流經肺泡時會將二氧化碳擴散至肺泡呼出，因此血液中二氧化碳濃度會「下降」。"
+        ]
+      },
+      {
+        id: 4,
+        pane: "right",
+        tier: "課本核心",
+        dimension: "基礎定義",
+        stem: "關於人體心血管系統中「心臟腔室、瓣膜與血管連接」的敘述，下列何者完全正確？",
+        visual: "",
+        options: [
+          "與心室相連接的血管皆為動脈，與心房相連接的血管皆為靜脈",
+          "所有動脈內流動的皆為充氧血，所有靜脈內流動的皆為缺氧血",
+          "上下大靜脈與右心房之間具有瓣膜，可防止血液逆流回靜脈",
+          "左、右心房同時收縮時，會將血液直接壓入主動脈與肺動脈"
+        ],
+        answer: 0,
+        concept: "3-2 心臟構造、瓣膜位置與體循環／肺循環之比較（課本 P.171 是非第 3 題、P.173 第 13 題、P.174 第 18 題）。",
+        formula: "血流方向：$\\text{靜脈} \\rightarrow \\text{心房} \\xrightarrow{\\text{房室瓣}} \\text{心室} \\xrightarrow{\\text{動脈瓣}} \\text{動脈}$",
+        explanation: "依據心血管系統定義，凡將血液「帶離心臟」的血管皆稱為動脈（連接左、右心室）；凡將血液「帶回心臟」的血管皆稱為靜脈（連接左、右心房）。",
+        distractors: [
+          "(B) 錯誤：「肺動脈」內流動的是缺氧血，「肺靜脈」內流動的是充氧血，此為最常見的迷思陷阱。",
+          "(C) 錯誤：上下大靜脈與右心房之間「沒有瓣膜」；瓣膜位於心房與心室之間、心室與動脈之間，以及較大的靜脈內。",
+          "(D) 錯誤：心房收縮是將血液壓入「心室」；須由左、右「心室」收縮，才能將血液送入主動脈與肺動脈。"
+        ]
+      },
+      {
+        id: 5,
+        pane: "left",
+        tier: "補充紅字",
+        dimension: "跨章整合",
+        stem: "比較人體小腸絨毛模式圖中的甲血管（將血液帶離小腸絨毛）與乙血管（將血液帶入小腸絨毛），在進食消化吸收一段時間後，下列兩血管內血液成分的比較何者正確？",
+        visual: `<pre>【小腸絨毛物質交換模式圖】
+  乙血管（小動脈） ──▶ [小腸絨毛微血管網] ──▶ 甲血管（小靜脈）
+                            ▲         │
+                    葡萄糖、胺基酸    │ O₂ 供細胞呼吸
+                    經吸收進入血液    ▼ 產生 CO₂ 排入血液</pre>`,
+        options: [
+          "葡萄糖濃度：甲血管 ＜ 乙血管",
+          "氧氣濃度：甲血管 ＞ 乙血管",
+          "二氧化碳濃度：甲血管 ＞ 乙血管",
+          "血管管壁厚度：甲血管 ＞ 乙血管"
+        ],
+        answer: 2,
+        concept: "3-2 體循環中組織微血管的養分與氣體交換（課本 P.171 是非第 5 題、P.174 第 19 題）。",
+        formula: "小腸組織微血管變化：$\\text{葡萄糖}\\uparrow、\\text{胺基酸}\\uparrow、O_2\\downarrow、CO_2\\uparrow$",
+        explanation: "小腸屬於體循環的組織器官，血液流經小腸絨毛微血管時，會吸收消化後的葡萄糖與胺基酸，同時提供氧氣給小腸細胞進行呼吸作用並帶走二氧化碳，因此流出的甲血管（小靜脈）二氧化碳濃度高於流入的乙血管（小動脈）。",
+        distractors: [
+          "(A) 錯誤：小腸吸收葡萄糖進入血液後由甲血管帶走，故葡萄糖濃度應為「甲血管 ＞ 乙血管」。",
+          "(B) 錯誤：小腸細胞呼吸作用消耗氧氣，故流出小腸的甲血管氧氣濃度較低，應為「甲血管 ＜ 乙血管」。",
+          "(D) 錯誤：乙血管為小動脈，甲血管為小靜脈，動脈管壁厚於靜脈，故管壁厚度應為「甲血管 ＜ 乙血管」。"
+        ]
+      },
+      {
+        id: 6,
+        pane: "left",
+        tier: "補充紅字",
+        dimension: "圖表判讀",
+        stem: "附圖為人體內甲、乙兩種器官各自的動脈與靜脈血液中氧氣含量比較圖。若紅血球從肺泡獲得氧氣後，經由循環系統運送至組織細胞釋出氧氣，其流經甲、乙及心臟的正確途徑為何？",
+        visual: `<pre>【甲、乙兩器官動靜脈血氧含量長條圖】
+  氧含量 高 │  ██                  ██
+            │  ██   ░░        ░░   ██
+         低 │  ██   ░░        ░░   ██
+            └───────────     ───────────
+              動脈 靜脈      動脈 靜脈
+              [器官 甲]      [器官 乙]</pre>`,
+        options: [
+          "甲 → 心臟 → 乙",
+          "甲 → 乙 → 心臟",
+          "乙 → 心臟 → 甲",
+          "乙 → 甲 → 心臟"
+        ],
+        answer: 2,
+        concept: "104 教育會考題：肺循環與體循環的血液含氧量變化與路徑整合（課本 P.177 會考專區第 8 題）。",
+        formula: "氧氣運輸路徑：$\\text{肺部（乙）} \\xrightarrow{\\text{肺靜脈}} \\text{心臟（左心）} \\xrightarrow{\\text{主動脈}} \\text{一般組織（甲）}$",
+        explanation: "器官乙的靜脈血氧含量高於動脈（缺氧血變充氧血），代表乙為進行氣體交換獲得氧氣的「肺部」；器官甲的動脈血氧含量高於靜脈（充氧血變缺氧血），代表甲為消耗氧氣的「一般組織器官」。紅血球攜氧路徑為：肺部（乙）→ 左心房 → 左心室（心臟）→ 一般組織（甲）。",
+        distractors: [
+          "(A) 錯誤：此順序代表從一般組織釋出氧氣後回心臟再去肺部，與題意「從獲得氧氣到釋出氧氣」方向相反。",
+          "(B) 錯誤：體循環與肺循環之間必須經過心臟加壓推動，無法由器官甲直接流向器官乙。",
+          "(D) 錯誤：肺靜脈的充氧血必須先流回心臟左心房、左心室，再由主動脈送往全身器官，不會直接由乙流向甲。"
+        ]
+      },
+      {
+        id: 7,
+        pane: "left",
+        tier: "課本核心",
+        dimension: "跨章整合",
+        stem: "純信因腳部發炎就醫，醫生在純信右臂的靜脈注射消炎藥劑。若藥劑隨血液循環運送至左腳發炎處，其流經下列構造的先後順序為何？\n(甲)主動脈；(乙)上大靜脈；(丙)肺靜脈；(丁)肺動脈；(戊)心臟；(己)下肢動脈。",
+        visual: `<pre>【藥物靜脈注射循環路徑示意】
+  右臂靜脈 ──▶ (？) ──▶ 右心房/右心室 ──▶ (？) ──▶ 肺微血管 ──▶ (？) ──▶ 左心房/左心室 ──▶ (？) ──▶ (？) ──▶ 左腳</pre>`,
+        options: [
+          "甲 → 戊 → 丙 → 丁 → 戊 → 乙 → 己",
+          "乙 → 戊 → 丁 → 丙 → 戊 → 甲 → 己",
+          "戊 → 乙 → 丁 → 丙 → 戊 → 己 → 甲",
+          "丁 → 戊 → 乙 → 丙 → 甲 → 己 → 戊"
+        ],
+        answer: 1,
+        concept: "大考類題：體循環與肺循環完整路徑追蹤（課本 P.178 第 12 題、P.177 會考專區第 6 題）。",
+        formula: "手臂靜脈 $\\rightarrow \\text{上大靜脈（乙）} \\rightarrow \\text{心臟右半側（戊）} \\rightarrow \\text{肺動脈（丁）} \\rightarrow \\text{肺} \\rightarrow \\text{肺靜脈（丙）} \\rightarrow \\text{心臟左半側（戊）} \\rightarrow \\text{主動脈（甲）} \\rightarrow \\text{下肢動脈（己）}$",
+        explanation: "上肢靜脈注射的藥物會先匯入上大靜脈（乙），進入心臟右心房與右心室（戊），再經肺動脈（丁）送至肺部；接著經肺靜脈（丙）流回心臟左心房與左心室（戊），最後由主動脈（甲）分支進入下肢動脈（己）抵達左腳。",
+        distractors: [
+          "(A) 錯誤：誤將靜脈注射的起點當成主動脈（甲），且將肺靜脈與肺動脈順序顛倒。",
+          "(C) 錯誤：血液必須先經過上大靜脈（乙）才能進入心臟（戊），且主動脈（甲）位於下肢動脈（己）之前。",
+          "(D) 錯誤：起點並非肺動脈（丁），整體循環邏輯錯亂。"
+        ]
+      },
+      {
+        id: 8,
+        pane: "right",
+        tier: "課本核心",
+        dimension: "基礎定義",
+        stem: "關於人體「血球細胞」與「淋巴系統」的生理功能敘述，下列何者正確？",
+        visual: "",
+        options: [
+          "紅血球具有雙凹圓盤狀構造且無細胞核，可作為親子 DNA 鑑定的主要材料",
+          "白血球體積最大且具有細胞核，能變形穿出微血管壁吞噬入侵的病原體",
+          "血小板與血液凝固無關，主要負責將消化後的葡萄糖運送至全身細胞",
+          "淋巴結收縮是推動淋巴液在淋巴管內流動並最終注入動脈的主要動力"
+        ],
+        answer: 1,
+        concept: "3-2 血液成分（血漿、三種血球）與淋巴循環系統（課本 P.172 第 5、10 題、P.173 第 11、15 題）。",
+        formula: "血球特性比較：$\\text{白血球（有核、最大、防禦）} > \\text{紅血球（無核、雙凹圓盤、攜氧）} > \\text{血小板（無核碎片、凝血）}$",
+        explanation: "白血球是三種血球中體積最大且唯一具有細胞核的細胞，可作變形蟲運動穿過微血管壁進入組織間隙吞噬細菌，並參與專一性防禦。",
+        distractors: [
+          "(A) 錯誤：成熟的紅血球「沒有細胞核」，不含細胞核 DNA，因此進行 DNA 鑑定需使用「白血球」。",
+          "(C) 錯誤：血小板的主要功能是協助血液凝固（止血）；葡萄糖則主要由「血漿」運送。",
+          "(D) 錯誤：淋巴管內無心臟加壓，淋巴液流動主要靠「骨骼肌收縮」與呼吸運動擠壓，淋巴結不具收縮功能，且淋巴最終是注入「靜脈」回到血液循環。"
+        ]
+      },
+      {
+        id: 9,
+        pane: "left",
+        tier: "課本核心",
+        dimension: "實驗變因",
+        stem: "阿芳利用複式顯微鏡觀察小魚尾鰭內血液流動的方向，所觀察到的視野影像如附圖所示（箭頭代表實際血液流動方向）。若阿芳想追蹤最上方血管的血流去向，而將培養皿「往左」緩慢移動，則在視野中依序消失的血管為何？",
+        visual: `<pre>【複式顯微鏡視野下的小魚尾鰭血管】
+           上
+      ┌───────────┐
+      │  ───▶───  │  ← 上方血管（血流向右）
+   左 │  ──▶──▶─  │ 右 ← 中間微血管（血流向右）
+      │  ───◀───  │  ← 下方血管（血流向左）
+      └───────────┘
+           下</pre>`,
+        options: [
+          "小動脈、微血管、小靜脈",
+          "小動脈、小靜脈、微血管",
+          "小靜脈、微血管、小動脈",
+          "小靜脈、小動脈、微血管"
+        ],
+        answer: 2,
+        concept: "112 教育會考題：複式顯微鏡成像原理（上下顛倒、左右相反）與血管判別（課本 P.178 第 11 題）。",
+        formula: "顯微鏡成像與移動方向：$\\text{玻片往左移} \\Rightarrow \\text{視野影像往右移} \\Rightarrow \\text{視野左側物體先消失}$",
+        explanation: "視野中上方血管血流向右並分流至中間微血管，故上方血管為「小動脈」，中間為「微血管」，下方匯集血流的為「小靜脈」。當實體培養皿「往左」移動時，因複式顯微鏡成像左右相反，視野內的影像會整體「往右」移動，因此位於視野最左側（下方）的小靜脈會最先移出視野消失，依序為：小靜脈 → 微血管 → 小動脈。",
+        distractors: [
+          "(A) 錯誤：此為將培養皿「往右」移動時，視野影像往左移才會發生的消失順序。",
+          "(B) 錯誤：混淆了微血管與小靜脈在圖中的相對位置與移動方向。",
+          "(D) 錯誤：誤判上方與下方血管的動脈、靜脈屬性。"
+        ]
+      },
+      {
+        id: 10,
+        pane: "left",
+        tier: "課本核心",
+        dimension: "圖表判讀",
+        stem: "維管束植物進行某種生理代謝作用，其反應式為：「$\\text{甲} + \\text{二氧化碳} \\xrightarrow{\\text{光能、葉綠體}} \\text{氧氣} + \\text{乙} + \\text{水}$」。有關物質「甲」的名稱及其在植物體內主要運送的構造與方向，下列何者最合理？",
+        visual: `<pre>【植物體內雙向運輸管道比較】
+  構造①（木質部）：根部吸收 ──▶ 單向「由下往上」運送 ──▶ 葉片行光合作用
+  構造②（韌皮部）：葉片製造 ──▶ 雙向「由上往下或由下往上」運送 ──▶ 根、莖、果實</pre>`,
+        options: [
+          "甲為水，主要由木質部由下往上運送",
+          "甲為水，主要由韌皮部由上往下運送",
+          "甲為葡萄糖，主要由木質部由下往上運送",
+          "甲為葡萄糖，主要由韌皮部由上往下運送"
+        ],
+        answer: 0,
+        concept: "112 教育會考題：光合作用反應式與木質部、韌皮部運輸功能（課本 P.171 選擇第 3 題、P.172 第 8 題）。",
+        formula: "光合作用總反應式：$12\\text{H}_2\\text{O（甲：水）} + 6\\text{CO}_2 \\xrightarrow{\\text{光能、葉綠體}} 6\\text{O}_2 + \\text{C}_6\\text{H}_{12}\\text{O}_6\\text{（乙：葡萄糖）} + 6\\text{H}_2\\text{O}$",
+        explanation: "根據光合作用反應式，反應物甲為「水（$\\text{H}_2\\text{O}$）」，產物乙為「葡萄糖（$\\text{C}_6\\text{H}_{12}\\text{O}_6$）」。植物所需的水分由根毛吸收後，主要經由維管束的「木質部」單向由下往上運送至葉片。",
+        distractors: [
+          "(B) 錯誤：韌皮部負責運送有機養分（葡萄糖），水分主要由木質部運送。",
+          "(C) 錯誤：葡萄糖是光合作用的產物（乙），並非反應物（甲），且不由木質部運送。",
+          "(D) 錯誤：將反應物「水（甲）」與產物「葡萄糖（乙）」的角色顛倒。"
+        ]
+      },
+      {
+        id: 11,
+        pane: "left",
+        tier: "課本核心",
+        dimension: "圖表判讀",
+        stem: "附圖為多年生木本植物莖的橫切面構造示意圖（由外而內依序標示為甲、乙、丙）。下列關於各構造名稱與功能的敘述，何者正確？",
+        visual: `<pre>【雙子葉木本植物莖橫切面由外而內構造】
+  樹皮（外側） ──▶ [ 甲：韌皮部 ] ──▶ 運送葉片製造的有機養分
+                   [ 乙：形成層 ] ──▶ 細胞分裂使莖逐年加粗
+  木材（內側） ──▶ [ 丙：木質部 ] ──▶ 運送根部吸收的水分與礦物質</pre>`,
+        options: [
+          "植物冬天落葉時，根部儲存的養分可經由甲構造向上運送供芽生長",
+          "乙構造可不斷進行細胞分裂，使植物莖部逐年向高處抽長",
+          "丙構造具有雙向運輸能力，可將水分同時向下或向上輸送",
+          "日常所見的木材是由甲與丙逐年向內分裂堆積而形成的"
+        ],
+        answer: 0,
+        concept: "3-1 植物維管束構造（韌皮部、形成層、木質部）與雙向／單向運輸（課本 P.171 選擇第 1 題、P.176 會考專區第 2、3 題）。",
+        formula: "莖橫切面排列（外 $\\rightarrow$ 內）：$\\text{樹皮（含甲：韌皮部）} \\rightarrow \\text{乙：形成層} \\rightarrow \\text{木材（丙：木質部）}$",
+        explanation: "維管束環狀排列時，韌皮部（甲）靠外側、木質部（丙）靠內側，形成層（乙）夾在兩者之間。韌皮部可雙向運輸養分，冬天落葉時能將根部儲存的養分由下往上運送至枝芽。",
+        distractors: [
+          "(B) 錯誤：形成層（乙）細胞分裂是使莖「逐年加粗」，使莖長高的是頂芽（生長點）。",
+          "(C) 錯誤：木質部（丙）只能「單向由下往上」運送水分，無法向下運輸。",
+          "(D) 錯誤：木材完全是由形成層（乙）向內分裂產生的「木質部（丙）」細胞逐年累積而成，不含韌皮部（甲）。"
+        ]
+      },
+      {
+        id: 12,
+        pane: "right",
+        tier: "課本核心",
+        dimension: "基礎定義",
+        stem: "單子葉植物（如玉米、水稻）與雙子葉木本植物（如榕樹、臺灣欒樹）的維管束排列與生長特性各有不同。下列比較敘述何者正確？",
+        visual: "",
+        options: [
+          "玉米莖內維管束呈環狀排列且具有形成層，因此可觀察到明顯年輪",
+          "榕樹樹幹中空變成神木後仍可存活，是因老化的木質部仍具運輸水分功能",
+          "植物體內水分由根部上升至葉片的主要動力，來自葉片氣孔進行的蒸散作用",
+          "木材年輪中顏色較淺、細胞較大且排列疏鬆的部分，通常是在寒冷乾燥季節形成"
+        ],
+        answer: 2,
+        concept: "3-1 單／雙子葉維管束比較、年輪成因與蒸散作用拉力（課本 P.171 是非第 1、7 題、選擇第 2、4 題、P.172 第 6 題）。",
+        formula: "水分上升動力順序：$\\text{蒸散作用拉力（主因）} > \\text{毛細現象} > \\text{根壓}$",
+        explanation: "葉片氣孔蒸散水氣時會產生強大的向上拉力（蒸散作用），牽引木質部內的水柱連續由根部上升至葉片，是高大樹木水分運輸最主要的動力。",
+        distractors: [
+          "(A) 錯誤：玉米與水稻為單子葉植物，莖內維管束呈「散生排列」且「缺乏形成層」，無法加粗也沒有年輪。",
+          "(B) 錯誤：神木樹幹中空（老化的木質部腐朽），但外圍新生的木質部與樹皮內的韌皮部仍完整，故仍可運輸水分與養分而存活。",
+          "(D) 錯誤：細胞大、排列疏鬆、顏色較淡的早材（春材），是在「溫暖多雨」的季節快速生長所形成；寒冷乾燥季節則形成細胞小、顏色深的晚材（秋材）。"
+        ]
+      },
+      {
+        id: 13,
+        pane: "left",
+        tier: "補充紅字",
+        dimension: "實驗變因",
+        stem: "阿碩欲將庭園中的一棵樹木移植至別處，他整理了四項移植操作要點與其對應的主要生理原因（如附表）。請問哪一項要點的建議與其主要原因「不相符合」？",
+        visual: `<table>
+  <thead>
+    <tr><th>要點代號</th><th>移植操作建議</th><th>對應之主要生理原因</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>甲</td><td>選擇在夜晚或陰天進行移植</td><td>降低光照與溫度，減少葉片蒸散作用</td></tr>
+    <tr><td>乙</td><td>修剪掉樹木大部分的枝葉</td><td>幫助莖部木質部內的水分快速上升至葉片</td></tr>
+    <tr><td>丙</td><td>保留黏附在根部周圍的土壤</td><td>避免移植過程傷害細小的根毛構造</td></tr>
+    <tr><td>丁</td><td>移植後不可立即施灑高濃度肥料</td><td>避免土壤溶液濃度過高導致根部細胞脫水</td></tr>
+  </tbody>
+</table>`,
+        options: [
+          "甲",
+          "乙",
+          "丙",
+          "丁"
+        ],
+        answer: 1,
+        concept: "103 教育會考題：蒸散作用、根毛吸水與滲透作用在植物移植的綜合應用（課本 P.172 第 7 題）。",
+        formula: "水分平衡原則：$\\text{根部吸水量（受損減少）} \\ge \\text{葉片蒸散量（需修剪枝葉以降低）}$",
+        explanation: "移植樹木時難免會損傷部分根毛，導致根部吸水能力暫時下降；因此「修剪掉部分枝葉（乙）」的真正目的是為了「減少葉片氣孔的蒸散作用（減少水分散失）」，而非幫助水分上升。",
+        distractors: [
+          "(A) 符合：夜晚氣孔多半關閉且氣溫較低，可有效降低蒸散作用速率。",
+          "(C) 符合：根部表皮細胞向外突出的根毛極為脆弱，連同土壤一起挖掘可保護根毛，維持吸水表面積。",
+          "(D) 符合：若施灑高濃度肥料，會使土壤水分濃度低於根部細胞內部，引發滲透作用使根部水分流失（燒根現象）。"
+        ]
+      },
+      {
+        id: 14,
+        pane: "right",
+        tier: "課本核心",
+        dimension: "基礎定義",
+        stem: "在自然環境中，許多微生物（如細菌、病毒）入侵人體可能引發疾病，這些微生物統稱為病原體。關於人體防禦機制「三道防線」的歸類與特性，下列敘述何者正確？",
+        visual: "",
+        options: [
+          "口腔黏膜阻隔細菌與胃酸抑菌作用，皆屬於人體的第一道防線",
+          "受傷部位出現紅、腫、熱、痛的發炎反應，屬於專一性防禦作用",
+          "白血球針對特定病原體產生專一性抗體，屬於人體的第二道防線",
+          "人體內所有的白血球皆能進行吞噬作用，且不具專一性辨識能力"
+        ],
+        answer: 0,
+        concept: "3-3 人體防禦的三道防線（非專一性 vs 專一性防禦）（課本 P.166~167 課文重點、P.168 是非第 1、3 題、P.169 選擇第 1~4 題）。",
+        formula: "防禦階層：$\\text{第一道（皮膜阻隔）} + \\text{第二道（發炎與吞噬）} = \\text{非專一性防禦}$；$\\text{第三道（抗體與破壞感染細胞）} = \\text{專一性防禦}$",
+        explanation: "人體的第一道防線為「皮膜的阻隔」，包含完整皮膚以及消化道（如口腔黏膜、胃酸）、呼吸道（纖毛）、泌尿道表面的黏膜，能阻擋或抑制多種病原體入侵。",
+        distractors: [
+          "(B) 錯誤：發炎反應與白血球吞噬作用針對所有入侵病原體皆一視同仁，屬於「非專一性防禦（第二道防線）」。",
+          "(C) 錯誤：白血球針對特定病原體產生「抗體」或「破壞受感染細胞」，具有高度專一性，屬於「第三道防線」。",
+          "(D) 錯誤：並非所有白血球都能吞噬病原體；負責第三道防線的特殊白血球（淋巴球）主要功能是產生抗體或破壞受感染細胞。"
+        ]
+      },
+      {
+        id: 15,
+        pane: "left",
+        tier: "補充紅字",
+        dimension: "跨章整合",
+        stem: "小明兩週前曾施打過季節性「流感疫苗」，身體已產生免疫反應。今天他在體育課打籃球時不慎跌倒，導致膝蓋皮膚擦傷流血並出現輕微紅腫發炎。關於此時小明體內防禦機制的運作，下列推論何者正確？",
+        visual: `<pre>【雙重情境防禦機制啟動對照】
+  情境 1（兩週前）：施打流感疫苗 ──▶ 啟動「第三道防線（專一性）」 ──▶ 產生針對流感病毒之記憶性與抗體
+  情境 2（今日）：膝蓋擦傷流血 ──▶ 「第一道防線（皮膚）」破損 ──▶ 啟動「第二道防線（發炎＋吞噬）」</pre>`,
+        options: [
+          "流感疫苗所誘發產生的抗體，可直接辨識並消滅膝蓋傷口入侵的細菌",
+          "小明防禦作用的第一道防線仍保持完整，因此細菌無法進入體內",
+          "小明傷口出現紅腫發炎，顯示體內非專一性的第二道防線已經啟動",
+          "因兩週前已施打過疫苗，小明這次膝蓋擦傷將完全不會發生發炎反應"
+        ],
+        answer: 2,
+        concept: "3-3 專一性免疫（抗體專一性）與非專一性防禦（皮膜阻隔、發炎反應）的綜合應用（課本 P.168 例題 1）。",
+        formula: "專一性原則：$\\text{流感疫苗抗體} \\xrightarrow{\\text{僅辨識}} \\text{流感病毒（無法對抗細菌或愛滋病毒）}$",
+        explanation: "膝蓋皮膚擦傷使第一道防線破損，細菌趁機入侵組織，促使受傷部位微血管擴張並吸引白血球聚集，啟動非專一性的「第二道防線（發炎反應與吞噬作用）」。",
+        distractors: [
+          "(A) 錯誤：抗體具有高度「專一性」，流感疫苗產生的抗體只能對抗特定流感病毒，無法對抗傷口細菌或其他病毒（如愛滋病毒）。",
+          "(B) 錯誤：皮膚已經擦傷破皮，代表第一道防線（皮膜阻隔）已經破損不完整。",
+          "(D) 錯誤：疫苗誘發的是第三道防線，無法取代第一道皮膚屏障，也無法阻止第二道防線的發炎反應。"
+        ]
+      },
+      {
+        id: 16,
+        pane: "left",
+        tier: "課本核心",
+        dimension: "圖表判讀",
+        stem: "附圖為人體施打某種疫苗後，體內針對該病原體的免疫力強度隨時間變化的曲線圖。根據圖形趨勢與免疫學原理判斷，下列敘述何者正確？",
+        visual: `<pre>【施打疫苗後體內免疫力強度變化曲線圖】
+  免 │                        ╭──╮  ← 第二次反應（再次接觸相同病原體）
+  疫 │                        │  ╰╮
+  力 │       ╭───╮            │   ╰╮
+  強 │       │   ╰──╮         │    ╰──╮
+  度 │ ──────╯      ╰─────────╯       ╰────▶ 時間
+        ↑ 第一次反應（施打疫苗）</pre>`,
+        options: [
+          "第一次接觸病原體（施打疫苗）時，免疫系統反應速度最快且抗體量最多",
+          "第二次接觸相同病原體時，反應速度變慢但抗體維持時間較短",
+          "施打疫苗的主要目的是直接注入大量現成抗體，以立即殺死體內病毒",
+          "第二次接觸相同病原體時，因特殊白血球具記憶性，能快速增生並產生大量抗體"
+        ],
+        answer: 3,
+        concept: "3-3 疫苗作用原理與特殊白血球的免疫記憶效應（課本 P.167~168 圖表、P.169 選擇第 5 題、P.170 進階第 4 題）。",
+        formula: "二次免疫反應特徵：$\\text{潛伏期更短（速度更快）} + \\text{抗體峰值更高（數量更多）} + \\text{持續時間更長}$",
+        explanation: "疫苗成分能模擬病原體（不致病或僅輕微症狀），使特殊白血球（記憶細胞）留下記憶；當第二次真正接觸相同病原體時，記憶性白血球能迅速大量增生並製造抗體，使免疫力強度遠高於第一次反應。",
+        distractors: [
+          "(A) 錯誤：由曲線高度與斜率可知，反應最快、抗體量最多的是「第二次反應」，而非第一次。",
+          "(B) 錯誤：第二次反應因為有記憶效應，反應速度「變快」且抗體量大幅增加。",
+          "(C) 錯誤：疫苗的成分是「減毒、死去或片段的病原體（抗原）」，用來刺激人體自己產生記憶與抗體，並非直接注入抗體（注入抗體稱為注射血清）。"
+        ]
+      },
+      {
+        id: 17,
+        pane: "left",
+        tier: "課本核心",
+        dimension: "實驗變因",
+        stem: "在探討「酵素活性與專一性」的實驗中，某生取甲、乙、丙三支試管，分別加入等量且濃度相同的澱粉液，並依下表設計加入不同試劑，置於適宜溫度下作用 30 分鐘後，再各加入本氏液並隔水加熱觀察顏色變化。根據實驗結果推論，酵素 X 最可能具有下列何種功能？",
+        visual: `<table>
+  <thead>
+    <tr><th>試管編號</th><th>試管內所含物質</th><th>加入本氏液隔水加熱後顏色</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>甲</td><td>澱粉液 ＋ 清水</td><td>藍色（無糖反應）</td></tr>
+    <tr><td>乙</td><td>澱粉液 ＋ 唾液</td><td>黃色（有糖反應）</td></tr>
+    <tr><td>丙</td><td>澱粉液 ＋ 經酵素 X 作用後的唾液</td><td>藍色（無糖反應）</td></tr>
+  </tbody>
+</table>`,
+        options: [
+          "酵素 X 能分解澱粉分子產生葡萄糖",
+          "酵素 X 能將葡萄糖重新合成為澱粉",
+          "酵素 X 能分解唾液中的澱粉酶使其失去活性",
+          "酵素 X 能促進唾液中的酵素加速分解澱粉"
+        ],
+        answer: 2,
+        concept: "100 基測題：酵素專一性、對照組設計與本氏液檢測還原糖原理（課本 P.180 第 2 題）。",
+        formula: "本氏液變色梯度（含糖量低 $\\rightarrow$ 高）：$\\text{藍色（無糖）} \\rightarrow \\text{綠色} \\rightarrow \\text{黃色} \\rightarrow \\text{橙色} \\rightarrow \\text{紅色}$",
+        explanation: "乙試管顯示正常唾液中的澱粉酶可將澱粉分解為麥芽糖（本氏液呈黃色）；然而丙試管中，唾液先經「酵素 X」處理後，便無法再分解澱粉（本氏液維持藍色），推知酵素 X 破壞並分解了唾液中的澱粉酶（蛋白質）。",
+        distractors: [
+          "(A) 錯誤：若酵素 X 能分解澱粉，丙試管應會產生糖分而使本氏液變色（綠/黃/紅），而非維持藍色。",
+          "(B) 錯誤：試管內原本加入的是澱粉液而非葡萄糖，且實驗結果顯示無糖產生。",
+          "(D) 錯誤：丙試管結果與無酵素的甲試管相同（皆為藍色），顯示唾液酵素活性已被破壞，而非加速。"
+        ]
+      },
+      {
+        id: 18,
+        pane: "left",
+        tier: "課本核心",
+        dimension: "圖表判讀",
+        stem: "附圖為某種「蛋白質分解酶」的催化作用示意圖（圖中甲為受質，乙為酵素，丙與丁為反應後的產物）。關於此酵素催化反應的敘述，下列何者「錯誤」？",
+        visual: `<pre>【酵素催化反應循環模式圖】
+   [ 甲：蛋白質受質 ] ──┐
+                        ├──▶ [ 甲乙複合體 ] ──▶ [ 乙：酵素（形狀不變，可重複使用） ]
+   [ 乙：蛋白質分解酶 ] ─┘                             ＋ [ 丙 ] ＋ [ 丁 ]（小分子產物）</pre>`,
+        options: [
+          "物質甲的化學成分為蛋白質，經反應後會被分解為較小的分子",
+          "物質乙為酵素，在催化反應前後其構造與活性維持不變，可重複使用",
+          "物質丙與丁為酵素催化分解後所產生的產物，分子量皆比甲小",
+          "物質乙具有專一性，表示一種酵素在生物體內僅能進行一次催化反應"
+        ],
+        answer: 3,
+        concept: "酵素的特性：專一性、重複使用性與受質－產物關係（課本 P.180 第 3、4 題）。",
+        formula: "酵素催化通式：$E\\text{（乙）} + S\\text{（甲）} \\rightleftharpoons ES \\rightarrow E\\text{（乙）} + P_1\\text{（丙）} + P_2\\text{（丁）}$",
+        explanation: "酵素的「專一性」是指酵素與受質之間具有特定的立體結構互補關係（鎖鑰模型），一種酵素只能催化「某一種特定受質」的反應；反應結束後酵素本身不被消耗，可以重複進行多次催化。",
+        distractors: [
+          "(A) 正確：題幹已明示此為蛋白質分解酶，故被分解的受質甲為蛋白質。",
+          "(B) 正確：由循環箭頭可知乙在反應前後保持原狀，具備重複使用性。",
+          "(C) 正確：此為分解反應，大分子甲被拆解為丙與丁兩個小分子（如胺基酸或短胜肽）。"
+        ]
+      },
+      {
+        id: 19,
+        pane: "right",
+        tier: "課本核心",
+        dimension: "基礎定義",
+        stem: "在顯微鏡下觀察已發芽的蘿蔔種子，可發現根部表皮向外突出許多細毛狀的構造（根毛）。此構造的主要功能與人體或植物體內的哪一種構造最相似？",
+        visual: "",
+        options: [
+          "人體小腸內壁的絨毛，皆可大幅增加吸收物質的表面積",
+          "植物葉片表面的角質層，皆可防止體內水分過度散失",
+          "鳥類體表的羽毛，皆可協助維持體溫恆定與減少阻力",
+          "榕樹莖部垂下的氣根，皆可進行旺盛的光合作用製造養分"
+        ],
+        answer: 0,
+        concept: "構造與功能相適應原理：根毛與小腸絨毛的表面積放大效應（課本 P.180 第 5 題）。",
+        formula: "表面積放大效應：$\\text{細胞突起（根毛 / 小腸絨毛）} \\Rightarrow \\text{接觸面積劇增} \\Rightarrow \\text{吸收效率提升}$",
+        explanation: "蘿蔔幼苗的根毛是由單一表皮細胞向外突起形成，能大幅增加與土壤水分及礦物質的接觸表面積；這與人體小腸內壁布滿指狀絨毛以增加養分吸收表面積的生物學原理完全相同。",
+        distractors: [
+          "(B) 錯誤：角質層是蠟質防水層，功能為減少蒸散，與吸收無關。",
+          "(C) 錯誤：羽毛主要功能為保溫與飛行，非物質吸收構造。",
+          "(D) 錯誤：氣根主要功能為呼吸與支撐，並非進行光合作用的主要器官。"
+        ]
+      },
+      {
+        id: 20,
+        pane: "left",
+        tier: "補充紅字",
+        dimension: "跨章整合",
+        stem: "生物學家發現蚜蟲常被稱為「螞蟻乳牛」，因為蚜蟲會將細長的口器插入綠色植物體內吸取有機養分，並從腹部排出多餘的蜜露供螞蟻食用。若在植物進行旺盛光合作用的白天觀察，有關植物體內水分運輸方向（甲或乙）及葉片氣孔狀態（丙或丁）與蚜蟲口器插入部位的組合，下列何者完全正確？",
+        visual: `<pre>【整株植物運輸與氣孔狀態綜合示意圖】
+  運輸方向：[ 甲：由下往上 ]   [ 乙：由上往下 ]
+  氣孔狀態：[ 丙：保衛細胞吸水膨脹，氣孔開啟 ]   [ 丁：保衛細胞失水萎縮，氣孔關閉 ]
+  取食部位：[ 戊：木質部 ]     [ 己：韌皮部 ]</pre>`,
+        options: [
+          "水分運輸：甲；白天氣孔狀態：丙；蚜蟲吸取部位：己",
+          "水分運輸：甲；白天氣孔狀態：丁；蚜蟲吸取部位：戊",
+          "水分運輸：乙；白天氣孔狀態：丙；蚜蟲吸取部位：己",
+          "水分運輸：乙；白天氣孔狀態：丁；蚜蟲吸取部位：戊"
+        ],
+        answer: 0,
+        concept: "109 教育會考題整合：氣孔開閉機制、蒸散作用水分流向與韌皮部養分運輸（課本 P.172 第 8 題、P.181 第 7、9 題）。",
+        formula: "白天生理連動：$\\text{光照} \\rightarrow \\text{保衛細胞吸水膨脹（丙）} \\rightarrow \\text{蒸散作用拉力} \\rightarrow \\text{木質部水分向上（甲）} + \\text{韌皮部輸送養分（己）}$",
+        explanation: "白天有光照時，一對半月形的保衛細胞吸水膨脹彎曲，使氣孔開啟（丙），進行旺盛蒸散作用，牽引木質部內的水分由下往上運輸（甲）；同時葉片行光合作用製造的有機養分（蔗糖）透過韌皮部（己）運送，正是蚜蟲口器插入吸取的部位。",
+        distractors: [
+          "(B) 錯誤：白天氣孔多數開啟（丙），且蚜蟲吸取的是有機養分（韌皮部，己），而非只含水分與礦物質的木質部（戊）。",
+          "(C) 錯誤：植物體內水分運輸方向在正常情況下皆為單向「由下往上（甲）」，不會由上往下。",
+          "(D) 錯誤：水分方向、氣孔狀態與取食部位三者皆誤判。"
+        ]
+      },
+      {
+        id: 21,
+        pane: "right",
+        tier: "課本核心",
+        dimension: "基礎定義",
+        stem: "關於人體營養素的分類、功能與消化的敘述，下列何者正確？",
+        visual: "",
+        options: [
+          "每公克醣類約可產生 9 大卡熱量，是人體最主要的能量來源",
+          "維生素本身不能提供熱量，但能參與調節生理機能與維持健康",
+          "人體消化道可分泌纖維素酶，將纖維素分解為葡萄糖吸收利用",
+          "蛋白質經由酵素完全分解後，會產生甘油與脂肪酸供細胞利用"
+        ],
+        answer: 1,
+        concept: "3-1／第 2 次段考模擬試題：營養素熱量、功能與消化產物（課本 P.180 第 1 題）。",
+        formula: "熱量換算公式：$\\text{總熱量（kcal）} = 4 \\times \\text{醣類(g)} + 4 \\times \\text{蛋白質(g)} + 9 \\times \\text{脂質(g)}$",
+        explanation: "維生素（如維生素 A、C、D 等）不提供熱量，但屬於維持正常生理機能不可或缺的微量營養素。",
+        distractors: [
+          "(A) 錯誤：醣類與蛋白質每公克產生約「4 大卡」，「脂質」每公克才產生約「9 大卡」熱量。",
+          "(C) 錯誤：人體缺乏分解「纖維素」的酵素，纖維素無法被分解吸收，但可促進腸道蠕動形成糞便。",
+          "(D) 錯誤：蛋白質分解的最終產物是「胺基酸」；「甘油與脂肪酸」是「脂質」分解的產物。"
+        ]
+      },
+      {
+        id: 22,
+        pane: "left",
+        tier: "課本核心",
+        dimension: "圖表判讀",
+        stem: "附圖為小智體內局部血液循環路徑示意圖（箭頭代表血流方向，甲、乙、丙、丁為四段血管路徑）。若比較這四段路徑中血液的含氧量，下列哪兩段路徑的血液含氧量最低？",
+        visual: `<pre>【小智體內局部血液循環路徑示意圖】
+         [ 甲 ]
+  左心 ─────────▶ [ 腎臟 ] ─────────▶ [ 乙 ] ──▶ 右心
+                                                  │
+  左心 ◀───────── [ 丁 ] ◀───────── [ 肺 ] ◀──────┘
+                                     [ 丙 ]</pre>`,
+        options: [
+          "甲、丙",
+          "丙、丁",
+          "甲、丁",
+          "乙、丙"
+        ],
+        answer: 3,
+        concept: "體循環與肺循環氣體變化綜合判讀（課本 P.179 第 13 題）。",
+        formula: "含氧量高低判別：$\\text{充氧血（肺靜脈丁、主動脈甲）} > \\text{缺氧血（腎靜脈乙、肺動脈丙）}$",
+        explanation: "甲為左心出發流向腎臟的充氧血；丁為肺部氣體交換後流回左心的充氧血。而乙是流經腎臟組織耗氧後的缺氧血（腎靜脈），丙是由右心出發尚未進入肺泡充氧的缺氧血（肺動脈），因此乙與丙兩段血液含氧量最低。",
+        distractors: [
+          "(A) 錯誤：甲為充氧血，含氧量高。",
+          "(B) 錯誤：丁為肺靜脈充氧血，含氧量高。",
+          "(C) 錯誤：甲與丁皆為充氧血，含氧量皆高於缺氧血。"
+        ]
+      },
+      {
+        id: 23,
+        pane: "right",
+        tier: "課本核心",
+        dimension: "基礎定義",
+        stem: "植物葉片是進行光合作用的主要器官，由表皮組織、葉肉組織與維管束等構成。關於葉片各構造與其功能的配對，下列何者正確？",
+        visual: "",
+        options: [
+          "表皮細胞：含有大量葉綠體，是葉片行光合作用的主要場所",
+          "葉肉細胞：排列較疏鬆，含有葉綠體，可行光合作用製造養分",
+          "保衛細胞：呈扁平狀且緊密排列，主要功能是保護內部細胞",
+          "葉脈構造：僅由韌皮部組成，負責將根部水分向上輸送至葉片"
+        ],
+        answer: 1,
+        concept: "3-1 葉片構造與功能配對（課本 P.177 圖(二)、P.181 第 6、7 題）。",
+        formula: "氣孔開閉與蒸散關係：$\\text{葉肉細胞製造養分} + \\text{保衛細胞調節氣孔（丙：吸水開、丁：失水關）}$",
+        explanation: "葉肉組織位於上下表皮之間，細胞含有葉綠體，是植物進行光合作用製造有機養分的主要部位。",
+        distractors: [
+          "(A) 錯誤：一般表皮細胞呈扁平狀、透明且「不含葉綠體」（除保衛細胞外），主要功能是保護葉片。",
+          "(C) 錯誤：保衛細胞呈半月形、成對圍繞氣孔，含有葉綠體，主要調控氣孔開閉與蒸散作用。",
+          "(D) 錯誤：葉脈即葉內的維管束，包含「木質部（運水）」與「韌皮部（運養分）」。"
+        ]
+      },
+      {
+        id: 24,
+        pane: "left",
+        tier: "課本核心",
+        dimension: "實驗變因",
+        stem: "小美在地面撿起植物莖與葉片的落枝，帶回實驗室製成玻片標本觀察，得到莖橫切面（圖一）與葉橫切面（圖二）。若圖一中由外向內標示為甲、乙、丙，圖二中標示為丁的構造為氣孔，則下列敘述何者正確？",
+        visual: `<pre>【莖橫切面（圖一）與葉橫切面（圖二）構造對照】
+  圖一（莖橫切面）：[ 甲（外側） ] ── [ 乙（中層） ] ── [ 丙（內側） ]
+  圖二（葉橫切面）：氣孔（丁）位於下表皮居多，負責氣體進出與水氣蒸散</pre>`,
+        options: [
+          "圖一可能為玉米或水稻等單子葉植物的莖橫切面",
+          "圖一中的丙構造具有分裂能力，有可能形成木材",
+          "圖一中的乙構造為形成層，可向內分裂產生木質部",
+          "圖二中的丁構造是植物行光合作用製造葡萄糖的場所"
+        ],
+        answer: 2,
+        concept: "雙子葉木本植物莖與葉片橫切面構造辨識（課本 P.177 第 5 題）。",
+        formula: "形成層分裂方向：$\\text{形成層（乙）} \\xrightarrow{\\text{向內}} \\text{木質部}；\\xrightarrow{\\text{向外}} \\text{韌皮部}$",
+        explanation: "圖一維管束呈環狀排列，為雙子葉植物莖橫切面；甲為韌皮部、乙為形成層、丙為木質部。形成層（乙）細胞分裂可使莖加粗，向外產生韌皮部、向內產生木質部。",
+        distractors: [
+          "(A) 錯誤：玉米、水稻為單子葉植物，維管束呈散生排列，與環狀排列不同。",
+          "(B) 錯誤：丙為木質部，缺乏分裂能力；形成木材的是形成層（乙）向內分裂增生的木質部。",
+          "(D) 錯誤：丁為氣孔，是氣體進出與水分蒸散的通道，光合作用主要在「葉肉細胞」與「保衛細胞」的葉綠體中進行。"
+        ]
+      },
+      {
+        id: 25,
+        pane: "right",
+        tier: "課本核心",
+        dimension: "基礎定義",
+        stem: "關於綠色植物進行「光合作用」與「蒸散作用」對植物體及環境的意義，下列敘述何者「錯誤」？",
+        visual: "",
+        options: [
+          "光合作用能製造葡萄糖等有機養分，供植物本身生長與代謝利用",
+          "光合作用釋放氧氣供生物呼吸，並吸收二氧化碳以維持氣體平衡",
+          "蒸散作用產生的拉力有助於水分上升，並能降低葉片溫度避免灼傷",
+          "蒸散作用釋放出大量水氣，是供應植物體內水分需求的主要來源"
+        ],
+        answer: 3,
+        concept: "光合作用影響與蒸散作用功能辨析（課本 P.181 第 10、12 題）。",
+        formula: "水分收支方向：$\\text{根部吸收水分（進）} \\xrightarrow{\\text{木質部上升}} \\text{氣孔蒸散水氣（出）}$",
+        explanation: "蒸散作用是將植物體內的水分以水蒸氣形式「散失（排出）」至大氣中，並非供應水分的來源；植物水分需求是由「根部」從土壤吸收並經木質部運送而來。",
+        distractors: [
+          "(A) 正確：植物行光合作用製造的養分主要供自身利用，少部分儲存於根、莖、葉、種子或果實。",
+          "(B) 正確：光合作用消耗 $\\text{CO}_2$、產生 $\\text{O}_2$，對維持大氣氣體組成具重要意義。",
+          "(C) 正確：水分蒸發會吸收熱量，有助於降低葉片溫度，同時產生蒸散拉力促進水分運輸。"
+        ]
+      },
+      {
+        id: 26,
+        pane: "left",
+        tier: "補充紅字",
+        dimension: "跨章整合",
+        stem: "植物葉肉細胞在白天進行光合作用製造出葡萄糖後，必須經過酵素催化轉換為其他形式或運送至其他器官。關於植物體內養分的製造、轉化與運輸，下列敘述何者正確？",
+        visual: `<pre>【植物體內養分轉化與運送路徑】
+  光合作用（白天照光） ──▶ 葡萄糖 ──▶ 轉化為「澱粉」暫存於葉肉細胞
+                                   └──▶ 轉化為「蔗糖」經韌皮部運送至根、莖、果實</pre>`,
+        options: [
+          "葉肉細胞產生的葡萄糖需經酵素參與，才能轉變成澱粉暫存",
+          "下表皮細胞因光照程度高於上表皮細胞，故光合作用較為旺盛",
+          "植物在進行光合作用製造養分的過程中，完全不需要吸收太陽能",
+          "植物製造的有機養分僅供自身細胞利用，無法儲存於根或種子中"
+        ],
+        answer: 0,
+        concept: "高等植物養分轉化與儲存（課本 P.181 第 11 題）。",
+        formula: "養分合成與轉化：$\\text{葡萄糖} \\xrightarrow{\\text{酵素催化}} \\text{澱粉（儲存）} / \\text{蔗糖（韌皮部運輸）}$",
+        explanation: "葡萄糖在植物細胞內可透過酵素催化合成澱粉暫時儲存，或轉化為蔗糖經由韌皮部運送至其他器官。",
+        distractors: [
+          "(B) 錯誤：光照通常由上方射入，葉片「上表皮」下方（柵狀組織）照光較充足，且表皮細胞本身無葉綠體。",
+          "(C) 錯誤：光合作用必須吸收「光能（太陽能）」作為能量來源，才能將無機物轉化為有機物。",
+          "(D) 錯誤：植物製造的養分除供自身利用外，也會儲存於塊根、塊莖、種子或果實中。"
+        ]
+      },
+      {
+        id: 27,
+        pane: "right",
+        tier: "課本核心",
+        dimension: "基礎定義",
+        stem: "比較人體的「心血管系統」與「淋巴系統」，下列敘述何者正確？",
+        visual: "",
+        options: [
+          "心血管系統的液體為紅色，淋巴系統的液體為透明澄清且含紅血球",
+          "心血管系統的動力來自心臟收縮，淋巴系統的動力主要來自骨骼肌收縮",
+          "微血管與淋巴管皆為完全封閉的管道，兩者之間完全沒有物質交流",
+          "淋巴管最後直接注入主動脈，使淋巴液回到血液循環系統中"
+        ],
+        answer: 1,
+        concept: "心血管系統與淋巴系統比較（課本 P.171 是非第 4 題、P.173 第 11 題、P.181 第 13 題）。",
+        formula: "循環動力比較：$\\text{心血管系統} \\Rightarrow \\text{心臟跳動加壓}；\\text{淋巴系統} \\Rightarrow \\text{骨骼肌擠壓與呼吸運動}$",
+        explanation: "心血管系統以心臟為幫浦推動血液循環；淋巴系統沒有心臟，主要依靠骨骼肌收縮擠壓淋巴管推動淋巴液流動（淋巴管內有瓣膜防止逆流）。",
+        distractors: [
+          "(A) 錯誤：淋巴液呈淡黃色或透明澄清，主要含淋巴球，「不含紅血球」。",
+          "(C) 錯誤：淋巴管起於組織間隙，末端為「盲端（封閉起點）」，組織液滲入淋巴管形成淋巴，且淋巴最終會匯入靜脈回到血液循環。",
+          "(D) 錯誤：淋巴管收集全身淋巴後，最後注入「鎖骨下靜脈（靜脈）」回到血液循環，而非主動脈。"
+        ]
+      },
+      {
+        id: 28,
+        pane: "left",
+        tier: "補充紅字",
+        dimension: "圖表判讀",
+        stem: "附圖為人體血液循環與淋巴循環的部分關係示意圖，圖中實線箭頭代表液體流動方向，虛線箭頭代表物質由微血管滲出。甲、乙、丙為三種不同管道，根據圖示判斷，甲、乙、丙三者內有無「紅血球」的敘述，下列何者最合理？",
+        visual: `<pre>【血液循環與淋巴循環關係模式圖】
+        ┌──▶ [ 管道 甲 ] ──▶ 心臟
+  微血管 ─┼──▶ [ 管道 乙 ] ────────┘
+        └──▶ [ 管道 丙 ] ──▶ 匯入靜脈（淋巴管）</pre>`,
+        options: [
+          "僅甲、乙有紅血球",
+          "僅甲、丙有紅血球",
+          "甲、乙、丙皆有紅血球",
+          "甲、乙、丙皆沒有紅血球"
+        ],
+        answer: 0,
+        concept: "105 教育會考題：血液循環與淋巴循環成分差異（課本 P.177 會考專區第 7 題）。",
+        formula: "管道成分判別：$\\text{血管（甲、乙）} \\Rightarrow \\text{含紅血球}；\\text{淋巴管（丙）} \\Rightarrow \\text{不含紅血球}$",
+        explanation: "甲與乙屬於心血管系統的血管，血液中含有紅血球；丙為收集組織液並匯入靜脈的淋巴管，淋巴液中不含紅血球。故僅甲、乙有紅血球。",
+        distractors: [
+          "(B) 錯誤：丙為淋巴管，不含紅血球。",
+          "(C) 錯誤：淋巴管（丙）內無紅血球。",
+          "(D) 錯誤：甲與乙為血管，血液中含有紅血球。"
+        ]
+      },
+      {
+        id: 29,
+        pane: "left",
+        tier: "補充紅字",
+        dimension: "圖表判讀",
+        stem: "已知血液離開心臟後，直接進入甲血管，接著流經乙血管，再由丙血管流回心臟。各血管內血液中氧氣（$\\text{O}_2$）含量變化如附圖所示（乙血管含氧量由低上升至高）。若乙血管是物質交換的場所，則甲、丙對應的血管名稱，下列何者正確？",
+        visual: `<pre>【甲、乙、丙三段血管血液含氧量變化圖】
+  血中 O₂ 含量  高 │            ／──── 丙
+                 │          ／
+                 │        ／  [乙：氣體交換場所]
+                 │  ────／
+              低 │  甲
+                 └────────────────────▶ 血管代號</pre>`,
+        options: [
+          "甲是肺動脈，丙是肺靜脈",
+          "甲是肺靜脈，丙是肺動脈",
+          "甲是主動脈，丙是大靜脈",
+          "甲是大靜脈，丙的主動脈"
+        ],
+        answer: 0,
+        concept: "102 基測題：肺循環中血液含氧量上升的血管判別（課本 P.178 第 9 題）。",
+        formula: "含氧量上升路徑：$\\text{心臟右心室} \\rightarrow \\text{肺動脈（甲，低 } O_2\\text{）} \\rightarrow \\text{肺微血管（乙，吸收 } O_2\\text{）} \\rightarrow \\text{肺靜脈（丙，高 } O_2\\text{）} \\rightarrow \\text{左心房}$",
+        explanation: "血液流經乙血管時含氧量「由低升高」，代表乙是肺部微血管，進行了氣體交換使缺氧血變成充氧血。因此流出心臟進入肺部的甲為「肺動脈」，流回心臟的丙為「肺靜脈」。",
+        distractors: [
+          "(B) 錯誤：肺靜脈含氧量高，不會在流經交換場所前處於低氧狀態。",
+          "(C) 錯誤：流經一般體循環組織時，血液含氧量會「下降」而非上升。",
+          "(D) 錯誤：大靜脈是流「回」心臟的血管，不是離開心臟後直接進入的血管。"
+        ]
+      },
+      {
+        id: 30,
+        pane: "left",
+        tier: "課本核心",
+        dimension: "圖表判讀",
+        stem: "附圖為人體血液循環系統示意圖，箭頭表示血液流動方向（甲為心臟與肺臟間血管，乙為心臟腔室，丙為心臟上方連接血管，丁為心臟與肺臟間另一血管）。下列相關敘述何者正確？",
+        visual: `<pre>【人體血液循環系統簡圖】
+           ┌──▶ [ 丙 ] ──┐
+           │              ▼
+  [ 肺臟 ] ┼── [ 甲 ] ── [ 乙 ] ──▶ [ 丁 ] ──▶ [ 身體其他部位細胞 ]
+           └──────────────▲──────────────┘</pre>`,
+        options: [
+          "甲為左心房，負責接收來自肺臟的充氧血",
+          "乙為右心房，負責將血液壓送至肺臟進行氣體交換",
+          "丙為肺靜脈，內含暗紅色的缺氧血並流回左心房",
+          "丁為肺動脈，內含鮮紅色的充氧血並流向全身組織"
+        ],
+        answer: 1,
+        concept: "100 基測 II 題：血液循環系統腔室與血管對應辨識（課本 P.178 第 10 題）。",
+        formula: "心臟四腔室與血管連接：$\\text{右心房} \\rightarrow \\text{右心室} \\xrightarrow{\\text{肺動脈}} \\text{肺} \\xrightarrow{\\text{肺靜脈}} \\text{左心房} \\rightarrow \\text{左心室} \\xrightarrow{\\text{主動脈}} \\text{全身}$",
+        explanation: "依據血液循環路徑，乙為心臟右側腔室（右心房／右心室系統），將血液送往肺臟進行氣體交換。",
+        distractors: [
+          "(A) 錯誤：甲為連接心臟與肺臟的血管（肺動脈或肺靜脈），並非心臟腔室左心房。",
+          "(C) 錯誤：肺靜脈內含鮮紅色的「充氧血」，且流回「左心房」。",
+          "(D) 錯誤：流向全身組織的是「主動脈」，內含充氧血；肺動脈是流向肺臟的缺氧血。"
+        ]
+      },
+      {
+        id: 31,
+        pane: "left",
+        tier: "補充紅字",
+        dimension: "圖表判讀",
+        stem: "附圖為竹子與其鄰近竹筍的生長示意圖，箭頭表示物質 X 由竹子到竹筍的運輸方向。已知物質 X 來自竹子葉片的光合作用，則有關物質 X 及其由何種構造運輸的敘述，下列何者最合理？",
+        visual: `<pre>【竹子與竹筍物質運輸示意圖】
+   [ 竹子（成熟、行光合作用） ]
+               │
+        物質 X │ ──▶ 經由地下莖/維管束輸送 ──▶ [ 竹筍（幼嫩生長中） ]
+               ▼</pre>`,
+        options: [
+          "物質 X 為醣類，由韌皮部運輸",
+          "物質 X 為醣類，由木質部運輸",
+          "物質 X 為水分，由韌皮部運輸",
+          "物質 X 為水分，由木質部運輸"
+        ],
+        answer: 0,
+        concept: "107 教育會考題：光合作用產物與韌皮部運輸方向（課本 P.176 會考專區第 1 題）。",
+        formula: "光合作用產物運輸：$\\text{葉片製造醣類} \\xrightarrow{\\text{韌皮部（可雙向運輸）}} \\text{生長中的竹筍}$",
+        explanation: "光合作用製造的有機養分為醣類（葡萄糖／蔗糖），由維管束中的「韌皮部」負責運輸，且韌皮部可依需求進行雙向或側向輸送以供應新芽、竹筍生長。",
+        distractors: [
+          "(B) 錯誤：木質部主要運輸水分與礦物質，不運輸有機醣類。",
+          "(C) 錯誤：題幹已指出物質 X 來自光合作用製造的養分，非水分，且水分由木質部運輸。",
+          "(D) 錯誤：物質 X 為光合作用產物（醣類），並非水分。"
+        ]
+      },
+      {
+        id: 32,
+        pane: "left",
+        tier: "補充紅字",
+        dimension: "實驗變因",
+        stem: "研究人員利用工具鑽取榕樹樹幹的維管束組織，從樹皮表面上的 X 點垂直鑽入樹幹中心後，將取出的組織依其主要功能分別標示為甲、乙、丙，如附表所示。依表中的主要功能判斷，比較此三者與 X 點間的距離，下列何者最合理？",
+        visual: `<table>
+  <thead>
+    <tr><th>取出組織代號</th><th>主要功能</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>甲</td><td>運輸養分</td></tr>
+    <tr><td>乙</td><td>運輸水分</td></tr>
+    <tr><td>丙</td><td>細胞分裂</td></tr>
+  </tbody>
+</table>
+<pre>由外（X 點）向內鑽入順序：X 點（樹皮） ──▶ 甲（韌皮部） ──▶ 丙（形成層） ──▶ 乙（木質部）</pre>`,
+        options: [
+          "甲 ＜ 丙 ＜ 乙",
+          "甲 ＜ 乙 ＜ 丙",
+          "乙 ＜ 丙 ＜ 甲",
+          "乙 ＜ 甲 ＜ 丙"
+        ],
+        answer: 0,
+        concept: "105 教育會考題：雙子葉木本植物莖橫切面由外向內的構造順序（課本 P.176 會考專區第 2 題）。",
+        formula: "由外向內距離排序：$\\text{韌皮部（甲）} < \\text{形成層（丙）} < \\text{木質部（乙）}$",
+        explanation: "從樹皮表面（X 點）向內鑽入，最先遇到位於樹皮內側的「韌皮部（甲，運輸養分）」，接著是中間具分裂能力的「形成層（丙，細胞分裂）」，最深處才是構成木材的「木質部（乙，運輸水分）」。因此與 X 點的距離為：甲 ＜ 丙 ＜ 乙。",
+        distractors: [
+          "(B) 錯誤：形成層（丙）位於韌皮部（甲）與木質部（乙）之間，距離應小於木質部（乙）。",
+          "(C) 錯誤：木質部（乙）位於最內側，距離 X 點最遠，不可能最小。",
+          "(D) 錯誤：木質部（乙）距離最遠，韌皮部（甲）距離最近。"
+        ]
+      },
+      {
+        id: 33,
+        pane: "left",
+        tier: "補充紅字",
+        dimension: "圖表判讀",
+        stem: "某雙子葉木本植物的莖具有樹皮及木材等構造，如附圖所示。下列何者為圖中標示「＊」處（位於木材與樹皮交界處）的主要功能？",
+        visual: `<pre>【木本植物莖橫切面局部放大】
+  [ 樹皮（外） ] ──▶ [ ＊：形成層 ] ──▶ [ 木材（內：木質部） ]</pre>`,
+        options: [
+          "運輸養分",
+          "運輸水分",
+          "細胞分裂",
+          "光合作用"
+        ],
+        answer: 1,
+        concept: "106 教育會考題：木本植物莖橫切面構造功能判別（課本 P.176 會考專區第 3 題）。",
+        formula: "木本莖構造對應：$\\text{韌皮部（運養分）} + \\text{形成層（細胞分裂）} + \\text{木質部（運水分）}$",
+        explanation: "在木本植物莖的構造中，木質部負責由根部向上運輸水分與礦物質，韌皮部負責運輸有機養分，形成層則負責細胞分裂使莖加粗。",
+        distractors: [
+          "(A) 錯誤：運輸養分主要由韌皮部負責。",
+          "(C) 錯誤：細胞分裂主要由形成層負責。",
+          "(D) 錯誤：光合作用主要在葉片葉肉細胞與保衛細胞進行。"
+        ]
+      },
+      {
+        id: 34,
+        pane: "right",
+        tier: "補充紅字",
+        dimension: "跨章整合",
+        stem: "關於「臺灣欒樹（雙子葉木本植物）」與「小麥（單子葉草本植物）」的比較，下列敘述何者正確？",
+        visual: "",
+        options: [
+          "小麥利用韌皮部運送水分與礦物質，臺灣欒樹利用木質部運送養分",
+          "小麥的年輪是由木質部細胞組成，臺灣欒樹則無任何維管束構造",
+          "臺灣欒樹的莖內維管束呈環狀排列，小麥的莖內維管束呈散生排列",
+          "臺灣欒樹葉片的表皮細胞含有葉綠體，可行旺盛的光合作用"
+        ],
+        answer: 2,
+        concept: "會考類題：單子葉植物與雙子葉植物維管束排列比較（課本 P.176 會考專區第 4 題）。",
+        formula: "維管束排列差異：$\\text{雙子葉木本植物（臺灣欒樹）} \\Rightarrow \\text{環狀排列}；\\text{單子葉植物（小麥）} \\Rightarrow \\text{散生排列}$",
+        explanation: "臺灣欒樹屬於雙子葉木本植物，莖內維管束呈環狀排列且具形成層；小麥屬於單子葉植物，莖內維管束呈散生排列且無形成層。",
+        distractors: [
+          "(A) 錯誤：木質部運水、韌皮部運養分，兩者功能不可顛倒。",
+          "(B) 錯誤：小麥為單子葉草本植物，無形成層故無年輪；臺灣欒樹與小麥皆屬維管束植物，皆具維管束。",
+          "(D) 錯誤：一般表皮細胞不含葉綠體，保衛細胞才含葉綠體。"
+        ]
+      },
+      {
+        id: 35,
+        pane: "left",
+        tier: "補充紅字",
+        dimension: "圖表判讀",
+        stem: "附圖為人體注射藥劑的部位示意圖（甲為左手臂靜脈注射部位，乙為右手臂靜脈注射部位）。關於藥劑從甲部位或乙部位注入人體靜脈後，經由血液循環「最先」進入心臟哪一個腔室的敘述，下列何者最合理？",
+        visual: `<pre>【人體左右手臂靜脈注射路徑示意】
+  [ 甲：左手臂靜脈 ] ──┐
+                        ├──▶ 上大靜脈 ──▶ [ 右心房 ]（最先進入的心臟腔室）
+  [ 乙：右手臂靜脈 ] ──┘</pre>`,
+        options: [
+          "甲、乙部位的藥劑皆先進入右心房",
+          "甲、乙部位的藥劑皆先進入左心房",
+          "甲部位的藥劑先進入右心房，乙部位的藥劑先進入左心房",
+          "甲部位的藥劑先進入左心房，乙部位的藥劑先進入右心房"
+        ],
+        answer: 0,
+        concept: "107 教育會考題：體循環靜脈回流心臟的腔室定位（課本 P.177 會考專區第 6 題）。",
+        formula: "全身靜脈回心路徑：$\\text{上下肢／頭部靜脈} \\rightarrow \\text{上／下大靜脈} \\rightarrow \\text{右心房}$",
+        explanation: "無論從左手臂（甲）或右手臂（乙）的靜脈注入藥劑，血液皆會匯集經由「上大靜脈」流回心臟，最先進入的腔室皆為「右心房」。",
+        distractors: [
+          "(B) 錯誤：左心房接收的是來自「肺靜脈」的充氧血，不是全身靜脈回流的血液。",
+          "(C) 錯誤：左右手臂靜脈皆匯入上大靜脈進入右心房，不會進入左心房。",
+          "(D) 錯誤：左右手臂靜脈血液皆先進入右心房。"
+        ]
+      },
+      {
+        id: 36,
+        pane: "right",
+        tier: "課本核心",
+        dimension: "基礎定義",
+        stem: "關於人體防禦作用中「抗體」與「疫苗」的敘述，下列何者正確？",
+        visual: "",
+        options: [
+          "抗體是由血小板所製造的蛋白質，屬於人體非專一性防禦的第二道防線",
+          "施打疫苗的主要目的是讓免疫系統記住特定病原體，提升二次防禦效能",
+          "注射某種疫苗後，人體即可獲得對抗所有細菌與病毒的終身免疫力",
+          "疫苗成分是已製備好的專一性抗體，注射後能立即中和體內所有毒素"
+        ],
+        answer: 1,
+        concept: "3-3 疫苗與抗體特性（課本 P.167~168 課文、P.170 基礎第 2、3 題）。",
+        formula: "疫苗免疫記憶機制：$\\text{施打疫苗（模擬病原體）} \\rightarrow \\text{產生記憶性白血球} \\rightarrow \\text{再次感染時快速大量製造抗體}$",
+        explanation: "疫苗能模擬病原體引發免疫反應，使特殊白血球留下記憶；當日後再次遭遇相同病原體時，能迅速啟動專一性防禦，有效阻止病原體繁殖致病。",
+        distractors: [
+          "(A) 錯誤：抗體是由特殊「白血球（淋巴球）」針對特定病原體所產生，屬於「第三道防線（專一性防禦）」。",
+          "(C) 錯誤：免疫作用具專一性，一種疫苗僅針對特定病原體，無法對抗所有微生物。",
+          "(D) 錯誤：疫苗是抗原/減毒或死去病原體，刺激身體自己產生記憶與抗體；直接注射抗體稱為血清。"
+        ]
+      },
+      {
+        id: 37,
+        pane: "right",
+        tier: "課本核心",
+        dimension: "基礎定義",
+        stem: "關於人體「皮膚」在防禦與身體組成層次上的敘述，下列何者正確？",
+        visual: "",
+        options: [
+          "皮膚是由多種組織構成的「器官」，能阻擋病原體入侵並具保護功能",
+          "皮膚屬於人體「循環系統」的一部分，主要功能是推動血液流動",
+          "皮膚表面的汗腺與皮脂腺分泌物，屬於人體專一性防禦的第三道防線",
+          "皮膚只要沒有明顯流血，就代表第一道防線與第二道防線完全未啟動"
+        ],
+        answer: 0,
+        concept: "3-3 皮膚的防禦功能與生物體組成層次（課本 P.166~167、P.170 基礎第 1 題）。",
+        formula: "生物體組成層次（動物）：$\\text{細胞} \\rightarrow \\text{組織} \\rightarrow \\text{器官（如皮膚、心臟、肺）} \\rightarrow \\text{器官系統} \\rightarrow \\text{個體}$",
+        explanation: "皮膚由表皮、真皮、皮下組織及血管、神經等不同組織構成，具有特定生理功能，在生物體組成層次上屬於「器官」，也是第一道防線的重要屏障。",
+        distractors: [
+          "(B) 錯誤：皮膚不屬於循環系統；循環系統主要由心臟、血管與血液組成。",
+          "(C) 錯誤：皮膜阻隔與分泌物抑菌屬於非專一性的「第一道防線」。",
+          "(D) 錯誤：即使未流血，若表皮有微小破損或病原體入侵，仍可能引發局部發炎與吞噬作用。"
+        ]
+      },
+      {
+        id: 38,
+        pane: "left",
+        tier: "補充紅字",
+        dimension: "跨章整合",
+        stem: "下列有關人體防禦病原體的敘述，何者「錯誤」？",
+        visual: `<pre>【人體防禦三道防線彙整】
+  第一道防線：皮膚、消化道／呼吸道／泌尿道黏膜（非專一性）
+  第二道防線：發炎反應（紅、腫、熱、痛）、白血球吞噬作用（非專一性）
+  第三道防線：特殊白血球破壞感染細胞、產生專一性抗體（專一性、具記憶性）</pre>`,
+        options: [
+          "完整的皮膚與黏膜可阻擋多數病原體進入體內",
+          "血液與組織中的部分白血球可透過吞噬作用清除病原體",
+          "人體的淋巴結內有「紅血球」聚集，可產生抗體對抗病原體",
+          "注射疫苗有助於讓特殊白血球預先認識病原體，建立記憶"
+        ],
+        answer: 2,
+        concept: "3-3 淋巴結功能與抗體產生細胞辨析（課本 P.170 進階第 5 題、P.172 第 5 題）。",
+        formula: "抗體製造者：$\\text{特殊白血球（淋巴球）} \\xrightarrow{\\text{辨識病原體}} \\text{產生專一性抗體}$",
+        explanation: "淋巴結內聚集的是「白血球（包含吞噬細胞與淋巴球）」，具有過濾病原體與參與免疫防禦的功能；紅血球主要負責運送氧氣，不會產生抗體。",
+        distractors: [
+          "(A) 正確：皮膚與黏膜構成第一道物理與化學屏障。",
+          "(B) 正確：吞噬性白血球可吞噬入侵的細菌或異物。",
+          "(D) 正確：疫苗可誘發特殊白血球的記憶效應。"
+        ]
+      },
+      {
+        id: 39,
+        pane: "left",
+        tier: "補充紅字",
+        dimension: "圖表判讀",
+        stem: "某生觀察一塊木頭的橫切面，發現年輪清晰可辨，且其「最外圈」的環紋顏色較淡、木質部細胞較大且排列疏鬆。根據年輪形成原理判斷，此塊木材最可能是在下列哪一個季節砍伐下來的？",
+        visual: `<pre>【木本植物年輪構造示意】
+  [ 晚材（深色、細胞小、排列緊密） ] ──▶ 寒冷乾燥季節生長較慢
+  [ 早材（淺色、細胞大、排列疏鬆） ] ──▶ 溫暖多雨季節生長較快（位於最外圈）</pre>`,
+        options: [
+          "溫暖多雨的季節",
+          "溫暖乾燥的季節",
+          "寒冷乾燥的季節",
+          "寒冷多雨的季節"
+        ],
+        answer: 0,
+        concept: "112 教育會考題：年輪早材與晚材的季節成因判讀（課本 P.171 選擇第 2 題）。",
+        formula: "年輪環紋判讀：$\\text{細胞大、排列疏鬆、顏色淺} \\Rightarrow \\text{生長快速（溫暖多雨季）}$",
+        explanation: "在溫暖多雨的季節，植物水分充足、氣溫適宜，形成層分裂旺盛、細胞生長快，形成的木質部細胞體積較大、排列較疏鬆，視覺上顏色較淺；最外圈為最新形成的木質部，故可推知是在溫暖多雨季節砍伐。",
+        distractors: [
+          "(B) 錯誤：乾燥季節水分不足，生長速率會受限，不會形成最典型的疏鬆淺色寬環。",
+          "(C) 錯誤：寒冷乾燥季節植物生長緩慢，會形成細胞小、排列緊密、顏色較深的木質部。",
+          "(D) 錯誤：寒冷季節低溫會抑制形成層細胞分裂與生長速度。"
+        ]
+      },
+      {
+        id: 40,
+        pane: "left",
+        tier: "補充紅字",
+        dimension: "圖表判讀",
+        stem: "附圖為四種不同植物莖橫切面的維管束排列示意圖，其中「維管束呈環狀排列」的構造如圖所示。下列哪一種植物的莖內維管束排列最符合此圖？",
+        visual: `<pre>【莖橫切面維管束排列型態】
+  環狀排列（雙子葉植物）：○  ○  ○  ○  ○  ○  （圍繞中央髓部成一圈）
+  散生排列（單子葉植物）：  ○    ○      ○    （均勻分散於莖內）</pre>`,
+        options: [
+          "水稻",
+          "玉米",
+          "竹子",
+          "榕樹"
+        ],
+        answer: 3,
+        concept: "112 教育會考題：單子葉植物與雙子葉植物維管束排列辨識（課本 P.171 選擇第 4 題）。",
+        formula: "植物類群判別：$\\text{榕樹（雙子葉木本）} \\Rightarrow \\text{環狀排列}；\\text{水稻、玉米、竹子（單子葉）} \\Rightarrow \\text{散生排列}$",
+        explanation: "榕樹屬於雙子葉木本植物，其莖內維管束呈環狀排列，且具有形成層；而水稻、玉米、竹子皆屬於單子葉植物，維管束呈散生排列。",
+        distractors: [
+          "(A) 錯誤：水稻為單子葉植物，維管束散生。",
+          "(B) 錯誤：玉米為單子葉植物，維管束散生。",
+          "(C) 錯誤：竹子為單子葉植物，維管束散生。"
+        ]
+      },
+      {
+        id: 41,
+        pane: "left",
+        tier: "補充紅字",
+        dimension: "圖表判讀",
+        stem: "附圖為祐瑋腳部微血管網的放大示意圖，箭頭代表血液流動方向（血液由甲血管流入微血管網，再由乙血管流出）。若比較甲、乙兩血管與心臟腔室的連接關係，下列敘述何者正確？",
+        visual: `<pre>【腳部微血管網血流方向示意】
+  [ 甲血管（流入微血管，動脈端） ] ──▶ [ 腳部微血管網 ] ──▶ [ 乙血管（流出微血管，靜脈端） ]
+            ▲                                                         │
+            └─────────────── 源自「左心室」 ─────── 匯入「右心房」 ───┘</pre>`,
+        options: [
+          "甲血管源自左心室，乙血管流回右心房",
+          "甲血管源自右心室，乙血管流回左心房",
+          "甲血管源自左心房，乙血管流回右心室",
+          "甲血管源自右心房，乙血管流回左心室"
+        ],
+        answer: 0,
+        concept: "體循環起點與終點（左心室出發、右心房回流）之應用判讀（課本 P.173 第 14 題）。",
+        formula: "體循環起迄腔室：$\\text{左心室} \\xrightarrow{\\text{主動脈分支（甲）}} \\text{全身微血管} \\xrightarrow{\\text{靜脈匯集（乙）}} \\text{右心房}$",
+        explanation: "腳部屬於體循環的組織部位，血液由「左心室」打出經主動脈及其分支（甲）流向腳部微血管，進行物質交換後再經由靜脈（乙）匯集流回「右心房」。",
+        distractors: [
+          "(B) 錯誤：右心室打出的是流向肺臟的缺氧血，左心房接收的是來自肺靜脈的充氧血。",
+          "(C) 錯誤：心房是接收血液的腔室，心室才是將血液打出心臟的腔室。",
+          "(D) 錯誤：血液流向與腔室功能皆顛倒。"
+        ]
+      },
+      {
+        id: 42,
+        pane: "left",
+        tier: "課本核心",
+        dimension: "圖表判讀",
+        stem: "附圖為人體三種血球細胞（甲、乙、丙）在顯微鏡下的示意圖。下列關於甲、乙、丙三種血球構造與功能的敘述，何者正確？",
+        visual: `<pre>【人體三種血球細胞示意圖對照】
+  [ 甲：紅血球 ] ── 數量最多、雙凹圓盤狀、無細胞核、含血紅素（攜氧）
+  [ 乙：白血球 ] ── 體積最大、有細胞核、吞噬病原體或產生抗體（防禦）
+  [ 丙：血小板 ] ── 體積最小、細胞碎片、無細胞核（協助凝血）</pre>`,
+        options: [
+          "乙具有細胞核與防禦病原體的功能，可參與非專一性或專一性免疫",
+          "當人體血液中二氧化碳濃度偏高時，會直接抑制丙的凝血功能",
+          "甲、乙、丙三種細胞形態與功能不同，共同組成人體的「器官」",
+          "成熟後的甲與丙皆具有完整的細胞核，因此皆可進行細胞分裂增生"
+        ],
+        answer: 0,
+        concept: "3-2 三種血球細胞辨識與功能（課本 P.173 第 15 題）。",
+        formula: "血球細胞核與功能：$\\text{白血球（乙，有核）} \\Rightarrow \\text{防禦}；\\text{紅血球（甲，無核）} \\Rightarrow \\text{攜氧}；\\text{血小板（丙，無核）} \\Rightarrow \\text{凝血}$",
+        explanation: "圖中乙體積最大且具有細胞核，為白血球，可吞噬病原體（第二道防線）或產生抗體／破壞感染細胞（第三道防線）。",
+        distractors: [
+          "(B) 錯誤：二氧化碳濃度變化主要影響呼吸運動調節，非直接阻礙血小板凝血。",
+          "(C) 錯誤：血液由血漿與血球組成，屬於「流體組織」，並非由多種組織構成的「器官」。",
+          "(D) 錯誤：成熟的紅血球（甲）與血小板（丙）皆「沒有細胞核」，無法進行細胞分裂。"
+        ]
+      },
+      {
+        id: 43,
+        pane: "right",
+        tier: "課本核心",
+        dimension: "基礎定義",
+        stem: "下列哪一組血管內流動的血液，皆是富含氧氣、顏色鮮紅的「充氧血」？",
+        visual: "",
+        options: [
+          "主動脈和肺動脈",
+          "肺動脈和肺靜脈",
+          "上大靜脈和肺靜脈",
+          "主動脈和肺靜脈"
+        ],
+        answer: 3,
+        concept: "3-2 充氧血與缺氧血分布血管（課本 P.171 是非第 3 題、P.173 第 16 題）。",
+        formula: "充氧血血管：$\\text{肺靜脈} \\rightarrow \\text{左心房} \\rightarrow \\text{左心室} \\rightarrow \\text{主動脈}$",
+        explanation: "血液在肺部微血管吸收氧氣後成為充氧血，經「肺靜脈」流回左心房、進入左心室，再由「主動脈」送往全身，因此主動脈與肺靜脈內皆為充氧血。",
+        distractors: [
+          "(A) 錯誤：肺動脈內流動的是「缺氧血」。",
+          "(B) 錯誤：肺動脈為缺氧血，肺靜脈為充氧血，兩者含氧量不同。",
+          "(C) 錯誤：上大靜脈內流動的是「缺氧血」。"
+        ]
+      },
+      {
+        id: 44,
+        pane: "left",
+        tier: "課本核心",
+        dimension: "圖表判讀",
+        stem: "附圖為人體某些部位的血管放大圖（圖二為氣體交換示意，圖三為組織細胞與微血管物質交換示意）與三種血管橫切面（圖四中甲、乙、丙）。下列關於圖中血管的敘述，何者「錯誤」？",
+        visual: `<pre>【血管放大與橫切面構造對照】
+  圖二：肺泡微血管（C 為紅血球，進行 O₂ 與 CO₂ 擴散交換）
+  圖三：組織微血管（將 O₂、養分送入細胞，帶走 CO₂、代謝廢物）
+  圖四橫切面：甲（管壁厚、彈性佳＝動脈）、乙（管壁較薄＝靜脈）、丙（單層細胞＝微血管）</pre>`,
+        options: [
+          "圖二與圖三中的微血管，皆是圖四中管壁最薄的丙血管",
+          "圖二完成氣體交換後血液含氧量增加；圖三完成交換後血液含氧量減少",
+          "圖二中的氣體交換主要發生在肺泡與微血管之間，C 代表紅血球",
+          "圖四中三種血管的血液流速大小順序為：丙（微血管）＞ 甲（動脈）＞ 乙（靜脈）"
+        ],
+        answer: 3,
+        concept: "閱讀題綜合解析：肺部微血管、組織微血管與三種血管流速比較（課本 P.179 第 14~16 題）。",
+        formula: "血液流速排序：$\\text{動脈（甲）} > \\text{靜脈（乙）} > \\text{微血管（丙，流速最慢以利物質交換）}$",
+        explanation: "微血管（丙）總截面積最大、管徑最細，血液流速「最慢」，如此才能讓血液與周圍細胞有充足時間進行氣體、養分與廢物的交換，因此「丙 ＞ 甲」的流速敘述錯誤。",
+        distractors: [
+          "(A) 正確：無論肺部或組織微血管，管壁皆由單層細胞構成，對應圖四的丙。",
+          "(B) 正確：肺部微血管吸收氧氣使含氧量上升；組織微血管供氧給細胞使含氧量下降。",
+          "(C) 正確：圖二為肺部氣體交換，C 為運送氧氣的紅血球。"
+        ]
+      },
+      {
+        id: 45,
+        pane: "right",
+        tier: "課本核心",
+        dimension: "基礎定義",
+        stem: "關於人體心臟搏動與血壓、脈搏形成的敘述，下列何者正確？",
+        visual: "",
+        options: [
+          "心室收縮時將血液壓入動脈，此時動脈管壁承受的壓力最大，稱為收縮壓",
+          "心臟舒張時血液完全停止流動，因此測量血壓時會出現舒張壓為零的現象",
+          "脈搏是由心房收縮直接撞擊手臂靜脈管壁所產生的規律跳動",
+          "健康成人的脈搏跳動速率通常與心臟每分鐘跳動次數完全不同"
+        ],
+        answer: 0,
+        concept: "3-2 心臟收縮舒張、血壓與脈搏成因（課本 P.171 是非第 2 題、P.174 第 18 題、P.175 第 5 題）。",
+        formula: "心搏與血壓關係：$\\text{心室收縮} \\Rightarrow \\text{血液射入動脈} \\Rightarrow \\text{動脈壓上升（收縮壓）}$",
+        explanation: "當心室收縮將血液壓入動脈時，動脈內血壓達到最高，稱為收縮壓；當心室舒張時，動脈血壓降至最低，稱為舒張壓。",
+        distractors: [
+          "(B) 錯誤：心臟舒張時血液仍持續流動，舒張壓不會為零。",
+          "(C) 錯誤：脈搏是因心室收縮將血液壓入「動脈」，使具彈性的動脈管壁擴張與回縮所產生的搏動，且在動脈處測量。",
+          "(D) 錯誤：正常情況下，脈搏次數與心搏次數（心跳速率）是一致的。"
+        ]
+      },
+      {
+        id: 46,
+        pane: "right",
+        tier: "補充紅字",
+        dimension: "跨章整合",
+        stem: "下列關於人體防禦系統運作情境的敘述，何者正確？",
+        visual: "",
+        options: [
+          "吸入冷空氣而打噴嚏，主要是第三道防線產生專一性抗體所引起的現象",
+          "誤食不新鮮的飯糰後，胃酸殺菌屬於第一道防線，若病原體突破則啟動第二道防線",
+          "打疫苗預防傳染病，是因為疫苗可直接破壞病原體的細胞壁使其死亡",
+          "第二道防線的吞噬作用只針對特定的細菌有效，對其他病原體皆無效"
+        ],
+        answer: 1,
+        concept: "3-3 三道防線情境辨識與非專一性防禦特性（課本 P.166~167、P.169 選擇第 2、3 題）。",
+        formula: "防禦啟動順序：$\\text{皮膜／胃酸阻隔（第一道）} \\xrightarrow{\\text{突破}} \\text{發炎與吞噬（第二道）} \\xrightarrow{\\text{專一辨識}} \\text{抗體／破壞感染細胞（第三道）}$",
+        explanation: "消化道中的胃酸能抑制或殺滅隨食物進入的病原體，屬於第一道防線；若病原體侵入體內組織，則會啟動發炎反應與白血球吞噬作用等第二道防線。",
+        distractors: [
+          "(A) 錯誤：打噴嚏屬於呼吸道反射與黏膜排除異物反應，非抗體專一性反應。",
+          "(C) 錯誤：疫苗是模擬病原體激發人體免疫記憶，並非直接破壞病原體細胞壁。",
+          "(D) 錯誤：第二道防線的吞噬作用屬於「非專一性防禦」，可吞噬多種入侵的病原體，不限單一種類。"
+        ]
+      },
+      {
+        id: 47,
+        pane: "left",
+        tier: "補充紅字",
+        dimension: "實驗變因",
+        stem: "某實驗室進行「植物水分運輸與蒸散作用」觀察，將生長狀態相似的甲、乙兩株枝條插於裝有等量紅墨水的量筒中。甲枝條保留完整葉片，乙枝條摘除全部葉片，並於水面滴入少量油層防止水分直接蒸發。放置於光照與通風環境下數小時後，下列預測何者最合理？",
+        visual: `<pre>【蒸散作用對水分上升影響實驗設計】
+  甲組：帶葉枝條 ＋ 紅墨水 ＋ 表面滴油 ──▶ 蒸散作用強 ──▶ 水位下降多、莖內紅色染色高
+  乙組：無葉枝條 ＋ 紅墨水 ＋ 表面滴油 ──▶ 蒸散作用弱 ──▶ 水位下降少、莖內紅色染色低</pre>`,
+        options: [
+          "甲組量筒水位下降較多，且莖部木質部染紅的高度高於乙組",
+          "乙組量筒水位下降較多，因無葉片阻擋使水分蒸發更快",
+          "甲組與乙組量筒水位下降完全相同，因水分上升僅靠根壓推動",
+          "紅墨水主要沿著莖部最外層的韌皮部向上運輸並染紅"
+        ],
+        answer: 0,
+        concept: "蒸散作用拉力與木質部運輸路徑實驗推論（課本 P.171 是非第 7 題、P.172 第 8 題）。",
+        formula: "蒸散拉力與水分上升：$\\text{葉片面積大（甲）} \\Rightarrow \\text{蒸散拉力強} \\Rightarrow \\text{木質部吸水上行快}$",
+        explanation: "甲枝條具有葉片，氣孔蒸散作用旺盛，產生較強的向上拉力，促使水分與紅墨水沿著「木質部」快速向上運輸，因此量筒水位下降較多且染色位置較高。",
+        distractors: [
+          "(B) 錯誤：水面已滴油防止直接蒸發，且乙組無葉片、氣孔少，蒸散作用較弱，水位下降較少。",
+          "(C) 錯誤：葉片蒸散作用是水分上升的主要動力，甲、乙組因葉片有無而有顯著差異。",
+          "(D) 錯誤：水分與紅墨水是沿著「木質部」向上運輸，而非韌皮部。"
+        ]
+      },
+      {
+        id: 48,
+        pane: "right",
+        tier: "課本核心",
+        dimension: "基礎定義",
+        stem: "關於人體「心臟」四個腔室（左心房、右心房、左心室、右心室）的壁厚與功能敘述，下列何者正確？",
+        visual: "",
+        options: [
+          "右心室的肌肉壁最厚，因其必須將血液打出並送往全身最遠處",
+          "左心室的肌肉壁最厚，因其必須將充氧血泵送至全身各處組織",
+          "心房的肌肉壁比心室厚，因其必須將血液強力壓送至主動脈",
+          "左心房與右心房之間有瓣膜相通，使充氧血與缺氧血混合"
+        ],
+        answer: 1,
+        concept: "3-2 心臟四腔室功能與左心室壁厚成因（課本 P.173 第 13 題、P.174 第 18 題）。",
+        formula: "心室壁厚比較：$\\text{左心室（送血至全身，阻力大、壁最厚）} > \\text{右心室（送血至肺）} > \\text{心房（送血至相鄰心室）}$",
+        explanation: "左心室負責將充氧血打入主動脈，輸送至全身各處器官與組織，路徑最長、阻力最大，因此左心室的肌肉壁最厚、收縮力最強。",
+        distractors: [
+          "(A) 錯誤：右心室只需將血液送往鄰近的肺臟，壁厚小於左心室。",
+          "(C) 錯誤：心室的肌肉壁比心房厚，且心房只將血液壓入心室。",
+          "(D) 錯誤：正常人體的左心房與右心房、左心室與右心室之間由肌肉隔膜完全隔開，充氧血與缺氧血不會混合。"
+        ]
+      },
+      {
+        id: 49,
+        pane: "left",
+        tier: "補充紅字",
+        dimension: "跨章整合",
+        stem: "小華在閱讀健康手冊時看到一段說明：「某傳染病可透過施打疫苗預防，但若病人已出現嚴重症狀，有時醫師也會視情況給予含特定抗體的血清治療。」關於「疫苗」與「抗體（血清）」在人體防禦中的角色，下列比較何者正確？",
+        visual: `<pre>【疫苗 vs. 抗體（血清）防禦特性對照】
+  疫  苗：成分為減毒／死去病原體或片段 ──▶ 刺激自身免疫系統產生「記憶性」與抗體（防範未然）
+  抗  體：針對特定病原體的專一性蛋白質 ──▶ 直接中和病原體或使其失去感染力（專一性、無記憶性）</pre>`,
+        options: [
+          "疫苗能引發專一性防禦並產生記憶效應；抗體具有專一性但本身不具記憶效應",
+          "疫苗與抗體皆屬於人體非專一性防禦的第二道防線，可對抗所有病原體",
+          "注射抗體後，人體的淋巴球會永久記住該抗體結構，不再需要施打任何疫苗",
+          "疫苗只能預防細菌感染，抗體只能預防病毒感染，兩者作用對象完全互斥"
+        ],
+        answer: 0,
+        concept: "3-3 專一性防禦機制（白血球產生抗體與疫苗記憶效應）深度整合（課本 P.167~168）。",
+        formula: "專一性防禦雙途徑：$\\text{特殊白血球} \\begin{cases} \\text{產生抗體} \\rightarrow \\text{使病原體失去感染能力} \\\\ \\text{破壞感染細胞} \\rightarrow \\text{阻止病原體繁殖} \\end{cases}$",
+        explanation: "疫苗透過模擬病原體刺激人體產生專一性免疫反應並留下記憶性白血球；抗體則是針對特定病原體產生的蛋白質，具有高度專一性，但抗體分子本身並非細胞，不具記憶與增生能力。",
+        distractors: [
+          "(B) 錯誤：疫苗與抗體皆與「專一性防禦（第三道防線）」有關，且具專一性，非對抗所有病原體。",
+          "(C) 錯誤：直接輸入外來抗體會隨時間代謝分解，不會建立長期的免疫記憶。",
+          "(D) 錯誤：疫苗與抗體皆可針對特定細菌或病毒等病原體發揮專一性作用，並非互斥。"
+        ]
+      },
+      {
+        id: 50,
+        pane: "left",
+        tier: "補充紅字",
+        dimension: "實驗變因",
+        stem: "某生整理了「第 3 章 生物體內的運輸」四項常見的生物學迷思與正確觀念對照表（如附表）。請問表中哪一列的「迷思概念」與「正確觀念」配對「錯誤」？",
+        visual: `<table>
+  <thead>
+    <tr><th>編號</th><th>常見迷思概念</th><th>正確觀念說明</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>甲</td><td>所有動脈都流充氧血，所有靜脈都流缺氧血</td><td>肺動脈流缺氧血，肺靜脈流充氧血；血管分類依「血流方向」而非含氧量</td></tr>
+    <tr><td>乙</td><td>植物蒸散作用只會浪費水分，對植物有害</td><td>蒸散作用是水分上升的主要動力，並可降低葉溫，對植物具重要生理功能</td></tr>
+    <tr><td>丙</td><td>成熟的紅血球與白血球都有細胞核</td><td>成熟的紅血球「無細胞核」；白血球「有細胞核」且體積最大</td></tr>
+    <tr><td>丁</td><td>發炎反應是針對特定細菌產生的專一性防禦</td><td>發炎反應與吞噬作用屬於「非專一性防禦（第二道防線）」</td></tr>
+  </tbody>
+</table>`,
+        options: [
+          "甲",
+          "乙",
+          "丙",
+          "丁"
+        ],
+        answer: 2,
+        concept: "第 3 章全章核心迷思總體檢（3-1 運輸、3-2 循環、3-3 防禦）（課本 P.166~181 全章重點）。",
+        formula: "血球細胞核檢核：$\\text{紅血球（無核）} \\neq \\text{白血球（有核）}$",
+        explanation: "丙列的「正確觀念說明」寫成「成熟的紅血球與白血球都有細胞核」前後矛盾（與迷思概念相同），事實上成熟的紅血球沒有細胞核，只有白血球具有細胞核。",
+        distractors: [
+          "(A) 正確：肺動脈含缺氧血、肺靜脈含充氧血，血管依流向心臟內外定義。",
+          "(B) 正確：蒸散作用提供水分上升拉力與降溫功能。",
+          "(D) 正確：發炎反應與吞噬作用皆為非專一性的第二道防線。"
+        ]
+      }
+    ];
+
+    // =========================================================================
+    // 系統狀態變數
+    // =========================================================================
+    let currentQuestions = [];
+    let userAnswers = {}; // { qIndex: selectedOptionIndex }
+    let isSubmitted = false;
+    let totalSeconds = 50 * 60;
+    let remainingSeconds = 50 * 60;
+    let timerInterval = null;
+    let radarChartInstance = null;
+
+    // 隱藏觸發計數器
+    let titleClickCount = 0;
+    let titleClickTimer = null;
+    let verifyClickCount = 0;
+    let verifyClickTimer = null;
+
+    // =========================================================================
+    // 初始化與洗牌渲染邏輯
+    // =========================================================================
+    function initExam(shouldShuffle = false) {
+      isSubmitted = false;
+      userAnswers = {};
+      document.getElementById("resultDashboard").classList.remove("visible");
+      document.getElementById("submitBtn").disabled = false;
+      document.getElementById("submitBtn").textContent = "📝 提交試卷";
+      document.getElementById("filterAllBtn").classList.replace("btn-outline", "btn-primary");
+      document.getElementById("filterWrongBtn").classList.replace("btn-primary", "btn-outline");
+
+      // 深拷貝題庫
+      let cloned = JSON.parse(JSON.stringify(rawQuestionBank));
+
+      if (shouldShuffle) {
+        // 題目洗牌
+        for (let i = cloned.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [cloned[i], cloned[j]] = [cloned[j], cloned[i]];
+        }
+        // 選項洗牌並同步更新正確答案索引
+        cloned.forEach(q => {
+          const correctText = q.options[q.answer];
+          for (let i = q.options.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [q.options[i], q.options[j]] = [q.options[j], q.options[i]];
+          }
+          q.answer = q.options.indexOf(correctText);
+        });
+      }
+
+      currentQuestions = cloned;
+      renderAll();
+      resetTimer();
+    }
+
+    function renderAll() {
+      const navGrid = document.getElementById("navGrid");
+      const leftContainer = document.getElementById("leftQuestionsContainer");
+      const rightContainer = document.getElementById("rightQuestionsContainer");
+
+      navGrid.innerHTML = "";
+      leftContainer.innerHTML = "";
+      rightContainer.innerHTML = "";
+
+      const optLabels = ["(A)", "(B)", "(C)", "(D)"];
+
+      currentQuestions.forEach((q, idx) => {
+        const displayNum = idx + 1;
+
+        // 1. 建立題號導覽按鈕
+        const navBtn = document.createElement("button");
+        navBtn.className = "nav-btn";
+        navBtn.id = `nav-btn-${idx}`;
+        navBtn.textContent = displayNum;
+        navBtn.onclick = () => jumpToQuestion(idx);
+        navGrid.appendChild(navBtn);
+
+        // 2. 建立試題卡片
+        const card = document.createElement("div");
+        card.className = "q-card";
+        card.id = `q-card-${idx}`;
+
+        const badgeClass = q.tier === "補充紅字" ? "q-badge advanced" : "q-badge";
+        const visualHtml = q.visual ? `<div class="q-visual">${q.visual}</div>` : "";
+
+        let optionsHtml = `<div class="options-list" id="opts-${idx}">`;
+        q.options.forEach((optText, optIdx) => {
+          optionsHtml += `
+            <div class="option-item" id="opt-${idx}-${optIdx}" onclick="selectOption(${idx}, ${optIdx})">
+              <span class="opt-prefix">${optLabels[optIdx]}</span>
+              <span>${optText}</span>
+            </div>
+          `;
+        });
+        optionsHtml += `</div>`;
+
+        // 解析區塊
+        const distractorsHtml = q.distractors.map(d => `<li>${d}</li>`).join("");
+        const expHtml = `
+          <div class="explanation-box" id="exp-${idx}">
+            <div class="exp-header">
+              <span>📖 逐題詳解與觀念剖析</span>
+              <span style="color:var(--success);">正確答案：${optLabels[q.answer]}</span>
+            </div>
+            <div class="exp-section"><span class="exp-label">【核心考點】</span>${q.concept}</div>
+            <div class="exp-section"><span class="exp-label">【公式／邏輯推導】</span>${q.formula}</div>
+            <div class="exp-section"><span class="exp-label">【正解解析】</span>${q.explanation}</div>
+            <div class="exp-section">
+              <span class="exp-label">【誘答剖析（錯誤選項盲點）】</span>
+              <ul class="distractor-list">${distractorsHtml}</ul>
+            </div>
+          </div>
+        `;
+
+        card.innerHTML = `
+          <div class="q-meta">
+            <div>
+              <span style="font-weight:800;font-size:0.95rem;color:#1e3a8a;margin-right:6px;">第 ${displayNum} 題</span>
+              <span class="${badgeClass}">${q.tier}｜${q.dimension}</span>
+            </div>
+            <span class="q-status-tag" id="status-tag-${idx}"></span>
+          </div>
+          <div class="q-stem">${q.stem}</div>
+          ${visualHtml}
+          ${optionsHtml}
+          ${expHtml}
+        `;
+
+        if (q.pane === "left") {
+          leftContainer.appendChild(card);
+        } else {
+          rightContainer.appendChild(card);
+        }
+      });
+
+      updateProgressText();
+      if (window.renderMathInElement) {
+        renderMathInElement(document.body, {
+          delimiters: [
+            { left: "$$", right: "$$", display: true },
+            { left: "$", right: "$", display: false }
+          ]
+        });
+      }
+    }
+
+    function selectOption(qIdx, optIdx) {
+      if (isSubmitted) return;
+      userAnswers[qIdx] = optIdx;
+
+      // 更新選項視覺狀態
+      for (let i = 0; i < 4; i++) {
+        const el = document.getElementById(`opt-${qIdx}-${i}`);
+        if (el) {
+          el.classList.toggle("selected", i === optIdx);
+        }
+      }
+
+      // 更新題號導覽按鈕底色為藍色
+      const navBtn = document.getElementById(`nav-btn-${qIdx}`);
+      if (navBtn) navBtn.classList.add("answered");
+
+      updateProgressText();
+    }
+
+    function jumpToQuestion(qIdx) {
+      const card = document.getElementById(`q-card-${qIdx}`);
+      if (!card) return;
+      card.scrollIntoView({ behavior: "smooth", block: "center" });
+      card.classList.add("highlight-jump");
+      setTimeout(() => card.classList.remove("highlight-jump"), 1200);
+    }
+
+    function updateProgressText() {
+      const answeredCount = Object.keys(userAnswers).length;
+      document.getElementById("progressText").textContent = `已作答：${answeredCount} / ${currentQuestions.length} 題`;
+    }
+
+    // =========================================================================
+    // 倒數計時器控制
+    // =========================================================================
+    function resetTimer() {
+      clearInterval(timerInterval);
+      const mins = Math.min(240, Math.max(1, parseInt(document.getElementById("customMinutes").value) || 50));
+      document.getElementById("customMinutes").value = mins;
+      totalSeconds = mins * 60;
+      remainingSeconds = totalSeconds;
+      updateTimerUI();
+
+      timerInterval = setInterval(() => {
+        if (isSubmitted) {
+          clearInterval(timerInterval);
+          return;
+        }
+        remainingSeconds--;
+        updateTimerUI();
+        if (remainingSeconds <= 0) {
+          clearInterval(timerInterval);
+          showToast("⏰ 作答時間到！系統已自動為您交卷。");
+          submitExam(true);
+        }
+      }, 1000);
+    }
+
+    function updateTimerUI() {
+      const m = Math.floor(Math.max(0, remainingSeconds) / 60);
+      const s = Math.max(0, remainingSeconds) % 60;
+      const display = document.getElementById("timerDisplay");
+      display.textContent = `${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
+      if (remainingSeconds <= 180 && !isSubmitted) {
+        display.classList.add("warning");
+      } else {
+        display.classList.remove("warning");
+      }
+    }
+
+    document.getElementById("setTimerBtn").addEventListener("click", () => {
+      if (isSubmitted) {
+        showToast("已交卷狀態，請點擊「重新測驗」重設時間。");
+        return;
+      }
+      resetTimer();
+      showToast("⏱️ 已更新測驗倒數時間！");
+    });
+
+    // =========================================================================
+    // 交卷批改、弱點診斷雷達圖、LocalStorage 紀錄與 Telegram 通知
+    // =========================================================================
+    function submitExam(autoSubmit = false) {
+      if (isSubmitted) return;
+
+      const answeredCount = Object.keys(userAnswers).length;
+      if (!autoSubmit && answeredCount < currentQuestions.length) {
+        const confirmSubmit = confirm(`您還有 ${currentQuestions.length - answeredCount} 題尚未作答，確定要現在提交試卷嗎？`);
+        if (!confirmSubmit) return;
+      }
+
+      isSubmitted = true;
+      clearInterval(timerInterval);
+      document.getElementById("timerDisplay").classList.remove("warning");
+      document.getElementById("submitBtn").disabled = true;
+      document.getElementById("submitBtn").textContent = "✅ 已交卷批改";
+
+      let correctCount = 0;
+      const wrongList = [];
+      const dimStats = {
+        "基礎定義": { correct: 0, total: 0 },
+        "實驗變因": { correct: 0, total: 0 },
+        "圖表判讀": { correct: 0, total: 0 },
+        "跨章整合": { correct: 0, total: 0 }
+      };
+
+      const optLabels = ["(A)", "(B)", "(C)", "(D)"];
+
+      currentQuestions.forEach((q, idx) => {
+        const userChoice = userAnswers[idx];
+        const isCorrect = userChoice === q.answer;
+        const card = document.getElementById(`q-card-${idx}`);
+        const navBtn = document.getElementById(`nav-btn-${idx}`);
+        const statusTag = document.getElementById(`status-tag-${idx}`);
+        const expBox = document.getElementById(`exp-${idx}`);
+
+        if (dimStats[q.dimension]) {
+          dimStats[q.dimension].total++;
+          if (isCorrect) dimStats[q.dimension].correct++;
+        }
+
+        // 鎖定所有選項並標記正誤
+        for (let i = 0; i < 4; i++) {
+          const optEl = document.getElementById(`opt-${idx}-${i}`);
+          optEl.classList.add("locked");
+          if (i === q.answer) {
+            optEl.classList.add("opt-correct");
+          } else if (i === userChoice && !isCorrect) {
+            optEl.classList.add("opt-wrong");
+          }
+        }
+
+        if (isCorrect) {
+          correctCount++;
+          card.classList.add("result-correct");
+          navBtn.classList.add("correct");
+          statusTag.textContent = "✔ 答對";
+        } else {
+          card.classList.add("result-wrong");
+          navBtn.classList.add("wrong");
+          const chosenText = userChoice !== undefined ? optLabels[userChoice] : "未作答";
+          statusTag.textContent = `✘ 答錯（選 ${chosenText}，正解 ${optLabels[q.answer]}）`;
+          wrongList.push(`第${idx + 1}題(選${chosenText}/正${optLabels[q.answer]})`);
+        }
+
+        expBox.classList.add("visible");
+      });
+
+      // 計算分數（100分制）與作答耗時
+      const score = Math.round((correctCount / currentQuestions.length) * 100);
+      const spentSec = Math.max(1, totalSeconds - remainingSeconds);
+      const spentStr = `${String(Math.floor(spentSec / 60)).padStart(2, "0")}分${String(spentSec % 60).padStart(2, "0")}秒`;
+
+      document.getElementById("scoreValue").textContent = score;
+      document.getElementById("scoreDetail").textContent = `答對 ${correctCount} 題 / 共 ${currentQuestions.length} 題（作答耗時：${spentStr}）`;
+
+      // 更新四維度統計表與雷達圖數據
+      const dimTableBody = document.getElementById("dimTableBody");
+      dimTableBody.innerHTML = "";
+      const radarLabels = ["基礎定義", "實驗變因", "圖表判讀", "跨章整合"];
+      const radarData = [];
+      const dimSummaryStrings = [];
+
+      radarLabels.forEach(dim => {
+        const st = dimStats[dim];
+        const rate = st.total > 0 ? Math.round((st.correct / st.total) * 100) : 0;
+        radarData.push(rate);
+        dimSummaryStrings.push(`${dim}:${rate}%`);
+        dimTableBody.innerHTML += `
+          <tr>
+            <td style="font-weight:600;">${dim}</td>
+            <td>${st.correct} / ${st.total}</td>
+            <td style="font-weight:700;color:${rate >= 70 ? 'var(--success)' : 'var(--danger)'};">${rate}%</td>
+          </tr>
+        `;
+      });
+
+      renderRadarChart(radarLabels, radarData);
+
+      // 顯示成績面板並捲動至頂部
+      const dashboard = document.getElementById("resultDashboard");
+      dashboard.classList.add("visible");
+      document.getElementById("rightPane").scrollTo({ top: 0, behavior: "smooth" });
+
+      // 整理紀錄物件並寫入 LocalStorage + 呼叫 Telegram API
+      const now = new Date();
+      const timeStr = `${now.getFullYear()}/${String(now.getMonth() + 1).padStart(2, "0")}/${String(now.getDate()).padStart(2, "0")} ${String(now.getHours()).padStart(2, "0")}:${String(now.getMinutes()).padStart(2, "0")}:${String(now.getSeconds()).padStart(2, "0")}`;
+      const record = {
+        time: timeStr,
+        spent: spentStr,
+        score: score,
+        dims: dimSummaryStrings.join(" | "),
+        wrongs: wrongList.length > 0 ? wrongList.join(", ") : "全對（無錯題）"
+      };
+
+      saveRecordToLocalStorage(record);
+      sendTelegramReport(record);
+      showToast("📊 試卷批改完成！已生成雷達圖與逐題詳解。");
+    }
+
+    function renderRadarChart(labels, data) {
+      const ctx = document.getElementById("radarChart").getContext("2d");
+      if (radarChartInstance) {
+        radarChartInstance.destroy();
+      }
+      radarChartInstance = new Chart(ctx, {
+        type: "radar",
+        data: {
+          labels: labels,
+          datasets: [{
+            label: "各維度得分率 (%)",
+            data: data,
+            backgroundColor: "rgba(37, 99, 235, 0.22)",
+            borderColor: "#1d4ed8",
+            pointBackgroundColor: "#1e40af",
+            pointBorderColor: "#fff",
+            borderWidth: 2
+          }]
+        },
+        options: {
+          responsive: true,
+          scales: {
+            r: {
+              min: 0,
+              max: 100,
+              ticks: { stepSize: 20, font: { size: 10 } },
+              pointLabels: { font: { size: 12, weight: "bold" }, color: "#1e293b" }
+            }
+          },
+          plugins: {
+            legend: { display: false }
+          }
+        }
+      });
+    }
+
+    // =========================================================================
+    // 錯題篩選與筆記匯出功能 (Markdown & Word)
+    // =========================================================================
+    document.getElementById("filterAllBtn").addEventListener("click", () => {
+      document.getElementById("filterAllBtn").classList.replace("btn-outline", "btn-primary");
+      document.getElementById("filterWrongBtn").classList.replace("btn-primary", "btn-outline");
+      currentQuestions.forEach((_, idx) => {
+        document.getElementById(`q-card-${idx}`).style.display = "block";
+      });
+    });
+
+    document.getElementById("filterWrongBtn").addEventListener("click", () => {
+      document.getElementById("filterWrongBtn").classList.replace("btn-outline", "btn-primary");
+      document.getElementById("filterAllBtn").classList.replace("btn-primary", "btn-outline");
+      let wrongCount = 0;
+      currentQuestions.forEach((q, idx) => {
+        const isCorrect = userAnswers[idx] === q.answer;
+        document.getElementById(`q-card-${idx}`).style.display = isCorrect ? "none" : "block";
+        if (!isCorrect) wrongCount++;
+      });
+      if (wrongCount === 0) {
+        showToast("🎉 太棒了！本次測驗全對，沒有錯題！");
+      }
+    });
+
+    function generateWrongNotesMarkdown() {
+      const optLabels = ["(A)", "(B)", "(C)", "(D)"];
+      let md = `# 國中自然科學（生物）第3章 生物體內的運輸｜錯題複習筆記\n\n`;
+      md += `- 測驗得分：${document.getElementById("scoreValue").textContent} 分\n`;
+      md += `- 產出時間：${new Date().toLocaleString()}\n\n---\n\n`;
+
+      let hasWrong = false;
+      currentQuestions.forEach((q, idx) => {
+        const userChoice = userAnswers[idx];
+        if (userChoice !== q.answer) {
+          hasWrong = true;
+          const chosenStr = userChoice !== undefined ? `${optLabels[userChoice]} ${q.options[userChoice]}` : "未作答";
+          md += `### 第 ${idx + 1} 題【${q.dimension}】\n`;
+          md += `**題目**：${q.stem.replace(/\n/g, " ")}\n\n`;
+          md += `- ❌ **你的作答**：${chosenStr}\n`;
+          md += `- ✅ **正確答案**：${optLabels[q.answer]} ${q.options[q.answer]}\n`;
+          md += `- 📌 **核心考點**：${q.concept}\n`;
+          md += `- 📐 **公式與推導**：${q.formula}\n`;
+          md += `- 💡 **正解解析**：${q.explanation}\n`;
+          md += `- ⚠️ **誘答剖析**：\n`;
+          q.distractors.forEach(d => { md += `  - ${d}\n`; });
+          md += `\n---\n\n`;
+        }
+      });
+
+      if (!hasWrong) {
+        md += `🎉 本次測驗全部答對，無錯題紀錄！\n`;
+      }
+      return md;
+    }
+
+    document.getElementById("copyMarkdownBtn").addEventListener("click", () => {
+      const md = generateWrongNotesMarkdown();
+      navigator.clipboard.writeText(md).then(() => {
+        showToast("📋 錯題筆記 (Markdown) 已複製到剪貼簿，可直接貼入 Notion！");
+      }).catch(() => {
+        showToast("⚠️ 複製失敗，請改用 Word 下載功能。");
+      });
+    });
+
+    document.getElementById("downloadWordBtn").addEventListener("click", () => {
+      const optLabels = ["(A)", "(B)", "(C)", "(D)"];
+      let htmlContent = `
+        <html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
+        <head><meta charset='utf-8'><title>生物錯題複習卷</title></head>
+        <body style="font-family: 'Microsoft JhengHei', sans-serif; line-height: 1.6;">
+        <h2>國中自然科學（生物）第3章 生物體內的運輸｜錯題複習講義</h2>
+        <p>測驗得分：<b>${document.getElementById("scoreValue").textContent} 分</b>｜產出時間：${new Date().toLocaleString()}</p><hr/>
+      `;
+
+      let hasWrong = false;
+      currentQuestions.forEach((q, idx) => {
+        const userChoice = userAnswers[idx];
+        if (userChoice !== q.answer) {
+          hasWrong = true;
+          const chosenStr = userChoice !== undefined ? `${optLabels[userChoice]} ${q.options[userChoice]}` : "未作答";
+          htmlContent += `
+            <div style="margin-bottom: 18px; border-bottom: 1px solid #ccc; padding-bottom: 12px;">
+              <p><b>第 ${idx + 1} 題【${q.dimension}】</b>：${q.stem}</p>
+              <p style="color:#b91c1c;">你的作答：${chosenStr}</p>
+              <p style="color:#15803d;"><b>正確答案：${optLabels[q.answer]} ${q.options[q.answer]}</b></p>
+              <p><b>核心考點：</b>${q.concept}</p>
+              <p><b>正解解析：</b>${q.explanation}</p>
+              <p><b>誘答剖析：</b><br/>${q.distractors.join("<br/>")}</p>
+            </div>
+          `;
+        }
+      });
+
+      if (!hasWrong) {
+        htmlContent += `<p>恭喜！本次測驗全數答對，無錯題紀錄。</p>`;
+      }
+      htmlContent += `</body></html>`;
+
+      const blob = new Blob(['\ufeff', htmlContent], { type: 'application/msword' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `國中生物第3章_錯題複習筆記.doc`;
+      a.click();
+      URL.revokeObjectURL(url);
+      showToast("📄 Word 錯題複習卷已開始下載！");
+    });
+
+    // =========================================================================
+    // 家長監控機制 (LocalStorage + 標題連點 5 下 / Ctrl+Shift+P)
+    // =========================================================================
+    const STORAGE_KEY = "bio_ch3_exam_history_v1";
+
+    function saveRecordToLocalStorage(record) {
+      const history = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+      history.unshift(record);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(history));
+    }
+
+    function openParentMonitor() {
+      const pwd = prompt("請輸入家長監控密碼：");
+      if (pwd === "1234") {
+        const history = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+        const tbody = document.getElementById("parentHistoryBody");
+        tbody.innerHTML = "";
+        if (history.length === 0) {
+          tbody.innerHTML = `<tr><td colspan="6" style="text-align:center;color:#64748b;">目前尚無任何交卷紀錄。</td></tr>`;
+        } else {
+          history.forEach((rec, i) => {
+            tbody.innerHTML += `
+              <tr>
+                <td>${history.length - i}</td>
+                <td>${rec.time}</td>
+                <td>${rec.spent}</td>
+                <td style="font-weight:700;color:${rec.score >= 70 ? '#15803d' : '#b91c1c'};">${rec.score} 分</td>
+                <td>${rec.dims}</td>
+                <td style="font-size:0.82rem;">${rec.wrongs}</td>
+              </tr>
+            `;
+          });
+        }
+        document.getElementById("parentModal").classList.add("active");
+      } else if (pwd !== null) {
+        alert("密碼錯誤！");
+      }
+    }
+
+    function clearParentHistory() {
+      if (confirm("確定要清空所有歷次測驗紀錄嗎？")) {
+        localStorage.removeItem(STORAGE_KEY);
+        document.getElementById("parentHistoryBody").innerHTML = `<tr><td colspan="6" style="text-align:center;color:#64748b;">紀錄已清空。</td></tr>`;
+      }
+    }
+
+    // 連點標題 5 下觸發家長監控
+    document.getElementById("examTitle").addEventListener("click", () => {
+      titleClickCount++;
+      clearTimeout(titleClickTimer);
+      titleClickTimer = setTimeout(() => { titleClickCount = 0; }, 1500);
+      if (titleClickCount >= 5) {
+        titleClickCount = 0;
+        openParentMonitor();
+      }
+    });
+
+    // 鍵盤組合鍵 Ctrl + Shift + P 觸發家長監控
+    document.addEventListener("keydown", (e) => {
+      if (e.ctrlKey && e.shiftKey && (e.key === "P" || e.key === "p")) {
+        e.preventDefault();
+        openParentMonitor();
+      }
+    });
+
+    // =========================================================================
+    // 題庫驗證總表 (左上角 ❖ 連點 5 下開啟)
+    // =========================================================================
+    function openVerifyModal() {
+      const optLabels = ["(A)", "(B)", "(C)", "(D)"];
+      const counts = [0, 0, 0, 0];
+      const tbody = document.getElementById("verifyTableBody");
+      tbody.innerHTML = "";
+
+      currentQuestions.forEach((q, idx) => {
+        counts[q.answer]++;
+        tbody.innerHTML += `
+          <tr>
+            <td style="font-weight:700;">第 ${idx + 1} 題</td>
+            <td>${q.tier} / ${q.dimension}</td>
+            <td style="font-weight:700;color:var(--primary);">${optLabels[q.answer]}</td>
+            <td>${q.stem.substring(0, 48)}...<br><small style="color:#64748b;">${q.concept}</small></td>
+          </tr>
+        `;
+      });
+
+      document.getElementById("answerDistSummary").textContent =
+        `目前題庫（共 ${currentQuestions.length} 題）答案選項分佈統計：(A) ${counts[0]} 題 ｜ (B) ${counts[1]} 題 ｜ (C) ${counts[2]} 題 ｜ (D) ${counts[3]} 題`;
+      document.getElementById("verifyModal").classList.add("active");
+    }
+
+    document.getElementById("verifyBtn").addEventListener("click", () => {
+      verifyClickCount++;
+      clearTimeout(verifyClickTimer);
+      verifyClickTimer = setTimeout(() => { verifyClickCount = 0; }, 1500);
+      if (verifyClickCount >= 5) {
+        verifyClickCount = 0;
+        openVerifyModal();
+      }
+    });
+
+    function closeModal(id) {
+      document.getElementById(id).classList.remove("active");
+    }
+
+    // =========================================================================
+    // Telegram API 通知機制
+    // =========================================================================
+    function sendTelegramReport(record) {
+      const token = "8062206068:AAEqHmvEEMDFOYtggE4FxpHFoAWUGHX7Aq4";
+      const MY_CHAT_ID = "8049812362";
+
+      const msgText =
+        `📊 【國中生物模擬測驗交卷通知】\n` +
+        `01. 交卷時間：${record.time}\n` +
+        `02. 作答耗時：${record.spent}\n` +
+        `03. 測驗得分：${record.score} 分\n` +
+        `04. 各維度統計：${record.dims}\n` +
+        `05. 錯題清單：${record.wrongs}`;
+
+      const postToChat = (chatId) => {
+        return fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ chat_id: chatId, text: msgText })
+        })
+          .then(res => res.json())
+          .then(data => {
+            if (!data.ok) console.warn("Telegram 發送失敗：", data.description);
+          })
+          .catch(err => console.warn("Telegram 網路請求錯誤：", err));
+      };
+
+      if (MY_CHAT_ID) {
+        postToChat(MY_CHAT_ID);
+      }
+    }
+
+    function showToast(msg) {
+      const t = document.getElementById("toast");
+      t.textContent = msg;
+      t.classList.add("show");
+      setTimeout(() => t.classList.remove("show"), 3000);
+    }
+
+    // 綁定頂部按鈕事件
+    document.getElementById("submitBtn").addEventListener("click", () => submitExam(false));
+    document.getElementById("shuffleBtn").addEventListener("click", () => {
+      if (confirm("確定要重新測驗嗎？題目與選項順序將會重新隨機洗牌！")) {
+        initExam(true);
+        showToast("🔀 題目與選項已隨機洗牌，請開始作答！");
+      }
+    });
+
+    // 頁面載入時啟動測驗
+    window.addEventListener("DOMContentLoaded", () => {
+      initExam(false);
+    });
+  </script>
+</body>
+</html>
