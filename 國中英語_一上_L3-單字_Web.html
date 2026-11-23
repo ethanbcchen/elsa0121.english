@@ -1,0 +1,1709 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>國中七年級英語全真模擬測驗 — Lesson 3: Let's Get Some Ideas from RoomGPT</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      --bg-main: #0f172a;
+      --bg-panel: #1e293b;
+      --bg-card: #162032;
+      --bg-card-hover: #243249;
+      --bg-input: #0b1120;
+      --border-color: #334155;
+      --text-primary: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --accent-blue: #3b82f6;
+      --accent-blue-dark: #1d4ed8;
+      --accent-green: #10b981;
+      --accent-green-bg: rgba(16, 185, 129, 0.15);
+      --accent-red: #ef4444;
+      --accent-red-bg: rgba(239, 68, 68, 0.15);
+      --accent-amber: #f59e0b;
+      --accent-purple: #8b5cf6;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft JhengHei", Roboto, sans-serif;
+      background-color: var(--bg-main);
+      color: var(--text-primary);
+      line-height: 1.6;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    /* Top Header Bar */
+    .top-bar {
+      background-color: #0b1120;
+      border-bottom: 1px solid var(--border-color);
+      padding: 10px 20px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      z-index: 50;
+      flex-shrink: 0;
+    }
+
+    .controls-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .secret-verify-btn {
+      color: var(--text-muted);
+      cursor: pointer;
+      user-select: none;
+      font-size: 14px;
+      padding: 4px 6px;
+      border-radius: 4px;
+      transition: color 0.2s;
+    }
+    .secret-verify-btn:hover {
+      color: var(--text-secondary);
+    }
+
+    .timer-box {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--bg-panel);
+      border: 1px solid var(--border-color);
+      padding: 5px 10px;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--accent-amber);
+    }
+
+    .timer-input {
+      width: 52px;
+      background: var(--bg-input);
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
+      padding: 3px 6px;
+      border-radius: 4px;
+      text-align: center;
+      font-size: 13px;
+    }
+
+    .btn {
+      padding: 6px 12px;
+      border-radius: 6px;
+      border: 1px solid transparent;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .btn-dark {
+      background: var(--bg-panel);
+      border-color: var(--border-color);
+      color: var(--text-primary);
+    }
+    .btn-dark:hover { background: #2d3b52; }
+
+    .btn-status {
+      background: rgba(59, 130, 246, 0.15);
+      border-color: var(--accent-blue);
+      color: #60a5fa;
+      cursor: default;
+    }
+
+    .btn-submit {
+      background: var(--accent-green);
+      color: #06281e;
+    }
+    .btn-submit:hover { background: #059669; color: #fff; }
+    .btn-submit:disabled {
+      background: #334155;
+      color: #94a3b8;
+      cursor: not-allowed;
+    }
+
+    .btn-shuffle {
+      background: var(--bg-panel);
+      border-color: var(--border-color);
+      color: var(--text-primary);
+    }
+    .btn-shuffle:hover { border-color: var(--accent-blue); color: #60a5fa; }
+
+    .title-group {
+      text-align: right;
+      user-select: none;
+    }
+    .title-group h1 {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text-primary);
+      cursor: pointer;
+      letter-spacing: 0.3px;
+    }
+    .title-group p {
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    /* Main Split Layout */
+    .main-container {
+      display: flex;
+      flex: 1;
+      overflow: hidden;
+    }
+
+    .left-pane {
+      width: 50%;
+      border-right: 1px solid var(--border-color);
+      overflow-y: auto;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      background-color: #0d1424;
+    }
+
+    .right-pane {
+      width: 50%;
+      overflow-y: auto;
+      padding: 18px 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      background-color: var(--bg-main);
+    }
+
+    /* Cards & Panels */
+    .panel-card {
+      background: var(--bg-panel);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 16px;
+    }
+
+    .panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .panel-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #93c5fd;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .legend-text {
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    /* Score & Weakness Report Card */
+    .report-card {
+      display: none;
+      background: linear-gradient(145deg, #172338, #1e293b);
+      border: 1px solid #3b82f6;
+    }
+    .report-card.active {
+      display: block;
+    }
+
+    .report-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 16px;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    .score-summary-box {
+      background: rgba(15, 23, 42, 0.65);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 14px;
+      text-align: center;
+    }
+
+    .score-big {
+      font-size: 42px;
+      font-weight: 800;
+      color: var(--accent-green);
+      line-height: 1.1;
+      margin: 6px 0;
+    }
+
+    .score-sub {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-bottom: 10px;
+    }
+
+    .dim-list {
+      text-align: left;
+      font-size: 12.5px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      border-top: 1px dashed var(--border-color);
+      padding-top: 10px;
+    }
+
+    .dim-row {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .radar-wrapper {
+      position: relative;
+      height: 210px;
+      width: 100%;
+      background: rgba(15, 23, 42, 0.5);
+      border-radius: 8px;
+      padding: 8px;
+      border: 1px solid var(--border-color);
+    }
+
+    .report-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding-top: 10px;
+      border-top: 1px solid var(--border-color);
+    }
+
+    /* Quick Nav Grid */
+    .nav-grid {
+      display: grid;
+      grid-template-columns: repeat(10, 1fr);
+      gap: 6px;
+    }
+
+    .nav-btn {
+      background: var(--bg-input);
+      border: 1px solid var(--border-color);
+      color: var(--text-secondary);
+      border-radius: 5px;
+      padding: 6px 0;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.15s;
+    }
+    .nav-btn:hover {
+      border-color: var(--accent-blue);
+      color: #fff;
+    }
+    .nav-btn.answered {
+      background: var(--accent-blue);
+      border-color: #60a5fa;
+      color: #ffffff;
+    }
+    .nav-btn.correct {
+      background: var(--accent-green);
+      border-color: #34d399;
+      color: #052e16;
+    }
+    .nav-btn.wrong {
+      background: var(--accent-red);
+      border-color: #f87171;
+      color: #ffffff;
+    }
+
+    /* Reading & Cloze Passages (Left Pane) */
+    .passage-block {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 14px;
+      margin-bottom: 12px;
+    }
+    .passage-tag {
+      display: inline-block;
+      background: rgba(59, 130, 246, 0.2);
+      color: #93c5fd;
+      border: 1px solid rgba(59, 130, 246, 0.4);
+      font-size: 11.5px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 4px;
+      margin-bottom: 8px;
+    }
+    .passage-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #f8fafc;
+      margin-bottom: 8px;
+    }
+    .passage-body {
+      font-size: 14px;
+      color: #cbd5e1;
+      line-height: 1.75;
+    }
+    .passage-body p {
+      margin-bottom: 8px;
+    }
+
+    /* Section Header on Right Pane */
+    .section-banner {
+      background: linear-gradient(90deg, rgba(30, 58, 138, 0.5), rgba(15, 23, 42, 0.2));
+      border-left: 4px solid var(--accent-blue);
+      padding: 10px 14px;
+      border-radius: 0 8px 8px 0;
+    }
+    .section-banner h2 {
+      font-size: 15px;
+      color: #93c5fd;
+    }
+    .section-banner p {
+      font-size: 12.5px;
+      color: var(--text-secondary);
+    }
+
+    /* Question Card */
+    .question-card {
+      background: var(--bg-panel);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 16px;
+      transition: border-color 0.2s;
+    }
+    .question-card.is-correct {
+      border-color: var(--accent-green);
+    }
+    .question-card.is-wrong {
+      border-color: var(--accent-red);
+    }
+    .question-card.hidden-by-filter {
+      display: none;
+    }
+
+    .q-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .q-num {
+      font-size: 14px;
+      font-weight: 700;
+      color: #60a5fa;
+    }
+
+    .q-badge {
+      font-size: 11.5px;
+      background: var(--bg-input);
+      border: 1px solid var(--border-color);
+      color: var(--text-secondary);
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+
+    .q-stem {
+      font-size: 15px;
+      color: var(--text-primary);
+      margin-bottom: 14px;
+      line-height: 1.65;
+      white-space: pre-line;
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .option-item {
+      background: var(--bg-input);
+      border: 1px solid var(--border-color);
+      border-radius: 7px;
+      padding: 10px 12px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      color: var(--text-primary);
+      transition: all 0.15s;
+      user-select: none;
+    }
+    .option-item:hover:not(.locked) {
+      border-color: var(--accent-blue);
+      background: #131d33;
+    }
+    .option-item.selected {
+      border-color: var(--accent-blue);
+      background: rgba(59, 130, 246, 0.2);
+      color: #fff;
+      font-weight: 600;
+    }
+    .option-item.opt-correct {
+      border-color: var(--accent-green) !important;
+      background: var(--accent-green-bg) !important;
+      color: #6ee7b7 !important;
+      font-weight: 700;
+    }
+    .option-item.opt-wrong {
+      border-color: var(--accent-red) !important;
+      background: var(--accent-red-bg) !important;
+      color: #fca5a5 !important;
+      text-decoration: line-through;
+    }
+
+    .opt-radio {
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      border: 2px solid var(--text-muted);
+      display: inline-block;
+      flex-shrink: 0;
+      position: relative;
+    }
+    .option-item.selected .opt-radio {
+      border-color: #60a5fa;
+      background: #3b82f6;
+    }
+    .option-item.opt-correct .opt-radio {
+      border-color: var(--accent-green);
+      background: var(--accent-green);
+    }
+    .option-item.opt-wrong .opt-radio {
+      border-color: var(--accent-red);
+      background: var(--accent-red);
+    }
+
+    /* Detailed Explanation Box */
+    .explanation-box {
+      display: none;
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px dashed var(--border-color);
+      font-size: 13.5px;
+      color: #cbd5e1;
+      line-height: 1.7;
+    }
+    .explanation-box.visible {
+      display: block;
+    }
+
+    .exp-top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .exp-ans-pill {
+      background: var(--accent-green);
+      color: #052e16;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 4px;
+      font-size: 13px;
+    }
+
+    .exp-cat-pill {
+      background: var(--bg-input);
+      border: 1px solid var(--border-color);
+      color: var(--text-secondary);
+      padding: 3px 10px;
+      border-radius: 4px;
+      font-size: 12px;
+    }
+
+    .exp-block {
+      background: rgba(11, 17, 32, 0.65);
+      border-left: 3px solid var(--accent-blue);
+      padding: 10px 12px;
+      border-radius: 0 6px 6px 0;
+      margin-bottom: 8px;
+    }
+    .exp-block strong {
+      color: #93c5fd;
+    }
+    .exp-block.phonetics {
+      border-left-color: var(--accent-purple);
+    }
+    .exp-block.phonetics strong {
+      color: #c4b5fd;
+    }
+    .exp-block.distractors {
+      border-left-color: var(--accent-amber);
+    }
+    .exp-block.distractors strong {
+      color: #fcd34d;
+    }
+
+    /* Modals */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      z-index: 999;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .modal-overlay.open {
+      display: flex;
+    }
+    .modal-content {
+      background: var(--bg-panel);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      width: 100%;
+      max-width: 820px;
+      max-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .modal-header {
+      padding: 14px 18px;
+      background: #0b1120;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .modal-body {
+      padding: 18px;
+      overflow-y: auto;
+      font-size: 13.5px;
+    }
+    table.data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 8px;
+    }
+    table.data-table th, table.data-table td {
+      border: 1px solid var(--border-color);
+      padding: 8px 10px;
+      text-align: left;
+    }
+    table.data-table th {
+      background: #0b1120;
+      color: #93c5fd;
+    }
+
+    /* Scrollbar Styling */
+    ::-webkit-scrollbar { width: 7px; height: 7px; }
+    ::-webkit-scrollbar-track { background: #0b1120; }
+    ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #475569; }
+
+    /* Responsive Mobile/Tablet */
+    @media (max-width: 900px) {
+      body { height: auto; overflow: auto; }
+      .main-container { flex-direction: column; overflow: visible; }
+      .left-pane, .right-pane { width: 100%; height: auto; overflow: visible; border-right: none; }
+      .options-grid { grid-template-columns: 1fr; }
+      .report-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation & Timer Bar -->
+  <header class="top-bar">
+    <div class="controls-group">
+      <span id="secretVerifyBtn" class="secret-verify-btn" title="題庫驗證入口">❖</span>
+      <div class="timer-box">
+        <span>⏱ 倒數：</span>
+        <span id="timerDisplay">50:00</span>
+        <input type="number" id="timeInput" class="timer-input" value="50" min="0" max="240" />
+        <span>分</span>
+        <button class="btn btn-dark" onclick="setTimer()">設定</button>
+        <button class="btn btn-dark" id="pauseBtn" onclick="togglePause()">暫停</button>
+      </div>
+      <span class="btn btn-status" id="progressStatus">已作答：0 / 20</span>
+      <button class="btn btn-submit" id="submitBtn" onclick="submitExam()">提交試卷</button>
+      <button class="btn btn-shuffle" onclick="resetAndShuffle()">重新測驗 (洗牌)</button>
+    </div>
+
+    <div class="title-group">
+      <h1 id="courseTitle">國中七年級英語全真模擬測驗</h1>
+      <p>Lesson 3: Let's Get Some Ideas from RoomGPT — 詞彙、片語與句型評量</p>
+    </div>
+  </header>
+
+  <!-- Main 50/50 Split Container -->
+  <main class="main-container">
+    <!-- Left Pane: Score Report, Quick Navigation, Reference Texts -->
+    <section class="left-pane">
+      
+      <!-- Post-Submission Score & Radar Diagnosis Panel -->
+      <div class="panel-card report-card" id="reportCard">
+        <div class="panel-header">
+          <span class="panel-title">📊 測驗成績與弱點診斷分析報告</span>
+        </div>
+        <div class="report-grid">
+          <div class="score-summary-box">
+            <div style="font-size: 12px; color: var(--text-secondary);">總得分 (滿分 100 分)</div>
+            <div class="score-big" id="totalScoreDisplay">0</div>
+            <div class="score-sub" id="correctCountDisplay">答對 0 / 20 題 (答錯 20 題)</div>
+            <div class="dim-list" id="dimensionStatsList">
+              <!-- Populated dynamically -->
+            </div>
+          </div>
+          <div class="radar-wrapper">
+            <canvas id="radarChart"></canvas>
+          </div>
+        </div>
+        <div class="report-actions">
+          <button class="btn btn-dark" id="filterAllBtn" onclick="filterQuestions('all')" style="border-color: var(--accent-blue); color: #60a5fa;">顯示全部題目</button>
+          <button class="btn btn-dark" id="filterWrongBtn" onclick="filterQuestions('wrong')">只看錯題 (0)</button>
+          <button class="btn btn-submit" onclick="copyWrongNotesMarkdown()">📋 一鍵複製錯題筆記 (Markdown)</button>
+        </div>
+      </div>
+
+      <!-- Quick Question Navigation -->
+      <div class="panel-card">
+        <div class="panel-header">
+          <span class="panel-title">🧭 題號快速導覽 (點擊跳轉至該題)</span>
+          <span class="legend-text">藍：已答 ｜ 綠：答對 ｜ 紅：答錯</span>
+        </div>
+        <div class="nav-grid" id="navGrid"></div>
+      </div>
+
+      <!-- Left Reference Panel for Cloze / Reading / Key Grammar Notes -->
+      <div class="panel-card">
+        <div class="panel-header">
+          <span class="panel-title">📘 Lesson 3 核心閱讀文本與克漏字對照區</span>
+        </div>
+
+        <div class="passage-block">
+          <span class="passage-tag">自修重點摘要 ｜ 空間方位介系詞與祈使句</span>
+          <div class="passage-title">RoomGPT 居家空間設計與重點句型</div>
+          <div class="passage-body">
+            <p><strong>1. 方位介系詞辨析：</strong><br>
+            • <strong>in front of</strong>（在……前面，外部前方） vs. <strong>behind</strong>（在……後面）<br>
+            • <strong>next to / beside</strong>（緊靠在……旁邊） vs. <strong>near</strong>（在……附近）<br>
+            • <strong>between A and B</strong>（在 A 和 B 兩者之間）<br>
+            • <strong>inside</strong>（在……裡面；在室內） vs. <strong>outside</strong>（在……外面；在室外）<br>
+            • <strong>around</strong>（圍繞；在……周圍；到處）</p>
+            <p><strong>2. 祈使句與受格代名詞：</strong><br>
+            • <strong>Let's + 原形動詞...</strong>（我們一起……吧），否定為 <strong>Let's not + 原形動詞...</strong>。<br>
+            • <strong>That's OK / fine with + 受格</strong>（對某人來說沒問題），介系詞 <strong>with</strong> 後方接人稱代名詞時須用「受格」（me, you, him, her, us, them）。</p>
+          </div>
+        </div>
+
+        <div class="passage-block">
+          <span class="passage-tag">延伸閱讀文本 ｜ 行動電話的演進與智慧工具</span>
+          <div class="passage-title">From Cellphones to Smartphones</div>
+          <div class="passage-body">
+            <p>A smartphone is a great tool for learning and daily life. In the 1990s, cellphones were very expensive and large. Today, smartphones are small and just like mini computers. You can use a smartphone to surf the Internet, upload photos, and get great ideas for your bedroom or living room design from apps like RoomGPT.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Right Pane: Questions & Interactive Answer Area -->
+    <section class="right-pane" id="rightPane">
+      <div class="section-banner">
+        <h2>一、核心詞彙、片語運用與基礎句型 (第 1～20 題)</h2>
+        <p>請依據 Lesson 3《Let's Get Some Ideas from RoomGPT》自修內容，選出最適合的答案。</p>
+      </div>
+      <div id="questionsContainer" style="display: flex; flex-direction: column; gap: 16px;"></div>
+    </section>
+  </main>
+
+  <!-- Modal 1: Parent History Monitor -->
+  <div class="modal-overlay" id="parentModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span style="font-weight: 700; color: #93c5fd;">🔒 家長監控中心 — 歷次測驗歷史紀錄表</span>
+        <button class="btn btn-dark" onclick="closeModal('parentModal')">關閉</button>
+      </div>
+      <div class="modal-body" id="parentHistoryBody"></div>
+    </div>
+  </div>
+
+  <!-- Modal 2: Answer Key & Question Bank Verification -->
+  <div class="modal-overlay" id="verifyModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span style="font-weight: 700; color: #6ee7b7;">❖ 題庫視覺化驗證 — 答案分布與題目總表</span>
+        <button class="btn btn-dark" onclick="closeModal('verifyModal')">關閉</button>
+      </div>
+      <div class="modal-body" id="verifyBody"></div>
+    </div>
+  </div>
+
+  <script>
+    // =========================================================================
+    // 題庫資料結構 (第 1～20 題，100% 源自上傳之 Lesson 3 自修教材)
+    // =========================================================================
+    const rawQuestionBank = [
+      {
+        id: 1,
+        dimension: "字彙",
+        category: "字彙｜居家空間名詞",
+        stem: "A: Where is May?\nB: She is taking a shower in the ______.",
+        options: ["living room", "dining room", "bathroom", "bedroom"],
+        answerIndex: 2,
+        translation: "A：May 在哪裡？\nB：她正在浴室裡淋浴。",
+        corePoint: "本題測驗居家空間名詞辨析。題幹關鍵字為 taking a shower（淋浴），對應的場所應為 bathroom（浴室）。",
+        grammar: "「take a shower」為固定片語，意為「淋浴；沖澡」；表示「在某房間裡」使用介系詞 in the + 房間名稱。",
+        distractors: [
+          "(A) living room：意為「客廳」，是家人看電視、休息的場所，不適合淋浴。",
+          "(B) dining room：意為「飯廳」，是用餐（eat dinner）的場所。",
+          "(D) bedroom：意為「臥室」，是睡覺（sleep）的場所。"
+        ],
+        phonetics: "She is taking a shower in the bathroom. /ʃi ɪz ˈtekɪŋ ə ˈʃaʊɚ ɪn ðə ˈbæθˌrum/（連讀：taking_a /ˈtekɪŋ ə/；shower_in /ˈʃaʊɚ ɪn/）"
+      },
+      {
+        id: 2,
+        dimension: "字彙",
+        category: "字彙｜形容詞語意辨析",
+        stem: "The bed is very ______. You will have a good night's sleep on it.",
+        options: ["young", "strict", "true", "soft"],
+        answerIndex: 3,
+        translation: "這張床非常柔軟。你今晚在上面會睡個好覺。",
+        corePoint: "本題測驗形容詞字義。後半句提到「會睡個好覺（have a good night's sleep）」，且自修例句明確指出 The bed is soft and comfortable，故選 soft（柔軟的）。",
+        grammar: "be 動詞 is 後方接形容詞 soft 作主詞補語，程度副詞 very 修飾形容詞 soft。",
+        distractors: [
+          "(A) young：意為「年輕的」，通常用來形容人或動物的年紀，不修飾床鋪。",
+          "(B) strict：意為「嚴格的」，多用來形容老師或父母的管教態度。",
+          "(C) true：意為「真實的；正確的」，與床鋪的觸感無關。"
+        ],
+        phonetics: "The bed is very soft. /ðə bɛd ɪz ˈvɛri sɔft/（連讀：bed_is /bɛd ɪz/）"
+      },
+      {
+        id: 3,
+        dimension: "文法",
+        category: "文法｜祈使句與動詞搭配",
+        stem: "Mike won't come today. Let's not ______ for him here.",
+        options: ["wait", "get", "choose", "thank"],
+        answerIndex: 0,
+        translation: "Mike 今天不會來了。我們別在這裡等他吧。",
+        corePoint: "本題測驗祈使句「Let's not + 原形動詞」及固定片語「wait for + 人（等待某人）」。",
+        grammar: "Let's（= Let us）為祈使句，後接原形動詞；其否定形式直接在 Let's 後加 not，即「Let's not + 原形動詞」，切勿使用 don't。",
+        distractors: [
+          "(B) get：意為「獲得；拿取」，不與介系詞 for 搭配表示「等待某人」。",
+          "(C) choose：意為「選擇」，語意與前句「他不會來」不符。",
+          "(D) thank：意為「感謝」，常用於 thank + 人 + for + 事，與此處語境不符。"
+        ],
+        phonetics: "Let's not wait for him here. /lɛts nɑt wet fɔr hɪm hɪr/（連讀：for_him 可弱讀為 /fɚ ɪm/）"
+      },
+      {
+        id: 4,
+        dimension: "語意邏輯",
+        category: "語意邏輯｜方位介系詞與換句話說",
+        stem: "Mary is ______ me. That is, I am standing behind her.",
+        options: ["next to", "in front of", "around", "between"],
+        answerIndex: 1,
+        translation: "Mary 在我的前面。換句話說，我正站在她的後面。",
+        corePoint: "本題測驗方位介系詞的邏輯轉換。「我站在她的後面（behind her）」等同於「她在我的前面（in front of me）」。",
+        grammar: "in front of 為複合介系詞片語，意為「在……（外部）前面」，後方接名詞或人稱代名詞受格（me）。",
+        distractors: [
+          "(A) next to：意為「在……旁邊」，若在旁邊則彼此並非前後關係。",
+          "(C) around：意為「圍繞；在……周圍」，與 behind 無法構成相對位置。",
+          "(D) between：意為「在……中間」，後方必須接「兩者（A and B）」或複數名詞，不可單接 me。"
+        ],
+        phonetics: "Mary is in front of me. /ˈmɛri ɪz ɪn frʌnt əv mi/（連讀：is_in /ɪz ɪn/；front_of /frʌnt əv/）"
+      },
+      {
+        id: 5,
+        dimension: "語意邏輯",
+        category: "語意邏輯｜方位介系詞辨析",
+        stem: "A: What's ______ the white box? Let's open it and take a look.\nB: Wow! It's a cute robot.",
+        options: ["beside", "with", "inside", "near"],
+        answerIndex: 2,
+        translation: "A：白色箱子裡面有什麼？我們打開來看看吧。\nB：哇！是一隻可愛的機器人。",
+        corePoint: "本題測驗上下文語意推理。後句提到「打開它（open it）」，可見物品位於箱子內部，故選 inside（在……裡面）。",
+        grammar: "inside 在此作介系詞，後接名詞片語 the white box；亦可當副詞使用（如 go inside）。",
+        distractors: [
+          "(A) beside：意為「在……旁邊」，若在旁邊則肉眼可見，無需「打開箱子」。",
+          "(B) with：意為「和……一起；具有」，不符合詢問箱內物品的空間邏輯。",
+          "(D) near：意為「在……附近」，同樣不需打開箱子就能看到。"
+        ],
+        phonetics: "What's inside the white box? /wʌts ɪnˈsaɪd ðə waɪt bɑks/（連讀：What's_inside /wʌts ɪnˈsaɪd/）"
+      },
+      {
+        id: 6,
+        dimension: "字彙",
+        category: "字彙｜固定片語與介系詞搭配",
+        stem: "Why are you wearing that old jacket? It is out of ______ now.",
+        options: ["style", "idea", "tool", "type"],
+        answerIndex: 0,
+        translation: "你為什麼穿著那件舊夾克？它現在已經過時了。",
+        corePoint: "本題測驗名詞 style 的固定搭配。「in style」表示「流行的」，相反詞「out of style」表示「過時的」。",
+        grammar: "介系詞片語 out of style 在句中作主詞補語，修飾主詞 It（指那件舊夾克）。",
+        distractors: [
+          "(B) idea：意為「想法；點子」，無 out of idea 的用法（表「不知道」用 have no idea）。",
+          "(C) tool：意為「工具」，無法與 out of 搭配形容服飾流行度。",
+          "(D) type：意為「種類；類型」，常用於 this type of + 名詞。"
+        ],
+        phonetics: "It is out of style now. /ɪt ɪz aʊt əv staɪl naʊ/（連讀：It_is_out_of /ɪt ɪz aʊt əv/）"
+      },
+      {
+        id: 7,
+        dimension: "文法",
+        category: "文法｜不定冠詞與名詞搭配",
+        stem: "A: How about going to the zoo this afternoon?\nB: That's ______ good idea! Let's go.",
+        options: ["a", "an", "some", "the"],
+        answerIndex: 0,
+        translation: "A：今天下午去動物園如何？\nB：那是個好主意！我們走吧。",
+        corePoint: "本題測驗冠詞 a / an 的用法。雖然 idea 為母音開頭，單獨使用時為 an idea，但本題名詞前有子音開頭的形容詞 good 修飾，故須用 a。",
+        grammar: "不定冠詞 a / an 的選擇取決於「緊接在後的單字字首發音」，good /ɡʊd/ 為子音開頭，因此用 a good idea。",
+        distractors: [
+          "(B) an：學生常因死背「an idea」而誤選，忽略了中間插入的形容詞 good 為子音開頭。",
+          "(C) some：後方須接複數可數名詞（ideas）或不可數名詞，不可接單數的 idea。",
+          "(D) the：表特定指稱，初次贊同對方提議時慣用不定冠詞 a good idea。"
+        ],
+        phonetics: "That's a good idea! /ðæts ə ɡʊd aɪˈdiə/（連讀：That's_a /ðæts ə/；good_idea /ɡʊd aɪˈdiə/）"
+      },
+      {
+        id: 8,
+        dimension: "文法",
+        category: "文法｜不定代名詞 some 用法",
+        stem: "We don't have any eggs for the cake. Can you go buy ______ at the supermarket?",
+        options: ["it", "one", "some", "any"],
+        answerIndex: 2,
+        translation: "我們沒有做蛋糕用的蛋了。你能去超市買一些嗎？",
+        corePoint: "本題測驗 some 作代名詞的用法。some 可用於代替前面提過的複數名詞（eggs），且用於表示「請求、期待肯定答覆」的疑問句中。",
+        grammar: "some 兼具形容詞與代名詞詞性。此處代替複數可數名詞 eggs；在 Can you...? 表請求的問句中，通常用 some 而非 any。",
+        distractors: [
+          "(A) it：代替前面提過的「單數」名詞，無法代替複數的 eggs。",
+          "(B) one：代替前面提過的「單數」可數名詞，若要代替複數須用 ones。",
+          "(D) any：多用於否定句或純粹詢問有無的疑問句，表請求幫忙買東西時應用 some。"
+        ],
+        phonetics: "Can you go buy some? /kæn ju ɡo baɪ sʌm/（弱讀：Can_you /kən jə/）"
+      },
+      {
+        id: 9,
+        dimension: "字彙",
+        category: "字彙｜介系詞片語與複合名詞",
+        stem: "The smartphone is a very useful ______ for learning English today.",
+        options: ["question", "tool", "blanket", "step"],
+        answerIndex: 1,
+        translation: "現今智慧型手機是學習英文非常有用的工具。",
+        corePoint: "本題測驗自修課文原句概念：「The smartphone is a good tool for learning.」（智慧型手機是學習的好工具）。",
+        grammar: "「tool + for + N / V-ing」表示「（做）……的工具」，介系詞 for 後方接動名詞 learning。",
+        distractors: [
+          "(A) question：意為「問題」，常與 ask 或 answer 搭配，不與 smartphone 構成定義關係。",
+          "(C) blanket：意為「毛毯」，屬於寢具用品，與學習英語無關。",
+          "(D) step：意為「步驟；一步」，常用於 step one / step two 表示動作順序。"
+        ],
+        phonetics: "It is a useful tool for learning. /ɪt ɪz ə ˈjusfəl tul fɔr ˈlɝnɪŋ/（連讀：It_is_a /ɪt ɪz ə/）"
+      },
+      {
+        id: 10,
+        dimension: "字彙",
+        category: "字彙｜相關字彙與反義詞辨析",
+        stem: "Please ______ these cute photos to our class website so everyone can see them.",
+        options: ["upload", "download", "wait", "choose"],
+        answerIndex: 0,
+        translation: "請把這些可愛的照片上傳到我們班級的網站，這樣每個人都能看到。",
+        corePoint: "本題測驗動詞 upload（上傳）與相關字彙 download（下載）的區辨。題幹提及「放到網站上讓大家看（to our class website）」，應為 upload。",
+        grammar: "「upload + 物品 + to + 網站/平台」為固定用法，意為「將某物上傳至……」。",
+        distractors: [
+          "(B) download：意為「下載」，方向是從網站存到個人裝置（download ... from ...），與介系詞 to 方向相反。",
+          "(C) wait：為不及物動詞，表示「等待」時須加介系詞 for，且語意不合。",
+          "(D) choose：意為「選擇」，後方不接 to + 網站表示發布動作。"
+        ],
+        phonetics: "Please upload these photos to our website. /pliz ʌpˈlod ðiz ˈfotoz tu aʊr ˈwɛbˌsaɪt/（連讀：Please_upload /pliz ʌpˈlod/）"
+      },
+      {
+        id: 11,
+        dimension: "文法",
+        category: "文法｜介系詞後接人稱代名詞受格",
+        stem: "A: Can we go to the movies with Charlotte this Sunday?\nB: That's fine with ______. I like her very much.",
+        options: ["I", "my", "me", "mine"],
+        answerIndex: 2,
+        translation: "A：這個星期天我們可以和 Charlotte 去看電影嗎？\nB：我沒問題。我非常喜歡她。",
+        corePoint: "本題測驗固定句型「That's OK / fine with + 受格」（對某人來說沒問題），介系詞 with 後方接人稱代名詞時必須使用受格 me。",
+        grammar: "英文中所有介系詞（如 with, for, to, behind, beside）後方若接人稱代名詞，一律使用受格（me, you, him, her, us, them）。",
+        distractors: [
+          "(A) I：為主格，僅能放在句首當主詞使用，不可放在介系詞後。",
+          "(B) my：為所有格，後方必須接名詞（如 my idea），不可單獨使用。",
+          "(D) mine：為所有格代名詞（= my + 名詞），不符合「對我來說沒問題」的句型結構。"
+        ],
+        phonetics: "That's fine with me. /ðæts faɪn wɪð mi/"
+      },
+      {
+        id: 12,
+        dimension: "字彙",
+        category: "字彙｜反義形容詞辨析",
+        stem: "The kids are sleeping in the bedroom now. Please be ______ and don't make any noise.",
+        options: ["quiet", "noisy", "hard", "expensive"],
+        answerIndex: 0,
+        translation: "孩子們現在正在臥室裡睡覺。請保持安靜，不要製造任何噪音。",
+        corePoint: "本題測驗形容詞 quiet（安靜的）與相關反義字 noisy（嘈雜的；吵鬧的）。孩子在睡覺且不要製造噪音，故須保持安靜（quiet）。",
+        grammar: "祈使句「Please be + 形容詞」用於勸告或請求他人保持某種狀態（如 Please be quiet.）。",
+        distractors: [
+          "(B) noisy：意為「嘈雜的；吵鬧的」，與前句孩子在睡覺的語境完全相反。",
+          "(C) hard：意為「硬的；困難的」，不能用來勸告他人不要發出聲音。",
+          "(D) expensive：意為「昂貴的」，用來形容物品價格，不可形容人的行為。"
+        ],
+        phonetics: "Please be quiet! /pliz bi ˈkwaɪət/"
+      },
+      {
+        id: 13,
+        dimension: "語意邏輯",
+        category: "語意邏輯｜方位介系詞 between 用法",
+        stem: "Look at the picture. The small coffee table is ______ the sofa and the TV.",
+        options: ["in front", "next", "between", "around"],
+        answerIndex: 2,
+        translation: "看這張圖片。那張小咖啡桌在沙發和電視的中間。",
+        corePoint: "本題測驗「between A and B」（在 A 和 B 中間）的固定結構。題幹後方出現兩個名詞並以 and 連接（the sofa and the TV），故選 between。",
+        grammar: "between 用於表示「兩者之間」，標準句型為「between + 名詞 A + and + 名詞 B」。",
+        distractors: [
+          "(A) in front：缺少介系詞 of，單獨使用 in front 無法直接接受詞。",
+          "(B) next：缺少介系詞 to，單獨使用 next 不可直接接名詞片語。",
+          "(D) around：意為「圍繞」，後方不搭配 A and B 的對稱結構。"
+        ],
+        phonetics: "It is between the sofa and the TV. /ɪt ɪz bɪˈtwin ðə ˈsofə ænd ðə ˈtiˈvi/（連讀：sofa_and /ˈsofə ænd/）"
+      },
+      {
+        id: 14,
+        dimension: "字彙",
+        category: "字彙｜複合名詞與複數變化",
+        stem: "There are two big ______ in our new house, so our family can eat dinner together comfortably.",
+        options: ["dining room", "dining rooms", "dinings room", "dinings rooms"],
+        answerIndex: 1,
+        translation: "我們的新房子裡有兩間大飯廳，所以我們全家人可以舒適地一起吃晚餐。",
+        corePoint: "本題測驗由兩個字所構成的複合名詞（dining room）之複數變化規則，以及「吃晚餐」的對應場所。",
+        grammar: "由兩字或兩字以上構成的複合名詞，若要形成複數，通常將「最後一個字」改為複數即可，因此 dining room 的複數為 dining rooms。",
+        distractors: [
+          "(A) dining room：為單數形式，與前面的數量詞 two（兩個）及 be 動詞 are 不一致。",
+          "(C) dinings room：誤將第一個字 dining 加上 s，違反複合名詞複數變化原則。",
+          "(D) dinings rooms：前後兩字皆加 s，為常見的文法錯誤。"
+        ],
+        phonetics: "There are two big dining rooms. /ðɛr ɑr tu bɪɡ ˈdaɪnɪŋ rumz/（連讀：There_are /ðɛr ɑr/）"
+      },
+      {
+        id: 15,
+        dimension: "字彙",
+        category: "字彙｜名詞與形容詞搭配",
+        stem: "Don't ask the little boy this math ______. It is too difficult for him.",
+        options: ["question", "house", "ice", "world"],
+        answerIndex: 0,
+        translation: "別問這個小男孩這道數學問題。這對他來說太難了。",
+        corePoint: "本題測驗自修例句重現：「Don't ask the kids this math question. It's very difficult.」常與動詞 ask / answer 搭配的名詞為 question。",
+        grammar: "ask + 人 + 物（問某人某事）為雙賓動詞結構，this math question 為直接受詞。",
+        distractors: [
+          "(B) house：意為「房子」，無法與 ask（詢問）或 math（數學）搭配。",
+          "(C) ice：意為「冰」，與數學難題毫無關聯。",
+          "(D) world：意為「世界」，不符合句意。"
+        ],
+        phonetics: "Don't ask the boy this math question. /dont æsk ðə bɔɪ ðɪs mæθ ˈkwɛstʃən/"
+      },
+      {
+        id: 16,
+        dimension: "文法",
+        category: "文法｜複合名詞 step 與複數用法",
+        stem: "Step one, open the box. ______ two, take out the tool. Step three, please stand three ______ from the machine.",
+        options: ["Step; step", "Steps; steps", "Step; steps", "Steps; step"],
+        answerIndex: 2,
+        translation: "步驟一，打開箱子。步驟二，拿出工具。步驟三，請站在離機器三步遠的地方。",
+        corePoint: "本題測驗 step 的兩種用法：(1) 表示順序「步驟二」時用單數名詞 Step two；(2) 表示距離「三步」時，受數量詞 three 修飾須用複數 steps。",
+        grammar: "「名詞 + 基數（Step one / two / three）」專指特定編號的步驟，名詞用單數；「基數 + 複數名詞（three steps）」表示數量，須加 s。",
+        distractors: [
+          "(A) Step; step：第二格前方有數量詞 three，名詞未加 s 形成文法錯誤。",
+          "(B) Steps; steps：第一格表示「步驟二」專有名稱，不應加 s。",
+          "(D) Steps; step：兩格單複數完全顛倒。"
+        ],
+        phonetics: "Please stand three steps from the machine. /pliz stænd θri stɛps frʌm ðə məˈʃin/"
+      },
+      {
+        id: 17,
+        dimension: "字彙",
+        category: "字彙｜介系詞片語 near 與 close to",
+        stem: "My house is ______ the park, so I walk there with my dog every morning.",
+        options: ["near", "close", "between", "in front"],
+        answerIndex: 0,
+        translation: "我家在公園附近，所以我每天早上都和我的狗走路去那裡。",
+        corePoint: "本題測驗介系詞 near（在……附近）的用法。自修明確指出 near 本身即為介系詞，可直接接受詞（the park），意思等於 close to。",
+        grammar: "「be 動詞 + near + 地點」表示「在……附近」。若使用 close，則必須加上介系詞 to（close to the park）。",
+        distractors: [
+          "(B) close：作「靠近」解時，後方必須加介系詞 to 才能接名詞 the park。",
+          "(C) between：必須接兩個地點（A and B），此處只有一個地點 the park。",
+          "(D) in front：缺少介系詞 of，無法直接連接 the park。"
+        ],
+        phonetics: "My house is near the park. /maɪ haʊs ɪz nɪr ðə pɑrk/（連讀：house_is /haʊs ɪz/）"
+      },
+      {
+        id: 18,
+        dimension: "細節理解",
+        category: "細節理解｜文本資訊與字義辨析",
+        stem: "According to the reading, why did people call cellphones \"大哥大\" in the early 1990s?",
+        options: [
+          "Because they were very cheap and small.",
+          "Because they were expensive and very large.",
+          "Because everyone had one for learning.",
+          "Because they had touch screens and GPS."
+        ],
+        answerIndex: 1,
+        translation: "根據閱讀資料，為什麼人們在 1990 年代初期稱行動電話為「大哥大」？",
+        corePoint: "本題測驗知識+閱讀文本的細節理解。資料明確記載：「1990 年代中期以前，它的價格昂貴，只有極少部分的有錢人才買得起，而且體積龐大，因此又有『大哥大』的俗稱。」",
+        grammar: "Why 疑問句以 Because 帶領原因子句回答，時態配合過去時間（in the early 1990s）使用過去式 were。",
+        distractors: [
+          "(A) 價格便宜且體積小：與事實完全相反，當時價格昂貴且體積龐大。",
+          "(C) 每個人都有一支用來學習：當時只有極少數有錢人買得起，現今的智慧型手機才是學習工具。",
+          "(D) 擁有觸控螢幕與 GPS：這是現代智慧型手機（smartphone）的功能，非早期行動電話。"
+        ],
+        phonetics: "Because they were expensive and very large. /bɪˈkɔz ðe wɝ ɪkˈspɛnsɪv ænd ˈvɛri lɑrdʒ/（連讀：were_expensive /wɝ ɪkˈspɛnsɪv/）"
+      },
+      {
+        id: 19,
+        dimension: "語意邏輯",
+        category: "語意邏輯｜對話情境與慣用語",
+        stem: "A: Look! The black box is behind the door, not under the desk.\nB: ______. Let's go get it.",
+        options: ["I see", "Wait a second", "No idea", "Out of style"],
+        answerIndex: 0,
+        translation: "A：你看！那個黑箱子在門後面，不在書桌底下。\nB：我了解了。我們去拿吧。",
+        corePoint: "本題測驗自修字彙表中的慣用句「I see.」（我了解了。），用於理解對方說明的事實或位置後之回應。",
+        grammar: "I see. 為完整簡單句，see 在此作「明白；理解」解，非「看見」之意。",
+        distractors: [
+          "(B) Wait a second：意為「等一下」，與後句立刻行動（Let's go get it）語氣不連貫。",
+          "(C) No idea：意為「不知道」，用於回答別人詢問，而非得知位置後的回應。",
+          "(D) Out of style：意為「過時的」，完全不符合找尋箱子的對話情境。"
+        ],
+        phonetics: "I see. Let's go get it. /aɪ si lɛts ɡo ɡɛt ɪt/（連讀：get_it /ɡɛt ɪt/）"
+      },
+      {
+        id: 20,
+        dimension: "細節理解",
+        category: "細節理解｜室內設計與方位推理",
+        stem: "In Jenny's bedroom, the bed is next to the window. The desk is in front of the window, and the chair is between the desk and the bed. Where is the chair?",
+        options: [
+          "It is behind the window.",
+          "It is between the desk and the bed.",
+          "It is inside the box.",
+          "It is far from the bedroom."
+        ],
+        answerIndex: 1,
+        translation: "在 Jenny 的臥室裡，床在窗戶旁邊。書桌在窗戶前面，而椅子在書桌和床的中間。請問椅子在哪裡？",
+        corePoint: "本題測驗 Where 問句與方位介系詞的細節定位。題幹已明確陳述「the chair is between the desk and the bed」，直接對應選項 (B)。",
+        grammar: "Where is + 單數名詞？回答時用代名詞 It 代替 the chair，搭配「is + 介系詞片語」說明位置。",
+        distractors: [
+          "(A) 在窗戶後面：書桌在窗戶前面，椅子在書桌與床之間，並不在窗戶後面。",
+          "(C) 在箱子裡面：題幹完全未提及箱子（box）。",
+          "(D) 離臥室很遠：椅子本身就在 Jenny 的臥室（In Jenny's bedroom）裡面。"
+        ],
+        phonetics: "It is between the desk and the bed. /ɪt ɪz bɪˈtwin ðə dɛsk ænd ðə bɛd/（連讀：It_is /ɪt ɪz/；desk_and /dɛsk ænd/）"
+      }
+      // 題庫後半段貼在此處。
+    ];
+
+    // =========================================================================
+    // 系統狀態與變數初始化
+    // =========================================================================
+    let activeQuestions = [];
+    let userAnswers = {}; // key: question.id, value: selectedOptionText
+    let isSubmitted = false;
+    let totalSeconds = 50 * 60;
+    let remainingSeconds = 50 * 60;
+    let timerInterval = null;
+    let isPaused = false;
+    let startTimeStamp = Date.now();
+    let radarChartInstance = null;
+
+    // 隱藏入口計數器
+    let titleClickCount = 0;
+    let verifyClickCount = 0;
+
+    // 初始化測驗
+    function initExam(shuffleMode = false) {
+      isSubmitted = false;
+      userAnswers = {};
+      startTimeStamp = Date.now();
+      document.getElementById("submitBtn").disabled = false;
+      document.getElementById("reportCard").classList.remove("active");
+
+      // 深拷貝題庫
+      activeQuestions = JSON.parse(JSON.stringify(rawQuestionBank));
+
+      if (shuffleMode) {
+        // 洗牌題目順序
+        for (let i = activeQuestions.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [activeQuestions[i], activeQuestions[j]] = [activeQuestions[j], activeQuestions[i]];
+        }
+        // 洗牌每題的四個選項並更新正確答案索引
+        activeQuestions.forEach(q => {
+          const correctText = q.options[q.answerIndex];
+          for (let i = q.options.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [q.options[i], q.options[j]] = [q.options[j], q.options[i]];
+          }
+          q.answerIndex = q.options.indexOf(correctText);
+        });
+      }
+
+      renderNavGrid();
+      renderQuestions();
+      updateProgressStatus();
+      startTimer();
+    }
+
+    // 渲染左側題號快速導覽
+    function renderNavGrid() {
+      const navGrid = document.getElementById("navGrid");
+      navGrid.innerHTML = "";
+      activeQuestions.forEach((q, idx) => {
+        const btn = document.createElement("button");
+        btn.className = "nav-btn";
+        btn.id = `nav-btn-${q.id}`;
+        btn.textContent = idx + 1;
+        btn.onclick = () => {
+          const target = document.getElementById(`q-card-${q.id}`);
+          if (target) {
+            target.scrollIntoView({ behavior: "smooth", block: "center" });
+          }
+        };
+        navGrid.appendChild(btn);
+      });
+    }
+
+    // 渲染右側試題卡片
+    function renderQuestions() {
+      const container = document.getElementById("questionsContainer");
+      container.innerHTML = "";
+      const labels = ["(A)", "(B)", "(C)", "(D)"];
+
+      activeQuestions.forEach((q, idx) => {
+        const card = document.createElement("div");
+        card.className = "question-card";
+        card.id = `q-card-${q.id}`;
+
+        let optionsHtml = "";
+        q.options.forEach((optText, optIdx) => {
+          optionsHtml += `
+            <div class="option-item" id="opt-${q.id}-${optIdx}" onclick="selectOption(${q.id}, ${optIdx})">
+              <span class="opt-radio"></span>
+              <span><strong>${labels[optIdx]}</strong> ${optText}</span>
+            </div>
+          `;
+        });
+
+        const distractorsHtml = q.distractors.map(d => `<li>${d}</li>`).join("");
+
+        card.innerHTML = `
+          <div class="q-header">
+            <span class="q-num">第 ${idx + 1} 題</span>
+            <span class="q-badge">${q.category}</span>
+          </div>
+          <div class="q-stem">${q.stem}</div>
+          <div class="options-grid">${optionsHtml}</div>
+          <div class="explanation-box" id="exp-${q.id}">
+            <div class="exp-top-bar">
+              <span class="exp-ans-pill">正確答案：${labels[q.answerIndex]} ${q.options[q.answerIndex]}</span>
+              <span class="exp-cat-pill">考點歸類：${q.category}</span>
+            </div>
+            <div class="exp-block">
+              <p><strong>【測驗卷原題目】</strong>${q.stem.replace(/\n/g, " / ")}</p>
+              <p style="margin-top:4px;"><strong>【繁體中文翻譯】</strong>${q.translation.replace(/\n/g, " / ")}</p>
+            </div>
+            <div class="exp-block">
+              <p><strong>【核心考點說明】</strong>${q.corePoint}</p>
+              <p style="margin-top:4px;"><strong>【文法】</strong>${q.grammar}</p>
+            </div>
+            <div class="exp-block distractors">
+              <p><strong>【干擾項、誘答剖析】</strong></p>
+              <ul style="padding-left: 18px; margin-top: 4px;">${distractorsHtml}</ul>
+            </div>
+            <div class="exp-block phonetics">
+              <p><strong>【音標】</strong>${q.phonetics}</p>
+            </div>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    // 選擇選項
+    function selectOption(qId, optIdx) {
+      if (isSubmitted) return;
+      userAnswers[qId] = optIdx;
+
+      const q = activeQuestions.find(item => item.id === qId);
+      q.options.forEach((_, idx) => {
+        const el = document.getElementById(`opt-${qId}-${idx}`);
+        if (idx === optIdx) {
+          el.classList.add("selected");
+        } else {
+          el.classList.remove("selected");
+        }
+      });
+
+      const navBtn = document.getElementById(`nav-btn-${qId}`);
+      if (navBtn) navBtn.classList.add("answered");
+
+      updateProgressStatus();
+    }
+
+    function updateProgressStatus() {
+      const answeredCount = Object.keys(userAnswers).length;
+      document.getElementById("progressStatus").textContent = `已作答：${answeredCount} / ${activeQuestions.length}`;
+    }
+
+    // 計時器功能
+    function startTimer() {
+      clearInterval(timerInterval);
+      isPaused = false;
+      document.getElementById("pauseBtn").textContent = "暫停";
+      updateTimerDisplay();
+
+      timerInterval = setInterval(() => {
+        if (!isPaused && !isSubmitted) {
+          if (remainingSeconds > 0) {
+            remainingSeconds--;
+            updateTimerDisplay();
+          } else {
+            clearInterval(timerInterval);
+            alert("測驗時間到！系統將自動為您提交試卷。");
+            submitExam();
+          }
+        }
+      }, 1000);
+    }
+
+    function updateTimerDisplay() {
+      const mins = Math.floor(remainingSeconds / 60);
+      const secs = remainingSeconds % 60;
+      document.getElementById("timerDisplay").textContent =
+        `${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
+    }
+
+    function setTimer() {
+      if (isSubmitted) return;
+      let val = parseInt(document.getElementById("timeInput").value, 10);
+      if (isNaN(val) || val < 0) val = 0;
+      if (val > 240) val = 240;
+      document.getElementById("timeInput").value = val;
+      totalSeconds = val * 60;
+      remainingSeconds = totalSeconds;
+      updateTimerDisplay();
+    }
+
+    function togglePause() {
+      if (isSubmitted) return;
+      isPaused = !isPaused;
+      document.getElementById("pauseBtn").textContent = isPaused ? "繼續" : "暫停";
+    }
+
+    // 提交試卷與批改
+    function submitExam() {
+      if (isSubmitted) return;
+      isSubmitted = true;
+      clearInterval(timerInterval);
+      document.getElementById("submitBtn").disabled = true;
+
+      let correctCount = 0;
+      let wrongList = [];
+      const dimStats = {
+        "字彙": { correct: 0, total: 0 },
+        "文法": { correct: 0, total: 0 },
+        "語意邏輯": { correct: 0, total: 0 },
+        "細節理解": { correct: 0, total: 0 }
+      };
+
+      const labels = ["(A)", "(B)", "(C)", "(D)"];
+
+      activeQuestions.forEach((q, idx) => {
+        const userChoice = userAnswers[q.id];
+        const isCorrect = userChoice === q.answerIndex;
+
+        if (!dimStats[q.dimension]) {
+          dimStats[q.dimension] = { correct: 0, total: 0 };
+        }
+        dimStats[q.dimension].total++;
+
+        const card = document.getElementById(`q-card-${q.id}`);
+        const navBtn = document.getElementById(`nav-btn-${q.id}`);
+        const expBox = document.getElementById(`exp-${q.id}`);
+
+        // 鎖定選項並標示對錯
+        q.options.forEach((_, optIdx) => {
+          const optEl = document.getElementById(`opt-${q.id}-${optIdx}`);
+          optEl.classList.add("locked");
+          if (optIdx === q.answerIndex) {
+            optEl.classList.add("opt-correct");
+          } else if (optIdx === userChoice && !isCorrect) {
+            optEl.classList.add("opt-wrong");
+          }
+        });
+
+        expBox.classList.add("visible");
+        navBtn.classList.remove("answered");
+
+        if (isCorrect) {
+          correctCount++;
+          dimStats[q.dimension].correct++;
+          card.classList.add("is-correct");
+          navBtn.classList.add("correct");
+        } else {
+          card.classList.add("is-wrong");
+          navBtn.classList.add("wrong");
+          const chosenLabel = userChoice !== undefined ? `${labels[userChoice]} ${q.options[userChoice]}` : "未作答";
+          wrongList.push(`第${idx + 1}題(選:${chosenLabel}/正:${labels[q.answerIndex]})`);
+        }
+      });
+
+      const totalCount = activeQuestions.length;
+      const wrongCount = totalCount - correctCount;
+      const score = Math.round((correctCount / totalCount) * 100);
+
+      // 更新左側成績面板
+      document.getElementById("totalScoreDisplay").textContent = score;
+      document.getElementById("correctCountDisplay").textContent =
+        `答對 ${correctCount} / ${totalCount} 題 (答錯 ${wrongCount} 題)`;
+      document.getElementById("filterWrongBtn").textContent = `只看錯題 (${wrongCount})`;
+
+      const dimListEl = document.getElementById("dimensionStatsList");
+      dimListEl.innerHTML = "";
+      const radarLabels = [];
+      const radarData = [];
+      let dimSummaryStrArr = [];
+
+      Object.keys(dimStats).forEach(dim => {
+        const s = dimStats[dim];
+        const rate = s.total > 0 ? Math.round((s.correct / s.total) * 100) : 0;
+        radarLabels.push(dim);
+        radarData.push(rate);
+        dimSummaryStrArr.push(`${dim}:${rate}%`);
+
+        const row = document.createElement("div");
+        row.className = "dim-row";
+        row.innerHTML = `
+          <span>${dim} (${s.correct}/${s.total})</span>
+          <span style="font-weight:700; color:${rate >= 80 ? '#34d399' : rate >= 60 ? '#fbbf24' : '#f87171'};">${rate}%</span>
+        `;
+        dimListEl.appendChild(row);
+      });
+
+      document.getElementById("reportCard").classList.add("active");
+      renderRadarChart(radarLabels, radarData);
+
+      // 計算耗時與時間
+      const elapsedSec = Math.max(1, Math.floor((Date.now() - startTimeStamp) / 1000));
+      const spentStr = `${Math.floor(elapsedSec / 60)}分${elapsedSec % 60}秒`;
+      const nowStr = new Date().toLocaleString("zh-TW", { hour12: false });
+      const courseName = document.getElementById("courseTitle").textContent;
+
+      const record = {
+        course: courseName,
+        time: nowStr,
+        spent: spentStr,
+        score: score,
+        dims: dimSummaryStrArr.join(" | "),
+        wrongs: wrongList.length > 0 ? wrongList.join(", ") : "無錯題 (全對)"
+      };
+
+      saveHistoryToLocalStorage(record);
+      sendTelegramReport(record);
+    }
+
+    // 繪製 Chart.js 雷達圖
+    function renderRadarChart(labels, data) {
+      const ctx = document.getElementById("radarChart").getContext("2d");
+      if (radarChartInstance) {
+        radarChartInstance.destroy();
+      }
+      radarChartInstance = new Chart(ctx, {
+        type: "radar",
+        data: {
+          labels: labels,
+          datasets: [{
+            label: "各維度得分率 (%)",
+            data: data,
+            backgroundColor: "rgba(59, 130, 246, 0.25)",
+            borderColor: "#60a5fa",
+            pointBackgroundColor: "#34d399",
+            pointBorderColor: "#fff",
+            borderWidth: 2
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            r: {
+              min: 0,
+              max: 100,
+              ticks: {
+                stepSize: 20,
+                color: "#94a3b8",
+                backdropColor: "transparent",
+                font: { size: 10 }
+              },
+              grid: { color: "rgba(148, 163, 184, 0.2)" },
+              angleLines: { color: "rgba(148, 163, 184, 0.2)" },
+              pointLabels: {
+                color: "#f1f5f9",
+                font: { size: 12, weight: "bold" }
+              }
+            }
+          },
+          plugins: {
+            legend: { display: false }
+          }
+        }
+      });
+    }
+
+    // 錯題篩選器
+    function filterQuestions(mode) {
+      const allBtn = document.getElementById("filterAllBtn");
+      const wrongBtn = document.getElementById("filterWrongBtn");
+
+      if (mode === "all") {
+        allBtn.style.borderColor = "var(--accent-blue)";
+        allBtn.style.color = "#60a5fa";
+        wrongBtn.style.borderColor = "var(--border-color)";
+        wrongBtn.style.color = "var(--text-primary)";
+      } else {
+        wrongBtn.style.borderColor = "var(--accent-red)";
+        wrongBtn.style.color = "#fca5a5";
+        allBtn.style.borderColor = "var(--border-color)";
+        allBtn.style.color = "var(--text-primary)";
+      }
+
+      activeQuestions.forEach(q => {
+        const card = document.getElementById(`q-card-${q.id}`);
+        if (mode === "wrong" && card.classList.contains("is-correct")) {
+          card.classList.add("hidden-by-filter");
+        } else {
+          card.classList.remove("hidden-by-filter");
+        }
+      });
+    }
+
+    // 一鍵複製錯題筆記 (Markdown 格式)
+    function copyWrongNotesMarkdown() {
+      const labels = ["(A)", "(B)", "(C)", "(D)"];
+      let md = `# 📘 ${document.getElementById("courseTitle").textContent} — 錯題複習筆記\n`;
+      md += `- 測驗時間：${new Date().toLocaleString("zh-TW", { hour12: false })}\n`;
+      md += `- 測驗得分：${document.getElementById("totalScoreDisplay").textContent} 分\n\n---\n\n`;
+
+      let wrongCount = 0;
+      activeQuestions.forEach((q, idx) => {
+        const userChoice = userAnswers[q.id];
+        if (userChoice !== q.answerIndex) {
+          wrongCount++;
+          const chosenText = userChoice !== undefined ? `${labels[userChoice]} ${q.options[userChoice]}` : "未作答";
+          md += `### 第 ${idx + 1} 題 [${q.category}]\n`;
+          md += `- **題目**：${q.stem.replace(/\n/g, " / ")}\n`;
+          md += `- **翻譯**：${q.translation.replace(/\n/g, " / ")}\n`;
+          md += `- **你的作答**：${chosenText} ❌\n`;
+          md += `- **正確答案**：${labels[q.answerIndex]} ${q.options[q.answerIndex]} ✅\n`;
+          md += `- **核心考點**：${q.corePoint}\n`;
+          md += `- **文法說明**：${q.grammar}\n`;
+          md += `- **誘答剖析**：\n${q.distractors.map(d => `  - ${d}`).join("\n")}\n`;
+          md += `- **音標連讀**：${q.phonetics}\n\n`;
+        }
+      });
+
+      if (wrongCount === 0) {
+        md += `🎉 太棒了！本次測驗全數答對，無任何錯題。\n`;
+      }
+
+      navigator.clipboard.writeText(md).then(() => {
+        alert("已將錯題筆記（Markdown 格式）複製到剪貼簿，可直接貼至 Notion 或 Word！");
+      }).catch(() => {
+        alert("複製失敗，請確認瀏覽器剪貼簿權限。");
+      });
+    }
+
+    // 重新測驗 (洗牌)
+    function resetAndShuffle() {
+      const inputMins = parseInt(document.getElementById("timeInput").value, 10) || 50;
+      remainingSeconds = inputMins * 60;
+      initExam(true);
+      document.getElementById("rightPane").scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    // =========================================================================
+    // LocalStorage 家長監控紀錄儲存與讀取
+    // =========================================================================
+    const STORAGE_KEY = "junior_high_english_l3_records";
+
+    function saveHistoryToLocalStorage(record) {
+      try {
+        const existing = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+        existing.unshift(record);
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(existing));
+      } catch (e) {
+        console.warn("LocalStorage 寫入失敗", e);
+      }
+    }
+
+    function openParentMonitor() {
+      const pwd = prompt("請輸入家長監控密碼：");
+      if (pwd === "1234") {
+        const records = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+        const bodyEl = document.getElementById("parentHistoryBody");
+        if (records.length === 0) {
+          bodyEl.innerHTML = `<p style="color: var(--text-secondary);">目前尚無任何交卷歷史紀錄。</p>`;
+        } else {
+          let rows = records.map((r, i) => `
+            <tr>
+              <td>${records.length - i}</td>
+              <td>${r.time}</td>
+              <td>${r.spent}</td>
+              <td style="font-weight:700; color:${r.score >= 80 ? '#34d399' : '#f87171'};">${r.score} 分</td>
+              <td>${r.dims}</td>
+              <td style="font-size:12px;">${r.wrongs}</td>
+            </tr>
+          `).join("");
+
+          bodyEl.innerHTML = `
+            <p style="margin-bottom:10px; color:#93c5fd;">共計交卷 <strong>${records.length}</strong> 次（最新紀錄排在最上方）：</p>
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>次數</th>
+                  <th>交卷時間</th>
+                  <th>作答耗時</th>
+                  <th>得分</th>
+                  <th>各維度統計</th>
+                  <th>錯題清單</th>
+                </tr>
+              </thead>
+              <tbody>${rows}</tbody>
+            </table>
+          `;
+        }
+        document.getElementById("parentModal").classList.add("open");
+      } else if (pwd !== null) {
+        alert("密碼錯誤，無法存取家長監控中心。");
+      }
+    }
+
+    // 隱藏入口 1：連點標題 5 下
+    document.getElementById("courseTitle").addEventListener("click", () => {
+      titleClickCount++;
+      if (titleClickCount >= 5) {
+        titleClickCount = 0;
+        openParentMonitor();
+      }
+    });
+
+    // 隱藏入口 2：快捷鍵 Ctrl + Shift + P
+    document.addEventListener("keydown", (e) => {
+      if (e.ctrlKey && e.shiftKey && (e.key === "P" || e.key === "p")) {
+        e.preventDefault();
+        openParentMonitor();
+      }
+    });
+
+    // 隱藏入口 3：左上角 ❖ 連點 5 下開啟題庫驗證總表
+    document.getElementById("secretVerifyBtn").addEventListener("click", () => {
+      verifyClickCount++;
+      if (verifyClickCount >= 5) {
+        verifyClickCount = 0;
+        openVerificationModal();
+      }
+    });
+
+    function openVerificationModal() {
+      const labels = ["(A)", "(B)", "(C)", "(D)"];
+      const dist = { "(A)": 0, "(B)": 0, "(C)": 0, "(D)": 0 };
+      activeQuestions.forEach(q => {
+        dist[labels[q.answerIndex]]++;
+      });
+
+      const rows = activeQuestions.map((q, idx) => `
+        <tr>
+          <td>${idx + 1}</td>
+          <td>${q.category}</td>
+          <td>${q.stem.replace(/\n/g, " ")}</td>
+          <td style="font-weight:700; color:#34d399;">${labels[q.answerIndex]} ${q.options[q.answerIndex]}</td>
+        </tr>
+      `).join("");
+
+      document.getElementById("verifyBody").innerHTML = `
+        <div style="margin-bottom:12px; padding:10px; background:#0b1120; border-radius:6px; border:1px solid var(--border-color);">
+          <strong>目前題庫答案分布統計：</strong>
+          (A)：${dist["(A)"]} 題 ｜ (B)：${dist["(B)"]} 題 ｜ (C)：${dist["(C)"]} 題 ｜ (D)：${dist["(D)"]} 題
+        </div>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>題號</th>
+              <th>考點歸類</th>
+              <th>題幹摘要</th>
+              <th>標準答案</th>
+            </tr>
+          </thead>
+          <tbody>${rows}</tbody>
+        </table>
+      `;
+      document.getElementById("verifyModal").classList.add("open");
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).classList.remove("open");
+    }
+
+    // =========================================================================
+    // Telegram API 通知機制
+    // =========================================================================
+    function sendTelegramReport(record) {
+      const token = "8062206068:AAEqHmvEEMDFOYtggE4FxpHFoAWUGHX7Aq4";
+      const MY_CHAT_ID = "8049812362";
+
+      const msgText =
+        `📊 【${record.course} 交卷通知】\n` +
+        `01. 課程名稱：${record.course}\n` +
+        `02. 交卷時間：${record.time}\n` +
+        `03. 作答耗時：${record.spent}\n` +
+        `04. 測驗得分：${record.score} 分\n` +
+        `05. 各維度統計：${record.dims}\n` +
+        `06. 錯題清單：${record.wrongs}`;
+
+      const postToChat = (chatId) => {
+        return fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ chat_id: chatId, text: msgText })
+        })
+          .then(res => res.json())
+          .then(data => {
+            if (!data.ok) console.warn("Telegram 發送失敗：", data.description);
+          })
+          .catch(err => console.warn("Telegram 網路請求錯誤：", err));
+      };
+
+      if (MY_CHAT_ID) {
+        postToChat(MY_CHAT_ID);
+      }
+    }
+
+    // 啟動初始化
+    window.addEventListener("DOMContentLoaded", () => {
+      initExam(false);
+    });
+  </script>
+</body>
+</html>
