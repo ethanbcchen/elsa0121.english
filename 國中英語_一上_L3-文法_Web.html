@@ -1,0 +1,2324 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>國中七年級英語（Lesson 3）全真模擬測驗（50題）</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      --bg-body: #0f172a;
+      --bg-panel: #1e293b;
+      --bg-card: #162032;
+      --bg-card-hover: #1e2b45;
+      --bg-input: #0b1120;
+      --border-color: #334155;
+      --text-primary: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --accent-blue: #3b82f6;
+      --accent-blue-hover: #2563eb;
+      --accent-green: #10b981;
+      --accent-green-bg: rgba(16, 185, 129, 0.15);
+      --accent-red: #ef4444;
+      --accent-red-bg: rgba(239, 68, 68, 0.15);
+      --accent-amber: #f59e0b;
+      --font-sans: "Noto Sans TC", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--bg-body);
+      color: var(--text-primary);
+      line-height: 1.6;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    /* Top Header Bar */
+    header {
+      background-color: #0b1120;
+      border-bottom: 1px solid var(--border-color);
+      padding: 10px 20px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      z-index: 20;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .secret-verify-btn {
+      cursor: pointer;
+      color: var(--text-muted);
+      font-size: 16px;
+      user-select: none;
+      padding: 2px 6px;
+      border-radius: 4px;
+      transition: color 0.2s;
+    }
+    .secret-verify-btn:hover {
+      color: var(--text-secondary);
+    }
+
+    .timer-box {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--bg-panel);
+      border: 1px solid var(--border-color);
+      padding: 5px 12px;
+      border-radius: 6px;
+      font-weight: 700;
+      color: var(--accent-amber);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .timer-input {
+      width: 52px;
+      background: var(--bg-input);
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
+      padding: 3px 6px;
+      border-radius: 4px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .btn {
+      padding: 6px 14px;
+      border-radius: 6px;
+      border: 1px solid transparent;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      color: #fff;
+      background: var(--bg-panel);
+      border-color: var(--border-color);
+    }
+    .btn:hover {
+      background: #334155;
+    }
+    .btn-primary {
+      background: var(--accent-blue);
+      border-color: var(--accent-blue);
+    }
+    .btn-primary:hover {
+      background: var(--accent-blue-hover);
+    }
+    .btn-success {
+      background: var(--accent-green);
+      border-color: var(--accent-green);
+      color: #064e3b;
+    }
+    .btn-success:hover {
+      filter: brightness(1.1);
+    }
+    .btn-warning {
+      background: #d97706;
+      border-color: #d97706;
+    }
+    .btn-warning:hover {
+      background: #b45309;
+    }
+
+    .status-badge {
+      background: rgba(59, 130, 246, 0.15);
+      border: 1px solid var(--accent-blue);
+      color: #93c5fd;
+      padding: 5px 12px;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .header-right {
+      text-align: right;
+    }
+    .header-right h1 {
+      font-size: 18px;
+      font-weight: 700;
+      color: #f8fafc;
+      cursor: pointer;
+      user-select: none;
+    }
+    .header-right p {
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    /* Main Split Layout */
+    .main-container {
+      display: flex;
+      flex: 1;
+      overflow: hidden;
+    }
+
+    .left-pane, .right-pane {
+      width: 50%;
+      height: 100%;
+      overflow-y: auto;
+      padding: 20px;
+    }
+
+    .left-pane {
+      border-right: 1px solid var(--border-color);
+      background-color: #0f172a;
+    }
+
+    .right-pane {
+      background-color: #0b1120;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--bg-input);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #334155;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #475569;
+    }
+
+    /* Panels in Left Pane */
+    .panel-box {
+      background: var(--bg-panel);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 16px;
+      margin-bottom: 18px;
+    }
+
+    .panel-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #93c5fd;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 8px;
+    }
+
+    /* Navigation Grid */
+    .nav-grid {
+      display: grid;
+      grid-template-columns: repeat(10, 1fr);
+      gap: 6px;
+    }
+
+    .nav-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: var(--text-secondary);
+      padding: 6px 0;
+      border-radius: 5px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.15s;
+    }
+    .nav-btn:hover {
+      border-color: var(--accent-blue);
+      color: #fff;
+    }
+    .nav-btn.answered {
+      background: var(--accent-blue);
+      border-color: var(--accent-blue);
+      color: #fff;
+    }
+    .nav-btn.correct {
+      background: var(--accent-green);
+      border-color: var(--accent-green);
+      color: #022c22;
+    }
+    .nav-btn.wrong {
+      background: var(--accent-red);
+      border-color: var(--accent-red);
+      color: #fff;
+    }
+
+    /* Result Dashboard */
+    #resultDashboard {
+      display: none;
+    }
+    .score-summary-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 16px;
+      align-items: center;
+    }
+    .score-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 16px;
+      text-align: center;
+    }
+    .score-big {
+      font-size: 48px;
+      font-weight: 800;
+      color: #60a5fa;
+      line-height: 1.1;
+      margin: 8px 0;
+    }
+    .dim-list {
+      margin-top: 12px;
+      text-align: left;
+      font-size: 13px;
+    }
+    .dim-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 4px 0;
+      border-bottom: 1px dashed #334155;
+    }
+    .chart-wrapper {
+      position: relative;
+      height: 220px;
+      width: 100%;
+    }
+    .result-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    /* Reading & Cloze Passages */
+    .passage-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 14px;
+      margin-bottom: 14px;
+    }
+    .passage-tag {
+      display: inline-block;
+      background: rgba(59, 130, 246, 0.2);
+      color: #93c5fd;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 4px;
+      margin-bottom: 6px;
+    }
+    .passage-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #f8fafc;
+      margin-bottom: 8px;
+    }
+    .passage-text {
+      font-size: 14.5px;
+      color: #cbd5e1;
+      line-height: 1.75;
+    }
+
+    /* Right Pane Question Cards */
+    .section-banner {
+      background: linear-gradient(90deg, rgba(59,130,246,0.2), transparent);
+      border-left: 4px solid var(--accent-blue);
+      padding: 10px 14px;
+      margin: 18px 0 12px 0;
+      border-radius: 0 6px 6px 0;
+    }
+    .section-banner:first-child {
+      margin-top: 0;
+    }
+    .section-banner h2 {
+      font-size: 16px;
+      color: #93c5fd;
+    }
+    .section-banner p {
+      font-size: 12.5px;
+      color: var(--text-secondary);
+    }
+
+    .question-card {
+      background: var(--bg-panel);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 16px;
+      margin-bottom: 16px;
+      transition: border-color 0.2s;
+    }
+    .question-card.is-wrong {
+      border-color: var(--accent-red);
+    }
+    .question-card.is-correct {
+      border-color: var(--accent-green);
+    }
+
+    .q-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .q-num {
+      font-size: 15px;
+      font-weight: 700;
+      color: #60a5fa;
+    }
+    .q-category {
+      font-size: 12px;
+      background: var(--bg-input);
+      color: var(--text-secondary);
+      padding: 3px 8px;
+      border-radius: 4px;
+      border: 1px solid var(--border-color);
+    }
+
+    .q-stem {
+      font-size: 15.5px;
+      color: #f8fafc;
+      margin-bottom: 14px;
+      line-height: 1.65;
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .option-label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      padding: 10px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14.5px;
+      transition: all 0.15s;
+    }
+    .option-label:hover {
+      background: var(--bg-card-hover);
+      border-color: #64748b;
+    }
+    .option-label input[type="radio"] {
+      accent-color: var(--accent-blue);
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
+    }
+    .option-label.selected {
+      background: rgba(59, 130, 246, 0.2);
+      border-color: var(--accent-blue);
+      color: #fff;
+    }
+    .option-label.correct-opt {
+      background: var(--accent-green-bg) !important;
+      border-color: var(--accent-green) !important;
+      color: #6ee7b7 !important;
+      font-weight: 700;
+    }
+    .option-label.wrong-opt {
+      background: var(--accent-red-bg) !important;
+      border-color: var(--accent-red) !important;
+      color: #fca5a5 !important;
+      text-decoration: line-through;
+    }
+
+    /* Explanation Box */
+    .explanation-box {
+      display: none;
+      margin-top: 14px;
+      background: #0b1120;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      padding: 14px;
+      font-size: 13.5px;
+      color: #cbd5e1;
+      line-height: 1.7;
+    }
+    .explanation-box.visible {
+      display: block;
+    }
+    .exp-top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #1e293b;
+    }
+    .exp-ans-badge {
+      background: var(--accent-green-bg);
+      border: 1px solid var(--accent-green);
+      color: #6ee7b7;
+      padding: 3px 10px;
+      border-radius: 4px;
+      font-weight: 700;
+    }
+    .exp-block {
+      margin-bottom: 8px;
+    }
+    .exp-label {
+      color: #93c5fd;
+      font-weight: 700;
+    }
+    .exp-distractors {
+      padding-left: 16px;
+      margin-top: 4px;
+    }
+    .exp-distractors li {
+      margin-bottom: 3px;
+    }
+
+    /* Modals */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .modal-overlay.active {
+      display: flex;
+    }
+    .modal-content {
+      background: var(--bg-panel);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      width: 100%;
+      max-width: 850px;
+      max-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .modal-header {
+      padding: 14px 20px;
+      background: #0b1120;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .modal-body {
+      padding: 20px;
+      overflow-y: auto;
+    }
+    table.data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13.5px;
+    }
+    table.data-table th, table.data-table td {
+      border: 1px solid var(--border-color);
+      padding: 8px 10px;
+      text-align: left;
+    }
+    table.data-table th {
+      background: #0b1120;
+      color: #93c5fd;
+    }
+
+    @media (max-width: 900px) {
+      body {
+        height: auto;
+        overflow: auto;
+      }
+      .main-container {
+        flex-direction: column;
+        overflow: visible;
+      }
+      .left-pane, .right-pane {
+        width: 100%;
+        height: auto;
+        border-right: none;
+      }
+      .options-grid {
+        grid-template-columns: 1fr;
+      }
+      .score-summary-grid {
+        grid-template-columns: 1fr;
+      }
+      .nav-grid {
+        grid-template-columns: repeat(5, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Control Bar -->
+  <header>
+    <div class="header-left">
+      <span id="secretVerifyBtn" class="secret-verify-btn" title="系統標記">❖</span>
+      <div class="timer-box">
+        <span>⏱ 倒數：</span>
+        <span id="timerDisplay">50:00</span>
+      </div>
+      <input type="number" id="customMinutes" class="timer-input" value="50" min="0" max="240" />
+      <span>分</span>
+      <button class="btn" id="setTimerBtn">設定</button>
+      <button class="btn" id="pauseTimerBtn">暫停</button>
+      <div class="status-badge" id="progressBadge">已作答：0 / 20</div>
+      <button class="btn btn-success" id="submitBtn">提交試卷</button>
+      <button class="btn btn-warning" id="shuffleBtn">重新測驗 (洗牌)</button>
+    </div>
+    <div class="header-right">
+      <h1 id="examTitle">國中七年級英語（Lesson 3）全真模擬測驗（50題）</h1>
+      <p>翰林/康軒/南一課綱核心：祈使句、Where問答、代名詞受格、年齡與空間介系詞</p>
+    </div>
+  </header>
+
+  <!-- Split Pane Container -->
+  <div class="main-container">
+    <!-- Left Pane: Result Dashboard, Navigation, Passages -->
+    <div class="left-pane">
+      <!-- Result & Weakness Dashboard (Hidden until submitted) -->
+      <div class="panel-box" id="resultDashboard">
+        <div class="panel-title">
+          <span>📊 測驗成績與弱點診斷分析報告</span>
+        </div>
+        <div class="score-summary-grid">
+          <div class="score-card">
+            <div style="font-size: 13px; color: var(--text-secondary);">總得分（滿分 100 分）</div>
+            <div class="score-big" id="totalScoreDisplay">0</div>
+            <div style="font-size: 13px; color: #cbd5e1;" id="correctCountDisplay">答對 0 / 20 題</div>
+            <div class="dim-list" id="dimensionStatsList"></div>
+          </div>
+          <div class="chart-wrapper">
+            <canvas id="radarChart"></canvas>
+          </div>
+        </div>
+        <div class="result-actions">
+          <button class="btn btn-primary" id="filterAllBtn">顯示全部題目</button>
+          <button class="btn" id="filterWrongBtn">只看錯題 (0)</button>
+          <button class="btn" id="copyMarkdownBtn" style="background:#0284c7; border-color:#0284c7;">📋 一鍵複製錯題筆記 (Markdown)</button>
+        </div>
+      </div>
+
+      <!-- Quick Navigation Grid -->
+      <div class="panel-box">
+        <div class="panel-title">
+          <span>🧭 題號快速導覽（點擊跳轉至該題）</span>
+          <span style="font-size: 12px; font-weight: 400; color: var(--text-secondary);">藍：已答 ｜ 綠：答對 ｜ 紅：答錯</span>
+        </div>
+        <div class="nav-grid" id="navGrid"></div>
+      </div>
+
+      <!-- Reading & Cloze Reference Area -->
+      <div class="panel-box">
+        <div class="panel-title">
+          <span>📖 綜合克漏字與閱讀理解文本區（第 31～50 題對照）</span>
+        </div>
+        <p style="font-size: 12.5px; color: var(--text-secondary); margin-bottom: 12px;">
+          作答第 31～50 題時，請對照下方課文延伸短文與閱讀題組。電腦版可獨立捲動左側文本與右側題目。
+        </p>
+
+        <div class="passage-card">
+          <span class="passage-tag">克漏字題組 (一) ｜ 對應第 31～35 題</span>
+          <div class="passage-title">Room Makeover with an AI Tool（居家空間大改造）</div>
+          <div class="passage-text">
+            Bella is at Scott's home. Scott's house is nice and quiet, but it is not really his style. Bella gives him a good idea: "What about a makeover? Let's get some ideas from RoomGPT." Scott asks, "What's that?" Bella tells him that it is a cool AI tool on her smartphone. First, <b><u>(31)</u></b> a photo of the room. Second, choose a room type, like the living room, the bathroom, or the bedroom. Next, choose a room theme. Scott looks <b><u>(32)</u></b> the themes on the phone and thinks they are really cool! However, Bella says, "Wait. A big makeover is expensive. Are you OK <b><u>(33)</u></b> that?" Scott laughs and says, "Ha! That's a good question." In fact, they can just paint the wall or put a new blanket <b><u>(34)</u></b> the bed. Let's <b><u>(35)</u></b> sad about the money and start small!
+          </div>
+        </div>
+
+        <div class="passage-card">
+          <span class="passage-tag">閱讀理解題組 (一) ｜ 對應第 41～45 題</span>
+          <div class="passage-title">Unique Homes and Beds Around the World（世界各地的獨特房屋與床鋪）</div>
+          <div class="passage-text">
+            Is your bed big and soft, or is it small and hard? In fact, beds around the world are very different. Let's meet two new friends and see their special homes.<br><br>
+            Jenny is an eleven-year-old girl. Her house is an igloo. It is made of ice and snow. Inside the igloo, there are no separate walls between rooms. This single space is her bedroom, kitchen, living room, and dining room, too. Where is her bed? It is beside the kitchen. It is a big and hard ice bed, covered with warm animal skins.<br><br>
+            Jason is twenty-one years old. His house is inside a quiet cave. Where is his bed? It is next to the wooden table. It is a small and old blanket on the cave floor. Both Jenny and Jason love their special beds very much!
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Pane: Questions Container -->
+    <div class="right-pane" id="questionsContainer"></div>
+  </div>
+
+  <!-- Hidden Parent Monitor Modal (Ctrl+Shift+P or 5x title click) -->
+  <div class="modal-overlay" id="parentModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>🔒 家長監控中心 — 歷次測驗歷史紀錄表</h3>
+        <button class="btn" onclick="closeModal('parentModal')">關閉</button>
+      </div>
+      <div class="modal-body">
+        <div style="margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center;">
+          <span style="font-size: 13px; color: var(--text-secondary);">以下紀錄儲存於本機瀏覽器，可檢視孩子每次交卷時間、作答耗時與得分明細。</span>
+          <button class="btn" style="background: var(--accent-red); border-color: var(--accent-red);" onclick="clearHistory()">清除紀錄</button>
+        </div>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>交卷時間</th>
+              <th>作答耗時</th>
+              <th>總得分</th>
+              <th>各維度得分率</th>
+              <th>錯題題號</th>
+            </tr>
+          </thead>
+          <tbody id="historyTableBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hidden Question Bank Verification Modal (5x ❖ click) -->
+  <div class="modal-overlay" id="verifyModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>❖ 題庫結構與標準答案總表（命題檢核用）</h3>
+        <button class="btn" onclick="closeModal('verifyModal')">關閉</button>
+      </div>
+      <div class="modal-body">
+        <div id="answerDistSummary" style="margin-bottom: 12px; font-size: 14px; color: #6ee7b7; font-weight: 700;"></div>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>題號</th>
+              <th>考點維度</th>
+              <th>細項分類</th>
+              <th>標準答案</th>
+              <th>題幹摘要</th>
+            </tr>
+          </thead>
+          <tbody id="verifyTableBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // =========================================================================
+    // 1. 結構化題庫資料 (目前置入第 1～20 題，保留擴充介面)
+    // =========================================================================
+    const rawQuestionBank = [
+      {
+        id: 1,
+        section: "一、核心詞彙與片語運用 (Vocabulary & Idioms)",
+        dimension: "字彙",
+        subCategory: "字彙｜生活場所名詞",
+        stem: "My mom is cooking dinner for our family in the ________ right now.",
+        options: ["kitchen", "bathroom", "bedroom", "igloo"],
+        answer: 0,
+        translation: "我媽媽現在正在廚房裡為我們全家人煮晚餐。",
+        corePoint: "根據句意 cooking dinner（煮晚餐），應選擇「廚房（kitchen）」。",
+        grammar: "S + be + V-ing + O + in the + N (地點名詞).",
+        distractors: [
+          "(B) bathroom：浴室，為洗澡或盥洗的場所，不適合煮晚餐。",
+          "(C) bedroom：臥室，為睡覺休息的房間，與煮飯語意不符。",
+          "(D) igloo：冰屋，為愛斯基摩人居住的圓頂冰屋，非一般烹飪場所名稱。"
+        ],
+        phonetics: "kitchen /ˈkɪtʃən/；cooking dinner /ˈkʊkɪŋ ˈdɪnɚ/（注意 -ing 鼻音 /ŋ/ 與後面子音自然銜接）。"
+      },
+      {
+        id: 2,
+        section: "一、核心詞彙與片語運用 (Vocabulary & Idioms)",
+        dimension: "字彙",
+        subCategory: "片語｜固定介系詞搭配",
+        stem: "Welcome to my house, Bella! Please ________ and have a cup of hot tea.",
+        options: ["look at", "come in", "get up", "turn off"],
+        answer: 1,
+        translation: "歡迎來到我家，Bella！請進來喝杯熱茶吧。",
+        corePoint: "課文對話核心片語「Please come in.（請進。）」，由動詞 come 與副詞 in 組成，邀請對方進入屋內。",
+        grammar: "祈使句：Please + 原形動詞片語 (come in) + and + 原形動詞片語.",
+        distractors: [
+          "(A) look at：看……，為及物動詞片語，後方必須接受詞，語意亦不合。",
+          "(C) get up：起床，與歡迎客人進屋的情境不符。",
+          "(D) turn off：關掉（電源/水龍頭），後方需接名詞受詞。"
+        ],
+        phonetics: "come in /kʌm ɪn/（連讀為 /kʌˈmɪn/）；cup of /kʌp əv/（連讀為 /kʌpəv/）。"
+      },
+      {
+        id: 3,
+        section: "一、核心詞彙與片語運用 (Vocabulary & Idioms)",
+        dimension: "字彙",
+        subCategory: "字彙｜形容詞語意辨析",
+        stem: "My grandfather's bed is very ________, so I don't like to sleep on it. I like a soft one.",
+        options: ["quiet", "nice", "hard", "cool"],
+        answer: 2,
+        translation: "我爺爺的床非常硬，所以我不喜歡睡在上面。我喜歡軟的床。",
+        corePoint: "後半句提到「I like a soft one.（我喜歡軟的床）」，透過前後對比可知爺爺的床是「硬的（hard）」。",
+        grammar: "S + be + adv. (very) + adj. (hard), so + S + don't + V.",
+        distractors: [
+          "(A) quiet：安靜的，通常形容環境或人，無法與 soft（柔軟的）形成對比。",
+          "(B) nice：美好的、友善的，與後半句不喜歡睡在上面的語意矛盾。",
+          "(D) cool：涼爽的、酷的，非描述床墊軟硬度的形容詞。"
+        ],
+        phonetics: "hard /hɑrd/；sleep on it /slip ɑn ɪt/（連讀為 /sliˈpɑnɪt/）。"
+      },
+      {
+        id: 4,
+        section: "一、核心詞彙與片語運用 (Vocabulary & Idioms)",
+        dimension: "字彙",
+        subCategory: "片語｜轉折副詞片語",
+        stem: "A: Is this your new smartphone? B: No, it isn't. ________, it is my sister's phone.",
+        options: ["In fact", "For example", "At first", "Over there"],
+        answer: 0,
+        translation: "A：這是你的新智慧型手機嗎？ B：不，不是。事實上，它是我姊姊的手機。",
+        corePoint: "課文重點片語「In fact（事實上；實際上）」，置於句首並以逗點隔開，用來補充說明真實情況。",
+        grammar: "In fact, + S + be + N (主詞補語).",
+        distractors: [
+          "(B) For example：例如，用於舉出具體事例，不符合否定後澄清事實的語境。",
+          "(C) At first：起初、一開始，暗示後來有所改變，與句意不符。",
+          "(D) Over there：在那邊，為地方副詞片語，通常置於句尾且不加逗點。"
+        ],
+        phonetics: "In fact /ɪn fækt/；it is /ɪt ɪz/（美式口語常連讀為 /ɪˈtɪz/）。"
+      },
+      {
+        id: 5,
+        section: "一、核心詞彙與片語運用 (Vocabulary & Idioms)",
+        dimension: "字彙",
+        subCategory: "字彙｜科技與生活名詞",
+        stem: "RoomGPT is a great AI ________. You can use it to get cool ideas for your bedroom.",
+        options: ["blanket", "tool", "cave", "nurse"],
+        answer: 1,
+        translation: "RoomGPT 是一個很棒的人工智慧工具。你可以用它來為你的臥室獲得很酷的點子。",
+        corePoint: "根據課文「It is an AI tool.（它是一個 AI 工具）」，tool 意為「工具」。",
+        grammar: "S + be + art. (an) + N (AI) + N (tool).",
+        distractors: [
+          "(A) blanket：毛毯，為寢具用品，並非人工智慧軟體。",
+          "(C) cave：洞穴，為自然地形或居住空間，與 AI 無關。",
+          "(D) nurse：護理師，為職業人物名詞，與主詞 RoomGPT 不符。"
+        ],
+        phonetics: "AI tool /ˌeɪ ˈaɪ tul/；use it /juz ɪt/（連讀為 /ˈjuzɪt/）。"
+      },
+      {
+        id: 6,
+        section: "一、核心詞彙與片語運用 (Vocabulary & Idioms)",
+        dimension: "字彙",
+        subCategory: "片語｜動詞固定搭配",
+        stem: "Our living room is too old. Let's ________ it a makeover before Chinese New Year.",
+        options: ["thank", "wait", "give", "wash"],
+        answer: 2,
+        translation: "我們的客廳太舊了。我們在農曆新年前為它做個大改造吧。",
+        corePoint: "課文核心搭配詞「give + 地方/人 + a makeover」，意為「為某地／某人做改造」。",
+        grammar: "Let's + 原形動詞 (give) + 間接受詞 (it) + 直接受詞 (a makeover).",
+        distractors: [
+          "(A) thank：感謝，常用句型為 thank + 人 + for + 事。",
+          "(B) wait：等待，為不及物動詞，若要接受詞須加介系詞 for。",
+          "(D) wash：清洗，語意為「洗」，無法與 a makeover 搭配。"
+        ],
+        phonetics: "give it a makeover /ɡɪv ɪt ə ˈmekˌovɚ/（連讀為 /ˈɡɪvɪtə ˈmekˌovɚ/）。"
+      },
+      {
+        id: 7,
+        section: "一、核心詞彙與片語運用 (Vocabulary & Idioms)",
+        dimension: "字彙",
+        subCategory: "字彙｜形容詞與名詞搭配",
+        stem: "This dress is too ________ for me. I don't have enough money to buy it.",
+        options: ["expensive", "soft", "different", "special"],
+        answer: 0,
+        translation: "這件洋裝對我來說太昂貴了。我沒有足夠的錢買它。",
+        corePoint: "由後句「I don't have enough money（我沒有足夠的錢）」推知，洋裝價格「昂貴（expensive）」。",
+        grammar: "S + be + too + adj. (expensive) + for + O.",
+        distractors: [
+          "(B) soft：柔軟的，與沒錢購買無因果關係。",
+          "(C) different：不同的，無法說明為何買不起。",
+          "(D) special：特別的，單純「特別」並不直接等於沒有足夠的錢購買。"
+        ],
+        phonetics: "expensive /ɪkˈspɛnsɪv/；buy it /baɪ ɪt/（連讀為 /ˈbaɪɪt/）。"
+      },
+      {
+        id: 8,
+        section: "一、核心詞彙與片語運用 (Vocabulary & Idioms)",
+        dimension: "字彙",
+        subCategory: "片語｜look 的介系詞搭配",
+        stem: "________ the cute tiger in the picture! Its eyes are big and blue.",
+        options: ["Look for", "Look at", "Look like", "Look up"],
+        answer: 1,
+        translation: "看看圖片裡那隻可愛的老虎！牠的眼睛又大又藍。",
+        corePoint: "「look at + 受詞」表示「看……（注視某人或某物）」，為本課對話與練習重點。",
+        grammar: "肯定祈使句：原形動詞片語 (Look at) + O (the cute tiger).",
+        distractors: [
+          "(A) Look for：尋找，表示東西不見而在找尋，與圖片就在眼前的語境不符。",
+          "(C) Look like：看起來像，主詞通常是事物，不適合用於祈使句叫人看老虎。",
+          "(D) Look up：查閱（字典），受詞通常為單字或資訊。"
+        ],
+        phonetics: "Look at /lʊk æt/（連讀為 /ˈlʊkæt/）；eyes are /aɪz ɑr/（連讀為 /ˈaɪzɑr/）。"
+      },
+      {
+        id: 9,
+        section: "一、核心詞彙與片語運用 (Vocabulary & Idioms)",
+        dimension: "字彙",
+        subCategory: "字彙｜動詞語意辨析",
+        stem: "Please ________ your photo to the website first, and then you can see the new room design.",
+        options: ["choose", "upload", "draw", "eat"],
+        answer: 1,
+        translation: "請先將你的照片上傳到網站，然後你就可以看到新的房間設計。",
+        corePoint: "課文「Step one, upload a photo.（第一步，上傳一張照片。）」，upload 意為「上傳」。",
+        grammar: "Please + 原形動詞 (upload) + O (your photo) + to + N.",
+        distractors: [
+          "(A) choose：選擇，課文中是先 upload a photo，第二步才是 choose a room type。",
+          "(C) draw：畫畫，與數位照片傳送至網站的動作不符。",
+          "(D) eat：吃，與語意完全無關。"
+        ],
+        phonetics: "upload /ˈʌpˌlod/；upload a photo /ˈʌpˌlod ə ˈfoto/（連讀為 /ˈʌpˌlodə ˈfoto/）。"
+      },
+      {
+        id: 10,
+        section: "一、核心詞彙與片語運用 (Vocabulary & Idioms)",
+        dimension: "字彙",
+        subCategory: "字彙｜日常用品名詞",
+        stem: "It's cold at night. Please put this warm ________ on your bed.",
+        options: ["theme", "blanket", "style", "dining room"],
+        answer: 1,
+        translation: "晚上很冷。請把這條溫暖的毛毯放在你的床上。",
+        corePoint: "天氣冷且放在床上的保暖物品為「毛毯（blanket）」，出自課文 Jason 的床描述。",
+        grammar: "Please + V (put) + O (this warm blanket) + 地方介系詞片語 (on your bed).",
+        distractors: [
+          "(A) theme：主題（如房間設計主題），無法蓋在床上保暖。",
+          "(C) style：風格，為抽象名詞，不符合具體物品語意。",
+          "(D) dining room：飯廳，為房間名稱，不能放在床上。"
+        ],
+        phonetics: "blanket /ˈblæŋkɪt/；put this /pʊt ðɪs/（/t/ 與 /ð/ 相鄰產生不完全爆破）。"
+      },
+      {
+        id: 11,
+        section: "一、核心詞彙與片語運用 (Vocabulary & Idioms)",
+        dimension: "字彙",
+        subCategory: "片語｜空間介系詞片語",
+        stem: "In our classroom, Tom sits ________ Amy and John. Amy is on his left, and John is on his right.",
+        options: ["between", "in front of", "under", "inside"],
+        answer: 0,
+        translation: "在我們教室裡，Tom 坐在 Amy 和 John 中間。Amy 在他左邊，而 John 在他右邊。",
+        corePoint: "「between A and B」表示「在 A 和 B 兩者之間」，由後句左右兩側的人名可確認。",
+        grammar: "S + V + between + N1 + and + N2.",
+        distractors: [
+          "(B) in front of：在……前面，不與 and 連用來表示夾在兩人中間。",
+          "(C) under：在……下面，空間關係完全錯誤。",
+          "(D) inside：在……裡面，人無法坐在另外兩個人「裡面」。"
+        ],
+        phonetics: "between /bɪˈtwin/；Amy and John /ˈemi ənd dʒɑn/。"
+      },
+      {
+        id: 12,
+        section: "一、核心詞彙與片語運用 (Vocabulary & Idioms)",
+        dimension: "字彙",
+        subCategory: "片語｜世界範圍片語",
+        stem: "People ________ the world have different houses, food, and languages.",
+        options: ["next to", "around", "behind", "under"],
+        answer: 1,
+        translation: "世界各地的人們有著不同的房屋、食物和語言。",
+        corePoint: "課文核心片語「around the world（世界各地）」，介系詞片語置於名詞 people 後方作後位修飾。",
+        grammar: "N (People) + 介系詞片語 (around the world) + V (have) + O.",
+        distractors: [
+          "(A) next to：在……旁邊，無法與 the world 構成「全世界」之意。",
+          "(C) behind：在……後面，語意不合。",
+          "(D) under：在……下面，沒有 under the world 這種搭配用法。"
+        ],
+        phonetics: "around the world /əˈraʊnd ðə wɝld/（around 尾音 /d/ 遇子音 /ð/ 弱化）。"
+      },
+      {
+        id: 13,
+        section: "一、核心詞彙與片語運用 (Vocabulary & Idioms)",
+        dimension: "語意邏輯",
+        subCategory: "對話｜口語回應功能",
+        stem: "A: Why is our math teacher in the dining room? B: ________ I want to know, too.",
+        options: ["Please come in.", "That's a good question.", "Welcome to my home.", "Oh, I see."],
+        answer: 1,
+        translation: "A：為什麼我們的數學老師在飯廳裡？ B：那是個好問題。我也想知道。",
+        corePoint: "課文對話重點「That's a good question.（那是個好問題。）」，口語上常用來表示「我也不知道答案」。",
+        grammar: "指示代名詞主詞 (That) + be (is) + 名詞補語 (a good question).",
+        distractors: [
+          "(A) Please come in.：請進，用於邀請別人進屋。",
+          "(C) Welcome to my home.：歡迎來到我家，用於主人迎接客人。",
+          "(D) Oh, I see.：喔，我了解了，表示聽懂對方的解釋，與後句「我也想知道」矛盾。"
+        ],
+        phonetics: "That's a good question /ðæts ə ɡʊd ˈkwɛstʃən/（That's 與 a 連讀為 /ðætsə/）。"
+      },
+      {
+        id: 14,
+        section: "一、核心詞彙與片語運用 (Vocabulary & Idioms)",
+        dimension: "語意邏輯",
+        subCategory: "對話｜提議與徵求意見",
+        stem: "A: Our bedroom is boring. B: Well, ________ painting the wall blue?",
+        options: ["what's that", "what about", "where is", "how old"],
+        answer: 1,
+        translation: "A：我們的臥室好無聊。 B：嗯，把牆壁漆成藍色怎麼樣？",
+        corePoint: "課文句型「What about...?（……怎麼樣？）」，用於提出建議或徵求意見，介系詞 about 後接動名詞 V-ing。",
+        grammar: "What about + V-ing (painting) + O?",
+        distractors: [
+          "(A) what's that：那是什麼，用於詢問未知的事物名稱。",
+          "(C) where is：……在哪裡，用於詢問地點位置。",
+          "(D) how old：幾歲，用於詢問年齡。"
+        ],
+        phonetics: "what about /wʌt əˈbaʊt/（美式口語常連讀並閃音化為 /wʌɾəˈbaʊt/）。"
+      },
+      {
+        id: 15,
+        section: "一、核心詞彙與片語運用 (Vocabulary & Idioms)",
+        dimension: "字彙",
+        subCategory: "字彙｜動物與生物名詞",
+        stem: "Look at that ________! It is very big and has a long nose.",
+        options: ["elephant", "pet", "nurse", "cook"],
+        answer: 0,
+        translation: "看看那隻大象！牠非常大而且有一個長鼻子。",
+        corePoint: "自修練習題出現之單字 elephant（大象），由「很大且有長鼻子」可判斷。",
+        grammar: "Look at + that + 單數可數名詞 (elephant)!",
+        distractors: [
+          "(B) pet：寵物，大象通常不是一般家庭寵物，且特徵不如 elephant 明確。",
+          "(C) nurse：護理師，為人類職業，不會用 It 指稱且無長鼻子。",
+          "(D) cook：廚師，為人類職業，語意不合。"
+        ],
+        phonetics: "elephant /ˈɛləfənt/；that elephant /ðæt ˈɛləfənt/（連讀為 /ðæˈtɛləfənt/）。"
+      },
+      {
+        id: 16,
+        section: "二、文法與句型結構 (Grammar & Sentence Patterns)",
+        dimension: "文法",
+        subCategory: "文法｜複合形容詞與冠詞 a/an",
+        stem: "Jenny is ________ girl, and her brother is ________.",
+        options: [
+          "an eleven-year-old; five years old",
+          "a eleven-year-old; five-year-old",
+          "an eleven-years-old; five years old",
+          "eleven-year-old; five year old"
+        ],
+        answer: 0,
+        translation: "Jenny 是個十一歲的女孩，而她的哥哥五歲。",
+        corePoint: "名詞前用連字號複合形容詞「a/an + 數字-year-old + N」，eleven 首音為母音 /ɪ/ 故用 an，且 year 不可加 s；be 動詞後直接表年齡用「數字 + years old」。",
+        grammar: "S + be + an + 數字-year-old + 單數名詞；S + be + 數字 + years old.",
+        distractors: [
+          "(B) eleven 開頭發母音 /ɪ/，冠詞不可用 a；第二格後方無名詞，不可用連字號複合形容詞。",
+          "(C) 連字號複合形容詞中的 year 視為形容詞成分，絕對不可加 s 變成 years。",
+          "(D) 單數可數名詞 girl 前缺少冠詞 an；第二格數字 five 大於 1，year 須加 s。"
+        ],
+        phonetics: "an eleven-year-old girl /ən ɪˈlɛvən jɪr old ɡɝl/（an 與 eleven 連讀為 /ənɪˈlɛvən/）。"
+      },
+      {
+        id: 17,
+        section: "二、文法與句型結構 (Grammar & Sentence Patterns)",
+        dimension: "文法",
+        subCategory: "文法｜祈使句與稱呼語標點",
+        stem: "Lily, ________ a good girl and ________ late for school again.",
+        options: [
+          "be; don't be",
+          "do; not be",
+          "is; don't",
+          "be; not"
+        ],
+        answer: 0,
+        translation: "Lily，做個好女孩，而且不要再上學遲到了。",
+        corePoint: "祈使句省略主詞 you，須以「原形動詞」開頭；good girl 為名詞片語，須用 be 動詞原形 be；否定祈使句在原形動詞前加 don't（即 don't be）。",
+        grammar: "人名, + 原形動詞 (be) + N + and + don't + 原形動詞 (be) + adj.",
+        distractors: [
+          "(B) good girl 前缺少動詞 be，不可用助動詞 do；否定祈使句不可直接用 not be，須用 don't be。",
+          "(C) 祈使句不可用現在式動詞 is；late 為形容詞，don't 後方缺少原形動詞 be。",
+          "(D) 第二格缺少助動詞 don't 與原形動詞 be。"
+        ],
+        phonetics: "be a good girl /bi ə ɡʊd ɡɝl/；don't be late /dont bi let/。"
+      },
+      {
+        id: 18,
+        section: "二、文法與句型結構 (Grammar & Sentence Patterns)",
+        dimension: "文法",
+        subCategory: "文法｜人稱代名詞主格、所有格與受格",
+        stem: "________ classroom is right over there. Come with ________, please.",
+        options: [
+          "We; I",
+          "Our; me",
+          "Us; my",
+          "Our; I"
+        ],
+        answer: 1,
+        translation: "我們的教室就在那邊。請跟我來。",
+        corePoint: "第一格後方有名詞 classroom，須填所有格 Our（我們的）；第二格位於介系詞 with 之後，須填受格 me（我）。",
+        grammar: "所有格 (Our) + N (classroom) + be + adv.；V (Come) + prep. (with) + 受格 (me).",
+        distractors: [
+          "(A) We 為代名詞主格，不可直接修飾名詞 classroom；I 為代名詞主格，不可置於介系詞 with 後。",
+          "(C) Us 為受格，不可當所有格修飾名詞；my 為所有格，後方無名詞不可單獨置於介系詞後。",
+          "(D) 第二格介系詞 with 後方須用受格 me，不可用主格 I。"
+        ],
+        phonetics: "Come with me /kʌm wɪð mi/（with 尾音 /ð/ 與 me 雙唇音 /m/ 自然順接）。"
+      },
+      {
+        id: 19,
+        section: "二、文法與句型結構 (Grammar & Sentence Patterns)",
+        dimension: "文法",
+        subCategory: "文法｜Let's 祈使句肯定與否定",
+        stem: "It's raining outside. ________ play in the park. ________ read comic books at home.",
+        options: [
+          "Let's don't; Let's",
+          "Don't let's; Let",
+          "Let's not; Let's",
+          "Not let's; Let's"
+        ],
+        answer: 2,
+        translation: "外面正在下雨。我們不要在公園裡玩吧。我們在家看漫畫書吧。",
+        corePoint: "Let's（= Let us）祈使句的否定形式為「Let's not + 原形動詞」，不可在 Let's 後加 don't；肯定提議為「Let's + 原形動詞」。",
+        grammar: "否定提議：Let's + not + 原形動詞；肯定提議：Let's + 原形動詞.",
+        distractors: [
+          "(A) 國中必考易錯點：Let's 的否定直接加 not（Let's not），不可使用 Let's don't。",
+          "(B) 語序錯誤，且第二格 Let 缺少受格 us（須寫為 Let's）。",
+          "(D) 不可將 Not 置於 Let's 之前。"
+        ],
+        phonetics: "Let's not play /lɛts nɑt ple/；Let's read /lɛts rid/。"
+      },
+      {
+        id: 20,
+        section: "二、文法與句型結構 (Grammar & Sentence Patterns)",
+        dimension: "文法",
+        subCategory: "文法｜Where 問答與單複數一致",
+        stem: "A: ________ your pet dogs? B: ________ in the living room.",
+        options: [
+          "Where is; It is",
+          "Where are; They are",
+          "Where are; It is",
+          "Where is; They are"
+        ],
+        answer: 1,
+        translation: "A：你的寵物狗在哪裡？ B：牠們在客廳裡。",
+        corePoint: "主詞 your pet dogs 為複數名詞，因此疑問句的 be 動詞須用複數 are；回答時用複數代名詞 They 代替 pet dogs，並搭配 are。",
+        grammar: "Where + are + 複數主詞? → They + are + 地方介系詞片語.",
+        distractors: [
+          "(A) dogs 為複數，be 動詞不可用單數 is，且回答不可用單數 It。",
+          "(C) 問句用複數 are，但答句誤用單數 It is，前後人稱數不一致。",
+          "(D) 問句誤用單數 is 搭配複數名詞 dogs。"
+        ],
+        phonetics: "Where are /wɛr ɑr/（連讀為 /wɛˈrɑr/）；They are /ðe ɑr/。"
+      },
+      {
+        id: 21,
+        section: "二、文法與句型結構 (Grammar & Sentence Patterns)",
+        dimension: "文法",
+        subCategory: "文法｜對等連接詞 and 與 or",
+        stem: "Is the sofa big ________ small? Is it ________ old, or is it new?",
+        options: [
+          "or; old",
+          "and; or",
+          "but; and",
+          "or; and"
+        ],
+        answer: 0,
+        translation: "這張沙發是大還是小？它是舊的，還是新的？",
+        corePoint: "本課閱讀解析重點：問句中出現「擇一（還是）」的語意時使用對等連接詞 or；第二格形容詞 old 與 new 為互斥狀態，亦用 or 連接。",
+        grammar: "Be + S + adj.1 + or + adj.2? / Be + S + adj.1, or + be + S + adj.2?",
+        distractors: [
+          "(B) 兩處皆為「大或小」、「舊或新」的擇一問句，用 and 無法表達「還是」的選擇關係。",
+          "(C) but 表轉折，不適用於疑問句中連接兩個互斥的形容詞作選擇。",
+          "(D) 第二格 old 與 new 為二選一關係，應使用 or 而非 and。"
+        ],
+        phonetics: "big or small /bɪɡ ɔr smɔl/；old or new /old ɔr nu/。"
+      },
+      {
+        id: 22,
+        section: "二、文法與句型結構 (Grammar & Sentence Patterns)",
+        dimension: "文法",
+        subCategory: "文法｜單數指示代名詞與並列表達",
+        stem: "________ is my new room, study, living room, and kitchen, ________.",
+        options: [
+          "This; too",
+          "These; also",
+          "Those; too",
+          "This; either"
+        ],
+        answer: 0,
+        translation: "這也是我的新房間、書房、客廳和廚房。",
+        corePoint: "本課核心句型「This is her bedroom, kitchen, living room, and dining room, too.」：this 指單數近物，雖列舉多個空間但指同一處，be 動詞用單數 is；句尾表示「也」用副詞 too。",
+        grammar: "This + is + 所有格 + N1, N2, N3, and + N4, too.",
+        distractors: [
+          "(B) These 為複數主詞，且 also 通常置於句中動詞前或 be 動詞後，不置於句尾逗點後。",
+          "(C) Those 為複數指示代名詞，與本句單數空間概念及句型結構不符。",
+          "(D) either 用於否定句尾表示「也（不）」，本句為肯定句，應使用 too。"
+        ],
+        phonetics: "This is /ðɪs ɪz/（連讀為 /ðɪˈsɪz/）；living room /ˈlɪvɪŋ rʊm/。"
+      },
+      {
+        id: 23,
+        section: "二、文法與句型結構 (Grammar & Sentence Patterns)",
+        dimension: "文法",
+        subCategory: "文法｜空間介系詞與方位辨析",
+        stem: "A: Where is the cat? B: It is ________ the box and the dog.",
+        options: [
+          "between",
+          "in",
+          "on",
+          "at"
+        ],
+        answer: 0,
+        translation: "A：貓在哪裡？ B：牠在箱子和狗的中間。",
+        corePoint: "「between + A + and + B」表示「在 A 與 B 兩者之間」，為本課 Grammar Focus 重點方位介系詞搭配。",
+        grammar: "S + be + between + N1 + and + N2.",
+        distractors: [
+          "(B) in 表示「在……裡面」，無法直接搭配 and 連接兩個物體表示中間。",
+          "(C) on 表示「在……上面」，不與 and 連用表兩者之間。",
+          "(D) at 表示「在……處」，語意與結構皆不符合兩者之間的方位。"
+        ],
+        phonetics: "between the box /bɪˈtwin ðə bɑks/；the dog /ðə dɔɡ/。"
+      },
+      {
+        id: 24,
+        section: "二、文法與句型結構 (Grammar & Sentence Patterns)",
+        dimension: "文法",
+        subCategory: "文法｜祈使句與稱呼語逗點",
+        stem: "________ your book, Ted. ________ talk in class, please.",
+        options: [
+          "Close; Don't",
+          "Closing; Not",
+          "Closes; Doesn't",
+          "To close; Don't"
+        ],
+        answer: 0,
+        translation: "Ted，把你的書合上。請不要在課堂上說話。",
+        corePoint: "肯定祈使句以原形動詞 Close 開頭；否定祈使句在原形動詞前加 Don't，句尾加 please 時前方須加逗點。",
+        grammar: "原形動詞 (Close) + O, + 人名. / Don't + 原形動詞 (talk) + 地方, please.",
+        distractors: [
+          "(B) 祈使句不可直接用 V-ing 開頭；否定祈使句不可只用 Not。",
+          "(C) 祈使句省略主詞 you，動詞不用第三人稱單數變化（Closes / Doesn't）。",
+          "(D) 祈使句開頭不用不定詞 To close。"
+        ],
+        phonetics: "Close your book /kloz jʊr bʊk/；Don't talk /dont tɔk/。"
+      },
+      {
+        id: 25,
+        section: "二、文法與句型結構 (Grammar & Sentence Patterns)",
+        dimension: "文法",
+        subCategory: "文法｜代名詞受格作受詞",
+        stem: "Ms. Cooper is very nice to ________. Please listen to ________ carefully.",
+        options: [
+          "them; her",
+          "they; she",
+          "their; hers",
+          "them; she"
+        ],
+        answer: 0,
+        translation: "Cooper 女士對他們很好。請仔細聽她說話。",
+        corePoint: "本課 Grammar Focus 第 4 點：介系詞（to）後方須使用代名詞「受格」。Ms. Cooper 為女性，故第二格用受格 her。",
+        grammar: "S + be + adj. + to + 受格 (them); 請祈使句 + to + 受格 (her) + adv.",
+        distractors: [
+          "(B) they 與 she 皆為主格，不可直接置於介系詞 to 之後作受詞。",
+          "(C) their 為所有格，hers 為所有格代名詞，皆不符合介系詞後受格的要求。",
+          "(D) 第二格 she 為代名詞主格，不可置於介系詞 to 之後。"
+        ],
+        phonetics: "nice to them /naɪs tə ðɛm/；listen to her /ˈlɪsən tə hɝ/。"
+      },
+      {
+        id: 26,
+        section: "二、文法與句型結構 (Grammar & Sentence Patterns)",
+        dimension: "文法",
+        subCategory: "文法｜Where 問句倒裝與動詞一致",
+        stem: "________ the new books? ________ on the desk next to the chair.",
+        options: [
+          "Where are; They're",
+          "Where is; It's",
+          "Where are; It's",
+          "Where is; They're"
+        ],
+        answer: 0,
+        translation: "新書在哪裡？牠們在椅子旁邊的書桌上。",
+        corePoint: "Where 問句結構為「Where + be + 主詞」，the new books 為複數名詞，be 動詞用 are；答句用複數代名詞 They 代替 books。",
+        grammar: "Where + are + 複數主詞? → They're + 方位介系詞片語.",
+        distractors: [
+          "(B) books 為複數名詞，問句不可用 is，答句也不可用單數 It's。",
+          "(C) 問句用複數 are，但答句誤用單數 It's 指稱複數的書。",
+          "(D) 問句誤用單數 is 搭配複數主詞 the new books。"
+        ],
+        phonetics: "Where are the new books /wɛr ɑr ðə nu bʊks/；next to /nɛkst tə/。"
+      },
+      {
+        id: 27,
+        section: "二、文法與句型結構 (Grammar & Sentence Patterns)",
+        dimension: "文法",
+        subCategory: "文法｜祈使句重組與語序",
+        stem: "Please ________ a room theme and ________ the picture.",
+        options: [
+          "choose; upload",
+          "choosing; uploading",
+          "chooses; uploads",
+          "to choose; to upload"
+        ],
+        answer: 0,
+        translation: "請選擇一個房間主題並上傳這張照片。",
+        corePoint: "祈使句以原形動詞開頭，連接詞 and 前後動詞形式須平行一致，皆使用原形動詞（choose 與 upload）。",
+        grammar: "Please + 原形動詞1 (choose) + O1 + and + 原形動詞2 (upload) + O2.",
+        distractors: [
+          "(B) 祈使句不用動名詞 V-ing 開頭。",
+          "(C) 祈使句省略主詞 you，動詞不加 -s。",
+          "(D) 祈使句開頭不使用不定詞 to + V。"
+        ],
+        phonetics: "choose a room theme /tʃuz ə rʊm θim/；upload the picture /ˈʌpˌlod ðə ˈpɪktʃɚ/。"
+      },
+      {
+        id: 28,
+        section: "二、文法與句型結構 (Grammar & Sentence Patterns)",
+        dimension: "文法",
+        subCategory: "文法｜介系詞片語後位修飾與主詞一致",
+        stem: "The two boys ________ me ________ my classmates. In fact, they are my brothers.",
+        options: [
+          "next to; are",
+          "next to; is",
+          "in; are",
+          "on; is"
+        ],
+        answer: 0,
+        translation: "我旁邊的那兩個男孩是我的同學。事實上，他們是我的哥哥／弟弟。",
+        corePoint: "本課閱讀解析重點：「介系詞片語（next to me）」置於名詞（The two boys）後作後位修飾；句子真正主詞為複數的 The two boys，故 be 動詞用複數 are。",
+        grammar: "複數主詞 (The two boys) + 方位片語 (next to me) + are + 複數名詞.",
+        distractors: [
+          "(B) 主詞 The two boys 為複數，be 動詞不可用單數 is。",
+          "(C) 方位介系詞 in 搭配 me 語意不合，人通常在某人旁邊用 next to。",
+          "(D) 方位介系詞 on 與動詞 is 皆不符合語意與主詞複數一致原則。"
+        ],
+        phonetics: "next to me /nɛkst tə mi/；my brothers /maɪ ˈbrʌðɚz/。"
+      },
+      {
+        id: 29,
+        section: "二、文法與句型結構 (Grammar & Sentence Patterns)",
+        dimension: "文法",
+        subCategory: "文法｜代名詞格位綜合辨析",
+        stem: "________ sister and I like Ms. Smith. She is nice to ________.",
+        options: [
+          "My; us",
+          "Me; we",
+          "My; we",
+          "Mine; us"
+        ],
+        answer: 0,
+        translation: "我姊姊／妹妹和我都很喜歡 Smith 女士。她對我們很好。",
+        corePoint: "出自本課 Grammar Focus 第 4 點練習：第一格修飾名詞 sister，用所有格 My；第二格位於介系詞 to 之後，指包含自己在內的「我們」，用受格 us。",
+        grammar: "所有格 (My) + N (sister) + and + 主格 (I) + V; prep. (to) + 受格 (us).",
+        distractors: [
+          "(B) Me 為受格，不可修飾名詞 sister；we 為主格，不可放在介系詞 to 後。",
+          "(C) 第二格介系詞 to 後方須用受格 us，不可用主格 we。",
+          "(D) Mine 為所有格代名詞，後方不可直接接名詞 sister。"
+        ],
+        phonetics: "nice to us /naɪs tə ʌs/（to 與 us 連讀為 /təʌs/ 或 /tʊʌs/）。"
+      },
+      {
+        id: 30,
+        section: "二、文法與句型結構 (Grammar & Sentence Patterns)",
+        dimension: "文法",
+        subCategory: "文法｜疑問詞與祈使句綜合應用",
+        stem: "A: ________ is your smartphone? B: It is on the table. ________ look at it.",
+        options: [
+          "Where; Let's",
+          "What; Don't",
+          "How; Be",
+          "Who; Please"
+        ],
+        answer: 0,
+        translation: "A：你的智慧型手機在哪裡？ B：它在桌子上。我們來看看它吧。",
+        corePoint: "答句回答地點「on the table」，故問句用 Where 詢問位置；後句提議一起看手機，用「Let's + 原形動詞」。",
+        grammar: "Where + is + 單數主詞? → It is + 地方介系詞片語. Let's + 原形動詞 + O.",
+        distractors: [
+          "(B) What 詢問事物名稱，與答句回答地點不符；Don't 後方需接原形動詞而非 look at。",
+          "(C) How 詢問方式或狀態，不符合對地點的提問；Be 後方不可直接接原形動詞 look。",
+          "(D) Who 詢問人，與主詞 your smartphone（手機）不符。"
+        ],
+        phonetics: "Where is your smartphone /wɛr ɪz jʊr ˈsmɑrtˌfon/；look at it /lʊk æt ɪt/。"
+      },
+      {
+        id: 31,
+        section: "三、綜合克漏字測驗 (Cloze Test)",
+        dimension: "語意邏輯",
+        subCategory: "克漏字｜祈使句與操作步驟語意",
+        stem: "克漏字 (一) 第 31 題：First, ________ a photo of the room.",
+        options: [
+          "upload",
+          "uploads",
+          "uploading",
+          "to upload"
+        ],
+        answer: 0,
+        translation: "首先，上傳一張房間的照片。",
+        corePoint: "對應課文「Step one, upload a photo.」，說明操作步驟的祈使句須以原形動詞 upload 開頭。",
+        grammar: "副詞 (First,) + 原形動詞 (upload) + O (a photo of the room).",
+        distractors: [
+          "(B) 祈使句省略主詞 you，動詞不加 -s。",
+          "(C) 祈使句開頭不使用現在分詞/動名詞 uploading。",
+          "(D) 祈使句開頭不使用不定詞 to upload。"
+        ],
+        phonetics: "First, upload a photo /fɝst ˈʌpˌlod ə ˈfoto/。"
+      },
+      {
+        id: 32,
+        section: "三、綜合克漏字測驗 (Cloze Test)",
+        dimension: "字彙",
+        subCategory: "克漏字｜動詞片語搭配",
+        stem: "克漏字 (一) 第 32 題：Scott looks ________ the themes on the phone and thinks they are really cool!",
+        options: [
+          "at",
+          "in",
+          "on",
+          "to"
+        ],
+        answer: 0,
+        translation: "Scott 看著手機上的主題，覺得牠們真的很酷！",
+        corePoint: "課文句型「look at + 受詞」表示「看……」，Scott 正在觀看手機上的房間主題。",
+        grammar: "S + looks at + O (the themes on the phone).",
+        distractors: [
+          "(B) look in 意為「往裡面看」或「順道拜訪」，不符合看手機主題的搭配。",
+          "(C) look on 意為「旁觀」，與句意不符。",
+          "(D) look to 意為「指望、仰賴」，非「看某物」之意。"
+        ],
+        phonetics: "looks at the themes /lʊks æt ðə θimz/（looks 與 at 連讀為 /ˈlʊksæt/）。"
+      },
+      {
+        id: 33,
+        section: "三、綜合克漏字測驗 (Cloze Test)",
+        dimension: "語意邏輯",
+        subCategory: "克漏字｜對話片語與介系詞搭配",
+        stem: "克漏字 (一) 第 33 題：Wait. A big makeover is expensive. Are you OK ________ that?",
+        options: [
+          "with",
+          "at",
+          "for",
+          "by"
+        ],
+        answer: 0,
+        translation: "等一下。大改造很昂貴。你對那件事沒問題嗎？",
+        corePoint: "對應課文對話「Wait. A big makeover is expensive. Are you OK with that?」，be OK with sth. 表示「對某事沒問題／接受某事」。",
+        grammar: "Be + S + OK with + 代名詞 (that)?",
+        distractors: [
+          "(B) OK at 較常指擅長某事，不與 that 搭配詢問是否接受昂貴的改造。",
+          "(C) 英文口語中詢問「對……是否 OK」固定搭配介系詞 with。",
+          "(D) by 表方式或由……，不符合與 OK 搭配的慣用語法。"
+        ],
+        phonetics: "Are you OK with that /ɑr ju oˈke wɪð ðæt/。"
+      },
+      {
+        id: 34,
+        section: "三、綜合克漏字測驗 (Cloze Test)",
+        dimension: "文法",
+        subCategory: "克漏字｜方位介系詞語意",
+        stem: "克漏字 (一) 第 34 題：In fact, they can just paint the wall or put a new blanket ________ the bed.",
+        options: [
+          "on",
+          "under",
+          "between",
+          "in"
+        ],
+        answer: 0,
+        translation: "事實上，他們可以只是粉刷牆壁，或是在床上放一條新毛毯。",
+        corePoint: "毛毯通常是鋪或放在「床上」，空間方位介系詞用 on（在……上面）。",
+        grammar: "put + O (a new blanket) + 方位介系詞片語 (on the bed).",
+        distractors: [
+          "(B) under 表示「在……下面」，毛毯一般不會放在床底下當作改造布置。",
+          "(C) between 需要連接兩個事物（A and B），此處只有單一對象 the bed。",
+          "(D) in 表示「在……裡面」，床墊或床鋪表面通常用 on。"
+        ],
+        phonetics: "put a new blanket on the bed /pʊt ə nu ˈblæŋkɪt ɑn ðə bɛd/。"
+      },
+      {
+        id: 35,
+        section: "三、綜合克漏字測驗 (Cloze Test)",
+        dimension: "文法",
+        subCategory: "克漏字｜Let's 否定祈使句結構",
+        stem: "克漏字 (一) 第 35 題：Let's ________ sad about the money and start small!",
+        options: [
+          "not be",
+          "don't be",
+          "not",
+          "be not"
+        ],
+        answer: 0,
+        translation: "我們不要為錢感到難過，從小地方開始吧！",
+        corePoint: "Let's 祈使句的否定形式為「Let's not + 原形動詞」；sad 為形容詞，前面須加上 be 動詞原形 be，故為 Let's not be sad。",
+        grammar: "Let's + not + be + adj. (sad) + 介系詞片語 + and + 原形動詞 (start).",
+        distractors: [
+          "(B) Let's 之後不可直接加 don't，正確否定結構為 Let's not。",
+          "(C) sad 為形容詞，缺少 be 動詞原形 be。",
+          "(D) 否定詞 not 應置於 be 動詞之前（not be），不可放在 be 之後。"
+        ],
+        phonetics: "Let's not be sad /lɛts nɑt bi sæd/。"
+      },
+      {
+        id: 36,
+        section: "三、綜合克漏字測驗 (Cloze Test)",
+        dimension: "文法",
+        subCategory: "克漏字｜複合形容詞與年齡表達",
+        stem: "克漏字 (二) 第 36 題：Kevin is ________ boy, and his little sister is ________.",
+        options: [
+          "a twelve-year-old; six years old",
+          "a twelve-years-old; six year old",
+          "an twelve-year-old; six years old",
+          "twelve-year-old; six years old"
+        ],
+        answer: 0,
+        translation: "Kevin 是個十二歲的男孩，而他的小妹妹六歲。",
+        corePoint: "名詞 boy 前用連字號複合形容詞「a + 數字-year-old + 單數名詞」，twelve 首音為子音 /t/ 故用 a，且 year 不可加 s；be 動詞後表年齡用「數字 + years old」。",
+        grammar: "S + be + a + 數字-year-old + 單數名詞；S + be + 數字 + years old.",
+        distractors: [
+          "(B) 連字號複合形容詞中的 year 不可加 s；第二格 six 大於 1，years 須加 s。",
+          "(C) twelve 首音為子音 /t/，不定冠詞應用 a 而非 an。",
+          "(D) 單數可數名詞 boy 前缺少不定冠詞 a。"
+        ],
+        phonetics: "a twelve-year-old boy /ə twɛlv jɪr old bɔɪ/；six years old /sɪks jɪrz old/。"
+      },
+      {
+        id: 37,
+        section: "三、綜合克漏字測驗 (Cloze Test)",
+        dimension: "語意邏輯",
+        subCategory: "克漏字｜上下文轉折與對比",
+        stem: "克漏字 (二) 第 37 題：Kevin's house is small, ________ it is very warm and nice.",
+        options: [
+          "but",
+          "or",
+          "so",
+          "and"
+        ],
+        answer: 0,
+        translation: "Kevin 的房子很小，但是它非常溫暖又舒適。",
+        corePoint: "前半句「房子小（small）」與後半句「非常溫暖又舒適（warm and nice）」形成語意上的轉折對比，用連接詞 but。",
+        grammar: "S1 + be + adj.1 (small), but + S2 + be + adj.2 (warm and nice).",
+        distractors: [
+          "(B) or 表「或者／還是」，不符合前後句轉折對比的語意。",
+          "(C) so 表「所以（結果）」，房子小並非導致溫暖舒適的原因。",
+          "(D) and 表並列或補充，未能凸顯「雖小但溫馨」的轉折語氣。"
+        ],
+        phonetics: "small, but it is /smɔl bʌt ɪt ɪz/（but 與 it 連讀為 /bʌˈtɪz/）。"
+      },
+      {
+        id: 38,
+        section: "三、綜合克漏字測驗 (Cloze Test)",
+        dimension: "字彙",
+        subCategory: "克漏字｜方位介系詞辨析",
+        stem: "克漏字 (二) 第 38 題：His desk is ________ the window, so he can see the trees outside.",
+        options: [
+          "next to",
+          "under",
+          "inside",
+          "behind"
+        ],
+        answer: 0,
+        translation: "他的書桌在窗戶旁邊，所以他可以看到外面的樹木。",
+        corePoint: "根據「可以看到外面的樹木」，書桌應在「窗戶旁邊（next to the window）」；behind 雖也可表示後面，但 next to 最符合靠窗擺設且能看外面的情境。",
+        grammar: "S + is + 方位介系詞片語 (next to the window), so + S + can + V + O.",
+        distractors: [
+          "(B) under 表示「在……下面」，與看到窗外樹木的描述關聯較弱。",
+          "(C) inside 表示「在……裡面」，書桌不會在窗戶「裡面」。",
+          "(D) behind 表示「在……後面」，若在窗戶後方通常指室內更深處，不如 next to 貼切。"
+        ],
+        phonetics: "next to the window /nɛkst tə ðə ˈwɪndo/；trees outside /triz ˌaʊtˈsaɪd/。"
+      },
+      {
+        id: 39,
+        section: "三、綜合克漏字測驗 (Cloze Test)",
+        dimension: "文法",
+        subCategory: "克漏字｜祈使句否定型態",
+        stem: "克漏字 (二) 第 39 題：________ on the bed with dirty shoes, Kevin!",
+        options: [
+          "Don't jump",
+          "Not jump",
+          "Let's don't jump",
+          "No jump"
+        ],
+        answer: 0,
+        translation: "Kevin，不要穿著髒鞋子在床上跳！",
+        corePoint: "對 Kevin 下達否定命令或勸告，為第二人稱祈使句否定式，結構為「Don't + 原形動詞（jump）」。",
+        grammar: "Don't + 原形動詞 (jump) + 地方副詞片語 + 介系詞片語, + 稱呼語.",
+        distractors: [
+          "(B) 祈使句否定不可只寫 Not，須使用助動詞 Don't。",
+          "(C) Let's don't 為錯誤用法，且此處是對 Kevin 說話而非提議「我們」。",
+          "(D) No jump 並非標準祈使句否定結構。"
+        ],
+        phonetics: "Don't jump on the bed /dont dʒʌmp ɑn ðə bɛd/；dirty shoes /ˈdɝti ʃuz/。"
+      },
+      {
+        id: 40,
+        section: "三、綜合克漏字測驗 (Cloze Test)",
+        dimension: "語意邏輯",
+        subCategory: "克漏字｜對話回應邏輯",
+        stem: "克漏字 (二) 第 40 題：Kevin says, '________' His sister smiles and says, 'Yes, it's really fun!'",
+        options: [
+          "Let's play together!",
+          "Where is my bed?",
+          "Is it hard or soft?",
+          "That's a good question."
+        ],
+        answer: 0,
+        translation: "Kevin 說：「我們一起玩吧！」他的妹妹笑著說：「好啊，真的很有趣！」",
+        corePoint: "妹妹回答「Yes, it's really fun!（好啊，真的很有趣！）」，可見 Kevin 提出的是「一起玩」的提議（Let's play together!）。",
+        grammar: "提議句型：Let's + 原形動詞 (play) + 副詞 (together)! → 回應：Yes, + S + be + adv. + adj.",
+        distractors: [
+          "(B) 詢問床在哪裡，與妹妹回答「真的很有趣」語意不連貫。",
+          "(C) 詢問床是硬還是軟，妹妹不會直接回答「真的很有趣」。",
+          "(D) 用於回應問題或表示不知道，不符合妹妹贊同好玩的語境。"
+        ],
+        phonetics: "Let's play together /lɛts ple təˈɡɛðɚ/；really fun /ˈrɪli fʌn/。"
+      },
+      {
+        id: 41,
+        section: "四、閱讀理解測驗 (Reading Comprehension)",
+        dimension: "細節理解",
+        subCategory: "閱讀理解｜文本細節擷取",
+        stem: "閱讀測驗 (一) 第 41 題：How old is Jenny, and what is her house like?",
+        options: [
+          "She is eleven years old, and her house is an igloo.",
+          "She is twenty-one years old, and her house is a cave.",
+          "She is five years old, and her house is big and soft.",
+          "She is eleven years old, and her house is a big bedroom."
+        ],
+        answer: 0,
+        translation: "Jenny 幾歲，她的房子是什麼樣子？",
+        corePoint: "文章第二段明確指出：「Jenny is an eleven-year-old girl. Her house is an igloo.」",
+        grammar: "How old + be + S? → S + be + 數字 + years old. What + be + 所有格 + house + like? → S + be + N.",
+        distractors: [
+          "(B) 二十一歲且住在洞穴裡的是 Jason，非 Jenny。",
+          "(C) 文中未提 Jenny 五歲，且她的冰床是 big and hard（又大又硬），非 big and soft。",
+          "(D) 她的冰屋內只有一個空間包含臥室、廚房、客廳與飯廳，房子本身是 igloo（冰屋）。"
+        ],
+        phonetics: "eleven years old /ɪˈlɛvən jɪrz old/；an igloo /ən ˈɪɡlu/。"
+      },
+      {
+        id: 42,
+        section: "四、閱讀理解測驗 (Reading Comprehension)",
+        dimension: "細節理解",
+        subCategory: "閱讀理解｜方位與物品細節辨析",
+        stem: "閱讀測驗 (一) 第 42 題：Where is Jenny's bed, and what is it made of?",
+        options: [
+          "It is beside the kitchen, and it is a big and hard ice bed.",
+          "It is next to the table, and it is a small and old blanket.",
+          "It is in front of the cave, and it is a soft bed.",
+          "It is between the living room and the dining room."
+        ],
+        answer: 0,
+        translation: "Jenny 的床在哪裡，它是什麼材質或樣子的？",
+        corePoint: "文章第二段指出：「Where is her bed? It is beside the kitchen. It is a big and hard ice bed...」",
+        grammar: "Where + is + 所有格 + bed? → It is + 方位片語 (beside the kitchen).",
+        distractors: [
+          "(B) 在桌子旁邊且是小又舊的毛毯的是 Jason 的床，非 Jenny 的。",
+          "(C) 洞穴（cave）是 Jason 的住處，且 Jenny 的床是 hard（硬的），非 soft。",
+          "(D) 文中說明她的床在廚房旁邊（beside the kitchen），且冰屋內沒有隔間。"
+        ],
+        phonetics: "beside the kitchen /bɪˈsaɪd ðə ˈkɪtʃən/；ice bed /aɪs bɛd/。"
+      },
+      {
+        id: 43,
+        section: "四、閱讀理解測驗 (Reading Comprehension)",
+        dimension: "細節理解",
+        subCategory: "閱讀理解｜人物資訊比對",
+        stem: "閱讀測驗 (一) 第 43 題：Which is true about Jason according to the reading?",
+        options: [
+          "He lives in a quiet cave and sleeps on a small and old blanket.",
+          "He is an eleven-year-old boy with a big ice bed.",
+          "His bed is beside a kitchen inside an igloo.",
+          "He doesn't like his bed on the cave floor."
+        ],
+        answer: 0,
+        translation: "根據文章，關於 Jason 的敘述何者正確？",
+        corePoint: "文章第三段提到 Jason 住在安靜的洞穴裡（inside a quiet cave），他的床是洞穴地板上一條小又舊的毛毯（a small and old blanket on the cave floor）。",
+        grammar: "S + lives + in + a + adj. + N + and + sleeps + on + a + adj. + N.",
+        distractors: [
+          "(B) Jason 二十一歲（twenty-one years old），十一歲的是 Jenny。",
+          "(C) 住在冰屋且床在廚房旁邊的是 Jenny，非 Jason。",
+          "(D) 文章最後一句指出「Both Jenny and Jason love their special beds very much!」，故他很喜歡自己的床。"
+        ],
+        phonetics: "quiet cave /ˈkwaɪət kev/；small and old blanket /smɔl ənd old ˈblæŋkɪt/。"
+      },
+      {
+        id: 44,
+        section: "四、閱讀理解測驗 (Reading Comprehension)",
+        dimension: "語意邏輯",
+        subCategory: "閱讀理解｜代名詞指稱與句意理解",
+        stem: "閱讀測驗 (一) 第 44 題：In the second paragraph, what does 'This single space' refer to?",
+        options: [
+          "The space inside Jenny's igloo for her bedroom, kitchen, living room, and dining room.",
+          "The small and old blanket on Jason's cave floor.",
+          "The wooden table next to Jason's bed.",
+          "The warm animal skins on the table."
+        ],
+        answer: 0,
+        translation: "在第二段中，「This single space」指的是什麼？",
+        corePoint: "前文說明冰屋內沒有隔間，這個單一空間就是她的臥室、廚房、客廳和飯廳（This single space is her bedroom, kitchen, living room, and dining room, too.）。",
+        grammar: "指示形容詞片語 (This single space) + be + 名詞補語列舉.",
+        distractors: [
+          "(B) 洞穴地板上的毛毯屬於 Jason，非第二段 Jenny 冰屋內的空間。",
+          "(C) 木桌是 Jason 洞穴裡的物品，與第二段無關。",
+          "(D) 文中提到 warm animal skins 是覆蓋在 Jenny 的冰床上，並非在桌上。"
+        ],
+        phonetics: "single space /ˈsɪŋɡəl spes/；living room and dining room /ˈlɪvɪŋ rʊm ənd ˈdaɪnɪŋ rʊm/。"
+      },
+      {
+        id: 45,
+        section: "四、閱讀理解測驗 (Reading Comprehension)",
+        dimension: "語意邏輯",
+        subCategory: "閱讀理解｜主旨與推論判斷",
+        stem: "閱讀測驗 (一) 第 45 題：What can we learn from the reading?",
+        options: [
+          "People's beds and homes can be very different, and special beds can still be loved.",
+          "All beds around the world are big, soft, and new.",
+          "People in caves always sleep on big ice beds.",
+          "An igloo has four different rooms with walls."
+        ],
+        answer: 0,
+        translation: "我們可以從這篇文章學到什麼？",
+        corePoint: "全文開頭點出世界各地的床很不一樣（beds around the world are very different），並介紹 Jenny 與 Jason 獨特的住處與床鋪，最後指出兩人都非常喜歡自己的床。",
+        grammar: "S + can + learn + 名詞子句 (People's beds and homes can be... and special beds can...).",
+        distractors: [
+          "(B) 文章開頭就反問床是否又大又軟或又小又硬，並指出各地的床很不一樣。",
+          "(C) 冰床是 Jenny 在冰屋裡的床，Jason 在洞穴裡睡的是毛毯。",
+          "(D) 文章明確指出 Jenny 的冰屋內沒有隔間牆壁（no separate walls between rooms）。"
+        ],
+        phonetics: "learn from the reading /lɝn frʌm ðə ˈridɪŋ/；very different /ˈvɛri ˈdɪfərənt/。"
+      },
+      {
+        id: 46,
+        section: "四、閱讀理解測驗 (Reading Comprehension)",
+        dimension: "細節理解",
+        subCategory: "閱讀理解｜文本細節擷取",
+        stem: "閱讀測驗 (二) 第 46 題：Leo wants to make his small bedroom look cool without spending too much money. What does his friend Mia suggest?",
+        options: [
+          "He can use a free AI app, choose a theme, and paint one wall or add a new blanket.",
+          "He must buy a brand-new house and hire a famous designer.",
+          "He should throw away his bed and sleep in the kitchen.",
+          "He shouldn't change anything in the room at all."
+        ],
+        answer: 0,
+        translation: "Leo 想在不花太多錢的情況下讓他的小臥室看起來很酷。他的朋友 Mia 建議他怎麼做？",
+        corePoint: "閱讀測驗 (二) 情境延伸自本課對話與克漏字：先用免費 AI app 挑主題，再以粉刷一面牆或添購新毛毯等低成本方式改造。",
+        grammar: "S + can + V1, V2, and + V3 + O.",
+        distractors: [
+          "(B) 買新房子與請名設計師花費極高，與「不花太多錢」的前提衝突。",
+          "(C) 丟掉床並睡在廚房不符合一般居家改造邏輯。",
+          "(D) 完全不改變任何東西無法達成「讓臥室看起來很酷」的目標。"
+        ],
+        phonetics: "without spending too much money /wɪˈðaʊt ˈspɛndɪŋ tu mʌtʃ ˈmʌni/。"
+      },
+      {
+        id: 47,
+        section: "四、閱讀理解測驗 (Reading Comprehension)",
+        dimension: "細節理解",
+        subCategory: "閱讀理解｜方位描述理解",
+        stem: "閱讀測驗 (二) 第 47 題：In Leo's bedroom, where is his study desk?",
+        options: [
+          "It is between the bed and the window.",
+          "It is inside the bathroom.",
+          "It is under the dining table.",
+          "It is in front of the igloo."
+        ],
+        answer: 0,
+        translation: "在 Leo 的臥室裡，他的書桌在哪裡？",
+        corePoint: "根據閱讀測驗 (二) 空間描述，書桌擺放在床與窗戶之間（between the bed and the window）。",
+        grammar: "S + is + between + N1 + and + N2.",
+        distractors: [
+          "(B) 浴室（bathroom）並非臥室內的擺設位置。",
+          "(C) 餐桌（dining table）通常在飯廳，且書桌不會在餐桌底下。",
+          "(D) 冰屋（igloo）與 Leo 的臥室情境不符。"
+        ],
+        phonetics: "between the bed and the window /bɪˈtwin ðə bɛd ənd ðə ˈwɪndo/。"
+      },
+      {
+        id: 48,
+        section: "四、閱讀理解測驗 (Reading Comprehension)",
+        dimension: "語意邏輯",
+        subCategory: "閱讀理解｜對話語氣與句意推論",
+        stem: "閱讀測驗 (二) 第 48 題：When Mia asks, 'Are you OK with a blue wall?' and Leo answers, 'That's a good question. Let's think about it,' what does Leo mean?",
+        options: [
+          "He isn't sure yet and wants to think carefully before deciding.",
+          "He is angry at Mia and doesn't want to talk to her.",
+          "He has already painted the wall red.",
+          "He doesn't know what a wall is."
+        ],
+        answer: 0,
+        translation: "當 Mia 問「你對藍色牆壁沒問題嗎？」而 Leo 回答「那是個好問題。我們想想看吧」時，Leo 的意思是？",
+        corePoint: "本課對話解析重點：口語中「That's a good question.」常表示尚未有定論或一時不知如何回答，加上「Let's think about it」，代表他還在考慮、尚未決定。",
+        grammar: "S + be + not sure + and + V + to + V.",
+        distractors: [
+          "(B) 文中未顯示 Leo 生氣或不願交談，反而表示要一起想想。",
+          "(C) 他尚未決定牆壁顏色，並未已經漆成紅色。",
+          "(D) 牆壁（wall）是常見生活詞彙，Leo 並非不知道什麼是牆壁。"
+        ],
+        phonetics: "think about it /θɪŋk əˈbaʊt ɪt/（連讀為 /ˈθɪŋkəˌbaʊɾɪt/）。"
+      },
+      {
+        id: 49,
+        section: "四、閱讀理解測驗 (Reading Comprehension)",
+        dimension: "語意邏輯",
+        subCategory: "閱讀理解｜細節正誤判讀",
+        stem: "閱讀測驗 (二) 第 49 題：Why does Leo like the new theme on his phone?",
+        options: [
+          "Because the colors and design match his style and make the room look fresh.",
+          "Because it costs a lot of money and takes three months.",
+          "Because it turns his bedroom into a dark cave.",
+          "Because he can't see any pictures on his phone."
+        ],
+        answer: 0,
+        translation: "為什麼 Leo 喜歡手機上的新主題？",
+        corePoint: "契合個人風格（match his style）且讓空間看起來耳目一新（make the room look fresh），是選擇改造主題的核心原因。",
+        grammar: "Because + S + V + O + and + V + O + OC (原形動詞 look + adj.).",
+        distractors: [
+          "(B) 花費很多錢且耗時三個月與省錢改造的初衷相反。",
+          "(C) 變成黑暗洞穴不符合他想讓臥室看起來酷且溫馨的需求。",
+          "(D) 看不到圖片無法讓他喜歡該主題。"
+        ],
+        phonetics: "match his style /mætʃ hɪz staɪl/；look fresh /lʊk frɛʃ/。"
+      },
+      {
+        id: 50,
+        section: "四、閱讀理解測驗 (Reading Comprehension)",
+        dimension: "語意邏輯",
+        subCategory: "閱讀理解｜總結與行動建議推論",
+        stem: "閱讀測驗 (二) 第 50 題：At the end of the story, what do Leo and Mia decide to do first?",
+        options: [
+          "They decide to measure the room and check the price of paint and a blanket.",
+          "They decide to move to another country right away.",
+          "They decide to stop talking to each other.",
+          "They decide to sell their smartphones."
+        ],
+        answer: 0,
+        translation: "在故事最後，Leo 和 Mia 決定先做什麼？",
+        corePoint: "在進行實際粉刷與添購毛毯前，先量測空間尺寸並確認油漆與毛毯的價格，是務實且符合上下文的行動步驟。",
+        grammar: "S + decide + to + V1 + and + V2 + O.",
+        distractors: [
+          "(B) 立刻搬到其他國家與改造臥室的主題無關。",
+          "(C) 停止彼此交談與兩人合作改造的互動不符。",
+          "(D) 賣掉智慧型手機會失去使用工具與查價的便利性。"
+        ],
+        phonetics: "decide to measure /dɪˈsaɪd tə ˈmɛʒɚ/；price of paint /praɪs əv pent/。"
+      }
+    ];
+
+    // =========================================================================
+    // 2. 狀態管理與核心變數
+    // =========================================================================
+    let activeQuestions = [];
+    let userAnswers = {}; // key: question.id, value: selected option index in activeQuestions
+    let isSubmitted = false;
+    let timerSeconds = 50 * 60;
+    let initialSetSeconds = 50 * 60;
+    let timerInterval = null;
+    let isPaused = false;
+    let radarChartInstance = null;
+
+    // 隱藏機關點擊計數器
+    let titleClickCount = 0;
+    let verifyClickCount = 0;
+
+    // =========================================================================
+    // 3. 初始化與洗牌邏輯
+    // =========================================================================
+    function initExam(shouldShuffle = false) {
+      isSubmitted = false;
+      userAnswers = {};
+      document.getElementById("resultDashboard").style.display = "none";
+      document.getElementById("submitBtn").disabled = false;
+      document.getElementById("submitBtn").textContent = "提交試卷";
+      document.getElementById("submitBtn").className = "btn btn-success";
+
+      // 深拷貝題庫
+      let cloned = JSON.parse(JSON.stringify(rawQuestionBank));
+
+      if (shouldShuffle) {
+        // 洗牌題目順序（保持題庫題目隨機或選項隨機）
+        cloned = cloned.map(q => {
+          const correctText = q.options[q.answer];
+          const shuffledOpts = [...q.options].sort(() => Math.random() - 0.5);
+          q.options = shuffledOpts;
+          q.answer = shuffledOpts.indexOf(correctText);
+          return q;
+        });
+      }
+
+      activeQuestions = cloned;
+      renderNavigation();
+      renderQuestions();
+      updateProgress();
+      resetTimer();
+    }
+
+    // =========================================================================
+    // 4. 渲染題號導覽與試題區
+    // =========================================================================
+    function renderNavigation() {
+      const navGrid = document.getElementById("navGrid");
+      navGrid.innerHTML = "";
+      activeQuestions.forEach((q, idx) => {
+        const btn = document.createElement("button");
+        btn.className = "nav-btn";
+        btn.id = `nav-btn-${q.id}`;
+        btn.textContent = idx + 1;
+        btn.onclick = () => {
+          const target = document.getElementById(`q-card-${q.id}`);
+          if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+        };
+        navGrid.appendChild(btn);
+      });
+    }
+
+    function renderQuestions() {
+      const container = document.getElementById("questionsContainer");
+      container.innerHTML = "";
+      let currentSection = "";
+      const letters = ["(A)", "(B)", "(C)", "(D)"];
+
+      activeQuestions.forEach((q, idx) => {
+        if (q.section !== currentSection) {
+          currentSection = q.section;
+          const banner = document.createElement("div");
+          banner.className = "section-banner";
+          banner.innerHTML = `<h2>${currentSection}</h2><p>請選出最符合課本定義與文法語意的正確答案</p>`;
+          container.appendChild(banner);
+        }
+
+        const card = document.createElement("div");
+        card.className = "question-card";
+        card.id = `q-card-${q.id}`;
+
+        const optionsHtml = q.options.map((optText, optIdx) => {
+          return `
+            <label class="option-label" id="opt-label-${q.id}-${optIdx}">
+              <input type="radio" name="q_${q.id}" value="${optIdx}" onchange="handleSelect(${q.id}, ${optIdx})" />
+              <span><b>${letters[optIdx]}</b> ${optText}</span>
+            </label>
+          `;
+        }).join("");
+
+        const distractorsHtml = q.distractors.map(d => `<li>${d}</li>`).join("");
+
+        card.innerHTML = `
+          <div class="q-header">
+            <span class="q-num">第 ${idx + 1} 題</span>
+            <span class="q-category">${q.subCategory}</span>
+          </div>
+          <div class="q-stem">${q.stem}</div>
+          <div class="options-grid">${optionsHtml}</div>
+          <div class="explanation-box" id="exp-box-${q.id}">
+            <div class="exp-top-bar">
+              <span class="exp-ans-badge">正確答案：${letters[q.answer]} ${q.options[q.answer]}</span>
+              <span style="font-size:12px; color:#94a3b8;">考點歸類：${q.subCategory}</span>
+            </div>
+            <div class="exp-block"><span class="exp-label">【測驗卷原題目】</span>${q.stem}</div>
+            <div class="exp-block"><span class="exp-label">【繁體中文翻譯】</span>${q.translation}</div>
+            <div class="exp-block"><span class="exp-label">【核心考點說明】</span>${q.corePoint}</div>
+            <div class="exp-block"><span class="exp-label">【文法結構解析】</span>${q.grammar}</div>
+            <div class="exp-block">
+              <span class="exp-label">【干擾項與誘答剖析】</span>
+              <ul class="exp-distractors">${distractorsHtml}</ul>
+            </div>
+            <div class="exp-block"><span class="exp-label">【K.K.音標與連讀說明】</span>${q.phonetics}</div>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function handleSelect(qId, optIdx) {
+      if (isSubmitted) return;
+      userAnswers[qId] = optIdx;
+
+      // 更新選項高亮
+      for (let i = 0; i < 4; i++) {
+        const lbl = document.getElementById(`opt-label-${qId}-${i}`);
+        if (lbl) lbl.classList.toggle("selected", i === optIdx);
+      }
+
+      // 更新左側導覽按鈕為藍色
+      const navBtn = document.getElementById(`nav-btn-${qId}`);
+      if (navBtn) navBtn.classList.add("answered");
+
+      updateProgress();
+    }
+
+    function updateProgress() {
+      const answeredCount = Object.keys(userAnswers).length;
+      document.getElementById("progressBadge").textContent = `已作答：${answeredCount} / ${activeQuestions.length}`;
+    }
+
+    // =========================================================================
+    // 5. 計時器控制
+    // =========================================================================
+    function formatTime(sec) {
+      const m = Math.floor(sec / 60).toString().padStart(2, "0");
+      const s = (sec % 60).toString().padStart(2, "0");
+      return `${m}:${s}`;
+    }
+
+    function startTimer() {
+      clearInterval(timerInterval);
+      timerInterval = setInterval(() => {
+        if (!isPaused && !isSubmitted) {
+          if (timerSeconds > 0) {
+            timerSeconds--;
+            document.getElementById("timerDisplay").textContent = formatTime(timerSeconds);
+          } else {
+            clearInterval(timerInterval);
+            alert("測驗時間到！系統將自動為您交卷。");
+            submitExam();
+          }
+        }
+      }, 1000);
+    }
+
+    function resetTimer() {
+      const mins = Math.max(0, Math.min(240, parseInt(document.getElementById("customMinutes").value) || 50));
+      initialSetSeconds = mins * 60;
+      timerSeconds = initialSetSeconds;
+      isPaused = false;
+      document.getElementById("pauseTimerBtn").textContent = "暫停";
+      document.getElementById("timerDisplay").textContent = formatTime(timerSeconds);
+      startTimer();
+    }
+
+    document.getElementById("setTimerBtn").onclick = () => {
+      if (isSubmitted) return;
+      resetTimer();
+    };
+
+    document.getElementById("pauseTimerBtn").onclick = () => {
+      if (isSubmitted) return;
+      isPaused = !isPaused;
+      document.getElementById("pauseTimerBtn").textContent = isPaused ? "繼續" : "暫停";
+    };
+
+    // =========================================================================
+    // 6. 交卷批改、弱點診斷、雷達圖與 Telegram / LocalStorage 紀錄
+    // =========================================================================
+    function submitExam() {
+      if (isSubmitted) return;
+      isSubmitted = true;
+      clearInterval(timerInterval);
+
+      const submitBtn = document.getElementById("submitBtn");
+      submitBtn.disabled = true;
+      submitBtn.textContent = "已交卷";
+      submitBtn.className = "btn";
+
+      let correctCount = 0;
+      const wrongList = [];
+      const dimStats = {
+        "字彙": { correct: 0, total: 0 },
+        "文法": { correct: 0, total: 0 },
+        "語意邏輯": { correct: 0, total: 0 },
+        "細節理解": { correct: 0, total: 0 }
+      };
+
+      activeQuestions.forEach((q, idx) => {
+        const userChoice = userAnswers[q.id];
+        const isCorrect = userChoice === q.answer;
+        const card = document.getElementById(`q-card-${q.id}`);
+        const navBtn = document.getElementById(`nav-btn-${q.id}`);
+        const expBox = document.getElementById(`exp-box-${q.id}`);
+
+        // 鎖定 radio buttons
+        const radios = document.querySelectorAll(`input[name="q_${q.id}"]`);
+        radios.forEach(r => r.disabled = true);
+
+        // 統計維度
+        if (!dimStats[q.dimension]) dimStats[q.dimension] = { correct: 0, total: 0 };
+        dimStats[q.dimension].total++;
+
+        if (isCorrect) {
+          correctCount++;
+          dimStats[q.dimension].correct++;
+          card.classList.add("is-correct");
+          navBtn.className = "nav-btn correct";
+        } else {
+          wrongList.push(`第${idx + 1}題`);
+          card.classList.add("is-wrong");
+          navBtn.className = "nav-btn wrong";
+          if (userChoice !== undefined) {
+            document.getElementById(`opt-label-${q.id}-${userChoice}`).classList.add("wrong-opt");
+          }
+        }
+
+        // 高亮正確答案與展開解析
+        document.getElementById(`opt-label-${q.id}-${q.answer}`).classList.add("correct-opt");
+        expBox.classList.add("visible");
+      });
+
+      // 計算 100 分制總分
+      const score = Math.round((correctCount / activeQuestions.length) * 100);
+      const wrongCount = activeQuestions.length - correctCount;
+
+      document.getElementById("totalScoreDisplay").textContent = score;
+      document.getElementById("correctCountDisplay").textContent = `答對 ${correctCount} / ${activeQuestions.length} 題（答錯 ${wrongCount} 題）`;
+      document.getElementById("filterWrongBtn").textContent = `只看錯題 (${wrongCount})`;
+
+      // 渲染各維度列表
+      const dimListEl = document.getElementById("dimensionStatsList");
+      dimListEl.innerHTML = "";
+      const labels = ["字彙", "文法", "語意邏輯", "細節理解"];
+      const radarData = [];
+      const dimSummaryArr = [];
+
+      labels.forEach(dim => {
+        const st = dimStats[dim] || { correct: 0, total: 0 };
+        const rate = st.total > 0 ? Math.round((st.correct / st.total) * 100) : 0;
+        radarData.push(rate);
+        dimSummaryArr.push(`${dim} ${rate}%`);
+        dimListEl.innerHTML += `
+          <div class="dim-item">
+            <span>${dim} (${st.correct}/${st.total})</span>
+            <span style="color:${rate >= 80 ? '#6ee7b7' : rate >= 60 ? '#fcd34d' : '#fca5a5'}; font-weight:700;">${rate}%</span>
+          </div>
+        `;
+      });
+
+      // 顯示成績儀表板
+      document.getElementById("resultDashboard").style.display = "block";
+      document.querySelector(".left-pane").scrollTo({ top: 0, behavior: "smooth" });
+
+      // 繪製雷達圖
+      renderRadarChart(labels, radarData);
+
+      // 計算耗時與紀錄儲存
+      const spentSec = Math.max(0, initialSetSeconds - timerSeconds);
+      const spentStr = `${Math.floor(spentSec / 60)}分${spentSec % 60}秒`;
+      const nowStr = new Date().toLocaleString("zh-TW", { hour12: false });
+      const courseName = document.getElementById("examTitle").textContent;
+
+      const record = {
+        course: courseName,
+        time: nowStr,
+        spent: spentStr,
+        score: score,
+        dims: dimSummaryArr.join(" | "),
+        wrongs: wrongList.length > 0 ? wrongList.join(", ") : "全對無錯題"
+      };
+
+      saveToLocalStorage(record);
+      sendTelegramReport(record);
+    }
+
+    function renderRadarChart(labels, dataValues) {
+      const ctx = document.getElementById("radarChart").getContext("2d");
+      if (radarChartInstance) radarChartInstance.destroy();
+      radarChartInstance = new Chart(ctx, {
+        type: "radar",
+        data: {
+          labels: labels,
+          datasets: [{
+            label: "各維度得分率 (%)",
+            data: dataValues,
+            backgroundColor: "rgba(59, 130, 246, 0.25)",
+            borderColor: "#60a5fa",
+            pointBackgroundColor: "#93c5fd",
+            borderWidth: 2
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            r: {
+              min: 0,
+              max: 100,
+              ticks: { stepSize: 20, color: "#94a3b8", backdropColor: "transparent" },
+              grid: { color: "#334155" },
+              angleLines: { color: "#334155" },
+              pointLabels: { color: "#f1f5f9", font: { size: 12, weight: "bold" } }
+            }
+          },
+          plugins: {
+            legend: { display: false }
+          }
+        }
+      });
+    }
+
+    // 錯題篩選器
+    document.getElementById("filterAllBtn").onclick = () => {
+      activeQuestions.forEach(q => {
+        document.getElementById(`q-card-${q.id}`).style.display = "block";
+      });
+    };
+
+    document.getElementById("filterWrongBtn").onclick = () => {
+      activeQuestions.forEach(q => {
+        const isCorrect = userAnswers[q.id] === q.answer;
+        document.getElementById(`q-card-${q.id}`).style.display = isCorrect ? "none" : "block";
+      });
+    };
+
+    // 一鍵複製錯題筆記 (Markdown)
+    document.getElementById("copyMarkdownBtn").onclick = () => {
+      const letters = ["(A)", "(B)", "(C)", "(D)"];
+      let md = `# 📘 國中七年級英語（Lesson 3）錯題複習筆記\n\n`;
+      let wrongCount = 0;
+
+      activeQuestions.forEach((q, idx) => {
+        const userChoice = userAnswers[q.id];
+        if (userChoice !== q.answer) {
+          wrongCount++;
+          const userAnsText = userChoice !== undefined ? `${letters[userChoice]} ${q.options[userChoice]}` : "未作答";
+          md += `### 第 ${idx + 1} 題（${q.subCategory}）\n`;
+          md += `- **題目**：${q.stem}\n`;
+          md += `- **你的作答**：${userAnsText}\n`;
+          md += `- **正確答案**：${letters[q.answer]} ${q.options[q.answer]}\n`;
+          md += `- **中文翻譯**：${q.translation}\n`;
+          md += `- **核心考點**：${q.corePoint}\n`;
+          md += `- **文法結構**：\`${q.grammar}\`\n`;
+          md += `- **誘答解析**：\n${q.distractors.map(d => `  - ${d}`).join("\n")}\n\n---\n\n`;
+        }
+      });
+
+      if (wrongCount === 0) {
+        md += `🎉 本次測驗全對，沒有錯題！繼續保持！`;
+      }
+
+      navigator.clipboard.writeText(md).then(() => {
+        alert("已成功複製錯題筆記（Markdown 格式）至剪貼簿！可直接貼上至 Notion 或 Word。");
+      }).catch(() => {
+        alert("複製失敗，請確認瀏覽器剪貼簿權限。");
+      });
+    };
+
+    document.getElementById("submitBtn").onclick = submitExam;
+    document.getElementById("shuffleBtn").onclick = () => {
+      if (confirm("確定要重新測驗並隨機洗牌選項順序嗎？目前的作答紀錄將會重置。")) {
+        initExam(true);
+      }
+    };
+
+    // =========================================================================
+    // 7. Telegram API 通知與 LocalStorage 家長監控機制
+    // =========================================================================
+    function saveToLocalStorage(record) {
+      const key = "english_l3_exam_history";
+      const existing = JSON.parse(localStorage.getItem(key) || "[]");
+      existing.unshift(record);
+      localStorage.setItem(key, JSON.stringify(existing));
+    }
+
+    function sendTelegramReport(record) {
+      const token = "8062206068:AAEqHmvEEMDFOYtggE4FxpHFoAWUGHX7Aq4";
+      const MY_CHAT_ID = "8049812362";
+
+      const msgText =
+        `📊 【${record.course} 交卷通知】\n` +
+        `01. 課程名稱：${record.course}\n` +
+        `02. 交卷時間：${record.time}\n` +
+        `03. 作答耗時：${record.spent}\n` +
+        `04. 測驗得分：${record.score} 分\n` +
+        `05. 各維度統計：${record.dims}\n` +
+        `06. 錯題清單：${record.wrongs}`;
+
+      const postToChat = (chatId) => {
+        return fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ chat_id: chatId, text: msgText })
+        })
+          .then(res => res.json())
+          .then(data => {
+            if (!data.ok) console.warn("Telegram 發送失敗：", data.description);
+          })
+          .catch(err => console.warn("Telegram 網路請求錯誤：", err));
+      };
+
+      if (MY_CHAT_ID) {
+        postToChat(MY_CHAT_ID);
+      }
+    }
+
+    // 家長監控觸發器：連點標題 5 下 或 Ctrl + Shift + P
+    function openParentMonitor() {
+      const pwd = prompt("請輸入家長監控密碼：");
+      if (pwd === "1234") {
+        const key = "english_l3_exam_history";
+        const list = JSON.parse(localStorage.getItem(key) || "[]");
+        const tbody = document.getElementById("historyTableBody");
+        tbody.innerHTML = list.length === 0
+          ? `<tr><td colspan="5" style="text-align:center;">尚無任何交卷紀錄</td></tr>`
+          : list.map(r => `
+              <tr>
+                <td>${r.time}</td>
+                <td>${r.spent}</td>
+                <td style="font-weight:700; color:#60a5fa;">${r.score} 分</td>
+                <td>${r.dims}</td>
+                <td>${r.wrongs}</td>
+              </tr>
+            `).join("");
+        document.getElementById("parentModal").classList.add("active");
+      } else if (pwd !== null) {
+        alert("密碼錯誤！");
+      }
+    }
+
+    function clearHistory() {
+      if (confirm("確定要清空所有歷次測驗紀錄嗎？")) {
+        localStorage.removeItem("english_l3_exam_history");
+        document.getElementById("historyTableBody").innerHTML = `<tr><td colspan="5" style="text-align:center;">紀錄已清空</td></tr>`;
+      }
+    }
+
+    document.getElementById("examTitle").onclick = () => {
+      titleClickCount++;
+      if (titleClickCount >= 5) {
+        titleClickCount = 0;
+        openParentMonitor();
+      }
+      setTimeout(() => { titleClickCount = 0; }, 2500);
+    };
+
+    document.addEventListener("keydown", (e) => {
+      if (e.ctrlKey && e.shiftKey && (e.key === "P" || e.key === "p")) {
+        e.preventDefault();
+        openParentMonitor();
+      }
+    });
+
+    // 題庫驗證總表觸發器：連點左上角 ❖ 5 下
+    document.getElementById("secretVerifyBtn").onclick = () => {
+      verifyClickCount++;
+      if (verifyClickCount >= 5) {
+        verifyClickCount = 0;
+        openVerifyModal();
+      }
+      setTimeout(() => { verifyClickCount = 0; }, 2500);
+    };
+
+    function openVerifyModal() {
+      const letters = ["(A)", "(B)", "(C)", "(D)"];
+      const counts = [0, 0, 0, 0];
+      const tbody = document.getElementById("verifyTableBody");
+      tbody.innerHTML = "";
+
+      activeQuestions.forEach((q, idx) => {
+        counts[q.answer]++;
+        tbody.innerHTML += `
+          <tr>
+            <td>第 ${idx + 1} 題</td>
+            <td>${q.dimension}</td>
+            <td>${q.subCategory}</td>
+            <td style="color:#6ee7b7; font-weight:700;">${letters[q.answer]} ${q.options[q.answer]}</td>
+            <td>${q.stem}</td>
+          </tr>
+        `;
+      });
+
+      document.getElementById("answerDistSummary").textContent =
+        `目前題庫共 ${activeQuestions.length} 題 ｜ 選項分布統計：(A) ${counts[0]} 題、(B) ${counts[1]} 題、(C) ${counts[2]} 題、(D) ${counts[3]} 題`;
+      document.getElementById("verifyModal").classList.add("active");
+    }
+
+    function closeModal(modalId) {
+      document.getElementById(modalId).classList.remove("active");
+    }
+
+    // 啟動測驗
+    window.onload = () => initExam(false);
+  </script>
+</body>
+</html>
