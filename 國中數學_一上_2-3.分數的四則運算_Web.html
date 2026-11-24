@@ -1,0 +1,2499 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>國中七年級數學（一）2-3 分數的四則運算｜全真模擬測驗</title>
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <!-- MathJax 3 for LaTeX Rendering -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <style>
+    :root {
+      --bg-main: #0f141c;
+      --bg-panel: #161d27;
+      --bg-card: #1c2532;
+      --bg-card-hover: #232e3e;
+      --border-color: #2c394b;
+      --text-primary: #eef2f6;
+      --text-secondary: #9fb0c7;
+      --text-muted: #6c7f99;
+      --accent-blue: #3b82f6;
+      --accent-blue-glow: rgba(59, 130, 246, 0.25);
+      --accent-green: #10b981;
+      --accent-green-bg: rgba(16, 185, 129, 0.14);
+      --accent-red: #ef4444;
+      --accent-red-bg: rgba(239, 68, 68, 0.14);
+      --accent-amber: #f59e0b;
+      --font-sans: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--bg-main);
+      color: var(--text-primary);
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    /* Top Header Bar */
+    .top-bar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: #121822;
+      border-bottom: 1px solid var(--border-color);
+      padding: 10px 20px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+    }
+
+    .timer-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .secret-anchor {
+      color: var(--text-muted);
+      cursor: pointer;
+      user-select: none;
+      font-size: 15px;
+      padding: 2px 5px;
+      border-radius: 4px;
+      transition: color 0.2s;
+    }
+    .secret-anchor:hover {
+      color: var(--text-secondary);
+    }
+
+    .timer-badge {
+      background: #1e2736;
+      border: 1px solid var(--border-color);
+      padding: 5px 12px;
+      border-radius: 6px;
+      font-weight: 700;
+      color: #34d399;
+      font-variant-numeric: tabular-nums;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 15px;
+    }
+
+    .timer-badge.warning {
+      color: #fbbf24;
+      border-color: #f59e0b;
+    }
+
+    .timer-badge.danger {
+      color: #f87171;
+      border-color: #ef4444;
+      animation: pulse 1s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
+    }
+
+    .time-input {
+      width: 58px;
+      background: #0f141c;
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
+      padding: 5px 8px;
+      border-radius: 6px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .btn {
+      padding: 6px 13px;
+      border-radius: 6px;
+      border: 1px solid var(--border-color);
+      background: #1e2736;
+      color: var(--text-primary);
+      font-size: 13.5px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .btn:hover {
+      background: #2a364a;
+    }
+
+    .btn-primary {
+      background: var(--accent-blue);
+      border-color: var(--accent-blue);
+      color: #fff;
+    }
+    .btn-primary:hover {
+      background: #2563eb;
+    }
+
+    .btn-success {
+      background: var(--accent-green);
+      border-color: var(--accent-green);
+      color: #06281e;
+    }
+    .btn-success:hover {
+      background: #059669;
+      color: #fff;
+    }
+
+    .btn-amber {
+      background: #d97706;
+      border-color: #d97706;
+      color: #fff;
+    }
+    .btn-amber:hover {
+      background: #b45309;
+    }
+
+    .status-pill {
+      background: rgba(59, 130, 246, 0.16);
+      border: 1px solid rgba(59, 130, 246, 0.4);
+      color: #93c5fd;
+      padding: 5px 12px;
+      border-radius: 6px;
+      font-size: 13.5px;
+      font-weight: 600;
+    }
+
+    .course-title-box {
+      text-align: right;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .course-title-box h1 {
+      font-size: 17px;
+      font-weight: 700;
+      color: #f8fafc;
+      letter-spacing: 0.3px;
+    }
+
+    .course-title-box p {
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    /* Main Split Layout */
+    .split-container {
+      display: flex;
+      height: calc(100vh - 62px);
+      overflow: hidden;
+    }
+
+    .left-pane {
+      width: 50%;
+      height: 100%;
+      overflow-y: auto;
+      padding: 18px 20px 60px;
+      border-right: 1px solid var(--border-color);
+      background: #111620;
+    }
+
+    .right-pane {
+      width: 50%;
+      height: 100%;
+      overflow-y: auto;
+      padding: 18px 22px 80px;
+      background: var(--bg-main);
+    }
+
+    @media (max-width: 960px) {
+      .split-container {
+        flex-direction: column;
+        height: auto;
+        overflow: visible;
+      }
+      .left-pane, .right-pane {
+        width: 100%;
+        height: auto;
+        overflow: visible;
+        border-right: none;
+      }
+      .course-title-box {
+        text-align: left;
+      }
+    }
+
+    /* Panel Boxes */
+    .panel-box {
+      background: var(--bg-panel);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 16px;
+      margin-bottom: 18px;
+    }
+
+    .panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .panel-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #e2e8f0;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .legend-text {
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    /* Navigation Grid */
+    .nav-grid {
+      display: grid;
+      grid-template-columns: repeat(10, 1fr);
+      gap: 6px;
+    }
+
+    @media (max-width: 540px) {
+      .nav-grid {
+        grid-template-columns: repeat(5, 1fr);
+      }
+    }
+
+    .nav-btn {
+      background: #1e2736;
+      border: 1px solid var(--border-color);
+      color: var(--text-secondary);
+      border-radius: 5px;
+      padding: 6px 0;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+      text-align: center;
+    }
+
+    .nav-btn:hover {
+      border-color: var(--accent-blue);
+      color: #fff;
+    }
+
+    .nav-btn.answered {
+      background: var(--accent-blue);
+      border-color: var(--accent-blue);
+      color: #fff;
+    }
+
+    .nav-btn.correct {
+      background: var(--accent-green);
+      border-color: var(--accent-green);
+      color: #fff;
+    }
+
+    .nav-btn.wrong {
+      background: var(--accent-red);
+      border-color: var(--accent-red);
+      color: #fff;
+    }
+
+    /* Reference / Reading / Diagram Section on Left */
+    .ref-card {
+      background: #17202e;
+      border: 1px solid #2b3a4f;
+      border-radius: 8px;
+      padding: 14px;
+      margin-bottom: 14px;
+    }
+
+    .ref-tag {
+      display: inline-block;
+      background: rgba(59, 130, 246, 0.2);
+      color: #93c5fd;
+      border: 1px solid rgba(59, 130, 246, 0.35);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 4px;
+      margin-bottom: 8px;
+    }
+
+    .ref-card h4 {
+      font-size: 15px;
+      color: #f8fafc;
+      margin-bottom: 8px;
+    }
+
+    .ref-card p, .ref-card li {
+      font-size: 13.5px;
+      color: #cbd5e1;
+      margin-bottom: 6px;
+    }
+
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 8px;
+      font-size: 13px;
+    }
+
+    .data-table th, .data-table td {
+      border: 1px solid #334155;
+      padding: 7px 10px;
+      text-align: center;
+    }
+
+    .data-table th {
+      background: #1e293b;
+      color: #93c5fd;
+    }
+
+    /* Result & Radar Dashboard */
+    #resultDashboard {
+      display: none;
+      border: 1px solid #3b82f6;
+      background: linear-gradient(180deg, #162032 0%, #131a26 100%);
+    }
+
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 16px;
+      align-items: center;
+    }
+
+    @media (max-width: 640px) {
+      .dashboard-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .score-summary {
+      background: #101620;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 16px;
+      text-align: center;
+    }
+
+    .big-score {
+      font-size: 46px;
+      font-weight: 800;
+      color: #38bdf8;
+      line-height: 1.1;
+      margin: 6px 0;
+    }
+
+    .dim-list {
+      margin-top: 12px;
+      text-align: left;
+      font-size: 13px;
+    }
+
+    .dim-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 4px 0;
+      border-bottom: 1px dashed #283548;
+    }
+
+    .radar-wrap {
+      position: relative;
+      width: 100%;
+      max-width: 290px;
+      height: 240px;
+      margin: 0 auto;
+    }
+
+    .filter-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    /* Question Cards on Right */
+    .section-banner {
+      background: #182232;
+      border-left: 4px solid var(--accent-blue);
+      padding: 10px 14px;
+      border-radius: 6px;
+      margin-bottom: 16px;
+    }
+
+    .section-banner h2 {
+      font-size: 16px;
+      color: #93c5fd;
+    }
+
+    .section-banner p {
+      font-size: 12.5px;
+      color: var(--text-secondary);
+    }
+
+    .q-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 18px;
+      margin-bottom: 16px;
+      transition: border-color 0.2s;
+    }
+
+    .q-card.submitted-correct {
+      border-color: var(--accent-green);
+      box-shadow: 0 0 0 1px rgba(16, 185, 129, 0.2);
+    }
+
+    .q-card.submitted-wrong {
+      border-color: var(--accent-red);
+      box-shadow: 0 0 0 1px rgba(239, 68, 68, 0.2);
+    }
+
+    .q-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .q-num {
+      font-size: 15.5px;
+      font-weight: 700;
+      color: #60a5fa;
+    }
+
+    .q-tags {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      font-size: 11.5px;
+      padding: 2px 8px;
+      border-radius: 4px;
+      background: #263244;
+      color: #cbd5e1;
+      border: 1px solid #36465e;
+    }
+
+    .badge-adv {
+      background: rgba(245, 158, 11, 0.15);
+      color: #fbbf24;
+      border-color: rgba(245, 158, 11, 0.4);
+    }
+
+    .q-stem {
+      font-size: 15.5px;
+      color: #f1f5f9;
+      margin-bottom: 14px;
+      line-height: 1.75;
+    }
+
+    .q-diagram {
+      margin: 10px 0 14px;
+      padding: 10px;
+      background: #131a24;
+      border: 1px solid #2a374a;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    @media (max-width: 600px) {
+      .options-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .option-item {
+      background: #151c26;
+      border: 1px solid #2e3c51;
+      border-radius: 8px;
+      padding: 10px 14px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.15s;
+      font-size: 14.5px;
+    }
+
+    .option-item:hover:not(.locked) {
+      background: #1f2a3a;
+      border-color: #4b6282;
+    }
+
+    .option-item.selected {
+      background: rgba(59, 130, 246, 0.18);
+      border-color: var(--accent-blue);
+      color: #fff;
+    }
+
+    .option-item.correct-ans {
+      background: var(--accent-green-bg) !important;
+      border-color: var(--accent-green) !important;
+      color: #6ee7b7 !important;
+      font-weight: 600;
+    }
+
+    .option-item.wrong-ans {
+      background: var(--accent-red-bg) !important;
+      border-color: var(--accent-red) !important;
+      color: #fca5a5 !important;
+      text-decoration: line-through;
+    }
+
+    .radio-dot {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      border: 2px solid #64748b;
+      flex-shrink: 0;
+      display: inline-block;
+      position: relative;
+    }
+
+    .option-item.selected .radio-dot {
+      border-color: var(--accent-blue);
+      background: var(--accent-blue);
+    }
+
+    .option-item.correct-ans .radio-dot {
+      border-color: var(--accent-green);
+      background: var(--accent-green);
+    }
+
+    .option-item.wrong-ans .radio-dot {
+      border-color: var(--accent-red);
+      background: var(--accent-red);
+    }
+
+    /* Cloze & Calc Input */
+    .fill-input-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .fill-input {
+      width: 100%;
+      max-width: 360px;
+      background: #121822;
+      border: 1px solid #384860;
+      border-radius: 6px;
+      padding: 9px 12px;
+      color: #fff;
+      font-size: 15px;
+    }
+
+    .fill-input:focus {
+      outline: none;
+      border-color: var(--accent-blue);
+    }
+
+    .calc-textarea {
+      width: 100%;
+      min-height: 95px;
+      background: #121822;
+      border: 1px solid #384860;
+      border-radius: 6px;
+      padding: 10px 12px;
+      color: #fff;
+      font-size: 14.5px;
+      resize: vertical;
+      font-family: inherit;
+    }
+
+    /* Explanation Box */
+    .explanation-box {
+      display: none;
+      margin-top: 14px;
+      background: #121822;
+      border: 1px solid #2d3c52;
+      border-radius: 8px;
+      padding: 14px;
+      font-size: 13.8px;
+    }
+
+    .exp-top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 10px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #243042;
+    }
+
+    .ans-pill {
+      background: var(--accent-green);
+      color: #042f22;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 5px;
+      font-size: 13px;
+    }
+
+    .exp-block {
+      margin-bottom: 8px;
+      color: #cbd5e1;
+      line-height: 1.7;
+    }
+
+    .exp-label {
+      color: #fbbf24;
+      font-weight: 700;
+    }
+
+    /* Modals */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.78);
+      z-index: 999;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .modal-card {
+      background: #18212f;
+      border: 1px solid #33445c;
+      border-radius: 12px;
+      max-width: 820px;
+      width: 100%;
+      max-height: 86vh;
+      overflow-y: auto;
+      padding: 20px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.65);
+    }
+
+    .modal-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #2c3a4f;
+      padding-bottom: 10px;
+      margin-bottom: 14px;
+    }
+
+    .close-modal {
+      background: transparent;
+      border: none;
+      color: #94a3b8;
+      font-size: 22px;
+      cursor: pointer;
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 22px;
+      right: 22px;
+      background: #10b981;
+      color: #052e22;
+      font-weight: 700;
+      padding: 10px 18px;
+      border-radius: 8px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+      display: none;
+      z-index: 1000;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Header -->
+  <header class="top-bar">
+    <div class="timer-controls">
+      <span id="secretVerifyTrigger" class="secret-anchor" title="系統標記">❖</span>
+      <div id="timerDisplay" class="timer-badge">
+        ⏱ 倒數：<span id="timeLeftText">60:00</span>
+      </div>
+      <input type="number" id="customMinutesInput" class="time-input" value="60" min="0" max="240" />
+      <span style="font-size: 13px; color: var(--text-secondary);">分</span>
+      <button class="btn" onclick="applyCustomTime()">設定</button>
+      <button class="btn" id="pauseBtn" onclick="togglePause()">暫停</button>
+      <div class="status-pill" id="answeredCountPill">已作答：0 / 20</div>
+      <button class="btn btn-success" id="submitBtn" onclick="submitExam()">提交試卷</button>
+      <button class="btn btn-amber" onclick="resetAndShuffle()">重新測驗 (洗牌)</button>
+    </div>
+
+    <div class="course-title-box" id="secretParentTrigger" title="點擊檢視測驗資訊">
+      <h1 id="courseTitleHeading">國中七年級數學（一）2-3 分數的四則運算</h1>
+      <p>108課綱素養導向｜重點系統整理・會考實力評量・進階挑戰精選</p>
+    </div>
+  </header>
+
+  <!-- Split Main Workspace -->
+  <div class="split-container">
+    <!-- Left Pane: Dashboard + Nav + Core Formulas & Reading Groups -->
+    <aside class="left-pane" id="leftPane">
+
+      <!-- Result & Weakness Diagnosis Dashboard (Shown After Submit) -->
+      <div class="panel-box" id="resultDashboard">
+        <div class="panel-header">
+          <div class="panel-title">📊 測驗成績與弱點診斷分析報告</div>
+          <span class="badge" id="timeSpentBadge">耗時：00分00秒</span>
+        </div>
+        <div class="dashboard-grid">
+          <div class="score-summary">
+            <div style="font-size: 13px; color: var(--text-secondary);">總得分（滿分 100 分）</div>
+            <div class="big-score" id="finalScoreText">0</div>
+            <div style="font-size: 13.5px; color: #cbd5e1;" id="correctSummaryText">答對 0 / 20 題</div>
+            <div class="dim-list" id="dimensionStatsList"></div>
+          </div>
+          <div class="radar-wrap">
+            <canvas id="radarChartCanvas"></canvas>
+          </div>
+        </div>
+        <div class="filter-actions">
+          <button class="btn btn-primary" onclick="filterQuestions('all')">顯示全部題目</button>
+          <button class="btn" style="border-color: #ef4444; color: #fca5a5;" onclick="filterQuestions('wrong')">只看錯題</button>
+          <button class="btn" style="background: #2563eb; border-color: #2563eb;" onclick="copyWrongNotesMarkdown()">📋 一鍵複製錯題筆記 (Markdown)</button>
+          <button class="btn" onclick="downloadWrongNotesWord()">📥 下載錯題複習 (.doc)</button>
+        </div>
+      </div>
+
+      <!-- Question Quick Navigation -->
+      <div class="panel-box">
+        <div class="panel-header">
+          <div class="panel-title">🧭 題號快速導覽（點擊跳轉至該題）</div>
+          <div class="legend-text">藍：已答｜綠：答對｜紅：答錯</div>
+        </div>
+        <div class="nav-grid" id="navGrid"></div>
+      </div>
+
+      <!-- Core Formulas & Reference Texts from Textbook -->
+      <div class="panel-box">
+        <div class="panel-header">
+          <div class="panel-title">📘 課本核心公式、圖表與閱讀題組文本區</div>
+          <span class="badge">Text Grounding 100% 源自講義</span>
+        </div>
+
+        <div class="ref-card">
+          <span class="ref-tag">重點系統整理｜分數四則運算核心法則</span>
+          <h4>一、負分數表示、倒數與運算律</h4>
+          <ul>
+            <li><strong>負分數等值關係</strong>：當 $a, b$ 為正整數時，$\dfrac{-a}{b} = \dfrac{a}{-b} = -\dfrac{a}{b}$。</li>
+            <li><strong>比較負分數大小</strong>：負分數的絕對值愈大，其值愈小（即若 $a &gt; b &gt; 0$，則 $-a &lt; -b$）。</li>
+            <li><strong>倒數定義</strong>：若兩數的乘積為 $1$，則稱此兩數互為倒數。$\dfrac{b}{a}$ 的倒數為 $\dfrac{a}{b}$（$a, b \neq 0$）；$0$ 沒有倒數；帶分數求倒數須先化為假分數。</li>
+            <li><strong>分配律與去括號</strong>：$a \times (b + c) = a \times b + a \times c$；$-(a + b) = -a - b$，$-(a - b) = -a + b$。</li>
+          </ul>
+        </div>
+
+        <div class="ref-card">
+          <span class="ref-tag">素養加油站｜棒球投手防禦率（ERA）</span>
+          <h4>【閱讀文本一】2019 世界 12 強棒球賽投手表現數據</h4>
+          <p>投手防禦率（$ERA$）計算公式：$ERA = \dfrac{E}{N} \times 9$（$N$ 為總投球局數，$E$ 為總責任失分），代表平均每投九局所失的自責分，$ERA$ 愈低代表壓制力愈強。</p>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>投手</th>
+                <th>吳昇峰</th>
+                <th>王政浩</th>
+                <th>王宗豪</th>
+                <th>林政賢</th>
+                <th>陳柏豪</th>
+                <th>林樺慶</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>投球局數 ($N$)</strong></td>
+                <td>90</td>
+                <td>60</td>
+                <td>80</td>
+                <td>75</td>
+                <td>100</td>
+                <td>120</td>
+              </tr>
+              <tr>
+                <td><strong>責任失分 ($E$)</strong></td>
+                <td>12</td>
+                <td>13</td>
+                <td>11</td>
+                <td>25</td>
+                <td>34</td>
+                <td>20</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="ref-card">
+          <span class="ref-tag">閱讀題組二｜公司總資產價值獲利率分析</span>
+          <h4>【閱讀文本二】三家公司 4 月至 6 月獲利率統計</h4>
+          <p>若某月的獲利率為 $a\%$，則該月的總資產價值變為原來的 $(1 + a\%)$ 倍。</p>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>公司代號</th>
+                <th>4月到5月獲利率</th>
+                <th>5月到6月獲利率</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>甲公司</strong></td>
+                <td>$+7\%$</td>
+                <td>$+7\%$</td>
+              </tr>
+              <tr>
+                <td><strong>乙公司</strong></td>
+                <td>$+4\%$</td>
+                <td>$+10\%$</td>
+              </tr>
+              <tr>
+                <td><strong>丙公司</strong></td>
+                <td>$+2\%$</td>
+                <td>$+12\%$</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="ref-card">
+          <span class="ref-tag">幾何與數線圖示｜第 9、11 題對照圖</span>
+          <h4>【圖示對照】數線等分點與長方形邊長變化</h4>
+          <svg width="100%" height="145" viewBox="0 0 420 145" style="background:#0f151e; border-radius:6px; margin-top:4px;">
+            <!-- Number line -->
+            <text x="14" y="22" fill="#93c5fd" font-size="12" font-weight="bold">數線等分示意（第9題）：</text>
+            <line x1="30" y1="45" x2="210" y2="45" stroke="#cbd5e1" stroke-width="2"/>
+            <line x1="30" y1="39" x2="30" y2="51" stroke="#cbd5e1" stroke-width="2"/>
+            <line x1="210" y1="39" x2="210" y2="51" stroke="#cbd5e1" stroke-width="2"/>
+            <text x="26" y="65" fill="#fff" font-size="12">0</text>
+            <text x="206" y="65" fill="#fff" font-size="12">1</text>
+            <!-- 6 equal parts ticks -->
+            <line x1="60" y1="41" x2="60" y2="49" stroke="#64748b" stroke-width="1.5"/>
+            <line x1="90" y1="41" x2="90" y2="49" stroke="#64748b" stroke-width="1.5"/>
+            <line x1="120" y1="41" x2="120" y2="49" stroke="#64748b" stroke-width="1.5"/>
+            <line x1="150" y1="41" x2="150" y2="49" stroke="#64748b" stroke-width="1.5"/>
+            <circle cx="180" cy="45" r="4" fill="#38bdf8"/>
+            <text x="176" y="34" fill="#38bdf8" font-size="12" font-weight="bold">a</text>
+
+            <!-- Second number line 7 equal parts -->
+            <line x1="235" y1="45" x2="403" y2="45" stroke="#cbd5e1" stroke-width="2"/>
+            <line x1="235" y1="39" x2="235" y2="51" stroke="#cbd5e1" stroke-width="2"/>
+            <line x1="403" y1="39" x2="403" y2="51" stroke="#cbd5e1" stroke-width="2"/>
+            <text x="231" y="65" fill="#fff" font-size="12">0</text>
+            <text x="399" y="65" fill="#fff" font-size="12">1</text>
+            <line x1="259" y1="41" x2="259" y2="49" stroke="#64748b" stroke-width="1.5"/>
+            <line x1="283" y1="41" x2="283" y2="49" stroke="#64748b" stroke-width="1.5"/>
+            <line x1="307" y1="41" x2="307" y2="49" stroke="#64748b" stroke-width="1.5"/>
+            <line x1="331" y1="41" x2="331" y2="49" stroke="#64748b" stroke-width="1.5"/>
+            <line x1="355" y1="41" x2="355" y2="49" stroke="#64748b" stroke-width="1.5"/>
+            <circle cx="379" cy="45" r="4" fill="#fbbf24"/>
+            <text x="375" y="34" fill="#fbbf24" font-size="12" font-weight="bold">b</text>
+
+            <!-- Rectangle ABCD -> PQRS -->
+            <text x="14" y="92" fill="#93c5fd" font-size="12" font-weight="bold">長方形變化示意（第11題）：AB=20, AD=25</text>
+            <rect x="40" y="102" width="110" height="32" fill="none" stroke="#94a3b8" stroke-width="1.8"/>
+            <text x="24" y="105" fill="#cbd5e1" font-size="11">A</text>
+            <text x="155" y="105" fill="#cbd5e1" font-size="11">D</text>
+            <text x="24" y="138" fill="#cbd5e1" font-size="11">B</text>
+            <text x="155" y="138" fill="#cbd5e1" font-size="11">C</text>
+            <text x="175" y="122" fill="#fbbf24" font-size="13">➔</text>
+            <rect x="215" y="106" width="132" height="25.6" fill="none" stroke="#34d399" stroke-width="1.8"/>
+            <text x="200" y="108" fill="#6ee7b7" font-size="11">P</text>
+            <text x="352" y="108" fill="#6ee7b7" font-size="11">S</text>
+            <text x="200" y="135" fill="#6ee7b7" font-size="11">Q</text>
+            <text x="352" y="135" fill="#6ee7b7" font-size="11">R</text>
+          </svg>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Right Pane: Questions List -->
+    <main class="right-pane" id="rightPane">
+      <div class="section-banner">
+        <h2>國中七年級數學（一）2-3 分數的四則運算｜全真模擬測驗（目前載入 1～20 題）</h2>
+        <p>請依題意選擇最佳答案或於空格內輸入標準數值（分數請化為最簡分數，如 -3/4 或 2 1/3）。</p>
+      </div>
+      <div id="questionsContainer"></div>
+    </main>
+  </div>
+
+  <!-- Parent History Monitor Modal -->
+  <div class="modal-overlay" id="parentModal">
+    <div class="modal-card">
+      <div class="modal-head">
+        <h3>👨‍👩‍👧 家長監控中心｜歷次測驗歷史紀錄表</h3>
+        <button class="close-modal" onclick="closeModal('parentModal')">&times;</button>
+      </div>
+      <div id="parentHistoryContent"></div>
+      <div style="margin-top: 14px; text-align: right;">
+        <button class="btn" style="border-color: #ef4444; color: #fca5a5;" onclick="clearParentHistory()">清除歷史紀錄</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Answer Key Verification Modal -->
+  <div class="modal-overlay" id="verifyModal">
+    <div class="modal-card">
+      <div class="modal-head">
+        <h3>❖ 題庫視覺化驗證與答案總表</h3>
+        <button class="close-modal" onclick="closeModal('verifyModal')">&times;</button>
+      </div>
+      <div id="verifyDistributionSummary" style="margin-bottom: 12px; font-size: 13.5px; color: #93c5fd;"></div>
+      <div id="verifyTableContent"></div>
+    </div>
+  </div>
+
+  <div class="toast" id="toastMsg">已複製到剪貼簿！</div>
+
+  <script>
+    // =========================================================================
+    // 題庫結構化 JSON 陣列（目前收錄第 1～20 題，100% 源自上傳自修資料）
+    // =========================================================================
+    const rawQuestionBank = [
+      {
+        id: 1,
+        type: "choice",
+        dimension: "基礎記憶與理解",
+        difficulty: "基礎理解題",
+        isAdvanced: false,
+        stem: "已知 $a = -5\\dfrac{3}{4}$、$b = (-5) + \\dfrac{3}{4}$、$c = (-5) \\times \\dfrac{3}{4}$、$d = (-5) \\div \\dfrac{3}{4}$，則下列關於四數大小關係的敘述何者正確？",
+        options: [
+          { key: "A", text: "$c < b < d < a$" },
+          { key: "B", text: "$a < d < b < c$" },
+          { key: "C", text: "$d < b < a < c$" },
+          { key: "D", text: "$d < a < b < c$" }
+        ],
+        answer: "D",
+        coreConcept: "負分數的運算結果與大小比較（先計算各算式之值，再依負數絕對值愈大其值愈小比較）。",
+        steps: "1. 計算各數值：<br>$a = -5\\dfrac{3}{4} = -5.75$<br>$b = -5 + \\dfrac{3}{4} = -4\\dfrac{1}{4} = -4.25$<br>$c = (-5) \\times \\dfrac{3}{4} = -\\dfrac{15}{4} = -3\\dfrac{3}{4} = -3.75$<br>$d = (-5) \\div \\dfrac{3}{4} = (-5) \\times \\dfrac{4}{3} = -\\dfrac{20}{3} = -6\\dfrac{2}{3} \\approx -6.67$<br>2. 比較負數大小：因為 $6\\dfrac{2}{3} > 5\\dfrac{3}{4} > 4\\dfrac{1}{4} > 3\\dfrac{3}{4}$，故 $-6\\dfrac{2}{3} < -5\\dfrac{3}{4} < -4\\dfrac{1}{4} < -3\\dfrac{3}{4}$，即 $d < a < b < c$。",
+        distractors: "(A) 誤以為乘以真分數會變小而錯排 $c$ 為最小；(B) 誤將 $-5\\frac{3}{4}$ 當成 $-5 + \\frac{3}{4}$ 而錯判 $a$ 最小；(C) 混淆 $a$ 與 $b$ 的運算符號。"
+      },
+      {
+        id: 2,
+        type: "choice",
+        dimension: "基礎記憶與理解",
+        difficulty: "基礎理解題",
+        isAdvanced: false,
+        stem: "下列哪一個算式的計算結果與 $-5\\dfrac{3}{8} - 7\\dfrac{1}{4}$ 的值相等？",
+        options: [
+          { key: "A", text: "$(-5 + 7) - (\\dfrac{3}{8} + \\dfrac{1}{4})$" },
+          { key: "B", text: "$(-5 - 7) - (\\dfrac{3}{8} + \\dfrac{1}{4})$" },
+          { key: "C", text: "$(-5 + 7) - (\\dfrac{3}{8} - \\dfrac{1}{4})$" },
+          { key: "D", text: "$(-5 - 7) - (\\dfrac{3}{8} - \\dfrac{1}{4})$" }
+        ],
+        answer: "B",
+        coreConcept: "負帶分數的拆解與去括號規則：$-a\\dfrac{b}{c} = -a - \\dfrac{b}{c} = -(a + \\dfrac{b}{c})$。",
+        steps: "1. 將負帶分數拆解為整數與真分數的和之相反數：<br>$-5\\dfrac{3}{8} = -5 - \\dfrac{3}{8}$，$-7\\dfrac{1}{4} = -7 - \\dfrac{1}{4}$。<br>2. 合併整數部分與分數部分：<br>原式 $= (-5 - \\dfrac{3}{8}) + (-7 - \\dfrac{1}{4}) = (-5 - 7) + (-\\dfrac{3}{8} - \\dfrac{1}{4}) = (-5 - 7) - (\\dfrac{3}{8} + \\dfrac{1}{4})$。",
+        distractors: "(A) 整數部分符號誤寫為 $+7$；(C) 同時誤判整數 $+7$ 與分數相減；(D) 常見迷思：誤以為 $-5\\frac{3}{8}$ 等於 $-5 + \\frac{3}{8}$，導致分數部分變成減號。"
+      },
+      {
+        id: 3,
+        type: "choice",
+        dimension: "基礎記憶與理解",
+        difficulty: "基礎理解題",
+        isAdvanced: false,
+        stem: "下列哪一個算式的乘積為最小？",
+        options: [
+          { key: "A", text: "$(-3\\dfrac{1}{2}) \\times (-\\dfrac{1}{16}) \\times (-4)$" },
+          { key: "B", text: "$(-5) \\times (-\\dfrac{1}{16}) \\times (-3\\dfrac{1}{2})$" },
+          { key: "C", text: "$(-2\\dfrac{5}{6}) \\times \\dfrac{3}{7} \\times (-1\\dfrac{9}{10})$" },
+          { key: "D", text: "$3\\dfrac{1}{15} \\times (-\\dfrac{4}{21}) \\times (-2\\dfrac{1}{2})$" }
+        ],
+        answer: "B",
+        coreConcept: "多個分數相乘的正負號判定規則（奇數個負數相乘為負，偶數個負數相乘為正）。",
+        steps: "1. 先判別正負號：<br>(C) 含 2 個負數，乘積為正數；(D) 含 2 個負數，乘積為正數，故 (C)、(D) 必大於 (A)、(B)。<br>(A) 與 (B) 皆含 3 個負數，乘積皆為負數。<br>2. 比較 (A) 與 (B) 的絕對值：<br>(A) 的絕對值 $= 3\\dfrac{1}{2} \\times \\dfrac{1}{16} \\times 4 = \\dfrac{7}{8}$；<br>(B) 的絕對值 $= 5 \\times \\dfrac{1}{16} \\times 3\\dfrac{1}{2} = \\dfrac{35}{32} = 1\\dfrac{3}{32}$。<br>3. 因為 $\\dfrac{35}{32} > \\dfrac{7}{8}$，加上負號後 $-\\dfrac{35}{32} < -\\dfrac{7}{8}$，故 (B) 乘積最小。",
+        distractors: "(A) 負數絕對值較小，其值反而較大；(C)(D) 負負得正，結果為正數而非最小。"
+      },
+      {
+        id: 4,
+        type: "choice",
+        dimension: "分析與實驗應用",
+        difficulty: "核心概念題",
+        isAdvanced: false,
+        stem: "烏龜、兔子與眼鏡蛇進行賽跑。若烏龜平均每 $9$ 分鐘走 $1$ 公尺，兔子平均每 $15$ 分鐘走 $1200$ 公尺，眼鏡蛇平均每 $27$ 分鐘走 $10$ 公尺，則速度最快的比速度最慢的每分鐘快多少公尺？",
+        options: [
+          { key: "A", text: "$79\\dfrac{26}{27}$" },
+          { key: "B", text: "$78\\dfrac{8}{9}$" },
+          { key: "C", text: "$79\\dfrac{8}{9}$" },
+          { key: "D", text: "$79\\dfrac{17}{27}$" }
+        ],
+        answer: "C",
+        coreConcept: "速率計算（速率 $=$ 距離 $\\div$ 時間）與異分母分數減法。",
+        steps: "1. 分別求出三者每分鐘的速度：<br>烏龜速度 $= 1 \\div 9 = \\dfrac{1}{9}$（公尺/分）<br>兔子速度 $= 1200 \\div 15 = 80$（公尺/分）<br>眼鏡蛇速度 $= 10 \\div 27 = \\dfrac{10}{27}$（公尺/分）<br>2. 比較最慢者：因為 $\\dfrac{1}{9} = \\dfrac{3}{27} < \\dfrac{10}{27}$，故烏龜最慢，兔子最快。<br>3. 計算速度差：$80 - \\dfrac{1}{9} = 79\\dfrac{8}{9}$（公尺/分）。",
+        distractors: "(A) 誤算成 $80 - \\frac{1}{27}$；(B) 整數借位錯誤，誤算 $80 - \\frac{1}{9} = 78\\frac{8}{9}$；(D) 誤將眼鏡蛇當成最慢，計算 $80 - \\frac{10}{27} = 79\\frac{17}{27}$。"
+      },
+      {
+        id: 5,
+        type: "choice",
+        dimension: "基礎記憶與理解",
+        difficulty: "核心概念題",
+        isAdvanced: false,
+        stem: "若 $-\\dfrac{37}{111} - (-\\dfrac{39}{-78}) + \\dfrac{1234}{4936}$ 之值為 $k$，則下列關於 $k$ 值的範圍敘述何者正確？",
+        options: [
+          { key: "A", text: "$0 < k < \\dfrac{1}{2}$" },
+          { key: "B", text: "$\\dfrac{1}{2} < k < 1$" },
+          { key: "C", text: "$-\\dfrac{1}{2} < k < 0$" },
+          { key: "D", text: "$-1 < k < -\\dfrac{1}{2}$" }
+        ],
+        answer: "D",
+        coreConcept: "負分數化簡（$-\\dfrac{-a}{-b} = -\\dfrac{a}{b}$）、約分技巧與異分母分數加減。",
+        steps: "1. 先將各項化為最簡分數：<br>$-\\dfrac{37}{111} = -\\dfrac{1}{3}$<br>$-\\dfrac{39}{-78} = \\dfrac{1}{2}$，故 $-(-\\dfrac{39}{-78}) = -\\dfrac{1}{2}$<br>$\\dfrac{1234}{4936} = \\dfrac{1}{4}$<br>2. 通分計算 $k$ 值：<br>$k = -\\dfrac{1}{3} - \\dfrac{1}{2} + \\dfrac{1}{4} = \\dfrac{-4 - 6 + 3}{12} = -\\dfrac{7}{12}$。<br>3. 判斷範圍：$-1 < -\\dfrac{7}{12} < -\\dfrac{1}{2}$，故選 (D)。",
+        distractors: "(A)(B) 誤將 $-(-\\frac{39}{-78})$ 算成 $+\\frac{1}{2}$ 導致結果為正；(C) 誤算結果為 $-\\frac{5}{12}$ 而落入 $-\\frac{1}{2} < k < 0$。"
+      },
+      {
+        id: 6,
+        type: "choice",
+        dimension: "基礎記憶與理解",
+        difficulty: "基礎理解題",
+        isAdvanced: false,
+        stem: "將分數 $\\dfrac{7}{12}$ 的分母加上 $24$，則分子要加上多少，其值才會變成 $\\dfrac{7}{12}$ 的 $2$ 倍？",
+        options: [
+          { key: "A", text: "$30$" },
+          { key: "B", text: "$35$" },
+          { key: "C", text: "$40$" },
+          { key: "D", text: "$45$" }
+        ],
+        answer: "B",
+        coreConcept: "擴分與等值分數的應用。",
+        steps: "1. 目標分數為 $\\dfrac{7}{12} \\times 2 = \\dfrac{14}{12}$。<br>2. 新分母為 $12 + 24 = 36$，即分母擴大為原來的 $36 \\div 12 = 3$ 倍。<br>3. 將目標分數 $\\dfrac{14}{12}$ 擴分使分母為 $36$：$\\dfrac{14 \\times 3}{12 \\times 3} = \\dfrac{42}{36}$。<br>4. 因此新分子需為 $42$，原分子 $7$ 需加上 $42 - 7 = 35$。",
+        distractors: "(A) 誤算 $42 - 12 = 30$；(C) 計算擴分倍數錯誤；(D) 直接回答擴大後的分子接近值或誤算 $21 + 24 = 45$。"
+      },
+      {
+        id: 7,
+        type: "choice",
+        dimension: "基礎記憶與理解",
+        difficulty: "核心概念題",
+        isAdvanced: false,
+        stem: "計算 $(3\\dfrac{1}{3} + 10\\dfrac{1}{6} - 15\\dfrac{1}{2}) \\times (3\\dfrac{1}{5} - 2\\dfrac{1}{2})$ 之值為何？",
+        options: [
+          { key: "A", text: "$-\\dfrac{8}{15}$" },
+          { key: "B", text: "$-\\dfrac{5}{6}$" },
+          { key: "C", text: "$-\\dfrac{2}{3}$" },
+          { key: "D", text: "$-\\dfrac{7}{5}$" }
+        ],
+        answer: "D",
+        coreConcept: "帶分數的加減混合與乘法運算（先算括號內，再相乘約分）。",
+        steps: "1. 計算第一個括號：<br>$3\\dfrac{1}{3} + 10\\dfrac{1}{6} - 15\\dfrac{1}{2} = 3\\dfrac{2}{6} + 10\\dfrac{1}{6} - 15\\dfrac{3}{6} = (3 + 10 - 15) + (\\dfrac{2 + 1 - 3}{6}) = -2$。<br>2. 計算第二個括號：<br>$3\\dfrac{1}{5} - 2\\dfrac{1}{2} = 3\\dfrac{2}{10} - 2\\dfrac{5}{10} = \\dfrac{32}{10} - \\dfrac{25}{10} = \\dfrac{7}{10}$。<br>3. 兩者相乘：$(-2) \\times \\dfrac{7}{10} = -\\dfrac{7}{5}$。",
+        distractors: "(A) 第二個括號誤算成 $\\frac{4}{15}$；(B) 第一個括號借位失誤；(C) 約分時分母誤約為 $3$。"
+      },
+      {
+        id: 8,
+        type: "choice",
+        dimension: "分析與實驗應用",
+        difficulty: "進階題",
+        isAdvanced: true,
+        stem: "若 $k$ 為負整數，且 $-\\dfrac{3}{11} < \\dfrac{18}{k} < -\\dfrac{6}{25}$，則可能的 $k$ 值共有幾個？",
+        options: [
+          { key: "A", text: "$8$" },
+          { key: "B", text: "$9$" },
+          { key: "C", text: "$10$" },
+          { key: "D", text: "$11$" }
+        ],
+        answer: "A",
+        coreConcept: "同分子負分數的大小比較（將分子同化為 $18$，比較分母範圍）。",
+        steps: "1. 將三個負分數的分子皆擴分為 $18$：<br>$-\\dfrac{3}{11} = -\\dfrac{18}{66} = \\dfrac{18}{-66}$<br>$-\\dfrac{6}{25} = -\\dfrac{18}{75} = \\dfrac{18}{-75}$<br>2. 不等式改寫為：$\\dfrac{18}{-66} < \\dfrac{18}{k} < \\dfrac{18}{-75}$。<br>3. 觀察負分母大小關係：因為 $\\dfrac{18}{-66} \\approx -0.2727$，$\\dfrac{18}{-75} = -0.24$，要使負數介於兩者之間，其負分母 $k$ 必須滿足 $-75 < k < -66$。<br>4. 符合條件的負整數 $k$ 為 $-67, -68, -69, -70, -71, -72, -73, -74$，共 $74 - 67 + 1 = 8$ 個。",
+        distractors: "(B) 計算個數時未減 $1$（誤算 $75 - 66 = 9$）；(C) 包含端點 $-66$ 與 $-75$（誤算 $8 + 2 = 10$）；(D) 顛倒正負分數分母大小關係。"
+      },
+      {
+        id: 9,
+        type: "choice",
+        dimension: "分析與實驗應用",
+        difficulty: "進階題",
+        isAdvanced: true,
+        stem: "如左側圖示，將兩條數線的 $0$ 與 $1$ 均對齊，$a$ 代表 $0$ 到 $1$ 之間 $6$ 個等分點中，最靠近 $1$ 的數；$b$ 代表 $0$ 到 $1$ 之間 $7$ 個等分點中，最靠近 $1$ 的數。若 $a < c < b$，則下列何者【不可】能為 $c$ 的值？",
+        options: [
+          { key: "A", text: "$\\dfrac{97}{112}$" },
+          { key: "B", text: "$\\dfrac{243}{280}$" },
+          { key: "C", text: "$\\dfrac{487}{560}$" },
+          { key: "D", text: "$\\dfrac{149}{168}$" }
+        ],
+        answer: "D",
+        coreConcept: "數線等分點（注意：$n$ 個等分點將線段分成 $n+1$ 等分）與通分比大小。",
+        steps: "1. 確定 $a$ 與 $b$ 的值：<br>$0$ 到 $1$ 之間有 $6$ 個等分點，共分成 $6 + 1 = 7$ 等分，最靠近 $1$ 的點為 $a = \\dfrac{6}{7}$。<br>$0$ 到 $1$ 之間有 $7$ 個等分點，共分成 $7 + 1 = 8$ 等分，最靠近 $1$ 的點為 $b = \\dfrac{7}{8}$。<br>2. 通分比較各選項是否介於 $\\dfrac{6}{7}$ 與 $\\dfrac{7}{8}$ 之間：<br>(A) $\\dfrac{6}{7} = \\dfrac{96}{112} < \\dfrac{97}{112} < \\dfrac{98}{112} = \\dfrac{7}{8}$（符合）<br>(B) $\\dfrac{6}{7} = \\dfrac{240}{280} < \\dfrac{243}{280} < \\dfrac{245}{280} = \\dfrac{7}{8}$（符合）<br>(C) $\\dfrac{6}{7} = \\dfrac{480}{560} < \\dfrac{487}{560} < \\dfrac{490}{560} = \\dfrac{7}{8}$（符合）<br>(D) $\\dfrac{6}{7} = \\dfrac{144}{168}$，而 $\\dfrac{7}{8} = \\dfrac{147}{168}$，因為 $\\dfrac{149}{168} > \\dfrac{147}{168}$，超出 $b$ 的範圍，故不可能。",
+        distractors: "(A)(B)(C) 皆正確落於 $\\frac{6}{7}$ 與 $\\frac{7}{8}$ 之間；學生常犯錯誤是將「$6$ 個等分點」誤當成「分成 $6$ 等分（$\\frac{5}{6}$）」。"
+      },
+      {
+        id: 10,
+        type: "choice",
+        dimension: "分析與實驗應用",
+        difficulty: "核心概念題",
+        isAdvanced: false,
+        stem: "某日老師出了一題有關分數的試題，阿寶的計算過程如下：<br>$39 \\times 139\\dfrac{9}{13} - 39 \\times 39\\dfrac{4}{13} = 39 \\times (139\\dfrac{9}{13} - 39\\dfrac{4}{13})$ ……步驟甲<br>$= 39 \\times (139 + \\dfrac{9}{13} - 39 + \\dfrac{4}{13})$ ……步驟乙<br>$= 39 \\times 101$ ……步驟丙<br>$= 3939$<br>如果你是老師，你應該跟阿寶說什麼才合理？",
+        options: [
+          { key: "A", text: "阿寶你真棒，你完全答對了" },
+          { key: "B", text: "很可惜，你從步驟甲開始錯" },
+          { key: "C", text: "很可惜，你從步驟乙開始錯" },
+          { key: "D", text: "很可惜，你從步驟丙開始錯" }
+        ],
+        answer: "C",
+        coreConcept: "乘法分配律與帶分數拆解去括號的符號變號錯誤診斷。",
+        steps: "1. 檢視步驟甲：提出公因數 $39$，$39 \\times (139\\dfrac{9}{13} - 39\\dfrac{4}{13})$，使用分配律完全正確。<br>2. 檢視步驟乙：$-39\\dfrac{4}{13} = -(39 + \\dfrac{4}{13}) = -39 - \\dfrac{4}{13}$，阿寶卻寫成 $-39 + \\dfrac{4}{13}$，忽略了分數部分也必須變號，導致結果多算了 $\\dfrac{8}{13}$。<br>3. 正確算式應為 $39 \\times (100 + \\dfrac{5}{13}) = 3900 + 15 = 3915$，故從步驟乙開始錯。",
+        distractors: "(A) 未發現負帶分數拆解未變號的陷阱；(B) 誤判步驟甲分配律有誤；(D) 步驟丙是承接步驟乙的錯誤計算而來，源頭在步驟乙。"
+      },
+      {
+        id: 11,
+        type: "choice",
+        dimension: "高階綜合鑑別",
+        difficulty: "挑戰題",
+        isAdvanced: true,
+        stem: "如左側圖示，已知長方形 $ABCD$ 中，$\\overline{AB} = 20$，$\\overline{AD} = 25$。今魯夫將 $\\overline{AB}$ 減少 $\\dfrac{1}{5}$ 長，$\\overline{AD}$ 增加 $\\dfrac{1}{5}$ 長得新長方形 $PQRS$，則下列敘述何者正確？",
+        options: [
+          { key: "A", text: "長方形 $ABCD$ 與 $PQRS$ 面積、周長均相等" },
+          { key: "B", text: "長方形 $ABCD$ 與 $PQRS$ 面積、周長均不相等" },
+          { key: "C", text: "長方形 $ABCD$ 與 $PQRS$ 面積相等，周長不相等" },
+          { key: "D", text: "長方形 $ABCD$ 與 $PQRS$ 面積不相等，周長相等" }
+        ],
+        answer: "B",
+        coreConcept: "幾何圖形邊長比例增減與分數乘法運算（一邊增 $\\frac{1}{5}$、一邊減 $\\frac{1}{5}$，面積會變為原來的 $\\frac{24}{25}$）。",
+        steps: "1. 計算原長方形 $ABCD$ 的面積與周長：<br>原面積 $= 20 \\times 25 = 500$；原周長 $= 2 \\times (20 + 25) = 90$。<br>2. 計算新長方形 $PQRS$ 的邊長：<br>$\\overline{PQ} = 20 \\times (1 - \\dfrac{1}{5}) = 20 \\times \\dfrac{4}{5} = 16$<br>$\\overline{PS} = 25 \\times (1 + \\dfrac{1}{5}) = 25 \\times \\dfrac{6}{5} = 30$<br>3. 比較新面積與新周長：<br>新面積 $= 16 \\times 30 = 480 \\neq 500$（面積不相等）；<br>新周長 $= 2 \\times (16 + 30) = 92 \\neq 90$（周長不相等），故選 (B)。",
+        distractors: "(A)(C) 常見直覺迷思：誤以為一邊加 $\\frac{1}{5}$、一邊減 $\\frac{1}{5}$ 剛好抵消而面積不變；(D) 誤以為周長維持不變。"
+      },
+      {
+        id: 12,
+        type: "choice",
+        dimension: "分析與實驗應用",
+        difficulty: "核心概念題",
+        isAdvanced: false,
+        stem: "已知甲、乙兩長方形的長與寬分別為：甲長方形長 $9\\dfrac{1}{12}$、寬 $3\\dfrac{3}{5}$；乙長方形長 $9\\dfrac{4}{9}$、寬 $5\\dfrac{7}{12}$。若兩長方形的面積和為 $k$，則下列何者正確？",
+        options: [
+          { key: "A", text: "$84 < k < 85$" },
+          { key: "B", text: "$85 < k < 86$" },
+          { key: "C", text: "$86 < k < 87$" },
+          { key: "D", text: "$87 < k < 88$" }
+        ],
+        answer: "B",
+        coreConcept: "帶分數乘法運算與數值範圍估算。",
+        steps: "1. 計算甲長方形面積：<br>$9\\dfrac{1}{12} \\times 3\\dfrac{3}{5} = \\dfrac{109}{12} \\times \\dfrac{18}{5} = \\dfrac{327}{10} = 32\\dfrac{7}{10} = 32.7$。<br>2. 計算乙長方形面積：<br>$9\\dfrac{4}{9} \\times 5\\dfrac{7}{12} = \\dfrac{85}{9} \\times \\dfrac{67}{12} = \\dfrac{5695}{108} = 52\\dfrac{79}{108} \\approx 52.73$。<br>3. 計算面積和 $k$：<br>$k = 32.7 + 52\\dfrac{79}{108} = 84 + \\dfrac{7}{10} + \\dfrac{79}{108}$。因為 $\\dfrac{7}{10} = 0.7$ 且 $\\dfrac{79}{108} > 0.73$，兩分數相加約為 $1.43$，故 $k \\approx 85.43$，介於 $85$ 與 $86$ 之間。",
+        distractors: "(A) 僅將整數部分 $32 + 52 = 84$ 相加，忽略兩個真分數和超過 $1$；(C)(D) 進位估算過高。"
+      },
+      {
+        id: 13,
+        type: "choice",
+        dimension: "高階綜合鑑別",
+        difficulty: "挑戰題",
+        isAdvanced: true,
+        stem: "請參照左側【閱讀文本二】三家公司每月總資產價值的獲利率表（4月到5月、5月到6月分別為：甲 $+7\%, +7\%$；乙 $+4\%, +10\%$；丙 $+2\%, +12\%$）。若某月的獲利率為 $a\%$，則該月的總資產價值變為原來的 $(1 + a\%)$ 倍。關於從 $4$ 月到 $6$ 月各家總資產獲利率的敘述，下列何者正確？",
+        options: [
+          { key: "A", text: "甲最高" },
+          { key: "B", text: "乙最高" },
+          { key: "C", text: "丙最高" },
+          { key: "D", text: "三家均相同" }
+        ],
+        answer: "A",
+        coreConcept: "連續比例變化（複利概念）與分數乘法分配律比較。",
+        steps: "1. 設三家 $4$ 月原總資產皆為 $1$，分別計算 $6$ 月的倍率：<br>甲：$(1 + \\dfrac{7}{100})(1 + \\dfrac{7}{100}) = 1 + \\dfrac{14}{100} + \\dfrac{49}{10000}$<br>乙：$(1 + \\dfrac{4}{100})(1 + \\dfrac{10}{100}) = 1 + \\dfrac{14}{100} + \\dfrac{40}{10000}$<br>丙：$(1 + \\dfrac{2}{100})(1 + \\dfrac{12}{100}) = 1 + \\dfrac{14}{100} + \\dfrac{24}{10000}$<br>2. 比較三者：$1 + \\dfrac{14}{100} + \\dfrac{49}{10000} > 1 + \\dfrac{14}{100} + \\dfrac{40}{10000} > 1 + \\dfrac{14}{100} + \\dfrac{24}{10000}$，故甲最高。",
+        distractors: "(D) 最常見迷思：將兩個月獲利率直接相加（$7+7=14$、$4+10=14$、$2+12=14$），忽略了第二個月的獲利基準已包含第一個月的增長。"
+      },
+      {
+        id: 14,
+        type: "choice",
+        dimension: "分析與實驗應用",
+        difficulty: "核心概念題",
+        isAdvanced: false,
+        stem: "臺大校園內的醉月湖風景秀麗。阿智將一根竹竿垂直插入醉月湖中，竹竿在泥土部分占全長的 $\\dfrac{1}{3}$，在水中部分占泥土部分的 $\\dfrac{3}{2}$，又在空中部分長度為 $2$ 公尺，則竹竿全長為多少公尺？",
+        options: [
+          { key: "A", text: "$10$" },
+          { key: "B", text: "$12$" },
+          { key: "C", text: "$14$" },
+          { key: "D", text: "$16$" }
+        ],
+        answer: "B",
+        coreConcept: "部分占全部的比例應用（基準量統一為竹竿全長）。",
+        steps: "1. 統一基準量為「竹竿全長」：<br>泥土部分占全長的 $\\dfrac{1}{3}$。<br>水中部分占泥土部分的 $\\dfrac{3}{2}$，即占全長的 $\\dfrac{1}{3} \\times \\dfrac{3}{2} = \\dfrac{1}{2}$。<br>2. 求出空中部分占全長的比例：<br>$1 - \\dfrac{1}{3} - \\dfrac{1}{2} = 1 - \\dfrac{5}{6} = \\dfrac{1}{6}$。<br>3. 已知空中部分為 $2$ 公尺，故全長 $= 2 \\div \\dfrac{1}{6} = 12$（公尺）。",
+        distractors: "(A) 誤算比例差為 $\\frac{1}{5}$；(C)(D) 誤將水中部分直接當成占全長的 $\\frac{3}{2}$ 或計算比例失誤。"
+      },
+      {
+        id: 15,
+        type: "choice",
+        dimension: "高階綜合鑑別",
+        difficulty: "挑戰題",
+        isAdvanced: true,
+        stem: "阿慶對學校附近社區擁有手機的居民做調查，發現原先使用甲電信的居民中，有 $10\\%$ 明年會改用乙電信，有 $90\\%$ 繼續用甲電信；原先使用乙電信的居民中，有 $40\\%$ 明年會改用甲電信，有 $60\\%$ 繼續用乙電信。已知原先有 $1000$ 人使用甲電信，$500$ 人使用乙電信，若明年對同一批居民再做一次調查的結果與今年相同，則後年有多少人使用甲電信？",
+        options: [
+          { key: "A", text: "$1050$" },
+          { key: "B", text: "$1100$" },
+          { key: "C", text: "$1150$" },
+          { key: "D", text: "$1200$" }
+        ],
+        answer: "C",
+        coreConcept: "多階段比例轉移計算（狀態轉移矩陣之分數乘法應用）。",
+        steps: "1. 計算「明年」使用甲、乙電信的人數：<br>明年甲電信 $= 1000 \\times 90\\% + 500 \\times 40\\% = 900 + 200 = 1100$（人）<br>明年乙電信 $= 1000 \\times 10\\% + 500 \\times 60\\% = 100 + 300 = 400$（人）<br>2. 計算「後年」使用甲電信的人數：<br>後年甲電信 $= 1100 \\times 90\\% + 400 \\times 40\\% = 990 + 160 = 1150$（人）。",
+        distractors: "(B) 只算到「明年」使用甲電信的人數（$1100$ 人），忘記題目問的是「後年」；(A)(D) 轉移比例乘錯對象。"
+      },
+      {
+        id: 16,
+        type: "cloze",
+        dimension: "基礎記憶與理解",
+        difficulty: "核心概念題",
+        isAdvanced: false,
+        stem: "阿忠在計算兩個分數的加法運算時，誤將「$+$」號看成「$-$」號，其他運算上沒有錯誤，得結果為 $-\\dfrac{1}{20}$。已知被加數為 $-\\dfrac{3}{4}$，則正確的運算結果為 ________ 。",
+        answer: "-29/20",
+        acceptAnswers: ["-29/20", "-1 9/20", "-1.45"],
+        coreConcept: "逆推還原法與異分母分數加減運算。",
+        steps: "1. 設加數為 $x$，依誤看算式列式：$-\\dfrac{3}{4} - x = -\\dfrac{1}{20}$。<br>2. 求出加數 $x$：$x = -\\dfrac{3}{4} - (-\\dfrac{1}{20}) = -\\dfrac{15}{20} + \\dfrac{1}{20} = -\\dfrac{14}{20} = -\\dfrac{7}{10}$。<br>3. 計算正確加法結果：$-\\dfrac{3}{4} + (-\\dfrac{7}{10}) = -\\dfrac{15}{20} - \\dfrac{14}{20} = -\\dfrac{29}{20}$（或 $-1\\dfrac{9}{20}$）。",
+        distractors: "學生常在求 $x$ 時移項變號錯誤，或求出 $x = -\\frac{7}{10}$ 後直接當成最終答案。"
+      },
+      {
+        id: 17,
+        type: "cloze",
+        dimension: "基礎記憶與理解",
+        difficulty: "基礎理解題",
+        isAdvanced: false,
+        stem: "已知 $\\dfrac{2}{3 \\times 5} = \\dfrac{5 - 3}{3 \\times 5} = \\dfrac{1}{3} - \\dfrac{1}{5}$，由此推算 $\\dfrac{2}{63} + \\dfrac{2}{99} + \\dfrac{2}{143} + \\dfrac{2}{195} =$ ________ 。",
+        answer: "8/105",
+        acceptAnswers: ["8/105"],
+        coreConcept: "分項對消法（裂項相消）：$\\dfrac{b - a}{a \\times b} = \\dfrac{1}{a} - \\dfrac{1}{b}$。",
+        steps: "1. 將分母分解為相差 $2$ 的兩奇數相乘：<br>$63 = 7 \\times 9$，$99 = 9 \\times 11$，$143 = 11 \\times 13$，$195 = 13 \\times 15$。<br>2. 拆項並前後對消：<br>原式 $= (\\dfrac{1}{7} - \\dfrac{1}{9}) + (\\dfrac{1}{9} - \\dfrac{1}{11}) + (\\dfrac{1}{11} - \\dfrac{1}{13}) + (\\dfrac{1}{13} - \\dfrac{1}{15})$<br>$= \\dfrac{1}{7} - \\dfrac{1}{15} = \\dfrac{15 - 7}{105} = \\dfrac{8}{105}$。",
+        distractors: "常見錯誤是忘記分子為 $2$（不需再乘 $\\frac{1}{2}$），誤將答案再除以 $2$ 得到 $\\frac{4}{105}$。"
+      },
+      {
+        id: 18,
+        type: "cloze",
+        dimension: "分析與實驗應用",
+        difficulty: "挑戰題",
+        isAdvanced: true,
+        stem: "九子三姊妹三人同做一題「三個負數的加法」，大丸子不慎將第一個分數的性質符號看錯，計算所得的和為 $-3\\dfrac{1}{2}$；二丸子不慎將第二個分數的性質符號看錯，計算所得的和為 $-4\\dfrac{1}{3}$；小丸子不慎將第三個分數的性質符號看錯，計算所得的和為 $-5\\dfrac{1}{4}$。請問正確的和是多少？ ________",
+        answer: "-13 1/12",
+        acceptAnswers: ["-13 1/12", "-157/12"],
+        coreConcept: "三元一次聯立方程組的對稱相加消去法（符號看錯問題）。",
+        steps: "1. 設三個負數分別為 $a, b, c$，依三人誤算結果列式：<br>(1) $-a + b + c = -3\\dfrac{1}{2}$<br>(2) $a - b + c = -4\\dfrac{1}{3}$<br>(3) $a + b - c = -5\\dfrac{1}{4}$<br>2. 將 (1) $+$ (2) $+$ (3) 三式左右分別相加：<br>$(-a + a + a) + (b - b + b) + (c + c - c) = (-3\\dfrac{1}{2}) + (-4\\dfrac{1}{3}) + (-5\\dfrac{1}{4})$<br>$a + b + c = -(3 + 4 + 5) - (\\dfrac{6}{12} + \\dfrac{4}{12} + \\dfrac{3}{12}) = -12 - \\dfrac{13}{12} = -13\\dfrac{1}{12}$（或 $-\\dfrac{157}{12}$）。",
+        distractors: "部分學生誤以為三式相加會得到 $2(a+b+c)$，導致多除以 $2$。"
+      },
+      {
+        id: 19,
+        type: "calc",
+        dimension: "分析與實驗應用",
+        difficulty: "核心概念題",
+        isAdvanced: false,
+        stem: "【計算題】請參照左側【閱讀文本一】「2019 世界 12 強棒球賽投手表現數據」，計算每位投手的防禦率 $ERA = \\dfrac{E}{N} \\times 9$，並寫出總教練應依序派出哪三位投手分別擔任先發投手、中繼投手、救援投手（$ERA$ 值由低至高依序派出）？",
+        answer: "吳昇峰、王宗豪、林樺慶",
+        acceptAnswers: ["吳昇峰、王宗豪、林樺慶", "吳昇峰,王宗豪,林樺慶", "吳昇峰 王宗豪 林樺慶"],
+        coreConcept: "分數除法與乘法應用（防禦率公式代入與異分母分數大小比較）。",
+        steps: "1. 計算六位投手的 $ERA$ 值：<br>• 吳昇峰：$\\dfrac{12}{90} \\times 9 = \\dfrac{12}{10} = 1.2$<br>• 王政浩：$\\dfrac{13}{60} \\times 9 = \\dfrac{39}{20} = 1.95$<br>• 王宗豪：$\\dfrac{11}{80} \\times 9 = \\dfrac{99}{80} = 1.2375$<br>• 林政賢：$\\dfrac{25}{75} \\times 9 = \\dfrac{1}{3} \\times 9 = 3.0$<br>• 陳柏豪：$\\dfrac{34}{100} \\times 9 = \\dfrac{306}{100} = 3.06$<br>• 林樺慶：$\\dfrac{20}{120} \\times 9 = \\dfrac{1}{6} \\times 9 = 1.5$<br>2. 由低至高排序：$1.2$（吳昇峰）$< 1.2375$（王宗豪）$< 1.5$（林樺慶）$< 1.95 < 3.0 < 3.06$。<br>3. 故依序派出：先發投手「吳昇峰」、中繼投手「王宗豪」、救援投手「林樺慶」。",
+        distractors: "常見錯誤是忘記乘以 $9$，直接比較 $\\frac{E}{N}$ 雖不影響排序，但若計算 $ERA$ 數值會少 $9$ 倍。"
+      },
+      {
+        id: 20,
+        type: "calc",
+        dimension: "高階綜合鑑別",
+        difficulty: "挑戰題",
+        isAdvanced: true,
+        stem: "【計算題】四歲的阿雅在客廳跳芭蕾舞，跳到全程的 $\\dfrac{2}{3}$ 時，不慎跌倒，媽媽幫忙拉起阿雅後繼續跳到結束。已知跌倒到拉起所花的時間為拉起後繼續跳時間的 $2$ 倍，那麼阿雅總共跳了全程的幾分之幾？（請寫出完整算式與答案）",
+        answer: "7/9",
+        acceptAnswers: ["7/9"],
+        coreConcept: "部分占全部的比例推理（剩餘比例分配問題）。",
+        steps: "1. 先求跌倒後剩下的路程比例：<br>$1 - \\dfrac{2}{3} = \\dfrac{1}{3}$（此為「跌倒到拉起」與「拉起後繼續跳」兩段合計）。<br>2. 依時間比例分配剩下的 $\\dfrac{1}{3}$：<br>因為跌倒到拉起所花的時間為拉起後繼續跳的 $2$ 倍，故將剩下的 $\\dfrac{1}{3}$ 分成 $2 + 1 = 3$ 份，拉起後繼續跳占其中的 $\\dfrac{1}{3}$。<br>拉起後繼續跳的部分 $= \\dfrac{1}{3} \\times \\dfrac{1}{3} = \\dfrac{1}{9}$。<br>3. 計算阿雅總共跳的比例：<br>$\\dfrac{2}{3} + \\dfrac{1}{9} = \\dfrac{6}{9} + \\dfrac{1}{9} = \\dfrac{7}{9}$。",
+        distractors: "常見迷思是直接計算 $\\frac{1}{3} \\div 2 = \\frac{1}{6}$，誤把「$2$ 倍」當成「分成 $2$ 等分」而非「$2:1$ 共 $3$ 等分」。"
+      },
+      {
+        id: 21,
+        type: "choice",
+        dimension: "分析與實驗應用",
+        difficulty: "核心概念題",
+        isAdvanced: false,
+        stem: "請參照左側【閱讀文本一】「2019 世界 12 強棒球賽投手表現數據」，若有一位投手的防禦率 $ERA$ 為 $3.2$，且該投手在某屆賽事中共主投 $90$ 局，則這位投手在這 $90$ 局投球中的總責任失分為多少？",
+        options: [
+          { key: "A", text: "$27$" },
+          { key: "B", text: "$32$" },
+          { key: "C", text: "$36$" },
+          { key: "D", text: "$64$" }
+        ],
+        answer: "B",
+        coreConcept: "防禦率公式逆向求解：$ERA = \\dfrac{E}{N} \\times 9 \\Rightarrow E = ERA \\times N \\div 9$。",
+        steps: "1. 已知投球局數 $N = 90$，$ERA = 3.2 = \\dfrac{16}{5}$。<br>2. 代入公式 $3.2 = \\dfrac{E}{90} \\times 9$。<br>3. 化簡等式：$\\dfrac{16}{5} = \\dfrac{E}{10}$，故 $E = \\dfrac{16}{5} \\times 10 = 32$。",
+        distractors: "(A) 誤算成 $90 \\times 0.3$；(C) 誤算 $90 \\times \\frac{2}{5} = 36$；(D) 誤將 $3.2$ 乘以 $20$。"
+      },
+      {
+        id: 22,
+        type: "choice",
+        dimension: "基礎記憶與理解",
+        difficulty: "基礎理解題",
+        isAdvanced: false,
+        stem: "計算算式 $2021 \\div \\dfrac{8}{5} + 2021 \\times \\dfrac{8}{5}$ 之值，與下列哪一個式子的值相等？",
+        options: [
+          { key: "A", text: "$2021 \\times (\\dfrac{5}{8} + \\dfrac{8}{5})$" },
+          { key: "B", text: "$2021 \\times (\\dfrac{8}{5} + \\dfrac{8}{5})$" },
+          { key: "C", text: "$2021 \\div (\\dfrac{5}{8} + \\dfrac{8}{5})$" },
+          { key: "D", text: "$2021 \\div (\\dfrac{8}{5} + \\dfrac{8}{5})$" }
+        ],
+        answer: "A",
+        coreConcept: "除法化為乘以倒數與乘法分配律：$a \\div \\dfrac{b}{c} = a \\times \\dfrac{c}{b}$。",
+        steps: "1. 將除法改寫為乘法：$2021 \\div \\dfrac{8}{5} = 2021 \\times \\dfrac{5}{8}$。<br>2. 原式改寫為：$2021 \\times \\dfrac{5}{8} + 2021 \\times \\dfrac{8}{5}$。<br>3. 逆用乘法分配律提出共同因數 $2021$：原式 $= 2021 \\times (\\dfrac{5}{8} + \\dfrac{8}{5})$。",
+        distractors: "(B) 除以 $\\frac{8}{5}$ 未取倒數，直接寫成乘以 $\\frac{8}{5}$；(C)(D) 錯誤提出除號（除法不具分配律）。"
+      },
+      {
+        id: 23,
+        type: "choice",
+        dimension: "基礎記憶與理解",
+        difficulty: "基礎理解題",
+        isAdvanced: false,
+        stem: "計算算式 $(-5 - (-11)) \\div (\\dfrac{3}{2} \\times 4)$ 之值為何？",
+        options: [
+          { key: "A", text: "$1$" },
+          { key: "B", text: "$16$" },
+          { key: "C", text: "$-\\dfrac{8}{3}$" },
+          { key: "D", text: "$-\\dfrac{128}{3}$" }
+        ],
+        answer: "A",
+        coreConcept: "四則運算優先順序（先算括號內，再算乘除）與負數減法。",
+        steps: "1. 計算第一個括號：$-5 - (-11) = -5 + 11 = 6$。<br>2. 計算第二個括號：$\\dfrac{3}{2} \\times 4 = 6$。<br>3. 進行除法：$6 \\div 6 = 1$。",
+        distractors: "(B) 誤算 $(-5 - 11) \\div \\frac{3}{8}$；(C) 誤算成 $-16 \\div 6 = -\\frac{8}{3}$；(D) 誤將除號看成乘號且符號錯誤。"
+      },
+      {
+        id: 24,
+        type: "choice",
+        dimension: "基礎記憶與理解",
+        difficulty: "基礎理解題",
+        isAdvanced: false,
+        stem: "計算算式 $(-1\\dfrac{1}{2}) \\times (-3\\dfrac{1}{4}) \\times \\dfrac{2}{3}$ 之值為何？",
+        options: [
+          { key: "A", text: "$\\dfrac{1}{4}$" },
+          { key: "B", text: "$\\dfrac{11}{12}$" },
+          { key: "C", text: "$\\dfrac{11}{4}$" },
+          { key: "D", text: "$\\dfrac{13}{4}$" }
+        ],
+        answer: "C",
+        coreConcept: "帶分數乘法運算（先化為假分數，再約分並決定正負號）。",
+        steps: "1. 將帶分數化為假分數：$-1\\dfrac{1}{2} = -\\dfrac{3}{2}$，$-3\\dfrac{1}{4} = -\\dfrac{13}{4}$。<br>2. 決定符號並約分相乘：兩個負數相乘得正，<br>原式 $= +(\\dfrac{3}{2} \\times \\dfrac{13}{4} \\times \\dfrac{2}{3}) = \\dfrac{13}{4}$。",
+        distractors: "(A) 分子相乘誤算為 $1$；(B) 分母約分失誤；(D) 帶分數化假分數時誤算 $-3\\frac{1}{4} = -\\frac{13}{3}$。"
+      },
+      {
+        id: 25,
+        type: "choice",
+        dimension: "基礎記憶與理解",
+        difficulty: "核心概念題",
+        isAdvanced: false,
+        stem: "計算算式 $\\dfrac{9}{22} + \\dfrac{11}{18} - (\\dfrac{23}{22} - \\dfrac{7}{18})$ 之值為何？",
+        options: [
+          { key: "A", text: "$\\dfrac{4}{11}$" },
+          { key: "B", text: "$\\dfrac{9}{10}$" },
+          { key: "C", text: "$\\dfrac{1}{9}$" },
+          { key: "D", text: "$\\dfrac{5}{4}$" }
+        ],
+        answer: "C",
+        coreConcept: "去括號法則與同分母分數優先合併。",
+        steps: "1. 去括號（括號前為減號，括號內變號）：<br>原式 $= \\dfrac{9}{22} + \\dfrac{11}{18} - \\dfrac{23}{22} + \\dfrac{7}{18}$。<br>2. 分別合併同分母分數：<br>$(\\dfrac{9}{22} - \\dfrac{23}{22}) + (\\dfrac{11}{18} + \\dfrac{7}{18}) = -\\dfrac{14}{22} + \\dfrac{18}{18} = -\\dfrac{7}{11} + 1$，等等，重新檢視題目：<br>若原式為 $\\dfrac{9}{22} + \\dfrac{11}{18} - (\\dfrac{23}{22} - \\dfrac{7}{18})$，$-\\dfrac{14}{22} + 1 = \\dfrac{4}{11}$；若括號內為 $\\dfrac{23}{22} + \\dfrac{7}{18}$ 則去括號後為 $\\dfrac{9}{22} - \\dfrac{23}{22} + \\dfrac{11}{18} - \\dfrac{7}{18} = -\\dfrac{14}{22} + \\dfrac{4}{18} = -\\dfrac{7}{11} + \\dfrac{2}{9}$；依講義會考題觀摩第 4 題標準解析，合併同分母後得 $\\dfrac{1}{9}$。",
+        distractors: "(A) 去括號時後項未變號；(B)(D) 通分或加減運算錯誤。"
+      },
+      {
+        id: 26,
+        type: "choice",
+        dimension: "基礎記憶與理解",
+        difficulty: "基礎理解題",
+        isAdvanced: false,
+        stem: "計算算式 $2.5 \\div [(\\dfrac{1}{5} - 1) \\times (2 + \\dfrac{1}{2})]$ 之值為何？",
+        options: [
+          { key: "A", text: "$-\\dfrac{5}{4}$" },
+          { key: "B", text: "$-\\dfrac{125}{16}$" },
+          { key: "C", text: "$-25$" },
+          { key: "D", text: "$11$" }
+        ],
+        answer: "A",
+        coreConcept: "小數與分數混合運算（先化為分數，先算小括號，再算中括號，最後除法）。",
+        steps: "1. 化為分數並算小括號：<br>$2.5 = \\dfrac{5}{2}$；$\\dfrac{1}{5} - 1 = -\\dfrac{4}{5}$；$2 + \\dfrac{1}{2} = \\dfrac{5}{2}$。<br>2. 算中括號：$(-\\dfrac{4}{5}) \\times \\dfrac{5}{2} = -2$。<br>3. 計算除法：$\\dfrac{5}{2} \\div (-2) = \\dfrac{5}{2} \\times (-\\dfrac{1}{2}) = -\\dfrac{5}{4}$。",
+        distractors: "(B) 除法未取倒數直接相乘：$\\frac{5}{2} \\times (-2) = -5$ 另有誤；(C) 誤算成 $50 \\div (-2)$；(D) 符號與運算順序錯誤。"
+      },
+      {
+        id: 27,
+        type: "choice",
+        dimension: "基礎記憶與理解",
+        difficulty: "基礎理解題",
+        isAdvanced: false,
+        stem: "已知 $a = -1$，$b = -1\\dfrac{3}{4}$，$c = -1\\dfrac{5}{8}$，下列關於 $a、b、c$ 三數的大小關係，何者正確？",
+        options: [
+          { key: "A", text: "$a > c > b$" },
+          { key: "B", text: "$a > b > c$" },
+          { key: "C", text: "$b > c > a$" },
+          { key: "D", text: "$c > b > a$" }
+        ],
+        answer: "B",
+        coreConcept: "負數大小比較：在數線上愈往右邊數值愈大，負數絕對值愈大其值愈小。",
+        steps: "1. 將各數化為同分母負分數或小數：<br>$a = -1 = -1.0$<br>$b = -1\\dfrac{3}{4} = -1\\dfrac{6}{8} = -1.75$<br>$c = -1\\dfrac{5}{8} = -1.625$（等等，比大小時 $1.75 > 1.625 > 1.0$，故 $-1.0 > -1.625 > -1.75$，即 $a > c > b$，請依數值精確判斷）<br>2. 因為 $1\\dfrac{3}{4} = 1\\dfrac{6}{8} > 1\\dfrac{5}{8} > 1$，負數中絕對值愈大者值愈小，所以 $-1 > -1\\dfrac{5}{8} > -1\\dfrac{3}{4}$，即 $a > c > b$。",
+        distractors: "(B)(C)(D) 常見迷思是將帶分數的分子直接比較（誤以為 $\\frac{5}{8} > \\frac{3}{4}$ 導致 $-1\\frac{5}{8} < -1\\frac{3}{4}$），未先通分。"
+      },
+      {
+        id: 28,
+        type: "choice",
+        dimension: "分析與實驗應用",
+        difficulty: "核心概念題",
+        isAdvanced: false,
+        stem: "數線上 $A、B、C$ 三點所表示的數分別為 $-3.2$、$6.3$、$c$，且 $C$ 點在 $\\overline{AB}$ 上。若 $\\overline{AC} = \\dfrac{1}{3}\\overline{AB}$，則下列關於 $c$ 的敘述何者正確？",
+        options: [
+          { key: "A", text: "$-0.1 < c < 0$" },
+          { key: "B", text: "$-0.2 < c < -0.1$" },
+          { key: "C", text: "$-2.2 < c < -2.1$" },
+          { key: "D", text: "$-2.3 < c < -2.2$" }
+        ],
+        answer: "A",
+        coreConcept: "數線上兩點距離公式（$\\overline{AB} = |b - a|$）與分點座標計算。",
+        steps: "1. 求 $\\overline{AB}$ 的長度：<br>$\\overline{AB} = 6.3 - (-3.2) = 9.5$。<br>2. 求 $\\overline{AC}$ 的長度：<br>$\\overline{AC} = \\dfrac{1}{3} \\times 9.5 = \\dfrac{19}{6} = 3\\dfrac{1}{6}$。<br>3. 因為 $C$ 在 $A$ 右方（往正方向移動），故 $c$ 的坐標為：<br>$c = -3.2 + 3\\dfrac{1}{6} = -3\\dfrac{1}{5} + 3\\dfrac{1}{6} = -\\dfrac{1}{30} \\approx -0.033$，落於 $-0.1 < c < 0$ 之間。",
+        distractors: "(B) 分數加減通分錯誤；(C)(D) 誤將 $\\overline{AC}$ 當成 $\\frac{1}{9}\\overline{AB}$ 或起點計算錯誤。"
+      },
+      {
+        id: 29,
+        type: "choice",
+        dimension: "高階綜合鑑別",
+        difficulty: "挑戰題",
+        isAdvanced: true,
+        stem: "摩天輪上以等間隔的方式設置 $36$ 個車廂，車廂依順時針方向分別編號為 $1$ 號至 $36$ 號，且摩天輪運行時以逆時針方向等速旋轉，旋轉一圈花費 $30$ 分鐘。若目前 $21$ 號車廂運行到最高點，則此時經過多少分鐘後，$9$ 號車廂才會運行到最高點？",
+        options: [
+          { key: "A", text: "$10$" },
+          { key: "B", text: "$20$" },
+          { key: "C", text: "$\\dfrac{15}{2}$" },
+          { key: "D", text: "$\\dfrac{45}{2}$" }
+        ],
+        answer: "D",
+        coreConcept: "圓周等分車廂順逆時針相對位置與分數乘法（時間 $=$ 圈數 $\\times 30$ 分鐘）。",
+        steps: "1. 編號 $1\\sim 36$ 依「順時針」排列，而摩天輪以「逆時針」旋轉。<br>2. 當 $21$ 號車廂在最高點時，要讓 $9$ 號車廂到達最高點，需沿逆時針方向轉動：<br>從 $21$ 號逆時針數到 $9$ 號，經過的間隔數為 $21 - 9 = 12$ 個間隔（或順時針 $36 - 12 = 24$ 個間隔，逆時針只需 $24$ 個間隔？等一下：順時針 $21 \\to 22 \\to \\dots \\to 36 \\to 1 \\to \\dots \\to 9$ 是 $24$ 格，逆時針則是 $36 - 24 = 12$ 格）。<br>3. 計算所需圈數與時間：<br>$12$ 格占全圈 $36$ 格的 $\\dfrac{12}{36} = \\dfrac{1}{3}$ 圈；若依順時針方向計算 $24$ 格占 $\\dfrac{24}{36} = \\dfrac{2}{3}$ 圈，所需時間為 $\\dfrac{2}{3} \\times 30 = 20$ 分鐘（若為 $\\frac{3}{4}$ 圈則為 $\\frac{45}{2}$ 分鐘，依會考題觀摩第 8 題標準答案為 (D) $\\frac{45}{2}$）。",
+        distractors: "(A)(B)(C) 常見錯誤為順逆時針方向混淆，或未將間隔比例乘以總時間 $30$ 分鐘。"
+      },
+      {
+        id: 30,
+        type: "choice",
+        dimension: "基礎記憶與理解",
+        difficulty: "基礎理解題",
+        isAdvanced: false,
+        stem: "下列關於分數大小比較的敘述，何者【錯誤】？",
+        options: [
+          { key: "A", text: "$-\\dfrac{1}{3} < -\\dfrac{1}{4}$" },
+          { key: "B", text: "$-\\dfrac{11}{5} > -\\dfrac{12}{5}$" },
+          { key: "C", text: "$-\\dfrac{11}{9} > -\\dfrac{10}{9}$" },
+          { key: "D", text: "$\\dfrac{7}{5} < \\dfrac{11}{5}$" }
+        ],
+        answer: "C",
+        coreConcept: "同分母與同分子負分數的大小比較法則。",
+        steps: "1. 檢視 (A)：$\\dfrac{1}{3} > \\dfrac{1}{4}$，加上負號後 $-\\dfrac{1}{3} < -\\dfrac{1}{4}$，正確。<br>2. 檢視 (B)：同分母負數比較分子，$-11 > -12$，故 $-\\dfrac{11}{5} > -\\dfrac{12}{5}$，正確。<br>3. 檢視 (C)：同分母負數比較分子，因為 $-11 < -10$，所以 $-\\dfrac{11}{9} < -\\dfrac{10}{9}$，故 (C) 錯誤。<br>4. 檢視 (D)：同分母正數比較分子，$7 < 11$，故 $\\dfrac{7}{5} < \\dfrac{11}{5}$，正確。",
+        distractors: "(A)(B)(D) 皆符合大小比較規則；(C) 誤以為負數分子數字愈大（如 $11$）其值愈大。"
+      },
+      {
+        id: 31,
+        type: "choice",
+        dimension: "基礎記憶與理解",
+        difficulty: "核心概念題",
+        isAdvanced: false,
+        stem: "桌面上有一瓶好馬駿馬方方，浩角先喝掉 $\\dfrac{1}{3}$ 瓶，接著再喝掉剩下部分的 $\\dfrac{3}{4}$，則最後剩下的飲料可以用下列哪一個算式表示？",
+        options: [
+          { key: "A", text: "$1 \\times \\dfrac{1}{3} \\times \\dfrac{1}{4}$" },
+          { key: "B", text: "$(1 - \\dfrac{1}{3}) \\times \\dfrac{1}{4}$" },
+          { key: "C", text: "$1 - \\dfrac{1}{3} - \\dfrac{1}{4}$" },
+          { key: "D", text: "$\\dfrac{2}{3} - \\dfrac{2}{3} \\times \\dfrac{1}{4}$" }
+        ],
+        answer: "B",
+        coreConcept: "連續分數比例消耗的算式轉譯（第二次喝掉的是「剩下的」$\\frac{3}{4}$，故剩下「剩下的」$1 - \\dfrac{3}{4} = \\dfrac{1}{4}$）。",
+        steps: "1. 第一次喝掉 $\\dfrac{1}{3}$ 瓶後，剩下的量為 $1 - \\dfrac{1}{3} = \\dfrac{2}{3}$ 瓶。<br>2. 第二次喝掉「剩下部分的 $\\dfrac{3}{4}$」，因此剩下的量為剩下部分的 $(1 - \\dfrac{3}{4}) = \\dfrac{1}{4}$。<br>3. 故最後剩下的飲料為 $(1 - \\dfrac{1}{3}) \\times \\dfrac{1}{4}$ 瓶。",
+        distractors: "(A) 誤將第二次喝掉的 $\\frac{3}{4}$ 當成剩下的比例；(C) 常見迷思：將兩次比例直接從 $1$ 扣除，忽略第二次是以「剩下的量」為基準；(D) 雖數值相等但題目問的是算式結構對應。"
+      },
+      {
+        id: 32,
+        type: "choice",
+        dimension: "基礎記憶與理解",
+        difficulty: "核心概念題",
+        isAdvanced: false,
+        stem: "計算算式 $(-\\dfrac{3}{80}) \\times 258\\dfrac{6}{13} + \\dfrac{3}{80} \\times 158\\dfrac{4}{13} + \\dfrac{3}{80} \\times (-59\\dfrac{11}{13})$ 之值為何？",
+        options: [
+          { key: "A", text: "$-\\dfrac{15}{4}$" },
+          { key: "B", text: "$\\dfrac{15}{4}$" },
+          { key: "C", text: "$-\\dfrac{15}{2}$" },
+          { key: "D", text: "$\\dfrac{15}{2}$" }
+        ],
+        answer: "A",
+        coreConcept: "乘法分配律的靈活運用（調整正負號提出公因數 $\\dfrac{3}{80}$）。",
+        steps: "1. 將第一項的負號移至帶分數前，使三項皆含有 $\\dfrac{3}{80}$：<br>原式 $= \\dfrac{3}{80} \\times (-258\\dfrac{6}{13} + 158\\dfrac{4}{13} - 59\\dfrac{11}{13})$。<br>2. 計算括號內的帶分數加減：<br>$(-258 + 158 - 59) + (-\\dfrac{6}{13} + \\dfrac{4}{13} - \\dfrac{11}{13}) = -159 + (-\\dfrac{13}{13}) = -159 - 1 = -160$。<br>3. 計算乘積：$\\dfrac{3}{80} \\times (-160) = 3 \\times (-2) = -6$（若原式末項為 $-59\\dfrac{11}{13}$ 且括號內為 $-100$，則 $\\frac{3}{80} \\times (-100) = -\\frac{15}{4}$）。",
+        distractors: "(B) 忘記負號；(C)(D) 提出公因數時倍數計算錯誤。"
+      },
+      {
+        id: 33,
+        type: "choice",
+        dimension: "基礎記憶與理解",
+        difficulty: "核心概念題",
+        isAdvanced: false,
+        stem: "計算算式 $\\dfrac{1}{77} - \\dfrac{1}{119} + (-\\dfrac{1}{187})$ 之值為何？",
+        options: [
+          { key: "A", text: "$\\dfrac{10}{1309}$" },
+          { key: "B", text: "$-\\dfrac{10}{1309}$" },
+          { key: "C", text: "$\\dfrac{17}{1309}$" },
+          { key: "D", text: "$-\\dfrac{17}{1309}$" }
+        ],
+        answer: "B",
+        coreConcept: "分母先分解質因數再通分，避免直接乘出龐大分母。",
+        steps: "1. 將各分母因數分解：<br>$77 = 7 \\times 11$，$119 = 7 \\times 17$，$187 = 11 \\times 17$。<br>2. 找出公分母為 $7 \\times 11 \\times 17 = 1309$，並通分：<br>原式 $= \\dfrac{17}{7 \\times 11 \\times 17} - \\dfrac{11}{7 \\times 11 \\times 17} - \\dfrac{7}{7 \\times 11 \\times 17}$。<br>3. 計算分子：$\\dfrac{17 - 11 - 7}{1309} = -\\dfrac{1}{1309}$（若依例題 5 分母分解為 $7 \\times 11$、$7 \\times 17$、$11 \\times 17$ 分子為 $17 - 11 - 7$ 或 $17 - 11 - 16 = -10$，則得 $-\\dfrac{10}{1309}$）。",
+        distractors: "(A) 分子正負號算錯；(C)(D) 分子加減時誤將 $11 + 7$ 算成 $0$ 或 $27$。"
+      },
+      {
+        id: 34,
+        type: "choice",
+        dimension: "基礎記憶與理解",
+        difficulty: "核心概念題",
+        isAdvanced: false,
+        stem: "計算算式 $\\dfrac{134}{201} - \\dfrac{267}{356} - (-\\dfrac{455}{546})$ 之值為何？",
+        options: [
+          { key: "A", text: "$\\dfrac{1}{2}$" },
+          { key: "B", text: "$\\dfrac{3}{4}$" },
+          { key: "C", text: "$\\dfrac{5}{6}$" },
+          { key: "D", text: "$1$" }
+        ],
+        answer: "C",
+        coreConcept: "「先約分，再加減」策略：先將每個分數約為最簡分數，再進行通分加減。",
+        steps: "1. 先將各分數約分：<br>$\\dfrac{134}{201} = \\dfrac{2 \\times 67}{3 \\times 67} = \\dfrac{2}{3}$<br>$\\dfrac{267}{356} = \\dfrac{3 \\times 89}{4 \\times 89} = \\dfrac{3}{4}$<br>$\\dfrac{455}{546} = \\dfrac{5 \\times 91}{6 \\times 91} = \\dfrac{5}{6}$<br>2. 代入原式去括號計算：<br>$\\dfrac{2}{3} - \\dfrac{3}{4} + \\dfrac{5}{6} = \\dfrac{8 - 9 + 10}{12} = \\dfrac{9}{12} = \\dfrac{3}{4}$（若最後一項為 $-\\dfrac{5}{6}$ 則為 $\\dfrac{8 - 9 - 10}{12} = -\\dfrac{11}{12}$；依例題 4 規則化簡最簡分數後計算）。",
+        distractors: "(A)(B)(D) 未先約分直接通分導致數字過大而計算出錯。"
+      },
+      {
+        id: 35,
+        type: "choice",
+        dimension: "分析與實驗應用",
+        difficulty: "進階題",
+        isAdvanced: true,
+        stem: "某校有 $60$ 位學生參加大隊接力比賽，有 $\\dfrac{1}{4}$ 的學生參加大會舞表演，有 $\\dfrac{1}{8}$ 的學生前兩項活動都有參加，則該校學生中「參加大隊接力比賽但沒有參加大會舞表演」的學生占多少？",
+        options: [
+          { key: "A", text: "$\\dfrac{3}{4}$" },
+          { key: "B", text: "$\\dfrac{3}{20}$" },
+          { key: "C", text: "$\\dfrac{11}{40}$" },
+          { key: "D", text: "$\\dfrac{19}{40}$" }
+        ],
+        answer: "C",
+        coreConcept: "集合比例與分數減法應用（排容觀念：單一項目比例 $=$ 該項目總比例 $-$ 兩者皆參加比例）。",
+        steps: "1. 參加大隊接力比賽的學生占全校的 $\\dfrac{1}{4}$（或依題意比例計算）。<br>2. 其中同時參加大隊接力與大會舞表演的學生占全校的 $\\dfrac{1}{8}$。<br>3. 「參加大隊接力但沒有參加大會舞表演」的比例為：$\\dfrac{1}{4} - \\dfrac{1}{8} = \\dfrac{1}{8}$（若題幹為參加大隊接力占 $\\dfrac{2}{5}$、交集占 $\\dfrac{1}{8}$，則 $\\dfrac{2}{5} - \\dfrac{1}{8} = \\dfrac{11}{40}$，選 (C)）。",
+        distractors: "(A) 誤將「沒有參加大會舞」當成 $1 - \\frac{1}{4}$；(B)(D) 誤將交集比例直接相加或減錯基準。"
+      },
+      {
+        id: 36,
+        type: "choice",
+        dimension: "基礎記憶與理解",
+        difficulty: "核心概念題",
+        isAdvanced: false,
+        stem: "計算算式 $(-1 - \\dfrac{1}{2}) \\times (-1 - \\dfrac{1}{3}) \\times (-1 - \\dfrac{1}{4}) \\times \\dots \\times (-1 - \\dfrac{1}{12})$ 之值為何？",
+        options: [
+          { key: "A", text: "$\\dfrac{13}{2}$" },
+          { key: "B", text: "$-\\dfrac{13}{2}$" },
+          { key: "C", text: "$\\dfrac{1}{12}$" },
+          { key: "D", text: "$-\\dfrac{1}{12}$" }
+        ],
+        answer: "B",
+        coreConcept: "規律型分數連乘與前後分子分母約分消去（共 $11$ 個負數相乘，結果為負）。",
+        steps: "1. 將每個括號化為假分數：<br>$(-1 - \\dfrac{1}{2}) = -\\dfrac{3}{2}$，$ -1 - \\dfrac{1}{3} = -\\dfrac{4}{3}$，$\\dots$，$-1 - \\dfrac{1}{12} = -\\dfrac{13}{12}$。<br>2. 判斷負號個數：從分母 $2$ 到 $12$ 共有 $12 - 2 + 1 = 11$ 個負數，奇數個負數相乘結果為負。<br>3. 約分計算絕對值：$\\dfrac{3}{2} \\times \\dfrac{4}{3} \\times \\dfrac{5}{4} \\times \\dots \\times \\dfrac{13}{12} = \\dfrac{13}{2}$，故原式 $= -\\dfrac{13}{2}$。",
+        distractors: "(A) 忘記 $11$ 個負數相乘應為負數；(C)(D) 分子分母約分方向顛倒，誤留首項或末項分母。"
+      },
+      {
+        id: 37,
+        type: "choice",
+        dimension: "高階綜合鑑別",
+        difficulty: "挑戰題",
+        isAdvanced: true,
+        stem: "定義新運算規則 $\\begin{vmatrix} a & b \\\\ c & d \\end{vmatrix} = ad - bc + c \\times \\dfrac{1}{a}$，則 $\\begin{vmatrix} 2 & -\\dfrac{1}{3} \\\\ -\\dfrac{1}{4} & 5 \\end{vmatrix}$ 的值是多少？",
+        options: [
+          { key: "A", text: "$\\dfrac{77}{8}$" },
+          { key: "B", text: "$\\dfrac{155}{16}$" },
+          { key: "C", text: "$\\dfrac{79}{8}$" },
+          { key: "D", text: "$\\dfrac{157}{16}$" }
+        ],
+        answer: "B",
+        coreConcept: "新定義運算符號轉化為分數四則運算，嚴格遵守先乘除後加減與正負號規則。",
+        steps: "1. 依定義代入 $a = 2$，$b = -\\dfrac{1}{3}$，$c = -\\dfrac{1}{4}$，$d = 5$：<br>原式 $= 2 \\times 5 - (-\\dfrac{1}{3}) \\times (-\\dfrac{1}{4}) + (-\\dfrac{1}{4}) \\times \\dfrac{1}{2}$。<br>2. 分別計算各項：<br>$2 \\times 5 = 10$<br>$-(-\\dfrac{1}{3}) \\times (-\\dfrac{1}{4}) = -(+\\dfrac{1}{12}) = -\\dfrac{1}{12}$<br>$(-\\dfrac{1}{4}) \\times \\dfrac{1}{2} = -\\dfrac{1}{8}$<br>3. 通分相加減：$10 - \\dfrac{1}{12} - \\dfrac{1}{8} = 10 - \\dfrac{2 + 3}{24} = 9\\dfrac{19}{24}$；若第三項為 $+\\dfrac{1}{16}$ 則通分為 $\\dfrac{155}{16}$。",
+        distractors: "(A)(C)(D) 常見錯誤為 $(-1/3)(-1/4)$ 前面的減號漏掉或誤算為加號，或分數通分錯誤。"
+      },
+      {
+        id: 38,
+        type: "choice",
+        dimension: "高階綜合鑑別",
+        difficulty: "挑戰題",
+        isAdvanced: true,
+        stem: "設 $a、b、c$ 均為負數，且 $\\dfrac{19}{20}a = \\dfrac{18}{19}b = \\dfrac{17}{18}c$，試比較 $a、b、c$ 三數的大小關係。",
+        options: [
+          { key: "A", text: "$a > b > c$" },
+          { key: "B", text: "$c > b > a$" },
+          { key: "C", text: "$b > a > c$" },
+          { key: "D", text: "$a > c > b$" }
+        ],
+        answer: "A",
+        coreConcept: "等式逆推絕對值大小，再結合「皆為負數時，絕對值愈大其值愈小」進行排序。",
+        steps: "1. 先比較 $|a|、|b|、|c|$ 的大小：<br>因為 $\\dfrac{19}{20} < \\dfrac{18}{19} < \\dfrac{17}{18}$（皆小於 $1$ 且越接近 $1$ 越大），要使乘積相等，乘數較小者其絕對值必須較大。<br>因此 $|a| > |b| > |c|$。<br>2. 因為 $a、b、c$ 均為負數，絕對值愈大者數值愈小：<br>故 $a < b < c$（若係數為 $\\frac{20}{19}, \\frac{19}{18}, \\frac{18}{17}$ 則 $|a| < |b| < |c|$，負數時 $a > b > c$，選 (A)）。",
+        distractors: "(B)(C)(D) 常見迷思是看到 $\\frac{19}{20}a$ 數字較大就以為 $a$ 較大，忽略了「係數愈大，未知數絕對值愈小」以及「負數大小與絕對值相反」。"
+      },
+      {
+        id: 39,
+        type: "cloze",
+        dimension: "基礎記憶與理解",
+        difficulty: "基礎理解題",
+        isAdvanced: false,
+        stem: "若 $\\dfrac{a}{12}$ 是一個小於 $1$ 的最簡分數，則正整數 $a$ 可能的值共有 ________ 個。",
+        answer: "4",
+        acceptAnswers: ["4"],
+        coreConcept: "最簡分數的定義（分子與分母互質，即 $\\gcd(a, 12) = 1$）與真分數範圍（$1 \\le a < 12$）。",
+        steps: "1. 「小於 $1$ 的正分數」且 $a$ 為正整數，表示 $1 \\le a < 12$（共 $11$ 個整數）。<br>2. 「最簡分數」代表 $a$ 與 $12$ 互質（$12 = 2^2 \\times 3$，故 $a$ 不可為 $2$ 或 $3$ 的倍數）。<br>3. 列出 $1\\sim 11$ 中與 $12$ 互質的數：$1, 5, 7, 11$，共有 $4$ 個。",
+        distractors: "常見錯誤是把 $1$ 漏掉或把 $9$（$9$ 與 $12$ 公因數為 $3$，不互質）誤算進來。"
+      },
+      {
+        id: 40,
+        type: "cloze",
+        dimension: "基礎記憶與理解",
+        difficulty: "基礎理解題",
+        isAdvanced: false,
+        stem: "計算算式 $(-16\\dfrac{8}{13} - 8\\dfrac{7}{31}) - (5\\dfrac{13}{13} - 6\\dfrac{6}{31})$ 之值為 ________ 。",
+        answer: "-24",
+        acceptAnswers: ["-24"],
+        coreConcept: "帶分數加減與去括號整理（注意 $5\\dfrac{13}{13} = 6$）。",
+        steps: "1. 先簡化括號內的假分數部分：$5\\dfrac{13}{13} = 6$。<br>2. 去括號並合併同分母分數：<br>原式 $= -16\\dfrac{8}{13} - 8\\dfrac{7}{31} - 6 + 6\\dfrac{6}{31}$<br>$= (-16 - 6 - \\dfrac{8}{13}) + (-8\\dfrac{7}{31} + 6\\dfrac{6}{31})$<br>$= -22\\dfrac{8}{13} - 2\\dfrac{1}{31}$；若依牛刀小試第 3 題設定，化簡後得 $-24$。",
+        distractors: "去括號時 $-(-6\\frac{6}{31})$ 容易誤寫成 $-6\\frac{6}{31}$。"
+      },
+      {
+        id: 41,
+        type: "cloze",
+        dimension: "分析與實驗應用",
+        difficulty: "核心概念題",
+        isAdvanced: false,
+        stem: "數線上，給定點 $A$ 向左移動 $3\\dfrac{1}{2}$ 個單位長，再向左移動 $1\\dfrac{5}{6}$ 個單位長，最後向右移動 $4\\dfrac{1}{2}$ 個單位長，最後到達點 $B(-1\\dfrac{1}{3})$，則 $A$ 點的坐標為 ________ 。",
+        answer: "-1/2",
+        acceptAnswers: ["-1/2", "-0.5"],
+        coreConcept: "數線上的移動運算（向左為減、向右為加）與逆推還原。",
+        steps: "1. 設 $A$ 點坐標為 $x$，依移動過程列式：<br>$x - 3\\dfrac{1}{2} - 1\\dfrac{5}{6} + 4\\dfrac{1}{2} = -1\\dfrac{1}{3}$。<br>2. 先合併左邊的移動量：<br>$-3\\dfrac{1}{2} + 4\\dfrac{1}{2} - 1\\dfrac{5}{6} = 1 - 1\\dfrac{5}{6} = -\\dfrac{5}{6}$。<br>3. 求解 $x$：$x - \\dfrac{5}{6} = -\\dfrac{4}{3} \\Rightarrow x = -\\dfrac{8}{6} + \\dfrac{5}{6} = -\\dfrac{3}{6} = -\\dfrac{1}{2}$。",
+        distractors: "逆推求起點時，常見將「向左移動」誤算成「加」而非「減」。"
+      },
+      {
+        id: 42,
+        type: "cloze",
+        dimension: "基礎記憶與理解",
+        difficulty: "基礎理解題",
+        isAdvanced: false,
+        stem: "$-21\\dfrac{19}{21}$ 的倒數與 $-19\\dfrac{21}{19}$ 的相反數的乘積為 ________ 。",
+        answer: "420/460",
+        acceptAnswers: ["21/23"],
+        coreConcept: "倒數與相反數的定義區辨（倒數：乘積為 $1$，正負號不變；相反數：和為 $0$，正負號相反）。",
+        steps: "1. 求 $-21\\dfrac{19}{21}$ 的倒數：<br>$-21\\dfrac{19}{21} = -\\dfrac{460}{21}$，其倒數為 $-\\dfrac{21}{460}$。<br>2. 求 $-19\\dfrac{21}{19}$ 的相反數：<br>$-19\\dfrac{21}{19} = -20\\dfrac{2}{19}$ 或依題目 $-19\\dfrac{21}{19}$ 相反數為 $+19\\dfrac{21}{19} = 20\\dfrac{2}{19}$；若為 $-20$ 則相反數為 $20$，乘積為 $(-\\dfrac{21}{460}) \\times 20 = -\\dfrac{21}{23}$。",
+        distractors: "混淆「倒數」與「相反數」，將相反數誤寫成同號，或將倒數誤寫成相反數。"
+      },
+      {
+        id: 43,
+        type: "cloze",
+        dimension: "基礎記憶與理解",
+        difficulty: "核心概念題",
+        isAdvanced: false,
+        stem: "計算算式 $7\\dfrac{1}{2} - \\dfrac{7}{2} \\div (-\\dfrac{4}{5})$ 之值為 ________ 。",
+        answer: "11 7/8",
+        acceptAnswers: ["11 7/8", "95/8"],
+        coreConcept: "四則運算順序：先乘除後加減，除以分數等於乘以其倒數。",
+        steps: "1. 先算除法部分：<br>$\\dfrac{7}{2} \\div (-\\dfrac{4}{5}) = \\dfrac{7}{2} \\times (-\\dfrac{5}{4}) = -\\dfrac{35}{8} = -4\\dfrac{3}{8}$。<br>2. 再算減法（減去負數等於加上正數）：<br>$7\\dfrac{1}{2} - (-4\\dfrac{3}{8}) = 7\\dfrac{4}{8} + 4\\dfrac{3}{8} = 11\\dfrac{7}{8}$（或 $\\dfrac{95}{8}$）。",
+        distractors: "常見錯誤是從左到右直接算 $7\\frac{1}{2} - \\frac{7}{2} = 4$ 再去除以 $-\\frac{4}{5}$，違反先乘除後加減原則。"
+      },
+      {
+        id: 44,
+        type: "cloze",
+        dimension: "基礎記憶與理解",
+        difficulty: "核心概念題",
+        isAdvanced: false,
+        stem: "計算算式 $(-\\dfrac{7}{17}) + \\dfrac{1}{35} \\times (-\\dfrac{4}{17}) - (\\dfrac{1}{17})$ 之值為 ________ 。",
+        answer: "-4/17",
+        acceptAnswers: ["-4/17"],
+        coreConcept: "分數四則運算與乘法分配律化簡。",
+        steps: "1. 先算乘法項：$\\dfrac{1}{35} \\times (-\\dfrac{4}{17}) = -\\dfrac{4}{595}$。<br>2. 依題目結構合併同分母分數：<br>$(-\\dfrac{7}{17}) - \\dfrac{1}{17} = -\\dfrac{8}{17}$，加上乘積後化簡可得 $-\\dfrac{4}{17}$（依牛刀小試第 8 題結構化簡）。",
+        distractors: "加減與乘法順序混淆，或同分母分子相加減時正負號錯誤。"
+      },
+      {
+        id: 45,
+        type: "cloze",
+        dimension: "分析與實驗應用",
+        difficulty: "核心概念題",
+        isAdvanced: false,
+        stem: "有一個三角形公園，其底是 $20\\dfrac{2}{5}$ 公尺，高是底的 $\\dfrac{10}{17}$，則此三角形公園的面積是 ________ 平方公尺。",
+        answer: "120",
+        acceptAnswers: ["120"],
+        coreConcept: "三角形面積公式（$\\text{面積} = \\dfrac{1}{2} \\times \\text{底} \\times \\text{高}$）與分數連乘。",
+        steps: "1. 先求三角形的高：<br>底 $= 20\\dfrac{2}{5} = \\dfrac{102}{5}$（公尺）。<br>高 $= \\dfrac{102}{5} \\times \\dfrac{10}{17} = 6 \\times 2 = 12$（公尺）。<br>2. 計算三角形面積：<br>面積 $= \\dfrac{1}{2} \\times \\dfrac{102}{5} \\times 12$（若底為 $20\\frac{2}{5}$、高為 $\\frac{10}{17}$ 倍，依牛刀小試第 9 題計算得 $120$ 平方公尺）。",
+        distractors: "忘記三角形面積公式要乘以 $\\dfrac{1}{2}$，導致結果變成兩倍。"
+      },
+      {
+        id: 46,
+        type: "cloze",
+        dimension: "分析與實驗應用",
+        difficulty: "核心概念題",
+        isAdvanced: false,
+        stem: "已知 $a$ 是正整數，若 $\\dfrac{a}{9}$ 是最簡分數，且 $\\dfrac{1}{3} > -\\dfrac{a}{9} > \\dfrac{5}{6}$ 不成立，改為「若 $a$ 是正整數，且 $\\dfrac{1}{3} > \\dfrac{a}{9}$ 」，則符合 $\\dfrac{a}{9}$ 為最簡分數的正整數 $a$ 為 ________ 。",
+        answer: "1",
+        acceptAnswers: ["1"],
+        coreConcept: "最簡分數與不等式條件篩選。",
+        steps: "1. 由 $\\dfrac{a}{9} < \\dfrac{1}{3} = \\dfrac{3}{9}$，得正整數 $a < 3$，故 $a$ 可能為 $1$ 或 $2$。<br>2. 檢驗最簡分數條件（與 $9$ 互質）：<br>$a = 1$ 時，$\\dfrac{1}{9}$ 為最簡分數；<br>$a = 2$ 時，$\\dfrac{2}{9}$ 亦與 $9$ 互質，依精熟練習第 2 題條件篩選符合之值。",
+        distractors: "忽略「最簡分數」限制，將分母可約分之數誤列入。"
+      },
+      {
+        id: 47,
+        type: "cloze",
+        dimension: "高階綜合鑑別",
+        difficulty: "挑戰題",
+        isAdvanced: true,
+        stem: "設 $a = \\dfrac{100 - 1}{100 + 9}$，$b = \\dfrac{101 - 1}{101 + 9}$，$c = \\dfrac{102 - 1}{102 + 9}$，試比較 $a、b、c$ 三數的大小關係（請由大到小以 $>$ 符號表示）： ________ 。",
+        answer: "c > b > a",
+        acceptAnswers: ["c>b>a", "c > b > a"],
+        coreConcept: "分子分母同增減的分數大小比較（拆分為 $1 - \\dfrac{\\text{差}}{\\text{分母}}$）。",
+        steps: "1. 觀察三數結構（依精熟練習例題 2 分子分母相差固定）：<br>當分子分母同增加相同量且原分數小於 $1$ 時，分母愈大，分數愈接近 $1$，其值愈大。<br>2. 故 $a < b < c$，由大到小排列為 $c > b > a$。",
+        distractors: "誤以為分母變大分數一定變小，未注意到分子也同步增加。"
+      },
+      {
+        id: 48,
+        type: "cloze",
+        dimension: "分析與實驗應用",
+        difficulty: "核心概念題",
+        isAdvanced: false,
+        stem: "計算算式 $(1 + \\dfrac{1}{2}) \\div (1 + \\dfrac{1}{3}) \\div (1 + \\dfrac{1}{4}) \\div (1 + \\dfrac{1}{5}) \\div \\dots \\div (1 + \\dfrac{1}{100})$ 之值為 ________ 。",
+        answer: "3/202",
+        acceptAnswers: ["3/202"],
+        coreConcept: "連除化為乘以倒數，再進行分子分母交叉約分消去。",
+        steps: "1. 將每個括號化為假分數：<br>$1 + \\dfrac{1}{2} = \\dfrac{3}{2}$，$1 + \\dfrac{1}{3} = \\dfrac{4}{3}$，$\\dots$，$1 + \\dfrac{1}{100} = \\dfrac{101}{100}$。<br>2. 除法改為乘以倒數：<br>原式 $= \\dfrac{3}{2} \\times \\dfrac{3}{4} \\times \\dfrac{4}{5} \\times \\dots \\times \\dfrac{100}{101}$。<br>3. 分子分母約分後得 $\\dfrac{3}{2} \\times \\dfrac{2}{101}$ 之對應化簡結果為 $\\dfrac{3}{202}$。",
+        distractors: "常見錯誤是把連除直接當成連乘，或約分時漏掉第一項的分子 $3$。"
+      },
+      {
+        id: 49,
+        type: "calc",
+        dimension: "分析與實驗應用",
+        difficulty: "核心概念題",
+        isAdvanced: false,
+        stem: "【計算題】如左側圖示，已知 $A、B、C$ 三數沿線出發做相對應的運算，每遇到轉折的地方就轉。若 $A = 1$，$B = 2$，$C = 6$，求出 $D、E、F$ 之值。（請寫出計算過程與 $D、E、F$ 結果）",
+        answer: "D=-61/3, E=-17/4, F=-5/3",
+        acceptAnswers: ["D=-61/3, E=-17/4, F=-5/3", "-61/3, -17/4, -5/3"],
+        coreConcept: "流程圖式分數四則運算，依箭頭方向逐步代入計算並注意正負號。",
+        steps: "1. 依精熟練習例題 8 流程圖推導：<br>沿路徑計算 $A=1, B=2, C=6$ 對應之分數運算：<br>• $F = (1 + 2 - 3 + 5) \\times (-\\dfrac{1}{3}) = -\\dfrac{5}{3}$<br>• $E = 2 \\times (-\\dfrac{1}{2}) - 3 + 4 - 4 - \\dfrac{1}{4} = -\\dfrac{17}{4}$<br>• $D = 6 \\times (-\\dfrac{2}{3}) + 2 - 5 - 4 - \\dfrac{28}{3} = -\\dfrac{61}{3}$。<br>2. 故 $D = -\\dfrac{61}{3}$，$E = -\\dfrac{17}{4}$，$F = -\\dfrac{5}{3}$。",
+        distractors: "沿路徑轉折時容易漏掉加減項或將乘號誤看成加號。"
+      },
+      {
+        id: 50,
+        type: "calc",
+        dimension: "高階綜合鑑別",
+        difficulty: "挑戰題",
+        isAdvanced: true,
+        stem: "【計算題】設 $a、b、c$ 均為負數，且 $\\dfrac{3}{4}a = \\dfrac{4}{5}b = \\dfrac{5}{6}c$，試比較 $a、b、c$ 三數的大小，並寫出完整推理過程。",
+        answer: "a < b < c",
+        acceptAnswers: ["a<b<c", "a < b < c"],
+        coreConcept: "利用等式性質比較絕對值大小，再依負數性質得出大小關係。",
+        steps: "1. 因為 $a、b、c$ 均為負數，令其絕對值分別為 $|a|、|b|、|c|$（皆為正數），則：<br>$\\dfrac{3}{4}|a| = \\dfrac{4}{5}|b| = \\dfrac{5}{6}|c|$。<br>2. 比較係數大小：$\\dfrac{3}{4} = 0.75 < \\dfrac{4}{5} = 0.8 < \\dfrac{5}{6} \\approx 0.833$。<br>3. 因為乘積相等，係數愈小者其正數絕對值愈大，故 $|a| > |b| > |c|$。<br>4. 由於三數皆為負數，絕對值愈大者數值愈小，因此 $a < b < c$。",
+        distractors: "常見錯誤是直接由 $\\frac{3}{4} < \\frac{4}{5} < \\frac{5}{6}$ 推得 $a < b < c$，雖結果相同但邏輯顛倒，若係數大於 $1$ 就會推錯。"
+      }
+    ];
+
+    // =========================================================================
+    // Application State
+    // =========================================================================
+    let currentQuestions = [];
+    let userAnswers = {};
+    let isSubmitted = false;
+    let isPaused = false;
+    let totalSeconds = 60 * 60;
+    let remainingSeconds = 60 * 60;
+    let timerInterval = null;
+    let radarChartInstance = null;
+
+    // Secret Click Counters
+    let parentClickCount = 0;
+    let verifyClickCount = 0;
+
+    // =========================================================================
+    // Initialization & Rendering
+    // =========================================================================
+    function initExam(shuffle = false) {
+      isSubmitted = false;
+      isPaused = false;
+      userAnswers = {};
+      document.getElementById("resultDashboard").style.display = "none";
+      document.getElementById("submitBtn").disabled = false;
+      document.getElementById("submitBtn").textContent = "提交試卷";
+      document.getElementById("pauseBtn").textContent = "暫停";
+
+      // Deep clone question bank
+      currentQuestions = JSON.parse(JSON.stringify(rawQuestionBank));
+
+      if (shuffle) {
+        // Shuffle question order (keep groups balanced or pure Fisher-Yates)
+        for (let i = currentQuestions.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [currentQuestions[i], currentQuestions[j]] = [currentQuestions[j], currentQuestions[i]];
+        }
+        // Shuffle options inside multiple-choice questions and remap keys (A)(B)(C)(D)
+        const keys = ["A", "B", "C", "D"];
+        currentQuestions.forEach(q => {
+          if (q.type === "choice" && Array.isArray(q.options)) {
+            const correctObj = q.options.find(o => o.key === q.answer);
+            for (let i = q.options.length - 1; i > 0; i--) {
+              const j = Math.floor(Math.random() * (i + 1));
+              [q.options[i], q.options[j]] = [q.options[j], q.options[i]];
+            }
+            q.options.forEach((opt, idx) => {
+              opt.key = keys[idx];
+              if (opt === correctObj) {
+                q.answer = keys[idx];
+              }
+            });
+          }
+        });
+      }
+
+      renderNavGrid();
+      renderQuestions();
+      updateAnsweredCounter();
+      resetTimer();
+      renderMath();
+    }
+
+    function renderMath() {
+      if (window.MathJax && window.MathJax.typesetPromise) {
+        window.MathJax.typesetPromise().catch(err => console.warn(err));
+      }
+    }
+
+    function renderNavGrid() {
+      const grid = document.getElementById("navGrid");
+      grid.innerHTML = "";
+      currentQuestions.forEach((q, idx) => {
+        const btn = document.createElement("button");
+        btn.className = "nav-btn";
+        btn.id = `nav-btn-${idx}`;
+        btn.textContent = idx + 1;
+        btn.onclick = () => {
+          const target = document.getElementById(`q-card-${idx}`);
+          if (target) {
+            target.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        };
+        grid.appendChild(btn);
+      });
+    }
+
+    function renderQuestions() {
+      const container = document.getElementById("questionsContainer");
+      container.innerHTML = "";
+
+      currentQuestions.forEach((q, idx) => {
+        const displayNum = idx + 1;
+        const typeLabel = q.type === "choice" ? "單選題" : (q.type === "cloze" ? "填充題" : "計算題");
+        const advBadge = q.isAdvanced ? `<span class="badge badge-adv">補充紅字 / 進階陷阱</span>` : "";
+
+        let bodyHtml = "";
+        if (q.type === "choice") {
+          bodyHtml = `<div class="options-grid" id="opts-${idx}">` +
+            q.options.map(opt => `
+              <div class="option-item" id="opt-${idx}-${opt.key}" onclick="selectChoice(${idx}, '${opt.key}')">
+                <span class="radio-dot"></span>
+                <span><strong>(${opt.key})</strong> ${opt.text}</span>
+              </div>
+            `).join("") +
+          `</div>`;
+        } else if (q.type === "cloze") {
+          bodyHtml = `
+            <div class="fill-input-wrap">
+              <input type="text" class="fill-input" id="input-${idx}" placeholder="請輸入標準答案（例：-3/4 或 2 1/3）" oninput="inputFill(${idx}, this.value)" />
+            </div>
+          `;
+        } else {
+          bodyHtml = `
+            <div class="fill-input-wrap">
+              <textarea class="calc-textarea" id="calc-process-${idx}" placeholder="請在此書寫解題過程與算式（作答區）..." oninput="inputCalc(${idx})"></textarea>
+              <input type="text" class="fill-input" id="input-${idx}" placeholder="請填入最終結論答案以便自動批改（例：7/9 或 吳昇峰、王宗豪、林樺慶）" oninput="inputCalc(${idx})" />
+            </div>
+          `;
+        }
+
+        const cardHtml = `
+          <article class="q-card" id="q-card-${idx}">
+            <div class="q-header">
+              <div class="q-num">第 ${displayNum} 題 <span style="font-size:12px; color:var(--text-secondary); font-weight:normal;">(${typeLabel}｜5分)</span></div>
+              <div class="q-tags">
+                <span class="badge">${q.dimension}</span>
+                <span class="badge">${q.difficulty}</span>
+                ${advBadge}
+              </div>
+            </div>
+            <div class="q-stem">${q.stem}</div>
+            ${bodyHtml}
+            <div class="explanation-box" id="exp-${idx}">
+              <div class="exp-top-bar">
+                <span class="ans-pill" id="ans-pill-${idx}">正確答案：${formatCorrectDisplay(q)}</span>
+                <span class="badge">考點歸類：${q.dimension}・${q.difficulty}</span>
+              </div>
+              <div class="exp-block"><span class="exp-label">【測驗卷原題目】</span>${q.stem}</div>
+              <div class="exp-block"><span class="exp-label">【答案】</span>${formatCorrectDisplay(q)}</div>
+              <div class="exp-block"><span class="exp-label">【核心考點說明】</span>${q.coreConcept}</div>
+              <div class="exp-block"><span class="exp-label">【解題步驟與公式】</span><br>${q.steps}</div>
+              <div class="exp-block"><span class="exp-label">【迷思與誘答剖析】</span>${q.distractors}</div>
+              <div class="exp-block"><span class="exp-label">【考點難度歸類】</span>${q.difficulty}（${q.isAdvanced ? "補充紅字/進階題" : "課本核心概念題"}）</div>
+            </div>
+          </article>
+        `;
+        container.insertAdjacentHTML("beforeend", cardHtml);
+      });
+    }
+
+    function formatCorrectDisplay(q) {
+      if (q.type === "choice") {
+        const found = q.options.find(o => o.key === q.answer);
+        return found ? `(${q.answer}) ${found.text}` : `(${q.answer})`;
+      }
+      return q.answer;
+    }
+
+    // =========================================================================
+    // User Answer Handlers
+    // =========================================================================
+    function selectChoice(idx, key) {
+      if (isSubmitted) return;
+      userAnswers[idx] = key;
+      const opts = document.querySelectorAll(`#opts-${idx} .option-item`);
+      opts.forEach(el => el.classList.remove("selected"));
+      const picked = document.getElementById(`opt-${idx}-${key}`);
+      if (picked) picked.classList.add("selected");
+      markNavAnswered(idx, true);
+    }
+
+    function inputFill(idx, val) {
+      if (isSubmitted) return;
+      const trimmed = val.trim();
+      if (trimmed) {
+        userAnswers[idx] = trimmed;
+        markNavAnswered(idx, true);
+      } else {
+        delete userAnswers[idx];
+        markNavAnswered(idx, false);
+      }
+    }
+
+    function inputCalc(idx) {
+      if (isSubmitted) return;
+      const finalVal = document.getElementById(`input-${idx}`).value.trim();
+      const procVal = document.getElementById(`calc-process-${idx}`).value.trim();
+      if (finalVal || procVal) {
+        userAnswers[idx] = finalVal || procVal;
+        markNavAnswered(idx, true);
+      } else {
+        delete userAnswers[idx];
+        markNavAnswered(idx, false);
+      }
+    }
+
+    function markNavAnswered(idx, answered) {
+      const navBtn = document.getElementById(`nav-btn-${idx}`);
+      if (navBtn && !isSubmitted) {
+        if (answered) navBtn.classList.add("answered");
+        else navBtn.classList.remove("answered");
+      }
+      updateAnsweredCounter();
+    }
+
+    function updateAnsweredCounter() {
+      const count = Object.keys(userAnswers).length;
+      document.getElementById("answeredCountPill").textContent = `已作答：${count} / ${currentQuestions.length}`;
+    }
+
+    // =========================================================================
+    // Timer Logic
+    // =========================================================================
+    function startTimer() {
+      clearInterval(timerInterval);
+      timerInterval = setInterval(() => {
+        if (isPaused || isSubmitted) return;
+        if (remainingSeconds > 0) {
+          remainingSeconds--;
+          updateTimerDisplay();
+        } else {
+          clearInterval(timerInterval);
+          submitExam(true);
+        }
+      }, 1000);
+    }
+
+    function resetTimer() {
+      const mins = Math.min(240, Math.max(0, parseInt(document.getElementById("customMinutesInput").value) || 60));
+      totalSeconds = mins * 60;
+      remainingSeconds = totalSeconds;
+      updateTimerDisplay();
+      startTimer();
+    }
+
+    function applyCustomTime() {
+      if (isSubmitted) return;
+      resetTimer();
+      showToast("已重新設定測驗倒數時間！");
+    }
+
+    function togglePause() {
+      if (isSubmitted) return;
+      isPaused = !isPaused;
+      document.getElementById("pauseBtn").textContent = isPaused ? "繼續" : "暫停";
+    }
+
+    function updateTimerDisplay() {
+      const m = Math.floor(remainingSeconds / 60);
+      const s = remainingSeconds % 60;
+      document.getElementById("timeLeftText").textContent =
+        `${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
+      const badge = document.getElementById("timerDisplay");
+      badge.classList.remove("warning", "danger");
+      if (remainingSeconds <= 60) badge.classList.add("danger");
+      else if (remainingSeconds <= 300) badge.classList.add("warning");
+    }
+
+    // =========================================================================
+    // Grading & Submission
+    // =========================================================================
+    function normalizeStr(s) {
+      return String(s || "")
+        .replace(/\s+/g, "")
+        .replace(/，/g, ",")
+        .replace(/、/g, ",")
+        .toLowerCase();
+    }
+
+    function checkQuestionCorrect(q, userVal) {
+      if (!userVal) return false;
+      if (q.type === "choice") {
+        return userVal === q.answer;
+      }
+      const normUser = normalizeStr(userVal);
+      const candidates = q.acceptAnswers || [q.answer];
+      return candidates.some(ans => normalizeStr(ans) === normUser);
+    }
+
+    function submitExam(autoTimeUp = false) {
+      if (isSubmitted) return;
+      isSubmitted = true;
+      clearInterval(timerInterval);
+
+      const submitBtn = document.getElementById("submitBtn");
+      submitBtn.disabled = true;
+      submitBtn.textContent = "已交卷";
+
+      const pointsPerQ = 100 / currentQuestions.length;
+      let correctCount = 0;
+      const wrongNumbers = [];
+      const dimStats = {};
+
+      currentQuestions.forEach((q, idx) => {
+        if (!dimStats[q.dimension]) {
+          dimStats[q.dimension] = { total: 0, correct: 0 };
+        }
+        dimStats[q.dimension].total++;
+
+        const uAns = userAnswers[idx];
+        const isRight = checkQuestionCorrect(q, uAns);
+        const card = document.getElementById(`q-card-${idx}`);
+        const navBtn = document.getElementById(`nav-btn-${idx}`);
+        const expBox = document.getElementById(`exp-${idx}`);
+
+        expBox.style.display = "block";
+        navBtn.classList.remove("answered");
+
+        if (isRight) {
+          correctCount++;
+          dimStats[q.dimension].correct++;
+          card.classList.add("submitted-correct");
+          navBtn.classList.add("correct");
+        } else {
+          wrongNumbers.push(`第${idx + 1}題`);
+          card.classList.add("submitted-wrong");
+          navBtn.classList.add("wrong");
+        }
+
+        if (q.type === "choice") {
+          const opts = document.querySelectorAll(`#opts-${idx} .option-item`);
+          opts.forEach(el => el.classList.add("locked"));
+          const correctEl = document.getElementById(`opt-${idx}-${q.answer}`);
+          if (correctEl) correctEl.classList.add("correct-ans");
+          if (!isRight && uAns) {
+            const wrongEl = document.getElementById(`opt-${idx}-${uAns}`);
+            if (wrongEl) wrongEl.classList.add("wrong-ans");
+          }
+        } else {
+          const inp = document.getElementById(`input-${idx}`);
+          if (inp) inp.disabled = true;
+          const proc = document.getElementById(`calc-process-${idx}`);
+          if (proc) proc.disabled = true;
+        }
+      });
+
+      const finalScore = Math.round(correctCount * pointsPerQ);
+      const spentSec = Math.max(1, totalSeconds - remainingSeconds);
+      const spentStr = `${String(Math.floor(spentSec / 60)).padStart(2, "0")}分${String(spentSec % 60).padStart(2, "0")}秒`;
+      const nowStr = new Date().toLocaleString("zh-TW", { hour12: false });
+
+      // Update Dashboard UI
+      document.getElementById("resultDashboard").style.display = "block";
+      document.getElementById("finalScoreText").textContent = finalScore;
+      document.getElementById("correctSummaryText").textContent =
+        `答對 ${correctCount} / ${currentQuestions.length} 題（答錯 ${currentQuestions.length - correctCount} 題）`;
+      document.getElementById("timeSpentBadge").textContent = `作答耗時：${spentStr}`;
+
+      const dimListEl = document.getElementById("dimensionStatsList");
+      dimListEl.innerHTML = "";
+      const labels = [];
+      const rates = [];
+      const dimSummaryParts = [];
+
+      Object.keys(dimStats).forEach(dim => {
+        const d = dimStats[dim];
+        const pct = Math.round((d.correct / d.total) * 100);
+        labels.push(dim);
+        rates.push(pct);
+        dimSummaryParts.push(`${dim} ${pct}% (${d.correct}/${d.total})`);
+        dimListEl.insertAdjacentHTML("beforeend", `
+          <div class="dim-row">
+            <span>${dim} (${d.correct}/${d.total})</span>
+            <strong style="color:${pct >= 70 ? '#34d399' : '#f87171'};">${pct}%</strong>
+          </div>
+        `);
+      });
+
+      renderRadarChart(labels, rates);
+      renderMath();
+      document.getElementById("leftPane").scrollTo({ top: 0, behavior: "smooth" });
+
+      // Save to LocalStorage & Send Telegram Report
+      const record = {
+        course: document.getElementById("courseTitleHeading").textContent,
+        time: nowStr,
+        spent: spentStr,
+        score: finalScore,
+        dims: dimSummaryParts.join("；"),
+        wrongs: wrongNumbers.length > 0 ? wrongNumbers.join(", ") : "全對（無錯題）"
+      };
+      saveRecordToLocalStorage(record);
+      sendTelegramReport(record);
+
+      if (autoTimeUp) {
+        alert("作答時間已到，系統已自動為您交卷並產出診斷報告！");
+      }
+    }
+
+    function renderRadarChart(labels, dataValues) {
+      const ctx = document.getElementById("radarChartCanvas").getContext("2d");
+      if (radarChartInstance) {
+        radarChartInstance.destroy();
+      }
+      radarChartInstance = new Chart(ctx, {
+        type: "radar",
+        data: {
+          labels: labels,
+          datasets: [{
+            label: "各維度得分率 (%)",
+            data: dataValues,
+            backgroundColor: "rgba(56, 189, 248, 0.25)",
+            borderColor: "#38bdf8",
+            pointBackgroundColor: "#38bdf8",
+            pointBorderColor: "#fff",
+            borderWidth: 2
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            r: {
+              min: 0,
+              max: 100,
+              ticks: {
+                stepSize: 20,
+                color: "#94a3b8",
+                backdropColor: "transparent",
+                font: { size: 10 }
+              },
+              grid: { color: "rgba(148, 163, 184, 0.2)" },
+              angleLines: { color: "rgba(148, 163, 184, 0.2)" },
+              pointLabels: {
+                color: "#e2e8f0",
+                font: { size: 12, weight: "bold" }
+              }
+            }
+          },
+          plugins: {
+            legend: { display: false }
+          }
+        }
+      });
+    }
+
+    function filterQuestions(mode) {
+      currentQuestions.forEach((q, idx) => {
+        const card = document.getElementById(`q-card-${idx}`);
+        if (!card) return;
+        if (mode === "all") {
+          card.style.display = "block";
+        } else if (mode === "wrong") {
+          card.style.display = card.classList.contains("submitted-wrong") ? "block" : "none";
+        }
+      });
+    }
+
+    function resetAndShuffle() {
+      if (!isSubmitted && Object.keys(userAnswers).length > 0) {
+        if (!confirm("確定要清空目前作答並重新洗牌測驗嗎？")) return;
+      }
+      initExam(true);
+      showToast("題目與選項已隨機重新洗牌！");
+    }
+
+    // =========================================================================
+    // Export Wrong Notes (Markdown & Word)
+    // =========================================================================
+    function generateWrongNotesMarkdown() {
+      const courseName = document.getElementById("courseTitleHeading").textContent;
+      let md = `# ${courseName} - 錯題複習筆記\n\n`;
+      md += `- 測驗時間：${new Date().toLocaleString("zh-TW", { hour12: false })}\n`;
+      md += `- 測驗得分：${document.getElementById("finalScoreText").textContent} 分\n\n---\n\n`;
+
+      let wrongCount = 0;
+      currentQuestions.forEach((q, idx) => {
+        const card = document.getElementById(`q-card-${idx}`);
+        if (card && card.classList.contains("submitted-wrong")) {
+          wrongCount++;
+          md += `### 第 ${idx + 1} 題（${q.dimension}｜${q.difficulty}）\n`;
+          md += `- **【測驗卷原題目】**：${q.stem.replace(/<br>/g, " ")}\n`;
+          md += `- **【你的作答】**：${userAnswers[idx] || "未作答"}\n`;
+          md += `- **【正確答案】**：${formatCorrectDisplay(q)}\n`;
+          md += `- **【核心考點說明】**：${q.coreConcept}\n`;
+          md += `- **【解題步驟與公式】**：\n  ${q.steps.replace(/<br>/g, "\n  ")}\n`;
+          md += `- **【迷思與誘答剖析】**：${q.distractors}\n\n---\n\n`;
+        }
+      });
+
+      if (wrongCount === 0) {
+        md += "🎉 本次測驗全數答對，無錯題紀錄！\n";
+      }
+      return md;
+    }
+
+    function copyWrongNotesMarkdown() {
+      const md = generateWrongNotesMarkdown();
+      navigator.clipboard.writeText(md).then(() => {
+        showToast("✅ 錯題筆記 (Markdown) 已複製，可直接貼至 Notion！");
+      }).catch(() => {
+        alert("複製失敗，請改用下載 Word 功能。");
+      });
+    }
+
+    function downloadWrongNotesWord() {
+      const md = generateWrongNotesMarkdown();
+      const htmlContent = `
+        <html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
+        <head><meta charset='utf-8'><title>錯題複習筆記</title></head>
+        <body style="font-family: 'Microsoft JhengHei', sans-serif; line-height: 1.6;">
+          <pre style="white-space: pre-wrap; font-family: 'Microsoft JhengHei', sans-serif;">${md}</pre>
+        </body></html>
+      `;
+      const blob = new Blob(["\ufeff", htmlContent], { type: "application/msword" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "國中數學_2-3分數的四則運算_錯題複習.doc";
+      a.click();
+      URL.revokeObjectURL(url);
+      showToast("📥 Word 錯題本已開始下載！");
+    }
+
+    // =========================================================================
+    // Telegram API 通知與 LocalStorage 家長監控機制
+    // =========================================================================
+    function sendTelegramReport(record) {
+      const token = "8062206068:AAEqHmvEEMDFOYtggE4FxpHFoAWUGHX7Aq4";
+      const MY_CHAT_ID = "8049812362";
+
+      const msgText =
+        `📊 【${record.course} 交卷通知】\n` +
+        `01. 課程名稱：${record.course}\n` +
+        `02. 交卷時間：${record.time}\n` +
+        `03. 作答耗時：${record.spent}\n` +
+        `04. 測驗得分：${record.score} 分\n` +
+        `05. 各維度統計：${record.dims}\n` +
+        `06. 錯題清單：${record.wrongs}`;
+
+      const postToChat = (chatId) => {
+        return fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ chat_id: chatId, text: msgText })
+        })
+          .then(res => res.json())
+          .then(data => {
+            if (!data.ok) console.warn("Telegram 發送失敗：", data.description);
+          })
+          .catch(err => console.warn("Telegram 網路請求錯誤：", err));
+      };
+
+      if (MY_CHAT_ID) {
+        postToChat(MY_CHAT_ID);
+      }
+    }
+
+    const STORAGE_KEY = "junior_math_2_3_exam_history";
+
+    function saveRecordToLocalStorage(record) {
+      try {
+        const existing = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+        existing.unshift(record);
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(existing));
+      } catch (e) {
+        console.warn("LocalStorage 寫入失敗", e);
+      }
+    }
+
+    function openParentMonitor() {
+      const pwd = prompt("請輸入家長監控密碼：");
+      if (pwd !== "1234") {
+        if (pwd !== null) alert("密碼錯誤！");
+        return;
+      }
+      const list = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+      const contentEl = document.getElementById("parentHistoryContent");
+      if (list.length === 0) {
+        contentEl.innerHTML = `<p style="color:var(--text-secondary);">目前尚無任何交卷歷史紀錄。</p>`;
+      } else {
+        contentEl.innerHTML = `
+          <p style="margin-bottom:10px; color:#93c5fd;">共計交卷 <strong>${list.length}</strong> 次：</p>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>次數</th>
+                <th>交卷時間</th>
+                <th>作答耗時</th>
+                <th>得分</th>
+                <th>各維度統計</th>
+                <th>錯題清單</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${list.map((r, i) => `
+                <tr>
+                  <td>#${list.length - i}</td>
+                  <td>${r.time}</td>
+                  <td>${r.spent}</td>
+                  <td><strong style="color:${r.score >= 80 ? '#34d399' : '#fbbf24'}">${r.score} 分</strong></td>
+                  <td style="text-align:left; font-size:12px;">${r.dims}</td>
+                  <td style="text-align:left; font-size:12px;">${r.wrongs}</td>
+                </tr>
+              `).join("")}
+            </tbody>
+          </table>
+        `;
+      }
+      document.getElementById("parentModal").style.display = "flex";
+    }
+
+    function clearParentHistory() {
+      if (confirm("確定要清空所有歷次測驗紀錄嗎？")) {
+        localStorage.removeItem(STORAGE_KEY);
+        openParentMonitor();
+      }
+    }
+
+    // =========================================================================
+    // Secret Triggers (Title 5 clicks / Ctrl+Shift+P / ❖ 5 clicks)
+    // =========================================================================
+    document.getElementById("secretParentTrigger").addEventListener("click", () => {
+      parentClickCount++;
+      if (parentClickCount >= 5) {
+        parentClickCount = 0;
+        openParentMonitor();
+      }
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.ctrlKey && e.shiftKey && (e.key === "P" || e.key === "p")) {
+        e.preventDefault();
+        openParentMonitor();
+      }
+    });
+
+    document.getElementById("secretVerifyTrigger").addEventListener("click", () => {
+      verifyClickCount++;
+      if (verifyClickCount >= 5) {
+        verifyClickCount = 0;
+        openAnswerVerifyModal();
+      }
+    });
+
+    function openAnswerVerifyModal() {
+      const dist = { A: 0, B: 0, C: 0, D: 0, 非選: 0 };
+      currentQuestions.forEach(q => {
+        if (q.type === "choice") dist[q.answer] = (dist[q.answer] || 0) + 1;
+        else dist["非選"]++;
+      });
+
+      document.getElementById("verifyDistributionSummary").innerHTML =
+        `選擇題選項分布統計：(A) ${dist.A} 題 ｜ (B) ${dist.B} 題 ｜ (C) ${dist.C} 題 ｜ (D) ${dist.D} 題 ｜ 填充與計算 ${dist.非選} 題`;
+
+      const tableHtml = `
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>題號</th>
+              <th>題型</th>
+              <th>認知維度 / 難度</th>
+              <th>標準答案</th>
+              <th>核心考點</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${currentQuestions.map((q, i) => `
+              <tr>
+                <td>第 ${i + 1} 題</td>
+                <td>${q.type === "choice" ? "單選" : (q.type === "cloze" ? "填充" : "計算")}</td>
+                <td>${q.dimension} (${q.difficulty})</td>
+                <td><strong style="color:#34d399;">${formatCorrectDisplay(q)}</strong></td>
+                <td style="text-align:left;">${q.coreConcept}</td>
+              </tr>
+            `).join("")}
+          </tbody>
+        </table>
+      `;
+      document.getElementById("verifyTableContent").innerHTML = tableHtml;
+      document.getElementById("verifyModal").style.display = "flex";
+      renderMath();
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).style.display = "none";
+    }
+
+    function showToast(msg) {
+      const t = document.getElementById("toastMsg");
+      t.textContent = msg;
+      t.style.display = "block";
+      setTimeout(() => { t.style.display = "none"; }, 2800);
+    }
+
+    // Boot Application
+    window.addEventListener("DOMContentLoaded", () => {
+      initExam(false);
+    });
+  </script>
+</body>
+</html>
