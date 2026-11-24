@@ -1,0 +1,2457 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>國中七年級自然科學（生物）全真模擬測驗（50題）</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  window.MathJax = {
+    tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+    svg: { fontCache: 'global' }
+  };
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+  :root {
+    --bg-main: #0f172a;
+    --bg-panel: #1e293b;
+    --bg-card: #162032;
+    --bg-hover: #283549;
+    --border-color: #334155;
+    --text-primary: #f1f5f9;
+    --text-secondary: #94a3b8;
+    --accent-blue: #3b82f6;
+    --accent-green: #10b981;
+    --accent-red: #ef4444;
+    --accent-yellow: #f59e0b;
+    --accent-purple: #8b5cf6;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: "Noto Sans TC", "Microsoft JhengHei", -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    line-height: 1.6;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  /* 頂部控制列 */
+  header {
+    background-color: #0b1120;
+    border-bottom: 1px solid var(--border-color);
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    z-index: 100;
+  }
+
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .secret-verify-btn {
+    color: #334155;
+    cursor: pointer;
+    font-size: 16px;
+    user-select: none;
+    transition: color 0.2s;
+  }
+  .secret-verify-btn:hover {
+    color: #475569;
+  }
+
+  .timer-box {
+    background: var(--bg-panel);
+    border: 1px solid var(--border-color);
+    padding: 5px 12px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: bold;
+    color: var(--accent-yellow);
+    font-size: 15px;
+  }
+
+  .timer-input {
+    width: 52px;
+    background: #0f172a;
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    padding: 3px 6px;
+    border-radius: 4px;
+    text-align: center;
+    font-size: 14px;
+  }
+
+  .btn {
+    padding: 6px 14px;
+    border-radius: 6px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .btn-gray { background: #334155; color: #e2e8f0; }
+  .btn-gray:hover { background: #475569; }
+  .btn-green { background: #059669; color: #fff; }
+  .btn-green:hover { background: #10b981; }
+  .btn-blue { background: #2563eb; color: #fff; }
+  .btn-blue:hover { background: #3b82f6; }
+  .btn-red { background: #dc2626; color: #fff; }
+  .btn-red:hover { background: #ef4444; }
+  .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  .status-badge {
+    background: rgba(59, 130, 246, 0.15);
+    border: 1px solid rgba(59, 130, 246, 0.4);
+    color: #60a5fa;
+    padding: 5px 12px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .header-right {
+    text-align: right;
+  }
+
+  .exam-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: #f8fafc;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .exam-subtitle {
+    font-size: 12px;
+    color: var(--text-secondary);
+  }
+
+  /* 主版面左右雙欄 */
+  main {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+  }
+
+  .left-pane, .right-pane {
+    width: 50%;
+    height: 100%;
+    overflow-y: auto;
+    padding: 20px;
+  }
+
+  .left-pane {
+    border-right: 1px solid var(--border-color);
+    background-color: #111827;
+  }
+
+  .right-pane {
+    background-color: var(--bg-main);
+  }
+
+  /* 捲軸美化 */
+  ::-webkit-scrollbar { width: 8px; height: 8px; }
+  ::-webkit-scrollbar-track { background: #0f172a; }
+  ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background: #475569; }
+
+  /* 區塊卡片 */
+  .panel-box {
+    background: var(--bg-panel);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 18px;
+    margin-bottom: 20px;
+  }
+
+  .panel-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #93c5fd;
+    margin-bottom: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 8px;
+  }
+
+  /* 題號導覽格 */
+  .nav-grid {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 6px;
+  }
+
+  .nav-btn {
+    background: #0f172a;
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    padding: 6px 0;
+    border-radius: 5px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.15s;
+  }
+
+  .nav-btn:hover { border-color: var(--accent-blue); color: #fff; }
+  .nav-btn.answered { background: #2563eb; border-color: #3b82f6; color: #fff; }
+  .nav-btn.correct { background: #059669; border-color: #10b981; color: #fff; }
+  .nav-btn.wrong { background: #dc2626; border-color: #ef4444; color: #fff; }
+
+  /* 成績與弱點診斷面板 */
+  #result-dashboard {
+    display: none;
+    border: 1px solid #3b82f6;
+    background: linear-gradient(145deg, #1e293b, #0f172a);
+  }
+
+  .score-summary-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 16px;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+
+  .score-card {
+    background: rgba(15, 23, 42, 0.7);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 15px;
+    text-align: center;
+  }
+
+  .big-score {
+    font-size: 46px;
+    font-weight: 800;
+    color: #34d399;
+    line-height: 1.1;
+    margin: 6px 0;
+  }
+
+  .dim-stat-list {
+    margin-top: 12px;
+    text-align: left;
+    font-size: 13px;
+  }
+
+  .dim-stat-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 4px 0;
+    border-bottom: 1px dashed #334155;
+  }
+
+  .chart-wrapper {
+    background: rgba(15, 23, 42, 0.7);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 10px;
+    height: 230px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .filter-toolbar {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+  }
+
+  /* 實驗與閱讀題組文本區 */
+  .passage-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 16px;
+  }
+
+  .passage-badge {
+    display: inline-block;
+    background: rgba(59, 130, 246, 0.2);
+    color: #60a5fa;
+    border: 1px solid rgba(59, 130, 246, 0.4);
+    font-size: 12px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+
+  .passage-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #f8fafc;
+    margin-bottom: 8px;
+  }
+
+  .passage-content {
+    font-size: 14px;
+    color: #cbd5e1;
+  }
+
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10px 0;
+    font-size: 13px;
+  }
+
+  .data-table th, .data-table td {
+    border: 1px solid #334155;
+    padding: 7px 10px;
+    text-align: center;
+  }
+
+  .data-table th {
+    background: #1e293b;
+    color: #93c5fd;
+  }
+
+  .svg-diagram {
+    background: #0f172a;
+    border: 1px solid #334155;
+    border-radius: 6px;
+    padding: 10px;
+    margin: 10px 0;
+    text-align: center;
+  }
+
+  /* 右側題目卡片 */
+  .section-banner {
+    background: rgba(30, 41, 59, 0.8);
+    border-left: 4px solid var(--accent-blue);
+    padding: 12px 16px;
+    border-radius: 6px;
+    margin-bottom: 18px;
+  }
+
+  .question-card {
+    background: var(--bg-panel);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 18px;
+    margin-bottom: 18px;
+    transition: border-color 0.2s;
+  }
+
+  .question-card.q-correct { border-color: var(--accent-green); }
+  .question-card.q-wrong { border-color: var(--accent-red); }
+
+  .q-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #283549;
+  }
+
+  .q-num {
+    font-size: 16px;
+    font-weight: 700;
+    color: #60a5fa;
+  }
+
+  .q-tags {
+    display: flex;
+    gap: 6px;
+    font-size: 12px;
+  }
+
+  .tag {
+    background: #0f172a;
+    border: 1px solid #334155;
+    color: #94a3b8;
+    padding: 2px 8px;
+    border-radius: 4px;
+  }
+
+  .q-stem {
+    font-size: 15.5px;
+    color: #f8fafc;
+    margin-bottom: 14px;
+    line-height: 1.7;
+  }
+
+  .options-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .option-label {
+    background: #0f172a;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 11px 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 14.5px;
+    transition: all 0.15s;
+  }
+
+  .option-label:hover {
+    background: var(--bg-hover);
+    border-color: #475569;
+  }
+
+  .option-label input[type="radio"] {
+    margin-top: 4px;
+    accent-color: var(--accent-blue);
+    transform: scale(1.1);
+  }
+
+  .option-label.selected {
+    background: rgba(37, 99, 235, 0.2);
+    border-color: #3b82f6;
+  }
+
+  .option-label.opt-correct {
+    background: rgba(16, 185, 129, 0.2) !important;
+    border-color: #10b981 !important;
+    color: #6ee7b7;
+    font-weight: 600;
+  }
+
+  .option-label.opt-wrong {
+    background: rgba(239, 68, 68, 0.2) !important;
+    border-color: #ef4444 !important;
+    color: #fca5a5;
+    text-decoration: line-through;
+  }
+
+  /* 解析區 */
+  .explanation-box {
+    display: none;
+    margin-top: 16px;
+    background: #0b1120;
+    border: 1px solid #334155;
+    border-radius: 8px;
+    padding: 15px;
+    font-size: 14px;
+  }
+
+  .exp-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .ans-pill {
+    background: #059669;
+    color: #fff;
+    padding: 3px 10px;
+    border-radius: 5px;
+    font-weight: 700;
+    font-size: 13px;
+  }
+
+  .exp-section {
+    margin-bottom: 10px;
+    color: #cbd5e1;
+  }
+
+  .exp-section strong {
+    color: #93c5fd;
+  }
+
+  .formula-block {
+    background: #162032;
+    border-left: 3px solid #8b5cf6;
+    padding: 8px 12px;
+    margin: 8px 0;
+    border-radius: 4px;
+    color: #e2e8f0;
+  }
+
+  .distractor-list {
+    list-style: none;
+    padding-left: 4px;
+  }
+
+  .distractor-list li {
+    margin-bottom: 5px;
+    color: #94a3b8;
+  }
+
+  /* Modal 視窗 */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    z-index: 999;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+
+  .modal-box {
+    background: var(--bg-panel);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    max-width: 850px;
+    width: 100%;
+    max-height: 85vh;
+    overflow-y: auto;
+    padding: 24px;
+    position: relative;
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 16px;
+    right: 20px;
+    background: transparent;
+    border: none;
+    color: #94a3b8;
+    font-size: 22px;
+    cursor: pointer;
+  }
+
+  @media (max-width: 900px) {
+    body { height: auto; overflow: auto; }
+    main { flex-direction: column; overflow: visible; }
+    .left-pane, .right-pane { width: 100%; height: auto; overflow: visible; border-right: none; }
+    .options-grid { grid-template-columns: 1fr; }
+    .score-summary-grid { grid-template-columns: 1fr; }
+    .nav-grid { grid-template-columns: repeat(5, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-left">
+    <span class="secret-verify-btn" id="secretVerifyBtn" title="題庫驗證入口">❖</span>
+    <div class="timer-box">
+      <span>⏱️ 倒數：</span>
+      <span id="timerDisplay">50:00</span>
+      <input type="number" id="customMinutes" class="timer-input" value="50" min="1" max="240">
+      <span>分</span>
+      <button class="btn btn-gray" onclick="setTimer()">設定</button>
+      <button class="btn btn-gray" id="pauseBtn" onclick="togglePause()">暫停</button>
+    </div>
+    <div class="status-badge" id="progressBadge">已作答：0 / 25</div>
+    <button class="btn btn-green" id="submitBtn" onclick="submitExam()">提交試卷</button>
+    <button class="btn btn-blue" onclick="shuffleAndReset()">重新測驗 (洗牌)</button>
+  </div>
+  <div class="header-right">
+    <div class="exam-title" id="examTitle" title="測驗標題">國中七年級自然科學（生物）全真模擬測驗（50題）</div>
+    <div class="exam-subtitle">單元 2-2 酵素與代謝作用 ＆ 2-3 植物如何製造養分 綜合實力評量</div>
+  </div>
+</header>
+
+<main>
+  <!-- 左側固定導覽與圖表文本區 -->
+  <div class="left-pane" id="leftPane">
+    <!-- 交卷後的成績診斷報告 -->
+    <div class="panel-box" id="result-dashboard">
+      <div class="panel-title">
+        <span>📊 測驗成績與弱點診斷分析報告</span>
+        <span id="timeSpentTag" style="font-size:12px; color:#94a3b8;"></span>
+      </div>
+      <div class="score-summary-grid">
+        <div class="score-card">
+          <div style="font-size:13px; color:#94a3b8;">總得分（滿分 100 分）</div>
+          <div class="big-score" id="totalScoreDisplay">0</div>
+          <div style="font-size:13px; font-weight:600;" id="correctCountDisplay">答對 0 / 25 題</div>
+          <div class="dim-stat-list" id="dimStatList"></div>
+        </div>
+        <div class="chart-wrapper">
+          <canvas id="radarChart"></canvas>
+        </div>
+      </div>
+      <div class="filter-toolbar">
+        <button class="btn btn-blue" onclick="filterQuestions('all')">顯示全部題目</button>
+        <button class="btn btn-red" id="filterWrongBtn" onclick="filterQuestions('wrong')">只看錯題 (0)</button>
+        <button class="btn btn-gray" onclick="copyWrongNotes()">📋 一鍵複製錯題筆記 (Markdown)</button>
+      </div>
+    </div>
+
+    <!-- 題號快速導覽 -->
+    <div class="panel-box">
+      <div class="panel-title">
+        <span>🧭 題號快速導覽（點擊跳轉至該題）</span>
+        <span style="font-size:12px; color:#94a3b8;">藍：已答｜綠：答對｜紅：答錯</span>
+      </div>
+      <div class="nav-grid" id="navGrid"></div>
+    </div>
+
+    <!-- 實驗數據與圖表對照區 -->
+    <div class="panel-box">
+      <div class="panel-title">
+        <span>🔬 實驗數據、曲線圖與葉片構造圖表對照區</span>
+      </div>
+      <p style="font-size:13px; color:#94a3b8; margin-bottom:12px;">
+        作答涉及圖表判讀與實驗變因之試題時，請對照下方五組自修核心實驗與構造圖表。電腦版可獨立捲動左側文本與右側題目。
+      </p>
+
+      <!-- 圖表組一 -->
+      <div class="passage-card">
+        <span class="passage-badge">圖表題組（一）｜酵素活性與溫度、pH 值關係</span>
+        <div class="passage-title">人體內三種消化酵素與不同環境下的酵素活性曲線</div>
+        <div class="passage-content">
+          <p><strong>【圖一：溫度與酵素活性】</strong>人體酵素最適溫度約在 $37^\circ\text{C}$；低溫（如 $0^\circ\text{C}$）時活性極低但結構未被破壞，回溫可恢復活性；高溫超過 $60^\circ\text{C}$ 以上會使蛋白質結構永久破壞（變性）而失去活性。</p>
+          <p style="margin-top:6px;"><strong>【圖二：酸鹼值（pH）與酵素活性】</strong>不同酵素有特定最適 pH 範圍：胃蛋白酶偏好強酸性（pH $\approx 2$）、唾液澱粉酶偏好中性（pH $\approx 7$）、胰蛋白酶（於小腸中作用）偏好弱鹼性（pH $\approx 8\sim9$）。</p>
+          <div class="svg-diagram">
+            <svg width="100%" height="145" viewBox="0 0 460 145">
+              <!-- 左圖：溫度 -->
+              <line x1="35" y1="120" x2="205" y2="120" stroke="#64748b" stroke-width="1.5"/>
+              <line x1="35" y1="15" x2="35" y2="120" stroke="#64748b" stroke-width="1.5"/>
+              <path d="M 40 115 Q 100 105 125 28 Q 145 75 160 118 L 195 118" fill="none" stroke="#38bdf8" stroke-width="2.5"/>
+              <line x1="125" y1="28" x2="125" y2="120" stroke="#94a3b8" stroke-dasharray="3,3"/>
+              <text x="125" y="135" fill="#cbd5e1" font-size="11" text-anchor="middle">37°C</text>
+              <text x="165" y="135" fill="#f87171" font-size="11" text-anchor="middle">60°C</text>
+              <text x="18" y="65" fill="#cbd5e1" font-size="11" transform="rotate(-90 18,65)" text-anchor="middle">酵素活性</text>
+              <text x="115" y="14" fill="#93c5fd" font-size="11" text-anchor="middle">人體酵素溫度曲線</text>
+
+              <!-- 右圖：pH值 -->
+              <line x1="245" y1="120" x2="445" y2="120" stroke="#64748b" stroke-width="1.5"/>
+              <line x1="245" y1="15" x2="245" y2="120" stroke="#64748b" stroke-width="1.5"/>
+              <!-- 胃酵素 -->
+              <path d="M 250 118 Q 275 20 300 118" fill="none" stroke="#f43f5e" stroke-width="2"/>
+              <text x="275" y="25" fill="#fda4af" font-size="10" text-anchor="middle">胃蛋白酶</text>
+              <!-- 唾液酵素 -->
+              <path d="M 305 118 Q 345 20 385 118" fill="none" stroke="#10b981" stroke-width="2"/>
+              <text x="345" y="25" fill="#6ee7b7" font-size="10" text-anchor="middle">唾液澱粉酶</text>
+              <!-- 胰酵素 -->
+              <path d="M 340 118 Q 385 20 430 118" fill="none" stroke="#f59e0b" stroke-width="2"/>
+              <text x="395" y="38" fill="#fcd34d" font-size="10" text-anchor="middle">胰蛋白酶</text>
+              <text x="275" y="135" fill="#cbd5e1" font-size="11" text-anchor="middle">pH 2</text>
+              <text x="345" y="135" fill="#cbd5e1" font-size="11" text-anchor="middle">pH 7</text>
+              <text x="395" y="135" fill="#cbd5e1" font-size="11" text-anchor="middle">pH 9</text>
+              <text x="345" y="14" fill="#93c5fd" font-size="11" text-anchor="middle">不同酵素酸鹼值曲線</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- 圖表組二 -->
+      <div class="passage-card">
+        <span class="passage-badge">實驗題組（二）｜實驗 2-2 唾液澱粉酶的作用</span>
+        <div class="passage-title">唾液分解澱粉實驗與溫度處理變因紀錄表</div>
+        <div class="passage-content">
+          <p><strong>【實驗假說】</strong>人體的唾液能讓澱粉產生出具有甜味的小分子醣類（還原糖）。</p>
+          <p><strong>【檢測方法】</strong>① <strong>碘液</strong>（黃褐色）：檢測澱粉存在，遇澱粉變<strong>藍黑色</strong>。② <strong>本氏液</strong>（淺藍色）：檢測小分子醣類（葡萄糖、麥芽糖等），需<strong>隔水加熱</strong>，隨糖濃度由低至高呈色變化為：<strong>藍色（無糖）→ 綠色 → 黃色 → 橙色 → 紅色（糖最多）</strong>。</p>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>試管</th>
+                <th>內容物（各 3 mL）</th>
+                <th>溫度處理</th>
+                <th>靜置 10 分鐘後加本氏液並隔水加熱</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>甲</strong></td>
+                <td>澱粉液 ＋ 新鮮唾液</td>
+                <td>維持 $37^\circ\text{C}$</td>
+                <td>呈<strong>綠色或黃色／橙紅色</strong>（有小分子醣）</td>
+              </tr>
+              <tr>
+                <td><strong>乙</strong></td>
+                <td>澱粉液 ＋ 清水</td>
+                <td>維持 $37^\circ\text{C}$</td>
+                <td>呈<strong>淺藍色</strong>（無小分子醣，對照組）</td>
+              </tr>
+              <tr>
+                <td><strong>丙</strong></td>
+                <td>澱粉液 ＋ 煮沸後冷卻的唾液</td>
+                <td>維持 $37^\circ\text{C}$</td>
+                <td>呈<strong>淺藍色</strong>（高溫煮沸使酵素永久失去活性）</td>
+              </tr>
+              <tr>
+                <td><strong>丁</strong></td>
+                <td>澱粉液 ＋ 新鮮唾液</td>
+                <td>置於 $0^\circ\text{C}$ 冰水</td>
+                <td>呈<strong>淺藍色或藍綠色</strong>（低溫抑制酵素活性）</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- 圖表組三 -->
+      <div class="passage-card">
+        <span class="passage-badge">實驗題組（三）｜酸鹼環境對唾液酵素活性的影響</span>
+        <div class="passage-title">小玲探討酸鹼度（醋酸）與溫度對唾液澱粉酶之實驗設計</div>
+        <div class="passage-content">
+          <p><strong>【實驗組 A】</strong>唾液 $1\text{ mL}$ ＋ <strong>醋 $2\text{ mL}$</strong> ＋ 澱粉液 $1\text{ mL}$，於 $37^\circ\text{C}$ 靜置 $10$ 分鐘後，加入 $1\text{ mL}$ 本氏液隔水加熱，結果呈<strong>藍色</strong>。</p>
+          <p><strong>【對照組 B】</strong>唾液 $1\text{ mL}$ ＋ <strong>水 $2\text{ mL}$</strong> ＋ 澱粉液 $1\text{ mL}$，於 $37^\circ\text{C}$ 靜置 $10$ 分鐘後，加入 $1\text{ mL}$ 本氏液隔水加熱，結果呈<strong>橘紅色</strong>。</p>
+          <p><strong>【低溫組 C】</strong>唾液 $1\text{ mL}$ ＋ <strong>水 $2\text{ mL}$</strong> ＋ 澱粉液 $1\text{ mL}$，於 <strong>$4^\circ\text{C}$ 低溫</strong>靜置 $10$ 分鐘後，加入 $1\text{ mL}$ 本氏液隔水加熱，結果呈<strong>藍色</strong>。</p>
+        </div>
+      </div>
+
+      <!-- 圖表組四 -->
+      <div class="passage-card">
+        <span class="passage-badge">圖表題組（四）｜茶葉發酵與酵素高溫去活性（會考精選）</span>
+        <div class="passage-title">綠茶與紅茶製作過程中酵素 X 之溫度調控示意圖</div>
+        <div class="passage-content">
+          <p>茶葉中所含的<strong>酵素 X 在超過 $70^\circ\text{C}$ 後，就無法再有催化能力</strong>。下表為製作綠茶（不發酵茶，高溫殺菁）與紅茶（全發酵茶）在步驟 I → II → III → IV 的溫度變化：</p>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>製茶階段</th>
+                <th>步驟 I</th>
+                <th>步驟 II（炒菁）</th>
+                <th>步驟 III</th>
+                <th>步驟 IV（乾燥）</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>綠茶溫度</strong></td>
+                <td>約 $30^\circ\text{C}$</td>
+                <td><strong>超過 $70^\circ\text{C}$</strong>（約 $85^\circ\text{C}$）</td>
+                <td>降至約 $35^\circ\text{C}$</td>
+                <td><strong>超過 $70^\circ\text{C}$</strong>（約 $80^\circ\text{C}$）</td>
+              </tr>
+              <tr>
+                <td><strong>紅茶溫度</strong></td>
+                <td>約 $30^\circ\text{C}$</td>
+                <td>約 $30^\circ\text{C}$（未超 $70^\circ\text{C}$）</td>
+                <td>約 $35^\circ\text{C}$（持續發酵）</td>
+                <td><strong>超過 $70^\circ\text{C}$</strong>（約 $80^\circ\text{C}$）</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- 圖表組五 -->
+      <div class="passage-card">
+        <span class="passage-badge">圖表題組（五）｜2-3 植物光合作用的主要器官——葉的構造</span>
+        <div class="passage-title">葉片橫切面構造與功能對照表</div>
+        <div class="passage-content">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>葉片構造</th>
+                <th>細胞特徵與葉綠體有無</th>
+                <th>主要生理功能</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>角質層</strong></td>
+                <td>非細胞構造，覆蓋在上下表皮外側</td>
+                <td><strong>防止水分散失</strong></td>
+              </tr>
+              <tr>
+                <td><strong>上、下表皮</strong></td>
+                <td>扁平、透明且排列整齊，<strong>無葉綠體</strong></td>
+                <td><strong>保護</strong>內部組織，讓光線穿透</td>
+              </tr>
+              <tr>
+                <td><strong>保衛細胞</strong></td>
+                <td>兩兩成對（半月形），<strong>具有葉綠體</strong></td>
+                <td>(1) <strong>行光合作用</strong>；(2) <strong>控制氣孔大小</strong></td>
+              </tr>
+              <tr>
+                <td><strong>氣孔</strong></td>
+                <td>由兩個保衛細胞圍成的空隙（多分布於下表皮）</td>
+                <td><strong>氣體進出葉片的門戶</strong>（水蒸氣、$\text{O}_2$、$\text{CO}_2$）</td>
+              </tr>
+              <tr>
+                <td><strong>葉肉</strong></td>
+                <td>分布在上、下表皮間，<strong>富含大量葉綠體</strong></td>
+                <td><strong>行光合作用</strong>的主要場所</td>
+              </tr>
+              <tr>
+                <td><strong>葉脈</strong></td>
+                <td>葉片內的輸導組織（維管束）</td>
+                <td><strong>運輸水分與養分</strong>（兼具支持功能）</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 右側試題與作答解析區 -->
+  <div class="right-pane" id="rightPane">
+    <div class="section-banner">
+      <div style="font-size:16px; font-weight:700; color:#60a5fa;">一、酵素特性、代謝作用與葉片構造全真試題</div>
+      <div style="font-size:13px; color:#94a3b8;">請選出最符合課本定義與生物學原理的正確答案（每題均有唯一正解，交卷後立即顯示公式與誘答解析）</div>
+    </div>
+    <div id="questionsContainer"></div>
+  </div>
+</main>
+
+<!-- 題庫驗證 Modal -->
+<div class="modal-overlay" id="verifyModal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('verifyModal')">✕</button>
+    <h3 style="color:#60a5fa; margin-bottom:10px;">❖ 題庫結構與答案分布驗證總表</h3>
+    <p style="font-size:13px; color:#94a3b8; margin-bottom:12px;" id="verifySummaryText"></p>
+    <table class="data-table" id="verifyTable">
+      <thead>
+        <tr>
+          <th>題號</th>
+          <th>考點維度</th>
+          <th>認知層次</th>
+          <th>正解</th>
+          <th>題幹摘要</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- 家長監控歷史紀錄 Modal -->
+<div class="modal-overlay" id="parentModal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('parentModal')">✕</button>
+    <h3 style="color:#f59e0b; margin-bottom:10px;">🔒 家長專屬：歷次測驗歷史紀錄表</h3>
+    <p style="font-size:13px; color:#94a3b8; margin-bottom:12px;">系統自動記錄每次交卷時間、作答耗時、得分與錯題清單，協助檢視學習成效。</p>
+    <div style="margin-bottom:12px;">
+      <button class="btn btn-red" onclick="clearHistory()">清除歷史紀錄</button>
+    </div>
+    <table class="data-table" id="historyTable">
+      <thead>
+        <tr>
+          <th>交卷時間</th>
+          <th>耗時</th>
+          <th>總得分</th>
+          <th>各維度表現</th>
+          <th>錯題編號清單</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+// =========================================================================
+// 題庫資料結構（目前內建第 1 ~ 25 題，嚴格依據自修 2-2 與 2-3 內容命題）
+// 維度對應：'基礎定義' | '實驗變因' | '圖表判讀' | '跨章整合'
+// =========================================================================
+const questionBank = [
+  {
+    id: 1,
+    dimension: "基礎定義",
+    level: "基礎記憶（課本核心）",
+    stem: "生物體內進行的物質轉變過程統稱為「代謝作用」，包含合成作用與分解作用兩大類型。下列哪一項生理現象<strong>不屬於</strong>生物體內的代謝作用？",
+    options: [
+      "(A) 植物葉肉細胞利用光能將水與二氧化碳合成葡萄糖",
+      "(B) 細胞內將胺基酸小分子彼此結合形成大分子蛋白質",
+      "(C) 細胞粒線體內將葡萄糖分解並釋放出能量的呼吸作用",
+      "(D) 水分子順著濃度梯度通過細胞膜進入細胞的擴散作用"
+    ],
+    answer: 3, // (D)
+    formula: "$$\\text{代謝作用} = \\text{合成作用（小分子} \\rightarrow \\text{大分子）} + \\text{分解作用（大分子} \\rightarrow \\text{小分子）}$$",
+    explanation: "代謝作用專指生物體內由酵素催化的化學反應（包含合成作用與分解作用）。選項 (D) 的「擴散作用」僅是物質分子由高濃度往低濃度移動的物理現象，並未發生新物質的合成或舊物質的分解，因此不屬於代謝作用。",
+    distractors: [
+      "<strong>(A) 光合作用：</strong>將小分子的水與二氧化碳合成大分子葡萄糖，屬於典型的合成作用（代謝作用之一）。",
+      "<strong>(B) 蛋白質合成：</strong>將小分子胺基酸結合成大分子蛋白質，屬於合成作用（代謝作用之一）。",
+      "<strong>(C) 呼吸作用：</strong>將大分子養分分解產生能量與二氧化碳，屬於分解作用（代謝作用之一）。"
+    ]
+  },
+  {
+    id: 2,
+    dimension: "基礎定義",
+    level: "基礎記憶（課本核心）",
+    stem: "酵素（又稱酶）是生物體內不可或缺的催化劑，能加速代謝反應的進行。下列關於酵素基本特性的敘述，何者<strong>錯誤</strong>？",
+    options: [
+      "(A) 酵素的主要成分是蛋白質，容易受到溫度與酸鹼值的影響",
+      "(B) 酵素具有專一性，每一種酵素只能與特定的受質結合作用",
+      "(C) 酵素具有可重複性，在化學反應前後本身的構造不會被消耗",
+      "(D) 酵素置於 $0^\\circ\\text{C}$ 低溫環境下會立刻被殺死而永久失去活性"
+    ],
+    answer: 3, // (D)
+    formula: "$$\\text{酵素 (E)} + \\text{受質 (S)} \\rightleftharpoons \\text{酵素-受質複合體 (ES)} \\rightarrow \\text{酵素 (E)} + \\text{產物 (P)}$$",
+    explanation: "酵素的成分為蛋白質，並非具有細胞構造的生物體，因此不會「死亡」；在 $0^\\circ\\text{C}$ 低溫下，酵素活性僅是暫時受到抑制而降低，若重新恢復至適宜溫度（如 $37^\\circ\\text{C}$），酵素仍可恢復催化活性。唯有高溫（超過 $60^\\circ\\text{C}$）才會破壞蛋白質結構導致永久失活。",
+    distractors: [
+      "<strong>(A) 正確敘述：</strong>課本明確指出酵素主成分為蛋白質，凡影響蛋白質特性的溫度與 pH 值皆會影響活性。",
+      "<strong>(B) 正確敘述：</strong>專一性指特定酵素只能催化特定受質（如澱粉酶只能分解澱粉，不能分解纖維素）。",
+      "<strong>(C) 正確敘述：</strong>催化劑在反應前後不會被消耗掉，可重複與新的受質結合。"
+    ]
+  },
+  {
+    id: 3,
+    dimension: "圖表判讀",
+    level: "分析應用（課本核心）",
+    stem: "某代謝反應的化學過程可表示為：「$\\text{甲} + \\text{乙} \\rightarrow \\text{丙} \\rightarrow \\text{丁} + \\text{乙}$」，其中甲為反應前的單一較大分子，丁為反應後產生的兩個較小分子。在此反應式中，何者最可能是「酵素」？",
+    options: [
+      "(A) 甲",
+      "(B) 乙",
+      "(C) 丙",
+      "(D) 丁"
+    ],
+    answer: 1, // (B)
+    formula: "$$\\text{受質 (甲)} + \\text{酵素 (乙)} \\rightarrow \\text{複合體 (丙)} \\rightarrow \\text{產物 (丁)} + \\text{酵素 (乙)}$$",
+    explanation: "酵素具有「可重複性」，在催化反應前後本身不會被消耗掉，其種類與數量在箭頭前後維持不變。觀察反應式可知，「乙」在反應前參與結合，反應結束後仍完整出現，故乙為酵素；甲為受質，丁為分解後的產物。",
+    distractors: [
+      "<strong>(A) 甲：</strong>反應前存在、反應後消失並轉變為丁，屬於被分解的「受質」。",
+      "<strong>(C) 丙：</strong>為酵素與受質暫時結合的中間產物（酵素-受質複合體）。",
+      "<strong>(D) 丁：</strong>為反應結束後新生成的較小分子，屬於「產物」。"
+    ]
+  },
+  {
+    id: 4,
+    dimension: "基礎定義",
+    level: "基礎記憶（課本核心）",
+    stem: "平時吃白米飯或白饅頭時，剛入口並無明顯甜味，但在口中充分咀嚼一段時間後會逐漸產生甜味。下列何者是造成此現象的最主要原因？",
+    options: [
+      "(A) 牙齒的物理性磨碎作用直接將澱粉切斷成甜味分子",
+      "(B) 人體分泌的唾液本身就含有高濃度的葡萄糖與蔗糖",
+      "(C) 唾液中的澱粉酶將米飯中的澱粉分解轉變為小分子醣類",
+      "(D) 米飯中的澱粉本身具有甜味，經唾液稀釋後才被味蕾察覺"
+    ],
+    answer: 2, // (C)
+    formula: "$$\\text{澱粉（大分子、無甜味）} \\xrightarrow{\\text{唾液澱粉酶（} 37^\\circ\\text{C, 中性）}} \\text{麥芽糖等小分子醣類（具甜味）}$$",
+    explanation: "白米飯富含澱粉，澱粉屬於大分子碳水化合物，本身不具甜味；但唾液中含有「唾液澱粉酶」，能在口腔中將澱粉逐步分解為具有甜味的小分子醣類（如麥芽糖），因此咀嚼一段時間後會感到甜味。",
+    distractors: [
+      "<strong>(A) 迷思概念：</strong>牙齒咀嚼僅能增加食物與消化液的接觸面積，無法破壞化學鍵將大分子轉變為新物質。",
+      "<strong>(B) 迷思概念：</strong>實驗 2-2 對照組顯示純唾液或純澱粉均無還原糖反應，唾液本身並不含糖。",
+      "<strong>(D) 迷思概念：</strong>澱粉本身不具甜味，必須經酵素分解為小分子醣類才有甜味。"
+    ]
+  },
+  {
+    id: 5,
+    dimension: "圖表判讀",
+    level: "分析應用（課本核心）",
+    stem: "請對照左側【圖表題組（一）】的人體酵素溫度曲線。下列關於人體內酵素活性與溫度關係的敘述，何者最符合圖表資訊？",
+    options: [
+      "(A) 溫度越高，人體酵素的催化反應速率就會無上限地持續上升",
+      "(B) 人體酵素在約 $37^\\circ\\text{C}$ 時活性最高，高於 $60^\\circ\\text{C}$ 時活性急遽下降至停止",
+      "(C) 當環境溫度降至 $0^\\circ\\text{C}$ 時，人體酵素的蛋白質結構會永久變性破壞",
+      "(D) 人體內所有酵素在 $0^\\circ\\text{C}$ 到 $37^\\circ\\text{C}$ 之間均保持完全相同的最高活性"
+    ],
+    answer: 1, // (B)
+    formula: "$$\\text{活性變化趨勢：} 0^\\circ\\text{C（低活性）} \\xrightarrow{\\text{升溫}} 37^\\circ\\text{C（最高峰）} \\xrightarrow{>60^\\circ\\text{C}} 0\\text{（永久失活）}$$",
+    explanation: "由溫度曲線圖可知，人體酵素的最適溫度約在體溫 $37^\\circ\\text{C}$ 左右；在 $37^\\circ\\text{C}$ 以下時，活性隨溫度升高而增加；但超過 $37^\\circ\\text{C}$ 後活性迅速下滑，超過 $60^\\circ\\text{C}$ 則因蛋白質結構遭高溫破壞而永久失去活性。",
+    distractors: [
+      "<strong>(A) 忽略高溫變性：</strong>酵素是蛋白質，並非一般無機催化劑，過高溫度會破壞其立體結構導致失活。",
+      "<strong>(C) 混淆高低溫效應：</strong>低溫僅抑制活性，不會破壞結構；高溫才會造成永久變性。",
+      "<strong>(D) 曲線判讀錯誤：</strong>$0^\\circ\\text{C}$ 至 $37^\\circ\\text{C}$ 曲線呈明顯上升坡度，並非水平直線。"
+    ]
+  },
+  {
+    id: 6,
+    dimension: "圖表判讀",
+    level: "分析應用（課本核心）",
+    stem: "觀察左側【圖表題組（一）】的三種人體消化酵素（胃蛋白酶、唾液澱粉酶、胰蛋白酶）在不同酸鹼值（pH 值）下的活性曲線。下列推論何者正確？",
+    options: [
+      "(A) 胃蛋白酶在弱鹼性環境（pH $= 9$）下仍能維持極高的蛋白質分解能力",
+      "(B) 唾液澱粉酶隨食物進入強酸性的胃部後，分解澱粉的活性會大幅提升",
+      "(C) 胰蛋白酶最適合在弱鹼性環境中作用，與小腸內的消化液環境相符",
+      "(D) 酸鹼值（pH 值）的改變不會影響人體內這三種酵素的催化反應速率"
+    ],
+    answer: 2, // (C)
+    formula: "$$\\text{最適 pH 比較：胃蛋白酶 (pH } \\approx 2) < \\text{唾液澱粉酶 (pH } \\approx 7) < \\text{胰蛋白酶 (pH } \\approx 8\\sim9)$$",
+    explanation: "從 pH 曲線高峰位置可判讀：胃蛋白酶峰值位於 pH $\\approx 2$（強酸性），唾液澱粉酶峰值位於 pH $\\approx 7$（中性），而胰蛋白酶峰值位於 pH $\\approx 8\\sim9$（弱鹼性），正好對應其作用場所「小腸」的弱鹼性環境。",
+    distractors: [
+      "<strong>(A) 曲線看反：</strong>pH $= 9$ 時胃蛋白酶曲線已降至 0，完全失去活性。",
+      "<strong>(B) 探索小Q考點：</strong>唾液澱粉酶偏好中性（pH 7），進入強酸性的胃部（pH 2）後會失去催化能力甚至被胃蛋白酶分解。",
+      "<strong>(D) 違背基本特性：</strong>三條曲線隨 pH 變化劇烈起伏，證明酸鹼值對酵素活性影響極大。"
+    ]
+  },
+  {
+    id: 7,
+    dimension: "基礎定義",
+    level: "進階補充（紅字易混淆點）",
+    stem: "課文重點評量中特別針對酵素的作用場所與條件進行辨析。下列關於酵素的敘述，何者<strong>正確</strong>？",
+    options: [
+      "(A) 酵素必須在完整的活細胞內部才能發揮催化作用，離開細胞即刻失效",
+      "(B) 所有的酵素在中性（pH $= 7$）環境下的催化活性皆為最高",
+      "(C) 人體唾液中的澱粉酶既能加速澱粉分解，也能將葡萄糖重新合成澱粉",
+      "(D) 酵素在適宜的溫度與酸鹼值條件下，即使離開活細胞（如試管中）仍可作用"
+    ],
+    answer: 3, // (D)
+    formula: "$$\\text{酵素活性條件} = \\text{適宜溫度} + \\text{適宜 pH 值（無須依賴活細胞完整結構）}$$",
+    explanation: "酵素是由細胞製造的蛋白質催化劑，只要環境的溫度與酸鹼值適宜，即使離開生物體（例如將唾液吐入試管中進行實驗，或使用洗衣粉中的酵素），依然具有催化活性。",
+    distractors: [
+      "<strong>(A) 課文是非題陷阱：</strong>實驗 2-2 在試管中進行唾液分解澱粉即證明酵素在細胞外仍可作用。",
+      "<strong>(B) 以偏概全：</strong>胃蛋白酶在強酸性（pH 2）活性最高，胰蛋白酶在弱鹼性（pH 8~9）活性最高，並非全在中性。",
+      "<strong>(C) 專一性混淆：</strong>澱粉酶專一性催化澱粉的分解，澱粉的合成需由植物體內的澱粉合成酶負責。"
+    ]
+  },
+  {
+    id: 8,
+    dimension: "圖表判讀",
+    level: "分析應用（歷屆基測經典）",
+    stem: "木瓜、鳳梨等水果含有可分解蛋白質的酵素，烹調前加入這些酵素可使牛肉軟嫩。若在 $15^\\circ\\text{C}$ 時測定甲、乙、丙、丁四種酵素在不同 pH 值下的活性：甲峰值在 pH $= 2$、乙峰值在 pH $= 7$、丙在 pH $= 7$ 活性僅乙的一半、丁峰值在 pH $= 11$。若將牛肉置於 $15^\\circ\\text{C}$ 的<strong>中性</strong>環境中，加入等量的哪一種酵素可使牛肉最快變軟嫩？",
+    options: [
+      "(A) 甲酵素",
+      "(B) 乙酵素",
+      "(C) 丙酵素",
+      "(D) 丁酵素"
+    ],
+    answer: 1, // (B)
+    formula: "$$\\text{中性環境定義：pH} = 7.0 \\implies \\text{比較 pH} = 7 \\text{ 處的活性高度：乙} > \\text{丙} > \\text{甲} = \\text{丁} \\approx 0$$",
+    explanation: "題目設定環境為「$15^\\circ\\text{C}$ 的中性環境」，中性即為 $\\text{pH} = 7$。對照四種酵素在 $\\text{pH} = 7$ 時的活性大小，乙酵素在中性環境下達到活性最高峰，分解牛肉蛋白質的速率最快，因此能使牛肉最快變軟嫩。",
+    distractors: [
+      "<strong>(A) 甲酵素：</strong>最適環境為強酸性（pH 2），在中性環境下幾乎無活性。",
+      "<strong>(C) 丙酵素：</strong>雖在中性有活性，但活性高度明顯低於乙酵素，反應較慢。",
+      "<strong>(D) 丁酵素：</strong>最適環境為強鹼性（pH 11），在中性環境下無活性。"
+    ]
+  },
+  {
+    id: 9,
+    dimension: "圖表判讀",
+    level: "高階綜合（會考精選）",
+    stem: "請對照左側【圖表題組（四）】的製茶溫度紀錄表。已知茶葉中所含的<strong>酵素 X 在超過 $70^\\circ\\text{C}$ 後，就無法再有催化能力</strong>。比較四個步驟結束時，綠茶與紅茶中酵素 X 的活性大小，下列推論何者最合理？",
+    options: [
+      "(A) 步驟 I 結束時：綠茶的酵素 X 活性遠大於紅茶",
+      "(B) 步驟 II 結束時：綠茶與紅茶的酵素 X 活性完全相等",
+      "(C) 步驟 III 結束時：綠茶的酵素 X 活性小於紅茶",
+      "(D) 步驟 IV 結束時：綠茶與紅茶的酵素 X 活性皆維持最高"
+    ],
+    answer: 2, // (C)
+    formula: "$$\\text{步驟 II：綠茶 } (>70^\\circ\\text{C} \\rightarrow \\text{永久失活}) \\quad vs. \\quad \\text{紅茶 } (30^\\circ\\text{C} \\rightarrow \\text{保有活性})$$",
+    explanation: "步驟 I 時兩者皆約 $30^\\circ\\text{C}$，活性相近；到了步驟 II，綠茶溫度超過 $70^\\circ\\text{C}$（高溫殺菁），使酵素 X <strong>永久失去活性</strong>，即使步驟 III 降溫至 $35^\\circ\\text{C}$ 也無法恢復；而紅茶在步驟 II、III 均未超過 $70^\\circ\\text{C}$，仍保有酵素活性，故步驟 III 結束時「綠茶 $<$ 紅茶」。",
+    distractors: [
+      "<strong>(A) 步驟 I 誤判：</strong>步驟 I 兩者溫度皆在 $30^\\circ\\text{C}$ 左右，酵素 X 活性應大致相等。",
+      "<strong>(B) 步驟 II 誤判：</strong>步驟 II 綠茶已超過 $70^\\circ\\text{C}$ 失活（活性為 0），紅茶仍在 $30^\\circ\\text{C}$ 有活性。",
+      "<strong>(D) 步驟 IV 誤判：</strong>步驟 IV 乾燥過程兩者皆超過 $70^\\circ\\text{C}$，此時兩者酵素 X 皆已永久失去活性。"
+    ]
+  },
+  {
+    id: 10,
+    dimension: "圖表判讀",
+    level: "高階綜合（聯測精選）",
+    stem: "已知酵素 X 的最適溫度為 $40^\\circ\\text{C}$，且一旦置於<strong>超過 $44^\\circ\\text{C}$</strong> 的環境中，就會永久失去催化能力。小維將酵素 X 放入可調控溫度的裝置中，其溫度隨時間變化為：$10$ 分時為 $37^\\circ\\text{C}$、$20$ 分時升至 $48^\\circ\\text{C}$、$40$ 分時降至 $38^\\circ\\text{C}$、$50$ 分時為 $40^\\circ\\text{C}$、$60$ 分時升至 $45^\\circ\\text{C}$。若在 $10$、$20$、$50$、$60$ 分鐘分別取出等量酵素於 $40^\\circ\\text{C}$ 下測定活性，哪一時間點取出的酵素活性最大？",
+    options: [
+      "(A) $10$ 分鐘",
+      "(B) $20$ 分鐘",
+      "(C) $50$ 分鐘",
+      "(D) $60$ 分鐘"
+    ],
+    answer: 0, // (A)
+    formula: "$$t = 20\\text{ 分時 } T = 48^\\circ\\text{C} > 44^\\circ\\text{C} \\implies \\text{酵素 X 不可逆永久失活（後續降溫亦無法恢復）}$$",
+    explanation: "本題關鍵在於「高溫變性具有不可逆性」。在 $10$ 分鐘時溫度為 $37^\\circ\\text{C}$，尚未超過臨界高溫 $44^\\circ\\text{C}$，酵素仍保有完整活性；但到了 $20$ 分鐘時溫度飆升至 $48^\\circ\\text{C}$（超過 $44^\\circ\\text{C}$），試管內所有酵素 X 均已永久變性失活，因此後續 $50$ 分、$60$ 分取出的酵素活性皆為 $0$。",
+    distractors: [
+      "<strong>(B) 20 分鐘：</strong>此時溫度達 $48^\\circ\\text{C} > 44^\\circ\\text{C}$，酵素已遭高溫破壞失活。",
+      "<strong>(C) 50 分鐘（最大誘答陷阱）：</strong>學生常只看 $50$ 分鐘當下溫度剛好是最適溫度 $40^\\circ\\text{C}$，卻忽略酵素在 $20$ 分鐘時就已經「被高溫煮死」無法復活。",
+      "<strong>(D) 60 分鐘：</strong>不僅經歷過 $20$ 分鐘的高溫，當下 $45^\\circ\\text{C}$ 也超過 $44^\\circ\\text{C}$。"
+    ]
+  },
+  {
+    id: 11,
+    dimension: "實驗變因",
+    level: "分析應用（課本核心）",
+    stem: "請對照左側【實驗題組（二）】的實驗紀錄表。小晴準備了甲（$37^\\circ\\text{C}$ 唾液）、乙（$37^\\circ\\text{C}$ 清水）、丙（$37^\\circ\\text{C}$ 煮沸唾液）、丁（$0^\\circ\\text{C}$ 唾液）四支試管。她設計「丁試管」並與「甲試管」對照，主要目的是為了探討哪一種因素對酵素活性的影響？",
+    options: [
+      "(A) 唾液酵素的有無",
+      "(B) 作用溫度的高低",
+      "(C) 澱粉液濃度的大小",
+      "(D) 酸鹼值（pH）的變化"
+    ],
+    answer: 1, // (B)
+    formula: "$$\\text{單一操縱變因原則：甲試管 (} 37^\\circ\\text{C) } \\quad vs. \\quad \\text{丁試管 (} 0^\\circ\\text{C) } \\implies \\text{唯一差異為溫度}$$",
+    explanation: "科學實驗設計須符合「單一操縱變因原則」。比較甲試管與丁試管，兩者皆加入「$3\\text{ mL}$ 澱粉液 ＋ $3\\text{ mL}$ 新鮮唾液」，唯一的差別在於作用溫度（甲為 $37^\\circ\\text{C}$，丁為 $0^\\circ\\text{C}$），因此是為了探討「溫度高低」對酵素活性的影響。",
+    distractors: [
+      "<strong>(A) 酵素的有無：</strong>應比較「甲試管（加唾液）」與「乙試管（加清水）」。",
+      "<strong>(C) 澱粉液濃度：</strong>四支試管的澱粉液體積與濃度皆相同，屬於控制變因。",
+      "<strong>(D) 酸鹼值變化：</strong>四支試管均未添加酸或鹼性試劑，pH 值為控制變因。"
+    ]
+  },
+  {
+    id: 12,
+    dimension: "實驗變因",
+    level: "分析應用（進階陷阱題）",
+    stem: "承上題，在左側【實驗題組（二）】的甲、乙、丙、丁四支試管中，若不加本氏液，改為「每隔 $2$ 分鐘取出少量溶液並滴入<strong>碘液</strong>檢測」，哪一支試管會<strong>最先不再呈現藍黑色</strong>（即維持碘液原本的黃褐色）？",
+    options: [
+      "(A) 甲試管",
+      "(B) 乙試管",
+      "(C) 丙試管",
+      "(D) 丁試管"
+    ],
+    answer: 0, // (A)
+    formula: "$$\\text{碘液（黃褐色）} + \\text{澱粉} \\rightarrow \\text{藍黑色} \\quad ; \\quad \\text{澱粉完全分解} \\rightarrow \\text{維持黃褐色}$$",
+    explanation: "碘液是用來檢測「澱粉」的試劑，有澱粉時會呈藍黑色；當澱粉被分解完畢後，滴入碘液就會維持原本的黃褐色。甲試管處於最適溫度 $37^\\circ\\text{C}$ 且含有活性正常的唾液澱粉酶，分解澱粉的速率最快，因此會最先將澱粉分解完畢而呈現黃褐色。",
+    distractors: [
+      "<strong>(B) 乙試管：</strong>只加清水無酵素，澱粉完全不會被分解，滴入碘液永遠呈藍黑色。",
+      "<strong>(C) 丙試管：</strong>唾液已煮沸失活，無法分解澱粉，滴入碘液呈藍黑色。",
+      "<strong>(D) 丁試管：</strong>置於 $0^\\circ\\text{C}$ 低溫，酵素活性極低，澱粉分解極慢，短時間內仍呈藍黑色。"
+    ]
+  },
+  {
+    id: 13,
+    dimension: "實驗變因",
+    level: "分析應用（課本核心）",
+    stem: "如果小晴想要了解「唾液經過高溫煮沸之後，是否仍然保有分解澱粉的酵素活性」，依據單一操縱變因原則，她應該選擇哪兩支試管作為實驗組與對照組？",
+    options: [
+      "(A) 甲與乙",
+      "(B) 乙與丙",
+      "(C) 甲與丙",
+      "(D) 丙與丁"
+    ],
+    answer: 2, // (C)
+    formula: "$$\\text{操縱變因：唾液是否煮沸} \\implies \\text{甲（未煮沸唾液, } 37^\\circ\\text{C) } \\quad vs. \\quad \\text{丙（煮沸唾液, } 37^\\circ\\text{C)}$$",
+    explanation: "欲探討「唾液煮沸與否」的影響，兩組除了「唾液是否經過煮沸」不同外，其餘條件（澱粉液量、唾液量、作用溫度 $37^\\circ\\text{C}$）必須完全相同。甲試管為未煮沸新鮮唾液（$37^\\circ\\text{C}$），丙試管為煮沸後唾液（$37^\\circ\\text{C}$），兩者構成最嚴謹的對照。",
+    distractors: [
+      "<strong>(A) 甲與乙：</strong>探討「唾液（酵素）的有無」對澱粉分解的影響。",
+      "<strong>(B) 乙與丙：</strong>兩者皆無酵素活性（一個是清水、一個是死酵素），無法看出正常酵素的基準線。",
+      "<strong>(D) 丙與丁：</strong>同時改變了「是否煮沸」與「作用溫度（$37^\\circ\\text{C}$ vs $0^\\circ\\text{C}$）」兩個變因，違反單一變因原則。"
+    ]
+  },
+  {
+    id: 14,
+    dimension: "實驗變因",
+    level: "分析應用（課本核心）",
+    stem: "根據左側【實驗題組（二）】甲、乙、丙、丁四支試管的完整實驗結果，小晴<strong>無法</strong>做出下列哪一種科學推論？",
+    options: [
+      "(A) 唾液中的酵素活性會受到環境溫度高低的影响",
+      "(B) 經過高溫煮沸處理的唾液會失去分解澱粉的能力",
+      "(C) 唾液中的酵素能將大分子澱粉轉變為小分子醣類",
+      "(D) 唾液中的酵素是由蛋白質所構成的有機大分子"
+    ],
+    answer: 3, // (D)
+    formula: "$$\\text{實驗證據邊界：本氏液僅能檢測「還原糖」有無，無法直接鑑定「酵素的化學成分」}$$",
+    explanation: "實驗結論必須嚴格建立在實驗觀察到的證據上。本實驗使用「本氏液」檢測是否產生小分子醣類，並改變溫度與煮沸條件，因此可推論出 (A)、(B)、(C)；但實驗過程中並未使用任何檢測蛋白質的試劑（如雙縮脲試劑），故無法直接從本實驗結果推論出酵素的成分是蛋白質。",
+    distractors: [
+      "<strong>(A) 可推論：</strong>比較甲（$37^\\circ\\text{C}$）與丁（$0^\\circ\\text{C}$）的結果差異即可得知。",
+      "<strong>(B) 可推論：</strong>比較甲（新鮮唾液）與丙（煮沸唾液）的結果差異即可得知。",
+      "<strong>(C) 可推論：</strong>比較甲（加唾液呈黃/橙色）與乙（加清水呈淺藍色）的結果即可得知。"
+    ]
+  },
+  {
+    id: 15,
+    dimension: "實驗變因",
+    level: "分析應用（課本核心）",
+    stem: "在課本「實驗 2-2 酵素的作用」步驟中，將澱粉液與唾液混合均勻後，並未立刻加入本氏液加熱，而是先將試管放回 $37^\\circ\\text{C}$ 溫水中靜置 $10$ 分鐘。執行此步驟的主要原因為何？",
+    options: [
+      "(A) 讓本氏液有充足的時間與澱粉分子進行化學結合",
+      "(B) 給予唾液中的酵素足夠的時間分解澱粉產生小分子醣類",
+      "(C) 讓試管內的水分蒸發以提高澱粉液的反應濃度",
+      "(D) 藉由長時間浸泡溫水將唾液中的雜菌徹底殺死"
+    ],
+    answer: 1, // (B)
+    formula: "$$\\text{反應時間 } (t = 10\\text{ min}) \\times \\text{酵素催化速率 } (v) = \\text{累積生成的小分子醣類總量}$$",
+    explanation: "酵素雖然能加速化學反應，但將大分子澱粉逐步分解為小分子醣類仍需要一定的反應時間。因此必須先置於最適溫度 $37^\\circ\\text{C}$ 下靜置 $10$ 分鐘，累積足夠的小分子醣類後，再加入本氏液隔水加熱才能觀察到明顯的變色反應。",
+    distractors: [
+      "<strong>(A) 步驟順序錯誤：</strong>本氏液是在靜置 $10$ 分鐘「之後」才加入的，且本氏液是測糖而非測澱粉。",
+      "<strong>(C) 目的錯誤：</strong>$37^\\circ\\text{C}$ 溫水不會使水分劇烈蒸發，目的在於維持酵素最適溫度。",
+      "<strong>(D) 溫度常識錯誤：</strong>$37^\\circ\\text{C}$ 是人體體溫，無法殺菌，反而最適合細菌與人體酵素作用。"
+    ]
+  },
+  {
+    id: 16,
+    dimension: "實驗變因",
+    level: "高階綜合（進階陷阱題）",
+    stem: "在實驗 2-2 中，若在 $37^\\circ\\text{C}$ 靜置 $10$ 分鐘後，將「唾液＋澱粉液」的混合液分為兩半：一半加入本氏液隔水加熱後呈<strong>黃色</strong>；另一半則滴入<strong>碘液</strong>檢測，結果發現竟然呈現<strong>藍黑色</strong>！針對此現象，下列解釋何者最合理？",
+    options: [
+      "(A) 唾液中的酵素已完全失活，沒有任何澱粉被分解",
+      "(B) 本氏液受到高溫加熱後會自動變成黃色，與糖無關",
+      "(C) 靜置 $10$ 分鐘內「部分澱粉」已分解為糖，但仍有「部分澱粉」尚未分解完畢",
+      "(D) 唾液澱粉酶會將分解出來的小分子醣類又重新組合成為澱粉"
+    ],
+    answer: 2, // (C)
+    formula: "$$\\text{澱粉（剩餘，遇碘液變藍黑）} \\xrightarrow{\\text{部分分解}} \\text{小分子醣類（已生成，遇本氏液變黃色）}$$",
+    explanation: "這是自修實驗重點統整的經典考題！本氏液變黃色證明「已經產生了小分子醣類」（部分澱粉已分解）；同時碘液變藍黑色證明「試管中仍有殘留的澱粉」（尚未 100% 分解完畢）。兩者並不矛盾，正說明了 $10$ 分鐘內反應正在進行中。",
+    distractors: [
+      "<strong>(A) 矛盾推論：</strong>若完全失活，本氏液應維持原本的淺藍色，不會變成黃色。",
+      "<strong>(B) 實驗原理錯誤：</strong>無糖時本氏液隔水加熱後依然維持淺藍色，不會自動變黃。",
+      "<strong>(D) 專一性錯誤：</strong>唾液澱粉酶只負責分解澱粉，不會逆向合成澱粉。"
+    ]
+  },
+  {
+    id: 17,
+    dimension: "實驗變因",
+    level: "分析應用（課本例題）",
+    stem: "請對照左側【實驗題組（三）】小玲的實驗設計。在實驗組 A 中，她將「唾液 $1\\text{ mL}$ ＋ 醋 $2\\text{ mL}$ ＋ 澱粉液 $1\\text{ mL}$」置於 $37^\\circ\\text{C}$ 靜置 $10$ 分鐘，結果本氏液呈藍色；對照組 B 則改加「水 $2\\text{ mL}$」，結果本氏液呈橘紅色。小玲設計此組實驗的「實驗假設」應為何？",
+    options: [
+      "(A) 酸性環境會降低或抑制唾液中酵素分解澱粉的活性",
+      "(B) 澱粉液的濃度高低會直接影響本氏液加熱後的顏色",
+      "(C) $37^\\circ\\text{C}$ 的溫水環境會破壞唾液澱粉酶的蛋白質結構",
+      "(D) 醋酸本身具有還原性，能直接讓本氏液變成橘紅色"
+    ],
+    answer: 0, // (A)
+    formula: "$$\\text{操縱變因：加入醋（酸性, pH} < 7) \\quad vs. \\quad \\text{加入水（中性, pH} \\approx 7)$$",
+    explanation: "比較實驗組 A 與對照組 B，兩者的唾液量、澱粉液量、反應溫度（$37^\\circ\\text{C}$）與時間（$10$ 分鐘）完全一致，唯一的操縱變因是「加入醋（營造酸性環境）」與「加入水（維持中性環境）」。因此實驗假設是探討「酸性環境是否會改變唾液中酵素的活性」。",
+    distractors: [
+      "<strong>(B) 變因判讀錯誤：</strong>兩組的澱粉液均為 $1\\text{ mL}$，濃度與體積皆為控制變因。",
+      "<strong>(C) 溫度條件錯誤：</strong>兩組皆在 $37^\\circ\\text{C}$ 下進行，且對照組 B 呈橘紅色證明 $37^\\circ\\text{C}$ 酵素活性極佳。",
+      "<strong>(D) 結果看反：</strong>加醋的 A 試管本氏液維持「藍色」，並未變成橘紅色。"
+    ]
+  },
+  {
+    id: 18,
+    dimension: "實驗變因",
+    level: "分析應用（課本評量）",
+    stem: "承左側【實驗題組（三）】，小玲另外準備了低溫組 C（唾液 $1\\text{ mL}$ ＋ 水 $2\\text{ mL}$ ＋ 澱粉液 $1\\text{ mL}$，置於 $4^\\circ\\text{C}$ 低溫 $10$ 分鐘）。若依據 C 試管的實驗結果（本氏液呈藍色，顯示低溫能抑制酵素作用），小玲可以將此原理應用在下列哪一項日常生活中？",
+    options: [
+      "(A) 將剛買回來的生豬肉放進冰箱冷藏或冷凍庫，以減緩微生物酵素作用並延長保存時間",
+      "(B) 將生豬肉用滾水徹底煮熟後再食用，使肉類蛋白質變性而更容易被胃腸消化",
+      "(C) 將自來水煮沸至 $100^\\circ\\text{C}$ 並持續滾燙 $5$ 分鐘，以殺死水中的病原菌",
+      "(D) 將白開水放入冷凍庫製成冰塊，以提高水中礦物質的酵素催化活性"
+    ],
+    answer: 0, // (A)
+    formula: "$$\\text{低溫環境 } (4^\\circ\\text{C}) \\implies \\text{抑制腐敗微生物體內酵素活性} \\implies \\text{延緩食物腐敗變質}$$",
+    explanation: "C 試管證明「低溫（$4^\\circ\\text{C}$）會大幅降低酵素活性，使分解反應幾乎停滯」。日常生活中將食物（如生豬肉）放入冰箱冷藏，正是利用低溫抑制細菌與黴菌體內的酵素活性，減緩食物養分被分解腐敗的速度，從而延長保存期限。",
+    distractors: [
+      "<strong>(B) 原理不符：</strong>煮熟屬於「高溫」處理，並非 C 試管所探討的「低溫」抑制作用。",
+      "<strong>(C) 原理不符：</strong>煮沸開水是利用「高溫」殺菌，與低溫保存無關。",
+      "<strong>(D) 科學錯誤：</strong>白開水與礦物質並非蛋白質，不含酵素，且低溫是降低而非提高活性。"
+    ]
+  },
+  {
+    id: 19,
+    dimension: "基礎定義",
+    level: "基礎記憶（課本核心）",
+    stem: "在「2-3 植物如何製造養分」單元中，綠色植物行光合作用的主要器官是葉片。下列關於葉片構造與其主要功能的配對，何者<strong>完全正確</strong>？",
+    options: [
+      "(A) 角質層 —— 含有大量葉綠體，是行光合作用的主要場所",
+      "(B) 上、下表皮 —— 細胞排列緊密且不含葉綠體，具有保護內部組織的功能",
+      "(C) 保衛細胞 —— 由兩個氣孔細胞組成，不含葉綠體，僅負責氣體進出",
+      "(D) 葉脈 —— 分布於上下表皮間的薄壁細胞，負責儲存澱粉與進行氣體交換"
+    ],
+    answer: 1, // (B)
+    formula: "$$\\text{葉片含葉綠體細胞} = \\text{葉肉細胞（主要）} + \\text{保衛細胞（次要）} \\quad ; \\quad \\text{表皮細胞無葉綠體}$$",
+    explanation: "葉片的上、下表皮細胞扁平、透明且排列整齊緊密，<strong>不具有葉綠體</strong>，主要功能為保護葉片內部構造，並讓陽光順利穿透至下方的葉肉細胞行光合作用。",
+    distractors: [
+      "<strong>(A) 角質層錯誤：</strong>角質層是表皮外側的蠟質非細胞構造，不含葉綠體，功能為「防止水分散失」。",
+      "<strong>(C) 保衛細胞兩大錯誤：</strong>保衛細胞<strong>具有葉綠體</strong>（能行光合作用），且是兩個保衛細胞圍成一個「氣孔」。",
+      "<strong>(D) 葉脈錯誤：</strong>葉脈是葉片內的輸導組織（維管束），負責「運輸水分與養分」，行光合作用的是葉肉。"
+    ]
+  },
+  {
+    id: 20,
+    dimension: "基礎定義",
+    level: "進階補充（紅字易混淆點）",
+    stem: "陸生植物的葉片構造中，關於「氣孔」與「保衛細胞」的分布位置與生理特徵，下列敘述何者<strong>正確</strong>？",
+    options: [
+      "(A) 氣孔多數分布在葉片的上表皮，以利直接接受陽光照射並加速蒸散",
+      "(B) 保衛細胞不具有葉綠體，必須完全依賴葉肉細胞提供能量才能開啟氣孔",
+      "(C) 氣孔是氣體（氧氣、二氧化碳、水蒸氣）進出葉片的主要門戶，由一對保衛細胞控制大小",
+      "(D) 當植物體內水分嚴重缺乏時，保衛細胞會膨脹並使氣孔完全張開以散熱"
+    ],
+    answer: 2, // (C)
+    formula: "$$\\text{氣孔功能：} \\text{CO}_2\\text{（進入）} \\quad / \\quad \\text{O}_2\\text{、水蒸氣（散出）} \\quad ; \\quad \\text{多分布於下表皮以減少水分散失}$$",
+    explanation: "氣孔由兩個半月形的保衛細胞圍成，是氣體（二氧化碳、氧氣、水蒸氣）進出葉片的門戶；為避免陽光直射導致水分過度蒸散，陸生植物葉片的氣孔多數分布於「下表皮」。",
+    distractors: [
+      "<strong>(A) 分布位置錯誤：</strong>陸生植物氣孔多分布於「下表皮」，避免陽光直射以減少水分散失（浮水植物才多在上表皮）。",
+      "<strong>(B) 構造特徵錯誤：</strong>表皮細胞無葉綠體，但「保衛細胞具有葉綠體」，能行光合作用。",
+      "<strong>(D) 生理機制相反：</strong>植物缺水時，保衛細胞會失水萎縮而使氣孔「關閉」，以防止水分繼續散失。"
+    ]
+  },
+  {
+    id: 21,
+    dimension: "基礎定義",
+    level: "基礎記憶（課本核心）",
+    stem: "植物葉片中的葉綠體含有葉綠素，能吸收太陽能並配合酵素的作用進行光合作用。下列哪一項化學反應式最能正確表示植物光合作用的總過程？",
+    options: [
+      "(A) $\\text{葡萄糖} + \\text{氧氣} \\xrightarrow{\\text{酵素}} \\text{二氧化碳} + \\text{水} + \\text{能量}$",
+      "(B) $\\text{水} + \\text{二氧化碳} \\xrightarrow{\\text{光能、葉綠體（酵素）}} \\text{葡萄糖} + \\text{氧氣} + \\text{水}$",
+      "(C) $\\text{水} + \\text{氧氣} \\xrightarrow{\\text{光能、葉綠體（酵素）}} \\text{葡萄糖} + \\text{二氧化碳}$",
+      "(D) $\\text{澱粉} + \\text{水} \\xrightarrow{\\text{葉綠體（酵素）}} \\text{葡萄糖} + \\text{氧氣}$"
+    ],
+    answer: 1, // (B)
+    formula: "$$12\\text{H}_2\\text{O} + 6\\text{CO}_2 \\xrightarrow{\\text{光能、葉綠體}} \\text{C}_6\\text{H}_{12}\\text{O}_6\\text{（葡萄糖）} + 6\\text{O}_2 + 6\\text{H}_2\\text{O}$$",
+    explanation: "依據自修 2-3 課文定義：「葉綠體中的葉綠素吸收光能，配合酵素的作用將<strong>水</strong>和<strong>二氧化碳</strong>經過一連串的反應轉換成<strong>葡萄糖</strong>、<strong>氧氣</strong>和<strong>水</strong>的過程，稱為光合作用。」",
+    distractors: [
+      "<strong>(A) 呼吸作用反應式：</strong>這是細胞分解葡萄糖產生能量的「呼吸作用」，並非光合作用。",
+      "<strong>(C) 氣體進出搞反：</strong>光合作用是吸收「二氧化碳」並釋放出「氧氣」，選項將兩者位置顛倒。",
+      "<strong>(D) 反應物錯誤：</strong>光合作用的原料是無機物（水與二氧化碳），並非澱粉。"
+    ]
+  },
+  {
+    id: 22,
+    dimension: "基礎定義",
+    level: "進階補充（紅字易混淆點）",
+    stem: "某生用顯微鏡觀察植物葉片下表皮的撕片標本，在視野中看到許多扁平透明的表皮細胞，以及散生其間、兩兩成對的半月形保衛細胞。在未染色的情況下，他能直接在視野中觀察到的綠色顆粒構造分布於何處？",
+    options: [
+      "(A) 僅存在於扁平透明的表皮細胞內",
+      "(B) 僅存在於兩兩成對的保衛細胞內",
+      "(C) 同時存在於表皮細胞與保衛細胞內",
+      "(D) 兩者皆無，葉綠體僅存在於角質層中"
+    ],
+    answer: 1, // (B)
+    formula: "$$\\text{表皮撕片標本（含表皮細胞} + \\text{保衛細胞）} \\implies \\text{僅保衛細胞含葉綠體（呈綠色顆粒）}$$",
+    explanation: "這是最經典的顯微鏡觀察考題！在葉片「表皮撕片」標本中，表皮細胞透明無色、<strong>不含葉綠體</strong>；唯有兩兩成對的<strong>保衛細胞具有葉綠體</strong>，因此在顯微鏡下可看見保衛細胞內有綠色顆粒（葉綠體）。",
+    distractors: [
+      "<strong>(A) 觀念顛倒：</strong>表皮細胞無葉綠體，若表皮有葉綠體會遮擋陽光進入葉肉層。",
+      "<strong>(C) 過度推論：</strong>表皮細胞並無葉綠體。",
+      "<strong>(D) 構造混淆：</strong>角質層為蠟質保護層，不是細胞，不可能有葉綠體。"
+    ]
+  },
+  {
+    id: 23,
+    dimension: "跨章整合",
+    level: "高階綜合（跨概念整合）",
+    stem: "若將綠色植物放在完全無光線的暗室中，即使持續澆水並提供充足的二氧化碳，植物葉肉細胞依然無法合成葡萄糖。結合「2-2 酵素」與「2-3 光合作用」的觀念，下列解釋何者最完整？",
+    options: [
+      "(A) 葉綠體內的酵素在黑暗中會立刻高溫變性而永久失去活性",
+      "(B) 光合作用需要葉綠素吸收「光能」提供能量，並配合葉綠體內的「酵素」催化反應",
+      "(C) 植物在黑暗中氣孔會完全張開，導致葉片內的葉綠素全部流失",
+      "(D) 沒有光線時，植物葉脈會停止將根部吸收的水分向上運輸"
+    ],
+    answer: 1, // (B)
+    formula: "$$\\text{光合作用必要條件} = \\text{原料（}\\text{H}_2\\text{O} + \\text{CO}_2\\text{）} + \\text{能量（光能）} + \\text{催化劑（葉綠體酵素）}$$",
+    explanation: "光合作用屬於「合成作用」（將小分子的水與二氧化碳合成大分子葡萄糖），此過程不僅需要葉綠體內的<strong>酵素</strong>催化，還必須仰賴葉綠素吸收<strong>光能</strong>作為能量來源。缺乏光能時，反應無法驅動進行。",
+    distractors: [
+      "<strong>(A) 酵素特性錯誤：</strong>黑暗不會使酵素高溫變性，只是缺乏光能驅動光合作用。",
+      "<strong>(C) 氣孔機制錯誤：</strong>黑暗中無須行光合作用吸收二氧化碳，氣孔通常會關閉（且葉綠素不會從氣孔流失）。",
+      "<strong>(D) 因果錯誤：</strong>即使有水分，缺乏光能仍無法進行光合作用。"
+    ]
+  },
+  {
+    id: 24,
+    dimension: "跨章整合",
+    level: "高階綜合（生活情境素養）",
+    stem: "醫學臨床上，當病人出現持續性高燒（體溫超過 $40^\\circ\\text{C}$ 以上）若未及時降溫處置，往往會有危及生命的危險。根據生物學中酵素與代謝作用的原理，下列哪一項說明最能解釋此現象？",
+    options: [
+      "(A) 體溫過高會使體內水分瞬間全部蒸發，導致血液凝固無法流動",
+      "(B) 體溫過高會使體內酵素的活性急遽下降甚至結構破壞，導致細胞無法維持正常代謝作用",
+      "(C) 體溫過高會刺激胃部大量分泌胃酸，直接將胃壁與小腸消化溶解",
+      "(D) 體溫過高會使人體細胞內的葉綠體停止行光合作用而缺乏養分"
+    ],
+    answer: 1, // (B)
+    formula: "$$\\text{持續高燒 } (T > 40^\\circ\\text{C}) \\implies \\text{人體酵素蛋白質變性失活} \\implies \\text{細胞代謝停擺（危及生命）}$$",
+    explanation: "依據自修 2-2「疑問一點通」課文解答：人體內所有維持生命的代謝反應（如呼吸作用產生能量）皆須仰賴酵素催化，而人體酵素最適溫度約為 $37^\\circ\\text{C}$。持續高燒會導致體內酵素活性急遽降低甚至變性失活，使細胞無法維持正常代謝作用而危及生命。",
+    distractors: [
+      "<strong>(A) 誇大非科學敘述：</strong>$40^\\circ\\text{C}$ 並不會使體內水分瞬間沸騰蒸發。",
+      "<strong>(C) 偏離核心機制：</strong>核心危機在於全身細胞（尤其是腦部等重要器官）的代謝酵素失活，而非單純胃酸分泌。",
+      "<strong>(D) 生物分類錯誤：</strong>人體為動物，細胞內並不具有葉綠體，也不會行光合作用。"
+    ]
+  },
+  {
+    id: 25,
+    dimension: "實驗變因",
+    level: "高階綜合（實驗設計整合）",
+    stem: "某研究團隊想探討「不同種類的酵素（胃蛋白酶、唾液澱粉酶、胰蛋白酶）對蛋白質的分解效率」，他們在三支試管中皆放入等量的蛋白塊，並維持在 $37^\\circ\\text{C}$ 與 $\\text{pH} = 7$（中性）的環境下進行實驗。結果發現只有胰蛋白酶有微弱分解效果，胃蛋白酶幾乎無作用。此實驗設計最主要的瑕疵為何？",
+    options: [
+      "(A) 應該將三支試管全部加熱至 $100^\\circ\\text{C}$ 沸騰，才能加快蛋白質分解",
+      "(B) 忽略了不同酵素各自有不同的「最適酸鹼值（pH 值）」，不應強迫胃蛋白酶在中性環境下測試",
+      "(C) 應該將蛋白塊換成等量的纖維素，才能公平比較三種酵素的專一性",
+      "(D) 唾液澱粉酶與胃蛋白酶必須混合在同一支試管中才能發揮協同作用"
+    ],
+    answer: 1, // (B)
+    formula: "$$\\text{公平比較原則：應將各酵素置於其「各自最適條件」（如胃蛋白酶須在 } \\text{pH} \\approx 2 \\text{ 酸性環境）}$$",
+    explanation: "胃蛋白酶的最適酸鹼值為強酸性（$\\text{pH} \\approx 2$），在中性（$\\text{pH} = 7$）環境下幾乎失去活性；因此若要測定胃蛋白酶分解蛋白質的真正能力，必須提供其適宜的酸性環境，否則會產生「偽陰性」的誤判。",
+    distractors: [
+      "<strong>(A) 溫度錯誤：</strong>$100^\\circ\\text{C}$ 會使所有酵素永久變性失活。",
+      "<strong>(C) 專一性錯誤：</strong>三者均無分解纖維素的酵素（人體缺乏纖維素酶）。",
+      "<strong>(D) 混雜變因：</strong>將不同酵素混在同一試管會無法區分各自的作用結果，且兩者所需 pH 值完全衝突。"
+    ]
+  }
+  ,
+  {
+    id: 26,
+    dimension: "基礎定義",
+    level: "基礎記憶（課本核心）",
+    stem: "生物體內的代謝作用可分為「合成作用」與「分解作用」兩大類型。下列哪一組生理現象的分類配對<strong>完全正確</strong>？",
+    options: [
+      "(A) 合成作用：葡萄糖轉變為澱粉；分解作用：胺基酸結合成蛋白質",
+      "(B) 合成作用：胺基酸結合成蛋白質；分解作用：澱粉分解為較小的糖分子",
+      "(C) 合成作用：澱粉分解為較小的糖分子；分解作用：水與二氧化碳合成葡萄糖",
+      "(D) 合成作用：脂質分解為甘油與脂肪酸；分解作用：葡萄糖轉變為纖維素"
+    ],
+    answer: 1, // (B)
+    formula: "$$\\text{合成作用：小分子} \\rightarrow \\text{大分子} \\quad ; \\quad \\text{分解作用：大分子} \\rightarrow \\text{小分子}$$",
+    explanation: "依據自修 2-2 課文重點解析：合成作用是將小分子結合成較大分子的作用，例如「蛋白合成酶可以將胺基酸組合成蛋白質」；分解作用是將較大的分子轉變成較小分子的作用，例如「澱粉酶可以將澱粉分解為較小的糖分子」。",
+    distractors: [
+      "<strong>(A) 分解作用舉例錯誤：</strong>「胺基酸結合成蛋白質」是由小分子變大分子，屬於合成作用。",
+      "<strong>(C) 兩者完全顛倒：</strong>澱粉分解為小分子糖是分解作用；水與二氧化碳合成葡萄糖（光合作用）才是合成作用。",
+      "<strong>(D) 兩者完全顛倒：</strong>脂質分解為甘油與脂肪酸是分解作用；葡萄糖轉變為纖維素是合成作用。"
+    ]
+  },
+  {
+    id: 27,
+    dimension: "基礎定義",
+    level: "基礎記憶（課本核心）",
+    stem: "在生物體內的代謝反應中，「能被特定酵素作用的物質」在生物學上稱為什麼？且酵素的命名通常與此物質密切相關（例如：以澱粉為作用對象的酵素稱為澱粉酶）。",
+    options: [
+      "(A) 受質",
+      "(B) 產物",
+      "(C) 催化劑",
+      "(D) 葉綠素"
+    ],
+    answer: 0, // (A)
+    formula: "$$\\text{受質（反應物）} \\xrightarrow{\\text{酵素（催化劑）}} \\text{產物（生成物）}$$",
+    explanation: "依據自修 2-2 課文重點解析：「在代謝反應中能被酵素作用的物質稱為受質。酵素與受質的結合具專一性，所以酵素的名稱常以受質來命名，例如：以澱粉為受質的酵素稱為澱粉酶。」",
+    distractors: [
+      "<strong>(B) 產物：</strong>是指受質經酵素催化反應後「新生成的物質」，並非被酵素作用的原始對象。",
+      "<strong>(C) 催化劑：</strong>是指「酵素」本身的角色功能，而非被酵素作用的物質。",
+      "<strong>(D) 葉綠素：</strong>是存在於葉綠體中負責吸收光能的色素分子。"
+    ]
+  },
+  {
+    id: 28,
+    dimension: "圖表判讀",
+    level: "分析應用（課本核心）",
+    stem: "觀察自修 2-2 課文「合成作用和分解作用示意圖」：若圖形顯示「兩個獨立的小分子幾何積木，透過酵素結合並合併成一個完整的單一大分子積木」，此圖示最能代表下列哪一項生理過程？",
+    options: [
+      "(A) 唾液中的澱粉酶將米飯中的澱粉分解為麥芽糖",
+      "(B) 胃液中的胃蛋白酶將肉類蛋白質分解為較小分子",
+      "(C) 細胞內的蛋白合成酶將多個胺基酸組合成蛋白質",
+      "(D) 細胞進行呼吸作用將葡萄糖分解產生二氧化碳與水"
+    ],
+    answer: 2, // (C)
+    formula: "$$\\text{小分子 A} + \\text{小分子 B} \\xrightarrow{\\text{合成酶}} \\text{大分子 AB（合成作用）}$$",
+    explanation: "題幹描述「兩個獨立小分子合併為一個單一大分子」，屬於「合成作用」。四個選項中僅有 (C)「將胺基酸組合成蛋白質」是由小分子結合成大分子的合成作用，其餘皆為大分子轉變為小分子的分解作用。",
+    distractors: [
+      "<strong>(A) 分解作用：</strong>澱粉（大分子）轉變為麥芽糖（小分子），與題幹合併圖示相反。",
+      "<strong>(B) 分解作用：</strong>蛋白質（大分子）轉變為較小分子，屬於分解作用。",
+      "<strong>(D) 分解作用：</strong>葡萄糖（較大分子）分解為二氧化碳與水（小分子），屬於分解作用。"
+    ]
+  },
+  {
+    id: 29,
+    dimension: "基礎定義",
+    level: "基礎記憶（課本核心）",
+    stem: "自修 2-2 課文指出「凡能影響蛋白質特性的因素，都可能改變酵素的活性，進而影響代謝反應的速率」。下列哪兩項環境因素最常被用來探討對酵素活性的影響？",
+    options: [
+      "(A) 溫度與酸鹼值（pH 值）",
+      "(B) 光照強度與風速大小",
+      "(C) 氣壓高低與重力加速度",
+      "(D) 容器材質與攪拌方向"
+    ],
+    answer: 0, // (A)
+    formula: "$$\\text{酵素活性 } = f(\\text{溫度 } T,\\ \\text{酸鹼值 } \\text{pH})$$",
+    explanation: "酵素的主要成分是蛋白質，蛋白質的立體結構與催化功能對「溫度」與「酸鹼值（pH 值）」極為敏感。過高溫度或過酸、過鹼的環境都會改變蛋白質結構並使酵素活性降低甚至永久失去活性。",
+    distractors: [
+      "<strong>(B) 光照與風速：</strong>主要影響植物光合作用速率與蒸散作用速率，並非影響酵素蛋白質活性的核心變因。",
+      "<strong>(C) 氣壓與重力：</strong>在一般地表生物體內環境中並不會劇烈改變酵素蛋白質的結構。",
+      "<strong>(D) 容器材質：</strong>玻璃試管或燒杯為實驗器材，不會改變酵素本身的化學活性。"
+    ]
+  },
+  {
+    id: 30,
+    dimension: "基礎定義",
+    level: "基礎記憶（課本核心）",
+    stem: "酸鹼值（pH 值）的數值範圍通常介於 $0$ 到 $14$ 之間，用來表示水溶液的酸鹼程度。下列關於酸鹼值（pH 值）大小與酸鹼性質的對應敘述，何者<strong>正確</strong>？",
+    options: [
+      "(A) $\\text{pH} = 0$ 表示水溶液為完全中性，不酸也不鹼",
+      "(B) $\\text{pH}$ 值愈小，表示水溶液的酸性愈強（例如 $\\text{pH} = 2$ 比 $\\text{pH} = 5$ 更酸）",
+      "(C) $\\text{pH}$ 值愈大，表示水溶液的酸性愈強（例如 $\\text{pH} = 12$ 為強酸）",
+      "(D) 人體胃液的酸鹼值約為 $\\text{pH} = 9$，屬於弱鹼性消化液"
+    ],
+    answer: 1, // (B)
+    formula: "$$0 \\xleftarrow{\\text{酸性愈強}} \\text{pH} < 7 \\quad | \\quad \\text{pH} = 7\\text{（中性）} \\quad | \\quad \\text{pH} > 7 \\xrightarrow{\\text{鹼性愈強}} 14$$",
+    explanation: "依據自修 2-2 酸鹼值（pH 值）數線圖：$\\text{pH} = 7$ 為中性；$\\text{pH} < 7$ 為酸性，且數值愈小酸性愈強；$\\text{pH} > 7$ 為鹼性，且數值愈大鹼性愈強。",
+    distractors: [
+      "<strong>(A) 中性數值錯誤：</strong>中性為 $\\text{pH} = 7$，$\\text{pH} = 0$ 為極強酸性。",
+      "<strong>(C) 大小方向相反：</strong>$\\text{pH}$ 值愈大是「鹼性」愈強，$\\text{pH} = 12$ 為強鹼而非強酸。",
+      "<strong>(D) 胃液酸鹼誤判：</strong>人體胃液含有胃酸（鹽酸），$\\text{pH}$ 值約為 $2$（強酸性），小腸液才呈弱鹼性。"
+    ]
+  },
+  {
+    id: 31,
+    dimension: "基礎定義",
+    level: "進階補充（紅字易混淆點）",
+    stem: "自修 2-2「探索小 Q」探討食品保存與酵素活性的關係：「若同一份生鮮食物分別放在室溫下與冰箱中低溫存放，何處存放的食物較不易腐敗？且將食物持續冷藏在冰箱，食物是否就永遠不會腐敗？」下列解釋何者最精確？",
+    options: [
+      "(A) 冰箱低溫能將食物中所有細菌與酵素徹底殺死，因此食物永遠不會腐敗",
+      "(B) 冰箱低溫能降低環境中微生物的酵素活性以減緩腐敗，但無法完全破壞酵素結構，久置仍會腐敗",
+      "(C) 室溫下微生物酵素會因溫度過高而永久變性，因此室溫比冰箱更適合保存食物",
+      "(D) 冰箱冷藏室的溫度通常高於 $60^\\circ\\text{C}$，是利用高溫滅菌原理來保存食物"
+    ],
+    answer: 1, // (B)
+    formula: "$$\\text{冰箱低溫 } (\\approx 4^\\circ\\text{C}) \\implies \\text{微生物酵素活性大幅降低（未破壞結構）} \\implies \\text{延緩但無法永久阻止腐敗}$$",
+    explanation: "依據自修 2-2「探索小 Q」解答：冰箱低溫較能抑制環境中微生物體內的酵素作用，減少其對食物養分的破壞；但低溫僅是降低反應速率，無法完全抑制或破壞所有生物酵素的結構與功能，因此食物長久置於冰箱中仍會腐敗。",
+    distractors: [
+      "<strong>(A) 常見生活迷思：</strong>低溫不會「殺死」酵素，只是降低活性，反應仍會以極慢速度進行。",
+      "<strong>(C) 溫度常識錯誤：</strong>台灣室溫約 $25\\sim30^\\circ\\text{C}$，正適合微生物酵素快速繁殖與分解食物。",
+      "<strong>(D) 溫度數值荒謬：</strong>冰箱冷藏室約 $4^\\circ\\text{C}$ 左右，並非高於 $60^\\circ\\text{C}$。"
+    ]
+  },
+  {
+    id: 32,
+    dimension: "跨章整合",
+    level: "高階綜合（人體消化系統整合）",
+    stem: "自修 2-2「探索小 Q」提出疑問：「人體唾液中的澱粉酶隨食物吞入食道後，直至進入胃中的強酸性環境後，唾液澱粉酶是否還能在胃中有效分解澱粉？」下列推測與依據何者正確？",
+    options: [
+      "(A) 可以，因為胃部溫度同樣維持在 $37^\\circ\\text{C}$，唾液澱粉酶活性完全不受影響",
+      "(B) 可以，因為唾液澱粉酶進入胃部後會自動轉變為胃蛋白酶繼續作用",
+      "(C) 不可以，因為唾液澱粉酶偏好中性環境，進入強酸性的胃部後會失去催化能力甚至被胃蛋白酶分解",
+      "(D) 不可以，因為澱粉在口腔中就已經 100% 全部分解為葡萄糖，胃裡已無澱粉"
+    ],
+    answer: 2, // (C)
+    formula: "$$\\text{唾液澱粉酶（最適 } \\text{pH} \\approx 7\\text{）} \\xrightarrow{\\text{進入胃部（} \\text{pH} \\approx 2\\text{）}} \\text{非最適酸鹼範圍} \\implies \\text{變性失活並成為胃蛋白酶的受質}$$",
+    explanation: "依據自修 2-2「探索小 Q」解答：唾液澱粉酶偏好中性（$\\text{pH} \\approx 7$）環境，隨食物進入強酸性（$\\text{pH} \\approx 2$）的胃部後，因處於不利此酵素活性的酸鹼環境，會失去催化能力，甚至因本身成分為蛋白質而在胃中被胃蛋白酶分解。",
+    distractors: [
+      "<strong>(A) 忽略 pH 值影響：</strong>酵素活性同時受「溫度」與「pH 值」雙重限制，缺一不可。",
+      "<strong>(B) 違背專一性：</strong>一種酵素具有特定結構與專一性，不會自動變形成另一種消化酵素。",
+      "<strong>(D) 消化常識錯誤：</strong>食物在口腔停留時間短，僅有部分澱粉被分解，其餘澱粉須到小腸再由胰液與腸液徹底分解。"
+    ]
+  },
+  {
+    id: 33,
+    dimension: "圖表判讀",
+    level: "基礎記憶（課本核心）",
+    stem: "觀察自修 2-2 課文重點評量選擇題第 1 題的循環示意圖：「大分子 $\\text{甲}$ 與 $\\text{乙}$ 結合後，轉變為兩個小分子 $\\text{丙}$ 與 $\\text{丁}$，而 $\\text{乙}$ 則沿著箭頭回到起點準備下一次結合」。下列關於此圖的描述，何者<strong>錯誤</strong>？",
+    options: [
+      "(A) 此代謝過程屬於將大分子轉變為小分子的分解作用",
+      "(B) 圖中的甲在反應過程中被酵素作用，屬於受質",
+      "(C) 圖中的丙是受質被分解後所生成的小分子產物",
+      "(D) 圖中的丁在反應前後數量不變，屬於生物體內的酵素"
+    ],
+    answer: 3, // (D)
+    formula: "$$\\text{甲（受質）} + \\text{乙（酵素）} \\rightarrow \\text{丙（產物 1）} + \\text{丁（產物 2）} + \\text{乙（酵素可重複使用）}$$",
+    explanation: "由循環箭頭方向可知，「乙」在反應前後循環重複出現，因此「乙」才是酵素；「甲」為被分解的大分子受質；而「丙」與「丁」皆為甲分解後產生的小分子「產物」。故選項 (D) 稱丁是酵素為錯誤敘述。",
+    distractors: [
+      "<strong>(A) 正確敘述：</strong>由一個大分子甲變成兩個小分子丙與丁，確實屬於分解作用。",
+      "<strong>(B) 正確敘述：</strong>甲是被酵素作用的物質，符合受質定義。",
+      "<strong>(C) 正確敘述：</strong>丙是反應後新生成的物質，符合產物定義。"
+    ]
+  },
+  {
+    id: 34,
+    dimension: "基礎定義",
+    level: "基礎記憶（課本核心）",
+    stem: "生物課上老師詢問同學：「什麼是『酵素的專一性』？」下列哪一位同學的回答最符合國中自然科學課本的精確定義？",
+    options: [
+      "(A) 小明：一種酵素只能存在於人體的某一個特定器官細胞中發揮作用",
+      "(B) 小華：一種酵素一生只能和一個受質分子結合一次，作用完就會消失",
+      "(C) 小美：每一種酵素只能與特定的受質結合，加速該特定化學反應的進行",
+      "(D) 小強：所有的酵素都只能催化分解作用，絕對不能催化任何合成作用"
+    ],
+    answer: 2, // (C)
+    formula: "$$\\text{酵素專一性（鎖鑰假說概念）：特定酵素} \\leftrightarrow \\text{特定受質（一對一功能對應）}$$",
+    explanation: "依據自修 2-2 課文重點評量第 2 題：酵素的專一性是指「每一種酵素只能和特定的受質結合」（如澱粉酶只能作用於澱粉，無法作用於蛋白質或纖維素）。",
+    distractors: [
+      "<strong>(A) 場所誤解：</strong>同一種酵素可能分布在不同組織或試管中（只要受質與環境適合即可作用）。",
+      "<strong>(B) 混淆專一性與重複性：</strong>酵素具有「可重複性」，反應後仍可與新的同類受質結合，並非只能作用一次。",
+      "<strong>(D) 忽略合成酶：</strong>生物體內既有分解酶，也有合成酶（如蛋白合成酶、澱粉合成酶）。"
+    ]
+  },
+  {
+    id: 35,
+    dimension: "實驗變因",
+    level: "分析應用（課本核心）",
+    stem: "在課本「實驗 2-2 酵素的作用」中，實驗設計將試管分為 A 組（$1\\text{ mL}$ 澱粉液 ＋ $1\\text{ mL}$ 清水）與 B 組（$1\\text{ mL}$ 澱粉液 ＋ $1\\text{ mL}$ 唾液），兩組均置於 $37^\\circ\\text{C}$ 溫水中靜置 $10$ 分鐘後再加本氏液隔水加熱。在此實驗設計中，屬於「控制變因」的項目<strong>不包含</strong>下列何者？",
+    options: [
+      "(A) 試管內加入的澱粉液體積與濃度",
+      "(B) 兩支試管水浴反應的溫度（$37^\\circ\\text{C}$）",
+      "(C) 加入試管中的液體種類（添加清水或添加唾液）",
+      "(D) 兩支試管靜置等待反應的時間（$10$ 分鐘）"
+    ],
+    answer: 2, // (C)
+    formula: "$$\\text{實驗變因分類：操縱變因（有無唾液）} \\quad | \\quad \\text{控制變因（澱粉量、溫度、時間、本氏液量）}$$",
+    explanation: "依據自修 2-2 實驗步驟變因表：A 組添加清水、B 組添加唾液，這是實驗者刻意改變以觀察差異的條件，屬於「操縱變因」；其餘保持完全一致的澱粉液體積、溫度、反應時間皆屬於「控制變因」。",
+    distractors: [
+      "<strong>(A) 控制變因：</strong>兩組皆加入 $1\\text{ mL}$ 相同濃度的澱粉液，維持不變。",
+      "<strong>(B) 控制變因：</strong>兩組皆置於 $37^\\circ\\text{C}$ 溫水中，維持不變。",
+      "<strong>(D) 控制變因：</strong>兩組皆等待 $10$ 分鐘後同時進行本氏液檢測，維持不變。"
+    ]
+  },
+  {
+    id: 36,
+    dimension: "實驗變因",
+    level: "分析應用（課本核心）",
+    stem: "在「實驗 2-2 酵素的作用」中，剛把 $1\\text{ mL}$ 淺藍色的本氏液滴入 A 試管（澱粉液＋清水）與 B 試管（澱粉液＋唾液）中、「尚未放入熱水中隔水加熱之前」，A、B 兩支試管內的溶液分別呈現什麼顏色？",
+    options: [
+      "(A) A 試管呈淺藍色；B 試管呈淺藍色",
+      "(B) A 試管呈淺藍色；B 試管呈黃色或橙紅色",
+      "(C) A 試管呈藍黑色；B 試管呈黃褐色",
+      "(D) A 試管呈無色透明；B 試管呈綠色"
+    ],
+    answer: 0, // (A)
+    formula: "$$\\text{本氏液（淺藍色）} + \\text{小分子醣類} \\xrightarrow{\\text{必須「隔水加熱」才能啟動變色反應}} \\text{綠/黃/橙/紅色}$$",
+    explanation: "依據自修 2-2 實驗結果紀錄表：本氏液本身是淺藍色試劑，且<strong>必須經過「隔水加熱」</strong>才會與小分子醣類發生呈色反應。因此在「剛加入本氏液、尚未隔水加熱前」，A 與 B 兩支試管皆呈現本氏液原本的「淺藍色」。",
+    distractors: [
+      "<strong>(B) 忽略加熱條件（最常見考點）：</strong>B 試管雖然已有分解出的小分子醣類，但未加熱前本氏液不會變色，仍為淺藍色。",
+      "<strong>(C) 混淆碘液顏色：</strong>藍黑色與黃褐色是「碘液」檢測澱粉的顏色變化，非本氏液。",
+      "<strong>(D) 試劑顏色記憶錯誤：</strong>本氏液原液為淺藍色，並非無色透明。"
+    ]
+  },
+  {
+    id: 37,
+    dimension: "實驗變因",
+    level: "分析應用（課本核心）",
+    stem: "在自修 2-2「延伸探討：溫度會影響唾液分解澱粉的能力」實驗中，設計了三組不同溫度處理的唾液：實驗組 1（唾液加熱煮沸 $10$ 分鐘）、實驗組 2（唾液置於 $0^\\circ\\text{C}$ 低溫 $10$ 分鐘）、對照組（唾液維持在 $37^\\circ\\text{C}$），再分別加入澱粉液於 $37^\\circ\\text{C}$ 反應一段時間後以本氏液隔水加熱測試。下列哪一組實驗結果最符合實際情況？",
+    options: [
+      "(A) 實驗組 1（煮沸組）呈黃色；對照組（$37^\\circ\\text{C}$ 組）呈藍色",
+      "(B) 實驗組 1（煮沸組）呈藍色；實驗組 2（低溫組）呈藍綠色；對照組（$37^\\circ\\text{C}$ 組）呈黃色",
+      "(C) 三組試管全部都變成深紅色，因為最後都在 $37^\\circ\\text{C}$ 下反應",
+      "(D) 實驗組 2（低溫組）與實驗組 1（煮沸組）均永遠無法分解任何澱粉，兩者顏色完全相同"
+    ],
+    answer: 1, // (B)
+    formula: "$$\\text{酵素活性比較：對照組 (} 37^\\circ\\text{C, 黃色)} > \\text{實驗組 2 (低溫回溫, 藍綠色)} > \\text{實驗組 1 (煮沸失活, 藍色)}$$",
+    explanation: "依據自修 2-2 延伸探討實驗結果圖表：實驗組 1 唾液經高溫煮沸已永久失去活性，完全無法分解澱粉，本氏液維持「藍色」；實驗組 2 經低溫處理後活性降低（或回溫後部分作用），產生少量糖分呈「藍綠色」；對照組全程在 $37^\\circ\\text{C}$ 活性最佳，產生最多糖分呈「黃色」。",
+    distractors: [
+      "<strong>(A) 結果完全顛倒：</strong>煮沸組失活應為藍色，最適溫度組有最多糖分應為黃色。",
+      "<strong>(C) 忽略高溫不可逆性：</strong>實驗組 1 煮沸後蛋白質結構已永久破壞，即使放回 $37^\\circ\\text{C}$ 也無法恢復活性。",
+      "<strong>(D) 忽略低溫可逆性：</strong>低溫組在移入 $37^\\circ\\text{C}$ 反應過程中會逐漸恢復部分酵素活性，分解出少量糖分呈藍綠色。"
+    ]
+  },
+  {
+    id: 38,
+    dimension: "圖表判讀",
+    level: "分析應用（課本核心）",
+    stem: "對照自修 2-2「重點概念圖」的樹狀分類架構：「酵素 $\\rightarrow$ 具有 $\\rightarrow$ [甲] $\\rightarrow$ 受影響 $\\rightarrow$ 溫度、酸鹼值」。請問概念圖中框格 [甲] 應填入下列哪一個專有名詞？",
+    options: [
+      "(A) 活性",
+      "(B) 專一性",
+      "(C) 可重複性",
+      "(D) 擴散性"
+    ],
+    answer: 0, // (A)
+    formula: "$$\\text{酵素特性} \\begin{cases} \\text{活性} \\leftarrow \\text{受溫度、酸鹼值影響} \\\\ \\text{專一性} \\\\ \\text{可重複性} \\end{cases}$$",
+    explanation: "依據自修 2-2 重點概念圖：酵素具有三大特性——「活性」、「專一性」與「可重複性」，其中直接受到「溫度」與「酸鹼值（pH 值）」調控影響的特性正是「活性」。",
+    distractors: [
+      "<strong>(B) 專一性：</strong>決定酵素與受質的配對種類，不隨溫度或酸鹼值改變配對對象。",
+      "<strong>(C) 可重複性：</strong>指酵素在反應前後不被消耗的特性。",
+      "<strong>(D) 擴散性：</strong>並非酵素的三大核心特性之一。"
+    ]
+  },
+  {
+    id: 39,
+    dimension: "基礎定義",
+    level: "基礎記憶（課本核心）",
+    stem: "在「2-3 植物如何製造養分」的葉片構造解析中，覆蓋在植物葉片上、下表皮細胞最外側，能有效防止葉片內部水分散失的構造稱為什麼？",
+    options: [
+      "(A) 角質層",
+      "(B) 葉肉組織",
+      "(C) 氣室",
+      "(D) 葉脈"
+    ],
+    answer: 0, // (A)
+    formula: "$$\\text{角質層（非細胞蠟質層）} \\implies \\text{覆蓋表皮外側} \\implies \\text{防止水分散失}$$",
+    explanation: "依據自修 2-3 課文重點解析第 1 點：「角質層：覆蓋在表皮細胞外，可以防止水分散失。」（陸生植物通常上表皮角質層較厚，以抵禦陽光直射造成的水分蒸散）。",
+    distractors: [
+      "<strong>(B) 葉肉組織：</strong>位於上下表皮之間，富含葉綠體，功能為行光合作用。",
+      "<strong>(C) 氣室：</strong>葉肉細胞間的空隙，為氣體流通的管道。",
+      "<strong>(D) 葉脈：</strong>葉片的輸導組織，負責運輸水分與養分。"
+    ]
+  },
+  {
+    id: 40,
+    dimension: "基礎定義",
+    level: "基礎記憶（課本核心）",
+    stem: "觀察植物葉片橫切面構造時，分布在葉片上表皮與下表皮之間、細胞內含有大量葉綠體、負責行光合作用製造養分的主要組織為何？",
+    options: [
+      "(A) 上表皮細胞",
+      "(B) 葉肉組織",
+      "(C) 角質層",
+      "(D) 木質部導管"
+    ],
+    answer: 1, // (B)
+    formula: "$$\\text{葉肉細胞（含大量葉綠體）} + \\text{光能} + \\text{CO}_2 + \\text{H}_2\\text{O} \\xrightarrow{\\text{光合作用}} \\text{葡萄糖} + \\text{O}_2$$",
+    explanation: "依據自修 2-3 課文重點解析第 5 點：「葉肉：分布在上、下表皮間，含有葉綠體，可以行光合作用。」葉肉組織是整片葉子中葉綠體最密集、進行光合作用效率最高的部位。",
+    distractors: [
+      "<strong>(A) 上表皮細胞：</strong>扁平透明且無葉綠體，功能為保護與透光。",
+      "<strong>(C) 角質層：</strong>蠟質層，不含葉綠體，功能為防止水分散失。",
+      "<strong>(D) 木質部導管：</strong>位於葉脈內，負責運輸水分與礦物質，不行光合作用。"
+    ]
+  },
+  {
+    id: 41,
+    dimension: "基礎定義",
+    level: "基礎記憶（課本核心）",
+    stem: "植物葉片中的「葉脈」在葉片生理機能上扮演重要角色。下列關於葉脈構造與功能的敘述，何者<strong>正確</strong>？",
+    options: [
+      "(A) 葉脈是葉片內的氣體通道，負責讓二氧化碳直接擴散進入葉肉",
+      "(B) 葉脈是葉片的輸導組織（維管束），負責運輸水分與養分",
+      "(C) 葉脈由兩個半月形的保衛細胞圍成，能隨水分多寡控制開閉",
+      "(D) 葉脈覆蓋在葉片最外層，主要功能是防止葉片水分過度蒸散"
+    ],
+    answer: 1, // (B)
+    formula: "$$\\text{葉脈（葉片內的維管束）} \\begin{cases} \\text{運輸水分（由根部向上輸送至葉肉供光合作用）} \\\\ \\text{運輸養分（將光合作用製造的養分輸送至植物全身）} \\end{cases}$$",
+    explanation: "依據自修 2-3 課文重點解析第 7 點：「葉脈：是葉片的輸導組織，能運輸水分和養分。」同時葉脈也具有支持葉片展開以利接受陽光的功能。",
+    distractors: [
+      "<strong>(A) 氣室功能：</strong>氣體流通的管道是「氣室」與「氣孔」，非葉脈。",
+      "<strong>(C) 氣孔構造：</strong>由兩個保衛細胞圍成的是「氣孔」，非葉脈。",
+      "<strong>(D) 角質層功能：</strong>覆蓋最外層防止水分散失的是「角質層」，非葉脈。"
+    ]
+  },
+  {
+    id: 42,
+    dimension: "跨章整合",
+    level: "高階綜合（植物構造與生理整合）",
+    stem: "大晴天正午時分，一株陸生綠色植物正在進行旺盛的光合作用。此時光合作用所需的原料「水」與「二氧化碳」，分別主要經由葉片的哪兩種構造進入葉肉細胞中？",
+    options: [
+      "(A) 水由氣孔進入；二氧化碳由葉脈運輸而來",
+      "(B) 水由葉脈運輸而來；二氧化碳由氣孔擴散進入",
+      "(C) 水與二氧化碳皆直接穿透厚實的角質層進入",
+      "(D) 水與二氧化碳皆由上表皮細胞主動吞噬進入"
+    ],
+    answer: 1, // (B)
+    formula: "$$\\text{根吸收水分} \\xrightarrow{\\text{莖} \\rightarrow \\text{葉脈}} \\text{葉肉} \\xleftarrow{\\text{氣孔} \\rightarrow \\text{氣室}} \\text{大氣中 } \\text{CO}_2$$",
+    explanation: "光合作用需要「水」與「二氧化碳」兩種原料：水分由植物根部從土壤吸收後，經由莖部維管束向上輸送至葉片的「葉脈」，再擴散進入葉肉細胞；而二氧化碳則由大氣中通過葉片下表皮的「氣孔」進入氣室，再擴散至葉肉細胞。",
+    distractors: [
+      "<strong>(A) 路徑完全顛倒：</strong>水分是由維管束（葉脈）液態運輸，氣體（二氧化碳）才是從氣孔進出。",
+      "<strong>(C) 角質層阻隔：</strong>角質層為蠟質防水層，會阻擋水分與氣體直接穿透。",
+      "<strong>(D) 運輸機制錯誤：</strong>表皮細胞緊密排列且有角質層覆蓋，並非水與二氧化碳進入的主要門戶。"
+    ]
+  },
+  {
+    id: 43,
+    dimension: "基礎定義",
+    level: "進階補充（紅字易混淆點）",
+    stem: "比較植物葉片中的「表皮細胞」與「保衛細胞」，下列哪一項比較表格中的內容<strong>完全正確</strong>？",
+    options: [
+      "(A) 細胞形狀：表皮細胞為半月形；保衛細胞為扁平不規則形",
+      "(B) 葉綠體有無：表皮細胞無葉綠體；保衛細胞具有葉綠體",
+      "(C) 細胞排列方式：表皮細胞兩兩成對留下空隙；保衛細胞緊密排列無空隙",
+      "(D) 主要生理功能：表皮細胞可控制氣孔大小；保衛細胞僅負責保護與透光"
+    ],
+    answer: 1, // (B)
+    formula: "$$\\text{表皮細胞（無葉綠體、扁平緊密、保護）} \\quad vs. \\quad \\text{保衛細胞（有葉綠體、半月形兩兩成對、控制氣孔）}$$",
+    explanation: "依據自修 2-3 課文重點解析第 2、3 點：上、下表皮由扁平、透明且排列整齊的表皮細胞組成（無葉綠體），具保護功能；保衛細胞兩兩成對（半月形），<strong>具有葉綠體</strong>，能行光合作用也能控制氣孔的大小。",
+    distractors: [
+      "<strong>(A) 形狀顛倒：</strong>保衛細胞才是半月形，表皮細胞為扁平狀。",
+      "<strong>(C) 排列方式顛倒：</strong>保衛細胞兩兩成對圍出氣孔空隙，表皮細胞則是緊密排列。",
+      "<strong>(D) 功能顛倒：</strong>控制氣孔大小是保衛細胞的功能，保護與透光才是表皮細胞的功能。"
+    ]
+  },
+  {
+    id: 44,
+    dimension: "圖表判讀",
+    level: "分析應用（課本核心）",
+    stem: "在「實驗 2-2 酵素的作用」中，若將加入本氏液並隔水加熱後的試管顏色變化，依照溶液中所含「小分子醣類濃度由低到高」排列，下列順序何者正確？",
+    options: [
+      "(A) 藍色 $\\rightarrow$ 綠色 $\\rightarrow$ 黃色 $\\rightarrow$ 橙色 $\\rightarrow$ 紅色",
+      "(B) 紅色 $\\rightarrow$ 橙色 $\\rightarrow$ 黃色 $\\rightarrow$ 綠色 $\\rightarrow$ 藍色",
+      "(C) 黃褐色 $\\rightarrow$ 藍黑色 $\\rightarrow$ 淺藍色 $\\rightarrow$ 紫色",
+      "(D) 藍色 $\\rightarrow$ 紅色 $\\rightarrow$ 黃色 $\\rightarrow$ 綠色"
+    ],
+    answer: 0, // (A)
+    formula: "$$\\text{還原糖濃度（無} \\rightarrow \\text{高）：藍色（0）} < \\text{綠色（少）} < \\text{黃色（中）} < \\text{橙色（多）} < \\text{紅色（極多）}$$",
+    explanation: "本氏液（原色為淺藍色）與還原糖（如葡萄糖、麥芽糖）隔水加熱後，隨糖分濃度由低至高依序呈現「藍 $\\rightarrow$ 綠 $\\rightarrow$ 黃 $\\rightarrow$ 橙 $\\rightarrow$ 紅」的漸層顏色變化。",
+    distractors: [
+      "<strong>(B) 濃度順序相反：</strong>此為含糖量由「高到低」的排列順序。",
+      "<strong>(C) 混淆碘液試劑：</strong>黃褐色與藍黑色是碘液檢測澱粉的顏色變化。",
+      "<strong>(D) 色彩光譜順序錯誤：</strong>正確漸層為藍、綠、黃、橙、紅。"
+    ]
+  },
+  {
+    id: 45,
+    dimension: "實驗變因",
+    level: "進階補充（實驗操作安全與細節）",
+    stem: "在「實驗 2-2 酵素的作用」步驟 4 中，加入本氏液後必須將試管放入裝有熱水的燒杯中進行「隔水加熱」，而不可直接用酒精燈火焰對試管底部加熱。下列哪一項是採用「隔水加熱」最主要的原因？",
+    options: [
+      "(A) 隔水加熱能讓試管受熱均勻且避免溶液暴沸噴出，提升實驗安全性",
+      "(B) 酒精燈火焰溫度太低，無法達到本氏液變色所需的 $37^\\circ\\text{C}$",
+      "(C) 隔水加熱能讓空氣中的氧氣更容易溶入試管中參與本氏液反應",
+      "(D) 直接加熱會使試管內的澱粉瞬間燃燒產生黑煙"
+    ],
+    answer: 0, // (A)
+    formula: "$$\\text{隔水加熱（水浴法）} \\implies \\text{受熱均勻、溫度穩定可控（} \\le 100^\\circ\\text{C}\\text{）、防止液體突沸噴濺}$$",
+    explanation: "使用隔水加熱（水浴法）能使試管內的液體受熱均勻，避免局部過熱造成溶液劇烈沸騰噴出試管而燙傷操作者，是理化與生物實驗中標準的安全加熱方式。",
+    distractors: [
+      "<strong>(B) 溫度認知錯誤：</strong>酒精燈火焰溫度高達數百度，遠高於沸水溫度。",
+      "<strong>(C) 化學原理錯誤：</strong>本氏液變色不依賴溶入空氣中的氧氣。",
+      "<strong>(D) 狀態錯誤：</strong>試管內為水溶液，在水分蒸乾前不會燃燒。"
+    ]
+  },
+  {
+    id: 46,
+    dimension: "實驗變因",
+    level: "分析應用（課本核心）",
+    stem: "在自修 2-2「實驗重點評量」中，小聆設計了 A（澱粉液 $1\\text{ mL}$ ＋ 清水 $1\\text{ mL}$，$37^\\circ\\text{C}$）、B（澱粉液 $1\\text{ mL}$ ＋ 唾液 $1\\text{ mL}$，$37^\\circ\\text{C}$）、C（澱粉液 $1\\text{ mL}$ ＋ 唾液 $1\\text{ mL}$，$4^\\circ\\text{C}$ 低溫）三組試管。靜置 $10$ 分鐘後加入本氏液並隔水加熱，下列哪一個顏色預測結果最接近真實情況？",
+    options: [
+      "(A) A 試管：藍色；B 試管：黃色；C 試管：藍色（或極淡藍綠色）",
+      "(B) A 試管：黃色；B 試管：藍色；C 試管：黃色",
+      "(C) A 試管：黃色；B 試管：綠色；C 試管：藍色",
+      "(D) A 試管：藍色；B 試管：藍色；C 試管：黃色"
+    ],
+    answer: 0, // (A)
+    formula: "$$\\text{A（無酵素）} \\rightarrow \\text{無糖（藍色）} \\quad ; \\quad \\text{B（} 37^\\circ\\text{C 酵素）} \\rightarrow \\text{有糖（黃/橙色）} \\quad ; \\quad \\text{C（} 4^\\circ\\text{C 抑制）} \\rightarrow \\text{無糖（藍色）}$$",
+    explanation: "A 試管只加清水無酵素，澱粉未被分解，本氏液維持「藍色」；B 試管在 $37^\\circ\\text{C}$ 下唾液澱粉酶活性最佳，產生大量小分子醣類，本氏液變為「黃色（或橙色）」；C 試管在 $4^\\circ\\text{C}$ 低溫下酵素活性被抑制，幾乎無糖產生，本氏液維持「藍色」。",
+    distractors: [
+      "<strong>(B) A、B 結果顛倒：</strong>A 無酵素不會變黃，B 有酵素且溫度適宜才會變黃。",
+      "<strong>(C) A 試管誤判：</strong>A 試管僅含澱粉與清水，不含還原糖，不會變黃色。",
+      "<strong>(D) B、C 結果顛倒：</strong>$37^\\circ\\text{C}$ 活性遠大於 $4^\\circ\\text{C}$，應是 B 變黃而 C 維持藍色。"
+    ]
+  },
+  {
+    id: 47,
+    dimension: "實驗變因",
+    level: "分析應用（課本核心）",
+    stem: "承上題，在小聆設計的 A、B、C 三組實驗中，若她只比較「A 試管」與「B 試管」的實驗結果，可以獲得下列哪一項最直接的科學推論？",
+    options: [
+      "(A) 唾液中的酵素可以促進澱粉分解產生小分子醣類",
+      "(B) 高溫煮沸會徹底破壞唾液澱粉酶的蛋白質結構",
+      "(C) 酸性環境會降低唾液澱粉酶分解澱粉的催化速率",
+      "(D) $4^\\circ\\text{C}$ 低溫環境會使唾液澱粉酶的活性大幅下降"
+    ],
+    answer: 0, // (A)
+    formula: "$$\\text{A 試管（澱粉} + \\text{清水）} \\quad vs. \\quad \\text{B 試管（澱粉} + \\text{唾液）} \\implies \\text{驗證「唾液」對澱粉分解的催化作用}$$",
+    explanation: "比較 A 與 B 兩試管，兩者溫度皆為 $37^\\circ\\text{C}$、澱粉液皆為 $1\\text{ mL}$，唯一差別在於是否含有「唾液」，因此 A、B 兩組對照的結論即為「唾液中的酵素可以促進澱粉分解產生糖」。",
+    distractors: [
+      "<strong>(B) 無煮沸組別：</strong>A、B、C 三組中均沒有高溫煮沸處理的試管。",
+      "<strong>(C) 無酸性變因：</strong>A、B、C 三組均未加入酸性物質（如醋酸）。",
+      "<strong>(D) 需比較 B 與 C：</strong>探討低溫影響必須比較「B 試管（$37^\\circ\\text{C}$）」與「C 試管（$4^\\circ\\text{C}$）」。"
+    ]
+  },
+  {
+    id: 48,
+    dimension: "基礎定義",
+    level: "進階補充（紅字易混淆點）",
+    stem: "老師在黑板上寫出五句關於酵素的敘述，請同學找出<strong>唯一正確</strong>的一句。請問下列哪一個選項是正確的？",
+    options: [
+      "(A) 酵素的主要成分是由胺基酸連接而成的蛋白質所構成",
+      "(B) 酵素一旦離開活細胞的細胞膜範圍，就會立刻失去催化活性",
+      "(C) 人體內所有的酵素在中性（$\\text{pH} = 7$）環境下的催化活性皆最高",
+      "(D) 在任何溫度範圍內，只要環境溫度持續升高，酵素活性就會跟著愈高"
+    ],
+    answer: 0, // (A)
+    formula: "$$\\text{酵素化學本質} = \\text{蛋白質（由胺基酸組成之大分子）}$$",
+    explanation: "依據自修 2-2 課文重點評量是非題第 1 題：「酵素的主要成分是由蛋白質構成」為正確敘述。",
+    distractors: [
+      "<strong>(B) 錯誤（是非題第 2 題）：</strong>只要溫度與 pH 值適宜，酵素在細胞外（如試管、消化道腔室中）仍可作用。",
+      "<strong>(C) 錯誤（是非題第 3 題）：</strong>不同酵素各有最適 pH 值，例如胃蛋白酶在強酸性環境活性最高。",
+      "<strong>(D) 錯誤（是非題第 4 題）：</strong>超過最適溫度（如 $>60^\\circ\\text{C}$）後，酵素會因高溫變性而急遽失去活性。"
+    ]
+  },
+  {
+    id: 49,
+    dimension: "基礎定義",
+    level: "基礎記憶（課本核心）",
+    stem: "在植物葉片的構造中，由兩個半月形保衛細胞所圍成的空隙稱為「氣孔」。下列關於氣孔生理功能的敘述，何者<strong>不屬於</strong>氣孔的主要作用？",
+    options: [
+      "(A) 讓大氣中的二氧化碳擴散進入葉片，作為光合作用的原料",
+      "(B) 讓葉肉細胞行光合作用產生的氧氣擴散釋放到大氣中",
+      "(C) 讓植物體內的水分以水蒸氣形式散失到空氣中（蒸散作用）",
+      "(D) 讓根部吸收的土壤礦物質與水溶性養分直接進入葉肉細胞"
+    ],
+    answer: 3, // (D)
+    formula: "$$\\text{氣孔進出物質} = \\text{氣體分子（}\\text{CO}_2\\text{、}\\text{O}_2\\text{、水蒸氣）} \\quad \\neq \\quad \\text{液態水分與礦物質（由葉脈運輸）}$$",
+    explanation: "氣孔是「氣體」進出葉片的門戶，負責二氧化碳、氧氣與水蒸氣的進出；而根部吸收的水分與礦物質則是透過維管束（莖與葉脈）在植物體內運輸，並非經由氣孔進入。",
+    distractors: [
+      "<strong>(A) 氣孔功能之一：</strong>二氧化碳經由氣孔進入葉片供光合作用使用。",
+      "<strong>(B) 氣孔功能之一：</strong>光合作用產生的氧氣經由氣孔釋放至大氣。",
+      "<strong>(C) 氣孔功能之一：</strong>植物蒸散作用的水蒸氣主要經由氣孔散失。"
+    ]
+  },
+  {
+    id: 50,
+    dimension: "跨章整合",
+    level: "高階綜合（跨單元概念整合）",
+    stem: "綜合「2-2 酵素」與「2-3 植物如何製造養分」兩單元的知識，比較植物葉肉細胞內的「光合作用」與人體消化道內的「澱粉分解作用」，下列共同點與差異點的敘述何者<strong>完全正確</strong>？",
+    options: [
+      "(A) 兩者皆屬於生物體內的代謝作用，且反應過程皆需要特定酵素的參與催化",
+      "(B) 兩者皆必須直接吸收太陽的光能才能啟動反應，在黑暗中皆完全無法進行",
+      "(C) 光合作用屬於分解作用；人體唾液分解澱粉則屬於合成作用",
+      "(D) 光合作用在細胞內進行；唾液澱粉酶分解澱粉則必須在口腔表皮細胞內進行"
+    ],
+    answer: 0, // (A)
+    formula: "$$\\begin{cases} \\text{光合作用：}\\text{H}_2\\text{O} + \\text{CO}_2 \\xrightarrow{\\text{光能、葉綠體酵素}} \\text{葡萄糖} + \\text{O}_2\\text{（合成作用）} \\\\ \\text{澱粉消化：澱粉} \\xrightarrow{\\text{唾液澱粉酶}} \\text{小分子醣類（分解作用）} \\end{cases} \\implies \\text{皆屬酵素催化之代謝作用}$$",
+    explanation: "代謝作用包含合成作用與分解作用，無論是植物合成葡萄糖的光合作用，或是人體將澱粉分解為小分子醣類的消化作用，都屬於生物體內的代謝作用，且皆需要具有專一性的「酵素」參與催化。",
+    distractors: [
+      "<strong>(B) 能量條件錯誤：</strong>只有光合作用需要吸收光能，人體唾液分解澱粉在黑暗中依然正常進行。",
+      "<strong>(C) 類型完全顛倒：</strong>光合作用是合成作用（小分子變大分子），澱粉消化才是分解作用（大分子變小分子）。",
+      "<strong>(D) 場所錯誤：</strong>唾液澱粉酶是由唾液腺分泌至口腔（細胞外環境）中進行作用，並非在細胞內部。"
+    ]
+  }
+];
+
+// =========================================================================
+// 應用程式核心狀態與功能邏輯
+// =========================================================================
+let currentQuestions = [...questionBank];
+let userAnswers = {}; // { questionId: selectedOptionIndex }
+let isSubmitted = false;
+let timerSeconds = 50 * 60;
+let initialSeconds = 50 * 60;
+let timerInterval = null;
+let isPaused = false;
+let radarChartInstance = null;
+
+// 初始化測驗
+function initExam() {
+  renderNavGrid();
+  renderQuestions();
+  updateProgressBadge();
+  startTimer();
+  setupSecretTriggers();
+}
+
+// 渲染左側題號導覽格
+function renderNavGrid() {
+  const navGrid = document.getElementById("navGrid");
+  navGrid.innerHTML = "";
+  currentQuestions.forEach((q, idx) => {
+    const btn = document.createElement("button");
+    btn.className = "nav-btn";
+    btn.id = `nav-btn-${q.id}`;
+    btn.textContent = idx + 1;
+    btn.onclick = () => {
+      const target = document.getElementById(`q-card-${q.id}`);
+      if (target) {
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    };
+    navGrid.appendChild(btn);
+  });
+}
+
+// 渲染右側所有試題
+function renderQuestions() {
+  const container = document.getElementById("questionsContainer");
+  container.innerHTML = "";
+
+  currentQuestions.forEach((q, idx) => {
+    const displayNum = idx + 1;
+    const card = document.createElement("div");
+    card.className = "question-card";
+    card.id = `q-card-${q.id}`;
+
+    let optionsHtml = "";
+    q.options.forEach((optText, optIdx) => {
+      const checked = userAnswers[q.id] === optIdx ? "checked" : "";
+      const selectedClass = userAnswers[q.id] === optIdx ? "selected" : "";
+      optionsHtml += `
+        <label class="option-label ${selectedClass}" id="opt-label-${q.id}-${optIdx}">
+          <input type="radio" name="q_${q.id}" value="${optIdx}" ${checked} onchange="selectOption(${q.id}, ${optIdx})">
+          <span>${optText}</span>
+        </label>
+      `;
+    });
+
+    const distractorsHtml = q.distractors.map(d => `<li>• ${d}</li>`).join("");
+
+    card.innerHTML = `
+      <div class="q-header">
+        <span class="q-num">第 ${displayNum} 題</span>
+        <div class="q-tags">
+          <span class="tag">${q.dimension}</span>
+          <span class="tag">${q.level}</span>
+        </div>
+      </div>
+      <div class="q-stem">${q.stem}</div>
+      <div class="options-grid">${optionsHtml}</div>
+      <div class="explanation-box" id="exp-box-${q.id}">
+        <div class="exp-header">
+          <span class="ans-pill">正確答案：${q.options[q.answer]}</span>
+          <span class="tag">考點歸類：${q.dimension} ｜ ${q.level}</span>
+        </div>
+        <div class="exp-section">
+          <strong>【原題重現】</strong>${q.stem}
+        </div>
+        <div class="formula-block">
+          <strong>【核心公式與生化邏輯推導】</strong><br>
+          ${q.formula}
+        </div>
+        <div class="exp-section">
+          <strong>【中文解釋與核心考點】</strong>${q.explanation}
+        </div>
+        <div class="exp-section">
+          <strong>【誘答剖析（為什麼其他選項錯誤）】</strong>
+          <ul class="distractor-list">${distractorsHtml}</ul>
+        </div>
+      </div>
+    `;
+    container.appendChild(card);
+  });
+
+  if (window.MathJax && MathJax.typesetPromise) {
+    MathJax.typesetPromise();
+  }
+}
+
+// 選擇答案
+function selectOption(qId, optIdx) {
+  if (isSubmitted) return;
+  userAnswers[qId] = optIdx;
+
+  // 更新選項視覺樣式
+  for (let i = 0; i < 4; i++) {
+    const lbl = document.getElementById(`opt-label-${qId}-${i}`);
+    if (lbl) {
+      lbl.classList.toggle("selected", i === optIdx);
+    }
+  }
+
+  // 更新左側導覽列為藍色
+  const navBtn = document.getElementById(`nav-btn-${qId}`);
+  if (navBtn) {
+    navBtn.classList.add("answered");
+  }
+
+  updateProgressBadge();
+}
+
+// 更新作答進度
+function updateProgressBadge() {
+  const answeredCount = Object.keys(userAnswers).length;
+  const total = currentQuestions.length;
+  const badge = document.getElementById("progressBadge");
+  badge.textContent = isSubmitted ? `已交卷 (${answeredCount}/${total})` : `已作答：${answeredCount} / ${total}`;
+}
+
+// 計時器控制
+function startTimer() {
+  clearInterval(timerInterval);
+  timerInterval = setInterval(() => {
+    if (isPaused || isSubmitted) return;
+    if (timerSeconds > 0) {
+      timerSeconds--;
+      updateTimerDisplay();
+    } else {
+      clearInterval(timerInterval);
+      alert("測驗時間已到，系統將自動為您交卷！");
+      submitExam(true);
+    }
+  }, 1000);
+}
+
+function updateTimerDisplay() {
+  const mins = Math.floor(timerSeconds / 60);
+  const secs = timerSeconds % 60;
+  document.getElementById("timerDisplay").textContent =
+    `${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
+}
+
+function setTimer() {
+  if (isSubmitted) return;
+  let val = parseInt(document.getElementById("customMinutes").value, 10);
+  if (isNaN(val) || val < 1) val = 1;
+  if (val > 240) val = 240;
+  document.getElementById("customMinutes").value = val;
+  timerSeconds = val * 60;
+  initialSeconds = timerSeconds;
+  updateTimerDisplay();
+}
+
+function togglePause() {
+  if (isSubmitted) return;
+  isPaused = !isPaused;
+  document.getElementById("pauseBtn").textContent = isPaused ? "繼續" : "暫停";
+}
+
+// 提交試卷並批改
+function submitExam(autoSubmit = false) {
+  if (isSubmitted) return;
+  const answeredCount = Object.keys(userAnswers).length;
+  const total = currentQuestions.length;
+
+  if (!autoSubmit && answeredCount < total) {
+    const confirmMsg = `您目前還有 ${total - answeredCount} 題尚未作答，確定要現在提交試卷嗎？`;
+    if (!confirm(confirmMsg)) return;
+  }
+
+  isSubmitted = true;
+  clearInterval(timerInterval);
+  document.getElementById("submitBtn").disabled = true;
+  document.getElementById("submitBtn").textContent = "已交卷";
+  updateProgressBadge();
+
+  let correctCount = 0;
+  let wrongList = [];
+  const dimStats = {
+    "基礎定義": { total: 0, correct: 0 },
+    "實驗變因": { total: 0, correct: 0 },
+    "圖表判讀": { total: 0, correct: 0 },
+    "跨章整合": { total: 0, correct: 0 }
+  };
+
+  currentQuestions.forEach((q, idx) => {
+    const displayNum = idx + 1;
+    const uAns = userAnswers[q.id];
+    const isCorrect = uAns === q.answer;
+
+    if (!dimStats[q.dimension]) {
+      dimStats[q.dimension] = { total: 0, correct: 0 };
+    }
+    dimStats[q.dimension].total++;
+
+    const card = document.getElementById(`q-card-${q.id}`);
+    const navBtn = document.getElementById(`nav-btn-${q.id}`);
+    const expBox = document.getElementById(`exp-box-${q.id}`);
+
+    // 鎖定 radio
+    const radios = document.querySelectorAll(`input[name="q_${q.id}"]`);
+    radios.forEach(r => r.disabled = true);
+
+    // 標示對錯選項
+    const correctLabel = document.getElementById(`opt-label-${q.id}-${q.answer}`);
+    if (correctLabel) correctLabel.classList.add("opt-correct");
+
+    if (isCorrect) {
+      correctCount++;
+      dimStats[q.dimension].correct++;
+      card.classList.add("q-correct");
+      navBtn.classList.remove("answered");
+      navBtn.classList.add("correct");
+    } else {
+      wrongList.push(`第${displayNum}題`);
+      card.classList.add("q-wrong");
+      navBtn.classList.remove("answered");
+      navBtn.classList.add("wrong");
+      if (uAns !== undefined) {
+        const wrongLabel = document.getElementById(`opt-label-${q.id}-${uAns}`);
+        if (wrongLabel) wrongLabel.classList.add("opt-wrong");
+      }
+    }
+
+    // 展開詳解
+    if (expBox) expBox.style.display = "block";
+  });
+
+  const score = Math.round((correctCount / total) * 100);
+  const wrongCount = total - correctCount;
+  const spentSec = Math.max(1, initialSeconds - timerSeconds);
+  const spentStr = `${Math.floor(spentSec / 60)}分${spentSec % 60}秒`;
+  const submitTimeStr = new Date().toLocaleString("zh-TW", { hour12: false });
+
+  // 更新成績儀表板
+  document.getElementById("result-dashboard").style.display = "block";
+  document.getElementById("totalScoreDisplay").textContent = score;
+  document.getElementById("correctCountDisplay").textContent = `答對 ${correctCount} / ${total} 題（答錯 ${wrongCount} 題）`;
+  document.getElementById("timeSpentTag").textContent = `耗時：${spentStr}`;
+  document.getElementById("filterWrongBtn").textContent = `只看錯題 (${wrongCount})`;
+
+  // 渲染各維度統計
+  const dimListEl = document.getElementById("dimStatList");
+  dimListEl.innerHTML = "";
+  const labels = [];
+  const rates = [];
+  const dimSummaryArr = [];
+
+  for (const [dim, data] of Object.entries(dimStats)) {
+    const rate = data.total > 0 ? Math.round((data.correct / data.total) * 100) : 0;
+    labels.push(dim);
+    rates.push(rate);
+    dimSummaryArr.push(`${dim}:${rate}%`);
+    dimListEl.innerHTML += `
+      <div class="dim-stat-item">
+        <span>${dim} (${data.correct}/${data.total})</span>
+        <span style="color:${rate >= 80 ? '#34d399' : rate >= 60 ? '#fbbf24' : '#f87171'}; font-weight:700;">${rate}%</span>
+      </div>
+    `;
+  }
+
+  renderRadarChart(labels, rates);
+  document.getElementById("leftPane").scrollTo({ top: 0, behavior: "smooth" });
+
+  // 儲存紀錄至 localStorage 並發送 Telegram 通知
+  const record = {
+    time: submitTimeStr,
+    spent: spentStr,
+    score: score,
+    dims: dimSummaryArr.join(" | "),
+    wrongs: wrongList.length > 0 ? wrongList.join(", ") : "全對無錯題"
+  };
+  saveHistoryRecord(record);
+  sendTelegramReport(record);
+}
+
+// 繪製雷達圖
+function renderRadarChart(labels, dataValues) {
+  const ctx = document.getElementById("radarChart").getContext("2d");
+  if (radarChartInstance) {
+    radarChartInstance.destroy();
+  }
+  radarChartInstance = new Chart(ctx, {
+    type: "radar",
+    data: {
+      labels: labels,
+      datasets: [{
+        label: "各維度得分率 (%)",
+        data: dataValues,
+        backgroundColor: "rgba(59, 130, 246, 0.25)",
+        borderColor: "#3b82f6",
+        pointBackgroundColor: "#10b981",
+        pointBorderColor: "#fff",
+        borderWidth: 2
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        r: {
+          min: 0,
+          max: 100,
+          ticks: { stepSize: 20, color: "#94a3b8", backdropColor: "transparent", font: { size: 10 } },
+          grid: { color: "#334155" },
+          angleLines: { color: "#334155" },
+          pointLabels: { color: "#e2e8f0", font: { size: 12, weight: "bold" } }
+        }
+      },
+      plugins: {
+        legend: { display: false }
+      }
+    }
+  });
+}
+
+// 錯題篩選器
+function filterQuestions(mode) {
+  currentQuestions.forEach((q) => {
+    const card = document.getElementById(`q-card-${q.id}`);
+    const isCorrect = userAnswers[q.id] === q.answer;
+    if (mode === "wrong") {
+      card.style.display = isCorrect ? "none" : "block";
+    } else {
+      card.style.display = "block";
+    }
+  });
+}
+
+// 一鍵複製錯題筆記 (Markdown)
+function copyWrongNotes() {
+  if (!isSubmitted) return;
+  let md = `# 國中自然科學（生物）錯題複習筆記\n- 測驗時間：${new Date().toLocaleString("zh-TW")}\n- 總得分：${document.getElementById("totalScoreDisplay").textContent} 分\n\n---\n\n`;
+  let wrongCounter = 0;
+
+  currentQuestions.forEach((q, idx) => {
+    if (userAnswers[q.id] !== q.answer) {
+      wrongCounter++;
+      const uText = userAnswers[q.id] !== undefined ? q.options[userAnswers[q.id]] : "未作答";
+      md += `### ${wrongCounter}. [原第 ${idx + 1} 題]（${q.dimension}）\n`;
+      md += `**題目：** ${q.stem.replace(/<[^>]*>/g, "")}\n`;
+      md += `- **你的作答：** ${uText}\n`;
+      md += `- **正確答案：** ${q.options[q.answer]}\n`;
+      md += `- **核心公式：** ${q.formula}\n`;
+      md += `- **觀念解析：** ${q.explanation.replace(/<[^>]*>/g, "")}\n\n`;
+    }
+  });
+
+  if (wrongCounter === 0) {
+    md += "🎉 本次測驗全數答對，無錯題紀錄！\n";
+  }
+
+  navigator.clipboard.writeText(md).then(() => {
+    alert(`已成功複製 ${wrongCounter} 題錯題筆記（Markdown 格式）至剪貼簿，可直接貼入 Notion 或 Word！`);
+  }).catch(() => {
+    alert("複製失敗，請確認瀏覽器剪貼簿權限。");
+  });
+}
+
+// 洗牌並重新測驗（打亂題目順序與選項順序）
+function shuffleAndReset() {
+  if (!confirm("確定要打亂題目與選項順序並重新開始測驗嗎？")) return;
+
+  isSubmitted = false;
+  isPaused = false;
+  userAnswers = {};
+  document.getElementById("submitBtn").disabled = false;
+  document.getElementById("submitBtn").textContent = "提交試卷";
+  document.getElementById("pauseBtn").textContent = "暫停";
+  document.getElementById("result-dashboard").style.display = "none";
+
+  // 深拷貝並洗牌題目與選項
+  currentQuestions = questionBank.map(q => {
+    const correctText = q.options[q.answer];
+    // 剝除原本的 (A)(B)(C)(D) 前綴以便重新編號
+    const cleanOpts = q.options.map(o => o.replace(/^\([A-D]\)\s*/, ""));
+    for (let i = cleanOpts.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [cleanOpts[i], cleanOpts[j]] = [cleanOpts[j], cleanOpts[i]];
+    }
+    const labels = ["(A)", "(B)", "(C)", "(D)"];
+    const cleanCorrect = correctText.replace(/^\([A-D]\)\s*/, "");
+    const newAnswerIdx = cleanOpts.indexOf(cleanCorrect);
+    const newOptions = cleanOpts.map((txt, idx) => `${labels[idx]} ${txt}`);
+
+    return {
+      ...q,
+      options: newOptions,
+      answer: newAnswerIdx
+    };
+  });
+
+  // 洗牌題目順序
+  for (let i = currentQuestions.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [currentQuestions[i], currentQuestions[j]] = [currentQuestions[j], currentQuestions[i]];
+  }
+
+  setTimer();
+  renderNavGrid();
+  renderQuestions();
+  updateProgressBadge();
+  startTimer();
+  document.getElementById("rightPane").scrollTo({ top: 0, behavior: "smooth" });
+}
+
+// =========================================================================
+// Telegram API 通知與 LocalStorage 家長監控機制
+// =========================================================================
+function sendTelegramReport(record) {
+  const token = "8062206068:AAEqHmvEEMDFOYtggE4FxpHFoAWUGHX7Aq4";
+  const MY_CHAT_ID = "8049812362"; // 例如 "123456789"
+
+  const msgText =
+    `📊 【國中生物模擬測驗交卷通知】\n` +
+    `01. 交卷時間：${record.time}\n` +
+    `02. 作答耗時：${record.spent}\n` +
+    `03. 測驗得分：${record.score} 分\n` +
+    `04. 各維度統計：${record.dims}\n` +
+    `05. 錯題清單：${record.wrongs}`;
+
+  const postToChat = (chatId) => {
+    return fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ chat_id: chatId, text: msgText })
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (!data.ok) console.warn("Telegram 發送失敗：", data.description);
+      })
+      .catch(err => console.warn("Telegram 網路請求錯誤：", err));
+  };
+
+  if (MY_CHAT_ID && MY_CHAT_ID !== "8049812362") {
+    postToChat(MY_CHAT_ID);
+  } else {
+    fetch(`https://api.telegram.org/bot${token}/getUpdates`)
+      .then(res => res.json())
+      .then(data => {
+        if (data.ok && Array.isArray(data.result)) {
+          const chatIds = new Set();
+          data.result.forEach(item => {
+            const chat = item.message?.chat || item.callback_query?.message?.chat;
+            if (chat?.id) chatIds.add(chat.id);
+          });
+          chatIds.forEach(id => postToChat(id));
+        }
+      })
+      .catch(() => {});
+  }
+}
+
+function saveHistoryRecord(record) {
+  const key = "bio_exam_history_v1";
+  const list = JSON.parse(localStorage.getItem(key) || "[]");
+  list.unshift(record);
+  localStorage.setItem(key, JSON.stringify(list));
+}
+
+function openParentModal() {
+  const pwd = prompt("請輸入家長管理密碼：");
+  if (pwd !== "1234") {
+    if (pwd !== null) alert("密碼錯誤！");
+    return;
+  }
+  const key = "bio_exam_history_v1";
+  const list = JSON.parse(localStorage.getItem(key) || "[]");
+  const tbody = document.querySelector("#historyTable tbody");
+  tbody.innerHTML = "";
+
+  if (list.length === 0) {
+    tbody.innerHTML = `<tr><td colspan="5">目前尚無任何交卷歷史紀錄</td></tr>`;
+  } else {
+    list.forEach(item => {
+      tbody.innerHTML += `
+        <tr>
+          <td>${item.time}</td>
+          <td>${item.spent}</td>
+          <td style="font-weight:bold; color:${item.score >= 80 ? '#34d399' : '#f87171'};">${item.score} 分</td>
+          <td>${item.dims}</td>
+          <td style="text-align:left;">${item.wrongs}</td>
+        </tr>
+      `;
+    });
+  }
+  document.getElementById("parentModal").style.display = "flex";
+}
+
+function clearHistory() {
+  if (confirm("確定要清除所有歷次測驗紀錄嗎？")) {
+    localStorage.removeItem("bio_exam_history_v1");
+    openParentModal();
+  }
+}
+
+// 題庫驗證視窗
+function openVerifyModal() {
+  const tbody = document.querySelector("#verifyTable tbody");
+  tbody.innerHTML = "";
+  const dist = { A: 0, B: 0, C: 0, D: 0 };
+  const letters = ["A", "B", "C", "D"];
+
+  questionBank.forEach((q, idx) => {
+    const ansLetter = letters[q.answer];
+    dist[ansLetter]++;
+    tbody.innerHTML += `
+      <tr>
+        <td>${idx + 1}</td>
+        <td>${q.dimension}</td>
+        <td>${q.level}</td>
+        <td style="font-weight:bold; color:#34d399;">(${ansLetter})</td>
+        <td style="text-align:left;">${q.stem.replace(/<[^>]*>/g, "").slice(0, 42)}...</td>
+      </tr>
+    `;
+  });
+
+  document.getElementById("verifySummaryText").textContent =
+    `目前題庫共載入 ${questionBank.length} 題｜選項分布統計：(A) ${dist.A} 題、(B) ${dist.B} 題、(C) ${dist.C} 題、(D) ${dist.D} 題`;
+  document.getElementById("verifyModal").style.display = "flex";
+}
+
+function closeModal(id) {
+  document.getElementById(id).style.display = "none";
+}
+
+// 隱藏入口觸發設定
+function setupSecretTriggers() {
+  // 1. 左上角 ❖ 連點 5 下開啟題庫驗證總表
+  let verifyClicks = 0;
+  let verifyTimer = null;
+  document.getElementById("secretVerifyBtn").addEventListener("click", () => {
+    verifyClicks++;
+    clearTimeout(verifyTimer);
+    if (verifyClicks >= 5) {
+      verifyClicks = 0;
+      openVerifyModal();
+    } else {
+      verifyTimer = setTimeout(() => { verifyClicks = 0; }, 1500);
+    }
+  });
+
+  // 2. 右上角標題連點 5 下開啟家長監控歷史紀錄
+  let titleClicks = 0;
+  let titleTimer = null;
+  document.getElementById("examTitle").addEventListener("click", () => {
+    titleClicks++;
+    clearTimeout(titleTimer);
+    if (titleClicks >= 5) {
+      titleClicks = 0;
+      openParentModal();
+    } else {
+      titleTimer = setTimeout(() => { titleClicks = 0; }, 1500);
+    }
+  });
+
+  // 3. 快捷鍵 Ctrl + Shift + P 開啟家長監控歷史紀錄
+  document.addEventListener("keydown", (e) => {
+    if (e.ctrlKey && e.shiftKey && (e.key === "P" || e.key === "p")) {
+      e.preventDefault();
+      openParentModal();
+    }
+  });
+}
+
+window.onload = initExam;
+</script>
+</body>
+</html>
