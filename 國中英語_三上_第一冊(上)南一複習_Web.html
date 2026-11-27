@@ -1,0 +1,3906 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>國中英語 (1～4冊) 甲 - 單元 1 第一冊 (上) 第 1～3 課 (第 10～15 頁)</title>
+<style>
+  :root {
+    --primary-color: #2b5876;
+    --secondary-color: #4e4376;
+    --accent-color: #d9534f;
+    --bg-color: #f4f6f9;
+    --card-bg: #ffffff;
+    --border-color: #dce1e7;
+    --text-main: #222222;
+    --text-muted: #555555;
+    --handwritten-color: #c0392b;
+    --handwritten-bg: #fff5f5;
+    --pos-tag-bg: #e8eff5;
+    --pos-tag-text: #1f4e78;
+    --note-bg: #f8f9fa;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: "Microsoft JhengHei", "PingFang TC", "Noto Sans TC", "Segoe UI", Arial, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+  }
+
+  /* 頂部控制導覽列 */
+  .top-nav {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: #fff;
+    padding: 12px 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .nav-title {
+    font-weight: bold;
+    font-size: 1.05rem;
+  }
+
+  .nav-controls {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .page-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+
+  .page-links a {
+    color: #fff;
+    text-decoration: none;
+    background: rgba(255, 255, 255, 0.18);
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    transition: background 0.2s;
+  }
+
+  .page-links a:hover {
+    background: rgba(255, 255, 255, 0.35);
+  }
+
+  .toggle-hw-btn {
+    background-color: #f39c12;
+    color: #fff;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background 0.2s;
+  }
+
+  .toggle-hw-btn:hover {
+    background-color: #e67e22;
+  }
+
+  .toggle-hw-btn.hidden-mode {
+    background-color: #7f8c8d;
+  }
+
+  /* 主容器 */
+  .container {
+    max-width: 1100px;
+    margin: 24px auto;
+    padding: 0 16px;
+  }
+
+  /* 每一頁獨立區塊 */
+  .page-block {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    margin-bottom: 32px;
+    padding: 24px 28px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+  }
+
+  .page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    font-weight: bold;
+  }
+
+  .page-badge {
+    background-color: var(--primary-color);
+    color: #fff;
+    padding: 3px 10px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+  }
+
+  /* 單元與大標 */
+  .unit-banner {
+    background: linear-gradient(90deg, #e9f2f9, #f7f4fb);
+    border-left: 6px solid var(--primary-color);
+    padding: 14px 18px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+  }
+
+  .unit-banner h1 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: var(--primary-color);
+  }
+
+  .section-title {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: var(--secondary-color);
+    color: #fff;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 1.15rem;
+    font-weight: bold;
+    margin: 18px 0 12px 0;
+  }
+
+  .sub-section-title {
+    font-size: 1.05rem;
+    font-weight: bold;
+    color: #1f4e78;
+    border-bottom: 1px dashed #b0c4de;
+    padding-bottom: 4px;
+    margin: 16px 0 10px 0;
+  }
+
+  .pos-banner {
+    display: inline-block;
+    background-color: #d9534f;
+    color: #fff;
+    padding: 2px 10px;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 0.95rem;
+    margin: 14px 0 8px 0;
+  }
+
+  .category-label {
+    font-weight: bold;
+    color: #2b5876;
+    font-size: 1rem;
+    margin: 10px 0 6px 0;
+  }
+
+  /* 表格樣式 */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0;
+    font-size: 0.95rem;
+  }
+
+  th, td {
+    border: 1px solid #cfd8dc;
+    padding: 8px 12px;
+    text-align: left;
+    vertical-align: top;
+  }
+
+  th {
+    background-color: #eef3f7;
+    color: #1f4e78;
+    font-weight: bold;
+  }
+
+  /* 雙欄排版 */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  @media (max-width: 768px) {
+    .two-col {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* 單字項目樣式 */
+  .vocab-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .vocab-item {
+    padding: 6px 8px;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  .vocab-main {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 10px;
+  }
+
+  .vocab-word {
+    font-weight: bold;
+    font-size: 1.02rem;
+    color: #111;
+  }
+
+  .vocab-meaning {
+    color: #333;
+  }
+
+  .vocab-sub {
+    margin-top: 4px;
+    padding-left: 18px;
+    font-size: 0.9rem;
+    color: #444;
+  }
+
+  .note-box {
+    background-color: var(--note-bg);
+    border-left: 3px solid #7f8c8d;
+    padding: 6px 10px;
+    margin-top: 4px;
+    font-size: 0.9rem;
+    border-radius: 0 4px 4px 0;
+  }
+
+  .tag-pos {
+    display: inline-block;
+    background: var(--pos-tag-bg);
+    color: var(--pos-tag-text);
+    border: 1px solid #b8cce4;
+    border-radius: 3px;
+    padding: 0 4px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    margin: 0 2px;
+  }
+
+  /* 一字多義卡片 */
+  .polysemy-card {
+    border: 1px solid #d0d7de;
+    border-radius: 6px;
+    margin-bottom: 14px;
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    overflow: hidden;
+  }
+
+  @media (max-width: 600px) {
+    .polysemy-card {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .polysemy-word {
+    background-color: #eef5fc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: #1f4e78;
+    padding: 12px;
+    border-right: 1px solid #d0d7de;
+  }
+
+  .polysemy-meanings {
+    padding: 10px 14px;
+  }
+
+  .polysemy-row {
+    padding: 4px 0;
+    border-bottom: 1px dashed #e5e5e5;
+  }
+
+  .polysemy-row:last-child {
+    border-bottom: none;
+  }
+
+  /* 片語圖卡片 */
+  .idiom-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin: 12px 0;
+  }
+
+  @media (max-width: 768px) {
+    .idiom-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .idiom-card {
+    border: 1px solid #d0d7de;
+    border-radius: 6px;
+    padding: 10px;
+    background-color: #fafbfc;
+    text-align: center;
+  }
+
+  .idiom-card .en {
+    font-weight: bold;
+    color: #1f4e78;
+    margin-bottom: 4px;
+  }
+
+  .idiom-card .zh {
+    font-size: 0.9rem;
+    color: #444;
+  }
+
+  /* 即時演練區塊 */
+  .quiz-box {
+    background-color: #fffdf7;
+    border: 1.5px solid #f0d9a7;
+    border-radius: 6px;
+    padding: 14px 18px;
+    margin-top: 16px;
+  }
+
+  .quiz-title {
+    display: inline-block;
+    background-color: #5b4b8a;
+    color: #fff;
+    font-weight: bold;
+    padding: 3px 12px;
+    border-radius: 4px;
+    font-size: 0.95rem;
+    margin-bottom: 10px;
+  }
+
+  .quiz-item {
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed #e6dec8;
+  }
+
+  .quiz-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .quiz-options {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-top: 6px;
+    padding-left: 20px;
+  }
+
+  @media (max-width: 650px) {
+    .quiz-options {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  /* 對話插圖框 */
+  .dialogue-group {
+    background-color: #f4f8fb;
+    border: 1px solid #d1e0ec;
+    border-radius: 6px;
+    padding: 12px;
+    margin: 10px 0;
+  }
+
+  .dialogue-pair {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin: 6px 0;
+  }
+
+  .speech-bubble {
+    background: #fff;
+    border: 1px solid #b8cce4;
+    border-radius: 10px;
+    padding: 6px 12px;
+    flex: 1;
+    font-size: 0.92rem;
+  }
+
+  /* 手寫筆記專用樣式 */
+  .handwritten {
+    color: var(--handwritten-color);
+    background-color: var(--handwritten-bg);
+    border: 1px dashed #e74c3c;
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 0.92em;
+    display: inline-block;
+    margin: 0 2px;
+  }
+
+  body.hide-handwritten .handwritten {
+    display: none !important;
+  }
+
+  /* 頁尾 */
+  footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #2c3e50;
+    color: #ecf0f1;
+    font-size: 0.95rem;
+    margin-top: 40px;
+  }
+</style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <div class="nav-title">英語自修數位筆記｜單元 1 第一冊 (上) 第 1～3 課</div>
+  <div class="nav-controls">
+    <div class="page-links">
+      <a href="#page-10">第 10 頁</a>
+      <a href="#page-11">第 11 頁</a>
+      <a href="#page-12">第 12 頁</a>
+      <a href="#page-13">第 13 頁</a>
+      <a href="#page-14">第 14 頁</a>
+      <a href="#page-15">第 15 頁</a>
+      <a href="#page-16">第 16 頁</a>
+      <a href="#page-17">第 17 頁</a>
+      <a href="#page-18">第 18 頁</a>
+      <a href="#page-19">第 19 頁</a>
+      <a href="#page-20">第 20 頁</a>
+      <a href="#page-21">第 21 頁</a>
+      <a href="#page-22">第 22 頁</a>
+      <a href="#page-23">第 23 頁</a>
+      <a href="#page-24">第 24 頁</a>
+      <a href="#page-25">第 25 頁</a>
+      <a href="#page-26">第 26 頁</a>
+      <a href="#page-27">第 27 頁</a>
+      <a href="#page-28">第 28 頁</a>
+      <a href="#page-29">第 29 頁</a>
+      <a href="#page-30">第 30 頁</a>
+      <a href="#page-31">第 31 頁</a>
+      <a href="#page-32">第 32 頁</a>
+      <a href="#page-33">第 33 頁</a>
+      <a href="#page-34">第 34 頁</a>
+      <a href="#page-35">第 35 頁</a>
+    </div>
+    <button id="toggleHwBtn" class="toggle-hw-btn" onclick="toggleHandwritten()">隱藏【手寫】筆記</button>
+  </div>
+</nav>
+
+<main class="container">
+
+  <!-- ==================== 第 10 頁 ==================== -->
+  <section id="page-10" class="page-block" data-page="10">
+    <div class="page-header">
+      <span class="page-badge">第 10 頁</span>
+      <span>單元 1｜第一冊 (上) 第 1～3 課</span>
+    </div>
+
+    <div class="unit-banner">
+      <h1>單元 1 第一冊 (上) 第 1～3 課</h1>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>文法細目</th>
+          <th>重要度</th>
+          <th>文法細目</th>
+          <th>重要度</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1. 稱呼、問候語</td>
+          <td>★</td>
+          <td>7. 可數名詞的單複數</td>
+          <td>★★★</td>
+        </tr>
+        <tr>
+          <td>2. 人稱代名詞和 be 動詞</td>
+          <td>★★★</td>
+          <td>8. 數字與電話用語</td>
+          <td>★</td>
+        </tr>
+        <tr>
+          <td>3. 冠詞與指示代名詞／指示形容詞</td>
+          <td>★★</td>
+          <td>9. 地方介系詞</td>
+          <td>★★</td>
+        </tr>
+        <tr>
+          <td>4. 現在簡單式 (be 動詞句型)</td>
+          <td>★★★</td>
+          <td>10. 祈使句</td>
+          <td>★★</td>
+        </tr>
+        <tr>
+          <td>5. Wh- 疑問句</td>
+          <td>★★</td>
+          <td>11. 助動詞 can 的用法</td>
+          <td>★</td>
+        </tr>
+        <tr>
+          <td>6. 形容詞</td>
+          <td>★★</td>
+          <td></td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="section-title">A 複習單字一點通</div>
+    <div class="sub-section-title">主題單字 <small>🎵 曲目 01 * 歷屆考古單字 ● 一字多義講解</small></div>
+
+    <div class="pos-banner">名詞</div>
+
+    <div class="two-col">
+      <!-- 左欄 -->
+      <div>
+        <div class="category-label">家庭</div>
+        <ul class="vocab-list">
+          <li class="vocab-item">
+            <div class="vocab-main"><span class="vocab-word">1. family</span><span class="vocab-meaning">家庭；家人</span></div>
+            <div class="vocab-sub">
+              (1) 視為一個整體時→當單數。<br>
+              (2) 視為家庭成員時→常作複數，複數為 families。<br>
+              (3) family name (＝last name) 姓氏
+            </div>
+          </li>
+          <li class="vocab-item">
+            <div class="vocab-main"><span class="vocab-word">2. parent</span><span class="vocab-meaning">雙親之一</span></div>
+            <div class="vocab-sub">parents <span class="tag-pos">名</span> 父母；grandparents <span class="tag-pos">名</span> 祖父母</div>
+          </li>
+          <li class="vocab-item">
+            <div class="vocab-main"><span class="vocab-word">3. husband</span><span class="vocab-meaning">丈夫</span></div>
+          </li>
+          <li class="vocab-item">
+            <div class="vocab-main"><span class="vocab-word">4. wife</span><span class="vocab-meaning">妻子</span></div>
+            <div class="vocab-sub">
+              (1) 複數為 wives<br>
+              (2) husband and wife <span class="tag-pos">名</span> 夫妻（關係）
+            </div>
+          </li>
+          <li class="vocab-item">
+            <div class="vocab-main"><span class="vocab-word">5. aunt</span><span class="vocab-meaning">阿姨；姑姑；嬸嬸</span></div>
+          </li>
+          <li class="vocab-item">
+            <div class="vocab-main"><span class="vocab-word">6. cousin</span><span class="vocab-meaning">表／堂兄弟姊妹</span></div>
+          </li>
+          <li class="vocab-item">
+            <div class="vocab-main"><span class="vocab-word">7. daughter</span><span class="vocab-meaning">女兒</span></div>
+          </li>
+          <li class="vocab-item">
+            <div class="vocab-main"><span class="vocab-word">8. son</span><span class="vocab-meaning">兒子</span></div>
+          </li>
+          <li class="vocab-item">
+            <div class="vocab-main"><span class="vocab-word">9. uncle</span><span class="vocab-meaning">舅舅；伯伯；叔叔</span></div>
+          </li>
+        </ul>
+
+        <div class="category-label">人物</div>
+        <ul class="vocab-list">
+          <li class="vocab-item">
+            <div class="vocab-main"><span class="vocab-word">10. baby</span><span class="vocab-meaning">嬰兒</span></div>
+            <div class="vocab-sub">
+              (1) 複數為 babies<br>
+              (2) 可當形容詞，有「年幼的」之意。
+            </div>
+          </li>
+          <li class="vocab-item">
+            <div class="vocab-main"><span class="vocab-word">11. guy</span><span class="vocab-meaning">人；傢伙</span></div>
+          </li>
+          <li class="vocab-item">
+            <div class="vocab-main"><span class="vocab-word">12. man</span><span class="vocab-meaning">男人 複數為 men</span></div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- 右欄 -->
+      <div>
+        <ul class="vocab-list">
+          <li class="vocab-item">
+            <div class="vocab-main"><span class="vocab-word">13. person</span><span class="vocab-meaning">人</span></div>
+            <div class="vocab-sub">複數為 persons 或 people</div>
+            <div class="note-box">
+              <strong>比較</strong><br>
+              persons → 正式用語，常見於法律文件。<br>
+              people → 常用語。<br>
+              （若<span class="handwritten">【手寫】「人數不明」處畫框標記</span>人數不明時常用 people。）
+            </div>
+          </li>
+          <li class="vocab-item">
+            <div class="vocab-main"><span class="vocab-word">14. woman</span><span class="vocab-meaning">女人 複數為 women</span></div>
+          </li>
+        </ul>
+
+        <div class="category-label">職業</div>
+        <ul class="vocab-list">
+          <li class="vocab-item">
+            <div class="vocab-main"><span class="vocab-word">15. housewife</span><span class="vocab-meaning">家庭主婦</span></div>
+            <div class="vocab-sub">複數為 housewives</div>
+          </li>
+          <li class="vocab-item">
+            <div class="vocab-main"><span class="vocab-word">16. police officer</span><span class="vocab-meaning">警察</span></div>
+            <div class="vocab-sub">the police 警方</div>
+          </li>
+          <li class="vocab-item">
+            <div class="vocab-main"><span class="vocab-word">17. singer</span><span class="vocab-meaning">歌手 sing <span class="tag-pos">動</span> 唱歌</span></div>
+          </li>
+          <li class="vocab-item">
+            <div class="vocab-main"><span class="vocab-word">18. writer</span><span class="vocab-meaning">作家</span></div>
+            <div class="vocab-sub">write <span class="tag-pos">動</span> 寫；寫作</div>
+          </li>
+          <li class="vocab-item">
+            <div class="vocab-main"><span class="vocab-word">19. office worker</span><span class="vocab-meaning">上班族</span></div>
+          </li>
+          <li class="vocab-item">
+            <div class="vocab-main"><span class="vocab-word">20. teacher</span><span class="vocab-meaning">老師</span></div>
+          </li>
+        </ul>
+
+        <div class="category-label">學校</div>
+        <ul class="vocab-list">
+          <li class="vocab-item">
+            <div class="vocab-main"><span class="vocab-word">21. elementary school</span><span class="vocab-meaning">小學</span></div>
+          </li>
+          <li class="vocab-item">
+            <div class="vocab-main"><span class="vocab-word">22. junior high school</span><span class="vocab-meaning">國中</span></div>
+          </li>
+          <li class="vocab-item">
+            <div class="vocab-main"><span class="vocab-word">● 23. class</span><span class="vocab-meaning">課；班級；班上同學；等級</span></div>
+          </li>
+          <li class="vocab-item">
+            <div class="vocab-main"><span class="vocab-word">24. classmate</span><span class="vocab-meaning">同班同學</span></div>
+            <div class="vocab-sub"><span class="handwritten">【手寫】senior high school 高中</span></div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 第 11 頁 ==================== -->
+  <section id="page-11" class="page-block" data-page="11">
+    <div class="page-header">
+      <span>單元 1｜第一冊 (上) 第 1～3 課</span>
+      <span class="page-badge">第 11 頁</span>
+    </div>
+
+    <div class="two-col">
+      <!-- 左欄 -->
+      <div>
+        <ul class="vocab-list">
+          <li class="vocab-item">
+            <div class="vocab-main"><span class="vocab-word">25. marker</span><span class="vocab-meaning">麥克筆；彩色筆</span></div>
+            <div class="vocab-sub">mark <span class="tag-pos">動</span> 做記號</div>
+          </li>
+          <li class="vocab-item">
+            <div class="vocab-main"><span class="vocab-word">26. notebook</span><span class="vocab-meaning">筆記本</span></div>
+          </li>
+          <li class="vocab-item">
+            <div class="vocab-main"><span class="vocab-word">27. pencil</span><span class="vocab-meaning">鉛筆</span></div>
+            <div class="vocab-sub">pencil case / pencil box <span class="tag-pos">名</span> 鉛筆盒</div>
+          </li>
+        </ul>
+
+        <div class="category-label">房屋＆公寓</div>
+        <ul class="vocab-list">
+          <li class="vocab-item">
+            <div class="vocab-main"><span class="vocab-word">28. house</span><span class="vocab-meaning">房子</span></div>
+          </li>
+          <li class="vocab-item">
+            <div class="vocab-main"><span class="vocab-word">29. bathroom</span><span class="vocab-meaning">浴室；廁所</span></div>
+          </li>
+          <li class="vocab-item">
+            <div class="vocab-main"><span class="vocab-word">30. bedroom</span><span class="vocab-meaning">臥室</span></div>
+          </li>
+          <li class="vocab-item">
+            <div class="vocab-main"><span class="vocab-word">* 31. dining room</span><span class="vocab-meaning">飯廳</span></div>
+          </li>
+          <li class="vocab-item">
+            <div class="vocab-main"><span class="vocab-word">32. kitchen</span><span class="vocab-meaning">廚房</span></div>
+          </li>
+          <li class="vocab-item">
+            <div class="vocab-main"><span class="vocab-word">33. living room</span><span class="vocab-meaning">客廳</span></div>
+          </li>
+          <li class="vocab-item">
+            <div class="vocab-main"><span class="vocab-word">34. wall</span><span class="vocab-meaning">牆壁</span></div>
+          </li>
+          <li class="vocab-item">
+            <div class="vocab-main"><span class="vocab-word"><span class="handwritten">【手寫】★</span> 35. table</span><span class="vocab-meaning">桌子</span></div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- 右欄 -->
+      <div>
+        <ul class="vocab-list">
+          <li class="vocab-item">
+            <div class="vocab-main"><span class="vocab-word">36. sofa</span><span class="vocab-meaning">沙發</span></div>
+          </li>
+        </ul>
+
+        <div class="category-label">其他</div>
+        <ul class="vocab-list">
+          <li class="vocab-item">
+            <div class="vocab-main"><span class="vocab-word">37. age</span><span class="vocab-meaning">年紀</span></div>
+          </li>
+          <li class="vocab-item">
+            <div class="vocab-main"><span class="vocab-word">* 38. color</span><span class="vocab-meaning">顏色</span></div>
+          </li>
+          <li class="vocab-item">
+            <div class="vocab-main"><span class="vocab-word"><span class="handwritten">【手寫】☆</span> 39. sign</span><span class="vocab-meaning">標誌</span></div>
+            <div class="vocab-sub">可當動詞，有「簽名」之意。</div>
+          </li>
+          <li class="vocab-item">
+            <div class="vocab-main"><span class="vocab-word">● 40. time</span><span class="vocab-meaning">次數；時間</span></div>
+            <div class="vocab-sub">
+              (1) three times <span class="tag-pos">名</span> 三次<br>
+              (2) in time <span class="tag-pos">副</span> 及時<br>
+              (3) on time <span class="tag-pos">副</span> 準時
+            </div>
+          </li>
+          <li class="vocab-item">
+            <div class="vocab-main"><span class="vocab-word">41. rule</span><span class="vocab-meaning">規則</span></div>
+            <div class="vocab-sub">
+              (1) 可當動詞，有「統治」之意。<br>
+              (2) ruler <span class="tag-pos">名</span> 尺；統治者
+            </div>
+          </li>
+          <li class="vocab-item">
+            <div class="vocab-main"><span class="vocab-word">● 42. place</span><span class="vocab-meaning">地方</span></div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 即時演練 1 -->
+    <div class="quiz-box">
+      <div class="quiz-title">即時演練</div>
+      <div class="quiz-item">
+        <div><span class="handwritten">【手寫】( B )</span> 1. Frank is my uncle's son. That is, he is my ______.</div>
+        <div class="quiz-options">
+          <span>(A) aunt</span>
+          <span>(B) cousin</span>
+          <span>(C) parent</span>
+          <span>(D) brother</span>
+        </div>
+      </div>
+      <div class="quiz-item">
+        <div><span class="handwritten">【手寫】( C )</span> 2. My mom takes care of my grandparents at home. She is a ______.</div>
+        <div class="quiz-options">
+          <span>(A) wife</span>
+          <span>(B) singer</span>
+          <span>(C) housewife</span>
+          <span>(D) police officer</span>
+        </div>
+      </div>
+      <div class="quiz-item">
+        <div><span class="handwritten">【手寫】( C )</span> 3. Mrs. Chen: Mike, where's your father?<br>
+         Mike: He's taking a shower in the ______.</div>
+        <div class="quiz-options">
+          <span>(A) class</span>
+          <span>(B) kitchen <span class="handwritten">【手寫】廚房</span></span>
+          <span>(C) bathroom</span>
+          <span>(D) living room</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="pos-banner">動詞</div>
+
+    <div class="two-col">
+      <!-- 左欄 -->
+      <div>
+        <ul class="vocab-list">
+          <li class="vocab-item">
+            <div class="vocab-main"><span class="vocab-word">43. check</span><span class="vocab-meaning">檢查；核對</span></div>
+            <div class="vocab-sub">
+              (1) check in <span class="tag-pos">動</span> 登記入住<br>
+              (2) check out <span class="tag-pos">動</span> 退房
+            </div>
+          </li>
+          <li class="vocab-item">
+            <div class="vocab-main"><span class="vocab-word">44. fight</span><span class="vocab-meaning">吵架；打架；對抗</span></div>
+          </li>
+          <li class="vocab-item">
+            <div class="vocab-main"><span class="vocab-word">* 45. follow</span><span class="vocab-meaning">遵守；跟隨</span></div>
+          </li>
+          <li class="vocab-item">
+            <div class="vocab-main"><span class="vocab-word">46. hurry</span><span class="vocab-meaning">趕緊</span></div>
+            <div class="vocab-sub">Hurry up! 快一點！</div>
+          </li>
+          <li class="vocab-item">
+            <div class="vocab-main"><span class="vocab-word">47. meet</span><span class="vocab-meaning">碰面；遇見；符合</span></div>
+            <div class="vocab-sub">Nice to meet you! 很高興認識你！</div>
+          </li>
+          <li class="vocab-item">
+            <div class="vocab-main"><span class="vocab-word">48. please</span><span class="vocab-meaning">取悅；使高興</span></div>
+            <div class="vocab-sub">可當感嘆詞，有「請；拜託」之意。</div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- 右欄 -->
+      <div>
+        <ul class="vocab-list">
+          <li class="vocab-item">
+            <div class="vocab-main"><span class="vocab-word">49. see</span><span class="vocab-meaning">看見</span></div>
+            <div class="vocab-sub">也有「理解」之意，如 I see. (我知道了。)</div>
+          </li>
+          <li class="vocab-item">
+            <div class="vocab-main"><span class="vocab-word">50. talk</span><span class="vocab-meaning">說話；談話</span></div>
+            <div class="vocab-sub">talk to/with＋人 和…談話</div>
+          </li>
+          <li class="vocab-item">
+            <div class="vocab-main"><span class="vocab-word">● 51. turn</span><span class="vocab-meaning">轉；轉向</span></div>
+            <div class="vocab-sub">
+              (1) turn on/off <span class="tag-pos">動</span> 打開／關閉（電器）<br>
+              (2) turn right/left <span class="tag-pos">動</span> 右轉／左轉
+            </div>
+          </li>
+          <li class="vocab-item">
+            <div class="vocab-main"><span class="vocab-word">52. use</span><span class="vocab-meaning">使用</span></div>
+          </li>
+          <li class="vocab-item">
+            <div class="vocab-main"><span class="vocab-word">53. wait</span><span class="vocab-meaning">等待</span></div>
+          </li>
+          <li class="vocab-item">
+            <div class="vocab-main"><span class="vocab-word">54. wake</span><span class="vocab-meaning">叫醒</span></div>
+            <div class="vocab-sub">wake up <span class="tag-pos">動</span> 醒一醒</div>
+          </li>
+          <li class="vocab-item">
+            <div class="vocab-main"><span class="vocab-word">55. wash</span><span class="vocab-meaning">清洗</span></div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 即時演練 2 -->
+    <div class="quiz-box">
+      <div class="quiz-title">即時演練</div>
+      <div class="quiz-item">
+        <div><span class="handwritten">【手寫】( D )</span> 1. Amy: Please ______ up! We're late. Eric: I see.</div>
+        <div class="quiz-options">
+          <span>(A) use</span>
+          <span>(B) turn <span class="handwritten">【手寫】轉</span></span>
+          <span>(C) check</span>
+          <span>(D) hurry</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 第 12 頁 ==================== -->
+  <section id="page-12" class="page-block" data-page="12">
+    <div class="page-header">
+      <span class="page-badge">第 12 頁</span>
+      <span>國中英語 (1～4冊) 甲</span>
+    </div>
+
+    <!-- 承接第11頁的即時演練第2題 -->
+    <div class="quiz-box" style="margin-top: 0; margin-bottom: 16px;">
+      <div class="quiz-item">
+        <div><span class="handwritten">【手寫】( C )</span> 2. Mrs. White: Boys, <span class="handwritten">【手寫】對彼此友善一點</span> be nice to each other. Don't ______.</div>
+        <div> Boys: Yes, Mom.</div>
+        <div class="quiz-options">
+          <span>(A) meet</span>
+          <span>(B) wait</span>
+          <span>(C) fight</span>
+          <span>(D) follow</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <!-- 左欄：形容詞、連接詞 -->
+      <div>
+        <div class="pos-banner">形容詞</div>
+        <div class="category-label">特質</div>
+        <ul class="vocab-list">
+          <li class="vocab-item">
+            <div class="vocab-main"><span class="vocab-word">56. beautiful</span><span class="vocab-meaning">美麗的</span></div>
+          </li>
+          <li class="vocab-item">
+            <div class="vocab-main"><span class="vocab-word">57. careful</span><span class="vocab-meaning">小心的</span></div>
+            <div class="vocab-sub">Be careful! 小心！</div>
+          </li>
+          <li class="vocab-item">
+            <div class="vocab-main"><span class="vocab-word">58. handsome</span><span class="vocab-meaning">英俊的</span></div>
+          </li>
+          <li class="vocab-item">
+            <div class="vocab-main"><span class="vocab-word">59. new</span><span class="vocab-meaning">新的</span></div>
+          </li>
+          <li class="vocab-item">
+            <div class="vocab-main"><span class="vocab-word">60. old</span><span class="vocab-meaning">老的；舊的</span></div>
+          </li>
+          <li class="vocab-item">
+            <div class="vocab-main"><span class="vocab-word">61. young</span><span class="vocab-meaning">年輕的</span></div>
+          </li>
+        </ul>
+
+        <div class="category-label">顏色</div>
+        <ul class="vocab-list">
+          <li class="vocab-item">
+            <div class="vocab-main"><span class="vocab-word">62. purple <span class="tag-pos">形</span> <span class="tag-pos">名</span></span><span class="vocab-meaning">紫色的 (的)</span></div>
+          </li>
+          <li class="vocab-item">
+            <div class="vocab-main"><span class="vocab-word">63. gray <span class="tag-pos">形</span> <span class="tag-pos">名</span></span><span class="vocab-meaning">灰色的 (的)</span></div>
+          </li>
+          <li class="vocab-item">
+            <div class="vocab-main"><span class="vocab-word">64. brown <span class="tag-pos">形</span> <span class="tag-pos">名</span></span><span class="vocab-meaning">咖啡色的 (的)</span></div>
+          </li>
+        </ul>
+
+        <div class="category-label">其他</div>
+        <ul class="vocab-list">
+          <li class="vocab-item">
+            <div class="vocab-main"><span class="vocab-word">65. dear</span><span class="vocab-meaning">親愛的</span></div>
+          </li>
+          <li class="vocab-item">
+            <div class="vocab-main"><span class="vocab-word">66. favorite <span class="tag-pos">形</span> <span class="tag-pos">名</span></span><span class="vocab-meaning">最喜愛的 (的)</span></div>
+          </li>
+          <li class="vocab-item">
+            <div class="vocab-main"><span class="vocab-word">* 67. hungry</span><span class="vocab-meaning">餓的</span></div>
+          </li>
+          <li class="vocab-item">
+            <div class="vocab-main"><span class="vocab-word">68. safe</span><span class="vocab-meaning">安全的</span></div>
+          </li>
+          <li class="vocab-item">
+            <div class="vocab-main"><span class="vocab-word">69. special</span><span class="vocab-meaning">特別的</span></div>
+          </li>
+          <li class="vocab-item">
+            <div class="vocab-main"><span class="vocab-word">70. sure <span class="tag-pos">形</span> <span class="tag-pos">副</span></span><span class="vocab-meaning">當然的；確定的</span></div>
+          </li>
+          <li class="vocab-item">
+            <div class="vocab-main"><span class="vocab-word">71. quiet</span><span class="vocab-meaning">安靜的</span></div>
+          </li>
+          <li class="vocab-item">
+            <div class="vocab-main"><span class="vocab-word">72. magic</span><span class="vocab-meaning">神奇的</span></div>
+            <div class="vocab-sub">可當名詞，有「魔法」之意。</div>
+          </li>
+        </ul>
+
+        <div class="pos-banner">連接詞</div>
+        <ul class="vocab-list">
+          <li class="vocab-item">
+            <div class="vocab-main"><span class="vocab-word">73. but</span><span class="vocab-meaning">但是</span></div>
+          </li>
+          <li class="vocab-item">
+            <div class="vocab-main"><span class="vocab-word">74. or</span><span class="vocab-meaning">或者；否則</span></div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- 右欄：副詞、介系詞、助動詞 -->
+      <div>
+        <div class="pos-banner">副詞</div>
+        <ul class="vocab-list">
+          <li class="vocab-item">
+            <div class="vocab-main"><span class="vocab-word">75. maybe</span><span class="vocab-meaning">可能</span></div>
+          </li>
+          <li class="vocab-item">
+            <div class="vocab-main"><span class="vocab-word">76. now</span><span class="vocab-meaning">現在</span></div>
+          </li>
+          <li class="vocab-item">
+            <div class="vocab-main"><span class="vocab-word">77. very</span><span class="vocab-meaning">非常；很</span></div>
+          </li>
+          <li class="vocab-item">
+            <div class="vocab-main"><span class="vocab-word">78. too</span><span class="vocab-meaning">也；太過…</span></div>
+          </li>
+          <li class="vocab-item">
+            <div class="vocab-main"><span class="vocab-word">79. really</span><span class="vocab-meaning">真地</span></div>
+          </li>
+          <li class="vocab-item">
+            <div class="vocab-main"><span class="vocab-word">● 80. right</span><span class="vocab-meaning">就</span></div>
+          </li>
+        </ul>
+
+        <div class="pos-banner">介系詞</div>
+        <div class="note-box" style="margin-bottom: 8px;">P.24 有更詳細的文法補充喔！</div>
+        <ul class="vocab-list">
+          <li class="vocab-item">
+            <div class="vocab-main"><span class="vocab-word">81. above</span><span class="vocab-meaning">在…上方</span></div>
+            <div class="note-box">
+              <strong>比較 above、over、on</strong><br>
+              above → 位置較高，不一定是正上方且沒有接觸。<br>
+              over → 在…正上方，兩者沒有接觸。<br>
+              on → 於…上方，兩者有接觸。
+            </div>
+          </li>
+          <li class="vocab-item">
+            <div class="vocab-main"><span class="vocab-word">82. behind</span><span class="vocab-meaning">在…後面</span></div>
+            <div class="note-box">
+              <strong>比較 behind、after</strong><br>
+              behind → 用以表示在某場所／人／物後面。<br>
+              after → 用以表示時間或順序之後。
+            </div>
+          </li>
+          <li class="vocab-item">
+            <div class="vocab-main"><span class="vocab-word">83. between</span><span class="vocab-meaning">在…之間</span></div>
+            <div class="vocab-sub">between A and B <span class="tag-pos">介</span> 在 A 與 B 之間</div>
+          </li>
+          <li class="vocab-item">
+            <div class="vocab-main"><span class="vocab-word">84. inside</span><span class="vocab-meaning">在…裡面</span></div>
+          </li>
+          <li class="vocab-item">
+            <div class="vocab-main"><span class="vocab-word">85. in front of</span><span class="vocab-meaning">在…前面</span></div>
+          </li>
+          <li class="vocab-item">
+            <div class="vocab-main"><span class="vocab-word">86. near</span><span class="vocab-meaning">在…附近</span></div>
+          </li>
+          <li class="vocab-item">
+            <div class="vocab-main"><span class="vocab-word">87. with</span><span class="vocab-meaning">用；和</span></div>
+          </li>
+        </ul>
+
+        <div class="pos-banner">助動詞</div>
+        <ul class="vocab-list">
+          <li class="vocab-item">
+            <div class="vocab-main"><span class="vocab-word">88. can</span><span class="vocab-meaning">可以；會</span></div>
+            <div class="vocab-sub">可當名詞，有「罐；桶」之意，如 garbage can <span class="tag-pos">名</span> 垃圾桶</div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 即時演練 -->
+    <div class="quiz-box">
+      <div class="quiz-title">即時演練</div>
+      <div class="quiz-item">
+        <div><span class="handwritten">【手寫】( D )</span> 1. Tony: Mom, is there anything to eat? I'm ______.<br>
+         Mom: You can have some bread. Here you are.</div>
+        <div class="quiz-options">
+          <span>(A) handsome</span>
+          <span>(B) safe</span>
+          <span>(C) right</span>
+          <span>(D) hungry</span>
+        </div>
+      </div>
+      <div class="quiz-item">
+        <div><span class="handwritten">【手寫】( B )</span> 2. Vivian is a ______ girl. She seldom talks to her classmates.</div>
+        <div class="quiz-options">
+          <span><span class="handwritten">【手寫】(刪除線)</span> (A) sure</span>
+          <span>(B) quiet</span>
+          <span><span class="handwritten">【手寫】(刪除線)</span> (C) brown</span>
+          <span><span class="handwritten">【手寫】(刪除線)</span> (D) favorite</span>
+        </div>
+      </div>
+      <div class="quiz-item">
+        <div><span class="handwritten">【手寫】( D )</span> 3. There is a big park ______ our school and the library.</div>
+        <div class="quiz-options">
+          <span>(A) with</span>
+          <span>(B) above</span>
+          <span>(C) inside</span>
+          <span>(D) between</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 第 13 頁 ==================== -->
+  <section id="page-13" class="page-block" data-page="13">
+    <div class="page-header">
+      <span>單元 1｜第一冊 (上) 第 1～3 課</span>
+      <span class="page-badge">第 13 頁</span>
+    </div>
+
+    <div class="section-title">一字多義 <small>🎵 曲目 02</small></div>
+
+    <!-- class -->
+    <div class="polysemy-card">
+      <div class="polysemy-word">class</div>
+      <div class="polysemy-meanings">
+        <div class="polysemy-row"><span class="tag-pos">名</span> <strong>等級</strong> ➡ This is a high-<strong>class</strong> hotel. (這是間高級飯店。)</div>
+        <div class="polysemy-row"><span class="tag-pos">名</span> <strong>課</strong> ➡ Judy has (an) English <strong>class</strong> every day. (Judy 每天都有英語課。)</div>
+        <div class="polysemy-row"><span class="tag-pos">名</span> <strong>班級</strong> ➡ There are thirty-five <strong>classes</strong> in our school. (我們學校有 35 個班級。)</div>
+        <div class="polysemy-row"><span class="tag-pos">名</span> <strong>班上同學（集合名詞）</strong> ➡ My <strong>class</strong> are playing basketball in the gym.<br>             (我的班上同學正在體育館裡打籃球。)</div>
+      </div>
+    </div>
+
+    <!-- time -->
+    <div class="polysemy-card">
+      <div class="polysemy-word">time</div>
+      <div class="polysemy-meanings">
+        <div class="polysemy-row"><span class="tag-pos">名</span> <strong>時間</strong> ➡ Do you have free <strong>time</strong> this weekend? (你這週末有時間嗎？)</div>
+        <div class="polysemy-row"><span class="tag-pos">名</span> <strong>時光</strong> ➡ We had a good <strong>time</strong> at the party. (我們在派對度過了愉快的時光。)</div>
+        <div class="polysemy-row"><span class="tag-pos">名</span> <strong>次數</strong> ➡ Johnny goes to the library three <strong>times</strong> a month. (Johnny 一個月去三次圖書館。)</div>
+      </div>
+    </div>
+
+    <!-- place -->
+    <div class="polysemy-card">
+      <div class="polysemy-word">place</div>
+      <div class="polysemy-meanings">
+        <div class="polysemy-row"><span class="tag-pos">名</span> <strong>地方</strong> ➡ The museum is a great <strong>place</strong>. (這間博物館是個好地方。)</div>
+        <div class="polysemy-row"><span class="tag-pos">名</span> <strong><span class="handwritten">【手寫】(圈選)</span> 名次</strong> ➡ My favorite singer won first <strong>place</strong>. (我最喜愛的歌手得了第一名。)</div>
+        <div class="polysemy-row"><span class="tag-pos">名</span> <strong>住處</strong> ➡ Welcome to my <strong>place</strong>. Please come on in. (歡迎到我家。請進。)</div>
+        <div class="polysemy-row"><span class="tag-pos">動</span> <strong>放置</strong> ➡ <strong>Place</strong> the markers in the drawer. (把彩色筆放在抽屜裡。)</div>
+      </div>
+    </div>
+
+    <!-- turn -->
+    <div class="polysemy-card">
+      <div class="polysemy-word">turn</div>
+      <div class="polysemy-meanings">
+        <div class="polysemy-row"><span class="tag-pos">名</span> <strong>輪流</strong> ➡ We take <strong>turns</strong> washing the dishes. (我們輪流洗碗。)</div>
+        <div class="polysemy-row"><span class="tag-pos">名</span> <strong>轉彎</strong> ➡ Please make a U-<strong>turn</strong> over there. (請在那裡迴轉。)</div>
+        <div class="polysemy-row"><span class="tag-pos">動</span> <strong>變成</strong> ➡ The witch <strong>turned</strong> the rat into a horse. (這位女巫把老鼠變成了馬。)</div>
+        <div class="polysemy-row"><span class="tag-pos">動</span> <strong>轉彎</strong> ➡ <strong>Turn</strong> left at the first traffic light. (在第一個紅綠燈處左轉。)</div>
+      </div>
+    </div>
+
+    <!-- right -->
+    <div class="polysemy-card">
+      <div class="polysemy-word">right</div>
+      <div class="polysemy-meanings">
+        <div class="polysemy-row"><span class="tag-pos">名</span> <strong>權利</strong> ➡ You should fight for your <strong>rights</strong>. (你應該要爭取你的權利。)</div>
+        <div class="polysemy-row"><span class="tag-pos">形</span> <strong>正確的；真實的</strong> ➡ Your answer is <strong>right</strong>. (你的答案是正確的。)</div>
+        <div class="polysemy-row"><span class="tag-pos">形</span> <strong>對的；正當的</strong> ➡ It's not <strong>right</strong> to cheat. (作弊是不對的。)</div>
+        <div class="polysemy-row"><span class="tag-pos">形</span> <span class="tag-pos">名</span> <strong>右邊 (的)</strong> ➡ Please raise your <strong>right</strong> hand. (請舉起你的右手。)</div>
+        <div class="polysemy-row"><span class="tag-pos">副</span> <strong>向右地</strong> ➡ Go straight for two blocks and turn <strong>right</strong>. (直走兩個街區，然後右轉。)</div>
+      </div>
+    </div>
+
+    <!-- 即時演練 -->
+    <div class="quiz-box">
+      <div class="quiz-title">即時演練</div>
+      <div class="quiz-item">
+        <div><span class="handwritten">【手寫】( B )</span> 1. Nina: Who takes out the garbage <span class="handwritten">【手寫】垃圾</span> in your family?<br>
+         Jack: My brother and I take ______.</div>
+        <div class="quiz-options">
+          <span>(A) times</span>
+          <span>(B) turns</span>
+          <span>(C) classes</span>
+          <span>(D) places</span>
+        </div>
+      </div>
+      <div class="quiz-item">
+        <div><span class="handwritten">【手寫】( C )</span> 2. Susan: How was your singing contest yesterday? <span class="note-box" style="display:inline-block; padding:1px 6px;">contest 比賽</span><br>
+         Dora: Guess what! I won second ______.</div>
+        <div class="quiz-options">
+          <span>(A) time</span>
+          <span>(B) turn <span class="handwritten">【手寫】輪流</span></span>
+          <span>(C) place</span>
+          <span>(D) right</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 第 14 頁 ==================== -->
+  <section id="page-14" class="page-block" data-page="14">
+    <div class="page-header">
+      <span class="page-badge">第 14 頁</span>
+      <span>國中英語 (1～4冊) 甲</span>
+    </div>
+
+    <div class="section-title">B 習得秘笈語句懂</div>
+
+    <div class="sub-section-title">百變片語圖</div>
+    <div class="idiom-grid">
+      <div class="idiom-card">
+        <div class="en">talk on the phone</div>
+        <div class="zh">講電話</div>
+      </div>
+      <div class="idiom-card">
+        <div class="en">talk to/with</div>
+        <div class="zh">和某人說話</div>
+      </div>
+      <div class="idiom-card">
+        <div class="en">talk about</div>
+        <div class="zh">談論關於</div>
+      </div>
+      <div class="idiom-card">
+        <div class="en">talk turkey</div>
+        <div class="zh">有話直說／打開天窗說亮話</div>
+      </div>
+    </div>
+
+    <div class="sub-section-title">片語＆佳句 <small>🎵 曲目 03</small></div>
+
+    <div class="two-col">
+      <!-- 左欄 1~7 -->
+      <div>
+        <ul class="vocab-list">
+          <li class="vocab-item"><strong>1. wash sth away</strong> (水或雨水) 將某物沖走；沖掉</li>
+          <li class="vocab-item"><strong>2. check in/out</strong> 住宿 (登機) 登記／退房</li>
+          <li class="vocab-item"><strong>3. green thumb/finger</strong> 園藝方面有雙巧手的人</li>
+          <li class="vocab-item"><strong>4. under the table</strong> 為賄賂某人送錢；祕密地；私底下；背地裡</li>
+          <li class="vocab-item">
+            <strong>5. <span class="handwritten">【手寫】現在式</span> can ＝ be able to</strong> (＋原形動詞) 能夠…<br>
+              <span class="handwritten">【手寫】↳ 未來式</span><br>
+             <strong>＝ be capable of</strong> (＋V-ing) 能夠…；可以…
+            <div class="note-box">
+              <span class="tag-pos">例</span> She is able to swim.<br>
+               / She is capable of swimming. (她會游泳。)
+            </div>
+          </li>
+          <li class="vocab-item">
+            <strong>6. fight for</strong> 為…而戰<br>
+             <strong>fight back</strong> 打回去；反擊
+          </li>
+          <li class="vocab-item"><strong>7. as follows</strong> 以下</li>
+        </ul>
+      </div>
+
+      <!-- 右欄 8~17 -->
+      <div>
+        <ul class="vocab-list">
+          <li class="vocab-item"><strong>8. hurry up</strong> 趕快</li>
+          <li class="vocab-item"><strong>9. wait for</strong> 等待</li>
+          <li class="vocab-item">
+            <strong>10. in time</strong> 及時<br>
+             <strong>on time</strong> 準時
+          </li>
+          <li class="vocab-item">
+            <strong>11. in class</strong> 課堂上；上課中<br>
+             <strong>cut class ＝ skip class</strong> 翹課
+          </li>
+          <li class="vocab-item"><strong>12. Like father, like son.</strong> 有其父必有其子。</li>
+          <li class="vocab-item"><strong>13. It's no use crying over spilt milk.</strong><br>  覆水難收 (牛奶已打翻，哭也無益)。</li>
+          <li class="vocab-item"><strong>14. It's a pleasure to see you.</strong> 很高興見到你。</li>
+          <li class="vocab-item"><strong>15. How are you doing?</strong> 你好嗎？</li>
+          <li class="vocab-item"><strong>16. Do you have time?</strong> 你有空嗎？</li>
+          <li class="vocab-item"><strong>17. Do you have the time?</strong> 現在幾點了？</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 即時演練 -->
+    <div class="quiz-box">
+      <div class="quiz-title">即時演練</div>
+      <div class="quiz-item">
+        <div><span class="handwritten">【手寫】( D )</span> 1. Dr. Wu is very busy, but I'm sure she'll ______ you tomorrow.</div>
+        <div class="quiz-options">
+          <span>(A) be able see</span>
+          <span>(B) able see</span>
+          <span>(C) be able to seeing</span>
+          <span>(D) be able to see</span>
+        </div>
+      </div>
+      <div class="quiz-item">
+        <div><span class="handwritten">【手寫】( A )</span> 2. We are ______ Jason's new girlfriend.</div>
+        <div class="quiz-options">
+          <span>(A) talking about</span>
+          <span>(B) talking for</span>
+          <span>(C) talking turkey</span>
+          <span>(D) talking on</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 第 15 頁 ==================== -->
+  <section id="page-15" class="page-block" data-page="15">
+    <div class="page-header">
+      <span>單元 1｜第一冊 (上) 第 1～3 課</span>
+      <span class="page-badge">第 15 頁</span>
+    </div>
+
+    <div class="section-title">C 百發百中文法點</div>
+
+    <div class="sub-section-title">一 稱呼、問候語</div>
+
+    <p><strong>1. (1) 稱呼英文姓名通常先寫「名字」，再寫「<span class="handwritten">【手寫】(紅筆底線)</span>姓氏」。</strong><br>
+     <span class="tag-pos">例</span> Sandy Chen (陳珊蒂)</p>
+
+    <p><strong> (2) 加「尊稱語」</strong></p>
+    <table>
+      <thead>
+        <tr>
+          <th>用法</th>
+          <th>後加「姓氏」或「名字＋姓氏」</th>
+          <th>可單獨使用</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>形式</strong></td>
+          <td>Mr./Miss/Mrs./Ms.＋姓氏／名字＋姓氏</td>
+          <td>sir/madam/ma'am</td>
+        </tr>
+        <tr>
+          <td><strong>例子</strong></td>
+          <td>Miss Jones (瓊斯小姐)、<br>Mr. Brian Smith (史密斯．布萊恩先生)</td>
+          <td>Yes, madam.<br>(是的，夫人。)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p><strong>2. 問候語</strong></p>
+
+    <div class="two-col" style="grid-template-columns: 2fr 1fr;">
+      <!-- 左側問候語表格 -->
+      <div>
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 15%;"></th>
+              <th>問候</th>
+              <th>回答</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td rowspan="4"><strong>一般問候</strong></td>
+              <td>Hi. / Hello. (嗨！你好！／哈囉！)</td>
+              <td>Hi. / Hello.<br>(嗨！你好！／哈囉！)</td>
+            </tr>
+            <tr>
+              <td>Good morning. (早安。)</td>
+              <td>Good morning. (早安。)</td>
+            </tr>
+            <tr>
+              <td>Good afternoon. (午安。)</td>
+              <td>Good afternoon. (午安。)</td>
+            </tr>
+            <tr>
+              <td>Good evening. (晚安。)</td>
+              <td>Good evening. (晚安。)</td>
+            </tr>
+            <tr>
+              <td rowspan="2"><strong>初見面</strong></td>
+              <td>How do you do? (你好！)</td>
+              <td>How do you do? (你好！)</td>
+            </tr>
+            <tr>
+              <td>Nice/Glad to meet you.<br>(很高興認識你。)</td>
+              <td>Nice/Glad to meet you, too.<br>(也很高興認識你。)</td>
+            </tr>
+            <tr>
+              <td rowspan="5"><strong>熟識者</strong></td>
+              <td>(1) How are you (doing)?<br>  (你好嗎？)</td>
+              <td>(1) Great. / Wonderful.<br>  (很棒。／好極了。)</td>
+            </tr>
+            <tr>
+              <td>(2) What's up? (你好嗎？)</td>
+              <td>(2) Fine, thank you. And you?<br>  (很好，謝謝你。你呢？)</td>
+            </tr>
+            <tr>
+              <td>(3) How's it going? (一切可好？)</td>
+              <td rowspan="2">(3) Not bad. (不錯。)<br>  / So so. (馬馬虎虎。)</td>
+            </tr>
+            <tr>
+              <td>(4) How's everything (going)?<br>  (一切可好？)</td>
+            </tr>
+            <tr>
+              <td>(5) Glad to see you (again).<br>  (很高興再次見到你。)</td>
+              <td>(4) Very bad. / Terrible.<br>  (很糟。)</td>
+            </tr>
+            <tr>
+              <td rowspan="2"><strong>道別</strong></td>
+              <td>Good night. (晚安。／再見。)</td>
+              <td>Good night. (晚安。／再見。)</td>
+            </tr>
+            <tr>
+              <td>Goodbye. / Bye-bye. / See you.<br>(再見。)</td>
+              <td>Goodbye. / Bye-bye. / See you.<br>(再見。)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 右側情境對話插圖框 -->
+      <div>
+        <div class="dialogue-group">
+          <div class="category-label" style="margin-top:0;">第一次見面</div>
+          <div class="dialogue-pair">
+            <div class="speech-bubble">Nice to meet you.</div>
+            <div class="speech-bubble">Nice to meet you, too.</div>
+          </div>
+          <div class="dialogue-pair">
+            <div class="speech-bubble">Glad to meet you.</div>
+            <div class="speech-bubble">Me, too.</div>
+          </div>
+          <div class="dialogue-pair">
+            <div class="speech-bubble">How do you do?</div>
+            <div class="speech-bubble">How do you do?</div>
+          </div>
+        </div>
+
+        <div class="dialogue-group">
+          <div class="category-label" style="margin-top:0;">五天後再見面</div>
+          <div class="dialogue-pair">
+            <div class="speech-bubble">Glad to see you again.</div>
+            <div class="speech-bubble">Me, too.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 即時演練 -->
+    <div class="quiz-box">
+      <div class="quiz-title">即時演練</div>
+      <div class="quiz-item">
+        <div><span class="handwritten">【手寫】( C )</span> 1. Ms. Davis: ______<br>
+         Dr. Miller: How do you do?</div>
+        <div class="quiz-options">
+          <span>(A) How are you?</span>
+          <span>(B) Nice to see you.</span>
+          <span>(C) How do you do?</span>
+          <span>(D) How about you?</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 第 16 頁 ==================== -->
+  <section id="page-16" class="page-block" data-page="16">
+    <div class="page-header">
+      <span class="page-badge">第 16 頁</span>
+      <span>國中英語 (1～4冊) 甲</span>
+    </div>
+
+    <div class="two-col" style="grid-template-columns: 1fr 3.2fr;">
+      <!-- 左側圖解與叮嚀 -->
+      <div>
+        <div class="aside-card">
+          <div class="aside-badge">圖解 1</div>
+          <div><strong>主格 ➡ 動詞 ➡ 受格</strong></div>
+          <div style="margin-top: 6px;">She <strong>likes</strong> him.<br><small>she      him</small></div>
+          <div style="margin-top: 8px;">He <strong>likes</strong> her.<br><small>he      her</small></div>
+        </div>
+
+        <div class="aside-card">
+          <div class="aside-badge">叮嚀</div>
+          <div>人稱代名詞同時在一個句子中出現時，順序是：</div>
+          <div style="margin-top: 6px;">
+            <strong>單數</strong><br>
+            第 2 ➡ 3 ➡ 1 人稱<br>
+            <small>you ➡ he/she/it/人名 ➡ I</small>
+          </div>
+          <div style="margin-top: 6px;">
+            <strong>複數</strong><br>
+            第 1 ➡ 2 ➡ 3 人稱<br>
+            <small>we ➡ you ➡ they</small>
+          </div>
+        </div>
+
+        <div class="aside-card">
+          <div class="aside-badge">圖解 2</div>
+          <div>（插圖：Lisa、Amy 與媽媽的合照）</div>
+        </div>
+
+        <div class="aside-card">
+          <div class="aside-badge">圖解 3</div>
+          <div>（插圖：Lisa 與媽媽、Amy 與媽媽的合照）</div>
+        </div>
+      </div>
+
+      <!-- 右側主內容 -->
+      <div>
+        <!-- 承接第15頁的即時演練第2、3題 -->
+        <div class="quiz-box" style="margin-top: 0;">
+          <div class="quiz-item">
+            <div>Allen: Hi,   2.  . How's it going?<br>
+            Daniel:   3.  .<br>
+            Allen: Great.</div>
+            <div class="quiz-options">
+              <span><span class="handwritten">【手寫】( A )</span> 2. (A) Mr. Daniel Green</span>
+              <span>(B) Miss Collins</span>
+              <span>(C) John Dunlop</span>
+              <span>(D) Ms. Wang</span>
+            </div>
+            <div class="quiz-options">
+              <span><span class="handwritten">【手寫】( B )</span> 3. (A) Very well.</span>
+              <span>(B) Not bad. How about you?</span>
+              <span>(C) How do you do?</span>
+              <span>(D) It's sunny today. And you?</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="sub-section-title">二 人稱代名詞和 be 動詞</div>
+        <p><strong>1. 人稱代名詞主格、所有格、受格</strong></p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>人稱</th>
+              <th>單複數</th>
+              <th>主格</th>
+              <th>be 動詞</th>
+              <th>所有格</th>
+              <th>受格</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td rowspan="2"><strong>第一人稱</strong></td>
+              <td>單數</td>
+              <td>I</td>
+              <td>am</td>
+              <td>my</td>
+              <td>me</td>
+            </tr>
+            <tr>
+              <td>複數</td>
+              <td>we</td>
+              <td>are</td>
+              <td>our</td>
+              <td>us</td>
+            </tr>
+            <tr>
+              <td rowspan="2"><strong>第二人稱</strong></td>
+              <td>單數</td>
+              <td>you</td>
+              <td>are</td>
+              <td>your</td>
+              <td>you</td>
+            </tr>
+            <tr>
+              <td>複數</td>
+              <td>you</td>
+              <td>are</td>
+              <td>your</td>
+              <td>you</td>
+            </tr>
+            <tr>
+              <td rowspan="4"><strong>第三人稱</strong></td>
+              <td rowspan="3">單數</td>
+              <td>he</td>
+              <td rowspan="3">is</td>
+              <td>his</td>
+              <td>him</td>
+            </tr>
+            <tr>
+              <td>she</td>
+              <td>her</td>
+              <td>her</td>
+            </tr>
+            <tr>
+              <td>it</td>
+              <td>its</td>
+              <td>it</td>
+            </tr>
+            <tr>
+              <td>複數</td>
+              <td>they</td>
+              <td>are</td>
+              <td>their</td>
+              <td>them</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="category-label">要點 使用時機 <span class="tag-pos">圖解 1</span></div>
+        <table>
+          <tbody>
+            <tr>
+              <td><strong>主格</strong></td>
+              <td>作主詞用</td>
+              <td><span class="tag-pos">例</span> <strong>It</strong> is a notebook. (它是一本筆記本。)</td>
+            </tr>
+            <tr>
+              <td><strong>所有格</strong></td>
+              <td>之後須接名詞；也可先接形容詞，再接名詞。</td>
+              <td><span class="tag-pos">例</span> <strong>His</strong> cousin is <strong>my</strong> new friend.<br>  (他的堂哥是我的新朋友。)</td>
+            </tr>
+            <tr>
+              <td><strong>受格</strong></td>
+              <td>作受詞用，放在動詞或介系詞後面</td>
+              <td><span class="tag-pos">例</span> Listen to <strong>me</strong>.<br>  (聽我說。)</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p><strong>2. 其他名詞的所有格</strong> <span class="handwritten">【手寫】指名詞＋'s等字</span></p>
+        <p><strong>(1) 有生命名詞的所有格</strong></p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>名詞</th>
+              <th>所有格形式</th>
+              <th>例子</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>單數</strong></td>
+              <td>單數名詞's</td>
+              <td>that singer's (那位歌手的)、John's (John 的)</td>
+            </tr>
+            <tr>
+              <td rowspan="2"><strong>複數</strong></td>
+              <td>複數名詞 s'</td>
+              <td>the boys' (那些男孩們的)、<br>these doctors' (這些醫生們的)</td>
+            </tr>
+            <tr>
+              <td rowspan="2"><strong>共同所有</strong><br>A and B's<br><br><strong>個別所有</strong><br>A's and B's</td>
+              <td><strong>Amy and Lisa's</strong> mom is a nurse. <span class="tag-pos">圖解 2</span><br>(Amy 和 Lisa 的媽媽是護理師。)<br>➡ Amy 和 Lisa 是姊妹，只有一位媽媽。</td>
+            </tr>
+            <tr>
+              <td><strong>A and B</strong></td>
+              <td><strong>Amy's and Lisa's</strong> moms are nurses. <span class="tag-pos">圖解 3</span><br>(Amy 的媽媽和 Lisa 的媽媽都是護理師。)<br>➡ 兩人非姊妹，有兩位媽媽。</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p><strong>(2) 無生命名詞的所有格：</strong>the＋名詞（小範圍）of＋the／所有格＋名詞（整體）</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 第 17 頁 ==================== -->
+  <section id="page-17" class="page-block" data-page="17">
+    <div class="page-header">
+      <span>單元 1｜第一冊 (上) 第 1～3 課</span>
+      <span class="page-badge">第 17 頁</span>
+    </div>
+
+    <div class="two-col" style="grid-template-columns: 3.2fr 1fr;">
+      <!-- 左側主內容 -->
+      <div>
+        <p>若當句子的主詞，動詞的單複數要以「小範圍」的名詞來決定。<br>
+        <span class="tag-pos">例</span> <strong>The wall</strong> of the house <strong>is</strong> green. (這房子的牆是綠色的。)<br>
+          ➡ wall 是單數，動詞要用 is。<br>
+        <span class="tag-pos">例</span> <strong>The windows</strong> of the classroom <strong>are</strong> open.<br>
+          (教室裡的窗戶是打開的。)<br>
+          ➡ windows 是複數，動詞要用 are。</p>
+
+        <div class="note-box">
+          <strong>要點</strong> 所有格不可和冠詞 (a/an/the)、指示形容詞 (this/that/these/those) 或不定形容詞 (some/any/many/much/most…) 等字連用。<br>
+          <span class="tag-pos">例</span> the student's a pen (×)、some the ladies' bags (×)
+        </div>
+
+        <!-- 即時演練 -->
+        <div class="quiz-box">
+          <div class="quiz-title">即時演練</div>
+          <div class="quiz-item">
+            <div><span class="handwritten">【手寫】( D )</span> 1. ______ are junior high school students and like to play sports.</div>
+            <div class="quiz-options">
+              <span>(A) I and Justin</span>
+              <span>(B) They and you</span>
+              <span>(C) We and they</span>
+              <span>(D) Alice and you</span>
+            </div>
+          </div>
+          <div class="quiz-item">
+            <div><span class="handwritten">【手寫】( D )</span> 2. Sam and his teacher are in the classroom. He's asking ______ a question.</div>
+            <div class="quiz-options">
+              <span>(A) he</span>
+              <span>(B) his</span>
+              <span>(C) she</span>
+              <span>(D) her</span>
+            </div>
+          </div>
+          <div class="quiz-item">
+            <div><span class="handwritten">【手寫】( C )</span> 3. ______ is true.</div>
+            <div class="quiz-options">
+              <span>(A) The movie's story</span>
+              <span>(B) The movies of the story</span>
+              <span>(C) The story of the movie</span>
+              <span>(D) The stories of the movie</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 文法澄清題 -->
+        <div class="quiz-box">
+          <div class="quiz-title" style="background-color: #2b8a88;">文法澄清題</div>
+          <div class="quiz-item">
+            <div><span class="handwritten">【手寫】( B )</span> 1. ______ moms are doctors, and they work in the same hospital.</div>
+            <div class="quiz-options">
+              <span>(A) Ryan and Sarah's</span>
+              <span>(B) Ray's and Paul's</span>
+              <span>(C) They</span>
+              <span>(D) Mr. White's and Ms. Green</span>
+            </div>
+          </div>
+          <div class="quiz-item">
+            <div><span class="handwritten">【手寫】( A )</span> 2. ______ father is an English teacher in our school, and he teaches very well.</div>
+            <div class="quiz-options">
+              <span>(A) Arthur and Wendy's</span>
+              <span>(B) Arthur's and Wendy's</span>
+              <span>(C) He</span>
+              <span>(D) Him</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="sub-section-title">三 冠詞與指示代名詞／指示形容詞</div>
+        <p><strong>1. 冠詞</strong></p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>名稱</th>
+              <th>意義</th>
+              <th>用法</th>
+              <th>例句</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>不定冠詞</strong></td>
+              <td>沒有特定</td>
+              <td>a＋單數名詞<br>(子音發音開頭)<br>an＋單數名詞<br>(母音發音開頭)</td>
+              <td>An apple a day keeps the doctor away.<br>(一天一蘋果，醫生遠離我。)</td>
+            </tr>
+            <tr>
+              <td><strong>定冠詞</strong></td>
+              <td>有特定</td>
+              <td>the＋單數名詞／複數名詞</td>
+              <td>The hats on the table are gifts.<br>(桌上那些帽子是禮物。)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 右側注意框 -->
+      <div style="display: flex; flex-direction: column; justify-content: flex-end;">
+        <div class="aside-card">
+          <div class="aside-badge" style="background-color: #d9534f;">注意</div>
+          <div>第一次提到的單數名詞用「不定冠詞」(a/an)，第二次提到用「定冠詞」(the)。</div>
+          <div style="margin-top: 6px;">
+            <span class="tag-pos">例</span> There is <u>an</u> apple on the table.<br>
+              <u>The</u> apple is very big.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 第 18 頁 ==================== -->
+  <section id="page-18" class="page-block" data-page="18">
+    <div class="page-header">
+      <span class="page-badge">第 18 頁</span>
+      <span>國中英語 (1～4冊) 甲</span>
+    </div>
+
+    <div class="two-col" style="grid-template-columns: 1fr 3.2fr;">
+      <!-- 左側圖解 -->
+      <div>
+        <div class="aside-card">
+          <div class="aside-badge">圖解</div>
+          <div style="margin-top: 6px;">
+            <strong>真理</strong><br>
+            Time is money.
+          </div>
+          <div style="margin-top: 10px;">
+            <strong>事實</strong><br>
+            He is a boy.
+          </div>
+          <div style="margin-top: 10px;">
+            <strong>習慣</strong><br>
+            He is always late.
+          </div>
+        </div>
+      </div>
+
+      <!-- 右側主內容 -->
+      <div>
+        <p><strong>2. 指示代名詞與指示形容詞</strong></p>
+
+        <table>
+          <thead>
+            <tr>
+              <th rowspan="2">距離</th>
+              <th rowspan="2">單數</th>
+              <th rowspan="2">複數</th>
+              <th colspan="2">用法與例句</th>
+            </tr>
+            <tr>
+              <th>指示代名詞</th>
+              <th>指示形容詞</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>離說話者「遠」</strong></td>
+              <td>that (那)</td>
+              <td>those (那些)</td>
+              <td><strong>Those</strong> are cute cats.<br>(那些是可愛的貓。)</td>
+              <td><strong>Those</strong> cats are cute. (那些貓是可愛的。)</td>
+            </tr>
+            <tr>
+              <td><strong>離說話者「近」</strong></td>
+              <td>this (這)</td>
+              <td>these (這些)</td>
+              <td><strong>This</strong> is a cute dog.<br>(這是一隻可愛的狗。)</td>
+              <td><strong>This</strong> dog is cute.<br>(這隻狗是可愛的。)</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="note-box">
+          <strong>要點</strong> 回答「指示代名詞」當主詞的疑問句時，簡答時主詞不可用 this/these/that/those，須用 it/he/she 來代替 this/that；they 來代替 these/those。<br>
+          <span class="tag-pos">例</span> Sam: Is <strong>that</strong> your pencil case? (那是你的鉛筆盒嗎？)<br>
+            Ted: Yes, <strong>it</strong> is. <strong>That</strong>'s my pencil case. (是，它是。那是我的鉛筆盒。)<br>
+            ➡ 簡答時主詞須用 it；詳答時可用 that。
+        </div>
+
+        <!-- 即時演練 -->
+        <div class="quiz-box">
+          <div class="quiz-title">即時演練</div>
+          <div class="quiz-item">
+            <div>Cindy: Is that your uncle?<br>
+            Eric: Which one?<br>
+            Cindy:   1.   tall man next to Peter.<br>
+            Eric: Oh. Yes,   2.  . He's my father's brother, Uncle Mark.</div>
+            <div class="quiz-options">
+              <span><span class="handwritten">【手寫】( C )</span> 1. (A) A</span>
+              <span>(B) An</span>
+              <span>(C) The</span>
+              <span>(D) Those</span>
+            </div>
+            <div class="quiz-options">
+              <span><span class="handwritten">【手寫】( D )</span> 2. (A) it is</span>
+              <span>(B) that is</span>
+              <span>(C) you are</span>
+              <span>(D) he is</span>
+            </div>
+          </div>
+          <div class="quiz-item">
+            <div><span class="handwritten">【手寫】( D )</span> 3. I don't think Katie will read any one of the books you've picked out for her: ______ look(s) very boring. <span class="tag-pos" style="background:#fce4ec; color:#c2185b; border-color:#f8bbd0;">會考題</span></div>
+            <div class="quiz-options">
+              <span>(A) it</span>
+              <span>(B) one</span>
+              <span>(C) some</span>
+              <span>(D) they</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="sub-section-title">四 現在簡單式 (be 動詞句型)</div>
+        <p><strong>1. 現在 (簡單) 式的使用時機 <span class="tag-pos">圖解</span></strong></p>
+
+        <table>
+          <thead>
+            <tr>
+              <th colspan="2">使用時機</th>
+              <th>例句</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>表示目前的事實、狀態或動作。</td>
+              <td><span class="timeline-bar">過去 ── 現在(●) ── 未來</span></td>
+              <td>Tom is short and heavy. (Tom 又矮又胖。)</td>
+            </tr>
+            <tr>
+              <td>表示不變的真理、格言或諺語。</td>
+              <td><span class="timeline-bar">過去(●) ── 現在(●) ── 未來(●)</span></td>
+              <td>Time is money.<br>(時間就是金錢。)</td>
+            </tr>
+            <tr>
+              <td>表習慣，常和 every＋時間、頻率副詞 (always, often…) 連用。</td>
+              <td><span class="timeline-bar">過去(● ●) ── 現在(●) ── 未來(● ●)</span></td>
+              <td>Bill and Eva are busy every day. (Bill 和 Eva 每天都很忙。)</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p><strong>2. 句型</strong></p>
+        <table>
+          <thead>
+            <tr>
+              <th>種類</th>
+              <th>句型</th>
+              <th>例句</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>肯定句</strong></td>
+              <td>S＋be 動詞....</td>
+              <td>She is my cousin.<br>(她是我的表姊。)</td>
+            </tr>
+            <tr>
+              <td><strong>否定句</strong></td>
+              <td>S＋be 動詞＋not....</td>
+              <td>She is not my cousin.<br>(她不是我的表姊。)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 第 19 頁 ==================== -->
+  <section id="page-19" class="page-block" data-page="19">
+    <div class="page-header">
+      <span>單元 1｜第一冊 (上) 第 1～3 課</span>
+      <span class="page-badge">第 19 頁</span>
+    </div>
+
+    <div class="two-col" style="grid-template-columns: 3.2fr 1fr;">
+      <!-- 左側主內容 -->
+      <div>
+        <table>
+          <tbody>
+            <tr>
+              <td rowspan="2"><strong>Yes-No 問答</strong></td>
+              <td>Be 動詞＋S...?</td>
+              <td>Is she your cousin?<br>(她是你的表姊嗎？)</td>
+            </tr>
+            <tr>
+              <td>Yes, S (代名詞)＋be 動詞.<br>No, S (代名詞)＋be 動詞＋n't.</td>
+              <td>Yes, she is. (是，她是。)<br>No, she isn't. (不，她不是。)</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="note-box">
+          <strong>要點</strong><br>
+          1. 主詞是 I，be 動詞用 am；主詞是第三人稱單數 (he/she/it/人名/單數名詞)，be 動詞用 is；其餘主詞 (第二人稱＆所有人稱複數) 的 be 動詞用 are。<br>
+          2. 簡答句的主詞須用「人稱代名詞」；詳答則無此限制。<br>
+          3. 肯定簡答時，主詞和 be 動詞不可縮寫。<br>
+          4. 問句與答句中，第一、二人稱要互換 (問 you，回答 I 或 we)。
+        </div>
+
+        <div class="sub-section-title" style="color: #b71c1c;">文法進階</div>
+        <p><strong>否定疑問句的用法</strong><br>
+        1. 改為「否定疑問句」，有下列兩種方式。<span class="tag-pos">圖解</span><br>
+         (1) not 留在原位 (主詞之後)，只將 be 動詞移到句首。<br>
+         (2) be 動詞和 not 一起移到句首，此時一定要「縮寫」。<br>
+        2. 回答方式和肯定疑問句一樣。回答訣竅：不要管否定疑問句中的 not。</p>
+
+        <!-- 即時演練 -->
+        <div class="quiz-box">
+          <div class="quiz-title">即時演練</div>
+          <div class="quiz-item">
+            <div><span class="handwritten">【手寫】( B )</span> 1. Mr. Jordan: Look! ______ the boys in the sports field our students?<br>
+             Ms. Bush: I guess not. School was over an hour ago.</div>
+            <div class="quiz-options">
+              <span>(A) Do</span>
+              <span>(B) Are</span>
+              <span>(C) Did</span>
+              <span>(D) Were</span>
+            </div>
+          </div>
+          <div class="quiz-item">
+            <div><span class="handwritten">【手寫】( C )</span> 2. Joe: Are the man and the woman at the door your parents?<br>
+             Sam: Yes, ______.</div>
+            <div class="quiz-options">
+              <span>(A) they're</span>
+              <span>(B) he isn't my parent</span>
+              <span>(C) they are</span>
+              <span>(D) they are my grandparents</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="sub-section-title">五 Wh- 疑問句</div>
+        <p><strong>1. 疑問詞</strong></p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>疑問詞</th>
+              <th>用來詢問</th>
+              <th>疑問句</th>
+              <th>回答</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td rowspan="4"><strong>what</strong><br>(什麼)</td>
+              <td>事物</td>
+              <td><strong>What is this?</strong><br>(這是什麼？)</td>
+              <td>It's a card.<br>(它是卡片。)</td>
+            </tr>
+            <tr>
+              <td>姓名</td>
+              <td><strong>What's your name?</strong><br>(你叫什麼名字？)</td>
+              <td>My name is Tony.<br>(我叫 Tony。)</td>
+            </tr>
+            <tr>
+              <td>職業</td>
+              <td><strong>What do you do? / What are you?</strong> (你是做什麼的？)</td>
+              <td>I'm a teacher.<br>(我是老師。)</td>
+            </tr>
+            <tr>
+              <td>電話號碼</td>
+              <td><strong>What's your phone number?</strong><br>(你的電話號碼是多少？)</td>
+              <td>It's 0911-233-×××.<br>(0911-233-×××。)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 右側注意與圖解 -->
+      <div>
+        <div class="aside-card">
+          <div class="aside-badge" style="background-color: #d9534f;">注意</div>
+          <div>
+            Are you cooks?<br>
+            Yes, <del>we're</del> ➡ we are.<br>
+            ➡ 肯定簡答不能縮寫，否定簡答可以縮寫。
+          </div>
+          <div style="margin-top: 8px; border-top: 1px dashed #ccc; padding-top: 6px;">
+            Is your brother a cook?<br>
+            Yes, <del>my brother</del> is. ➡ he<br>
+            ➡ 簡答時用人稱代名詞回答。
+          </div>
+        </div>
+
+        <div class="aside-card">
+          <div class="aside-badge">圖解</div>
+          <div>
+            (1) Tina <u>is</u> not young now.<br>
+            ➡ Is Tina not young now?
+          </div>
+          <div style="margin-top: 6px;">
+            (2) Tina <u>isn't</u> young now.<br>
+            ➡ Isn't Tina young now?
+          </div>
+          <div style="margin-top: 8px; background: #fff; padding: 6px; border-radius: 4px; border: 1px solid #d1e0ec;">
+            Is Tina not young now?<br>
+            Isn't Tina young now?<br>
+            Is Tina young now?
+          </div>
+          <div style="margin-top: 6px;">
+            💬 Yes, she is.<br>
+            💬 No, she isn't.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 第 20 頁 ==================== -->
+  <section id="page-20" class="page-block" data-page="20">
+    <div class="page-header">
+      <span class="page-badge">第 20 頁</span>
+      <span>國中英語 (1～4冊) 甲</span>
+    </div>
+
+    <div class="two-col" style="grid-template-columns: 1fr 3.2fr;">
+      <!-- 左側圖解 -->
+      <div style="display: flex; flex-direction: column; justify-content: center;">
+        <div class="aside-card">
+          <div class="aside-badge">圖解</div>
+          <div style="margin-top: 6px;">
+            💬 Which is your favorite, tea or juice?
+          </div>
+          <div style="margin-top: 6px;">
+            （販賣機標示：tea | juice）
+          </div>
+          <div style="margin-top: 6px;">
+            💬 juice ❤️
+          </div>
+        </div>
+      </div>
+
+      <!-- 右側表格 -->
+      <div>
+        <table>
+          <tbody>
+            <tr>
+              <td rowspan="5"><strong>how</strong><br>(如何)</td>
+              <td>健康狀況</td>
+              <td><strong>How is your father?</strong><br>(你父親好嗎？)</td>
+              <td>He is fine.<br>(他很好。)</td>
+            </tr>
+            <tr>
+              <td>狀態</td>
+              <td><strong>How was your date?</strong><br>(你的約會如何？)</td>
+              <td>It was great.<br>(很棒。)</td>
+            </tr>
+            <tr>
+              <td>方法</td>
+              <td><strong>How can you speak good English?</strong><br>(你如何能說流利的英語？)</td>
+              <td>I practice it every day.<br>(我每天練習。)</td>
+            </tr>
+            <tr>
+              <td>程度</td>
+              <td><strong>How does she love her mom?</strong> (她有多愛她的媽媽？)</td>
+              <td>Very much.<br>(非常。)</td>
+            </tr>
+            <tr>
+              <td>交通工具</td>
+              <td><strong>How does he go to school?</strong><br>(他如何上學？)</td>
+              <td>By bicycle.<br>(騎腳踏車。)</td>
+            </tr>
+            <tr>
+              <td rowspan="2"><strong>who</strong><br>(誰)</td>
+              <td>姓名</td>
+              <td><strong>Who is he?</strong><br>(他是誰？)</td>
+              <td>He's Harry.<br>(他是 Harry。)</td>
+            </tr>
+            <tr>
+              <td>關係</td>
+              <td><strong>Who is the girl?</strong><br>(那女孩是誰？)</td>
+              <td>She is my student.<br>(她是我學生。)</td>
+            </tr>
+            <tr>
+              <td rowspan="2"><strong>where</strong><br>(哪裡)</td>
+              <td>來自哪裡</td>
+              <td><strong>Where are you from?</strong><br>(你是哪裡人？)</td>
+              <td>I'm from Japan.<br>(我是日本人。)</td>
+            </tr>
+            <tr>
+              <td>地點、位置</td>
+              <td><strong>Where are you?</strong><br>(你在哪？)</td>
+              <td>I'm in the kitchen.<br>(我在廚房。)</td>
+            </tr>
+            <tr>
+              <td><strong>when</strong><br>(何時)</td>
+              <td>時間</td>
+              <td><strong>When is Ben coming?</strong><br>(Ben 何時會來？)</td>
+              <td>This afternoon.<br>(今天下午。)</td>
+            </tr>
+            <tr>
+              <td><strong>which</strong><br>(哪一個)<br><span class="tag-pos">圖解</span></td>
+              <td>有選擇性</td>
+              <td><strong>Which is your favorite, tea or juice?</strong> (你最愛的是哪一種，茶還是果汁？)</td>
+              <td>My favorite is juice. (我的最愛是果汁。)</td>
+            </tr>
+            <tr>
+              <td><strong>why</strong><br>(為什麼)</td>
+              <td>原因、理由</td>
+              <td><strong>Why are you late?</strong><br>(你為什麼遲到？)</td>
+              <td>I got up late.<br>(我起床晚了。)</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p><strong>2. How＋形容詞</strong></p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>疑問詞</th>
+              <th>用來詢問</th>
+              <th>疑問句</th>
+              <th>回答</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>How old</strong></td>
+              <td>年齡</td>
+              <td><strong>How old are you?</strong><br>(你幾歲？)</td>
+              <td>I'm ten.<br>(我十歲。)</td>
+            </tr>
+            <tr>
+              <td><strong>How tall</strong></td>
+              <td>身高</td>
+              <td><strong>How tall is she?</strong><br>(她多高？)</td>
+              <td>She's 158 cm tall.<br>(她 158 公分高。)</td>
+            </tr>
+            <tr>
+              <td rowspan="2"><strong>How long</strong></td>
+              <td>長短</td>
+              <td><strong>How long is the ruler?</strong><br>(這支尺多長？)</td>
+              <td>It's 15 cm.<br>(15 公分。)</td>
+            </tr>
+            <tr>
+              <td>時間<br>(多久)</td>
+              <td><strong>How long is the trip?</strong><br>(那趟旅行多久？)</td>
+              <td>Three days.<br>(三天。)</td>
+            </tr>
+            <tr>
+              <td><strong>How often</strong></td>
+              <td>頻率；<br>多久一次</td>
+              <td><strong>How often do you read the novel?</strong><br>(你多久讀這本小說？)</td>
+              <td>Twice a day.<br>(一天兩次。)</td>
+            </tr>
+            <tr>
+              <td><strong>How far</strong></td>
+              <td>距離</td>
+              <td><strong>How far is your school from here?</strong> (你的學校離這裡有多遠？)</td>
+              <td>2 miles.<br>(2 英里。)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 第 21 頁 ==================== -->
+  <section id="page-21" class="page-block" data-page="21">
+    <div class="page-header">
+      <span>單元 1｜第一冊 (上) 第 1～3 課</span>
+      <span class="page-badge">第 21 頁</span>
+    </div>
+
+    <div class="two-col" style="grid-template-columns: 3.2fr 1fr;">
+      <!-- 左側主內容 -->
+      <div>
+        <table>
+          <thead>
+            <tr>
+              <th>疑問詞</th>
+              <th>用來詢問</th>
+              <th>疑問句</th>
+              <th>回答</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>How fast</strong></td>
+              <td>速度</td>
+              <td><strong>How fast can a lion run?</strong><br>(獅子能跑多快？)</td>
+              <td>It can run 100 km/hr.<br>(牠一小時可以跑 100 公里。)</td>
+            </tr>
+            <tr>
+              <td><strong>How soon</strong></td>
+              <td>多久之後；<br>多快</td>
+              <td><strong>How soon will you get ready?</strong><br>(你多久會準備好？)</td>
+              <td>In five minutes.<br>(五分鐘後。)</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="note-box">
+          <strong>要點</strong> 1. 疑問詞開頭的疑問句，不必回答 Yes 或 No。<br>
+             2. 有「選擇性」或「特定範圍」用 which 問。<br>
+             3. 疑問代名詞 (What/Who/Which) 當主詞，視為第三人稱單數，後面接收單數動詞。<br>
+             <span class="tag-pos">例</span> Joe: Who is in the kitchen? (誰在廚房？)<br>
+               ➡ 主詞是 who，be 動詞用 is。<br>
+               Tim: Eric and Ben are. (是 Eric 和 Ben。)
+        </div>
+
+        <div class="note-box">
+          <strong>補充</strong><br>
+          年齡的回答方式也可用：主詞＋be 動詞＋a/an＋數字-year-old＋名詞。<br>
+          <span class="tag-pos">例</span> Branda is an <u>eight-year-old</u> girl.<br>
+            (Branda 是一個八歲大的女孩。)<br>
+            ➡ eight-year-old 作形容詞用，故 year 不加 s。
+        </div>
+
+        <!-- 即時演練 1 -->
+        <div class="quiz-box">
+          <div class="quiz-title">即時演練</div>
+          <div class="quiz-item">
+            <div><span class="handwritten">【手寫】( D )</span> 1. Allen: Who is the girl over there?<br>
+             Betty: ______</div>
+            <div class="quiz-options">
+              <span>(A) She is fine.</span>
+              <span>(B) He's my son.</span>
+              <span>(C) She is ten.</span>
+              <span>(D) She's my sister.</span>
+            </div>
+          </div>
+          <div class="quiz-item">
+            <div><span class="handwritten">【手寫】( C )</span> 2. Iris: ______ in the box on the dining table?<br>
+             James: I have no idea.</div>
+            <div class="quiz-options">
+              <span>(A) What</span>
+              <span>(B) Is</span>
+              <span>(C) What's</span>
+              <span>(D) What are</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="sub-section-title">六 形容詞</div>
+        <table>
+          <thead>
+            <tr>
+              <th>用法</th>
+              <th>例句</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>be 動詞／連綴動詞＋形容詞</strong></td>
+              <td>His wife is <strong>kind</strong> and <strong>pretty</strong>.<br>(他的太太善良又漂亮。)</td>
+            </tr>
+            <tr>
+              <td><strong>形容詞＋名詞</strong></td>
+              <td>He is a <strong>cool</strong> singer. (他是一位很酷的歌手。)</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- 即時演練 2 -->
+        <div class="quiz-box">
+          <div class="quiz-title">即時演練</div>
+          <div class="quiz-item">
+            <div><span class="handwritten">【手寫】( A )</span> Justin: I can't find my pet dog, Spot, anywhere.<br>
+            Arthur: I'm ______ to hear that.</div>
+            <div class="quiz-options">
+              <span>(A) sorry</span>
+              <span>(B) glad</span>
+              <span>(C) ugly</span>
+              <span>(D) sadly</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 右側叮嚀與鯉魚旗圖解 -->
+      <div>
+        <div class="aside-card">
+          <div class="aside-badge">叮嚀</div>
+          <div>fast ➡ 與速度有關<br><small>(100m / 11s)</small></div>
+          <div style="margin-top: 8px;">soon ➡ 與時間有關<br><small>(two minutes later)</small></div>
+        </div>
+
+        <div class="aside-card">
+          <div class="aside-badge" style="background-color: #d9534f;">形容詞出場順序</div>
+          <div>
+            <strong>先</strong><br>
+            1. 意見 (beautiful)<br>
+            2. 大小 (big)<br>
+            3. 形狀<br>
+            4. 年齡 (new)<br>
+            5. 顏色 (yellow)<br>
+            6. 國籍 (Japanese)<br>
+            7. 材質 (cotton)<br>
+            8. 名詞 (flag)<br>
+            <strong>後</strong>
+          </div>
+          <div style="margin-top: 8px; border-top: 1px dashed #ccc; padding-top: 6px;">
+            <span class="tag-pos">例</span> a beautiful big new yellow Japanese cotton flag<br>
+            (一支漂亮、大、新、黃色、日本棉質的旗幟)
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 第 22 頁 ==================== -->
+  <section id="page-22" class="page-block" data-page="22">
+    <div class="page-header">
+      <span class="page-badge">第 22 頁</span>
+      <span>國中英語 (1～4冊) 甲</span>
+    </div>
+
+    <div class="two-col" style="grid-template-columns: 1fr 3.2fr;">
+      <!-- 左側補充欄 -->
+      <div>
+        <div class="aside-card">
+          <div class="aside-badge">補充</div>
+          <div>
+            <strong>1. 單數名詞字尾是 o 時，其複數形在字尾加 s 或 es。</strong><br>
+            <span class="tag-pos">例</span> zoo (動物園)<br>
+              ➡ zoos；<br>
+              tomato (番茄)<br>
+              ➡ tomatoes；<br>
+              piano (鋼琴)<br>
+              ➡ pianos。
+          </div>
+
+          <div style="margin-top: 10px; border-top: 1px dashed #ccc; padding-top: 8px;">
+            <strong>2. fish 的單複數</strong><br>
+            (1) 可數：<br>
+            ① 同種類：單複數同形<br>
+              a fish (一隻魚)<br>
+              two fish (兩隻魚)<br>
+            ② 不同種類，字尾加 es<br>
+              two kinds of fishes (兩種不同的魚)<br>
+            (2) 不可數 (永遠單數)：字尾永不加 es<br>
+              fish (魚肉)
+          </div>
+
+          <div style="margin-top: 10px; border-top: 1px dashed #ccc; padding-top: 8px;">
+            <strong>3. family 可指「家人」或「家庭」，但 families 是指「家庭」的複數。</strong>
+          </div>
+        </div>
+      </div>
+
+      <!-- 右側主內容 -->
+      <div>
+        <div class="sub-section-title">七 可數名詞的單複數</div>
+        <p><strong>1. 普通名詞為可數名詞，其「數量」可以計算，具有單數與複數兩種形式。</strong></p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>普通名詞</th>
+              <th>用法</th>
+              <th>例子</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>單數</strong></td>
+              <td>之前一定要加 a/an、one、the、所有格、this、that…等。</td>
+              <td>an egg (一個蛋)、<br>his pen (他的筆)、<br>this cellphone (這支手機)</td>
+            </tr>
+            <tr>
+              <td><strong>複數</strong></td>
+              <td><strong>複數</strong>可數名詞若有限定，則前面可加「限定詞」(所有格、the、these、those、some、any、many…)；若沒有限定，則不必加。</td>
+              <td>the desks (這些書桌)、<br>these books (這些書)、<br>some houses (一些房子)</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p><strong>2. 複數名詞的形成</strong></p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>種類</th>
+              <th>變化方式</th>
+              <th>例子</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>一般的單數名詞</strong></td>
+              <td>字尾＋s</td>
+              <td>student ➡ students [s]</td>
+            </tr>
+            <tr>
+              <td><strong>字尾是「s、x、ch、sh」</strong></td>
+              <td>字尾＋es</td>
+              <td>box ➡ boxes [ɪz]；<br>watch ➡ watches [ɪz]</td>
+            </tr>
+            <tr>
+              <td><strong>字尾是「子音＋y」</strong></td>
+              <td>去 y＋ies</td>
+              <td>story ➡ stories [z]；<br>family ➡ families [z]</td>
+            </tr>
+            <tr>
+              <td><strong>字尾是「母音＋y」</strong></td>
+              <td>字尾＋s</td>
+              <td>boy ➡ boys [z]</td>
+            </tr>
+            <tr>
+              <td><strong>字尾是「f」或「fe」</strong></td>
+              <td>去 f 或 fe＋ves</td>
+              <td>wife ➡ wives [z]；knife ➡ knives [z]</td>
+            </tr>
+            <tr>
+              <td><strong>單複數同形</strong></td>
+              <td>不變</td>
+              <td>Chinese ➡ Chinese；<br>fish ➡ fish；sheep ➡ sheep</td>
+            </tr>
+            <tr>
+              <td><strong>不規則變化</strong></td>
+              <td></td>
+              <td>child ➡ children；man ➡ men；<br>woman ➡ women；ox ➡ oxen；<br>tooth ➡ teeth；foot ➡ feet；<br>mouse ➡ mice</td>
+            </tr>
+            <tr>
+              <td><strong>恆為複數</strong></td>
+              <td></td>
+              <td>people</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- 即時演練 -->
+        <div class="quiz-box">
+          <div class="quiz-title">即時演練</div>
+          <div class="quiz-item">
+            <div><span class="handwritten">【手寫】( B )</span> Mr. Jordan: Look! Are the men on the bridge ______?<br>
+            Ms. Bush: No, they are not.</div>
+            <div class="quiz-options">
+              <span>(A) a Chinese</span>
+              <span>(B) Chinese</span>
+              <span>(C) American</span>
+              <span>(D) an American</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="sub-section-title">八 數字與電話用語</div>
+        <p><strong>1. 詢問與回答電話號碼</strong></p>
+
+        <table>
+          <tbody>
+            <tr>
+              <td><strong>問句</strong></td>
+              <td><strong>What's</strong>＋your＋phone/telephone/cellphone number?</td>
+              <td>你的電話／手機號碼幾號？</td>
+            </tr>
+            <tr>
+              <td><strong>答句</strong></td>
+              <td>My phone/telephone/cellphone number is＋電話號碼.</td>
+              <td>我的電話／手機號碼是…。</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 第 23 頁 ==================== -->
+  <section id="page-23" class="page-block" data-page="23">
+    <div class="page-header">
+      <span>單元 1｜第一冊 (上) 第 1～3 課</span>
+      <span class="page-badge">第 23 頁</span>
+    </div>
+
+    <div class="two-col" style="grid-template-columns: 3.2fr 1fr;">
+      <!-- 左側主內容 -->
+      <div>
+        <table>
+          <tbody>
+            <tr>
+              <td style="width: 12%;"><strong>例句</strong></td>
+              <td>Amanda: <strong>What's your cellphone number?</strong> (你的手機號碼幾號？)<br>
+              David: My number is 0911-222-×××.<br>
+                 (我的號碼是 0911-222-×××。)</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p><strong>2. 常見電話用語</strong></p>
+
+        <table>
+          <tbody>
+            <tr>
+              <td rowspan="3" style="width: 10%;"><strong>來電者</strong></td>
+              <td rowspan="3" style="width: 14%;">打電話找人</td>
+              <td>(1) <strong>Hello, is this Nora?</strong> (喂，妳是 Nora 嗎？)</td>
+            </tr>
+            <tr>
+              <td>(2) <strong>Is Nora there/in?</strong> (Nora 在嗎？)</td>
+            </tr>
+            <tr>
+              <td>(3) <strong>May I speak to Nora?</strong><br>  (我可以請 Nora 聽電話嗎？)</td>
+            </tr>
+            <tr>
+              <td rowspan="7"><strong>接電話者</strong></td>
+              <td rowspan="3">本人接電話</td>
+              <td>(1) <strong>Speaking.</strong> (我就是。)</td>
+            </tr>
+            <tr>
+              <td>(2) <strong>This is Nora/she speaking.</strong><br>  (我就是 Nora。)</td>
+            </tr>
+            <tr>
+              <td>(3) <strong>Nora speaking.</strong> (我就是 Nora。)</td>
+            </tr>
+            <tr>
+              <td rowspan="4">非本人接電話</td>
+              <td>(1) <strong>Nora/She is not in/here.</strong> (Nora／她不在。)</td>
+            </tr>
+            <tr>
+              <td>(2) <strong>Please hold on.</strong> (請稍等。)</td>
+            </tr>
+            <tr>
+              <td>(3) <strong>Who's calling? / Who's this?</strong> (您是哪位？)</td>
+            </tr>
+            <tr>
+              <td>(4) <strong>Sorry. You have the wrong number.</strong><br>  (抱歉！你打錯了。)</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p><strong>3. 數字</strong></p>
+
+        <table>
+          <thead>
+            <tr>
+              <th colspan="4">0～12</th>
+              <th colspan="2">13～19：<br>-teen</th>
+              <th colspan="2">十位整數<br>20、30…90：<br>-ty</th>
+              <th colspan="2">21～100：<br>十位數-個位數</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>0</td><td>zero</td><td>7</td><td>seven</td>
+              <td>13</td><td>thirteen</td>
+              <td>20</td><td>twenty</td>
+              <td>21</td><td>twenty-one</td>
+            </tr>
+            <tr>
+              <td>1</td><td>one</td><td>8</td><td>eight</td>
+              <td>14</td><td>fourteen</td>
+              <td>30</td><td>thirty</td>
+              <td>35</td><td>thirty-five</td>
+            </tr>
+            <tr>
+              <td>2</td><td>two</td><td>9</td><td>nine</td>
+              <td>15</td><td>fifty <span class="handwritten">【註：原書印刷為 fifteen】</span></td>
+              <td>40</td><td>forty</td>
+              <td>46</td><td>forty-six</td>
+            </tr>
+            <tr>
+              <td>3</td><td>three</td><td>10</td><td>ten</td>
+              <td>16</td><td>sixteen</td>
+              <td>50</td><td>fifty</td>
+              <td>78</td><td>seventy-eight</td>
+            </tr>
+            <tr>
+              <td>4</td><td>four</td><td>11</td><td>eleven</td>
+              <td>17</td><td>seventeen</td>
+              <td>60</td><td>sixty</td>
+              <td colspan="2" rowspan="4"></td>
+            </tr>
+            <tr>
+              <td>5</td><td>five</td><td>12</td><td>twelve</td>
+              <td>18</td><td>eighteen</td>
+              <td>70</td><td>seventy</td>
+            </tr>
+            <tr>
+              <td>6</td><td>six</td><td colspan="2"></td>
+              <td>19</td><td>nineteen</td>
+              <td>80</td><td>eighty</td>
+            </tr>
+            <tr>
+              <td colspan="6"></td>
+              <td>90</td><td>ninety</td>
+            </tr>
+            <tr>
+              <th colspan="10" style="text-align: center;">100 以上</th>
+            </tr>
+            <tr>
+              <td colspan="10">
+                one hundred (100)、one hundred (and) one (101)、<br>
+                one hundred (and) fifty-two (152)、one thousand (1,000)、<br>
+                six thousand five hundred (6,500)、ten thousand (10,000)、<br>
+                one million (1,000,000)
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- 即時演練 -->
+        <div class="quiz-box">
+          <div class="quiz-title">即時演練</div>
+          <div class="quiz-item">
+            <div><span class="handwritten">【手寫】( C )</span> 1. Kevin: ______ your phone number?<br>
+             Cindy: It's 222-××××.</div>
+            <div class="quiz-options">
+              <span>(A) Who's</span>
+              <span>(B) How's</span>
+              <span>(C) What's</span>
+              <span>(D) When's</span>
+            </div>
+          </div>
+          <div class="quiz-item">
+            <div><span class="handwritten">【手寫】( C )</span> 2. Mike: Hello, may I speak to Willy? Willy's dad: ______</div>
+            <div class="quiz-options">
+              <span>(A) This is Willy speaking.</span>
+              <span>(B) You have the wrong number.</span>
+              <span>(C) Who's this, please?</span>
+              <span>(D) Please hang up.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 右側補充欄 -->
+      <div>
+        <div class="aside-card">
+          <div class="aside-badge">補充</div>
+          <div>電話中表示「我是…。」要用 This is...，不能用 I am...。</div>
+          <div style="margin-top: 8px; background: #fff; padding: 6px; border-radius: 4px; border: 1px solid #d1e0ec;">
+            💬 Hello! This is John. Is Mary there?<br>
+            💬 This is she speaking.
+          </div>
+        </div>
+
+        <div class="aside-card">
+          <div class="aside-badge">補充</div>
+          <div>
+            million＝100 萬<br>
+            million×1,000<br>
+            ＝billion (10 億)<br>
+            (1) 臺灣人口數大約 2,300 萬<br>
+              2,300 萬＝23×100 萬<br>
+              ＝23 million<br>
+              [Taiwan]<br>
+            (2) 印度人口數大約 14 億<br>
+              14 億＝1.4×10 億<br>
+              ＝1.4 billion<br>
+              [India]
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 第 24 頁 ==================== -->
+  <section id="page-24" class="page-block" data-page="24">
+    <div class="page-header">
+      <span class="page-badge">第 24 頁</span>
+      <span>國中英語 (1～4冊) 甲</span>
+    </div>
+
+    <div class="two-col" style="grid-template-columns: 1fr 3.2fr;">
+      <!-- 左側補充欄 -->
+      <div>
+        <div class="aside-card">
+          <div class="aside-badge">補充</div>
+          <div>
+            <strong>1. (1) on</strong><br>
+              ➡ 表面有接觸<br>
+            <strong>  (2) above/over</strong><br>
+              ➡ 表面通常沒接觸
+          </div>
+
+          <div style="margin-top: 10px; border-top: 1px dashed #ccc; padding-top: 8px;">
+            <strong>2.</strong>（樹幹與蘋果／鳥插圖標示：on the tree / in the tree）<br>
+            (1) on the tree<br>
+              ➡ 樹本身的東西<br>
+            (2) in the tree<br>
+              ➡ 到樹上的外來物
+          </div>
+
+          <div style="margin-top: 10px; border-top: 1px dashed #ccc; padding-top: 8px;">
+            <strong>3. above：</strong>某個水平面之上；<strong>below：</strong>某個水平面之下。
+          </div>
+
+          <div style="margin-top: 10px; border-top: 1px dashed #ccc; padding-top: 8px;">
+            <strong>4.</strong><br>
+            <span class="tag-pos">例</span> There is a bridge <u>over</u> the river. Jimmy is walking <u>across/crossing</u> the bridge.
+          </div>
+        </div>
+      </div>
+
+      <!-- 右側主內容 -->
+      <div>
+        <div class="sub-section-title">九 地方介系詞</div>
+        <p><strong>1. 一般介系詞</strong></p>
+
+        <div class="note-box">
+          <strong>【場景圖解標示】</strong><br>
+          • <strong>over</strong> (在…上面)<br>
+          • <strong>in back of / behind</strong> (在…後面)<br>
+          • <strong>on</strong> (在…上面)<br>
+          • <strong>in</strong> (在…裡面)<br>
+          • <strong>above</strong> (在…上方)<br>
+          • <strong>below</strong> (在…下方)<br>
+          • <strong>under</strong> (在…下面)<br>
+          • <strong>in front of</strong> (在…前面)<br>
+          • <strong>next to / by / beside</strong> (在…旁邊)<br>
+          • <strong>between</strong> (在…之間) [旁有 BOOK STORE]<br>
+          • <strong>at</strong> (在…地方)<br>
+          • <strong>near</strong> (在…附近)<br>
+          • <strong>across from</strong> (在…對面)
+        </div>
+
+        <p><strong>2. 表「移動性」的介系詞</strong></p>
+
+        <div class="note-box">
+          <strong>【場景圖解標示】</strong><br>
+          • <strong>past</strong> (經過)<br>
+          • <strong>out of</strong> (從…出來) [旁有 Library]<br>
+          • <strong>into</strong> (進入) [旁有 HOTEL]<br>
+          • <strong>along</strong> (沿著)<br>
+          • <strong>over</strong> (越過)<br>
+          • <strong>up</strong> (向上)<br>
+          • <strong>down</strong> (向下)<br>
+          • <strong>around</strong> (圍繞)<br>
+          • <strong>across</strong> (橫越)<br>
+          • <strong>through</strong> (穿越)
+        </div>
+
+        <!-- 文法澄清題 -->
+        <div class="quiz-box">
+          <div class="quiz-title" style="background-color: #2b8a88;">文法澄清題</div>
+          <div class="quiz-item">
+            <div><span class="handwritten">【手寫】( B )</span> 1. The old woman is standing ______ the fan on the wall in the dining room now.</div>
+            <div class="quiz-options">
+              <span>(A) above</span>
+              <span>(B) under</span>
+              <span>(C) across</span>
+              <span>(D) inside</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 第 25 頁 ==================== -->
+  <section id="page-25" class="page-block" data-page="25">
+    <div class="page-header">
+      <span>單元 1｜第一冊 (上) 第 1～3 課</span>
+      <span class="page-badge">第 25 頁</span>
+    </div>
+
+    <div class="two-col" style="grid-template-columns: 3.2fr 1fr;">
+      <!-- 左側主內容 -->
+      <div>
+        <!-- 承接第24頁的文法澄清題第2題 -->
+        <div class="quiz-box" style="margin-top: 0;">
+          <div class="quiz-item">
+            <div><span class="handwritten">【手寫】( A )</span> 2. Planes fly ______ Mr. and Mrs. Brown's house every day, so they don't want to live there anymore.</div>
+            <div class="quiz-options">
+              <span>(A) over</span>
+              <span>(B) between</span>
+              <span>(C) under</span>
+              <span>(D) next to</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="sub-section-title">十 祈使句</div>
+        <p><strong>1. 祈使句是表示請求、命令或禁止的句子。用原形動詞開頭，省略主詞 you。</strong><br>
+        <strong>2. 句型</strong></p>
+
+        <table>
+          <thead>
+            <tr>
+              <th></th>
+              <th>句型</th>
+              <th>例句</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>be 動詞</strong></td>
+              <td>Be 動詞..., 稱呼語.<br>➡肯定句<br>＝稱呼語, be 動詞....</td>
+              <td><strong>Be</strong> a good boy, Tim.<br>(Tim，做個好男孩。)<br>＝Tim, <strong>be</strong> a good boy.</td>
+            </tr>
+            <tr>
+              <td><strong>一般動詞</strong></td>
+              <td>句首：<strong>Please</strong>＋原形動詞..., 稱呼語.<br>句中：稱呼語, <strong>please</strong>＋原形動詞....<br>句尾：稱呼語, 原形動詞..., <strong>please</strong>.</td>
+              <td><strong>Please stand</strong> up, Amy.<br>(Amy，請站起來。)<br>＝Amy, <strong>please stand</strong> up.<br>＝Amy, <strong>stand</strong> up, <strong>please</strong>.</td>
+            </tr>
+            <tr>
+              <td><strong>否定</strong></td>
+              <td>(1) <strong>Don't</strong>＋原形動詞....<br>(2) <strong>Never</strong>＋原形動詞....</td>
+              <td><strong>Don't open</strong> the window, <strong>please</strong>.<br>(請不要開窗。)<br><strong>Please don't open</strong> the window.</td>
+            </tr>
+            <tr>
+              <td rowspan="2"><strong><span class="tag-pos">圖解</span><br>Let's....</strong></td>
+              <td>肯定：<strong>Let's</strong>＋原形動詞....</td>
+              <td><strong>Let's turn</strong> off the TV.<br>(我們關掉電視吧！)</td>
+            </tr>
+            <tr>
+              <td>否定：<strong>Let's not</strong>＋原形動詞....</td>
+              <td><strong>Let's not stand</strong> outside.<br>(我們不要站在外面。)</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="note-box">
+          <strong>要點</strong> 1. 稱呼語不管放句首或句尾，皆要以<strong>逗號</strong>隔開。<br>
+             2. please 放句首或句中時，之後不加逗號；放句尾時 please 前面才須以逗號隔開。<br>
+             3. 句首可加 Always 強調，表「務必；一定」；否定祈使句也可用 never 代替 don't，表「絕不」，語氣較強烈。<br>
+             <span class="tag-pos">例</span> <u>Never</u> tell a lie. <u>Always</u> be honest. (絕不要說謊。一定要誠實。)
+        </div>
+
+        <div class="sub-section-title" style="color: #b71c1c;">文法進階</div>
+        <table>
+          <tbody>
+            <tr>
+              <td style="width: 12%;"><strong>句型</strong></td>
+              <td>
+                1. 祈使句, <strong>and</strong>＋表示結果好的句子. …，那麼…。<br>
+                2. 祈使句, <strong>or</strong>＋表示結果不好的句子. …，否則…。
+              </td>
+            </tr>
+            <tr>
+              <td><strong>例句</strong></td>
+              <td>
+                1. Get up early, <strong>and</strong> you can catch the train.<br>
+                  (要早起，那麼你就可以趕上火車。)<br>
+                2. Study hard, <strong>or</strong> you can't pass the test.<br>
+                  (用功念書，否則你無法通過考試。)
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 右側比較與圖解 -->
+      <div>
+        <div class="aside-card">
+          <div class="aside-badge">比較</div>
+          <div>
+            1. Tim <u>is</u> a good boy.<br>
+              (Tim 是個好男孩。)<br>
+            2. Tim, <u>be</u> a good boy.<br>
+              (Tim，你要做個好男孩。)
+          </div>
+        </div>
+
+        <div class="aside-card">
+          <div class="aside-badge">圖解</div>
+          <div>
+            <span class="tag-pos">例</span> Let's eat out.<br>
+              ➡ 邀請媽媽一起外食
+          </div>
+          <div style="margin-top: 10px; border-top: 1px dashed #ccc; padding-top: 8px;">
+            <span class="tag-pos">例</span> Let us eat out, please.<br>
+              ➡ 請媽媽讓我們外食
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 第 26 頁 ==================== -->
+  <section id="page-26" class="page-block" data-page="26">
+    <div class="page-header">
+      <span class="page-badge">第 26 頁</span>
+      <span>國中英語 (1～4冊) 甲</span>
+    </div>
+
+    <div class="two-col" style="grid-template-columns: 1fr 3.2fr;">
+      <!-- 左側補充欄 -->
+      <div>
+        <div class="aside-card">
+          <div class="aside-badge">補充</div>
+          <div>
+            <strong>1. could 除了是 can 的過去式之外，亦可表委婉、客氣的語氣。</strong><br>
+            • I could speak Spanish when I worked in Peru.<br>
+              ➡ 過去會說西班牙語<br>
+            • Could you help me with this heavy box?<br>
+              ➡ 客氣的請求
+          </div>
+          <div style="margin-top: 10px; border-top: 1px dashed #ccc; padding-top: 8px;">
+            <strong>2. can 做為名詞時表「罐子」、「罐頭」</strong><br>
+            • two cans of cola<br>
+            • canned food
+          </div>
+        </div>
+      </div>
+
+      <!-- 右側主內容 -->
+      <div>
+        <!-- 承接第25頁祈使句的即時演練 -->
+        <div class="quiz-box" style="margin-top: 0;">
+          <div class="quiz-title">即時演練</div>
+          <div class="quiz-item">
+            <div><span class="handwritten">【手寫】( C )</span> 1. Be quiet, everyone. ______ make any noise in the classroom.</div>
+            <div class="quiz-options">
+              <span>(A) Not</span>
+              <span>(B) Let's</span>
+              <span>(C) Never</span>
+              <span>(D) Doesn't</span>
+            </div>
+          </div>
+          <div class="quiz-item">
+            <div><span class="handwritten">【手寫】( B )</span> 2. ______ a map with you when you go to a place for the first time. <span class="tag-pos" style="background:#fce4ec; color:#c2185b; border-color:#f8bbd0;">會考題</span> <span class="handwritten">【手寫】(A) 選項有畫記痕跡</span></div>
+            <div class="quiz-options">
+              <span>(A) Have taken</span>
+              <span>(B) Take</span>
+              <span>(C) Taking</span>
+              <span>(D) To take</span>
+            </div>
+          </div>
+          <div class="quiz-item">
+            <div><span class="handwritten">【手寫】( A )</span> 3. It's raining heavily outside. ______ sure to take an umbrella with you before you leave the house.</div>
+            <div class="quiz-options">
+              <span>(A) Be</span>
+              <span>(B) It is</span>
+              <span>(C) To be</span>
+              <span>(D) It was</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="sub-section-title">十一 助動詞 can 的用法</div>
+        <p><strong>1. 助動詞 can 之後接原形動詞。且不管主詞是第幾人稱，can 後永不加 s。</strong><br>
+         其用法如下：</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>用法</th>
+              <th>解釋</th>
+              <th>例句</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>表能力</strong><br>(＝be able to)</td>
+              <td>會；能</td>
+              <td>He <strong>can play</strong> the piano. (他會彈鋼琴。)<br>＝He <strong>is able to play</strong> the piano.<br>➡ be 動詞用 am/are/is，由主詞決定。</td>
+            </tr>
+            <tr>
+              <td><strong>表許可</strong></td>
+              <td>可以；能</td>
+              <td>You <strong>can come</strong> in. (你可以進來。)</td>
+            </tr>
+            <tr>
+              <td><strong>表推測／懷疑</strong></td>
+              <td>可能</td>
+              <td>It <strong>can be</strong> Andy outside. (外面可能是 Andy。)</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p><strong>2. can 的句型</strong></p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>種類</th>
+              <th>句型</th>
+              <th>例句</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>肯定句</strong></td>
+              <td>S＋can＋原形動詞....</td>
+              <td>Ted <strong>can help</strong> us. (Ted 會幫我們。)</td>
+            </tr>
+            <tr>
+              <td><strong>否定句</strong></td>
+              <td>S＋can't/cannot＋原形動詞....</td>
+              <td>He <strong>can't ride</strong> a bicycle.<br>(他不會騎腳踏車。)</td>
+            </tr>
+            <tr>
+              <td rowspan="2"><strong>Yes-No 問答</strong></td>
+              <td>Can＋S＋原形動詞...?</td>
+              <td><strong>Can</strong> I <strong>play</strong> basketball?<br>(我可以打籃球嗎？)</td>
+            </tr>
+            <tr>
+              <td>Yes, S＋can.<br>No, S＋can't.</td>
+              <td>Yes, you can. (是，你可以。)<br>No, you can't. (不，你不可以。)</td>
+            </tr>
+            <tr>
+              <td><strong>Wh- 問答</strong></td>
+              <td>疑問詞＋can＋S＋原形動詞...?</td>
+              <td>Paul: What <strong>can</strong> the robot <strong>do</strong>?<br>   (那個機器人會做什麼？)<br>Ted: It <strong>can catch</strong> a ball. (牠會接球。)</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- 即時演練 -->
+        <div class="quiz-box">
+          <div class="quiz-title">即時演練</div>
+          <div class="quiz-item">
+            <div><span class="handwritten">【手寫】( B )</span> 1. Frank: We ______ go out to play tennis because it is raining heavily. What should we do?<br>
+             Robert: How about playing online games?</div>
+            <div class="quiz-options">
+              <span>(A) can</span>
+              <span>(B) cannot</span>
+              <span>(C) are</span>
+              <span>(D) aren't</span>
+            </div>
+          </div>
+          <div class="quiz-item">
+            <div><span class="handwritten">【手寫】( D )</span> 2. Oscar: Our band needs a guitar player. Can you play the guitar?<br>
+             Nina: No, I ______, but Eddie ______. Maybe you can ask him.</div>
+            <div class="quiz-options">
+              <span>(A) can; can</span>
+              <span>(B) can't; can't</span>
+              <span>(C) can; can't</span>
+              <span>(D) can't; can</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 第 27 頁 ==================== -->
+  <section id="page-27" class="page-block" data-page="27">
+    <div class="page-header">
+      <span>單元 1｜第一冊 (上) 第 1～3 課</span>
+      <span class="page-badge">第 27 頁</span>
+    </div>
+
+    <div class="section-title">D 分析會考最前線</div>
+
+    <div class="two-col" style="grid-template-columns: 3fr 1.2fr;">
+      <!-- 左側會考題 -->
+      <div>
+        <div class="quiz-box" style="margin-top: 0;">
+          <div class="quiz-item">
+            <div>
+              <span class="handwritten">【手寫】( D )</span> 1. Jerry wanted to know ______ he was kicked off the soccer team, but no one gave him a good reason <span class="handwritten">【手寫】理由</span>. <span class="tag-pos">112.會考 通過率 65%</span>
+            </div>
+            <div class="quiz-options">
+              <span>(A) where</span>
+              <span>(B) when</span>
+              <span>(C) whether</span>
+              <span>(D) why</span>
+            </div>
+          </div>
+
+          <div class="quiz-item">
+            <div>
+              <span class="handwritten">【手寫】( B )</span> 2. If you're interested in our business plan, ______ this number and ask for Ms. Lee. She'll answer your questions. <span class="tag-pos">110.會考 通過率 62%</span>
+            </div>
+            <div class="quiz-options">
+              <span>(A) calling</span>
+              <span>(B) call</span>
+              <span>(C) and call</span>
+              <span>(D) to call</span>
+            </div>
+          </div>
+
+          <div class="quiz-item">
+            <div>
+              <span class="handwritten">【手寫】( B )</span> 3. It almost killed Kevin to take care of his baby sister for one afternoon. He wondered <span class="handwritten">【手寫】想知道</span> how his mom could do ______ every day. <span class="tag-pos">106.會考 通過率 68%</span>
+            </div>
+            <div class="quiz-options">
+              <span>(A) her</span>
+              <span>(B) it <span class="handwritten">【手寫】代名詞</span></span>
+              <span>(C) one</span>
+              <span>(D) them</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 右側解題技巧 -->
+      <div>
+        <div class="aside-card">
+          <div class="aside-badge">解題技巧</div>
+          <div>
+            1. Jerry 想知道他「為什麼」被逐出足球隊，但是沒有人給他一個好的理由，故選(D)。<br><br>
+            2. 連接詞 if 連接兩個子句，第二句缺乏主詞，又 and 之後連接祈使句 (ask for Ms. Lee)，故要用原形動詞，選(B)。<br><br>
+            3. 照顧他妹妹一下午讓 Kevin 太痛苦了。他很好奇他媽媽如何每天做「這件事情」。用代名詞 it 來代替前面所提到的事 (take care of his baby sister)，選(B)。
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-title">E 硬實力培養專區 <small>達 B 衝 A</small></div>
+
+    <div class="note-box">
+      <strong>會考應試小訣竅｜現在簡單式</strong><br>
+      🔑 現在簡單式表示 ❶ 目前的狀態、事實或動作；❷ 不變的真理、格言或諺語；❸ 習慣。
+    </div>
+
+    <div class="quiz-box">
+      <div class="quiz-title">精選試題</div>
+      <div class="quiz-item">
+        <div>
+          <span class="handwritten">【手寫】( C )</span> Aunt Gina has lived in this town for more than sixty years, so she ______ it very well. <span class="tag-pos">111.會考 通過率 64%</span>
+        </div>
+        <div class="quiz-options">
+          <span>(A) will know</span>
+          <span>(B) knew</span>
+          <span>(C) knows</span>
+          <span>(D) was going to know</span>
+        </div>
+      </div>
+
+      <div class="quiz-title" style="margin-top: 10px;">必練仿題</div>
+      <div class="quiz-item">
+        <div>
+          <span class="handwritten">【手寫】( A )</span> My brother has practiced the piano since he was five, so he ______ it very well now.
+        </div>
+        <div class="quiz-options">
+          <span>(A) plays</span>
+          <span>(B) played</span>
+          <span>(C) was playing</span>
+          <span>(D) will play</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-title">F 百尺竿頭衝會考 <small>精熟 A++ 38 / A+ 37 / A 35-36｜基礎 B++ 32-34 / B+ 27-31 / B 15-26｜待加強 C 0-14</small></div>
+
+    <div class="quiz-box">
+      <div class="quiz-title">單題</div>
+      <div class="quiz-item">
+        <div><span class="handwritten">【手寫】( B )</span> 1. Look at the picture. The cat is sleeping ______ the sofa. <span class="tag-pos">精熟題</span><br>
+        <small>（插圖：一隻貓睡在沙發底下）</small></div>
+        <div class="quiz-options">
+          <span>(A) in</span>
+          <span>(B) under</span>
+          <span>(C) behind</span>
+          <span>(D) on</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 第 28 頁 ==================== -->
+  <section id="page-28" class="page-block" data-page="28">
+    <div class="page-header">
+      <span class="page-badge">第 28 頁</span>
+      <span>國中英語 (1～4冊) 甲</span>
+    </div>
+
+    <div class="quiz-box" style="margin-top: 0;">
+      <div class="quiz-item">
+        <div><span class="handwritten">【手寫】( B )</span> 2. Sam: Who are the ______?<br>
+         Gill: Oh, they are my friends, Kelly and Gina.</div>
+        <div class="quiz-options">
+          <span>(A) woman</span>
+          <span>(B) women</span>
+          <span>(C) person</span>
+          <span>(D) men</span>
+        </div>
+      </div>
+
+      <div class="quiz-item">
+        <div><span class="handwritten">【手寫】( D )</span> 3. Ken: ______ are those? Sandy: They're birthday gifts for Cindy.</div>
+        <div class="quiz-options">
+          <span>(A) Who</span>
+          <span>(B) How</span>
+          <span>(C) Where</span>
+          <span>(D) What</span>
+        </div>
+      </div>
+
+      <div class="quiz-item">
+        <div><span class="handwritten">【手寫】( A )</span> 4. I can't believe the woman is fifty ______. She looks like your sister.</div>
+        <div class="quiz-options">
+          <span>(A) years old</span>
+          <span>(B) kilograms</span>
+          <span>(C) centimeters</span>
+          <span>(D) dollars</span>
+        </div>
+      </div>
+
+      <div class="quiz-item">
+        <div><span class="handwritten">【手寫】( C )</span> 5. Jack: Mom, I'm so ______. Can I have some cookies before dinner?<br>
+         Mia: Sure, but not too many.</div>
+        <div class="quiz-options">
+          <span>(A) young</span>
+          <span>(B) special</span>
+          <span>(C) hungry</span>
+          <span>(D) quiet</span>
+        </div>
+      </div>
+
+      <div class="quiz-item">
+        <div><span class="handwritten">【手寫】( D )</span> 6. Mr. and Mrs. Smith have three children, two sons and one ______.</div>
+        <div class="quiz-options">
+          <span>(A) cousin</span>
+          <span>(B) classmate</span>
+          <span>(C) family</span>
+          <span>(D) daughter</span>
+        </div>
+      </div>
+
+      <div class="quiz-item">
+        <div><span class="handwritten">【手寫】( A )</span> 7. Someone broke into my house. I need to call the ______.</div>
+        <div class="quiz-options">
+          <span>(A) police</span>
+          <span>(B) cook</span>
+          <span>(C) singer</span>
+          <span>(D) office worker</span>
+        </div>
+      </div>
+
+      <div class="quiz-item">
+        <div><span class="handwritten">【手寫】( C )</span> 8. Mike: Are these ______? Anna: No, they are ______.</div>
+        <div class="quiz-options">
+          <span>(A) pencil box; toy buses</span>
+          <span>(B) pencil boxes; toy bus</span>
+          <span>(C) pencil boxes; toy buses</span>
+          <span>(D) pencils boxes; toys buses</span>
+        </div>
+      </div>
+
+      <div class="quiz-item">
+        <div><span class="handwritten">【手寫】( D )</span> 9. Annie: What a wonderful day! Let's ______ on a picnic in the park this afternoon.<br>
+         Jeff: Good idea!</div>
+        <div class="quiz-options">
+          <span>(A) going</span>
+          <span>(B) went</span>
+          <span>(C) goes</span>
+          <span>(D) go</span>
+        </div>
+      </div>
+
+      <div class="quiz-item">
+        <div><span class="handwritten">【手寫】( D )</span> 10. Be ______ when you use the knife. Don't cut yourself!</div>
+        <div class="quiz-options">
+          <span>(A) noisy</span>
+          <span>(B) useful</span>
+          <span>(C) clear</span>
+          <span>(D) careful</span>
+        </div>
+      </div>
+
+      <div class="quiz-item">
+        <div><span class="handwritten">【手寫】( A )</span> 11. Cathy: ______ are you coming? Pete: This morning.</div>
+        <div class="quiz-options">
+          <span>(A) When</span>
+          <span>(B) What</span>
+          <span>(C) Who</span>
+          <span>(D) How</span>
+        </div>
+      </div>
+
+      <div class="quiz-item">
+        <div><span class="handwritten">【手寫】( B )</span> ✦12. Linda: ______ husbands are twin brothers. <span class="note-box" style="display:inline-block; padding:1px 6px;">twin 雙胞胎 No wonder 難怪</span><br>
+          Ted: No wonder they look the same.</div>
+        <div class="quiz-options">
+          <span>(A) Nora's and Tina</span>
+          <span>(B) Nora's and Tina's</span>
+          <span>(C) Nora and Tina</span>
+          <span>(D) Nora and Tina's</span>
+        </div>
+      </div>
+
+      <div class="quiz-item">
+        <div><span class="handwritten">【手寫】( B )</span> 13. Join our club, and you ______ how to make delicious cakes.</div>
+        <div class="quiz-options">
+          <span>(A) learn</span>
+          <span>(B) can learn</span>
+          <span>(C) are learning</span>
+          <span>(D) has learned</span>
+        </div>
+      </div>
+
+      <div class="quiz-item">
+        <div><span class="handwritten">【手寫】( A )</span> ✦14. ______ to turn off the gas after you finish cooking.</div>
+        <div class="quiz-options">
+          <span>(A) Remember</span>
+          <span>(B) To remember</span>
+          <span>(C) Remembering</span>
+          <span>(D) Remembers</span>
+        </div>
+      </div>
+
+      <div class="quiz-item">
+        <div><span class="handwritten">【手寫】( D )</span> 15. Betty: ______ is our new friend, Sandy, from?<br>
+         Mark: She's from Japan.</div>
+        <div class="quiz-options">
+          <span>(A) Who</span>
+          <span>(B) How</span>
+          <span>(C) What</span>
+          <span>(D) Where</span>
+        </div>
+      </div>
+
+      <div class="quiz-item">
+        <div><span class="handwritten">【手寫】( C )</span> 16. Oh, my! Please go wash your dirty hands in the ______.</div>
+        <div class="quiz-options">
+          <span>(A) living room</span>
+          <span>(B) bedroom</span>
+          <span>(C) bathroom</span>
+          <span>(D) dining room</span>
+        </div>
+      </div>
+
+      <div class="quiz-item">
+        <div><span class="handwritten">【手寫】( B )</span> 17. Henry is my ______. We walk to school together.</div>
+        <div class="quiz-options">
+          <span>(A) writer</span>
+          <span>(B) classmate</span>
+          <span>(C) sofa</span>
+          <span>(D) picture</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 第 29 頁 ==================== -->
+  <section id="page-29" class="page-block" data-page="29">
+    <div class="page-header">
+      <span>單元 1｜第一冊 (上) 第 1～3 課</span>
+      <span class="page-badge">第 29 頁</span>
+    </div>
+
+    <div class="quiz-box" style="margin-top: 0;">
+      <div class="quiz-item">
+        <div><span class="handwritten">【手寫】( A )</span> ✦18. <span class="tag-pos">情境單題</span><br>
+         Peter: Are you happy working at that restaurant?<br>
+         Linda: Yes. People there are friendly and the restaurant owner is nice to me.<br>
+         Peter: I am glad to hear that. But can you make enough money from it?<br>
+         Linda: Well, though the pay is not much, I can always get <u>handsome</u> tips from the guests.<br>
+         Peter: That sounds great. You finally found a job you like!<br>
+         What does <u>handsome</u> mean?</div>
+        <div class="quiz-options">
+          <span>(A) Large.</span>
+          <span>(B) True.</span>
+          <span>(C) Cute.</span>
+          <span>(D) Small.</span>
+        </div>
+      </div>
+
+      <div class="quiz-item">
+        <div><span class="handwritten">【手寫】( C )</span> 19. The fan ______ the table fell down and hit Rita's head.</div>
+        <div class="quiz-options">
+          <span>(A) next</span>
+          <span>(B) in</span>
+          <span>(C) above</span>
+          <span>(D) between</span>
+        </div>
+      </div>
+
+      <div class="quiz-item">
+        <div><span class="handwritten">【手寫】( B )</span> 20. There wasn't a ______ in our living room before. We could only sit on the floor.</div>
+        <div class="quiz-options">
+          <span>(A) wall</span>
+          <span>(B) sofa</span>
+          <span>(C) sign</span>
+          <span>(D) table</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sub-section-title">題組</div>
+    <div class="note-box">
+      <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
+        <span class="tag-pos">21～23</span>
+        <span class="tag-pos">字數 191</span>
+      </div>
+      <p>  Good afternoon, my name is Sandra Green. I am so happy to be here and share my family tree with you. Please take a look at this picture. This is my grandpa, Mark. He is a seventy-five-year-old farmer. He works for fun, not for money. He always shares his fruits and vegetables with people in town. He is happy on the farm. This nice lady is my grandma, Cathy. She used to be a housewife, but now she is a junior high school student at our night school. My dad, Richard, is a police officer. He is forty-five years old. My mother, Sandy, is a forty-year-old math teacher in our school. The little cute boy is my brother, Adam. He is eleven years old. By the way, we had a new family member last month. Her name is Apple. It was a <u>stray</u> dog. I found her on my way home, and she followed me home. Now, Adam and I like to play with her after school. We are teaching her to sit down, stand up, and shake hands. We are a happy family, and I love my family so much.</p>
+      <div style="text-align:right; font-size:0.88rem; color:#444;">
+        <span class="tag-pos">lady 女士</span> <span class="tag-pos">used to 過去習慣</span>
+      </div>
+    </div>
+
+    <div class="quiz-box">
+      <div class="quiz-item">
+        <div><span class="handwritten">【手寫】( A )</span> ✦21. <span class="tag-pos">猜測字義</span> What does the word <u>stray</u> mean?</div>
+        <div class="quiz-options">
+          <span>(A) Lost.</span>
+          <span>(B) Ugly.</span>
+          <span>(C) Happy.</span>
+          <span>(D) Beautiful.</span>
+        </div>
+      </div>
+
+      <div class="quiz-item">
+        <div><span class="handwritten">【手寫】( D )</span> 22. <span class="tag-pos">圖文轉換</span> Which is Sandra's family tree?</div>
+        <div class="quiz-options" style="grid-template-columns: 1fr;">
+          <span>(A) 第一代：Mark &amp; Cathy ➡ 第二代：Richard &amp; Sandy ➡ 第三代：Adam &amp; Sandra（第二代線條連至兩人）</span>
+          <span>(B) 第一代：Mark &amp; Cathy ➡ 第二代：Richard &amp; Sandy ➡ 第三代：Adam &amp; Sandra（結構與圖片同，細節差異）</span>
+          <span>(C) 第一代：Mark &amp; Cathy ➡ 第二代：Richard &amp; Sandy ➡ 第三代：Adam &amp; Sandra（結構與圖片同，細節差異）</span>
+          <span>(D) 第一代：Mark &amp; Cathy ➡ 第二代：Richard &amp; Sandy ➡ 第三代：Adam &amp; Sandra（正確家族樹圖示）</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 第 30 頁 ==================== -->
+  <section id="page-30" class="page-block" data-page="30">
+    <div class="page-header">
+      <span class="page-badge">第 30 頁</span>
+      <span>國中英語 (1～4冊) 甲</span>
+    </div>
+
+    <div class="quiz-box" style="margin-top: 0; margin-bottom: 16px;">
+      <div class="quiz-item">
+        <div><span class="handwritten">【手寫】( C )</span> 23. <span class="tag-pos">指出細節</span> Which is true?</div>
+        <div class="quiz-options" style="grid-template-columns: 1fr;">
+          <span>(A) Apple used to play with Cathy.</span>
+          <span>(B) Sandra's mother is an English teacher.</span>
+          <span>(C) Sandra and Cathy go to the same junior high school.</span>
+          <span>(D) Sandra's grandpa sells his fruits and vegetables at the market.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="note-box">
+      <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
+        <span class="tag-pos">24～26</span>
+        <span class="tag-pos">字數 29</span>
+      </div>
+      <p>  There are 1,000 students in Happy Junior High School. The pie chart shows the students' dream jobs. Read the pie chart and answer the questions.</p>
+      
+      <div class="two-col" style="margin-top:10px;">
+        <div class="aside-card" style="background:#fff;">
+          <div class="category-label" style="text-align:center;">Students' Dream Jobs — boys</div>
+          <ul>
+            <li>doctor: 50%</li>
+            <li>police officer: 15%</li>
+            <li>YouTuber: 60 人</li>
+            <li>singer: 10%</li>
+            <li>cook: 8%</li>
+            <li>teacher: 5%</li>
+            <li>nurse: 2%</li>
+          </ul>
+        </div>
+        <div class="aside-card" style="background:#fff;">
+          <div class="category-label" style="text-align:center;">Students' Dream Jobs — girls</div>
+          <ul>
+            <li>YouTuber: 40%</li>
+            <li>nurse: 18%</li>
+            <li>singer: 12%</li>
+            <li>teacher: 48 人</li>
+            <li>cook: 10%</li>
+            <li>doctor: 5%</li>
+            <li>police officer: 3%</li>
+          </ul>
+        </div>
+      </div>
+      <div style="text-align:right; font-size:0.88rem; color:#444;">
+        <span class="tag-pos">pie chart 圓餅圖</span>
+      </div>
+    </div>
+
+    <div class="quiz-box">
+      <div class="quiz-item">
+        <div><span class="handwritten">【手寫】( C )</span> 24. <span class="tag-pos">推敲文意</span> How many boy students are there in Happy Junior High School?</div>
+        <div class="quiz-options">
+          <span>(A) 400.</span>
+          <span>(B) 500.</span>
+          <span>(C) 600.</span>
+          <span>(D) 700.</span>
+        </div>
+      </div>
+
+      <div class="quiz-item">
+        <div><span class="handwritten">【手寫】( B )</span> 25. <span class="tag-pos">推敲文意</span> Duke is talking about his dream job. What might his dream job be?
+          <div class="note-box" style="background:#fff; margin:6px 0;">
+            It's not common for boys to do this job in Taiwan. But through the job, I can take care of sick people and save their lives. I will do my best to make my dream come true.
+          </div>
+        </div>
+        <div class="quiz-options">
+          <span>(A) A cook.</span>
+          <span>(B) A nurse.</span>
+          <span>(C) A singer.</span>
+          <span>(D) A teacher.</span>
+        </div>
+      </div>
+
+      <div class="quiz-item">
+        <div><span class="handwritten">【手寫】( B )</span> 26. <span class="tag-pos">訊息比較</span> Which is NOT true?</div>
+        <div class="quiz-options" style="grid-template-columns: 1fr;">
+          <span>(A) Most boy students want to be doctors.</span>
+          <span>(B) One hundred students want to be cooks.</span>
+          <span>(C) Most girl students want to be YouTubers.</span>
+          <span>(D) Only twelve girl students want to be police officers.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 第 31 頁 ==================== -->
+  <section id="page-31" class="page-block" data-page="31">
+    <div class="page-header">
+      <span>單元 1｜第一冊 (上) 第 1～3 課</span>
+      <span class="page-badge">第 31 頁</span>
+    </div>
+
+    <div class="note-box">
+      <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
+        <span class="tag-pos">27～28</span>
+        <span class="tag-pos">字數 151</span>
+      </div>
+      <h3 style="text-align:center; margin:8px 0;">Gimei Islands International Fireworks Festival</h3>
+      <p>  Welcome to the Gimei Islands, the most beautiful islands in the Treasure Ocean. This year the festival starts on May 1st and continues until June 29th. Come to see the show!</p>
+
+      <div class="aside-card" style="background:#fff;">
+        <div class="category-label" style="text-align:center;">Map of Gimei Islands and Fireworks Schedule</div>
+        <p style="text-align:center; font-size:0.85rem; color:#555;">（方位標示：N 上、S 下、W 左、E 右）</p>
+        <table>
+          <thead>
+            <tr>
+              <th>島嶼名稱（地理位置）</th>
+              <th>煙火與表演時間表</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Qiqi Island</strong>（東北方）</td>
+              <td>① At 9 p.m., every Tuesday.<br>② With music playing.</td>
+            </tr>
+            <tr>
+              <td><strong>Gi-ma Island</strong>（北方偏中）</td>
+              <td>① At 9 p.m., every Monday and Saturday.<br>② With Drone shows.</td>
+            </tr>
+            <tr>
+              <td><strong>Au-zi Island</strong>（東方偏南，最大島）</td>
+              <td>① At 9 p.m., every Sunday and Monday.<br>② With Drone shows.</td>
+            </tr>
+            <tr>
+              <td><strong>Mia-zan Island</strong>（西方）</td>
+              <td>① At 8 p.m., every Friday.<br>② With Drone shows.</td>
+            </tr>
+            <tr>
+              <td><strong>Mei-an Island</strong>（南方）</td>
+              <td>① At 8 p.m., every Thursday.<br>② With music playing.</td>
+            </tr>
+            <tr>
+              <td><strong>Ji-an Island</strong>（西南方）</td>
+              <td>（無煙火時刻標示）</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p><strong>Special events:</strong><br>
+      1. There will be an opening show on Au-zi Island on May 1st. Visitors will see a 20-minute fireworks show and a drone show as well.<br>
+      2. Every island has a mascot. Qiqi Island has Bee, Gi-ma Island has Goat, Au-zi Island has Rabbit, Mei-an Island has Elephant, Mia-zan Island has Sheep, and Ji-an Island has Butterfly. Visitors can collect more than four stamps of mascots on a card to get one free special present.</p>
+
+      <div style="text-align:right; font-size:0.88rem; color:#444;">
+        <span class="tag-pos">continue 持續</span> <span class="tag-pos">schedule 時刻表</span> <span class="tag-pos">drone 無人機</span> <span class="tag-pos">event 項目</span> <span class="tag-pos">mascot 吉祥物</span>
+      </div>
+    </div>
+
+    <div class="quiz-box">
+      <div class="quiz-item">
+        <div><span class="handwritten">【手寫】( B )</span> 27. <span class="tag-pos">推敲文意</span> Pam is planning to bring her sons to the Gimei Islands. Her sons like watching drone shows but they can only stay there for three nights. Which route is the best for them? <span class="note-box" style="display:inline-block; padding:1px 6px;">route 路線</span></div>
+        <div class="quiz-options" style="grid-template-columns: 1fr;">
+          <span>(A) Qiqi Island ➡ Au-zi Island ➡ Gi-ma Island.</span>
+          <span>(B) Mia-zan Island ➡ Gi-ma Island ➡ Au-zi Island.</span>
+          <span>(C) Ji-an Island ➡ Mei-an Island ➡ Mia-zan Island.</span>
+          <span>(D) Mia-zan Island ➡ Mei-an Island ➡ Au-zi Island.</span>
+        </div>
+      </div>
+
+      <div class="quiz-item">
+        <div><span class="handwritten">【手寫】( C )</span> 28. <span class="tag-pos">指出細節</span> Which is NOT true?</div>
+        <div class="quiz-options" style="grid-template-columns: 1fr;">
+          <span>(A) The opening show is on Au-zi Island.</span>
+          <span>(B) There will be no fireworks show on Wednesdays.</span>
+          <span>(C) Gi-ma Island is to the south of Au-zi Island.</span>
+          <span>(D) The fireworks show time on Mia-zan Island is earlier than that on Qiqi Island.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 第 32 頁 ==================== -->
+  <section id="page-32" class="page-block" data-page="32">
+    <div class="page-header">
+      <span class="page-badge">第 32 頁</span>
+      <span>國中英語 (1～4冊) 甲</span>
+    </div>
+
+    <div class="note-box">
+      <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
+        <span class="tag-pos">29～32</span>
+        <span class="tag-pos">字數 97</span>
+      </div>
+      <p>
+        Eva: Why are you still at your desk?<br>
+        Ted:  29.  Why, what time is it?<br>
+        Eva: It's almost eleven thirty.<br>
+        Ted: What? It's so late, and I still have to study for my English test. My smart beautiful sister, Eva, please help me with it later. PLEASE....<br>
+        Eva:  30.  But before we start, I have something to say.<br>
+        Ted: OK! What is it?<br>
+        Eva: You have to change your study habits. First, listen to your teachers in class and take notes. Second,  31.  what you learn. Third, do your homework. Last but not least, this is the last time. I won't help you again.<br>
+        Ted:  32.  Thanks a lot.
+      </p>
+    </div>
+
+    <div class="quiz-box">
+      <div class="quiz-item">
+        <div><span class="handwritten">【手寫】( D )</span> 29.</div>
+        <div class="quiz-options">
+          <span>(A) It's a picture.</span>
+          <span>(B) Yes, I'm at my desk.</span>
+          <span>(C) The homework is so easy.</span>
+          <span>(D) I'm still doing my homework.</span>
+        </div>
+      </div>
+
+      <div class="quiz-item">
+        <div><span class="handwritten">【手寫】( D )</span> 30.</div>
+        <div class="quiz-options">
+          <span>(A) I think so.</span>
+          <span>(B) Thank you.</span>
+          <span>(C) Be careful.</span>
+          <span>(D) No problem.</span>
+        </div>
+      </div>
+
+      <div class="quiz-item">
+        <div><span class="handwritten">【手寫】( A )</span> 31.</div>
+        <div class="quiz-options">
+          <span>(A) study</span>
+          <span>(B) studied</span>
+          <span>(C) to study</span>
+          <span>(D) studying</span>
+        </div>
+      </div>
+
+      <div class="quiz-item">
+        <div><span class="handwritten">【手寫】( A )</span> 32.</div>
+        <div class="quiz-options">
+          <span>(A) I see.</span>
+          <span>(B) Be quiet.</span>
+          <span>(C) I think so.</span>
+          <span>(D) Nice to meet you.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 第 33 頁 ==================== -->
+  <section id="page-33" class="page-block" data-page="33">
+    <div class="page-header">
+      <span class="page-badge">第 33 頁</span>
+      <span>會考體裁｜新聞</span>
+    </div>
+
+    <div class="section-title">會考體裁 新聞</div>
+    <div class="aside-card">
+      <div class="aside-badge">體裁揭密 100%</div>
+      <div>
+        ❶ 先掃讀整篇文章，抓出文章主要論點主旨。<br>
+        ❷ 看題目的問題重點，從文章中畫出關鍵資訊。<br>
+        ❸ 找出題目與文章關鍵資訊的連結來答題。
+      </div>
+    </div>
+
+    <div class="note-box">
+      <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
+        <span class="tag-pos">33～34</span>
+        <span class="tag-pos">字數 179</span>
+      </div>
+      <p>  Teenagers today have many different kinds of pressure.</p>
+
+      <p><strong><u>Peer pressure</u></strong><br>
+        Teenagers care about how their friends see them, and this might lead to peer pressure, which may also cause bad or dangerous behavior, like smoking. Teenagers often make poor decisions because of such pressure.</p>
+
+      <p><strong><u>Pressure of being successful at school</u></strong><br>
+        The stress of being successful at school can be challenging for teenagers. Many worry that a bad school performance will lead to being judged by their classmates or parents. Even high-performing students feel stressed about getting into the best schools.</p>
+
+      <p><strong><u>Parental pressure</u></strong><br>
+        The pressure parents put on their children to do well in every part of their life can be bad for teenagers. What the parents say, either good or bad, can affect how a child sees themselves.</p>
+
+      <p><strong><u>Pressure from technology</u></strong><br>
+        With the fast growth in technology, social media caused some serious problems. FOMO, a fear of missing out, is one of the serious problems: some people are always checking their cellphones because they are afraid that they might miss any information or messages.</p>
+
+      <div style="text-align:right; font-size:0.88rem; color:#444;">
+        <span class="tag-pos">pressure 壓力</span> <span class="tag-pos">behavior 行為</span> <span class="tag-pos">stress 壓力</span> <span class="tag-pos">judge 評論</span> <span class="tag-pos">fear 恐懼</span>
+      </div>
+    </div>
+
+    <div class="quiz-box">
+      <div class="quiz-item">
+        <div><span class="handwritten">【手寫】( A )</span> ✦33. <span class="tag-pos">訊息歸類</span> The following is part of Helen's diary.
+          <div class="note-box" style="background:#fff; margin:6px 0;">
+            <i>Kathy is my best friend. She always helps me with my schoolwork. On the other hand, I really don't want to lie to my parents for money, but Kathy keeps asking me to lend her some money. My parents will be sad if they know the truth. I don't know what to do....</i>
+          </div>
+          According to Helen's diary, what kind of pressure is Helen under? <span class="note-box" style="display:inline-block; padding:1px 6px;">according to 根據</span>
+        </div>
+        <div class="quiz-options">
+          <span>(A) Peer pressure.</span>
+          <span>(B) Parental pressure.</span>
+          <span>(C) Pressure from technology.</span>
+          <span>(D) Pressure of being successful at school.</span>
+        </div>
+      </div>
+
+      <div class="quiz-item">
+        <div><span class="handwritten">【手寫】( C )</span> 34. <span class="tag-pos">訊息比較</span> Which of the following examples is closest to the act of FOMO?</div>
+        <div class="quiz-options" style="grid-template-columns: 1fr;">
+          <span>(A) Nina, who works hard to learn how to use the computer.</span>
+          <span>(B) Pam, who always wants to buy the latest cellphone to show off.</span>
+          <span>(C) Sally, who keeps reading her friends' web pages for the latest news.</span>
+          <span>(D) Kevin, who always plays basketball after school without a day off.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 第 34 頁 ==================== -->
+  <section id="page-34" class="page-block" data-page="34">
+    <div class="page-header">
+      <span class="page-badge">第 34 頁</span>
+      <span>閱讀素養｜社會領域｜家庭教育</span>
+    </div>
+
+    <div class="section-title">閱讀素養 <small>字數 206｜社會領域｜家庭教育</small></div>
+    <h2 style="margin: 8px 0 14px 0; color: #1f4e78;">A Mother's Love Across Borders: Facing Challenges in Taiwan</h2>
+
+    <div class="note-box">
+      <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
+        <span class="tag-pos">35～36</span>
+      </div>
+      <p>  In Taiwan, many children are raised by foreign mothers. These mothers are often called foreign spouses. For most of them, raising a child in a new country is not an easy job. One of the problems is language. Many foreign mothers do not speak Chinese well, so it's hard for them to help their kids with homework. Their children may also feel shy when using their mother's language. This would make them miss the chance to learn two cultures. Another problem is that some foreign spouses come from poor families, so they cannot pay for more classes for their children. Also, if they don't have much education, they may not know how to help their children with their learning.</p>
+
+      <p>  Not having enough family time is another problem. A woman from Vietnam said, "I have to work long hours. After a tiring day, I feel too <u>exhausted</u> to take care of my children and their homework." Worst of all, discrimination against these foreign mothers and their children is still common. Sometimes, these kids face bullying at school.</p>
+
+      <p>  It is clear that foreign spouses and their kids must deal with these challenges. If we can help them more, they can have a better life here.</p>
+
+      <div style="margin-top: 8px; padding-top: 6px; border-top: 1px dashed #ccc; font-size: 0.88rem; color: #444;">
+        <span class="tag-pos">border 國界</span>
+        <span class="tag-pos">challenge 挑戰</span>
+        <span class="tag-pos">spouse 配偶</span>
+        <span class="tag-pos">culture 文化</span>
+        <span class="tag-pos">discrimination 歧視 against 針對</span>
+        <span class="tag-pos">bullying 霸凌</span>
+        <span class="tag-pos">deal with 處理；解決</span>
+      </div>
+    </div>
+
+    <div class="quiz-box">
+      <div class="quiz-item">
+        <div><span class="handwritten">【手寫】( C )</span> 35. <span class="tag-pos">擷取大意</span> What is the main idea of the reading?</div>
+        <div class="quiz-options" style="grid-template-columns: 1fr;">
+          <span>(A) How foreign spouses make a living in Taiwan.</span>
+          <span>(B) How foreign spouses raise children in Taiwan.</span>
+          <span>(C) What challenges foreign spouses and their kids are facing.</span>
+          <span>(D) Why foreign spouses cannot help their kids with homework.</span>
+        </div>
+      </div>
+
+      <div class="quiz-item">
+        <div><span class="handwritten">【手寫】( B )</span> 36. <span class="tag-pos">猜測字義</span> What does <u>exhausted</u> mean?</div>
+        <div class="quiz-options">
+          <span>(A) Sad.</span>
+          <span>(B) Tired.</span>
+          <span>(C) Excited.</span>
+          <span>(D) Surprised.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 第 35 頁 ==================== -->
+  <section id="page-35" class="page-block" data-page="35">
+    <div class="page-header">
+      <span>跨域時事｜科技領域｜環境教育｜SDG6｜SDG7</span>
+      <span class="page-badge">第 35 頁</span>
+    </div>
+
+    <div class="section-title">跨域時事 <small>字數 200｜科技領域｜環境教育｜SDG6｜SDG7</small></div>
+    <h2 style="margin: 8px 0 14px 0; color: #1f4e78;">Rainwater Harvesting</h2>
+
+    <div class="note-box">
+      <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
+        <span class="tag-pos">37～38</span>
+      </div>
+      <p>  Did you know that Taiwan is facing water stress? This means that as people living on this island, we should try to save water. Because Taiwan is such a small island, building a new reservoir is very difficult. There are other ways to make the best use of the water we get.</p>
+
+      <p>  Rainwater harvesting is a good idea that some buildings in Taiwan use to save water. We do get a lot of rain here, but most of it goes back into the sea without being used. If we save the rain and use it later, this will fix a lot of problems.</p>
+
+      <p>  Buildings with rainwater harvesting work like this: the rain will run down the roof and into the gutter, where it will go under the ground into the main tank. Before flowing into the main tank, the water will go through a filter, which will make sure that the water kept is clean. This way, we can keep the water from the rain under the house! The water can be used to water plants, wash cars, and more, so it will also help save some money.</p>
+
+      <p>  If this sounds good to you, call <u>us</u> for more information!</p>
+
+      <div class="aside-card" style="background:#fff; margin-top: 10px;">
+        <div class="category-label" style="text-align:center;">RAINWATER HARVESTING</div>
+        <div>
+          • <strong>Rain</strong> ➡ <strong>Roof</strong> ➡ <strong>Gutter</strong> ➡ <strong>Filter</strong> ➡ <strong>Tank</strong>（地下主水箱）<br>
+          • <strong>Tank 應用用途：</strong>Clothes washing、Toilet flushing、Garden watering、Car washing
+        </div>
+      </div>
+
+      <div style="margin-top: 8px; padding-top: 6px; border-top: 1px dashed #ccc; font-size: 0.88rem; color: #444;">
+        <span class="tag-pos">rainwater harvesting 雨水回收</span>
+        <span class="tag-pos">stress 壓力</span>
+        <span class="tag-pos">reservoir 水庫</span>
+        <span class="tag-pos">flow 流動</span>
+      </div>
+    </div>
+
+    <div class="quiz-box">
+      <div class="quiz-item">
+        <div><span class="handwritten">【手寫】( D )</span> 37. <span class="tag-pos">推敲文意</span> Who might be <u>us</u> in the last sentence?</div>
+        <div class="quiz-options" style="grid-template-columns: 1fr;">
+          <span>(A) People who work at a reservoir in Taiwan.</span>
+          <span>(B) A group of people who water plants for you.</span>
+          <span>(C) The weather news reporters who tell us whether it will rain or not tomorrow.</span>
+          <span>(D) A group of people who build houses to store water from the rain for future use.</span>
+        </div>
+      </div>
+
+      <div class="quiz-item">
+        <div><span class="handwritten">【手寫】( ✦B )</span> 38. <span class="tag-pos">作者觀點</span> Which of the following sentences will the writer agree with?</div>
+        <div class="quiz-options" style="grid-template-columns: 1fr;">
+          <span>(A) In order to fix the water problem in Taiwan, we should raise the price of water.</span>
+          <span>(B) Everyone can help save water by using the water from the rain in our everyday lives.</span>
+          <span>(C) Rainwater harvesting is a great idea, but it will only cost us more money in the long run.</span>
+          <span>(D) Not having enough reservoirs is the main reason for the water problem, and this should be fixed as soon as possible.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  本批次轉錄範圍：第 10 頁 ～ 第 35 頁，共 26 頁轉錄完畢
+</footer>
+
+<script>
+  function toggleHandwritten() {
+    const body = document.body;
+    const btn = document.getElementById('toggleHwBtn');
+    body.classList.toggle('hide-handwritten');
+    if (body.classList.contains('hide-handwritten')) {
+      btn.textContent = '顯示【手寫】筆記';
+      btn.classList.add('hidden-mode');
+    } else {
+      btn.textContent = '隱藏【手寫】筆記';
+      btn.classList.remove('hidden-mode');
+    }
+  }
+</script>
+
+</body>
+</html>
