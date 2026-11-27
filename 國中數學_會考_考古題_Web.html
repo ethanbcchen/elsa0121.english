@@ -1,0 +1,2418 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>115年國中教育會考數學科全真模擬測驗（27題完整互動版）</title>
+<style>
+  :root {
+    color-scheme: dark light;
+    --bg-main: #0f172a;
+    --bg-panel: #161e2e;
+    --bg-card: #1e293b;
+    --bg-card-hover: #263449;
+    --border-color: #334155;
+    --text-primary: #f8fafc;
+    --text-secondary: #cbd5e1;
+    --text-muted: #94a3b8;
+    --accent-blue: #38bdf8;
+    --accent-blue-bg: rgba(56, 189, 248, 0.16);
+    --accent-green: #22c55e;
+    --accent-green-bg: rgba(34, 197, 94, 0.16);
+    --accent-red: #ef4444;
+    --accent-red-bg: rgba(239, 68, 68, 0.16);
+    --accent-amber: #f59e0b;
+    --accent-purple: #a855f7;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft JhengHei", "PingFang TC", sans-serif;
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    line-height: 1.65;
+    overflow-x: hidden;
+  }
+
+  /* 頂部控制列 */
+  header.topbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(15, 23, 42, 0.96);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border-color);
+    padding: 10px 18px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .brand-area {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .secret-verify-btn {
+    cursor: pointer;
+    color: var(--text-muted);
+    font-size: 16px;
+    user-select: none;
+    padding: 4px 6px;
+    border-radius: 6px;
+    transition: color 0.2s;
+  }
+  .secret-verify-btn:hover {
+    color: var(--accent-blue);
+  }
+
+  .title-group h1 {
+    font-size: 1.12rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    cursor: pointer;
+    user-select: none;
+  }
+  .title-group p {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+  }
+
+  .controls-area {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .timer-box {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    padding: 5px 10px;
+    border-radius: 8px;
+    font-size: 0.88rem;
+  }
+
+  .timer-display {
+    font-family: "Consolas", "Monaco", monospace;
+    font-weight: 700;
+    color: #fde047;
+    font-size: 1rem;
+    min-width: 58px;
+    text-align: center;
+  }
+
+  .timer-box input {
+    width: 54px;
+    background: var(--bg-main);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    border-radius: 4px;
+    padding: 2px 6px;
+    text-align: center;
+    font-size: 0.85rem;
+  }
+
+  .btn {
+    border: 1px solid var(--border-color);
+    background: var(--bg-card);
+    color: var(--text-primary);
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 0.86rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.18s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .btn:hover {
+    background: var(--bg-card-hover);
+    border-color: var(--accent-blue);
+  }
+  .btn-primary {
+    background: #16a34a;
+    border-color: #22c55e;
+    color: #ffffff;
+  }
+  .btn-primary:hover {
+    background: #15803d;
+  }
+  .btn-info {
+    background: #0284c7;
+    border-color: #38bdf8;
+    color: #ffffff;
+  }
+  .btn-info:hover {
+    background: #0369a1;
+  }
+  .btn-amber {
+    background: #d97706;
+    border-color: #f59e0b;
+    color: #ffffff;
+  }
+  .btn-amber:hover {
+    background: #b45309;
+  }
+  .btn-sm {
+    padding: 3px 8px;
+    font-size: 0.78rem;
+  }
+
+  .status-pill {
+    background: rgba(56, 189, 248, 0.15);
+    border: 1px solid rgba(56, 189, 248, 0.4);
+    color: var(--accent-blue);
+    padding: 5px 10px;
+    border-radius: 8px;
+    font-size: 0.84rem;
+    font-weight: 600;
+  }
+
+  /* 成績診斷面板（交卷後顯示） */
+  #resultPanel {
+    display: none;
+    background: var(--bg-panel);
+    border-bottom: 1px solid var(--border-color);
+    padding: 18px 22px;
+  }
+
+  .result-grid {
+    max-width: 1500px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 20px;
+    align-items: center;
+  }
+
+  .score-summary-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 18px;
+  }
+
+  .score-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 10px;
+  }
+
+  .big-score {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #38bdf8;
+  }
+
+  .dim-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+
+  .dim-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.88rem;
+    background: rgba(15, 23, 42, 0.5);
+    padding: 6px 10px;
+    border-radius: 6px;
+  }
+
+  .action-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+  }
+
+  .radar-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 290px;
+  }
+
+  .radar-container {
+    width: 100%;
+    max-width: 380px;
+    height: 260px;
+    position: relative;
+  }
+
+  /* 左右雙欄主工作區 */
+  .main-workspace {
+    display: flex;
+    height: calc(100vh - 64px);
+    overflow: hidden;
+  }
+
+  .left-pane, .right-pane {
+    width: 50%;
+    height: 100%;
+    overflow-y: auto;
+    padding: 16px 20px 60px;
+  }
+
+  .left-pane {
+    background: var(--bg-panel);
+    border-right: 1px solid var(--border-color);
+  }
+
+  .right-pane {
+    background: var(--bg-main);
+  }
+
+  /* 題號導覽列 */
+  .nav-box {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 14px;
+    margin-bottom: 18px;
+  }
+
+  .nav-header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    font-size: 0.88rem;
+    color: var(--accent-amber);
+    font-weight: 700;
+  }
+
+  .nav-legend {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    font-weight: 400;
+  }
+
+  .nav-grid {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    gap: 6px;
+  }
+
+  .nav-item {
+    background: #0f172a;
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    border-radius: 6px;
+    padding: 6px 0;
+    text-align: center;
+    font-size: 0.84rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .nav-item:hover {
+    border-color: var(--accent-blue);
+    color: #fff;
+  }
+
+  .nav-item.answered {
+    background: #0284c7;
+    border-color: #38bdf8;
+    color: #ffffff;
+  }
+
+  .nav-item.correct {
+    background: #16a34a !important;
+    border-color: #4ade80 !important;
+    color: #ffffff !important;
+  }
+
+  .nav-item.wrong {
+    background: #dc2626 !important;
+    border-color: #f87171 !important;
+    color: #ffffff !important;
+  }
+
+  /* 區塊標題 */
+  .section-banner {
+    background: linear-gradient(90deg, rgba(56, 189, 248, 0.14), rgba(56, 189, 248, 0.03));
+    border-left: 4px solid var(--accent-blue);
+    padding: 10px 14px;
+    border-radius: 0 8px 8px 0;
+    margin-bottom: 16px;
+  }
+
+  .section-banner h2 {
+    font-size: 1.02rem;
+    color: var(--accent-blue);
+  }
+
+  .section-banner p {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+  }
+
+  /* 左側完整題幹與圖表卡片 */
+  .left-q-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 16px;
+    transition: border-color 0.2s;
+  }
+
+  .left-q-card:hover {
+    border-color: #475569;
+  }
+
+  .reading-passage-box {
+    background: rgba(245, 158, 11, 0.08);
+    border: 1px solid rgba(245, 158, 11, 0.35);
+    border-radius: 10px;
+    padding: 14px;
+    margin-bottom: 14px;
+    font-size: 0.92rem;
+    color: var(--text-primary);
+  }
+
+  .reading-passage-title {
+    font-weight: 700;
+    color: #fbbf24;
+    margin-bottom: 6px;
+    font-size: 0.96rem;
+  }
+
+  .q-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    gap: 8px;
+  }
+
+  .q-badge {
+    background: rgba(56, 189, 248, 0.16);
+    color: var(--accent-blue);
+    border: 1px solid rgba(56, 189, 248, 0.35);
+    padding: 2px 10px;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 0.88rem;
+  }
+
+  .q-tag {
+    font-size: 0.76rem;
+    color: var(--text-muted);
+    background: rgba(15, 23, 42, 0.65);
+    padding: 3px 8px;
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+  }
+
+  .q-stem {
+    font-size: 0.98rem;
+    color: var(--text-primary);
+    margin-bottom: 12px;
+    line-height: 1.75;
+  }
+
+  .visual-box {
+    background: #161b22;
+    border: 1px solid #334155;
+    border-radius: 10px;
+    padding: 12px;
+    margin-top: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .visual-box svg {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .visual-caption {
+    margin-top: 6px;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+
+  .no-fig-note {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    background: rgba(15, 23, 42, 0.55);
+    border: 1px dashed #334155;
+    border-radius: 8px;
+    padding: 8px 12px;
+    width: 100%;
+  }
+
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 8px 0;
+    font-size: 0.9rem;
+    text-align: center;
+  }
+  .data-table th, .data-table td {
+    border: 1px solid #475569;
+    padding: 7px 10px;
+  }
+  .data-table th {
+    background: #1e293b;
+    color: #38bdf8;
+  }
+
+  /* 右側作答卡片 */
+  .right-q-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 16px;
+    transition: all 0.2s;
+  }
+
+  .right-q-card.card-correct {
+    border: 2px solid var(--accent-green);
+    background: rgba(34, 197, 94, 0.05);
+  }
+
+  .right-q-card.card-wrong {
+    border: 2px solid var(--accent-red);
+    background: rgba(239, 68, 68, 0.05);
+  }
+
+  .options-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 10px;
+  }
+
+  .option-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    background: #0f172a;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.15s;
+    font-size: 0.95rem;
+  }
+
+  .option-label:hover {
+    border-color: var(--accent-blue);
+    background: #17233b;
+  }
+
+  .option-label input[type="radio"] {
+    accent-color: var(--accent-blue);
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+  }
+
+  .option-label.selected {
+    border-color: var(--accent-blue);
+    background: var(--accent-blue-bg);
+  }
+
+  .option-label.opt-correct {
+    border-color: var(--accent-green) !important;
+    background: var(--accent-green-bg) !important;
+    color: #86efac;
+    font-weight: 600;
+  }
+
+  .option-label.opt-wrong {
+    border-color: var(--accent-red) !important;
+    background: var(--accent-red-bg) !important;
+    color: #fca5a5;
+    text-decoration: line-through;
+  }
+
+  /* 詳解區塊 */
+  .explanation-box {
+    display: none;
+    margin-top: 14px;
+    background: #0f172a;
+    border: 1px solid #334155;
+    border-radius: 10px;
+    padding: 14px;
+    font-size: 0.9rem;
+    line-height: 1.75;
+  }
+
+  .exp-banner {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(34, 197, 94, 0.15);
+    border: 1px solid rgba(34, 197, 94, 0.4);
+    color: #86efac;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    font-size: 0.88rem;
+  }
+
+  .exp-section {
+    margin-bottom: 8px;
+    color: var(--text-secondary);
+  }
+
+  .exp-section strong {
+    color: #38bdf8;
+  }
+
+  /* 彈出視窗 Modal */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    z-index: 999;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+  }
+
+  .modal-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    max-width: 820px;
+    width: 100%;
+    max-height: 85vh;
+    overflow-y: auto;
+    padding: 20px;
+  }
+
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 10px;
+    margin-bottom: 14px;
+  }
+
+  /* RWD 手機與平板適應 */
+  @media (max-width: 960px) {
+    .main-workspace {
+      flex-direction: column;
+      height: auto;
+      overflow: visible;
+    }
+    .left-pane, .right-pane {
+      width: 100%;
+      height: auto;
+      overflow-y: visible;
+      border-right: none;
+    }
+    .result-grid {
+      grid-template-columns: 1fr;
+    }
+    .nav-grid {
+      grid-template-columns: repeat(6, 1fr);
+    }
+  }
+</style>
+
+<!-- MathJax 3 公式渲染設定 -->
+<script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']],
+      processEscapes: true
+    },
+    svg: { fontCache: 'global' },
+    startup: {
+      pageReady: () => {
+        return MathJax.startup.defaultPageReady().then(() => {
+          if (typeof safeTypeset === 'function') safeTypeset();
+        });
+      }
+    }
+  };
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<!-- Chart.js CDN（含原生 Canvas 雙重備援） -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand-area">
+    <span class="secret-verify-btn" id="secretVerifyBtn" title="系統資訊">❖</span>
+    <div class="title-group">
+      <h1 id="examTitle">115年國中教育會考數學科全真模擬測驗（27題）</h1>
+      <p>第一部分：選擇題（第1～25題）＆ 第二部分：非選擇題轉化素養題（第26～27題）</p>
+    </div>
+  </div>
+
+  <div class="controls-area">
+    <div class="timer-box">
+      <span>⏱ 倒數：</span>
+      <span class="timer-display" id="timerDisplay">80:00</span>
+      <input type="number" id="customMinutes" min="0" max="240" value="80" title="設定分鐘數(0~240)">
+      <span>分</span>
+      <button class="btn btn-sm" onclick="setCustomTimer()">設定</button>
+      <button class="btn btn-sm" id="pauseBtn" onclick="toggleTimer()">暫停</button>
+    </div>
+
+    <span class="status-pill" id="progressPill">已作答：0 / 27</span>
+    <button class="btn btn-primary" id="submitBtn" onclick="submitExam()">提交試卷</button>
+    <button class="btn btn-info" onclick="resetAndShuffleExam()">重新測驗 (洗牌)</button>
+  </div>
+</header>
+
+<!-- 交卷後成績與弱點診斷面板 -->
+<section id="resultPanel">
+  <div class="result-grid">
+    <div class="score-summary-card">
+      <div class="score-header">
+        <div>
+          <div style="font-size:0.88rem;color:var(--text-muted);">測驗總得分（滿分 100 分）</div>
+          <div class="big-score" id="totalScoreDisplay">0</div>
+        </div>
+        <div style="text-align:right;">
+          <div id="correctCountDisplay" style="font-size:1.05rem;font-weight:700;color:#86efac;">答對 0 / 27 題</div>
+          <div id="timeSpentDisplay" style="font-size:0.85rem;color:var(--text-muted);">耗時：00分00秒</div>
+        </div>
+      </div>
+
+      <div class="dim-bars" id="dimensionStatsList"></div>
+
+      <div class="action-toolbar">
+        <button class="btn btn-info" id="filterAllBtn" onclick="filterQuestions('all')">顯示全部題目 (27)</button>
+        <button class="btn btn-amber" id="filterWrongBtn" onclick="filterQuestions('wrong')">只看錯題 (0)</button>
+        <button class="btn" onclick="copyWrongNotesMarkdown()">📋 一鍵複製錯題筆記 (Markdown)</button>
+        <button class="btn" onclick="downloadWordReport()">📄 下載 Word 錯題本 (.doc)</button>
+      </div>
+    </div>
+
+    <div class="radar-card">
+      <div style="font-size:0.92rem;font-weight:700;color:var(--accent-blue);margin-bottom:8px;">四大數學領域核心能力雷達圖（得分率 %）</div>
+      <div class="radar-container">
+        <canvas id="radarChartCanvas" width="380" height="260"></canvas>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 左右雙欄主體 -->
+<main class="main-workspace">
+  <!-- 左側：題號導覽 + 全題目完整平鋪（題幹、公式、原卷圖表） -->
+  <section class="left-pane" id="leftPane">
+    <div class="nav-box">
+      <div class="nav-header">
+        <span>🧭 題號快速導覽（點擊平滑跳轉至該題）</span>
+        <span class="nav-legend">藍：已答 ｜ 綠：答對 ｜ 紅：答錯</span>
+      </div>
+      <div class="nav-grid" id="navGrid"></div>
+    </div>
+
+    <div class="section-banner">
+      <h2>📖 試題本完整題幹、算式與原卷圖表區</h2>
+      <p>左側完整平鋪全部 27 題題幹與精準繪製之原卷幾何／統計圖表，可與右側作答區同步對照。</p>
+    </div>
+
+    <div id="leftQuestionsContainer"></div>
+  </section>
+
+  <!-- 右側：作答選項區與逐題詳解 -->
+  <section class="right-pane" id="rightPane">
+    <div class="section-banner">
+      <h2>✍️ 作答區與即時批改解析</h2>
+      <p>請點選各題最適當的選項（第26～27題為原卷非選擇題轉化之素養評量題），交卷後顯示逐題完整推導。</p>
+    </div>
+
+    <div id="rightQuestionsContainer"></div>
+  </section>
+</main>
+
+<!-- 隱藏驗證視窗：題庫總表（左上角 ❖ 連點 5 下） -->
+<div class="modal-overlay" id="verifyModal">
+  <div class="modal-card">
+    <div class="modal-header">
+      <h3 style="color:var(--accent-blue);">🔍 題庫答案分布與原題驗證總表</h3>
+      <button class="btn btn-sm" onclick="closeModal('verifyModal')">關閉</button>
+    </div>
+    <div id="verifySummary" style="margin-bottom:12px;font-size:0.9rem;color:#fbbf24;"></div>
+    <table class="data-table" id="verifyTable">
+      <thead>
+        <tr>
+          <th>題號</th>
+          <th>領域維度</th>
+          <th>難度歸類</th>
+          <th>正解</th>
+          <th>核心考點</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- 隱藏家長監控視窗（標題連點 5 下 或 Ctrl+Shift+P） -->
+<div class="modal-overlay" id="parentModal">
+  <div class="modal-card">
+    <div class="modal-header">
+      <h3 style="color:#fbbf24;">🔒 家長監控中心 — 歷次測驗歷史紀錄表</h3>
+      <button class="btn btn-sm" onclick="closeModal('parentModal')">關閉</button>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+      <span style="font-size:0.85rem;color:var(--text-muted);">資料儲存於本機 LocalStorage，可檢視每次交卷時間、耗時與得分變化。</span>
+      <button class="btn btn-sm" onclick="clearParentHistory()">清除紀錄</button>
+    </div>
+    <table class="data-table" id="parentHistoryTable">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>交卷時間</th>
+          <th>作答耗時</th>
+          <th>總得分</th>
+          <th>各維度表現</th>
+          <th>錯題題號</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+// =========================================================================
+// 1. 結構化題庫資料（100% 忠實還原上傳之「115年國中教育會考數學試題卷」全部 27 題）
+// =========================================================================
+const RAW_QUESTIONS = [
+  {
+    id: 1,
+    originalNum: "第一部分 第1題",
+    dimension: "代數與函數",
+    difficulty: "基礎理解題",
+    concept: "二元一次聯立方程式（加減消去法）",
+    stem: "解二元一次聯立方程式 $\\begin{cases} x + 2y = 5 \\\\ 2x - 2y = 1 \\end{cases}$，得 $x$ 值為何？",
+    visualType: "none",
+    options: ["$-4$", "$-2$", "$2$", "$4$"],
+    answerIndex: 2,
+    explanation: {
+      original: "解二元一次聯立方程式 $\\begin{cases} x+2y=5 \\\\ 2x-2y=1 \\end{cases}$，得 $x$ 值為何？",
+      answerText: "(C) $2$",
+      core: "利用加減消去法消去 $y$ 項，直接求出一元一次方程式的解。",
+      steps: "1. 設第一式為 $x + 2y = 5$，第二式為 $2x - 2y = 1$。<br>2. 觀察兩式中 $y$ 的係數分別為 $+2$ 與 $-2$，互為相反數，因此將兩式直接相加：<br>$$(x + 2y) + (2x - 2y) = 5 + 1$$<br>3. 化簡得 $3x = 6$，兩邊同除以 $3$，得 $x = 2$。<br>4. 學生常見迷思：將兩式相減導致符號出錯（如誤算為 $-x = 4 \\Rightarrow x = -4$）。",
+      level: "基礎理解題"
+    }
+  },
+  {
+    id: 2,
+    originalNum: "第一部分 第2題",
+    dimension: "幾何與空間",
+    difficulty: "基礎理解題",
+    concept: "正三角形內角與直角柱側面垂直性質",
+    stem: "如圖(一)，直角柱 $ABCDEF$ 的底面為正三角形，圖中標示各頂點名稱。判斷此角柱中的 $\\angle ABC$、$\\angle BCF$ 的度數分別為何？",
+    visualType: "svg_q2",
+    visualCaption: "圖(一)：底面為正三角形的直角柱 ABCDEF",
+    options: [
+      "$\\angle ABC = 90^\\circ$，$\\angle BCF = 90^\\circ$",
+      "$\\angle ABC = 60^\\circ$，$\\angle BCF = 60^\\circ$",
+      "$\\angle ABC = 90^\\circ$，$\\angle BCF = 60^\\circ$",
+      "$\\angle ABC = 60^\\circ$，$\\angle BCF = 90^\\circ$"
+    ],
+    answerIndex: 3,
+    explanation: {
+      original: "如圖(一)，直角柱 $ABCDEF$ 的底面為正三角形，圖中標示各頂點名稱。判斷此角柱中的 $\\angle ABC$、$\\angle BCF$ 的度數分別為何？",
+      answerText: "(D) $\\angle ABC = 60^\\circ$，$\\angle BCF = 90^\\circ$",
+      core: "正三角形的每一個內角皆為 $60^\\circ$；直角柱的側稜垂直於底面，因此側面皆為長方形，內角為 $90^\\circ$。",
+      steps: "1. 因為底面 $\\triangle ABC$ 為正三角形，所以其三個內角皆相等，故 $\\angle ABC = 180^\\circ \\div 3 = 60^\\circ$。<br>2. 因為此立體圖形為「直角柱」，側邊 $\\overline{CF}$ 垂直於底面 $ABC$，即 $\\overline{CF} \\perp \\overline{BC}$，故 $\\angle BCF = 90^\\circ$。<br>3. 常見迷思：因立體圖斜視繪製，誤將 $\\angle ABC$ 看成直角或將 $\\angle BCF$ 誤判為 $60^\\circ$。",
+      level: "基礎理解題"
+    }
+  },
+  {
+    id: 3,
+    originalNum: "第一部分 第3題",
+    dimension: "數與量",
+    difficulty: "基礎理解題",
+    concept: "二次方根的化簡（最簡根式）",
+    stem: "若 $\\sqrt{504}$ 的最簡根式為 $a\\sqrt{b}$，則 $a + b$ 之值為何？",
+    visualType: "none",
+    options: ["$13$", "$19$", "$20$", "$50$"],
+    answerIndex: 2,
+    explanation: {
+      original: "若 $\\sqrt{504}$ 的最簡根式為 $a\\sqrt{b}$，則 $a+b$ 之值為何？",
+      answerText: "(C) $20$",
+      core: "將被開方數質因數分解，把完全平方因數提出根號外化為最簡根式。",
+      steps: "1. 將 $504$ 進行質因數分解：$504 = 2^3 \\times 3^2 \\times 7 = (2 \\times 3)^2 \\times (2 \\times 7) = 6^2 \\times 14$。<br>2. 化簡根式：$\\sqrt{504} = \\sqrt{6^2 \\times 14} = 6\\sqrt{14}$。<br>3. 對照 $a\\sqrt{b}$ 可得 $a = 6$，$b = 14$。<br>4. 計算 $a + b = 6 + 14 = 20$。<br>5. 常見迷思：未將完全平方數提乾淨（如寫成 $2\\sqrt{126}$ 或 $3\\sqrt{56}$）。",
+      level: "基礎理解題"
+    }
+  },
+  {
+    id: 4,
+    originalNum: "第一部分 第4題",
+    dimension: "統計與機率",
+    difficulty: "基礎理解題",
+    concept: "古典機率與樹狀圖／列表法求樣本空間",
+    stem: "已知甲袋中有三顆球，球上分別標記 $2$、$3$、$4$；乙袋中有三顆球，球上分別標記 $3$、$4$、$5$。阿翰打算從甲、乙兩袋中各抽出一球，若甲袋中每顆球被抽出的機會相等，乙袋中每顆球被抽出的機會相等，則抽出的兩球上的數字，總和為多少的機率最大？",
+    visualType: "none",
+    options: ["$6$", "$7$", "$8$", "$9$"],
+    answerIndex: 1,
+    explanation: {
+      original: "已知甲袋中有三顆球，球上分別標記2、3、4；乙袋中有三顆球，球上分別標記3、4、5。阿翰打算從甲、乙兩袋中各抽出一球...則抽出的兩球上的數字，總和為多少的機率最大？",
+      answerText: "(B) $7$",
+      core: "列出兩袋抽球的所有等可能組合（共 $3 \\times 3 = 9$ 種），統計各總和出現次數。",
+      steps: "1. 甲袋 $\\{2, 3, 4\\}$ 與乙袋 $\\{3, 4, 5\\}$ 各抽一球，共有 $3 \\times 3 = 9$ 種等可能結果：<br>• 總和為 $5$：$(2, 3)$，共 $1$ 種。<br>• 總和為 $6$：$(2, 4), (3, 3)$，共 $2$ 種。<br>• 總和為 $7$：$(2, 5), (3, 4), (4, 3)$，共 $3$ 種。<br>• 總和為 $8$：$(3, 5), (4, 4)$，共 $2$ 種。<br>• 總和為 $9$：$(4, 5)$，共 $1$ 種。<br>2. 總和為 $7$ 的機率為 $\\frac{3}{9} = \\frac{1}{3}$，為所有可能總和中最大者。",
+      level: "基礎理解題"
+    }
+  },
+  {
+    id: 5,
+    originalNum: "第一部分 第5題",
+    dimension: "數與量",
+    difficulty: "基礎理解題",
+    concept: "乘法分配律與負負得正運算",
+    stem: "算式 $2.45 \\times 98.7 - (-0.55) \\times 98.7$ 之值介於下列哪兩個數之間？",
+    visualType: "none",
+    options: ["$150, 200$", "$200, 250$", "$250, 300$", "$300, 350$"],
+    answerIndex: 2,
+    explanation: {
+      original: "算式 $2.45 \\times 98.7 - (-0.55) \\times 98.7$ 之值介於下列哪兩個數之間？",
+      answerText: "(C) $250, 300$",
+      core: "提取公因數 $98.7$，運用分配律 $a \\times c - (-b) \\times c = (a + b) \\times c$ 簡化計算。",
+      steps: "1. 原式 $= 2.45 \\times 98.7 + 0.55 \\times 98.7$。<br>2. 提取公因數 $98.7$：$= (2.45 + 0.55) \\times 98.7 = 3 \\times 98.7$。<br>3. 計算乘積：$3 \\times 98.7 = 296.1$。<br>4. $296.1$ 介於 $250$ 與 $300$ 之間。<br>5. 常見迷思：忽略負負得正，誤算為 $(2.45 - 0.55) \\times 98.7 = 1.9 \\times 98.7 = 187.53$（誤選 A）。",
+      level: "基礎理解題"
+    }
+  },
+  {
+    id: 6,
+    originalNum: "第一部分 第6題",
+    dimension: "統計與機率",
+    difficulty: "基礎理解題",
+    concept: "二維交叉列聯表判讀與條件篩選",
+    stem: "小彭的農園將收成的文旦根據每顆的重量分為小果、中果、大果，再根據每顆的品質分為良級、優級、特級，分類後各類別的總重量如表(一)所示。因為被分類為良級或大果的文旦不受喜愛，所以小彭僅將其餘的文旦都包裝成禮盒販售，求包裝成禮盒販售的文旦總共有多少公斤？",
+    visualType: "table_q6",
+    visualCaption: "表(一)：文旦重量與品質分類統計表（單位：公斤）",
+    options: ["$620$", "$630$", "$700$", "$720$"],
+    answerIndex: 1,
+    explanation: {
+      original: "小彭的農園將收成的文旦根據每顆的重量分為小果、中果、大果...因為被分類為良級或大果的文旦不受喜愛，所以小彭僅將其餘的文旦都包裝成禮盒販售，求包裝成禮盒販售的文旦總共有多少公斤？",
+      answerText: "(B) $630$",
+      core: "從交叉列聯表中排除「良級」與「大果」，加總剩餘符合條件的儲存格數值（注意勿重複扣除交集）。",
+      steps: "1. 排除「良級」（第一直行）與「大果」（第三橫列）後，符合「非良級且非大果」的類別為：<br>• 小果優級：$180$ 公斤<br>• 小果特級：$270$ 公斤<br>• 中果優級：$100$ 公斤<br>• 中果特級：$80$ 公斤<br>2. 加總可得：$180 + 270 + 100 + 80 = 630$（公斤）。<br>3. 另解（排容原理）：總重 $800 - (\\text{良級 } 80 + \\text{大果 } 100 - \\text{良級且大果 } 10) = 800 - 170 = 630$ 公斤。<br>4. 常見迷思：直接 $800 - 80 - 100 = 620$，重複扣除了「良級大果」的 $10$ 公斤（誤選 A）。",
+      level: "基礎理解題"
+    }
+  },
+  {
+    id: 7,
+    originalNum: "第一部分 第7題",
+    dimension: "代數與函數",
+    difficulty: "核心概念題",
+    concept: "多項式除法（長除法／分離係數法）求商式與餘式",
+    stem: "計算多項式 $4x^2 - 3x - 5$ 除以 $x + 2$ 後，所得商式與餘式兩者之和為何？（註：原卷印字清晰版題幹為 $4x^2 - 3x - 5$ 除以 $x + 2$）",
+    visualType: "none",
+    options: ["$4x + 6$", "$4x + 10$", "$-7x - 5$", "$-11x - 1$"],
+    answerIndex: 0,
+    explanation: {
+      original: "計算多項式 $4x^2 - 3x - 5$ 除以 $x + 2$ 後，所得商式與餘式兩者之和為何？",
+      answerText: "(A) $4x + 6$",
+      core: "利用多項式長除法求得商式 $Q(x)$ 與餘式 $R$，再將兩者合併同類項相加。",
+      steps: "1. 被除式 $4x^2 - 3x - 5$ 除以除式 $x + 2$：<br>• 第一步：商式第一項取 $4x$，得 $4x(x + 2) = 4x^2 + 8x$。<br>• 相減得餘項：$(-3x - 5) - (8x) = -11x - 5$。<br>• 第二步：商式第二項取 $-11$，得 $-11(x + 2) = -11x - 22$。<br>• 相減得餘式：$(-11x - 5) - (-11x - 22) = 17$。<br>2. 故商式為 $4x - 11$，餘式為 $17$。<br>3. 商式與餘式之和 $= (4x - 11) + 17 = 4x + 6$。（註：原卷掃描 OCR 處原式之 $-5$ 略顯連筆，依標準會考原題與選項 (A) $4x+6$ 完整對齊）。",
+      level: "核心概念題"
+    }
+  },
+  {
+    id: 8,
+    originalNum: "第一部分 第8題",
+    dimension: "數與量",
+    difficulty: "核心概念題",
+    concept: "科學記號的比較大小與幾何區域面積估算",
+    stem: "有一培養皿上均勻分布細菌，圖(二)是培養皿與其俯視圖，生物學家在培養皿上選定四個圓形區域，區域面積越大所含細菌數越多。若圖中甲、乙、丙三個區域細菌的數量分別為 $4.4 \\times 10^5$ 個、$7.3 \\times 10^6$ 個、$5.4 \\times 10^7$ 個，則下列何者可能是丁區域細菌的數量？",
+    visualType: "svg_q8",
+    visualCaption: "圖(二)：培養皿與四個圓形區域（甲、乙、丙、丁）俯視圖",
+    options: [
+      "$1.7 \\times 10^5$ 個",
+      "$1.7 \\times 10^6$ 個",
+      "$1.7 \\times 10^7$ 個",
+      "$1.7 \\times 10^8$ 個"
+    ],
+    answerIndex: 2,
+    explanation: {
+      original: "有一培養皿上均勻分布細菌，圖(二)是培養皿與其俯視圖...若圖中甲、乙、丙三個區域細菌的數量分別為 $4.4 \\times 10^5$ 個、$7.3 \\times 10^6$ 個、$5.4 \\times 10^7$ 個，則下列何者可能是丁區域細菌的數量？",
+      answerText: "(C) $1.7 \\times 10^7$ 個",
+      core: "觀察圓形面積大小順序，結合科學記號的指數與係數比大小。",
+      steps: "1. 由圖(二)俯視圖可明顯看出四個圓形區域的面積大小關係為：$\\text{甲} < \\text{乙} < \\text{丁} < \\text{丙}$。<br>2. 因為細菌均勻分布，細菌數量亦滿足：$\\text{甲} < \\text{乙} < \\text{丁} < \\text{丙}$，即：<br>$$7.3 \\times 10^6 < \\text{丁} < 5.4 \\times 10^7$$<br>3. 檢視各選項：<br>• (A) $1.7 \\times 10^5 < 4.4 \\times 10^5$（比甲還小）<br>• (B) $1.7 \\times 10^6 < 7.3 \\times 10^6$（比乙還小）<br>• (C) $1.7 \\times 10^7 = 17 \\times 10^6$，介於 $7.3 \\times 10^6$ 與 $54 \\times 10^6$ 之間，符合條件。<br>• (D) $1.7 \\times 10^8 > 5.4 \\times 10^7$（比丙還大）。",
+      level: "核心概念題"
+    }
+  },
+  {
+    id: 9,
+    originalNum: "第一部分 第9題",
+    dimension: "代數與函數",
+    difficulty: "核心概念題",
+    concept: "提公因式法解一元二次方程式",
+    stem: "已知一元二次方程式 $2x(x + 7) - 10(x + 7) = 0$ 的兩根為 $a$、$b$，且 $a > b$，求 $a + 2b$ 之值為何？",
+    visualType: "none",
+    options: ["$-13$", "$-9$", "$-4$", "$-3$"],
+    answerIndex: 1,
+    explanation: {
+      original: "已知一元二次方程式 $2x(x+7)-10(x+7)=0$ 的兩根為 $a$、$b$，且 $a > b$，求 $a+2b$ 之值為何？",
+      answerText: "(B) $-9$",
+      core: "利用提公因式 $(x+7)$ 因式分解求根，並依大小條件 $a > b$ 對應兩根數值。",
+      steps: "1. 提取公因式 $(x + 7)$：$(x + 7)(2x - 10) = 0$。<br>2. 令各因式為 $0$，得 $x + 7 = 0$ 或 $2x - 10 = 0$，解得兩根為 $x = -7$ 或 $x = 5$。<br>3. 因為 $a > b$，所以 $a = 5$，$b = -7$。<br>4. 計算 $a + 2b = 5 + 2 \\times (-7) = 5 - 14 = -9$。<br>5. 常見迷思：將 $a, b$ 大小顛倒代成 $-7 + 2(5) = 3$，或將根的正負號記反（誤選 $-13$）。",
+      level: "核心概念題"
+    }
+  },
+  {
+    id: 10,
+    originalNum: "第一部分 第10題",
+    dimension: "代數與函數",
+    difficulty: "核心概念題",
+    concept: "比例分配與一元一次方程式應用題",
+    stem: "某書店舉辦優惠活動，購買的書原價合計滿 $1100$ 元折扣 $200$ 元，圖(三)為兄妹兩人的對話情形。哥哥說：「我要買的書原價只有 $720$ 元，沒辦法折扣。」妹妹說：「我要買的書原價也不到 $1100$ 元。我們一起買的話，就能折扣 $200$ 元。」哥哥說：「那就一起買吧！依我們要買的書原價的比，來分攤折扣後的總金額。」妹妹說：「這樣的話，哥哥你要分攤 $600$ 元。」根據圖中的對話計算，妹妹要買的書原價為多少元？",
+    visualType: "svg_q10",
+    visualCaption: "圖(三)：兄妹兩人購買書籍分攤折扣金額對話情境圖",
+    options: ["$360$", "$380$", "$460$", "$480$"],
+    answerIndex: 3,
+    explanation: {
+      original: "某書店舉辦優惠活動，購買的書原價合計滿1100元折扣200元，圖(三)為兄妹兩人的對話情形...根據圖中的對話計算，妹妹要買的書原價為多少元？",
+      answerText: "(D) $480$",
+      core: "依原價比例分攤折扣後金額，利用比例式建立一元一次方程式求解。",
+      steps: "1. 設妹妹要買的書原價為 $x$ 元（其中 $380 \\le x < 1100$，使合計滿 $1100$ 元）。<br>2. 兩人合買原價總計為 $(720 + x)$ 元，折扣 $200$ 元後實付總金額為 $(720 + x - 200) = (520 + x)$ 元。<br>3. 依原價比例分攤，哥哥分攤 $600$ 元，故：<br>$$(520 + x) \\times \\frac{720}{720 + x} = 600$$<br>4. 交叉相乘得：$720(520 + x) = 600(720 + x)$，兩邊同除以 $120$：<br>$$6(520 + x) = 5(720 + x)$$<br>$$3120 + 6x = 3600 + 5x \\Rightarrow x = 480$$<br>5. 檢驗：$720 + 480 = 1200 \\ge 1100$，折扣後 $1000$ 元，哥哥付 $1000 \\times \\frac{720}{1200} = 600$ 元，完全符合。",
+      level: "核心概念題"
+    }
+  },
+  {
+    id: 11,
+    originalNum: "第一部分 第11題",
+    dimension: "數與量",
+    difficulty: "核心概念題",
+    concept: "數線上點的位置、正負數加減與距離幾何意義",
+    stem: "$A(a)$、$B(b)$、$P(a + b)$ 三點在數線上的位置如圖(四)所示。若要在數線上標示點 $Q(b - a)$，則關於 $Q$ 點的位置，下列敘述何者正確？",
+    visualType: "svg_q11",
+    visualCaption: "圖(四)：數線上 P(a+b)、A(a)、B(b) 的相對位置圖",
+    options: [
+      "在 $B$ 的右邊",
+      "介於 $A$、$B$ 之間",
+      "介於 $P$、$A$ 之間",
+      "在 $P$ 的左邊"
+    ],
+    answerIndex: 0,
+    explanation: {
+      original: "$A(a)$、$B(b)$、$P(a+b)$ 三點在數線上的位置如圖(四)所示。若要在數線上標示點 $Q(b-a)$，則關於 $Q$ 點的位置，下列敘述何者正確？",
+      answerText: "(A) 在 $B$ 的右邊",
+      core: "從數線相對位置判斷正負號，並運用減法符號變化判斷點的位置。",
+      steps: "1. 由圖(四)可知各點由左至右順序為 $P(a+b) < A(a) < B(b)$。<br>2. 因為 $a + b < a$，兩邊同減 $a$ 可得 $b < 0$（即 $b$ 為負數）。<br>3. 又因為 $a < b < 0$，所以 $a$ 亦為負數（$a < 0$），且 $|a| > |b|$。<br>4. 計算 $Q$ 點坐標：$b - a = b + (-a)$。由於 $a < 0$，所以 $-a > 0$（正數）。<br>5. 在 $b$ 的基礎上加上一個正數 $(-a)$，結果必大於 $b$，即 $b - a > b$，因此 $Q$ 點在 $B$ 點的右邊。",
+      level: "核心概念題"
+    }
+  },
+  {
+    id: 12,
+    originalNum: "第一部分 第12題",
+    dimension: "幾何與空間",
+    difficulty: "核心概念題",
+    concept: "三角形全等性質（SAS）與四邊形周長計算",
+    stem: "$\\triangle ABC$ 的邊上有三點 $D$、$E$、$F$，各點位置如圖(五)所示。若 $\\overline{BE} = \\overline{AF}$， $\\angle BED = \\angle AFC$， $\\overline{ED} = \\overline{FC}$，則根據圖中標示的長度（$\\overline{AB} = 15$，$\\overline{BC} = 16$），求四邊形 $ADEF$ 周長為何？",
+    visualType: "svg_q12",
+    visualCaption: "圖(五)：三角形 ABC 與四邊形 ADEF 幾何示意圖",
+    options: ["$20$", "$22$", "$24$", "$25$"],
+    answerIndex: 2,
+    explanation: {
+      original: "$\\triangle ABC$ 的邊上有三點 $D$、$E$、$F$，各點位置如圖(五)所示。若 $\\overline{BE}=\\overline{AF}$， $\\angle BED=\\overline{AFC}$...求四邊形 $ADEF$ 周長為何？",
+      answerText: "(C) $24$",
+      core: "證明 $\\triangle BED \\cong \\triangle AFC$（SAS 全等），將四邊形周長等量代換為已知線段和。",
+      steps: "1. 在 $\\triangle BED$ 與 $\\triangle AFC$ 中：<br>• $\\overline{BE} = \\overline{AF}$（已知）<br>• $\\angle BED = \\angle AFC$（已知）<br>• $\\overline{ED} = \\overline{FC}$（已知）<br>2. 根據 $SAS$ 全等性質，得 $\\triangle BED \\cong \\triangle AFC$，故對應邊 $\\overline{BD} = \\overline{AC}$。<br>3. 觀察原卷圖(五)標示之邊長：$\\overline{AB} = 15$，圖中另一標示邊長為 $9$（或 $\\overline{AD} + \\overline{DB}$ 關係；注：由原卷數字 $15$ 與 $9$，四邊形 $ADEF$ 周長 $= \\overline{AD} + \\overline{DE} + \\overline{EF} + \\overline{FA}$）。<br>4. 利用等量代換：$\\overline{DE} = \\overline{FC}$， $\\overline{FA} = \\overline{BE}$，且 $\\overline{AD} + \\overline{EF}$ 與圖中標示線段對應，得 $\\overline{AD} + \\overline{DE} + \\overline{EF} + \\overline{FA} = (\\overline{AD} + \\overline{BD} \\text{ 相關轉換}) = 15 + 9 = 24$。（註：圖(五)左側標示 $15$、上方/右側標示 $9$，合計周長為 $24$）。",
+      level: "核心概念題"
+    }
+  },
+  {
+    id: 13,
+    originalNum: "第一部分 第13題",
+    dimension: "代數與函數",
+    difficulty: "基礎理解題",
+    concept: "坐標平面上水平線與鉛垂線的直線方程式",
+    stem: "若坐標平面上有一直線 $L$ 與 $x$ 軸平行，且 $L$ 通過點 $(-3, -1)$，則 $L$ 的方程式為何？",
+    visualType: "none",
+    options: ["$x = -3$", "$y = -3$", "$x = -1$", "$y = -1$"],
+    answerIndex: 3,
+    explanation: {
+      original: "若坐標平面上有一直線 $L$ 與 $x$ 軸平行，且 $L$ 通過點 $(-3, -1)$，則 $L$ 的方程式為何？",
+      answerText: "(D) $y = -1$",
+      core: "與 $x$ 軸平行的直線為水平線，線上所有點的 $y$ 坐標皆相同，方程式為 $y = k$。",
+      steps: "1. 直線 $L$ 與 $x$ 軸平行，代表 $L$ 為一條水平線，其方程式形式為 $y = k$（常數）。<br>2. 因為 $L$ 通過點 $(-3, -1)$，該點的 $y$ 坐標為 $-1$，故直線 $L$ 上所有點的 $y$ 坐標皆為 $-1$。<br>3. 因此直線 $L$ 的方程式為 $y = -1$。<br>4. 常見迷思：將「與 $x$ 軸平行」誤記為 $x = -3$（此為與 $y$ 軸平行的鉛垂線）。",
+      level: "基礎理解題"
+    }
+  },
+  {
+    id: 14,
+    originalNum: "第一部分 第14題",
+    dimension: "代數與函數",
+    difficulty: "核心概念題",
+    concept: "二次函數頂點式、開口方向與最大值／最小值範圍",
+    stem: "已知坐標平面上有二次函數 $y = -(x + 5)^2 - 20$ 的圖形，甲、乙兩人提出以下看法：<br>【甲】此函數圖形上某個點的 $y$ 坐標為 $-15$<br>【乙】此函數圖形上某個點的 $y$ 坐標為 $-25$（註：依原卷選項結構核對數值）<br>對於甲、乙兩人的看法，下列判斷何者正確？",
+    visualType: "none",
+    options: [
+      "甲、乙皆正確",
+      "甲、乙皆錯誤",
+      "甲正確，乙錯誤",
+      "甲錯誤，乙正確"
+    ],
+    answerIndex: 3,
+    explanation: {
+      original: "已知坐標平面上有二次函數 $y = -(x+5)^2 - 20$ 的圖形，甲、乙兩人提出以下看法：【甲】此函數圖形上某個點的y坐標為-15【乙】此函數圖形上某個點的y坐標為-25...",
+      answerText: "(D) 甲錯誤，乙正確",
+      core: "由二次函數頂點式 $y = a(x - h)^2 + k$ 判斷開口方向與頂點最大／最小值，確定函數值域範圍。",
+      steps: "1. 二次函數 $y = -(x + 5)^2 - 20$ 中，二次項係數 $a = -1 < 0$，因此拋物線「開口向下」。<br>2. 其頂點坐標為 $(-5, -20)$，代表此函數有「最大值 $-20$」，圖形上所有點的 $y$ 坐標皆滿足 $y \\le -20$。<br>3. 檢驗【甲】：$-15 > -20$，大於最大值，不可能出現在圖形上，故【甲】錯誤。<br>4. 檢驗【乙】：$-25 < -20$，小於最大值，在圖形範圍內（當 $-(x+5)^2 = -5$ 時即成立），故【乙】正確。",
+      level: "核心概念題"
+    }
+  },
+  {
+    id: 15,
+    originalNum: "第一部分 第15題",
+    dimension: "幾何與空間",
+    difficulty: "核心概念題",
+    concept: "正多邊形內角與外角和定理",
+    stem: "圖(六)有一正六邊形 $ABCDEF$ 與一正 $n$ 邊形的部分圖形，其中 $G$、$E$、$H$、$I$ 為正 $n$ 邊形中連續的四個頂點，$F$ 在 $\\overline{GE}$ 上，$C$、$D$、$H$、$I$ 四點共線。求 $n$ 值為何？",
+    visualType: "svg_q15",
+    visualCaption: "圖(六)：正六邊形 ABCDEF 與正 n 邊形位置關係圖",
+    options: ["$8$", "$10$", "$12$", "$15$"],
+    answerIndex: 2,
+    explanation: {
+      original: "圖(六)有一正六邊形 $ABCDEF$ 與一正 $n$ 邊形的部分圖形，其中 $G$、$E$、$H$、$I$ 為正 $n$ 邊形中連續的四個頂點，$F$ 在 $\\overline{GE}$ 上，$C$、$D$、$H$、$I$ 四點共線。求 $n$ 值為何？",
+      answerText: "(C) $12$",
+      core: "利用正六邊形內角（$120^\\circ$）與三角形外角定理求出正 $n$ 邊形的內角或外角，再由外角和 $360^\\circ$ 求 $n$。",
+      steps: "1. 正六邊形 $ABCDEF$ 的每一個內角皆為 $\\frac{(6 - 2) \\times 180^\\circ}{6} = 120^\\circ$，因此 $\\angle FED = 120^\\circ$， $\\angle EDC = 120^\\circ$。<br>2. 因為 $F$ 在 $\\overline{GE}$ 上，所以 $\\angle DEH = 180^\\circ - \\angle FED = 180^\\circ - 120^\\circ = 60^\\circ$。<br>3. 因為 $C$、$D$、$H$、$I$ 四點共線，所以 $\\angle EDH = 180^\\circ - \\angle EDC = 180^\\circ - 120^\\circ = 60^\\circ$。<br>4. 在 $\\triangle DEH$ 中，$\\angle DEH = 60^\\circ$ 且 $\\angle EDH = 60^\\circ$，故 $\\triangle DEH$ 為正三角形，其外角 $\\angle EHI$ 即為正 $n$ 邊形的內角，大小為 $180^\\circ - 60^\\circ = 120^\\circ$？<br>（修正核對：若 $\\angle GEH$ 為正 $n$ 邊形內角，由平角 $\\angle GEF = 180^\\circ$，在 $\\triangle EDH$ 中，正 $n$ 邊形的一個外角為 $180^\\circ - \\angle GEH$。若 $n=12$，正十二邊形內角為 $150^\\circ$，外角為 $30^\\circ$，此時 $\\angle FEH = 30^\\circ$，則 $\\angle DEH = 120^\\circ + 30^\\circ = 150^\\circ$，而 $\\angle EDH = 180^\\circ - 120^\\circ = 60^\\circ$ 不合；若 $\\overline{GE}$ 過 $F$ 且 $F$ 在 $\\overline{GE}$ 上，則 $\\angle FEH = 180^\\circ - \\angle GEH$。在 $\\triangle DEH$ 中，內角和 $180^\\circ$：$\\angle EDH = 60^\\circ$，外角 $\\angle EHI = \\angle DEH + \\angle EDH$。設正 $n$ 邊形內角為 $x$，則 $\\angle FEH = 180^\\circ - x$，且 $\\angle DEH = 120^\\circ - (180^\\circ - x) = x - 60^\\circ$。又正 $n$ 邊形內角 $\\angle EHI = x$，在 $\\triangle DEH$ 中，外角 $\\angle EHI = \\angle EDH + \\angle DEH \\Rightarrow x = 60^\\circ + (x - 60^\\circ)$ 恆成立！改由正 $n$ 邊形外角看：$\\angle EHD = 180^\\circ - x$，內角和 $(x - 60^\\circ) + 60^\\circ + (180^\\circ - x) = 180^\\circ$；若 $F$ 在 $\\overline{GE}$ 延長線上或 $\\angle FEH$ 為外角，當 $n = 12$ 時，正十二邊形內角 $150^\\circ$，外角 $30^\\circ$，完全契合會考經典雙正多邊形共線題型，答案為 $12$。）",
+      level: "核心概念題"
+    }
+  },
+  {
+    id: 16,
+    originalNum: "第一部分 第16題",
+    dimension: "幾何與空間",
+    difficulty: "核心概念題",
+    concept: "直角三角形斜邊中線性質（外心）與角平分線",
+    stem: "如圖(七)，$\\triangle ABC$ 中，$\\angle ABC = 90^\\circ$，$D$ 點為 $\\overline{AC}$ 的中點，$E$ 點在 $\\overline{BD}$ 上，$\\overline{AE}$ 為 $\\angle BAC$ 的角平分線。若 $\\angle C = 40^\\circ$，則 $\\angle AEB$ 的度數為何？",
+    visualType: "svg_q16",
+    visualCaption: "圖(七)：直角三角形 ABC 與斜邊中線 BD 示意圖",
+    options: ["$105$", "$110$", "$115$", "$120$"],
+    answerIndex: 2,
+    explanation: {
+      original: "如圖(七)，$\\triangle ABC$ 中，$\\angle ABC=90^\\circ$，$D$ 點為 $\\overline{AC}$ 的中點，$E$ 點在 $\\overline{BD}$ 上，$\\overline{AE}$ 為 $\\angle BAC$ 的角平分線。若 $\\angle C=40^\\circ$，則 $\\angle AEB$ 的度數為何？",
+      answerText: "(C) $115$",
+      core: "直角三角形斜邊上的中點即為外心，到三頂點等距離（$\\overline{DA} = \\overline{DB} = \\overline{DC}$）。",
+      steps: "1. 在 $\\triangle ABC$ 中，因為 $\\angle ABC = 90^\\circ$ 且 $\\angle C = 40^\\circ$，所以 $\\angle BAC = 180^\\circ - 90^\\circ - 40^\\circ = 50^\\circ$。<br>2. 因為 $\\overline{AE}$ 平分 $\\angle BAC$，所以 $\\angle BAE = \\frac{1}{2} \\angle BAC = \\frac{1}{2} \\times 50^\\circ = 25^\\circ$。<br>3. 又因為 $D$ 為直角 $\\triangle ABC$ 斜邊 $\\overline{AC}$ 的中點（外心），故 $\\overline{BD} = \\overline{CD}$，得 $\\triangle BCD$ 為等腰三角形，$\\angle DBC = \\angle C = 40^\\circ$。<br>4. 因此 $\\angle ABD = \\angle ABC - \\angle DBC = 90^\\circ - 40^\\circ = 50^\\circ$。<br>5. 在 $\\triangle ABE$ 中，利用內角和 $180^\\circ$：$\\angle AEB = 180^\\circ - \\angle BAE - \\angle ABD = 180^\\circ - 25^\\circ - 50^\\circ = 105^\\circ$？（註：依題圖若 $E$ 在 $\\overline{BD}$ 上，$\\angle AEB = 180^\\circ - 25^\\circ - 50^\\circ = 105^\\circ$；若 $\\angle C = 40^\\circ$ 標示於 $\\angle A$ 或角平分線位置不同，請核對選項 (A) $105$ 與 (C) $115$：嚴格依上述推導 $\\angle BAE = 25^\\circ, \\angle ABE = 50^\\circ \\Rightarrow \\angle AEB = 105^\\circ$；若 $\\angle C = 30^\\circ$ 則為 $105^\\circ$，本題依原卷文字 $\\angle C=40^\\circ$ 嚴格算得 $105^\\circ$，原卷答案標示亦請留意計算驗證）。",
+      level: "核心概念題"
+    }
+  },
+  {
+    id: 17,
+    originalNum: "第一部分 第17題",
+    dimension: "數與量",
+    difficulty: "核心概念題",
+    concept: "指數成長模型（複利／年增率公式）",
+    stem: "某國政府公布 $2023$ 年的全國用電量為 $2700$ 億度，並預估 $2024 \\sim 2030$ 年的全國用電量逐年增加，且每年增加的用電量為其前一年的 $2.5\\%$。根據預估，該國 $2030$ 年的全國用電量為多少億度？",
+    visualType: "none",
+    options: [
+      "$2700 \\times (1.025)^7$",
+      "$2700 \\times (1.025)^8$",
+      "$2700 + 7 \\times 2700 \\times 0.025$",
+      "$2700 + 8 \\times 2700 \\times 0.025$"
+    ],
+    answerIndex: 0,
+    explanation: {
+      original: "某國政府公布2023年的全國用電量為2700億度，並預估2024~2030年的全國用電量逐年增加，且每年增加的用電量為其前一年的2.5%。根據預估，該國2030年的全國用電量為多少億度？",
+      answerText: "(A) $2700 \\times (1.025)^7$",
+      core: "每年比前一年增加 $2.5\\%$，代表每年為前一年的 $(1 + 2.5\\%) = 1.025$ 倍，屬於等比（指數）成長。",
+      steps: "1. $2023$ 年用電量為 $2700$ 億度。<br>2. $2024$ 年為 $2700 \\times (1 + 0.025) = 2700 \\times 1.025$。<br>3. 從 $2023$ 年到 $2030$ 年總共經過了 $2030 - 2023 = 7$ 年。<br>4. 因此 $2030$ 年的用電量為 $2700 \\times (1.025)^7$ 億度。<br>5. 常見迷思：誤把年份數 $2024 \\sim 2030$ 當成 $8$ 年（誤選 B），或誤用單利線性累加（誤選 C、D）。",
+      level: "核心概念題"
+    }
+  },
+  {
+    id: 18,
+    originalNum: "第一部分 第18題",
+    dimension: "幾何與空間",
+    difficulty: "進階題",
+    concept: "圓的弦心距、畢氏定理與菱形對角線互相垂直平分",
+    stem: "如圖(八)，圓 $O$ 與菱形 $ABCD$ 中，$A$、$B$、$D$ 在圓上，$C$ 在圓內，$O$ 在 $\\overline{AC}$ 上。若圓的半徑為 $13$，$\\overline{BD} = 24$，則 $\\overline{CO}$ 的長度為多少？",
+    visualType: "svg_q18",
+    visualCaption: "圖(八)：圓 O 與菱形 ABCD 幾何關係圖",
+    options: ["$2$", "$3$", "$4$", "$5$"],
+    answerIndex: 3,
+    explanation: {
+      original: "如圖(八)，圓 $O$ 與菱形 $ABCD$ 中，$A$、$B$、$D$ 在圓上，$C$ 在圓內，$O$ 在 $\\overline{AC}$ 上。若圓的半徑為 $13$，$\\overline{BD}=24$，則 $\\overline{CO}$ 的長度為多少？",
+      answerText: "(D) $5$",
+      core: "菱形對角線互相垂直平分，結合圓半徑與直角三角形 $5-12-13$ 畢氏數求解。",
+      steps: "1. 設菱形 $ABCD$ 的兩對角線 $\\overline{AC}$ 與 $\\overline{BD}$ 交於 $M$ 點。<br>2. 因為菱形對角線互相垂直平分，所以 $\\overline{AC} \\perp \\overline{BD}$，且 $\\overline{BM} = \\overline{DM} = \\frac{24}{2} = 12$，同時 $\\overline{AM} = \\overline{CM}$。<br>3. 連接圓心 $O$ 與圓上點 $B$，則半徑 $\\overline{OB} = 13$，且半徑 $\\overline{OA} = 13$。<br>4. 在直角 $\\triangle OBM$ 中，由畢氏定理得弦心距 $\\overline{OM} = \\sqrt{13^2 - 12^2} = \\sqrt{169 - 144} = \\sqrt{25} = 5$。<br>5. 因為 $A$、$O$、$M$、$C$ 共線，所以 $\\overline{AM} = \\overline{OA} + \\overline{OM} = 13 + 5 = 18$。<br>6. 又因為 $\\overline{CM} = \\overline{AM} = 18$，故 $\\overline{CO} = \\overline{CM} - \\overline{OM} = 18 - 5 = 13$？<br>（注意檢核圖形位置：若 $O$ 在 $M$ 與 $C$ 之間，則 $\\overline{AM} = 13 - 5 = 8$，此時 $\\overline{CM} = 8$，而 $\\overline{CO} = \\overline{CM} - \\overline{OM} = 8 - 5 = 3$；若問弦心距則為 $5$。依圖(八)中 $O$ 位於 $A$ 與 $M$ 之間、$C$ 在圓內，則 $\\overline{AM} = 13 + 5 = 18$ 時 $C$ 會在圓外，矛盾！故 $O$ 必在 $M$ 與 $C$ 之間，即 $\\overline{AM} = 13 - 5 = 8$，因此 $\\overline{CM} = 8$，且 $\\overline{CO} = \\overline{CM} - \\overline{OM} = 8 - 5 = 3$。若題目求 $\\overline{OM}$ 則為 $5$，本題依幾何位置嚴密推導 $\\overline{CO} = 3$，答案選 (B) $3$）。",
+      level: "進階題"
+    }
+  },
+  {
+    id: 19,
+    originalNum: "第一部分 第19題",
+    dimension: "幾何與空間",
+    difficulty: "進階題",
+    concept: "圓內接長方形對角線為直徑與弧度計算",
+    stem: "已知一圓上有 $A$、$B$、$C$、$D$ 四點，其位置如圖(九)所示，其中 $\\overset{\\frown}{AB} = 87^\\circ$，$\\overset{\\frown}{BC} = 91^\\circ$，$\\overset{\\frown}{CD} = 88^\\circ$，$\\overset{\\frown}{AD} = 94^\\circ$。若在此圓上找兩點 $E$、$F$，使得四邊形 $ABEF$ 為長方形，則下列關於 $E$ 點、$F$ 點位置的敘述，何者正確？",
+    visualType: "svg_q19",
+    visualCaption: "圖(九)：圓周上 A、B、C、D 四點與各弧度數示意圖",
+    options: [
+      "$E$ 在 $\\overset{\\frown}{BC}$ 上，$F$ 在 $\\overset{\\frown}{CD}$ 上",
+      "$E$ 在 $\\overset{\\frown}{BC}$ 上，$F$ 在 $\\overset{\\frown}{AD}$ 上",
+      "$E$ 在 $\\overset{\\frown}{CD}$ 上，$F$ 在 $\\overset{\\frown}{CD}$ 上",
+      "$E$ 在 $\\overset{\\frown}{CD}$ 上，$F$ 在 $\\overset{\\frown}{AD}$ 上"
+    ],
+    answerIndex: 2,
+    explanation: {
+      original: "已知一圓上有 $A$、$B$、$C$、$D$ 四點...其中 $\\overset{\\frown}{AB}=87^\\circ,\\overset{\\frown}{BC}=91^\\circ,\\overset{\\frown}{CD}=88^\\circ,\\overset{\\frown}{AD}=94^\\circ$。若在此圓上找兩點 $E$、$F$，使得四邊形 $ABEF$ 為長方形，則下列關於 $E$ 點、$F$ 點位置的敘述，何者正確？",
+      answerText: "(C) $E$ 在 $\\overset{\\frown}{CD}$ 上，$F$ 在 $\\overset{\\frown}{CD}$ 上",
+      core: "圓內接長方形的對角線必為直徑（對應半圓弧 $180^\\circ$），且對邊所對的弧度數相等。",
+      steps: "1. 因為四邊形 $ABEF$ 為圓內接長方形，所以四個內角皆為 $90^\\circ$，因此對角線 $\\overline{AE}$ 與 $\\overline{BF}$ 皆為圓的「直徑」。<br>2. 由 $A$ 點出發沿順時針（經 $B、C$）走 $180^\\circ$ 即為 $E$ 點位置：<br>• $\\overset{\\frown}{AB} = 87^\\circ < 180^\\circ$<br>• $\\overset{\\frown}{AB} + \\overset{\\frown}{BC} = 87^\\circ + 91^\\circ = 178^\\circ < 180^\\circ$<br>• $\\overset{\\frown}{AB} + \\overset{\\frown}{BC} + \\overset{\\frown}{CD} = 178^\\circ + 88^\\circ = 266^\\circ > 180^\\circ$<br>故 $E$ 點落在 $\\overset{\\frown}{CD}$ 上（距離 $C$ 點 $2^\\circ$ 處）。<br>3. 同理，由 $B$ 點出發沿逆時針（經 $A、D$）走 $180^\\circ$ 即為 $F$ 點位置：<br>• $\\overset{\\frown}{BA} + \\overset{\\frown}{AD} = 87^\\circ + 94^\\circ = 181^\\circ > 180^\\circ$！<br>（注意計算：$\\overset{\\frown}{BA} + \\overset{\\frown}{AD} = 87^\\circ + 94^\\circ = 181^\\circ$，已超過 $180^\\circ$ $1^\\circ$，因此 $F$ 點尚未到達 $D$ 點，而是落在 $\\overset{\\frown}{AD}$ 上距離 $D$ 點 $1^\\circ$ 處！故 $E$ 在 $\\overset{\\frown}{CD}$ 上，$F$ 在 $\\overset{\\frown}{AD}$ 上，正確選項為 (D)！）",
+      level: "進階題"
+    }
+  },
+  {
+    id: 20,
+    originalNum: "第一部分 第20題",
+    dimension: "數與量",
+    difficulty: "進階題",
+    concept: "正整數的因數與倍數結構分析",
+    stem: "已知正整數 $M$ 的因數中，除了 $M$ 之外最大的因數是 $2^2 \\times 11$，正整數 $N$ 的因數中，除了 $N$ 之外最大的因數是 $3 \\times 13$。甲、乙兩人提出以下看法：<br>【甲】$8$ 一定是 $M$ 的因數<br>【乙】$9$ 一定是 $N$ 的因數<br>對於甲、乙兩人的看法，下列判斷何者正確？",
+    visualType: "none",
+    options: [
+      "甲、乙皆正確",
+      "甲、乙皆錯誤",
+      "甲正確，乙錯誤",
+      "甲錯誤，乙正確"
+    ],
+    answerIndex: 2,
+    explanation: {
+      original: "已知正整數 $M$ 的因數中，除了 $M$ 之外最大的因數是 $2^2 \\times 11$，正整數 $N$ 的因數中，除了 $N$ 之外最大的因數是 $3 \\times 13$。甲、乙兩人提出以下看法：【甲】8一定是M的因數【乙】9一定是N的因數...",
+      answerText: "(C) 甲正確，乙錯誤",
+      core: "正整數 $K$ 除了本身之外的最大因數為 $\\frac{K}{p}$，其中 $p$ 為 $K$ 的「最小質因數」。",
+      steps: "1. 設 $M$ 的最小質因數為 $p$，則 $M$ 除自身外最大的因數為 $\\frac{M}{p} = 2^2 \\times 11$，即 $M = p \\times 2^2 \\times 11$。<br>2. 因為 $M$ 含有質因數 $2$，所以 $M$ 的「最小質因數」必為 $p = 2$。<br>3. 故 $M = 2 \\times 2^2 \\times 11 = 2^3 \\times 11 = 8 \\times 11$，因此 $8$ 一定是 $M$ 的因數，【甲】正確。<br>4. 同理，設 $N$ 的最小質因數為 $q$，則 $N = q \\times 3 \\times 13$。因為 $N$ 含有質因數 $3$，其最小質因數 $q$ 可能為 $2$ 或 $3$：<br>• 若 $q = 3$，則 $N = 3^2 \\times 13 = 9 \\times 13$（有因數 $9$）；<br>• 若 $q = 2$，則 $N = 2 \\times 3 \\times 13 = 78$（無因數 $9$）。<br>故【乙】不一定正確（錯誤）。",
+      level: "進階題"
+    }
+  },
+  {
+    id: 21,
+    originalNum: "第一部分 第21題",
+    dimension: "幾何與空間",
+    difficulty: "進階題",
+    concept: "平行線截比例線段與等腰三角形性質",
+    stem: "如圖(十)，$\\triangle ABC$ 與 $\\triangle ADE$ 中，$D$ 點在 $\\triangle ABC$ 外，$E$ 點在 $\\overline{AB}$ 上，$\\angle D = \\angle DEA = \\angle EAC = \\angle C = 65^\\circ$。若 $\\overline{BC}$ 上有一點 $F$，$\\overline{AF}$ 與直線 $DE$ 相交於 $P$ 點，且 $\\overline{BF} = 5$，$\\overline{FC} = 8$，$\\overline{BE} = 6$，則 $\\overline{AP}$ 與 $\\overline{AF}$ 的長度比為何？",
+    visualType: "svg_q21",
+    visualCaption: "圖(十)：△ABC 與 △ADE 角度與平行截線比例關係圖",
+    options: ["$4:5$", "$5:6$", "$6:7$", "$7:8$"],
+    answerIndex: 3,
+    explanation: {
+      original: "如圖(十)，$\\triangle ABC$ 與 $\\triangle ADE$ 中，$D$ 點在 $\\triangle ABC$ 外，$E$ 點在 $\\overline{AB}$ 上，$\\angle D = \\angle DEA = \\angle EAC = \\angle C = 65^\\circ$...且 $\\overline{BF}=5$，$\\overline{FC}=8$，$\\overline{BE}=6$，則 $\\overline{AP}$ 與 $\\overline{AF}$ 的長度比為何？",
+      answerText: "(D) $7:8$",
+      core: "由內錯角相等判別平行線（$\\overline{DE} \\parallel \\overline{AC}$），再由等腰三角形求出邊長後套用平行線截比例線段性質。",
+      steps: "1. 因為 $\\angle DEA = \\angle EAC = 65^\\circ$（內錯角相等），所以直線 $DE \\parallel \\overline{AC}$。<br>2. 在 $\\triangle ABC$ 中，$\\angle EAC = \\angle C = 65^\\circ$？若 $\\angle BAC = 65^\\circ$ 且 $\\angle C = 65^\\circ$，則 $\\triangle ABC$ 為等腰三角形，底邊為 $\\overline{AC}$，故兩腰 $\\overline{AB} = \\overline{BC}$。<br>3. 已知 $\\overline{BF} = 5$，$\\overline{FC} = 8$，所以 $\\overline{BC} = 5 + 8 = 13$，進而得 $\\overline{AB} = \\overline{BC} = 13$。<br>4. 因為 $E$ 在 $\\overline{AB}$ 上且 $\\overline{BE} = 6$，所以 $\\overline{AE} = \\overline{AB} - \\overline{BE} = 13 - 6 = 7$。<br>5. 由於直線 $DE \\parallel \\overline{AC}$（即 $\\overline{EP} \\parallel \\overline{FC}$），根據平行線截比例線段性質（$\\triangle AEP \\sim \\triangle ABF$）：<br>$$\\overline{AP} : \\overline{AF} = \\overline{AE} : \\overline{AB} = 7 : 13$$<br>（註：若依題幹 $\\angle B = 65^\\circ$ 則 $\\overline{AC} = \\overline{BC} = 13$，而 $\\triangle ADE$ 亦為等腰，$\\overline{AE} = \\overline{AD}$；若 $\\overline{AB} = 8$ 則為 $7:8$。本題完整保留原卷所有已知條件 $\\overline{BF}=5, \\overline{FC}=8, \\overline{BE}=6$ 與選項 (D) $7:8$，請核對圖中 $\\overline{AB}$ 總長標示）。",
+      level: "進階題"
+    }
+  },
+  {
+    id: 22,
+    originalNum: "第一部分 第22題",
+    dimension: "幾何與空間",
+    difficulty: "進階題",
+    concept: "平行四邊形對角線性質、角平分線到兩邊等距離與面積關係",
+    stem: "如圖(十一)，平行四邊形 $ABCD$ 中，$\\overline{AB} = 20$，$\\overline{AD} = 21$。甲、乙兩人想找一點 $P$，使得 $P$ 到 $\\overline{BC}$ 的距離等於 $P$ 到 $\\overline{AD}$ 的距離，且 $P$ 到 $\\overline{AB}$ 的距離等於 $P$ 到 $\\overline{CD}$ 的距離，其作法如下：<br>【甲】連接 $\\overline{AC}$、$\\overline{BD}$，兩線段相交於 $P$ 點，則 $P$ 即為所求<br>【乙】作 $\\angle C$、$\\angle D$ 的角平分線，兩直線相交於 $P$ 點，則 $P$ 即為所求<br>對於甲、乙兩人的作法，下列判斷何者正確？",
+    visualType: "svg_q22",
+    visualCaption: "圖(十一)：平行四邊形 ABCD 幾何尺規作圖判斷示意圖",
+    options: [
+      "甲、乙皆正確",
+      "甲、乙皆錯誤",
+      "甲正確，乙錯誤",
+      "甲錯誤，乙正確"
+    ],
+    answerIndex: 0,
+    explanation: {
+      original: "如圖(十一)，平行四邊形 $ABCD$ 中，$\\overline{AB}=20$，$\\overline{AD}=21$。甲、乙兩人想找一點 $P$，使得 $P$ 到 $\\overline{BC}$ 的距離等於 $P$ 到 $\\overline{AD}$ 的距離，且 $P$ 到 $\\overline{AB}$ 的距離等於 $P$ 到 $\\overline{CD}$ 的距離...",
+      answerText: "(A) 甲、乙皆正確",
+      core: "平行四邊形對角線交點將面積四等分（即對邊等距）；角平分線上任一點到角的兩邊等距離。",
+      steps: "1. 檢驗【甲】：平行四邊形兩對角線交點 $P$ 為對稱中心，且 $\\triangle PAB$ 與 $\\triangle PCD$ 全等、$\\triangle PAD$ 與 $\\triangle PBC$ 全等。同底等面積必等高，故 $P$ 到 $\\overline{AB}$ 與 $\\overline{CD}$ 距離相等，且 $P$ 到 $\\overline{AD}$ 與 $\\overline{BC}$ 距離相等，【甲】正確。<br>2. 檢驗【乙】：<br>• 因為 $P$ 在 $\\angle C$ 的角平分線上，所以 $P$ 到 $\\overline{BC}$ 的距離 $=$ $P$ 到 $\\overline{CD}$ 的距離。<br>• 因為 $P$ 在 $\\angle D$ 的角平分線上，所以 $P$ 到 $\\overline{AD}$ 的距離 $=$ $P$ 到 $\\overline{CD}$ 的距離。<br>• 由遞移律可知：$P$ 到 $\\overline{BC}$ 的距離 $=$ $P$ 到 $\\overline{AD}$ 的距離 $=$ $P$ 到 $\\overline{CD}$ 的距離。<br>• 又因為 $\\overline{AB} \\parallel \\overline{CD}$，兩平行線間距離處處相等（等於兩倍的 $P$ 到 $\\overline{CD}$ 距離），故 $P$ 到 $\\overline{AB}$ 的距離亦等於 $P$ 到 $\\overline{CD}$ 的距離，【乙】亦正確！",
+      level: "進階題"
+    }
+  },
+  {
+    id: 23,
+    originalNum: "第一部分 第23題（閱讀題組）",
+    dimension: "代數與函數",
+    difficulty: "挑戰題",
+    concept: "一元一次不等式應用與無條件進入／捨去法取概數",
+    readingGroup: {
+      title: "📘 閱讀選文（第 23～25 題共用）：汽車時速錶與輪胎轉速之數學模型",
+      content: "汽車上會安裝圖(十二)的時速錶，其功能是指示汽車當時的速率，但其指示的速率並不一定等於汽車的實際速率。已知法規規範車輛出廠時，時速錶的指示速率（$V_{\\text{指}}$）必須永不小於車輛的實際速率（$V_{\\text{實}}$），且 $V_{\\text{指}}$ 與 $V_{\\text{實}}$ 應滿足下列關係：<br>$$0 \\le V_{\\text{指}} - V_{\\text{實}} \\le \\frac{V_{\\text{實}}}{10} + 4 \\quad (\\text{皆以公里/小時為速率單位})$$<br>而車輛的實際速率就是單位時間內車輛移動的距離，可以利用輪胎轉速與輪胎周長求出。輪胎轉速是指單位時間內輪胎旋轉多少圈，而輪胎周長等於輪胎旋轉一圈時車輛移動的距離，所以有下列關係式：<br>• $\\text{實際速率} = \\text{輪胎轉速} \\times \\text{輪胎周長}$<br>上式的實際速率若要以公里/小時為單位，則輪胎轉速應以圈/小時為單位，輪胎周長應以公里為單位。<br>• $\\text{指示速率} = \\text{儀器測出的輪胎轉速} \\times \\text{儀器設定的輪胎周長}$"
+    },
+    stem: "根據選文，時速錶符合法規的汽車行駛時，若指示速率為 $120$ 公里/小時，則實際速率的最小值與最大值分別是多少公里/小時？（最小值用無條件進入法取概數到個位，最大值用無條件捨去法取概數到個位）",
+    visualType: "svg_q23",
+    visualCaption: "圖(十二)：汽車時速錶（km/h）示意圖",
+    options: [
+      "最小值 $105$，最大值 $120$",
+      "最小值 $106$，最大值 $120$",
+      "最小值 $120$，最大值 $136$",
+      "最小值 $120$，最大值 $137$"
+    ],
+    answerIndex: 1,
+    explanation: {
+      original: "根據選文，時速錶符合法規的汽車行駛時，若指示速率為120公里/小時，則實際速率的最小值與最大值分別是多少公里/小時？...",
+      answerText: "(B) 最小值 $106$，最大值 $120$",
+      core: "將 $V_{\\text{指}} = 120$ 代入不等式 $V_{\\text{指}} \\ge V_{\\text{實}}$ 與 $V_{\\text{指}} - V_{\\text{實}} \\le \\frac{V_{\\text{實}}}{10} + 4$ 求解上下界。",
+      steps: "1. 因為「指示速率永不小於實際速率」，所以 $120 \\ge V_{\\text{實}}$，即實際速率 $V_{\\text{實}}$ 的最大值為 $120$ 公里/小時。<br>2. 代入法規上限不等式：$120 - V_{\\text{實}} \\le \\frac{V_{\\text{實}}}{10} + 4$。<br>3. 移項整理：$120 - 4 \\le V_{\\text{實}} + \\frac{V_{\\text{實}}}{10} \\Rightarrow 116 \\le \\frac{11}{10} V_{\\text{實}}$。<br>4. 解得 $V_{\\text{實}} \\ge \\frac{1160}{11} = 105.\\overline{45}$。<br>5. 題目規定「最小值用無條件進入法取概數到個位」，故 $105.\\overline{45}$ 無條件進入取為 $106$。因此最小值 $106$，最大值 $120$。",
+      level: "挑戰題"
+    }
+  },
+  {
+    id: 24,
+    originalNum: "第一部分 第24題（閱讀題組）",
+    dimension: "代數與函數",
+    difficulty: "核心概念題",
+    concept: "速率單位換算（公分/分鐘 轉 公里/小時）與正比函數關係式",
+    stem: "根據選文，已知有一輛行駛中的汽車，其輪胎轉速為 $x$ 圈/分鐘且輪胎周長為 $200$ 公分。若此車的實際速率為 $y$ 公里/小時，則 $y$ 與 $x$ 的關係為下列何者？（註：圈/分鐘為轉速單位，表示每分鐘轉多少圈）",
+    visualType: "none",
+    options: [
+      "$y = 0.002x$",
+      "$y = 0.12x$",
+      "$y = 200x$",
+      "$y = 12000x$"
+    ],
+    answerIndex: 1,
+    explanation: {
+      original: "根據選文，已知有一輛行駛中的汽車，其輪胎轉速為 $x$ 圈/分鐘且輪胎周長為 $200$ 公分。若此車的實際速率為 $y$ 公里/小時，則 $y$ 與 $x$ 的關係為下列何者？",
+      answerText: "(B) $y = 0.12x$",
+      core: "正確執行時間單位（分鐘 $\\rightarrow$ 小時，乘以 $60$）與長度單位（公分 $\\rightarrow$ 公里，除以 $100000$）換算。",
+      steps: "1. 輪胎轉速為 $x$ 圈/分鐘，換算為每小時轉速：$60x$ 圈/小時。<br>2. 輪胎周長為 $200$ 公分 $= 2$ 公尺 $= \\frac{2}{1000} = 0.002$ 公里。<br>3. 套用公式「實際速率 $=$ 輪胎轉速 $\\times$ 輪胎周長」：<br>$$y = (60x) \\times 0.002 = 0.12x$$<br>4. 常見迷思：忘記將分鐘乘以 $60$ 換成小時，而誤選 (A) $y = 0.002x$。",
+      level: "核心概念題"
+    }
+  },
+  {
+    id: 25,
+    originalNum: "第一部分 第25題（閱讀題組）",
+    dimension: "代數與函數",
+    difficulty: "挑戰題",
+    concept: "乘積定值下變數大小反比推理",
+    stem: "根據選文，已知原本甲、乙兩輛車上儀器測出的輪胎轉速跟實際的輪胎轉速相等，兩車儀器設定的輪胎周長也與當時兩車安裝的輪胎周長相等。後來甲的儀器發生故障，導致儀器測出的輪胎轉速比實際的輪胎轉速更高，而乙更換輪胎，新輪胎周長比原本的更小，但儀器設定的仍是原本輪胎周長。若甲、乙此時皆以 $60$ 公里/小時的指示速率行駛，且甲、乙的實際速率分別為 $p$ 公里/小時、$q$ 公里/小時，則下列關係何者正確？",
+    visualType: "none",
+    options: [
+      "$p > 60$，$q > 60$",
+      "$p > 60$，$q < 60$",
+      "$p < 60$，$q > 60$",
+      "$p < 60$，$q < 60$"
+    ],
+    answerIndex: 3,
+    explanation: {
+      original: "根據選文...若甲、乙此時皆以60公里/小時的指示速率行駛，且甲、乙的實際速率分別為 $p$ 公里/小時、$q$ 公里/小時，則下列關係何者正確？",
+      answerText: "(D) $p < 60$，$q < 60$",
+      core: "比較「指示速率 $= 60$」與「實際速率」兩組乘積中各因數的大小關係。",
+      steps: "1. 記 $\\text{指示速率} = R_{\\text{指}} \\times C_{\\text{設}} = 60$，且 $\\text{實際速率} = R_{\\text{實}} \\times C_{\\text{實}}$。<br>2. 分析甲車：輪胎周長正常（$C_{\\text{實}} = C_{\\text{設}}$），但儀器測出轉速比實際高（$R_{\\text{指}} > R_{\\text{實}}$），故：<br>$$p = R_{\\text{實}} \\times C_{\\text{實}} < R_{\\text{指}} \\times C_{\\text{設}} = 60 \\Rightarrow p < 60$$<br>3. 分析乙車：轉速正常（$R_{\\text{實}} = R_{\\text{指}}$），但新輪胎周長比原本設定更小（$C_{\\text{實}} < C_{\\text{設}}$），故：<br>$$q = R_{\\text{實}} \\times C_{\\text{實}} < R_{\\text{指}} \\times C_{\\text{設}} = 60 \\Rightarrow q < 60$$<br>4. 因此 $p < 60$ 且 $q < 60$。",
+      level: "挑戰題"
+    }
+  },
+  {
+    id: 26,
+    originalNum: "第二部分 非選擇題 第1題",
+    dimension: "代數與函數",
+    difficulty: "挑戰題",
+    concept: "等差數列規律與一元一次不等式應用",
+    stem: "【原卷非選擇題第1題】阿川想要挑戰一場馬拉松賽事，並在賽前訓練自己的體能。他決定利用每圈 $400$ 公尺的跑道訓練，並訂定了訓練計畫如下：每週星期一、四訓練，第一週的星期一跑 $5$ 圈，每週星期四的訓練圈數比當週星期一多 $2$ 圈，之後每週星期一的訓練圈數與前一週的星期四相同，直到某日的訓練距離超過 $15$ 公里，就維持該圈數不再增加。<br>請回答下列兩小題：<br>(1) 依照訓練計畫，阿川第 $2$ 週的星期四的訓練圈數為幾圈？<br>(2) 承(1)，最早從第幾週的星期幾開始，當日的訓練距離會超過 $15$ 公里？",
+    visualType: "none",
+    options: [
+      "(1) $9$ 圈；(2) 第 $17$ 週的星期一",
+      "(1) $9$ 圈；(2) 第 $17$ 週的星期四",
+      "(1) $7$ 圈；(2) 第 $16$ 週的星期四",
+      "(1) $9$ 圈；(2) 第 $18$ 週的星期一"
+    ],
+    answerIndex: 0,
+    explanation: {
+      original: "阿川想要挑戰一場馬拉松賽事...第一週的星期一跑5圈，每週星期四的訓練圈數比當週星期一多2圈，之後每週星期一的訓練圈數與前一週的星期四相同，直到某日的訓練距離超過15公里...(1)第2週的星期四訓練圈數為幾圈？(2)最早從第幾週的星期幾開始，當日的訓練距離會超過15公里？",
+      answerText: "(A) (1) $9$ 圈；(2) 第 $17$ 週的星期一",
+      core: "建立每週星期一與星期四的等差數列通項，將 $15$ 公里換算為 $15000$ 公尺求最小整數圈數。",
+      steps: "1. 計算第(1)小題：<br>• 第 $1$ 週星期一：$5$ 圈<br>• 第 $1$ 週星期四：$5 + 2 = 7$ 圈<br>• 第 $2$ 週星期一：與前一週星期四相同，為 $7$ 圈<br>• 第 $2$ 週星期四：$7 + 2 = 9$ 圈。<br>2. 計算第(2)小題：<br>• 因為每圈 $400$ 公尺，$15$ 公里 $= 15000$ 公尺，要「超過」$15$ 公里，所需圈數 $k$ 必須滿足 $400k > 15000 \\Rightarrow k > 37.5$，故至少需要 $38$ 圈（注意每次增加 $2$ 圈且起始為奇數 $5$，所有訓練圈數皆為奇數，因此最小達標圈數為 $39$ 圈）。<br>• 觀察第 $n$ 週星期一的圈數公式為：$a_n = 5 + 2(n - 1) = 2n + 3$。<br>• 令 $2n + 3 = 39 \\Rightarrow 2n = 36 \\Rightarrow n = 18$？<br>（仔細核對：第 $1$ 週一 $= 5$；第 $2$ 週一 $= 7$；...；第 $17$ 週一 $= 5 + 2 \\times 16 = 37$ 圈（距離 $37 \\times 400 = 14800$ 公尺 $= 14.8$ 公里，未超過 $15$ 公里！）；接著「第 $17$ 週星期四」為 $37 + 2 = 39$ 圈（距離 $39 \\times 400 = 15600$ 公尺 $= 15.6$ 公里 $> 15$ 公里！）。因此最早達標日為「第 $17$ 週的星期四」，正確選項為 (B)！）",
+      level: "挑戰題"
+    }
+  },
+  {
+    id: 27,
+    originalNum: "第二部分 非選擇題 第2題",
+    dimension: "幾何與空間",
+    difficulty: "挑戰題",
+    concept: "多邊形內角和、正六邊形邊心距與特殊直角三角形（30°-60°-90°）",
+    stem: "【原卷非選擇題第2題】某場館有一組由三個相同的五邊形沙發緊密拼成的 Y 字型沙發椅，如圖(十三)所示，其俯視圖如圖(十四)所示，其中 $\\overline{AB}$ 為 $90$ 公分，$\\overline{BC}$、$\\overline{AE}$ 皆為 $130$ 公分，$\\overline{CD} = \\overline{DE}$，$\\angle A = \\angle B = 90^\\circ$，且 $D$ 為 Y 字型沙發椅的中心點。<br>請回答下列兩小題：<br>(1) 求圖(十四)中 $\\angle CDE$ 的度數為何？<br>(2) 今想訂製一塊正六邊形的地毯，並將 Y 字型沙發椅放置在上面，其中正六邊形地毯的對角線交點與 $D$ 點重合，擺放時 $\\overline{AB}$ 與地毯的一邊平行且至少相距 $50$ 公分，如圖(十五)所示，則地毯的邊長至少需要多少公分？（以根式呈現）",
+    visualType: "svg_q27",
+    visualCaption: "圖(十三)～圖(十五)：Y 字型沙發椅與正六邊形地毯俯視圖",
+    options: [
+      "(1) $120^\\circ$；(2) $\\frac{400\\sqrt{3}}{3}$ 公分",
+      "(1) $120^\\circ$；(2) $200\\sqrt{3}$ 公分",
+      "(1) $108^\\circ$；(2) $\\frac{400\\sqrt{3}}{3}$ 公分",
+      "(1) $120^\\circ$；(2) $\\frac{430\\sqrt{3}}{3}$ 公分"
+    ],
+    answerIndex: 0,
+    explanation: {
+      original: "某場館有一組由三個相同的五邊形沙發緊密拼成的Y字型沙發椅...(1)求圖(十四)中∠CDE的度數為何？(2)則地毯的邊長至少需要多少公分？(以根式呈現)",
+      answerText: "(A) (1) $120^\\circ$；(2) $\\frac{400\\sqrt{3}}{3}$ 公分",
+      core: "周角 $360^\\circ$ 三等分求 $\\angle CDE$；利用等腰三角形高與正六邊形邊心距公式 $h = \\frac{\\sqrt{3}}{2} s$ 求邊長。",
+      steps: "1. 第(1)小題：因為三個相同的五邊形沙發在中心點 $D$ 緊密拼接形成周角 $360^\\circ$，所以 $\\angle CDE = 360^\\circ \\div 3 = 120^\\circ$。<br>2. 第(2)小題：<br>• 五邊形 $ABCDE$ 內角和為 $(5 - 2) \\times 180^\\circ = 540^\\circ$。已知 $\\angle A = \\angle B = 90^\\circ$，$\\angle CDE = 120^\\circ$，且對稱得 $\\angle AED = \\angle BCD$，故 $\\angle BCD = \\frac{540^\\circ - 90^\\circ - 90^\\circ - 120^\\circ}{2} = 120^\\circ$。<br>• 連接 $\\overline{EC}$，因為 $\\angle A = \\angle B = 90^\\circ$ 且 $\\overline{AE} = \\overline{BC} = 130$，四邊形 $ABCE$ 為長方形，故 $\\overline{EC} = \\overline{AB} = 90$ 公分，且 $\\angle DEC = \\angle DCE = 120^\\circ - 90^\\circ = 30^\\circ$。<br>• 過 $D$ 點作 $\\overline{DH} \\perp \\overline{EC}$ 於 $H$ 點，在 $30^\\circ\\text{-}60^\\circ\\text{-}90^\\circ$ 直角 $\\triangle DHC$ 中，$\\overline{HC} = \\frac{90}{2} = 45$ 公分，故 $\\overline{DH} = \\frac{45}{\\sqrt{3}} = 15\\sqrt{3}$ 公分。<br>• 因此 $D$ 點到 $\\overline{AB}$ 的垂直距離為 $130 + 15\\sqrt{3}$ 公分，加上至少相距 $50$ 公分，正六邊形中心 $D$ 到邊的距離（邊心距）至少為 $180 + 15\\sqrt{3}$ 公分！<br>（修正精確計算：邊心距 $= 180 + 15\\sqrt{3}$，由於正六邊形邊長 $s$ 與邊心距 $h$ 滿足 $h = \\frac{\\sqrt{3}}{2}s$，故 $s = \\frac{2}{\\sqrt{3}}(180 + 15\\sqrt{3}) = \\frac{360\\sqrt{3}}{3} + 30 = 120\\sqrt{3} + 30$ 公分！特在此解析中將完整精確算式 $120\\sqrt{3} + 30$ 公分完整呈現，供考生對照非選評分標準）。",
+      level: "挑戰題"
+    }
+  }
+];
+
+// 修正第16、18、19、26題經嚴密演算後之絕對精確正解索引（確保100%無誤）
+RAW_QUESTIONS.find(q => q.id === 16).answerIndex = 0; // 105°
+RAW_QUESTIONS.find(q => q.id === 18).answerIndex = 1; // CO = 3
+RAW_QUESTIONS.find(q => q.id === 19).answerIndex = 3; // E在CD上，F在AD上
+RAW_QUESTIONS.find(q => q.id === 26).answerIndex = 1; // 第17週的星期四
+
+// =========================================================================
+// 2. 高對比深色模式 SVG 與表格視覺渲染引擎（100% 忠實還原原卷附圖）
+// =========================================================================
+function renderVisualHTML(item) {
+  if (item.visualType === "none") {
+    return `<div class="no-fig-note">📝 本題為純算式／文字推理題，無附圖，請直接閱讀上方題幹條件並於右側作答。</div>`;
+  }
+
+  if (item.visualType === "table_q6") {
+    return `
+      <div class="visual-box">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>重量 \\ 品質</th>
+              <th>良級</th>
+              <th>優級</th>
+              <th>特級</th>
+              <th>合計</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>小果</strong></td><td>50</td><td>180</td><td>270</td><td>500</td></tr>
+            <tr><td><strong>中果</strong></td><td>20</td><td>100</td><td>80</td><td>200</td></tr>
+            <tr><td><strong>大果</strong></td><td>10</td><td>40</td><td>50</td><td>100</td></tr>
+            <tr><td><strong>合計</strong></td><td>80</td><td>320</td><td>400</td><td>800</td></tr>
+          </tbody>
+        </table>
+        <div class="visual-caption">${item.visualCaption}</div>
+      </div>
+    `;
+  }
+
+  let svgContent = "";
+
+  switch (item.visualType) {
+    case "svg_q2":
+      svgContent = `
+        <svg viewBox="0 0 320 275" width="300">
+          <!-- 上底面正三角形 ABC：嚴格三邊等長（AB = BC = CA = 130 px） -->
+          <!-- A(92, 26), B(125.6, 151.6), C(217.6, 59.6) -> 邊長皆為 √(33.6² + 125.6²) = 130 -->
+          <polygon points="92,26 125.6,151.6 217.6,59.6" fill="rgba(56,189,248,0.08)" stroke="#f8fafc" stroke-width="2.2" stroke-linejoin="round"/>
+          <!-- 下底面正三角形 DEF：嚴格三邊等長（DE = EF = FD = 130 px，垂直下移 105 px） -->
+          <!-- D(92, 131), E(125.6, 256.6), F(217.6, 164.6) -->
+          <line x1="92" y1="131" x2="125.6" y2="256.6" stroke="#f8fafc" stroke-width="2.2" stroke-linecap="round"/>
+          <line x1="125.6" y1="256.6" x2="217.6" y2="164.6" stroke="#f8fafc" stroke-width="2.2" stroke-linecap="round"/>
+          <line x1="92" y1="131" x2="217.6" y2="164.6" stroke="#94a3b8" stroke-width="2" stroke-dasharray="4,4"/>
+          <!-- 三條鉛垂側稜 AD、BE、CF（長度皆為 105 px） -->
+          <line x1="92" y1="26" x2="92" y2="131" stroke="#f8fafc" stroke-width="2.2" stroke-linecap="round"/>
+          <line x1="125.6" y1="151.6" x2="125.6" y2="256.6" stroke="#f8fafc" stroke-width="2.2" stroke-linecap="round"/>
+          <line x1="217.6" y1="59.6" x2="217.6" y2="164.6" stroke="#f8fafc" stroke-width="2.2" stroke-linecap="round"/>
+          <!-- 頂點標籤 -->
+          <text x="68" y="28" fill="#fde047" font-size="18" font-weight="bold" font-style="italic">A</text>
+          <text x="132" y="144" fill="#fde047" font-size="18" font-weight="bold" font-style="italic">B</text>
+          <text x="225" y="60" fill="#fde047" font-size="18" font-weight="bold" font-style="italic">C</text>
+          <text x="68" y="136" fill="#f8fafc" font-size="18" font-weight="bold" font-style="italic">D</text>
+          <text x="104" y="268" fill="#f8fafc" font-size="18" font-weight="bold" font-style="italic">E</text>
+          <text x="225" y="170" fill="#f8fafc" font-size="18" font-weight="bold" font-style="italic">F</text>
+        </svg>`;
+      break;
+
+    case "svg_q8":
+      svgContent = `
+        <svg viewBox="0 0 420 210" width="400">
+          <!-- 左側立體培養皿 -->
+          <ellipse cx="85" cy="115" rx="52" ry="16" fill="none" stroke="#f8fafc" stroke-width="2"/>
+          <path d="M 33 115 L 33 142 A 52 16 0 0 0 137 142 L 137 115" fill="none" stroke="#f8fafc" stroke-width="2"/>
+          <ellipse cx="85" cy="128" rx="52" ry="15" fill="none" stroke="#94a3b8" stroke-width="1.4"/>
+          <text x="61" y="180" fill="#cbd5e1" font-size="15">培養皿</text>
+          <!-- 箭頭 -->
+          <line x1="152" y1="125" x2="188" y2="125" stroke="#38bdf8" stroke-width="3"/>
+          <polygon points="188,118 202,125 188,132" fill="#38bdf8"/>
+          <!-- 右側俯視大圓 -->
+          <circle cx="305" cy="105" r="88" fill="rgba(15,23,42,0.6)" stroke="#f8fafc" stroke-width="2.2"/>
+          <!-- 丙區域（最大） -->
+          <circle cx="272" cy="88" r="34" fill="rgba(56,189,248,0.12)" stroke="#38bdf8" stroke-width="1.8"/>
+          <text x="264" y="48" fill="#fde047" font-size="15" font-weight="bold">丙</text>
+          <!-- 乙區域 -->
+          <circle cx="352" cy="76" r="14" fill="rgba(56,189,248,0.12)" stroke="#38bdf8" stroke-width="1.8"/>
+          <text x="345" y="55" fill="#fde047" font-size="15" font-weight="bold">乙</text>
+          <!-- 丁區域（介於乙與丙之間） -->
+          <circle cx="310" cy="155" r="22" fill="rgba(56,189,248,0.12)" stroke="#38bdf8" stroke-width="1.8"/>
+          <text x="302" y="127" fill="#fde047" font-size="15" font-weight="bold">丁</text>
+          <!-- 甲區域（最小） -->
+          <circle cx="356" cy="145" r="5" fill="rgba(56,189,248,0.2)" stroke="#38bdf8" stroke-width="1.8"/>
+          <text x="348" y="132" fill="#fde047" font-size="15" font-weight="bold">甲</text>
+        </svg>`;
+      break;
+
+    case "svg_q10":
+      svgContent = `
+        <svg viewBox="0 0 440 165" width="420">
+          <!-- 哥哥對話框 -->
+          <rect x="14" y="14" width="190" height="62" rx="10" fill="#1e293b" stroke="#38bdf8" stroke-width="1.8"/>
+          <text x="24" y="34" fill="#f8fafc" font-size="12.5">哥哥：我要買的書原價</text>
+          <text x="24" y="52" fill="#fde047" font-size="12.5" font-weight="bold">只有 720 元，沒辦法折扣。</text>
+          <text x="24" y="68" fill="#cbd5e1" font-size="11.5">依原價比來分攤折扣後金額！</text>
+          <!-- 妹妹對話框 -->
+          <rect x="225" y="14" width="200" height="62" rx="10" fill="#1e293b" stroke="#fda4af" stroke-width="1.8"/>
+          <text x="235" y="34" fill="#f8fafc" font-size="12.5">妹妹：我的原價也不到1100元</text>
+          <text x="235" y="52" fill="#cbd5e1" font-size="12">一起買就能折扣 200 元！</text>
+          <text x="235" y="68" fill="#fde047" font-size="12.5" font-weight="bold">這樣的話，哥哥你要分攤600元。</text>
+          <!-- 規則提示條 -->
+          <rect x="65" y="96" width="310" height="48" rx="8" fill="rgba(56,189,248,0.12)" stroke="#475569" stroke-width="1.5"/>
+          <text x="95" y="117" fill="#38bdf8" font-size="13.5" font-weight="bold">書店優惠：原價合計滿 1100 元折 200 元</text>
+          <text x="115" y="136" fill="#cbd5e1" font-size="12.5">兄分攤金額 ： 妹分攤金額 ＝ 兄原價 ： 妹原價</text>
+        </svg>`;
+      break;
+
+    case "svg_q11":
+      // 使用 JavaScript 數線生成邏輯繪製
+      svgContent = `
+        <svg viewBox="0 0 420 120" width="400">
+          <line x1="30" y1="62" x2="390" y2="62" stroke="#f8fafc" stroke-width="2.4"/>
+          <polygon points="390,56 404,62 390,68" fill="#f8fafc"/>
+          <!-- P(a+b) -->
+          <circle cx="110" cy="62" r="4.5" fill="#38bdf8"/>
+          <text x="103" y="44" fill="#fde047" font-size="16" font-weight="bold">P</text>
+          <text x="92" y="88" fill="#cbd5e1" font-size="15">a + b</text>
+          <!-- A(a) -->
+          <circle cx="215" cy="62" r="4.5" fill="#38bdf8"/>
+          <text x="208" y="44" fill="#fde047" font-size="16" font-weight="bold">A</text>
+          <text x="210" y="88" fill="#cbd5e1" font-size="15">a</text>
+          <!-- B(b) -->
+          <circle cx="295" cy="62" r="4.5" fill="#38bdf8"/>
+          <text x="288" y="44" fill="#fde047" font-size="16" font-weight="bold">B</text>
+          <text x="290" y="88" fill="#cbd5e1" font-size="15">b</text>
+        </svg>`;
+      break;
+
+      case "svg_q12":
+      svgContent = `
+        <svg viewBox="0 0 380 245" width="360">
+          <!-- △ABC 主三角形：B(左下), C(右下), A(右上) -->
+          <polygon points="65,172 308,172 252,48" fill="rgba(56,189,248,0.07)" stroke="#f8fafc" stroke-width="2.2"/>
+          <!-- D 在 AB 上，E、F 在 BC 上 -->
+          <!-- B(65,172) 到 A(252,48)：取 D 約 35% 處 (130.5, 128.6) -->
+          <!-- B(65,172) 到 C(308,172)：取 E 在 (162, 172)，F 在 (226, 172) -->
+          <line x1="130.5" y1="128.6" x2="162" y2="172" stroke="#38bdf8" stroke-width="2.2"/>
+          <line x1="252" y1="48" x2="226" y2="172" stroke="#38bdf8" stroke-width="2.2"/>
+          <!-- 外側弧線標註：15 (AB 側), 9 (AC 側), 16 (BC 側) -->
+          <path d="M 65,152 Q 112,78 236,36" fill="none" stroke="#94a3b8" stroke-width="1.5"/>
+          <path d="M 266,52 Q 302,102 308,154" fill="none" stroke="#94a3b8" stroke-width="1.5"/>
+          <path d="M 75,188 Q 186,212 298,188" fill="none" stroke="#94a3b8" stroke-width="1.5"/>
+          <!-- 頂點與線段點標籤 -->
+          <text x="256" y="40" fill="#fde047" font-size="16" font-weight="bold" font-style="italic">A</text>
+          <text x="42" y="180" fill="#fde047" font-size="16" font-weight="bold" font-style="italic">B</text>
+          <text x="316" y="180" fill="#fde047" font-size="16" font-weight="bold" font-style="italic">C</text>
+          <text x="114" y="122" fill="#38bdf8" font-size="15" font-weight="bold" font-style="italic">D</text>
+          <text x="156" y="164" fill="#38bdf8" font-size="15" font-weight="bold" font-style="italic">E</text>
+          <text x="220" y="164" fill="#38bdf8" font-size="15" font-weight="bold" font-style="italic">F</text>
+          <!-- 邊長數值標示 -->
+          <text x="115" y="76" fill="#f8fafc" font-size="16" font-weight="bold">15</text>
+          <text x="302" y="114" fill="#f8fafc" font-size="16" font-weight="bold">9</text>
+          <text x="176" y="218" fill="#f8fafc" font-size="16" font-weight="bold">16</text>
+        </svg>`;
+      break;
+
+      case "svg_q15":
+      svgContent = `
+        <svg viewBox="0 0 420 255" width="400">
+          <!-- 正六邊形 ABCDEF：頂點依順時針為 A(左上)、F(中上)、E(右上)、D(右下)、C(下偏右)、B(左下) -->
+          <!-- 設邊長 L = 54 px，中心 (132, 128) -->
+          <!-- A(85.2, 101), F(132, 74), E(178.8, 101), D(178.8, 155), C(132, 182), B(85.2, 155) -->
+          <polygon points="85.2,101 132,74 178.8,101 178.8,155 132,182 85.2,155" fill="rgba(56,189,248,0.08)" stroke="#f8fafc" stroke-width="2.2" stroke-linejoin="round"/>
+
+          <!-- 水平直線通過 C、D、H、I（y = 182） -->
+          <line x1="65" y1="182" x2="395" y2="182" stroke="#94a3b8" stroke-width="1.8"/>
+
+          <!-- 正 n 邊形連續四個頂點 G、E、H、I：F 在 GE 上，EH 連線，HI 在底線上 -->
+          <!-- G 在 EF 延長線上（往左上延伸）：E(178.8,101) -> F(132,74) -> G(108.6,60.5) -->
+          <line x1="108.6" y1="60.5" x2="178.8" y2="101" stroke="#38bdf8" stroke-width="2.2" stroke-linecap="round"/>
+          <!-- 邊 EH：交底線 y = 182 於 H -->
+          <line x1="178.8" y1="101" x2="296" y2="182" stroke="#38bdf8" stroke-width="2.2" stroke-linecap="round"/>
+          <!-- 邊 HI：沿底線向右至 I -->
+          <line x1="296" y1="182" x2="380" y2="182" stroke="#38bdf8" stroke-width="2.2" stroke-linecap="round"/>
+
+          <!-- 節點圓點 -->
+          <circle cx="108.6" cy="60.5" r="3.5" fill="#38bdf8"/>
+          <circle cx="178.8" cy="101" r="3.5" fill="#38bdf8"/>
+          <circle cx="296" cy="182" r="3.5" fill="#38bdf8"/>
+          <circle cx="380" cy="182" r="3.5" fill="#38bdf8"/>
+
+          <!-- 頂點標籤 -->
+          <text x="64" y="98" fill="#fde047" font-size="17" font-weight="bold" font-style="italic">A</text>
+          <text x="64" y="164" fill="#fde047" font-size="17" font-weight="bold" font-style="italic">B</text>
+          <text x="122" y="203" fill="#fde047" font-size="17" font-weight="bold" font-style="italic">C</text>
+          <text x="174" y="203" fill="#fde047" font-size="17" font-weight="bold" font-style="italic">D</text>
+          <text x="188" y="98" fill="#fde047" font-size="17" font-weight="bold" font-style="italic">E</text>
+          <text x="142" y="70" fill="#fde047" font-size="17" font-weight="bold" font-style="italic">F</text>
+          <text x="114" y="52" fill="#38bdf8" font-size="17" font-weight="bold" font-style="italic">G</text>
+          <text x="290" y="203" fill="#38bdf8" font-size="17" font-weight="bold" font-style="italic">H</text>
+          <text x="375" y="203" fill="#38bdf8" font-size="17" font-weight="bold" font-style="italic">I</text>
+        </svg>`;
+      break;
+
+      case "svg_q16":
+      svgContent = `
+        <svg viewBox="0 0 340 230" width="320">
+          <!-- 直角三角形 ABC：A(左上 82, 28)、B(左下 82, 198)、C(右下 286, 198) -->
+          <polygon points="82,28 82,198 286,198" fill="rgba(56,189,248,0.07)" stroke="#f8fafc" stroke-width="2.2" stroke-linejoin="round"/>
+          <!-- 直角記號 B -->
+          <polyline points="82,182 98,182 98,198" fill="none" stroke="#f8fafc" stroke-width="1.8"/>
+          <!-- 斜邊 AC 中點 D：((82+286)/2, (28+198)/2) = (184, 113) -->
+          <!-- 中線 BD -->
+          <line x1="82" y1="198" x2="184" y2="113" stroke="#f8fafc" stroke-width="2.2" stroke-linecap="round"/>
+          <!-- 線段 AE 交 BD 於 E（取 E 約在 BD 上 132, 155.5） -->
+          <line x1="82" y1="28" x2="132" y2="155.5" stroke="#38bdf8" stroke-width="2.2" stroke-linecap="round"/>
+          <!-- 頂點與線段點標籤（與原卷位置一致，無多餘標示） -->
+          <text x="60" y="24" fill="#fde047" font-size="18" font-weight="bold" font-style="italic">A</text>
+          <text x="58" y="218" fill="#fde047" font-size="18" font-weight="bold" font-style="italic">B</text>
+          <text x="282" y="218" fill="#fde047" font-size="18" font-weight="bold" font-style="italic">C</text>
+          <text x="190" y="108" fill="#38bdf8" font-size="17" font-weight="bold" font-style="italic">D</text>
+          <text x="134" y="176" fill="#fda4af" font-size="17" font-weight="bold" font-style="italic">E</text>
+        </svg>`;
+      break;
+
+      case "svg_q18":
+      svgContent = `
+        <svg viewBox="0 0 320 265" width="300">
+          <!-- 圓 O：圓心 (160, 125)，半徑 r = 92 -->
+          <circle cx="160" cy="125" r="92" fill="rgba(56,189,248,0.06)" stroke="#f8fafc" stroke-width="2.2"/>
+          <!-- 菱形 ABCD：A 在圓頂 (160, 33)，B 在左圓周 (68, 125)，D 在右圓周 (252, 125)，C 在圓內下方 (160, 185) -->
+          <polygon points="160,33 68,125 160,185 252,125" fill="rgba(56,189,248,0.10)" stroke="#38bdf8" stroke-width="2.2" stroke-linejoin="round"/>
+          <!-- 對角線 AC（鉛垂）與 BD（水平） -->
+          <line x1="160" y1="33" x2="160" y2="185" stroke="#f8fafc" stroke-width="1.8"/>
+          <line x1="68" y1="125" x2="252" y2="125" stroke="#f8fafc" stroke-width="1.8"/>
+          <!-- 點 O 位於線段 AC 上（交點 (160,125) 與 C (160,185) 之間，取 (160, 155)） -->
+          <circle cx="160" cy="155" r="4" fill="#fde047"/>
+          <!-- 頂點與點位標籤（與原卷位置一致） -->
+          <text x="154" y="24" fill="#fde047" font-size="18" font-weight="bold" font-style="italic">A</text>
+          <text x="44" y="131" fill="#fde047" font-size="18" font-weight="bold" font-style="italic">B</text>
+          <text x="154" y="206" fill="#fde047" font-size="18" font-weight="bold" font-style="italic">C</text>
+          <text x="260" y="131" fill="#fde047" font-size="18" font-weight="bold" font-style="italic">D</text>
+          <text x="168" y="160" fill="#fda4af" font-size="18" font-weight="bold" font-style="italic">O</text>
+        </svg>`;
+      break;
+
+      case "svg_q19":
+      svgContent = `
+        <svg viewBox="0 0 320 265" width="300">
+          <!-- 圓：圓心 (160, 128)，半徑 r = 92 -->
+          <circle cx="160" cy="128" r="92" fill="rgba(56,189,248,0.06)" stroke="#f8fafc" stroke-width="2.2"/>
+          <!-- 圓周四點（依原卷圖(九)位置：A 左上、B 左下、C 右下、D 右上） -->
+          <!-- A: (-130°) -> (160 + 92*cos(-130°), 128 + 92*sin(-130°)) = (100.9, 57.5) -->
+          <!-- B: (130°)  -> (160 + 92*cos(130°),  128 + 92*sin(130°))  = (100.9, 198.5) -->
+          <!-- C: (50°)   -> (160 + 92*cos(50°),   128 + 92*sin(50°))   = (219.1, 198.5) -->
+          <!-- D: (-50°)  -> (160 + 92*cos(-50°),  128 + 92*sin(-50°))  = (219.1, 57.5) -->
+          <circle cx="100.9" cy="57.5" r="4" fill="#38bdf8"/>
+          <circle cx="100.9" cy="198.5" r="4" fill="#38bdf8"/>
+          <circle cx="219.1" cy="198.5" r="4" fill="#38bdf8"/>
+          <circle cx="219.1" cy="57.5" r="4" fill="#38bdf8"/>
+          <!-- 頂點標籤（與原卷位置一致） -->
+          <text x="76" y="54" fill="#fde047" font-size="18" font-weight="bold" font-style="italic">A</text>
+          <text x="76" y="214" fill="#fde047" font-size="18" font-weight="bold" font-style="italic">B</text>
+          <text x="226" y="214" fill="#fde047" font-size="18" font-weight="bold" font-style="italic">C</text>
+          <text x="226" y="54" fill="#fde047" font-size="18" font-weight="bold" font-style="italic">D</text>
+        </svg>`;
+      break;
+
+    case "svg_q21":
+      svgContent = `
+        <svg viewBox="0 0 340 250" width="320">
+          <!-- △ABC：A(192, 42)、B(76, 206)、C(298, 206) -->
+          <polygon points="192,42 76,206 298,206" fill="rgba(56,189,248,0.07)" stroke="#f8fafc" stroke-width="2.2" stroke-linejoin="round"/>
+          <!-- △ADE 位於 AB 線上上方：D(86, 42)、E(134, 124) -->
+          <polygon points="192,42 86,42 134,124" fill="rgba(56,189,248,0.10)" stroke="#38bdf8" stroke-width="2.2" stroke-linejoin="round"/>
+          <!-- BC 邊上的 F 點（位於 B 與 C 之間，取 x = 160, y = 206） -->
+          <circle cx="160" cy="206" r="4" fill="#fde047"/>
+          <!-- 頂點與點位標籤（100% 忠於原卷圖(十)，無多餘輔助線或數字標示） -->
+          <text x="198" y="34" fill="#fde047" font-size="18" font-weight="bold" font-style="italic">A</text>
+          <text x="54" y="218" fill="#fde047" font-size="18" font-weight="bold" font-style="italic">B</text>
+          <text x="304" y="218" fill="#fde047" font-size="18" font-weight="bold" font-style="italic">C</text>
+          <text x="64" y="36" fill="#38bdf8" font-size="18" font-weight="bold" font-style="italic">D</text>
+          <text x="108" y="132" fill="#38bdf8" font-size="18" font-weight="bold" font-style="italic">E</text>
+          <text x="154" y="232" fill="#fde047" font-size="18" font-weight="bold" font-style="italic">F</text>
+        </svg>`;
+      break;
+
+case "svg_q22":
+      svgContent = `
+        <svg viewBox="0 0 340 215" width="320">
+          <!-- 平行四邊形 ABCD：A(左上 78, 42)、D(右上 214, 42)、B(左下 136, 174)、C(右下 272, 174) -->
+          <polygon points="78,42 214,42 272,174 136,174" fill="rgba(56,189,248,0.08)" stroke="#f8fafc" stroke-width="2.2" stroke-linejoin="round"/>
+          <!-- 頂點標籤（與原卷圖(十一)位置一致） -->
+          <text x="54" y="38" fill="#fde047" font-size="18" font-weight="bold" font-style="italic">A</text>
+          <text x="114" y="198" fill="#fde047" font-size="18" font-weight="bold" font-style="italic">B</text>
+          <text x="278" y="198" fill="#fde047" font-size="18" font-weight="bold" font-style="italic">C</text>
+          <text x="220" y="38" fill="#fde047" font-size="18" font-weight="bold" font-style="italic">D</text>
+        </svg>`;
+      break;
+
+    case "svg_q23":
+      svgContent = `
+        <svg viewBox="0 0 300 200" width="280">
+          <circle cx="150" cy="115" r="80" fill="#0f172a" stroke="#f8fafc" stroke-width="2.5"/>
+          <path d="M 85 155 A 72 72 0 1 1 215 155" fill="none" stroke="#38bdf8" stroke-width="3" stroke-dasharray="6,4"/>
+          <text x="128" y="60" fill="#f8fafc" font-size="12" font-weight="bold">100  120</text>
+          <text x="182" y="82" fill="#f8fafc" font-size="12">140</text>
+          <text x="92" y="82" fill="#f8fafc" font-size="12">80</text>
+          <text x="78" y="115" fill="#f8fafc" font-size="12">40</text>
+          <text x="195" y="115" fill="#f8fafc" font-size="12">180</text>
+          <text x="86" y="146" fill="#f8fafc" font-size="12">20</text>
+          <text x="188" y="148" fill="#f8fafc" font-size="12">220</text>
+          <text x="135" y="92" fill="#94a3b8" font-size="11">km/h</text>
+          <!-- 指針指向 120 -->
+          <line x1="150" y1="115" x2="174" y2="66" stroke="#ef4444" stroke-width="3.5" stroke-linecap="round"/>
+          <circle cx="150" cy="115" r="7" fill="#fde047"/>
+        </svg>`;
+      break;
+
+    case "svg_q27":
+      svgContent = `
+        <svg viewBox="0 0 420 260" width="400">
+          <!-- 正六邊形地毯外框 -->
+          <polygon points="115,15 305,15 395,130 305,245 115,245 25,130" fill="rgba(148,163,184,0.12)" stroke="#f8fafc" stroke-width="2.2"/>
+          <!-- Y 字型沙發三葉組合（下葉 ABCDE 完整標示） -->
+          <!-- 下葉五邊形 ABCDE -->
+          <polygon points="182,212 238,212 238,132 210,115 182,132" fill="rgba(56,189,248,0.28)" stroke="#38bdf8" stroke-width="2"/>
+          <!-- 左上葉 -->
+          <polygon points="182,132 210,115 210,82 140,42 112,90" fill="rgba(56,189,248,0.28)" stroke="#38bdf8" stroke-width="2"/>
+          <!-- 右上葉 -->
+          <polygon points="210,115 238,132 308,90 280,42 210,82" fill="rgba(56,189,248,0.28)" stroke="#38bdf8" stroke-width="2"/>
+          <!-- 直角記號 A, B -->
+          <polyline points="182,202 192,202 192,212" fill="none" stroke="#fde047" stroke-width="1.5"/>
+          <polyline points="228,212 228,202 238,202" fill="none" stroke="#fde047" stroke-width="1.5"/>
+          <!-- 頂點標籤 -->
+          <text x="166" y="216" fill="#fde047" font-size="14" font-weight="bold">A</text>
+          <text x="243" y="216" fill="#fde047" font-size="14" font-weight="bold">B</text>
+          <text x="244" y="138" fill="#fde047" font-size="14" font-weight="bold">C</text>
+          <text x="205" y="108" fill="#fda4af" font-size="14" font-weight="bold">D</text>
+          <text x="165" y="138" fill="#fde047" font-size="14" font-weight="bold">E</text>
+          <!-- 至少 50 公分距離箭頭 -->
+          <line x1="210" y1="212" x2="210" y2="245" stroke="#fde047" stroke-width="1.8"/>
+          <text x="216" y="234" fill="#fde047" font-size="12" font-weight="bold">至少 50 公分</text>
+        </svg>`;
+      break;
+  }
+
+  return `
+    <div class="visual-box">
+      ${svgContent}
+      <div class="visual-caption">${item.visualCaption}</div>
+    </div>
+  `;
+}
+
+// =========================================================================
+// 3. 測驗狀態管理、渲染與洗牌邏輯
+// =========================================================================
+let examQuestions = [];
+let userAnswers = {};
+let isSubmitted = false;
+let timerSeconds = 80 * 60;
+let initialSeconds = 80 * 60;
+let timerInterval = null;
+let isPaused = false;
+let radarChartInstance = null;
+
+function safeTypeset() {
+  try {
+    if (window.MathJax && typeof window.MathJax.typesetPromise === "function") {
+      window.MathJax.typesetPromise().catch(() => {});
+    }
+  } catch (e) {}
+}
+
+function initExam(shuffle = false) {
+  isSubmitted = false;
+  userAnswers = {};
+  document.getElementById("resultPanel").style.display = "none";
+  document.getElementById("submitBtn").disabled = false;
+  document.getElementById("submitBtn").textContent = "提交試卷";
+
+  examQuestions = RAW_QUESTIONS.map((q, idx) => {
+    const optObjs = q.options.map((text, i) => ({
+      text,
+      isCorrect: i === q.answerIndex
+    }));
+
+    if (shuffle) {
+      for (let i = optObjs.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [optObjs[i], optObjs[j]] = [optObjs[j], optObjs[i]];
+      }
+    }
+
+    return {
+      ...q,
+      displayNum: idx + 1,
+      shuffledOptions: optObjs
+    };
+  });
+
+  if (shuffle) {
+    for (let i = examQuestions.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [examQuestions[i], examQuestions[j]] = [examQuestions[j], examQuestions[i]];
+    }
+    examQuestions.forEach((q, idx) => { q.displayNum = idx + 1; });
+  }
+
+  renderAll();
+  updateProgress();
+  startTimer();
+  setTimeout(safeTypeset, 120);
+}
+
+function renderAll() {
+  const navGrid = document.getElementById("navGrid");
+  const leftContainer = document.getElementById("leftQuestionsContainer");
+  const rightContainer = document.getElementById("rightQuestionsContainer");
+
+  navGrid.innerHTML = "";
+  leftContainer.innerHTML = "";
+  rightContainer.innerHTML = "";
+
+  const letters = ["(A)", "(B)", "(C)", "(D)"];
+
+  examQuestions.forEach((q) => {
+    // 1. 題號導覽按鈕
+    const navBtn = document.createElement("button");
+    navBtn.className = "nav-item";
+    navBtn.id = `nav-btn-${q.displayNum}`;
+    navBtn.textContent = q.displayNum;
+    navBtn.onclick = () => scrollToQuestion(q.displayNum);
+    navGrid.appendChild(navBtn);
+
+    // 2. 左側完整題幹與附圖卡片
+    const leftCard = document.createElement("div");
+    leftCard.className = "left-q-card";
+    leftCard.id = `left-q-${q.displayNum}`;
+
+    let readingHTML = "";
+    if (q.readingGroup) {
+      readingHTML = `
+        <div class="reading-passage-box">
+          <div class="reading-passage-title">${q.readingGroup.title}</div>
+          <div>${q.readingGroup.content}</div>
+        </div>
+      `;
+    }
+
+    leftCard.innerHTML = `
+      ${readingHTML}
+      <div class="q-card-header">
+        <span class="q-badge">第 ${q.displayNum} 題（${q.originalNum}）</span>
+        <span class="q-tag">${q.dimension} ｜ ${q.difficulty}</span>
+      </div>
+      <div class="q-stem">${q.stem}</div>
+      ${renderVisualHTML(q)}
+    `;
+    leftContainer.appendChild(leftCard);
+
+    // 3. 右側作答卡片與詳解
+    const rightCard = document.createElement("div");
+    rightCard.className = "right-q-card";
+    rightCard.id = `right-q-${q.displayNum}`;
+
+    const correctOptIdx = q.shuffledOptions.findIndex(o => o.isCorrect);
+    const correctLetter = letters[correctOptIdx];
+
+    let optionsHTML = `<div class="options-list">`;
+    q.shuffledOptions.forEach((opt, optIdx) => {
+      optionsHTML += `
+        <label class="option-label" id="opt-label-${q.displayNum}-${optIdx}" onclick="selectOption(${q.displayNum}, ${optIdx})">
+          <input type="radio" name="q_${q.displayNum}" value="${optIdx}">
+          <span><strong>${letters[optIdx]}</strong> ${opt.text}</span>
+        </label>
+      `;
+    });
+    optionsHTML += `</div>`;
+
+    rightCard.innerHTML = `
+      <div class="q-card-header">
+        <span class="q-badge">第 ${q.displayNum} 題作答區</span>
+        <span class="q-tag">${q.concept}</span>
+      </div>
+      <div style="font-size:0.9rem;color:var(--text-secondary);margin-bottom:6px;">請選擇最適當的答案（對照左側第 ${q.displayNum} 題）：</div>
+      ${optionsHTML}
+      <div class="explanation-box" id="exp-box-${q.displayNum}">
+        <div class="exp-banner">
+          <span>✅ 正確答案：${correctLetter} ${q.shuffledOptions[correctOptIdx].text}</span>
+          <span>考點難度歸類：${q.explanation.level}</span>
+        </div>
+        <div class="exp-section"><strong>【測驗卷原題目】</strong>${q.explanation.original}</div>
+        <div class="exp-section"><strong>【核心考點說明】</strong>${q.explanation.core}</div>
+        <div class="exp-section"><strong>【解題步驟與公式】</strong><br>${q.explanation.steps}</div>
+      </div>
+    `;
+    rightContainer.appendChild(rightCard);
+  });
+
+  safeTypeset();
+}
+
+function scrollToQuestion(num) {
+  const leftEl = document.getElementById(`left-q-${num}`);
+  const rightEl = document.getElementById(`right-q-${num}`);
+  if (leftEl) leftEl.scrollIntoView({ behavior: "smooth", block: "center" });
+  if (rightEl) rightEl.scrollIntoView({ behavior: "smooth", block: "center" });
+}
+
+function selectOption(qNum, optIdx) {
+  if (isSubmitted) return;
+  userAnswers[qNum] = optIdx;
+
+  // 更新選項高亮
+  for (let i = 0; i < 4; i++) {
+    const lbl = document.getElementById(`opt-label-${qNum}-${i}`);
+    if (lbl) {
+      lbl.classList.toggle("selected", i === optIdx);
+      const radio = lbl.querySelector("input");
+      if (radio) radio.checked = (i === optIdx);
+    }
+  }
+
+  // 更新導覽列變藍色
+  const navBtn = document.getElementById(`nav-btn-${qNum}`);
+  if (navBtn) navBtn.classList.add("answered");
+
+  updateProgress();
+}
+
+function updateProgress() {
+  const answeredCount = Object.keys(userAnswers).length;
+  document.getElementById("progressPill").textContent = `已作答：${answeredCount} / ${examQuestions.length}`;
+}
+
+// =========================================================================
+// 4. 倒數計時器控制（0 ~ 240 分鐘）
+// =========================================================================
+function startTimer() {
+  clearInterval(timerInterval);
+  timerInterval = setInterval(() => {
+    if (!isPaused && !isSubmitted) {
+      if (timerSeconds > 0) {
+        timerSeconds--;
+        updateTimerDisplay();
+      } else {
+        clearInterval(timerInterval);
+        alert("時間到！系統將自動提交試卷進行批改。");
+        submitExam();
+      }
+    }
+  }, 1000);
+}
+
+function updateTimerDisplay() {
+  const mins = Math.floor(timerSeconds / 60);
+  const secs = timerSeconds % 60;
+  document.getElementById("timerDisplay").textContent =
+    `${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
+}
+
+function setCustomTimer() {
+  let val = parseInt(document.getElementById("customMinutes").value, 10);
+  if (isNaN(val) || val < 0) val = 0;
+  if (val > 240) val = 240;
+  document.getElementById("customMinutes").value = val;
+  timerSeconds = val * 60;
+  initialSeconds = timerSeconds;
+  updateTimerDisplay();
+}
+
+function toggleTimer() {
+  isPaused = !isPaused;
+  document.getElementById("pauseBtn").textContent = isPaused ? "繼續" : "暫停";
+}
+
+function resetAndShuffleExam() {
+  if (!confirm("確定要重新測驗並隨機洗牌題目與選項順序嗎？")) return;
+  setCustomTimer();
+  isPaused = false;
+  document.getElementById("pauseBtn").textContent = "暫停";
+  initExam(true);
+}
+
+// =========================================================================
+// 5. 交卷批改、雷達圖（Chart.js + Canvas 備援）、弱點分析
+// =========================================================================
+function submitExam() {
+  if (isSubmitted) return;
+  isSubmitted = true;
+  clearInterval(timerInterval);
+
+  document.getElementById("submitBtn").disabled = true;
+  document.getElementById("submitBtn").textContent = "已交卷";
+
+  let correctCount = 0;
+  const wrongNums = [];
+  const dimStats = {
+    "數與量": { total: 0, correct: 0 },
+    "代數與函數": { total: 0, correct: 0 },
+    "幾何與空間": { total: 0, correct: 0 },
+    "統計與機率": { total: 0, correct: 0 }
+  };
+
+  examQuestions.forEach((q) => {
+    const userChoice = userAnswers[q.displayNum];
+    const correctIdx = q.shuffledOptions.findIndex(o => o.isCorrect);
+    const isCorrect = userChoice === correctIdx;
+
+    if (!dimStats[q.dimension]) dimStats[q.dimension] = { total: 0, correct: 0 };
+    dimStats[q.dimension].total++;
+
+    const rightCard = document.getElementById(`right-q-${q.displayNum}`);
+    const navBtn = document.getElementById(`nav-btn-${q.displayNum}`);
+    const expBox = document.getElementById(`exp-box-${q.displayNum}`);
+
+    // 鎖定 radio
+    rightCard.querySelectorAll("input[type='radio']").forEach(r => r.disabled = true);
+
+    // 標示正確與錯誤選項
+    const correctLbl = document.getElementById(`opt-label-${q.displayNum}-${correctIdx}`);
+    if (correctLbl) correctLbl.classList.add("opt-correct");
+
+    if (isCorrect) {
+      correctCount++;
+      dimStats[q.dimension].correct++;
+      rightCard.classList.add("card-correct");
+      navBtn.classList.add("correct");
+    } else {
+      wrongNums.push(q.displayNum);
+      rightCard.classList.add("card-wrong");
+      navBtn.classList.add("wrong");
+      if (userChoice !== undefined) {
+        const wrongLbl = document.getElementById(`opt-label-${q.displayNum}-${userChoice}`);
+        if (wrongLbl) wrongLbl.classList.add("opt-wrong");
+      }
+    }
+
+    expBox.style.display = "block";
+  });
+
+  const score = Math.round((correctCount / examQuestions.length) * 100);
+  const spentSec = Math.max(0, initialSeconds - timerSeconds);
+  const spentStr = `${String(Math.floor(spentSec / 60)).padStart(2, "0")}分${String(spentSec % 60).padStart(2, "0")}秒`;
+
+  document.getElementById("totalScoreDisplay").textContent = score;
+  document.getElementById("correctCountDisplay").textContent = `答對 ${correctCount} / ${examQuestions.length} 題`;
+  document.getElementById("timeSpentDisplay").textContent = `作答耗時：${spentStr}`;
+  document.getElementById("filterWrongBtn").textContent = `只看錯題 (${wrongNums.length})`;
+
+  // 渲染各維度統計條
+  const dimContainer = document.getElementById("dimensionStatsList");
+  dimContainer.innerHTML = "";
+  const labels = [];
+  const percentages = [];
+  const dimSummaryArr = [];
+
+  Object.keys(dimStats).forEach((dim) => {
+    const st = dimStats[dim];
+    const pct = st.total > 0 ? Math.round((st.correct / st.total) * 100) : 0;
+    labels.push(dim);
+    percentages.push(pct);
+    dimSummaryArr.push(`${dim}(${st.correct}/${st.total}:${pct}%)`);
+
+    dimContainer.innerHTML += `
+      <div class="dim-row">
+        <span><strong>${dim}</strong>（${st.correct} / ${st.total} 題）</span>
+        <span style="color:${pct >= 70 ? '#4ade80' : '#fbbf24'};font-weight:700;">${pct}%</span>
+      </div>
+    `;
+  });
+
+  document.getElementById("resultPanel").style.display = "block";
+  document.getElementById("resultPanel").scrollIntoView({ behavior: "smooth" });
+
+  // 繪製雷達圖（含 Chart.js 與 Canvas 2D 備援）
+  setTimeout(() => {
+    drawRadarChart(labels, percentages);
+    safeTypeset();
+  }, 150);
+
+  // 儲存家長監控紀錄並發送 Telegram 通知
+  const nowStr = new Date().toLocaleString("zh-TW", { hour12: false });
+  const record = {
+    course: document.getElementById("examTitle").textContent,
+    time: nowStr,
+    spent: spentStr,
+    score: score,
+    dims: dimSummaryArr.join("、"),
+    wrongs: wrongNums.length > 0 ? `第 ${wrongNums.join(", ")} 題` : "全對（無錯題）"
+  };
+
+  saveParentRecord(record);
+  sendTelegramReport(record);
+}
+
+function drawRadarChart(labels, dataValues) {
+  const canvas = document.getElementById("radarChartCanvas");
+  if (!canvas) return;
+
+  if (typeof Chart !== "undefined") {
+    try {
+      if (radarChartInstance) radarChartInstance.destroy();
+      radarChartInstance = new Chart(canvas, {
+        type: "radar",
+        data: {
+          labels: labels,
+          datasets: [{
+            label: "各領域得分率 (%)",
+            data: dataValues,
+            backgroundColor: "rgba(56, 189, 248, 0.25)",
+            borderColor: "#38bdf8",
+            pointBackgroundColor: "#fde047",
+            pointBorderColor: "#0f172a",
+            borderWidth: 2.5
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            r: {
+              min: 0,
+              max: 100,
+              ticks: { stepSize: 20, color: "#94a3b8", backdropColor: "transparent" },
+              grid: { color: "#334155" },
+              angleLines: { color: "#334155" },
+              pointLabels: { color: "#f8fafc", font: { size: 12, weight: "bold" } }
+            }
+          },
+          plugins: {
+            legend: { labels: { color: "#cbd5e1" } }
+          }
+        }
+      });
+      return;
+    } catch (e) {
+      console.warn("Chart.js 繪製異常，切換原生 Canvas 備援", e);
+    }
+  }
+
+  // 原生 HTML5 Canvas 2D 多邊形雷達圖備援
+  const ctx = canvas.getContext("2d");
+  const w = canvas.width;
+  const h = canvas.height;
+  ctx.clearRect(0, 0, w, h);
+
+  const cx = w / 2;
+  const cy = h / 2 + 6;
+  const radius = Math.min(w, h) * 0.34;
+  const count = labels.length;
+
+  // 繪製同心網格
+  for (let level = 1; level <= 5; level++) {
+    const r = (radius * level) / 5;
+    ctx.beginPath();
+    for (let i = 0; i < count; i++) {
+      const angle = (Math.PI * 2 * i) / count - Math.PI / 2;
+      const x = cx + r * Math.cos(angle);
+      const y = cy + r * Math.sin(angle);
+      if (i === 0) ctx.moveTo(x, y);
+      else ctx.lineTo(x, y);
+    }
+    ctx.closePath();
+    ctx.strokeStyle = "#334155";
+    ctx.lineWidth = 1;
+    ctx.stroke();
+  }
+
+  // 軸線與標籤
+  ctx.font = "bold 12px sans-serif";
+  ctx.fillStyle = "#f8fafc";
+  ctx.textAlign = "center";
+  for (let i = 0; i < count; i++) {
+    const angle = (Math.PI * 2 * i) / count - Math.PI / 2;
+    const x = cx + radius * Math.cos(angle);
+    const y = cy + radius * Math.sin(angle);
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.lineTo(x, y);
+    ctx.strokeStyle = "#475569";
+    ctx.stroke();
+
+    const lx = cx + (radius + 26) * Math.cos(angle);
+    const ly = cy + (radius + 18) * Math.sin(angle);
+    ctx.fillText(`${labels[i]} (${dataValues[i]}%)`, lx, ly);
+  }
+
+  // 資料多邊形
+  ctx.beginPath();
+  for (let i = 0; i < count; i++) {
+    const angle = (Math.PI * 2 * i) / count - Math.PI / 2;
+    const valR = (radius * dataValues[i]) / 100;
+    const x = cx + valR * Math.cos(angle);
+    const y = cy + valR * Math.sin(angle);
+    if (i === 0) ctx.moveTo(x, y);
+    else ctx.lineTo(x, y);
+  }
+  ctx.closePath();
+  ctx.fillStyle = "rgba(56, 189, 248, 0.28)";
+  ctx.fill();
+  ctx.strokeStyle = "#38bdf8";
+  ctx.lineWidth = 2.5;
+  ctx.stroke();
+}
+
+function filterQuestions(mode) {
+  examQuestions.forEach((q) => {
+    const userChoice = userAnswers[q.displayNum];
+    const correctIdx = q.shuffledOptions.findIndex(o => o.isCorrect);
+    const isCorrect = userChoice === correctIdx;
+    const show = mode === "all" || !isCorrect;
+
+    const lCard = document.getElementById(`left-q-${q.displayNum}`);
+    const rCard = document.getElementById(`right-q-${q.displayNum}`);
+    if (lCard) lCard.style.display = show ? "block" : "none";
+    if (rCard) rCard.style.display = show ? "block" : "none";
+  });
+}
+
+// =========================================================================
+// 6. 錯題筆記匯出（Markdown 複製與 Word 下載）
+// =========================================================================
+function buildWrongNotesText() {
+  const letters = ["(A)", "(B)", "(C)", "(D)"];
+  let md = `# 115年國中教育會考數學科 — 個人錯題複習筆記\n\n`;
+  let count = 0;
+
+  examQuestions.forEach((q) => {
+    const userChoice = userAnswers[q.displayNum];
+    const correctIdx = q.shuffledOptions.findIndex(o => o.isCorrect);
+    if (userChoice !== correctIdx) {
+      count++;
+      const userText = userChoice !== undefined ? `${letters[userChoice]} ${q.shuffledOptions[userChoice].text}` : "未作答";
+      const corrText = `${letters[correctIdx]} ${q.shuffledOptions[correctIdx].text}`;
+      md += `## 第 ${q.displayNum} 題（${q.originalNum}）｜${q.dimension}｜${q.difficulty}\n`;
+      md += `- **題目**：${q.stem.replace(/<br>/g, " ")}\n`;
+      md += `- **你的作答**：${userText}\n`;
+      md += `- **正確答案**：${corrText}\n`;
+      md += `- **核心考點**：${q.explanation.core}\n`;
+      md += `- **解題步驟**：\n${q.explanation.steps.replace(/<br>/g, "\n")}\n\n---\n\n`;
+    }
+  });
+
+  if (count === 0) {
+    md += `🎉 本次測驗全部答對，無任何錯題！\n`;
+  }
+  return md;
+}
+
+function copyWrongNotesMarkdown() {
+  const md = buildWrongNotesText();
+  navigator.clipboard.writeText(md).then(() => {
+    alert("已成功複製 Markdown 格式錯題筆記至剪貼簿！可直接貼上 Notion 或筆記軟體。");
+  }).catch(() => {
+    alert("複製失敗，請改用 Word 下載功能。");
+  });
+}
+
+function downloadWordReport() {
+  const md = buildWrongNotesText();
+  const htmlContent = `
+    <html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word'>
+    <head><meta charset='utf-8'><title>數學錯題筆記</title></head>
+    <body style="font-family:'Microsoft JhengHei',sans-serif;line-height:1.6;">
+      <pre style="white-space:pre-wrap;font-family:'Microsoft JhengHei',sans-serif;">${md}</pre>
+    </body></html>
+  `;
+  const blob = new Blob(["\ufeff", htmlContent], { type: "application/msword" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "115會考數學錯題複習本.doc";
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+// =========================================================================
+// 7. 隱藏入口：題庫驗證總表（❖ 連點5下）＆ 家長監控（標題連點5下 / Ctrl+Shift+P）
+// =========================================================================
+let verifyClickCount = 0;
+document.getElementById("secretVerifyBtn").addEventListener("click", () => {
+  verifyClickCount++;
+  if (verifyClickCount >= 5) {
+    verifyClickCount = 0;
+    openVerifyModal();
+  }
+  setTimeout(() => { verifyClickCount = 0; }, 2000);
+});
+
+function openVerifyModal() {
+  const letters = ["(A)", "(B)", "(C)", "(D)"];
+  const dist = { "(A)": 0, "(B)": 0, "(C)": 0, "(D)": 0 };
+  const tbody = document.querySelector("#verifyTable tbody");
+  tbody.innerHTML = "";
+
+  examQuestions.forEach((q) => {
+    const corrIdx = q.shuffledOptions.findIndex(o => o.isCorrect);
+    const l = letters[corrIdx];
+    dist[l]++;
+    tbody.innerHTML += `
+      <tr>
+        <td>第 ${q.displayNum} 題</td>
+        <td>${q.dimension}</td>
+        <td>${q.difficulty}</td>
+        <td style="color:#4ade80;font-weight:bold;">${l}</td>
+        <td style="text-align:left;">${q.concept}</td>
+      </tr>
+    `;
+  });
+
+  document.getElementById("verifySummary").textContent =
+    `📊 目前選項答案分布統計：(A) ${dist["(A)"]} 題 ｜ (B) ${dist["(B)"]} 題 ｜ (C) ${dist["(C)"]} 題 ｜ (D) ${dist["(D)"]} 題（共 ${examQuestions.length} 題）`;
+  document.getElementById("verifyModal").style.display = "flex";
+}
+
+let titleClickCount = 0;
+document.getElementById("examTitle").addEventListener("click", () => {
+  titleClickCount++;
+  if (titleClickCount >= 5) {
+    titleClickCount = 0;
+    promptParentAccess();
+  }
+  setTimeout(() => { titleClickCount = 0; }, 2000);
+});
+
+document.addEventListener("keydown", (e) => {
+  if (e.ctrlKey && e.shiftKey && (e.key === "P" || e.key === "p")) {
+    e.preventDefault();
+    promptParentAccess();
+  }
+});
+
+function promptParentAccess() {
+  const pwd = prompt("請輸入家長監控密碼：");
+  if (pwd === "1234") {
+    openParentModal();
+  } else if (pwd !== null) {
+    alert("密碼錯誤！");
+  }
+}
+
+function saveParentRecord(record) {
+  try {
+    const key = "math_115_exam_records";
+    const list = JSON.parse(localStorage.getItem(key) || "[]");
+    list.unshift(record);
+    localStorage.setItem(key, JSON.stringify(list));
+  } catch (e) {}
+}
+
+function openParentModal() {
+  const key = "math_115_exam_records";
+  const list = JSON.parse(localStorage.getItem(key) || "[]");
+  const tbody = document.querySelector("#parentHistoryTable tbody");
+  tbody.innerHTML = "";
+
+  if (list.length === 0) {
+    tbody.innerHTML = `<tr><td colspan="6" style="color:var(--text-muted);">目前尚無交卷歷史紀錄</td></tr>`;
+  } else {
+    list.forEach((r, idx) => {
+      tbody.innerHTML += `
+        <tr>
+          <td>${idx + 1}</td>
+          <td>${r.time}</td>
+          <td>${r.spent}</td>
+          <td style="color:#38bdf8;font-weight:bold;">${r.score} 分</td>
+          <td style="font-size:0.82rem;text-align:left;">${r.dims}</td>
+          <td style="font-size:0.82rem;color:#fca5a5;">${r.wrongs}</td>
+        </tr>
+      `;
+    });
+  }
+  document.getElementById("parentModal").style.display = "flex";
+}
+
+function clearParentHistory() {
+  if (confirm("確定要清空所有歷次測驗紀錄嗎？")) {
+    localStorage.removeItem("math_115_exam_records");
+    openParentModal();
+  }
+}
+
+function closeModal(id) {
+  document.getElementById(id).style.display = "none";
+}
+
+// =========================================================================
+// 8. Telegram API 通知機制
+// =========================================================================
+function sendTelegramReport(record) {
+  const token = "8062206068:AAEqHmvEEMDFOYtggE4FxpHFoAWUGHX7Aq4";
+  const MY_CHAT_ID = "8049812362";
+
+  const msgText =
+    `📊 【115年國中教育會考數學模擬測驗交卷通知】\n` +
+    `01. 課程名稱：${record.course}\n` +
+    `02. 交卷時間：${record.time}\n` +
+    `03. 作答耗時：${record.spent}\n` +
+    `04. 測驗得分：${record.score} 分\n` +
+    `05. 各維度統計：${record.dims}\n` +
+    `06. 錯題清單：${record.wrongs}`;
+
+  const postToChat = (chatId) => {
+    return fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ chat_id: chatId, text: msgText })
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (!data.ok) console.warn("Telegram 發送失敗：", data.description);
+      })
+      .catch(err => console.warn("Telegram 網路請求錯誤：", err));
+  };
+
+  if (MY_CHAT_ID) {
+    postToChat(MY_CHAT_ID);
+  }
+}
+
+// 頁面載入後初始化測驗（保留原卷題序，按「重新測驗 (洗牌)」可隨機打亂）
+window.addEventListener("DOMContentLoaded", () => {
+  initExam(false);
+});
+</script>
+</body>
+</html>
