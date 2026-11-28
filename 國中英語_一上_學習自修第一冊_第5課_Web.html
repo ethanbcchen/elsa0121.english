@@ -1,0 +1,3435 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>國中英語自修數位筆記（第 187～193 頁）</title>
+  <style>
+    :root {
+      --bg-color: #f4f6f9;
+      --card-bg: #ffffff;
+      --primary-color: #2b5b84;
+      --secondary-color: #3a7ca5;
+      --accent-color: #d97724;
+      --border-color: #dce2e8;
+      --text-main: #222222;
+      --text-muted: #555555;
+      --non-1200-color: #9e5a28;
+      --box-info-bg: #eef4f8;
+      --box-knowledge-bg: #f3f7f2;
+      --box-knowledge-border: #6b9e78;
+      --handwritten-bg: #fff8dc;
+      --handwritten-text: #b91c1c;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "PingFang TC", "Microsoft JhengHei", "Noto Sans TC", sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      line-height: 1.65;
+    }
+
+    /* 頂部固定導覽列 */
+    header.top-nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background-color: #1e3a5f;
+      color: #ffffff;
+      padding: 12px 20px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .nav-title {
+      font-size: 1.1rem;
+      font-weight: bold;
+      letter-spacing: 0.5px;
+    }
+
+    .page-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .page-links button {
+      background-color: rgba(255, 255, 255, 0.15);
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      padding: 5px 11px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: background-color 0.2s;
+    }
+
+    .page-links button:hover {
+      background-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    #toggle-handwriting {
+      background-color: var(--accent-color);
+      color: #ffffff;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 4px;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: opacity 0.2s;
+    }
+
+    #toggle-handwriting:hover {
+      opacity: 0.9;
+    }
+
+    /* 主內容區 */
+    main {
+      max-width: 960px;
+      margin: 24px auto;
+      padding: 0 16px;
+    }
+
+    /* 單頁區塊標準樣式 */
+    section.page-block {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 28px 32px;
+      margin-bottom: 32px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+      scroll-margin-top: 76px;
+    }
+
+    .page-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid var(--primary-color);
+      padding-bottom: 10px;
+      margin-bottom: 22px;
+    }
+
+    .page-badge {
+      background-color: var(--primary-color);
+      color: #ffffff;
+      padding: 3px 12px;
+      border-radius: 20px;
+      font-weight: bold;
+      font-size: 0.92rem;
+    }
+
+    .unit-header-text {
+      color: var(--text-muted);
+      font-weight: bold;
+      font-size: 0.95rem;
+    }
+
+    /* 單元首頁標題樣式 */
+    .lesson-banner {
+      background: linear-gradient(135deg, #e6eff7 0%, #f5f9fc 100%);
+      border-left: 6px solid var(--primary-color);
+      padding: 20px 24px;
+      border-radius: 6px;
+      margin-bottom: 24px;
+    }
+
+    .lesson-label {
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: var(--secondary-color);
+      letter-spacing: 1px;
+    }
+
+    .lesson-title {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #111111;
+      margin: 6px 0 0 0;
+    }
+
+    /* 區塊標題 */
+    h2.section-heading {
+      font-size: 1.35rem;
+      color: var(--primary-color);
+      border-left: 5px solid var(--accent-color);
+      padding-left: 12px;
+      margin: 24px 0 14px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .sub-note {
+      font-size: 0.88rem;
+      font-weight: normal;
+      color: var(--non-1200-color);
+    }
+
+    .track-badge {
+      font-size: 0.85rem;
+      background-color: #eef2f5;
+      color: #333;
+      padding: 2px 10px;
+      border-radius: 12px;
+      border: 1px solid #cbd5e1;
+    }
+
+    /* 單字表格 */
+    table.vocab-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+      font-size: 0.98rem;
+    }
+
+    table.vocab-table th {
+      background-color: var(--secondary-color);
+      color: #ffffff;
+      padding: 10px 14px;
+      text-align: left;
+      border: 1px solid #2e6588;
+    }
+
+    table.vocab-table td {
+      padding: 8px 14px;
+      border: 1px solid var(--border-color);
+    }
+
+    table.vocab-table tr:nth-child(even) {
+      background-color: #f9fbfd;
+    }
+
+    .non-1200 {
+      color: var(--non-1200-color);
+      font-weight: 600;
+    }
+
+    .phonetic {
+      font-family: "Lucida Sans Unicode", "Arial Unicode MS", sans-serif;
+      color: #444444;
+    }
+
+    /* 詞性標籤 */
+    .pos-tag {
+      display: inline-block;
+      background-color: #5b7083;
+      color: #ffffff;
+      font-size: 0.8rem;
+      padding: 1px 6px;
+      border-radius: 3px;
+      margin-right: 4px;
+      vertical-align: middle;
+    }
+
+    .tag-label {
+      display: inline-block;
+      background-color: #2b5b84;
+      color: #ffffff;
+      font-size: 0.8rem;
+      padding: 1px 7px;
+      border-radius: 4px;
+      margin-right: 6px;
+      font-weight: bold;
+    }
+
+    .tag-label.warn {
+      background-color: #c0392b;
+    }
+
+    /* 字彙解析卡片 */
+    .vocab-entry {
+      border: 1px solid #e1e8ed;
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin-bottom: 18px;
+      background-color: #fcfdfe;
+    }
+
+    .vocab-entry-title {
+      font-size: 1.15rem;
+      font-weight: bold;
+      color: #164e63;
+      border-bottom: 1px dashed #cbd5e1;
+      padding-bottom: 8px;
+      margin-bottom: 12px;
+    }
+
+    .entry-num {
+      display: inline-block;
+      background-color: #164e63;
+      color: #ffffff;
+      width: 24px;
+      height: 24px;
+      line-height: 24px;
+      text-align: center;
+      border-radius: 50%;
+      font-size: 0.88rem;
+      margin-right: 6px;
+    }
+
+    ol.usage-list {
+      margin: 0 0 12px 0;
+      padding-left: 22px;
+    }
+
+    ol.usage-list li {
+      margin-bottom: 6px;
+    }
+
+    .example-line {
+      margin: 6px 0;
+      padding-left: 4px;
+    }
+
+    .your-turn-box {
+      background-color: #f1f5f9;
+      border-left: 4px solid #64748b;
+      padding: 10px 14px;
+      margin-top: 10px;
+      border-radius: 0 6px 6px 0;
+    }
+
+    .your-turn-badge {
+      display: inline-block;
+      background-color: #475569;
+      color: #ffffff;
+      font-size: 0.8rem;
+      font-weight: bold;
+      padding: 1px 8px;
+      border-radius: 4px;
+      margin-right: 8px;
+    }
+
+    .blank-line {
+      display: inline-block;
+      min-width: 110px;
+      border-bottom: 1.5px solid #333333;
+      text-align: center;
+      padding: 0 6px;
+    }
+
+    /* 知識+ 補充框 */
+    .knowledge-box {
+      background-color: var(--box-knowledge-bg);
+      border: 1px solid var(--box-knowledge-border);
+      border-left: 5px solid var(--box-knowledge-border);
+      border-radius: 6px;
+      padding: 14px 18px;
+      margin: 16px 0 20px 0;
+      font-size: 0.95rem;
+    }
+
+    .knowledge-header {
+      font-weight: bold;
+      color: #2e663d;
+      margin-bottom: 8px;
+      font-size: 1rem;
+    }
+
+    .knowledge-badge {
+      display: inline-block;
+      background-color: #2e663d;
+      color: #ffffff;
+      padding: 1px 8px;
+      border-radius: 4px;
+      font-size: 0.82rem;
+      margin-right: 8px;
+    }
+
+    .knowledge-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 6px;
+    }
+
+    .knowledge-table td {
+      padding: 6px 8px;
+      border-bottom: 1px dashed #b7d1be;
+      vertical-align: top;
+    }
+
+    .knowledge-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    /* 學習目標與句型框 */
+    .info-card {
+      background-color: var(--box-info-bg);
+      border: 1px solid #cbd9e6;
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin-bottom: 18px;
+    }
+
+    .info-card-title {
+      font-weight: bold;
+      color: var(--primary-color);
+      font-size: 1.08rem;
+      margin-bottom: 10px;
+      border-bottom: 1px solid #cbd9e6;
+      padding-bottom: 6px;
+    }
+
+    .grammar-item {
+      margin-bottom: 14px;
+    }
+
+    .grammar-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .grammar-sub {
+      padding-left: 18px;
+      margin-top: 4px;
+    }
+
+    /* 手寫標記樣式 */
+    .handwritten {
+      display: inline-block;
+      background-color: var(--handwritten-bg);
+      color: var(--handwritten-text);
+      border: 1px dashed #d97706;
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-weight: bold;
+      font-size: 0.92rem;
+    }
+
+    body.hide-handwriting .handwritten {
+      display: none;
+    }
+
+    .blank-status {
+      color: #888888;
+      font-size: 0.85rem;
+      font-style: italic;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #1e3a5f;
+      color: #ffffff;
+      font-weight: bold;
+      margin-top: 40px;
+      letter-spacing: 0.5px;
+    }
+
+    @media (max-width: 640px) {
+      section.page-block {
+        padding: 18px 16px;
+      }
+      .lesson-title {
+        font-size: 1.6rem;
+      }
+      table.vocab-table th,
+      table.vocab-table td {
+        padding: 6px 8px;
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="top-nav">
+    <div class="nav-title">國中英語自修數位筆記（Lesson 5）</div>
+    <nav class="page-links" aria-label="頁碼快速切換導覽列">
+      <button type="button" onclick="scrollToPage('page-187')">第 187 頁</button>
+      <button type="button" onclick="scrollToPage('page-188')">第 188 頁</button>
+      <button type="button" onclick="scrollToPage('page-189')">第 189 頁</button>
+      <button type="button" onclick="scrollToPage('page-190')">第 190 頁</button>
+      <button type="button" onclick="scrollToPage('page-191')">第 191 頁</button>
+      <button type="button" onclick="scrollToPage('page-192')">第 192 頁</button>
+      <button type="button" onclick="scrollToPage('page-193')">第 193 頁</button>
+      <button type="button" onclick="scrollToPage('page-194')">第 194 頁</button>
+      <button type="button" onclick="scrollToPage('page-195')">第 195 頁</button>
+      <button type="button" onclick="scrollToPage('page-196')">第 196 頁</button>
+      <button type="button" onclick="scrollToPage('page-197')">第 197 頁</button>
+      <button type="button" onclick="scrollToPage('page-198')">第 198 頁</button>
+      <button type="button" onclick="scrollToPage('page-199')">第 199 頁</button>
+      <button type="button" onclick="scrollToPage('page-200')">第 200 頁</button>
+      <button type="button" onclick="scrollToPage('page-201')">第 201 頁</button>
+      <button type="button" onclick="scrollToPage('page-202')">第 202 頁</button>
+      <button type="button" onclick="scrollToPage('page-203')">第 203 頁</button>
+      <button type="button" onclick="scrollToPage('page-204')">第 204 頁</button>
+      <button type="button" onclick="scrollToPage('page-205')">第 205 頁</button>
+      <button type="button" onclick="scrollToPage('page-206')">第 206 頁</button>
+      <button type="button" onclick="scrollToPage('page-207')">第 207 頁</button>
+      <button type="button" onclick="scrollToPage('page-208')">第 208 頁</button>
+      <button type="button" onclick="scrollToPage('page-209')">第 209 頁</button>
+      <button type="button" onclick="scrollToPage('page-210')">第 210 頁</button>
+      <button type="button" onclick="scrollToPage('page-211')">第 211 頁</button>
+      <button type="button" onclick="scrollToPage('page-212')">第 212 頁</button>
+      <button type="button" onclick="scrollToPage('page-213')">第 213 頁</button>
+      <button type="button" onclick="scrollToPage('page-214')">第 214 頁</button>
+      <button type="button" onclick="scrollToPage('page-215')">第 215 頁</button>
+      <button type="button" onclick="scrollToPage('page-216')">第 216 頁</button>
+      <button type="button" onclick="scrollToPage('page-217')">第 217 頁</button>
+      <button type="button" onclick="scrollToPage('page-218')">第 218 頁</button>
+      <button type="button" onclick="scrollToPage('page-219')">第 219 頁</button>
+      <button type="button" onclick="scrollToPage('page-220')">第 220 頁</button>
+    </nav>
+    <div class="controls">
+      <button type="button" id="toggle-handwriting" onclick="toggleHandwriting()">隱藏【手寫】筆記</button>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ==================== 第 187 頁 ==================== -->
+    <section id="page-187" class="page-block" data-page="187">
+      <div class="page-header">
+        <span class="page-badge">第 187 頁</span>
+        <span class="unit-header-text">Lesson 5</span>
+      </div>
+
+      <div class="lesson-banner">
+        <div class="lesson-label">LESSON 5</div>
+        <h1 class="lesson-title">What Are You Doing?</h1>
+      </div>
+
+      <div class="info-card">
+        <div class="info-card-title">一 學習目標</div>
+        <ol class="usage-list">
+          <li>能使用現在進行式描述正在持續進行的動作。</li>
+          <li>能聽說讀及拼寫本單元字彙並運用於現在進行式句型中。</li>
+          <li>能使用 What time...? 的問句與其回答。</li>
+          <li>能使用 What day...? 的問句與其回答。</li>
+          <li>能聽說讀及拼寫一週七天的英文名稱。</li>
+          <li>能分辨並正確唸出含 /ɪ/ 和 /aɪ/ 的單字。</li>
+        </ol>
+      </div>
+
+      <div class="info-card">
+        <div class="info-card-title">二 文法句型</div>
+
+        <div class="grammar-item">
+          <div>1. 現在進行式的 Yes / No 問句：</div>
+          <div class="grammar-sub">問句：be 動詞＋主詞＋V-ing?</div>
+          <div class="grammar-sub">簡答句：Yes, 主詞＋be 動詞.</div>
+          <div class="grammar-sub" style="padding-left: 74px;">No, 主詞＋be 動詞＋not.</div>
+        </div>
+
+        <div class="grammar-item">
+          <div>2. 現在進行式的 What 疑問句：</div>
+          <div class="grammar-sub">問句：What＋be 動詞＋主詞＋doing?</div>
+          <div class="grammar-sub">答句：主詞＋be 動詞＋V-ing.</div>
+        </div>
+
+        <div class="grammar-item">
+          <div>3. What time 問答句：</div>
+          <div class="grammar-sub">問句：What time＋is＋it / 名詞?</div>
+          <div class="grammar-sub">答句：It is＋時間 / at＋時間.</div>
+        </div>
+
+        <div class="grammar-item">
+          <div>4. What day 問答句：</div>
+          <div class="grammar-sub">問句：What day＋is＋it / 名詞?</div>
+          <div class="grammar-sub">答句：It is＋星期名稱 / on＋星期名稱.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 第 188 頁 ==================== -->
+    <section id="page-188" class="page-block" data-page="188">
+      <div class="page-header">
+        <span class="page-badge">第 188 頁</span>
+        <span class="unit-header-text">國中英語</span>
+      </div>
+
+      <h2 class="section-heading">
+        <span>字彙整理 <span class="sub-note">●棕色字為非 1200 字</span></span>
+        <span class="track-badge">🎧 Track 35</span>
+      </h2>
+
+      <table class="vocab-table">
+        <thead>
+          <tr>
+            <th style="width: 34%;">單 字</th>
+            <th style="width: 33%;">音 標</th>
+            <th style="width: 33%;">詞性和字義</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>week</td>
+            <td class="phonetic">[wik]</td>
+            <td><span class="pos-tag">名</span>星期</td>
+          </tr>
+          <tr>
+            <td>Monday</td>
+            <td class="phonetic">[ˋmʌnde ; ˋmʌndɪ]</td>
+            <td><span class="pos-tag">名</span>星期一</td>
+          </tr>
+          <tr>
+            <td>Tuesday</td>
+            <td class="phonetic">[ˋtjuzde ; ˋtjuzdɪ]</td>
+            <td><span class="pos-tag">名</span>星期二</td>
+          </tr>
+          <tr>
+            <td>Wednesday</td>
+            <td class="phonetic">[ˋwɛnzde ; ˋwɛnzdɪ]</td>
+            <td><span class="pos-tag">名</span>星期三</td>
+          </tr>
+          <tr>
+            <td>basketball</td>
+            <td class="phonetic">[ˋbæskɪt͵bɔl]</td>
+            <td><span class="pos-tag">名</span>籃球</td>
+          </tr>
+          <tr>
+            <td>Thursday</td>
+            <td class="phonetic">[ˋθɝzde ; ˋθɝzdɪ]</td>
+            <td><span class="pos-tag">名</span>星期四</td>
+          </tr>
+          <tr>
+            <td>Friday</td>
+            <td class="phonetic">[ˋfraɪde ; ˋfraɪdɪ]</td>
+            <td><span class="pos-tag">名</span>星期五</td>
+          </tr>
+          <tr>
+            <td>Saturday</td>
+            <td class="phonetic">[ˋsætɚde ; ˋsætɚdɪ]</td>
+            <td><span class="pos-tag">名</span>星期六</td>
+          </tr>
+          <tr>
+            <td>birthday</td>
+            <td class="phonetic">[ˋbɝθ͵de]</td>
+            <td><span class="pos-tag">名</span>生日</td>
+          </tr>
+          <tr>
+            <td>party</td>
+            <td class="phonetic">[ˋpɑrtɪ]</td>
+            <td><span class="pos-tag">名</span>派對</td>
+          </tr>
+          <tr>
+            <td>Sunday</td>
+            <td class="phonetic">[ˋsʌnde ; ˋsʌndɪ]</td>
+            <td><span class="pos-tag">名</span>星期日</td>
+          </tr>
+          <tr>
+            <td>day</td>
+            <td class="phonetic">[de]</td>
+            <td><span class="pos-tag">名</span>日</td>
+          </tr>
+          <tr>
+            <td>weekend</td>
+            <td class="phonetic">[ˋwik͵ɛnd]</td>
+            <td><span class="pos-tag">名</span>週末</td>
+          </tr>
+          <tr>
+            <td>noon</td>
+            <td class="phonetic">[nun]</td>
+            <td><span class="pos-tag">名</span>中午</td>
+          </tr>
+          <tr>
+            <td>wake up</td>
+            <td class="phonetic">[͵wek ˋʌp]</td>
+            <td>醒來</td>
+          </tr>
+          <tr>
+            <td>look for</td>
+            <td class="phonetic">[ˋlʊk fɔr ; ˋlʊk fɚ]</td>
+            <td>尋找</td>
+          </tr>
+          <tr>
+            <td>Hurry up.</td>
+            <td class="phonetic">[͵hɝɪ ˋʌp]</td>
+            <td>快一點。</td>
+          </tr>
+          <tr>
+            <td>by the way</td>
+            <td class="phonetic">[baɪ ðə ˋwe]</td>
+            <td>順帶一提</td>
+          </tr>
+          <tr>
+            <td>join</td>
+            <td class="phonetic">[dʒɔɪn]</td>
+            <td><span class="pos-tag">動</span>參加；加入</td>
+          </tr>
+          <tr>
+            <td>group</td>
+            <td class="phonetic">[grup]</td>
+            <td><span class="pos-tag">名</span>團體</td>
+          </tr>
+          <tr>
+            <td class="non-1200">chat</td>
+            <td class="phonetic">[tʃæt]</td>
+            <td><span class="pos-tag">名</span>；<span class="pos-tag">動</span>談話</td>
+          </tr>
+          <tr>
+            <td>tonight</td>
+            <td class="phonetic">[təˋnaɪt]</td>
+            <td><span class="pos-tag">副</span>今晚</td>
+          </tr>
+          <tr>
+            <td>meeting</td>
+            <td class="phonetic">[ˋmitɪŋ]</td>
+            <td><span class="pos-tag">名</span>會議</td>
+          </tr>
+          <tr>
+            <td>p.m.</td>
+            <td class="phonetic">[͵piˋɛm]</td>
+            <td><span class="pos-tag">副</span>下午；晚上</td>
+          </tr>
+          <tr>
+            <td>life</td>
+            <td class="phonetic">[laɪf]</td>
+            <td><span class="pos-tag">名</span>生活</td>
+          </tr>
+          <tr>
+            <td>prepare</td>
+            <td class="phonetic">[prɪˋpɛr]</td>
+            <td><span class="pos-tag">動</span>準備</td>
+          </tr>
+          <tr>
+            <td>o'clock</td>
+            <td class="phonetic">[əˋklɑk]</td>
+            <td><span class="pos-tag">副</span>……點鐘</td>
+          </tr>
+          <tr>
+            <td>everyone (everybody)</td>
+            <td class="phonetic">[ˋɛvrɪ͵wʌn] ([ˋɛvrɪ͵bɑdɪ])</td>
+            <td><span class="pos-tag">代</span>每個人；各位</td>
+          </tr>
+          <tr>
+            <td>a.m.</td>
+            <td class="phonetic">[͵eˋɛm]</td>
+            <td><span class="pos-tag">副</span>上午；凌晨</td>
+          </tr>
+          <tr>
+            <td>city</td>
+            <td class="phonetic">[ˋsɪtɪ]</td>
+            <td><span class="pos-tag">名</span>城市</td>
+          </tr>
+          <tr>
+            <td>say</td>
+            <td class="phonetic">[se]</td>
+            <td><span class="pos-tag">動</span>說</td>
+          </tr>
+          <tr>
+            <td>sun</td>
+            <td class="phonetic">[sʌn]</td>
+            <td><span class="pos-tag">名</span>太陽</td>
+          </tr>
+          <tr>
+            <td>rise</td>
+            <td class="phonetic">[raɪz]</td>
+            <td><span class="pos-tag">動</span>上升</td>
+          </tr>
+          <tr>
+            <td class="non-1200">shine</td>
+            <td class="phonetic">[ʃaɪn]</td>
+            <td><span class="pos-tag">動</span>照耀；發光</td>
+          </tr>
+          <tr>
+            <td>dinner</td>
+            <td class="phonetic">[ˋdɪnɚ]</td>
+            <td><span class="pos-tag">名</span>晚餐</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ==================== 第 189 頁 ==================== -->
+    <section id="page-189" class="page-block" data-page="189">
+      <div class="page-header">
+        <span class="page-badge">第 189 頁</span>
+        <span class="unit-header-text">Lesson 5</span>
+      </div>
+
+      <h2 class="section-heading"><span>字彙解析</span></h2>
+
+      <!-- 1 week -->
+      <div class="vocab-entry">
+        <div class="vocab-entry-title">
+          <span class="entry-num">1</span>week <span class="phonetic">[wik]</span> <span class="pos-tag">名</span>星期
+        </div>
+        <ol class="usage-list">
+          <li>week 表「星期；週」，為可數名詞，複數形為 weeks。</li>
+          <li>in a week 表「一星期內」。</li>
+        </ol>
+        <div class="example-line">
+          <span class="tag-label">例</span>We will go to the USA this week. I am very happy.<br>
+          （我們這星期將要去美國了。我非常開心。）
+        </div>
+        <div class="your-turn-box">
+          <span class="your-turn-badge">Your turn</span>There are seven days in a <span class="blank-line"><span class="blank-status">（原圖空白）</span></span>.（一個星期有七天。）
+        </div>
+      </div>
+
+      <!-- 知識+ 一星期七天的由來 -->
+      <div class="knowledge-box">
+        <div class="knowledge-header"><span class="knowledge-badge">知識＋</span>一星期七天的由來</div>
+        <div>
+          一星期七天的由來，據說與聖經中創世紀有關，也就是上帝工作了六天，而在第七天休息。但也有證據顯示，猶太人對星期的觀念可能是來自美索不達米亞的蘇美人及巴比倫人，他們將一年分成星期來計算，一星期有七天，其中一天是休息的日子。早在巴比倫的時代即以日、月配上當時所知的五個行星用來計日，七天為一週，分別為太陽日、月亮日、火星日、水星日、木星日、金星日、土星日。到了羅馬帝國時期，羅馬人沿用此習慣，但一度改成八天，直到西元 321 年，君士坦丁大帝將一星期七天置入羅馬曆，並且訂定星期日為一週的開始。後來，歐洲各國紛紛沿用，而隨著大英帝國在世界各地擴展殖民地，這項制度也擴展至世界各地，進而成為全世界共通的制度。
+        </div>
+      </div>
+
+      <!-- 2 Monday -->
+      <div class="vocab-entry">
+        <div class="vocab-entry-title">
+          <span class="entry-num">2</span>Monday <span class="phonetic">[ˋmʌnde ; ˋmʌndɪ]</span> <span class="pos-tag">名</span>星期一
+        </div>
+        <ol class="usage-list">
+          <li>為可數名詞，表「星期一；週一」，星期幾的名稱字首字母均須大寫。</li>
+          <li>須搭配介系詞 on，「on＋星期幾」表「在星期幾」。</li>
+          <li>「on＋星期幾 s」＝「every＋星期幾」，表「每星期幾」。</li>
+        </ol>
+        <div class="example-line">
+          <span class="tag-label">相關字彙</span>Tuesday（星期二）；Wednesday（星期三）；Thursday（星期四）；<br>
+          <span style="padding-left: 68px;">Friday（星期五）；Saturday（星期六）；Sunday（星期日）。</span>
+        </div>
+        <div class="example-line">
+          <span class="tag-label">例</span>Mayday will have a concert in Taipei Arena on Monday.<br>
+          （五月天星期一將在臺北小巨蛋舉行演唱會。）
+        </div>
+        <div class="your-turn-box">
+          <span class="your-turn-badge">Your turn</span>The meeting is <span class="blank-line"><span class="blank-status">（原圖空白）</span></span>.<br>
+          （這個會議是在星期一。）
+        </div>
+      </div>
+
+      <!-- 知識+ 星期一到星期日名稱的由來 -->
+      <div class="knowledge-box">
+        <div class="knowledge-header"><span class="knowledge-badge">知識＋</span>星期一到星期日名稱的由來</div>
+        <div>
+          英國人接受了羅馬的一星期七天的曆制，但他們還是把星期的名字做了一些改變，像太陽日變成 Sunday（星期日），月亮日變成 Monday（星期一），而以下五個就改成北歐神話的神。
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 第 190 頁 ==================== -->
+    <section id="page-190" class="page-block" data-page="190">
+      <div class="page-header">
+        <span class="page-badge">第 190 頁</span>
+        <span class="unit-header-text">國中英語</span>
+      </div>
+
+      <!-- 接續第 189 頁 知識+ 表格 -->
+      <div class="knowledge-box">
+        <table class="knowledge-table">
+          <tbody>
+            <tr>
+              <td style="width: 110px; font-weight: bold;">Tuesday<br>（星期二）</td>
+              <td>：意即「泰爾之日（Tyr's Day）」，源於北歐神話其中一位守護神泰爾（Tyr），象徵勇氣與英雄。在日耳曼民族裡泰爾則是個名為 Tiu 或 Twia 的天空之神。</td>
+            </tr>
+            <tr>
+              <td style="font-weight: bold;">Wednesday<br>（星期三）</td>
+              <td>：意為「主神之日（Woden's Day）」，源於北歐神話裡的最高主神奧丁（Odin），或盎格魯-撒克遜人信奉的最高主神沃登（Woden）。「沃登」這個名稱意為「暴虐的領袖」。</td>
+            </tr>
+            <tr>
+              <td style="font-weight: bold;">Thursday<br>（星期四）</td>
+              <td>：意即「托爾之日（Thor's Day）」，源於北歐神話裡的雷神托爾（Thor），掌管雷電。</td>
+            </tr>
+            <tr>
+              <td style="font-weight: bold;">Friday<br>（星期五）</td>
+              <td>：意即「芙蕾雅之日（Freya's Day）」，源於北歐神話裡代表愛、婚姻和生育的女神芙蕾雅（Freya）。</td>
+            </tr>
+            <tr>
+              <td style="font-weight: bold;">Saturday<br>（星期六）</td>
+              <td>：意即「撒頓之日（Saturn's Day）」，撒頓（Saturn）是羅馬傳統宗教的一位掌管農業的古老神祇，他的兒子就是羅馬最高主神朱比特（Jupiter）。由於羅馬人非常重視農業，因此自然會以農業之神命名一星期裡的其中一天，這就是一星期名稱的由來。</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 3 day -->
+      <div class="vocab-entry">
+        <div class="vocab-entry-title">
+          <span class="entry-num">3</span>day <span class="phonetic">[de]</span> <span class="pos-tag">名</span>日
+        </div>
+        <ol class="usage-list">
+          <li>day 為可數名詞，複數形為 days。</li>
+          <li>Have a nice day. 表「祝你有美好的一天。」。</li>
+        </ol>
+        <div class="example-line">
+          <span class="tag-label">例</span>January 1 is the first day of the year.（一月一日是一年的第一天。）
+        </div>
+        <div class="example-line">
+          <span class="tag-label">相關片語</span>day and night（日以繼夜）；day after day（日復一日）。
+        </div>
+        <div class="your-turn-box">
+          <span class="your-turn-badge">Your turn</span>There are 31 <span class="blank-line"><span class="blank-status">（原圖空白）</span></span> in December.（十二月有三十一天。）
+        </div>
+      </div>
+
+      <!-- 4 weekend -->
+      <div class="vocab-entry">
+        <div class="vocab-entry-title">
+          <span class="entry-num">4</span>weekend <span class="phonetic">[ˋwik͵ɛnd]</span> <span class="pos-tag">名</span>週末
+        </div>
+        <ol class="usage-list">
+          <li>weekend 是可數名詞，複數形為 weekends。</li>
+          <li>weekend 須搭配介系詞 on，on the weekend 表「在週末」。</li>
+          <li>on weekends＝every weekend，表「每個週末」。</li>
+        </ol>
+        <div class="example-line">
+          <span class="tag-label">例</span>We like to eat out on weekends.（我們週末時喜歡去外面吃。）
+        </div>
+        <div class="example-line">
+          <span class="tag-label">相關字彙</span>weekday（星期一到星期五的任一天）。
+        </div>
+        <div class="your-turn-box">
+          <span class="your-turn-badge">Your turn</span>Grandma and Grandpa go hiking every <span class="blank-line"><span class="blank-status">（原圖空白）</span></span>.<br>
+          （爺爺跟奶奶每個週末都去健行。）
+        </div>
+      </div>
+
+      <!-- 5 noon -->
+      <div class="vocab-entry">
+        <div class="vocab-entry-title">
+          <span class="entry-num">5</span>noon <span class="phonetic">[nun]</span> <span class="pos-tag">名</span>中午
+        </div>
+        <div class="example-line">
+          at noon 表「在中午」。
+        </div>
+        <div class="example-line">
+          <span class="tag-label">例</span>Let's not meet at noon. It's too hot then.（我們不要在中午碰面。那時太熱了。）
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 第 191 頁 ==================== -->
+    <section id="page-191" class="page-block" data-page="191">
+      <div class="page-header">
+        <span class="page-badge">第 191 頁</span>
+        <span class="unit-header-text">Lesson 5</span>
+      </div>
+
+      <!-- 接續第 190 頁 5 noon 的 Your turn -->
+      <div class="vocab-entry">
+        <div class="your-turn-box" style="margin-top: 0;">
+          <span class="your-turn-badge">Your turn</span>Can I talk to you about this problem <span class="blank-line"><span class="blank-status">（原圖空白）</span></span>?<br>
+          （我可以在中午和你談論這個問題嗎？）
+        </div>
+      </div>
+
+      <!-- 6 wake up -->
+      <div class="vocab-entry">
+        <div class="vocab-entry-title">
+          <span class="entry-num">6</span>wake up <span class="phonetic">[͵wek ˋʌp]</span> 醒來
+        </div>
+        <ol class="usage-list">
+          <li>wake 一字也可表示「醒來」，加上 up（起來）有加強語氣之意。</li>
+          <li>祈使句 Wake up! 常用於叫人起床。</li>
+          <li>要表示「叫醒或喚醒某人」可用「wake＋人＋up」或「wake up＋人」，但當人稱使用代名詞時，只能用「wake＋人＋up」表示。</li>
+        </ol>
+        <div class="example-line">
+          <span class="tag-label">例</span>(1) Wake up, John! Time for breakfast.（John，醒來！早餐時間到了。）<br>
+          <span style="padding-left: 28px;">(2) Please wake me up at noon.（請在中午叫醒我。）</span>
+        </div>
+        <div class="your-turn-box">
+          <span class="your-turn-badge">Your turn</span><span class="blank-line"><span class="blank-status">（原圖空白）</span></span> your brother and tell him about the news.<br>
+          （叫醒你哥哥並且告訴他這個消息。）
+        </div>
+      </div>
+
+      <!-- 7 look for -->
+      <div class="vocab-entry">
+        <div class="vocab-entry-title">
+          <span class="entry-num">7</span>look for <span class="phonetic">[ˋlʊk fɔr ; ˋlʊk fɚ]</span> 尋找
+        </div>
+        <ol class="usage-list">
+          <li>look for 是由動詞 look（看）和介系詞 for 所形成的動詞片語，後面接名詞。</li>
+          <li>look for 是指在「尋找」某人或某事物，但還沒找到。</li>
+        </ol>
+        <div class="example-line">
+          <span class="tag-label">例</span>Eric is looking for his pet dog, but he can't find it.<br>
+          （Eric 正在找他的寵物狗，但是他找不到。）
+        </div>
+        <div class="example-line">
+          <span class="tag-label">相關字彙</span>find（尋得；找到；發現）。
+        </div>
+        <div class="your-turn-box">
+          <span class="your-turn-badge">Your turn</span>A: What are you <span class="blank-line"><span class="blank-status">（原圖空白）</span></span>?（你在找什麼？）<br>
+          <span style="padding-left: 74px;">B: My robot. It's my birthday gift from my uncle.</span><br>
+          <span style="padding-left: 92px;">（我的機器人。它是我叔叔送我的生日禮物。）</span>
+        </div>
+      </div>
+
+      <!-- 8 Hurry up. -->
+      <div class="vocab-entry">
+        <div class="vocab-entry-title">
+          <span class="entry-num">8</span>Hurry up. <span class="phonetic">[͵hɝɪ ˋʌp]</span> 快一點。
+        </div>
+        <ol class="usage-list">
+          <li>Hurry up. 是由動詞 hurry（趕緊；匆忙）和副詞 up 所形成的動詞片語。常在口語中用來催促某人。</li>
+          <li>in a hurry 表「匆忙地」。</li>
+        </ol>
+        <div class="example-line">
+          <span class="tag-label">例</span>Hurry up. The movie is on.（快一點。電影開演了。）
+        </div>
+        <div class="your-turn-box">
+          <span class="your-turn-badge">Your turn</span>A: Patty, <span class="blank-line"><span class="blank-status">（原圖空白）</span></span>. We are late.<br>
+          <span style="padding-left: 92px;">（Patty，快一點。我們遲到了。）</span><br>
+          <span style="padding-left: 74px;">B: OK. Coming.（好。來了。）</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 第 192 頁 ==================== -->
+    <section id="page-192" class="page-block" data-page="192">
+      <div class="page-header">
+        <span class="page-badge">第 192 頁</span>
+        <span class="unit-header-text">國中英語</span>
+      </div>
+
+      <!-- 9 by the way -->
+      <div class="vocab-entry">
+        <div class="vocab-entry-title">
+          <span class="entry-num">9</span>by the way <span class="phonetic">[baɪ ðə ˋwe]</span> 順帶一提
+        </div>
+        <div class="example-line">
+          by the way 表示「順帶一提」某事，在對話中用於要另提一個和原本的話題無關的內容時，用來轉換語氣、岔開原本的話題；其後須加逗號。
+        </div>
+        <div class="example-line">
+          <span class="tag-label">例</span>Please close the door. By the way, remember to call Ryan.<br>
+          （請把門關上。順帶一提，記得打電話給 Ryan。）
+        </div>
+        <div class="your-turn-box">
+          <span class="your-turn-badge">Your turn</span>I am going to bed now. <span class="blank-line"><span class="blank-status">（原圖空白）</span></span>, the apples are on the table.（我現在要上床睡覺了。順帶一提，蘋果在桌上。）
+        </div>
+      </div>
+
+      <!-- 10 join -->
+      <div class="vocab-entry">
+        <div class="vocab-entry-title">
+          <span class="entry-num">10</span>join <span class="phonetic">[dʒɔɪn]</span> <span class="pos-tag">動</span>參加；加入
+        </div>
+        <ol class="usage-list">
+          <li>join 表示「參加／加入（某團體或組織成為一員）」之意，例如 join a club（參加社團）、join the army（從軍）等。</li>
+          <li>「join＋人＋for＋名詞」表示「與某人一起……」。</li>
+        </ol>
+        <div class="example-line">
+          <span class="tag-label">例</span>Let's join the English club.（我們加入英語社吧。）
+        </div>
+        <div class="your-turn-box">
+          <span class="your-turn-badge">Your turn</span>Can I <span class="blank-line"><span class="blank-status">（原圖空白）</span></span> you <span class="blank-line"><span class="blank-status">（原圖空白）</span></span> lunch?<br>
+          （我可以與你們共進午餐嗎？）
+        </div>
+      </div>
+
+      <!-- 11 group -->
+      <div class="vocab-entry">
+        <div class="vocab-entry-title">
+          <span class="entry-num">11</span>group <span class="phonetic">[grup]</span> <span class="pos-tag">名</span>團體
+        </div>
+        <div class="example-line">
+          a group of... 表「一群……」。
+        </div>
+        <div class="example-line">
+          <span class="tag-label">例</span>The group is very famous. They are good at telling jokes.<br>
+          （那個團體非常有名。他們很會說笑話。）
+        </div>
+        <div class="your-turn-box">
+          <span class="your-turn-badge">Your turn</span>There is a <span class="blank-line"><span class="blank-status">（原圖空白）</span></span> of kids in the park.（公園裡有一群小朋友。）
+        </div>
+      </div>
+
+      <!-- 12 chat -->
+      <div class="vocab-entry">
+        <div class="vocab-entry-title">
+          <span class="entry-num">12</span><span class="non-1200">chat</span> <span class="phonetic">[tʃæt]</span> <span class="pos-tag">名</span>；<span class="pos-tag">動</span>談話
+        </div>
+        <ol class="usage-list">
+          <li>chat 可當名詞，表示「談話」，have a chat with... 表「與……交談」。</li>
+          <li>chat 也可當動詞，後接介系詞 with / to 後再加人，表「與……交談」；chat about... 表「談論有關……」。</li>
+        </ol>
+        <div class="example-line">
+          <span class="tag-label">例</span>The boy is chatting with Linda. Who is he?<br>
+          （那個男生正在跟 Linda 聊天。他是誰？）
+        </div>
+        <div class="your-turn-box">
+          <span class="your-turn-badge">Your turn</span>Let's <span class="blank-line"><span class="blank-status">（原圖空白）</span></span> about your history report. It's very interesting.<br>
+          （我們來談談你的歷史報告吧。它非常有趣。）
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 第 193 頁 ==================== -->
+    <section id="page-193" class="page-block" data-page="193">
+      <div class="page-header">
+        <span class="page-badge">第 193 頁</span>
+        <span class="unit-header-text">Lesson 5</span>
+      </div>
+
+      <!-- 13 tonight -->
+      <div class="vocab-entry">
+        <div class="vocab-entry-title">
+          <span class="entry-num">13</span>tonight <span class="phonetic">[təˋnaɪt]</span> <span class="pos-tag">副</span>今晚
+        </div>
+        <ol class="usage-list">
+          <li>tonight 為時間副詞，通常放在句尾，前面不須加介系詞。</li>
+          <li>tonight 也可當名詞，視為單數，後面接單數動詞。</li>
+        </ol>
+        <div class="example-line">
+          <span class="tag-label">例</span>Do you have a good time at the party tonight?<br>
+          （今晚的派對你玩得開心嗎？）
+        </div>
+        <div class="your-turn-box">
+          <span class="your-turn-badge">Your turn</span>Are you free <span class="blank-line"><span class="blank-status">（原圖空白）</span></span>? Let's go to the movies.<br>
+          （你今晚有空嗎？我們去看電影吧。）
+        </div>
+      </div>
+
+      <!-- 14 meeting -->
+      <div class="vocab-entry">
+        <div class="vocab-entry-title">
+          <span class="entry-num">14</span>meeting <span class="phonetic">[ˋmitɪŋ]</span> <span class="pos-tag">名</span>會議
+        </div>
+        <ol class="usage-list">
+          <li>meeting 為可數名詞，是由動詞 meet（見面）後加上 -ing 所形成。</li>
+          <li>have / hold a meeting 表「舉行會議」。</li>
+        </ol>
+        <div class="example-line">
+          <span class="tag-label">例</span>The meeting is at 3 p.m. Don't be late.（會議是在下午三點。不要遲到了。）
+        </div>
+        <div class="your-turn-box">
+          <span class="your-turn-badge">Your turn</span>A: What's the <span class="blank-line"><span class="blank-status">（原圖空白）</span></span> about?（這個會議是關於什麼？）<br>
+          <span style="padding-left: 74px;">B: It's about our magic show.（它是關於我們的魔術表演。）</span>
+        </div>
+      </div>
+
+      <!-- 15 p.m. -->
+      <div class="vocab-entry">
+        <div class="vocab-entry-title">
+          <span class="entry-num">15</span>p.m. <span class="phonetic">[͵piˋɛm]</span> <span class="pos-tag">副</span>下午；晚上
+        </div>
+        <div class="example-line">
+          p.m. 是由拉丁文 post meridiem 縮寫而成，表「中午之後」，也就是「下午；晚上」。
+        </div>
+        <div class="example-line">
+          <span class="tag-label">例</span>Let's meet at the theater at 2 p.m.（我們下午兩點在戲院見面吧。）
+        </div>
+        <div class="example-line">
+          <span class="tag-label warn">注意</span>若句中有 p.m.，則不會再加上 in the afternoon。
+        </div>
+        <div class="example-line">
+          <span class="tag-label">相關字彙</span>a.m.（上午；凌晨），是由拉丁文 ante meridiem 縮寫而成，同樣地，若句中有 a.m.，則不會再加上 in the morning。
+        </div>
+        <div class="your-turn-box">
+          <span class="your-turn-badge">Your turn</span>Hurry up. We have to get there before 10 <span class="blank-line"><span class="blank-status">（原圖空白）</span></span>.<br>
+          （趕快。我們必須在晚上十點之前抵達那裡。）
+        </div>
+      </div>
+
+      <!-- 16 life -->
+      <div class="vocab-entry">
+        <div class="vocab-entry-title">
+          <span class="entry-num">16</span>life <span class="phonetic">[laɪf]</span> <span class="pos-tag">名</span>生活
+        </div>
+        <ol class="usage-list">
+          <li>life 為名詞，表「生活；生命」，其複數形為 lives。</li>
+          <li>in one's life 表「在某人的一生中」；live a... life 表「過著……的生活」；save one's life 表「救某人一命」。</li>
+        </ol>
+        <div class="example-line">
+          <span class="tag-label">例</span>(1) Life in the city is very convenient.（在都市的生活非常方便。）<br>
+          <span style="padding-left: 28px;">(2) The doctor is trying to save the young man's life.</span><br>
+          <span style="padding-left: 52px;">（那位醫生正在試著救那位年輕人的命。）</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ▼▼▼ （第 194～199 頁）的 <section> 區塊 ▼▼▼ -->
+
+    <!-- ==================== 第 194 頁 ==================== -->
+    <section id="page-194" class="page-block" data-page="194">
+      <div class="page-header">
+        <span class="page-badge">第 194 頁</span>
+        <span class="unit-header-text">國中英語</span>
+      </div>
+
+      <!-- 接續第 193 頁 16 life 的 Your turn -->
+      <div class="vocab-entry">
+        <div class="your-turn-box" style="margin-top: 0;">
+          <span class="your-turn-badge">Your turn</span>Mrs. Taylor and her family <span class="blank-line"><span class="blank-status">（原圖空白）</span></span> a happy <span class="blank-line"><span class="blank-status">（原圖空白）</span></span>.<br>
+          （Taylor 太太和她的家人過著幸福的生活。）
+        </div>
+      </div>
+
+      <!-- 17 prepare -->
+      <div class="vocab-entry">
+        <div class="vocab-entry-title">
+          <span class="entry-num">17</span>prepare <span class="phonetic">[prɪˋpɛr]</span> <span class="pos-tag">動</span>準備
+        </div>
+        <ol class="usage-list">
+          <li>prepare 為動詞，表「準備；預備」，其進行式為 preparing。</li>
+          <li>「prepare for＋名詞」表「準備某事」；「prepare to＋原形動詞」表「準備去做某事」；「prepare B for A」表「為 A 準備 B」。</li>
+        </ol>
+        <div class="example-line">
+          <span class="tag-label">例</span>(1) Gina is preparing for her test tomorrow.（Gina 正在準備她明天的考試。）<br>
+          <span style="padding-left: 28px;">(2) Mr. and Mrs. Clark are preparing to go on holiday.（Clark 夫婦正在準備去度假。）</span><br>
+          <span style="padding-left: 28px;">(3) Paul is preparing dinner for his children.（Paul 正在為他的孩子們準備晚餐。）</span>
+        </div>
+        <div class="your-turn-box">
+          <span class="your-turn-badge">Your turn</span>A: What is Mom doing?（媽媽在做什麼？）<br>
+          <span style="padding-left: 74px;">B: She is <span class="blank-line"><span class="blank-status">（原圖空白）</span></span> for the trip.（她正在為旅行做準備。）</span>
+        </div>
+      </div>
+
+      <!-- 18 o'clock -->
+      <div class="vocab-entry">
+        <div class="vocab-entry-title">
+          <span class="entry-num">18</span>o'clock <span class="phonetic">[əˋklɑk]</span> <span class="pos-tag">副</span>……點鐘
+        </div>
+        <ol class="usage-list">
+          <li>o'clock 為副詞，用來表示整點，用法為「數字＋o'clock」。</li>
+          <li>若非整點，而是表示幾點幾分時，則不加 o'clock。例如 two thirty-five（2:35）。</li>
+          <li>用 a.m. / p.m. 表示時間時，也不加 o'clock。</li>
+        </ol>
+        <div class="example-line">
+          <span class="tag-label">例</span>A: What time is it?（現在幾點？）<br>
+          <span style="padding-left: 28px;">B: It's four o'clock.（現在四點鐘。）</span>
+        </div>
+        <div class="your-turn-box">
+          <span class="your-turn-badge">Your turn</span>There is a basketball game at <span class="blank-line"><span class="blank-status">（原圖空白）</span></span> <span class="blank-line"><span class="blank-status">（原圖空白）</span></span>. Let's watch it together.（五點鐘有一場籃球賽。我們一起看吧。）
+        </div>
+      </div>
+
+      <!-- 19 everyone (everybody) -->
+      <div class="vocab-entry">
+        <div class="vocab-entry-title">
+          <span class="entry-num">19</span>everyone (everybody) <span class="phonetic">[ˋɛvrɪ͵wʌn] ([ˋɛvrɪ͵bɑdɪ])</span> <span class="pos-tag">代</span>每個人；各位
+        </div>
+        <ol class="usage-list">
+          <li>everyone＝everybody 為代名詞，表「每個人；各位」。</li>
+          <li>everyone (everybody) 須用單數動詞。</li>
+        </ol>
+        <div class="example-line">
+          <span class="tag-label">例</span>Everyone is very happy at the party.（在派對中，每個人都非常開心。）
+        </div>
+        <div class="example-line">
+          <span class="tag-label">相關字彙</span>someone / somebody（某人）；anyone / anybody（任何人）；<br>
+          <span style="padding-left: 68px;">everything（每件事）；something（某事）；anything（任何事）。</span>
+        </div>
+        <div class="your-turn-box">
+          <span class="your-turn-badge">Your turn</span><span class="blank-line"><span class="blank-status">（原圖空白）</span></span> <span class="blank-line"><span class="blank-status">（原圖空白）</span></span> quiet in the classroom.<br>
+          （在教室裡，每個人都很安靜。）
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 第 195 頁 ==================== -->
+    <section id="page-195" class="page-block" data-page="195">
+      <div class="page-header">
+        <span class="page-badge">第 195 頁</span>
+        <span class="unit-header-text">Lesson 5</span>
+      </div>
+
+      <!-- 20 city -->
+      <div class="vocab-entry">
+        <div class="vocab-entry-title">
+          <span class="entry-num">20</span>city <span class="phonetic">[ˋsɪtɪ]</span> <span class="pos-tag">名</span>城市
+        </div>
+        <ol class="usage-list">
+          <li>city 為可數名詞，其複數形為 cities。</li>
+          <li>若為專有名詞時，city 字首字母須大寫，例如 New York City（紐約市）。</li>
+          <li>city 通常搭配介系詞 in，in the city 表「在這個城市裡」。</li>
+        </ol>
+        <div class="example-line">
+          <span class="tag-label">例</span>There are many people and cars in the city.<br>
+          （這個城市有很多的人和車。）
+        </div>
+        <div class="example-line">
+          <span class="tag-label">相關字彙</span>country（鄉下）。
+        </div>
+        <div class="your-turn-box">
+          <span class="your-turn-badge">Your turn</span>We live in the <span class="blank-line"><span class="blank-status">（原圖空白）</span></span>, but our grandparents live in the country.<br>
+          （我們住在城市裡面，但是我們的祖父母住在鄉下。）
+        </div>
+      </div>
+
+      <!-- 21 say -->
+      <div class="vocab-entry">
+        <div class="vocab-entry-title">
+          <span class="entry-num">21</span>say <span class="phonetic">[se]</span> <span class="pos-tag">動</span>說
+        </div>
+        <ol class="usage-list">
+          <li>「say＋A＋to＋B」表「對 B 說 A」。</li>
+          <li>You can say that again. 為慣用語，表「你說得對。」。</li>
+        </ol>
+        <div class="example-line">
+          <span class="tag-label">例</span>Tommy, say hello to Mrs. Smith.（Tommy，和 Smith 太太說聲哈囉。）
+        </div>
+        <div class="example-line">
+          <span class="tag-label">相關字彙</span>talk（講話）；speak（說）；tell（告訴）。
+        </div>
+        <div class="your-turn-box">
+          <span class="your-turn-badge">Your turn</span>Let's <span class="blank-line"><span class="blank-status">（原圖空白）</span></span> hi <span class="blank-line"><span class="blank-status">（原圖空白）</span></span> the kids. They are so cute.<br>
+          （我們跟那些小朋友說聲嗨吧。他們好可愛。）
+        </div>
+      </div>
+
+      <!-- 22 sun -->
+      <div class="vocab-entry">
+        <div class="vocab-entry-title">
+          <span class="entry-num">22</span>sun <span class="phonetic">[sʌn]</span> <span class="pos-tag">名</span>太陽
+        </div>
+        <ol class="usage-list">
+          <li>sun 指太陽時，前須加定冠詞 the。</li>
+          <li>in the sun 表「在陽光下」。</li>
+        </ol>
+        <div class="example-line">
+          <span class="tag-label">相關字彙</span>rise（上升）；set（下落）。
+        </div>
+        <div class="example-line">
+          <span class="tag-label">例</span>Don't walk in the sun for too long.（別在陽光下走路走太久。）
+        </div>
+        <div class="your-turn-box">
+          <span class="your-turn-badge">Your turn</span>Look! <span class="blank-line"><span class="blank-status">（原圖空白）</span></span> <span class="blank-line"><span class="blank-status">（原圖空白）</span></span> is rising in the east.<br>
+          （你看！太陽正從東方升起。）
+        </div>
+      </div>
+
+      <!-- 23 rise -->
+      <div class="vocab-entry">
+        <div class="vocab-entry-title">
+          <span class="entry-num">23</span>rise <span class="phonetic">[raɪz]</span> <span class="pos-tag">動</span>上升
+        </div>
+        <ol class="usage-list">
+          <li>rise 表示「上升；升起」時，後可加 up 加強語氣。</li>
+          <li>rise 也可表示「起床；起身」，口語上則常用 get up / stand up。</li>
+        </ol>
+        <div class="example-line">
+          <span class="tag-label">例</span>Look! The sun is rising slowly.（你看！太陽正在緩緩升起。）
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 第 196 頁 ==================== -->
+    <section id="page-196" class="page-block" data-page="196">
+      <div class="page-header">
+        <span class="page-badge">第 196 頁</span>
+        <span class="unit-header-text">國中英語</span>
+      </div>
+
+      <!-- 接續第 195 頁 23 rise -->
+      <div class="vocab-entry">
+        <div class="example-line">
+          <span class="tag-label">相關字彙</span>early / late riser（早／晚起的人）。
+        </div>
+        <div class="your-turn-box">
+          <span class="your-turn-badge">Your turn</span>The balloon is <span class="blank-line"><span class="blank-status">（原圖空白）</span></span> <span class="blank-line"><span class="blank-status">（原圖空白）</span></span> into the sky.<br>
+          （氣球正上升到天空中。）
+        </div>
+      </div>
+
+      <!-- 24 shine -->
+      <div class="vocab-entry">
+        <div class="vocab-entry-title">
+          <span class="entry-num">24</span><span class="non-1200">shine</span> <span class="phonetic">[ʃaɪn]</span> <span class="pos-tag">動</span>照耀；發光
+        </div>
+        <ol class="usage-list">
+          <li>shine 常用副詞 brightly（明亮地）來修飾，常譯為「閃閃發光」。</li>
+          <li>shine 也可表「把……擦亮」，例如 shine your shoes。</li>
+        </ol>
+        <div class="example-line">
+          <span class="tag-label">例</span>(1) Look at the moon! It's shining brightly.（你看月亮！它正在閃閃發光。）<br>
+          <span style="padding-left: 28px;">(2) Jack is shining his shoes for the date with Luna.</span><br>
+          <span style="padding-left: 52px;">（Jack 正在為他和 Luna 的約會擦亮鞋子。）</span>
+        </div>
+        <div class="example-line">
+          <span class="tag-label">相關字彙</span>rise and shine（快起床）。
+        </div>
+        <div class="your-turn-box">
+          <span class="your-turn-badge">Your turn</span><span class="blank-line"><span class="blank-status">（原圖空白）</span></span> and <span class="blank-line"><span class="blank-status">（原圖空白）</span></span>! The sun is <span class="blank-line"><span class="blank-status">（原圖空白）</span></span> brightly.<br>
+          （快起床！太陽正在閃閃發光。）
+        </div>
+      </div>
+
+      <!-- 25 dinner -->
+      <div class="vocab-entry">
+        <div class="vocab-entry-title">
+          <span class="entry-num">25</span>dinner <span class="phonetic">[ˋdɪnɚ]</span> <span class="pos-tag">名</span>晚餐
+        </div>
+        <ol class="usage-list">
+          <li>dinner 通常前面不加 a，字尾也通常不加 -s。</li>
+          <li>eat / have dinner 表「吃晚餐」；make dinner 表「做晚餐」。</li>
+        </ol>
+        <div class="example-line">
+          <span class="tag-label">例</span>A: Mom, is dinner ready?（媽媽，晚餐好了嗎？）<br>
+          <span style="padding-left: 28px;">B: Yes, but you have to wash your hands first.（好了，但你必須先洗手。）</span>
+        </div>
+        <div class="example-line">
+          <span class="tag-label">相關字彙</span>supper（晚餐）；breakfast（早餐）；lunch（午餐）。
+        </div>
+        <div class="your-turn-box">
+          <span class="your-turn-badge">Your turn</span>Look. Kim is making <span class="blank-line"><span class="blank-status">（原圖空白）</span></span> in the kitchen.<br>
+          （看。Kim 正在廚房做晚餐。）
+        </div>
+      </div>
+
+      <h2 class="section-heading"><span>字彙加油站</span></h2>
+
+      <div class="vocab-entry">
+        <div style="font-weight: bold; margin-bottom: 10px;">一、中翻英</div>
+        <table class="knowledge-table">
+          <tbody>
+            <tr>
+              <td style="width: 50%;">1. 會議 <span class="blank-line"><span class="blank-status">（原圖空白）</span></span></td>
+              <td style="width: 50%;">2. 今晚 <span class="blank-line"><span class="blank-status">（原圖空白）</span></span></td>
+            </tr>
+            <tr>
+              <td>3. 生日 <span class="blank-line"><span class="blank-status">（原圖空白）</span></span></td>
+              <td>4. 點鐘 <span class="blank-line"><span class="blank-status">（原圖空白）</span></span></td>
+            </tr>
+            <tr>
+              <td>5. 城市 <span class="blank-line"><span class="blank-status">（原圖空白）</span></span></td>
+              <td>6. 團體 <span class="blank-line"><span class="blank-status">（原圖空白）</span></span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ==================== 第 197 頁 ==================== -->
+    <section id="page-197" class="page-block" data-page="197">
+      <div class="page-header">
+        <span class="page-badge">第 197 頁</span>
+        <span class="unit-header-text">Lesson 5</span>
+      </div>
+
+      <div class="vocab-entry">
+        <div style="font-weight: bold; margin-bottom: 14px;">二、字彙選擇</div>
+
+        <div class="grammar-item">
+          <div>（ <span class="blank-status">（原圖空白）</span> ）1. It's time for <span class="blank-line"></span>. I am so hungry（飢餓的）.</div>
+          <div class="grammar-sub" style="display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin-top: 6px;">
+            <div>(A) group</div>
+            <div>(B) city</div>
+            <div>(C) life</div>
+            <div>(D) dinner</div>
+          </div>
+        </div>
+
+        <div class="grammar-item">
+          <div>（ <span class="blank-status">（原圖空白）</span> ）2. Jasmine and I are <span class="blank-line"></span> about Amy's new friend. He is very handsome.</div>
+          <div class="grammar-sub" style="display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin-top: 6px;">
+            <div>(A) preparing</div>
+            <div>(B) chatting</div>
+            <div>(C) hurrying</div>
+            <div>(D) listening</div>
+          </div>
+        </div>
+
+        <div class="grammar-item">
+          <div>（ <span class="blank-status">（原圖空白）</span> ）3. John: The party is at 7:00. Can you <span class="blank-line"></span> us?</div>
+          <div style="padding-left: 44px;">Josh: Yes. I can't wait!</div>
+          <div class="grammar-sub" style="display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin-top: 6px;">
+            <div>(A) wake</div>
+            <div>(B) hurry</div>
+            <div>(C) join</div>
+            <div>(D) rise</div>
+          </div>
+        </div>
+
+        <div class="grammar-item">
+          <div>（ <span class="blank-status">（原圖空白）</span> ）4. <span class="blank-line"></span> is having a good time. All of them are singing（唱歌）and dancing.</div>
+          <div class="grammar-sub" style="display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin-top: 6px;">
+            <div>(A) Everyone</div>
+            <div>(B) Dinner</div>
+            <div>(C) Life</div>
+            <div>(D) Group</div>
+          </div>
+        </div>
+
+        <div class="grammar-item">
+          <div>（ <span class="blank-status">（原圖空白）</span> ）5. We have no school on <span class="blank-line"></span>. We can go out and play.</div>
+          <div class="grammar-sub" style="display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin-top: 6px;">
+            <div>(A) meetings</div>
+            <div>(B) groups</div>
+            <div>(C) cities</div>
+            <div>(D) weekends</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-card" style="background-color: #fdf8f3; border-color: #e6d5c3;">
+        <div class="info-card-title" style="color: #8c4a27; border-bottom-color: #e6d5c3;">Answers</div>
+
+        <div style="font-weight: bold; margin-bottom: 6px;">字彙解析</div>
+        <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; font-size: 0.92rem; margin-bottom: 12px;">
+          <div>1. week</div>
+          <div>2. on; Monday</div>
+          <div>3. days</div>
+          <div>4. weekend</div>
+          <div>5. at; noon</div>
+          <div>6. Wake; up</div>
+          <div>7. looking; for</div>
+          <div>8. hurry; up</div>
+          <div>9. By; the; way</div>
+          <div>10. join; for</div>
+          <div>11. group</div>
+          <div>12. chat</div>
+          <div>13. tonight</div>
+          <div>14. meeting</div>
+          <div>15. p.m.</div>
+          <div>16. live; life</div>
+          <div>17. preparing</div>
+          <div>18. five; o'clock</div>
+          <div style="grid-column: span 2;">19. Everyone / Everybody; is</div>
+          <div>20. city</div>
+          <div>21. say; to</div>
+          <div>22. The; sun</div>
+          <div>23. rising; up</div>
+          <div></div>
+          <div style="grid-column: span 2;">24. Rise; shine; shining</div>
+          <div>25. dinner</div>
+        </div>
+
+        <div style="font-weight: bold; margin-bottom: 6px;">字彙加油站</div>
+        <div style="font-size: 0.92rem; line-height: 1.8;">
+          <div>一、1. meeting  2. tonight  3. birthday</div>
+          <div style="padding-left: 28px;">4. o'clock  5. city  6. group</div>
+          <div>二、1. D    2. B    3. C    4. A    5. D</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 第 198 頁 ==================== -->
+    <section id="page-198" class="page-block" data-page="198">
+      <div class="page-header">
+        <span class="page-badge">第 198 頁</span>
+        <span class="unit-header-text">國中英語</span>
+      </div>
+
+      <h2 class="section-heading">
+        <span>Dialogue</span>
+        <span class="track-badge">🎧 Track 36</span>
+      </h2>
+
+      <div class="info-card">
+        <div class="info-card-title">學習目標</div>
+        <ol class="usage-list" style="margin-bottom: 0;">
+          <li>學會現在進行式的用法。</li>
+          <li>學會 What time 問答句。</li>
+          <li>學會 What day 問答句。</li>
+        </ol>
+      </div>
+
+      <table class="vocab-table">
+        <thead>
+          <tr>
+            <th style="width: 50%;">英文原文</th>
+            <th style="width: 50%;">中文翻譯</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="vertical-align: top;">
+              <div>(At Nick's home)</div>
+              <div>Mom: Wake up, Nick. <sup>1</sup>Time for school. What are you doing?</div>
+              <div>Nick: I'm looking for my watch. Mom, <sup>2</sup>what time is it?</div>
+              <div>Mom: It's seven twenty. Hurry up.</div>
+              <div>Nick: OK, Mom. Oh, by the way, <sup>3</sup>can I join the group chat at school tonight?</div>
+              <br>
+              <div>Mom: The group chat?</div>
+              <div>Nick: Yes, it's a meeting with students from the USA.</div>
+              <div>Mom: What time is the meeting?</div>
+              <div>Nick: It's at 9 p.m.</div>
+              <div>Mom: <sup>4</sup>What's the meeting about?</div>
+              <div>Nick: It's about our school life.</div>
+              <div>Mom: Great!</div>
+              <br>
+              <div>(In the classroom)</div>
+              <div>Rita: Nick, what are you doing?</div>
+              <div>Nick: I'm preparing for the group chat.</div>
+              <div>Rita: The group chat? <sup>5</sup>What day is today?</div>
+              <div>Nick: It's Thursday.</div>
+              <div>Rita: Isn't it on Friday?</div>
+            </td>
+            <td style="vertical-align: top;">
+              <div>（在 Nick 家）</div>
+              <div>媽媽：醒醒啊，Nick。上學的時間到了。你正在做什麼？</div>
+              <div>Nick：我正在找我的手錶。媽媽，現在是幾點？</div>
+              <div>媽媽：現在是七點二十分。快一點。</div>
+              <div>Nick：好的，媽媽。噢，順帶一提，我今晚可以參加學校的團體談話嗎？</div>
+              <br>
+              <div>媽媽：團體談話？</div>
+              <div>Nick：是的，它是一場和來自美國的學生們的會議。</div>
+              <div>媽媽：會議是在幾點？</div>
+              <div>Nick：它是在晚上九點。</div>
+              <div>媽媽：會議是關於什麼？</div>
+              <div>Nick：它是關於我們的校園生活。</div>
+              <div>媽媽：真棒！</div>
+              <br>
+              <div>（在教室裡）</div>
+              <div>Rita：Nick，你正在做什麼？</div>
+              <div>Nick：我正在準備團體談話。</div>
+              <div>Rita：團體談話？今天是星期幾？</div>
+              <div>Nick：今天是星期四。</div>
+              <div>Rita：它不是在星期五嗎？</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ==================== 第 199 頁 ==================== -->
+    <section id="page-199" class="page-block" data-page="199">
+      <div class="page-header">
+        <span class="page-badge">第 199 頁</span>
+        <span class="unit-header-text">Lesson 5</span>
+      </div>
+
+      <table class="vocab-table" style="margin-bottom: 24px;">
+        <thead>
+          <tr>
+            <th style="width: 50%;">英文原文（續）</th>
+            <th style="width: 50%;">中文翻譯（續）</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="vertical-align: top;">
+              <div>Nick: No, it isn't. It's at 9 o'clock in the evening.</div>
+              <div>Rita: Oh, no!</div>
+              <div>(At 9 p.m. in Taiwan)</div>
+              <div>Bella: OK, everyone. It's 8 a.m. in New York City. <sup>6</sup>Let's say good morning to our friends.</div>
+              <div>Students in Taiwan: Good morning.</div>
+              <div>Students in New York City: Good evening.</div>
+            </td>
+            <td style="vertical-align: top;">
+              <div>Nick：不，它不是。它是在晚上九點鐘。</div>
+              <div>Rita：噢，不！</div>
+              <div>（臺灣晚上九點）</div>
+              <div>Bella：好的，大家。現在紐約市是早上八點。我們一起向我們的朋友們說聲早安吧。</div>
+              <div>在臺灣的學生：早安。</div>
+              <div>在紐約市的學生：晚安。</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2 class="section-heading"><span>對話解析</span></h2>
+
+      <!-- 1 Time for school. -->
+      <div class="vocab-entry">
+        <div class="vocab-entry-title">
+          <span class="entry-num">1</span>Time for school.（上學的時間到了。）
+        </div>
+        <ol class="usage-list">
+          <li>媽媽提醒 Nick 到了該出門上學的時間了。</li>
+          <li>「time for＋名詞」表「……的時間到了」，名詞之前不加冠詞 a / an / the。完整的句型為「It is time for＋名詞.」，這邊省略了 It is。</li>
+          <li>這句話也可以換個說法「It is time to＋原形動詞＋....」，It is time to go to school.。</li>
+        </ol>
+        <div class="example-line">
+          <span class="tag-label">例</span>It's time for bed.（上床睡覺的時間到了。）<br>
+          <span style="padding-left: 28px;">＝It's time to go to bed.</span>
+        </div>
+        <div class="your-turn-box">
+          <span class="your-turn-badge">Your turn</span>It's <span class="blank-line"><span class="blank-status">（原圖空白）</span></span> <span class="blank-line"><span class="blank-status">（原圖空白）</span></span> tea.（喝茶的時間到了。）
+        </div>
+      </div>
+
+      <!-- 2 What time is it? It's seven twenty. -->
+      <div class="vocab-entry">
+        <div class="vocab-entry-title">
+          <span class="entry-num">2</span>What time is it? It's seven twenty.（現在是幾點？現在是七點二十分。）
+        </div>
+        <ol class="usage-list">
+          <li>Nick 聽到媽媽提醒他出門上學，但是他找不到手錶無法出門，所以反問媽媽現在幾點了。</li>
+          <li>詢問時間的疑問句為 What time is it?。在英式英語，也可以用 What's the time?。</li>
+          <li>回答的句型為「It is＋時＋分.」。時和分可以用數字直接表示，seven 即是七點，twenty 即是二十分。</li>
+        </ol>
+        <div class="example-line">
+          <span class="tag-label">例</span>A: What time is it?（現在幾點？）<br>
+          <span style="padding-left: 28px;">B: It's eight fifteen.（現在是八點十五分。）</span>
+        </div>
+        <div class="your-turn-box">
+          <span class="your-turn-badge">Your turn</span>A: <span class="blank-line"><span class="blank-status">（原圖空白）</span></span> <span class="blank-line"><span class="blank-status">（原圖空白）</span></span> is it?（現在幾點？）<br>
+          <span style="padding-left: 74px;">B: It's <span class="blank-line"><span class="blank-status">（原圖空白）</span></span> <span class="blank-line"><span class="blank-status">（原圖空白）</span></span>.（現在是九點二十五分。）</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ▼▼▼ （第 200～205 頁）的 <section> 區塊 ▼▼▼ -->
+
+    <!-- ==================== 第 200 頁 ==================== -->
+    <section id="page-200" class="page-block" data-page="200">
+      <div class="page-header">
+        <span class="page-badge">第 200 頁</span>
+        <span class="unit-header-text">國中英語</span>
+      </div>
+
+      <!-- 3 Can I join the group chat at school tonight? -->
+      <div class="vocab-entry">
+        <div class="vocab-entry-title">
+          <span class="entry-num">3</span>Can I join the group chat at school tonight?（我今晚可以參加學校的團體談話嗎？）
+        </div>
+        <ol class="usage-list">
+          <li>Nick 問媽媽他今晚可不可以參加學校的團體談話，助動詞 can 在此是表示「允許」，其後的一般動詞要用原形。</li>
+          <li>school 常用來指學校這個場域所進行的教育活動或上學（時間），而不是單指學校這個地點，此時 school 之前不必加上 a / an / the。例如 go to school（上學）及 after school（放學後）的 school，也都不必加上冠詞。</li>
+          <li>tonight 是時間副詞，通常置於句尾，此處說明團體談話的時間是今晚。</li>
+        </ol>
+        <div class="example-line">
+          <span class="tag-label">例</span>Can I go to Eva's house after school?（我放學後可以去 Eva 家嗎？）
+        </div>
+        <div class="your-turn-box">
+          <span class="your-turn-badge">Your turn</span><span class="blank-line"><span class="blank-status">（原圖空白）</span></span> I <span class="blank-line"><span class="blank-status">（原圖空白）</span></span> the meeting <span class="blank-line"><span class="blank-status">（原圖空白）</span></span>?<br>
+          （我今晚可以參加此會議嗎？）
+        </div>
+      </div>
+
+      <!-- 4 What's the meeting about? -->
+      <div class="vocab-entry">
+        <div class="vocab-entry-title">
+          <span class="entry-num">4</span>What's the meeting about?（會議是關於什麼？）
+        </div>
+        <ol class="usage-list">
+          <li>在前文，Nick 提到要和美國的學生進行團體談話，媽媽使用這句話詢問會議是關於什麼。</li>
+          <li>about 是介系詞，「about＋名詞」表「關於……」。</li>
+        </ol>
+        <div class="example-line">
+          <span class="tag-label">例</span>A: What are these books about?（這些書是關於什麼？）<br>
+          <span style="padding-left: 28px;">B: They are about the 12 signs of the zodiac.（它們是關於十二星座。）</span>
+        </div>
+        <div class="your-turn-box">
+          <span class="your-turn-badge">Your turn</span>A: <span class="blank-line"><span class="blank-status">（原圖空白）</span></span> the story <span class="blank-line"><span class="blank-status">（原圖空白）</span></span>?（這個故事是關於什麼？）<br>
+          <span style="padding-left: 74px;">B: It's about a castle.（它是關於一個城堡。）</span>
+        </div>
+      </div>
+
+      <!-- 5 What day is today? It's Thursday. -->
+      <div class="vocab-entry">
+        <div class="vocab-entry-title">
+          <span class="entry-num">5</span>What day is today? It's Thursday.（今天是星期幾？今天是星期四。）
+        </div>
+        <ol class="usage-list">
+          <li>Rita 看到 Nick 在準備團體談話，便問 Nick 今天星期幾，是為了要確認舉辦團體談話的時間。</li>
+          <li>What day is today? 詢問今天是星期幾，也可用 it 代替 today。回答的句型用「It's＋星期幾.」。</li>
+        </ol>
+        <div class="example-line">
+          <span class="tag-label">例</span>A: What day is today?（今天是星期幾？）<br>
+          <span style="padding-left: 28px;">B: It's Monday.（今天是星期一。）</span>
+        </div>
+        <div class="your-turn-box">
+          <span class="your-turn-badge">Your turn</span>A: <span class="blank-line"><span class="blank-status">（原圖空白）</span></span> <span class="blank-line"><span class="blank-status">（原圖空白）</span></span> is today?（今天是星期幾？）<br>
+          <span style="padding-left: 74px;">B: <span class="blank-line"><span class="blank-status">（原圖空白）</span></span> Tuesday.（今天是星期二。）</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 第 201 頁 ==================== -->
+    <section id="page-201" class="page-block" data-page="201">
+      <div class="page-header">
+        <span class="page-badge">第 201 頁</span>
+        <span class="unit-header-text">Lesson 5</span>
+      </div>
+
+      <!-- 6 Let's say good morning to our friends. -->
+      <div class="vocab-entry">
+        <div class="vocab-entry-title">
+          <span class="entry-num">6</span>Let's say good morning to our friends.（我們一起向我們的朋友們說聲早安吧。）
+        </div>
+        <ol class="usage-list">
+          <li>「Let's＋原形動詞＋....」的句型表「我們一起……吧」，Bella 用這句話提議同學們一起打招呼。</li>
+          <li>「say...＋to＋人」表「向某人說……」。</li>
+          <li>good morning 是說給美國學生聽的，課文裡提到現在紐約時間是早上八點。</li>
+        </ol>
+        <div class="example-line">
+          <span class="tag-label">例</span>Let's say good evening to Mr. Lin.（我們一起向林先生說聲晚安吧。）
+        </div>
+        <div class="your-turn-box">
+          <span class="your-turn-badge">Your turn</span><span class="blank-line"><span class="blank-status">（原圖空白）</span></span> <span class="blank-line"><span class="blank-status">（原圖空白）</span></span> good night <span class="blank-line"><span class="blank-status">（原圖空白）</span></span> our sons.<br>
+          （我們一起向兒子們說聲晚安吧。）
+        </div>
+      </div>
+
+      <h2 class="section-heading"><span>對話加油站</span></h2>
+
+      <div class="vocab-entry">
+        <div style="font-weight: bold; margin-bottom: 14px;">●綜合測驗</div>
+
+        <div class="grammar-item">
+          <div>（ <span class="blank-status">（原圖空白）</span> ）1. Bill, it's twelve o'clock. <span class="blank-line"></span> for lunch.</div>
+          <div class="grammar-sub" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; margin-top: 6px;">
+            <div>(A) Day</div>
+            <div>(B) Minute</div>
+            <div>(C) Time</div>
+            <div>(D) Clock</div>
+          </div>
+        </div>
+
+        <div class="grammar-item">
+          <div>（ <span class="blank-status">（原圖空白）</span> ）2. A: What time is it? B: <span class="blank-line"></span> five thirty.</div>
+          <div class="grammar-sub" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; margin-top: 6px;">
+            <div>(A) It's</div>
+            <div>(B) There's</div>
+            <div>(C) He's</div>
+            <div>(D) They're</div>
+          </div>
+        </div>
+
+        <div class="grammar-item">
+          <div>（ <span class="blank-status">（原圖空白）</span> ）3. A: <span class="blank-line"></span> I have some juice today?</div>
+          <div style="padding-left: 44px;">B: Yes. Let's make some apple juice.</div>
+          <div class="grammar-sub" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; margin-top: 6px;">
+            <div>(A) Am</div>
+            <div>(B) Let</div>
+            <div>(C) Are</div>
+            <div>(D) Can</div>
+          </div>
+        </div>
+
+        <div class="grammar-item">
+          <div>（ <span class="blank-status">（原圖空白）</span> ）4. A: <span class="blank-line"></span> the class about?</div>
+          <div style="padding-left: 44px;">B: It's about cooking.</div>
+          <div class="grammar-sub" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; margin-top: 6px;">
+            <div>(A) What</div>
+            <div>(B) What's</div>
+            <div>(C) Is it</div>
+            <div>(D) Is there</div>
+          </div>
+        </div>
+
+        <div class="grammar-item">
+          <div>（ <span class="blank-status">（原圖空白）</span> ）5. Let's <span class="blank-line"></span> the book this afternoon.</div>
+          <div class="grammar-sub" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; margin-top: 6px;">
+            <div>(A) to read</div>
+            <div>(B) reading</div>
+            <div>(C) reads</div>
+            <div>(D) read</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-card" style="background-color: #fdf8f3; border-color: #e6d5c3;">
+        <div class="info-card-title" style="color: #8c4a27; border-bottom-color: #e6d5c3;">Answers</div>
+
+        <div style="font-weight: bold; margin-bottom: 6px;">對話解析</div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4px; font-size: 0.92rem; margin-bottom: 12px;">
+          <div>1. time; for</div>
+          <div>2. What; time; nine; twenty-five</div>
+          <div>3. Can; join; tonight</div>
+          <div>4. What's; about</div>
+          <div>5. What; day; It's</div>
+          <div>6. Let's; say; to</div>
+        </div>
+
+        <div style="font-weight: bold; margin-bottom: 6px;">對話加油站</div>
+        <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; font-size: 0.92rem;">
+          <div>1. C</div>
+          <div>2. A</div>
+          <div>3. D</div>
+          <div>4. B</div>
+          <div>5. D</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 第 202 頁 ==================== -->
+    <section id="page-202" class="page-block" data-page="202">
+      <div class="page-header">
+        <span class="page-badge">第 202 頁</span>
+        <span class="unit-header-text">國中英語</span>
+      </div>
+
+      <h2 class="section-heading">
+        <span>Reading</span>
+        <span class="track-badge">🎧 Track 37</span>
+      </h2>
+
+      <div class="info-card">
+        <div class="info-card-title">學習目標</div>
+        <ol class="usage-list" style="margin-bottom: 0;">
+          <li>學會現在進行式的用法。</li>
+          <li>學會時間的表達方法。</li>
+        </ol>
+      </div>
+
+      <table class="vocab-table" style="margin-bottom: 24px;">
+        <thead>
+          <tr>
+            <th style="width: 50%;">What Are My Friends Doing?</th>
+            <th style="width: 50%;">我的朋友們正在做什麼呢？</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="vertical-align: top;">
+              <div>  The sun is up. Rise and shine. <sup>1</sup>Today is Monday. It's seven o'clock in the morning in Taipei. It's time for school. What are my friends, Daniel, Eric, and Miako, doing now?</div>
+              <div>  <sup>2</sup>In New York City, Daniel is making dinner with his family. <sup>3</sup>It's Sunday evening there. Eric from Paris is sleeping. It's only 12 a.m. in Paris. Good morning, Miako. It's 8 a.m. in Tokyo. <sup>4</sup>She is on her way to school. Have a nice day!</div>
+            </td>
+            <td style="vertical-align: top;">
+              <div>  太陽出來了。快起床。今天是星期一。現在是臺北早上七點鐘。上學的時間到了。我的朋友們 Daniel、Eric 和 Miako 現在正在做什麼呢？</div>
+              <div>  在紐約市，Daniel 正在和他的家人做晚餐。現在那裡是星期日傍晚。在巴黎的 Eric 正在睡覺。巴黎現在才凌晨十二點。早安，Miako。現在是東京早上八點。她正在上學的途中。祝有美好的一天！</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2 class="section-heading"><span>閱讀解析</span></h2>
+
+      <!-- 1 Today is Monday. -->
+      <div class="vocab-entry">
+        <div class="vocab-entry-title">
+          <span class="entry-num">1</span>Today is Monday.（今天是星期一。）
+        </div>
+        <ol class="usage-list">
+          <li>Nick 為了要介紹他的外國朋友們正在做什麼事，首先說明時間點是臺北的星期一。</li>
+          <li>要表示今天星期幾，常用的句型是「Today is＋星期幾.」。也可以用「It is＋星期幾（＋today）.」。</li>
+        </ol>
+        <div class="example-line">
+          <span class="tag-label">例</span>Today is Wednesday.＝It is Wednesday today.（今天是星期三。）
+        </div>
+        <div class="your-turn-box">
+          <span class="your-turn-badge">Your turn</span><span class="blank-line"><span class="blank-status">（原圖空白）</span></span> <span class="blank-line"><span class="blank-status">（原圖空白）</span></span> Sunday.（今天是星期日。）<br>
+          <span style="padding-left: 74px;">＝<span class="blank-line"><span class="blank-status">（原圖空白）</span></span> is Sunday <span class="blank-line"><span class="blank-status">（原圖空白）</span></span>.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 第 203 頁 ==================== -->
+    <section id="page-203" class="page-block" data-page="203">
+      <div class="page-header">
+        <span class="page-badge">第 203 頁</span>
+        <span class="unit-header-text">Lesson 5</span>
+      </div>
+
+      <!-- 2 In New York City, Daniel is making dinner with his family. -->
+      <div class="vocab-entry">
+        <div class="vocab-entry-title">
+          <span class="entry-num">2</span>In New York City, Daniel is making dinner with his family.（在紐約市，Daniel 正在和他的家人做晚餐。）
+        </div>
+        <ol class="usage-list">
+          <li>Nick 依序先介紹住 New York City 的 Daniel。In New York City 是表示位置的介系詞片語，放在句首時須在其後加上逗號與句子其他部分隔開，若是放在句尾則不需逗號。</li>
+          <li>New York City 是城市名「紐約市」，是專有名詞，故前面不加冠詞，且每個字開頭的字母均須大寫。New York City 還有個綽號叫做 Big Apple。</li>
+          <li>「be 動詞＋V-ing」為現在進行式，表示動作正在進行。本句主詞 Daniel 為第三人稱單數，故 be 動詞用 is。is making dinner 表「現在正在做晚餐」。</li>
+          <li>with 為介系詞，表「與……一起」，with his family 表示 Daniel 是和他的家人一起做晚餐。</li>
+        </ol>
+        <div class="example-line">
+          <span class="tag-label">例</span>In Taichung City, Sharon is having lunch with her classmates.<br>
+          （在臺中市，Sharon 正在和她的同學們一起吃午餐。）
+        </div>
+        <div class="your-turn-box">
+          <span class="your-turn-badge">Your turn</span>In Taipei <span class="blank-line"><span class="blank-status">（原圖空白）</span></span>, Tim <span class="blank-line"><span class="blank-status">（原圖空白）</span></span> <span class="blank-line"><span class="blank-status">（原圖空白）</span></span> cake <span class="blank-line"><span class="blank-status">（原圖空白）</span></span> his parents.<br>
+          （在臺北市，Tim 正在和他的父母一起吃蛋糕。）
+        </div>
+      </div>
+
+      <!-- 3 It's Sunday evening there. -->
+      <div class="vocab-entry">
+        <div class="vocab-entry-title">
+          <span class="entry-num">3</span>It's Sunday evening there.（現在那裡是星期日傍晚。）
+        </div>
+        <ol class="usage-list">
+          <li>Nick 在課文裡已經先提到 Daniel 正在做的事，現在要補上 Daniel 居住城市現在的時間。</li>
+          <li>evening 接在 Sunday 之後，可以更明確指出是星期日的哪個時段，同時呼應上一句中 Daniel 做晚餐的時間。there 為地方副詞，表「那裡」，在本句是指前一句提過的 New York City。</li>
+        </ol>
+        <div class="example-line">
+          <span class="tag-label">例</span>It's Monday morning here.（這裡是星期一早上。）
+        </div>
+        <div class="your-turn-box">
+          <span class="your-turn-badge">Your turn</span>It's <span class="blank-line"><span class="blank-status">（原圖空白）</span></span> <span class="blank-line"><span class="blank-status">（原圖空白）</span></span> <span class="blank-line"><span class="blank-status">（原圖空白）</span></span>.<br>
+          （那裡是星期六下午。）
+        </div>
+      </div>
+
+      <!-- 4 She is on her way to school. -->
+      <div class="vocab-entry">
+        <div class="vocab-entry-title">
+          <span class="entry-num">4</span>She is on her way to school.（她正在上學的途中。）
+        </div>
+        <ol class="usage-list" style="margin-bottom: 0;">
+          <li>本句的「on＋the / 所有格＋way（＋to＋地點名詞）」表示「在（去……的）路上／途中」。須注意若地點為 here / home，因是地方副詞，故不須加 to。</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ==================== 第 204 頁 ==================== -->
+    <section id="page-204" class="page-block" data-page="204">
+      <div class="page-header">
+        <span class="page-badge">第 204 頁</span>
+        <span class="unit-header-text">國中英語</span>
+      </div>
+
+      <!-- 接續第 203 頁 4 She is on her way to school. -->
+      <div class="vocab-entry">
+        <ol class="usage-list" start="2">
+          <li>school 表示「學校」時，為可數名詞，單數時前須加上冠詞、所有格或指示形容詞等；若表示「上學」時，為不可數名詞，故 on her way to school 表示「在上學的途中」。</li>
+        </ol>
+        <div class="example-line">
+          <span class="tag-label">例</span>Mark is on his way here. Let's walk to school with him later.<br>
+          （Mark 正在來這的路上。我們待會和他一起走路上學吧。）
+        </div>
+        <div class="your-turn-box">
+          <span class="your-turn-badge">Your turn</span>It's 7 a.m., and we're <span class="blank-line"><span class="blank-status">（原圖空白）</span></span> the <span class="blank-line"><span class="blank-status">（原圖空白）</span></span> <span class="blank-line"><span class="blank-status">（原圖空白）</span></span> <span class="blank-line"><span class="blank-status">（原圖空白）</span></span>.<br>
+          （現在是早上七點，而我們正在上學的途中。）
+        </div>
+      </div>
+
+      <h2 class="section-heading"><span>閱讀加油站</span></h2>
+
+      <div class="vocab-entry">
+        <div style="font-weight: bold; margin-bottom: 14px;">●綜合測驗</div>
+
+        <div class="grammar-item">
+          <div>（ <span class="blank-status">（原圖空白）</span> ）1. Nancy <span class="blank-line"></span> having lunch in the dining room.</div>
+          <div class="grammar-sub" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; margin-top: 6px;">
+            <div>(A) be</div>
+            <div>(B) am</div>
+            <div>(C) is</div>
+            <div>(D) are</div>
+          </div>
+        </div>
+
+        <div class="grammar-item">
+          <div>（ <span class="blank-status">（原圖空白）</span> ）2. Bella is dancing <span class="blank-line"></span> her friends.</div>
+          <div class="grammar-sub" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; margin-top: 6px;">
+            <div>(A) from</div>
+            <div>(B) in</div>
+            <div>(C) with</div>
+            <div>(D) under</div>
+          </div>
+        </div>
+
+        <div class="grammar-item">
+          <div>（ <span class="blank-status">（原圖空白）</span> ）3. Alex is on the bus now. He's <span class="blank-line"></span> his way home.</div>
+          <div class="grammar-sub" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; margin-top: 6px;">
+            <div>(A) on</div>
+            <div>(B) at</div>
+            <div>(C) in</div>
+            <div>(D) of</div>
+          </div>
+        </div>
+
+        <div class="grammar-item">
+          <div>（ <span class="blank-status">（原圖空白）</span> ）4. It's eleven o'clock. <span class="blank-line"></span> time for bed.</div>
+          <div class="grammar-sub" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; margin-top: 6px;">
+            <div>(A) It</div>
+            <div>(B) It's</div>
+            <div>(C) Let</div>
+            <div>(D) Let's</div>
+          </div>
+        </div>
+
+        <div class="grammar-item">
+          <div>（ <span class="blank-status">（原圖空白）</span> ）5. It's <span class="blank-line"></span> there.</div>
+          <div class="grammar-sub" style="display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin-top: 6px;">
+            <div>(A) Friday night</div>
+            <div>(B) Friday's night</div>
+            <div>(C) Fridays' night</div>
+            <div>(D) Fridays nights</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-card" style="background-color: #fdf8f3; border-color: #e6d5c3;">
+        <div class="info-card-title" style="color: #8c4a27; border-bottom-color: #e6d5c3;">Answers</div>
+
+        <div style="font-weight: bold; margin-bottom: 6px;">閱讀解析</div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4px; font-size: 0.92rem; margin-bottom: 12px;">
+          <div>1. Today; is; It; today</div>
+          <div>2. City; is; having / eating; with</div>
+          <div>3. Saturday; afternoon; there</div>
+          <div>4. on; way; to; school</div>
+        </div>
+
+        <div style="font-weight: bold; margin-bottom: 6px;">閱讀加油站</div>
+        <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; font-size: 0.92rem;">
+          <div>1. C</div>
+          <div>2. C</div>
+          <div>3. A</div>
+          <div>4. B</div>
+          <div>5. A</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 第 205 頁 ==================== -->
+    <section id="page-205" class="page-block" data-page="205">
+      <div class="page-header">
+        <span class="page-badge">第 205 頁</span>
+        <span class="unit-header-text">Lesson 5</span>
+      </div>
+
+      <h2 class="section-heading"><span>Grammar Focus</span></h2>
+
+      <!-- 1 現在進行式 -->
+      <div class="vocab-entry">
+        <div class="vocab-entry-title">
+          <span class="entry-num">1</span>現在進行式
+        </div>
+        <ol class="usage-list">
+          <li>現在進行式用來描述「現在正在進行中的動作」。</li>
+          <li>句型為「主詞＋be 動詞＋V-ing（現在分詞）....」，表示「主詞正在……。」。</li>
+          <li>be 動詞的單複數要與主詞的單複數一致。</li>
+          <li>改為否定句時，在 be 動詞之後加上 not。</li>
+        </ol>
+
+        <table class="vocab-table" style="text-align: center; margin-bottom: 14px;">
+          <tbody>
+            <tr>
+              <td style="width: 25%; text-align: center;">I</td>
+              <td style="width: 25%; text-align: center;">am</td>
+              <td rowspan="3" style="width: 25%; text-align: center; vertical-align: middle;">(not)</td>
+              <td rowspan="3" style="width: 25%; text-align: center; vertical-align: middle;">reading.<br>cooking.</td>
+            </tr>
+            <tr>
+              <td style="text-align: center;">He</td>
+              <td style="text-align: center;">is</td>
+            </tr>
+            <tr>
+              <td style="text-align: center;">We</td>
+              <td style="text-align: center;">are</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <ol class="usage-list" start="5">
+          <li>將一般動詞改為現在分詞（V-ing），有以下幾種變化：
+            <div style="margin-top: 4px;">(1) 大部分動詞直接加 -ing，例如 draw → drawing、eat → eating、play → playing。</div>
+            <div>(2) 動詞字尾為「不發音的 e」時，去 -e，再加 -ing，例如 close → closing、come → coming、make → making。</div>
+            <div>(3) 單音節的動詞「子音＋短母音＋子音」時，重複字尾的字母再加 -ing，例如 run → running、sit → sitting。</div>
+          </li>
+        </ol>
+
+        <div class="example-line">
+          <span class="tag-label">例</span>(1) Mary is talking to her teacher.（Mary 正在和她的老師說話。）<br>
+          <span style="padding-left: 28px;">(2) They are not playing with a ball in the playground.（他們不在操場上玩球。）</span>
+        </div>
+
+        <div class="your-turn-box">
+          <div style="margin-bottom: 6px;"><span class="your-turn-badge">Your turn</span></div>
+          <div style="font-weight: bold; margin-bottom: 6px;">●填充題：填入現在分詞</div>
+          <div style="line-height: 2;">
+            <div>1. Anna and her sisters are <span class="blank-line"><span class="blank-status">（原圖空白）</span></span> (sit) on the bed.</div>
+            <div>2. The two men are <span class="blank-line"><span class="blank-status">（原圖空白）</span></span> (wash) the car.</div>
+            <div>3. John is <span class="blank-line"><span class="blank-status">（原圖空白）</span></span> (close) the door.</div>
+            <div>4. Eric is not <span class="blank-line"><span class="blank-status">（原圖空白）</span></span> (eat) dinner.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2 現在進行式的 Yes / No 問句 -->
+      <div class="vocab-entry">
+        <div class="vocab-entry-title">
+          <span class="entry-num">2</span>現在進行式的 Yes / No 問句
+        </div>
+        <ol class="usage-list">
+          <li>將現在進行式直述句的 be 動詞放到句首，即可將直述句改為疑問句。</li>
+        </ol>
+
+        <table class="vocab-table" style="text-align: center;">
+          <tbody>
+            <tr>
+              <td style="width: 33%; text-align: center;">Are</td>
+              <td style="width: 33%; text-align: center;">you</td>
+              <td rowspan="2" style="width: 34%; text-align: center; vertical-align: middle;">reading?</td>
+            </tr>
+            <tr>
+              <td style="text-align: center;">Is</td>
+              <td style="text-align: center;">he</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ▼▼▼ （第 206～211 頁）的 <section> 區塊 ▼▼▼ -->
+
+    <!-- ==================== 第 206 頁 ==================== -->
+    <section id="page-206" class="page-block" data-page="206">
+      <div class="page-header">
+        <span class="page-badge">第 206 頁</span>
+        <span class="unit-header-text">國中英語</span>
+      </div>
+
+      <!-- 接續第 205 頁 2 現在進行式的 Yes / No 問句 -->
+      <div class="vocab-entry">
+        <ol class="usage-list" start="2">
+          <li>回答時先用 Yes / No 表示肯定或否定，肯定簡答再接主詞和 be 動詞，否定簡答接主詞和 be 動詞＋not。肯定答句的主詞＋be 動詞不可縮寫。否定答句的第一人稱 am not 無縮寫。</li>
+        </ol>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px;">
+          <table class="vocab-table" style="text-align: center; margin-top: 0;">
+            <tbody>
+              <tr>
+                <td rowspan="3" style="width: 40%; text-align: center; vertical-align: middle;">Yes,</td>
+                <td style="width: 60%; text-align: center;">I am.</td>
+              </tr>
+              <tr>
+                <td style="text-align: center;">we are.</td>
+              </tr>
+              <tr>
+                <td style="text-align: center;">he is.</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <table class="vocab-table" style="text-align: center; margin-top: 0;">
+            <tbody>
+              <tr>
+                <td rowspan="3" style="width: 30%; text-align: center; vertical-align: middle;">No,</td>
+                <td style="width: 45%; text-align: center;">I am</td>
+                <td rowspan="3" style="width: 25%; text-align: center; vertical-align: middle;">not.</td>
+              </tr>
+              <tr>
+                <td style="text-align: center;">we are</td>
+              </tr>
+              <tr>
+                <td style="text-align: center;">he is</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="example-line">
+          <span class="tag-label">例</span>(1) A: Are you sleeping?（你正在睡覺嗎？）<br>
+          <span style="padding-left: 28px;">B: No, I'm not.（不，我沒有。）</span><br>
+          <span style="padding-left: 28px;">(2) A: Is he writing?（他正在寫字嗎？）</span><br>
+          <span style="padding-left: 28px;">B: Yes, he is.（是的，他是。）</span>
+        </div>
+
+        <div class="your-turn-box">
+          <div style="margin-bottom: 6px;"><span class="your-turn-badge">Your turn</span></div>
+          <div style="font-weight: bold; margin-bottom: 6px;">●改為疑問句</div>
+          <div style="line-height: 2.2;">
+            <div>1. Joe is making a cake.</div>
+            <div><span class="blank-line" style="width: 100%; text-align: left;"><span class="blank-status">（原圖空白）</span></span></div>
+            <div>2. Molly and Katy are drinking the milk.</div>
+            <div><span class="blank-line" style="width: 100%; text-align: left;"><span class="blank-status">（原圖空白）</span></span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3 現在進行式的 What 疑問句 -->
+      <div class="vocab-entry">
+        <div class="vocab-entry-title">
+          <span class="entry-num">3</span>現在進行式的 What 疑問句
+        </div>
+        <ol class="usage-list">
+          <li>What 是疑問詞，放在問句的句首，後面接「be 動詞＋主詞＋doing...?」，用來詢問「某人正在做什麼？」。</li>
+          <li>now 是時間副詞，放在句尾表示「現在、目前」。now 不只用在現在進行式疑問句，也能用在現在進行式直述句。</li>
+          <li>疑問句共通的原則是 be 動詞的位置在先，主詞的位置在後。be 動詞的單複數要與主詞的單複數一致。</li>
+        </ol>
+
+        <table class="vocab-table" style="text-align: center;">
+          <tbody>
+            <tr>
+              <td rowspan="3" style="width: 20%; text-align: center; vertical-align: middle;">What</td>
+              <td style="width: 20%; text-align: center;">are</td>
+              <td style="width: 20%; text-align: center;">you</td>
+              <td rowspan="3" style="width: 20%; text-align: center; vertical-align: middle;">doing</td>
+              <td rowspan="3" style="width: 20%; text-align: center; vertical-align: middle;">(now)?</td>
+            </tr>
+            <tr>
+              <td style="text-align: center;">is</td>
+              <td style="text-align: center;">he / she</td>
+            </tr>
+            <tr>
+              <td style="text-align: center;">are</td>
+              <td style="text-align: center;">you / they</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ==================== 第 207 頁 ==================== -->
+    <section id="page-207" class="page-block" data-page="207">
+      <div class="page-header">
+        <span class="page-badge">第 207 頁</span>
+        <span class="unit-header-text">Lesson 5</span>
+      </div>
+
+      <!-- 接續第 206 頁 3 現在進行式的 What 疑問句 -->
+      <div class="vocab-entry">
+        <ol class="usage-list" start="4">
+          <li>疑問詞 What 開頭的問句，回答時用「主詞＋be 動詞＋V-ing（現在分詞）....」。</li>
+        </ol>
+
+        <table class="vocab-table" style="text-align: center; margin-bottom: 14px;">
+          <tbody>
+            <tr>
+              <td style="width: 25%; text-align: center;">I</td>
+              <td style="width: 20%; text-align: center;">am</td>
+              <td style="width: 30%; text-align: center;">eating</td>
+              <td rowspan="3" style="width: 25%; text-align: center; vertical-align: middle;">(now).</td>
+            </tr>
+            <tr>
+              <td style="text-align: center;">He / She</td>
+              <td style="text-align: center;">is</td>
+              <td style="text-align: center;">dancing</td>
+            </tr>
+            <tr>
+              <td style="text-align: center;">We / They</td>
+              <td style="text-align: center;">are</td>
+              <td style="text-align: center;">running</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="example-line">
+          <span class="tag-label">例</span>(1) A: What are you doing?（你們正在做什麼？）<br>
+          <span style="padding-left: 28px;">B: We are drawing pictures.（我們正在畫圖。）</span><br>
+          <span style="padding-left: 28px;">(2) A: What is she doing now?（她現在正在做什麼？）</span><br>
+          <span style="padding-left: 28px;">B: She is reading a newspaper now.（她現在正在看報紙。）</span>
+        </div>
+
+        <div class="your-turn-box">
+          <div style="margin-bottom: 6px;"><span class="your-turn-badge">Your turn</span></div>
+          <div style="font-weight: bold; margin-bottom: 6px;">●依提示作答</div>
+          <div style="line-height: 2.2;">
+            <div>1. What is Allen doing?（用「吃一顆蘋果」詳答）</div>
+            <div><span class="blank-line" style="width: 100%; text-align: left;"><span class="blank-status">（原圖空白）</span></span></div>
+            <div>2. What are they doing?（用「做晚餐」詳答）</div>
+            <div><span class="blank-line" style="width: 100%; text-align: left;"><span class="blank-status">（原圖空白）</span></span></div>
+            <div>3. What are you doing?（用「下載一首歌」詳答）</div>
+            <div><span class="blank-line" style="width: 100%; text-align: left;"><span class="blank-status">（原圖空白）</span></span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4 What time / day? 問答句 -->
+      <div class="vocab-entry">
+        <div class="vocab-entry-title">
+          <span class="entry-num">4</span>What time / day? 問答句
+        </div>
+        <ol class="usage-list">
+          <li>詢問現在幾點幾分的句型為：問句「What time＋is＋it?」及答句「It is＋時間.」。將現在幾點幾分的問答句型稍微改變一下，就可以用來詢問及回答「某事物幾點幾分開始」。問句「What time＋is＋it?」，將主詞 it 改為事物；答句「It is＋時間.」，在時間之前加入介系詞 at，表示「在」某時間。</li>
+        </ol>
+
+        <table class="vocab-table" style="text-align: center; margin-bottom: 14px;">
+          <tbody>
+            <tr>
+              <td colspan="2" style="width: 45%; text-align: center;">What time</td>
+              <td style="width: 20%; text-align: center;">is</td>
+              <td style="width: 35%; text-align: center;">the class?</td>
+            </tr>
+            <tr>
+              <td style="width: 22%; text-align: center;">It</td>
+              <td style="width: 23%; text-align: center;">is</td>
+              <td style="text-align: center;">at</td>
+              <td style="text-align: center;">eleven (o'clock).<br>eight a.m. / p.m.<br>ten thirty.<br>nine forty-three.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <ol class="usage-list" start="2" style="margin-bottom: 0;">
+          <li>詢問及回答今天星期幾的句型為：問句「What day＋is＋it?」及答句「It is＋星期幾.」。要改為詢問「某事物是在星期幾」，只須將問句「What day＋is＋it?」中的主詞 it 改為事物；答句「It is＋星期幾.」，在星期幾前加入介系詞 on，表示「在」星期幾。</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ==================== 第 208 頁 ==================== -->
+    <section id="page-208" class="page-block" data-page="208">
+      <div class="page-header">
+        <span class="page-badge">第 208 頁</span>
+        <span class="unit-header-text">國中英語</span>
+      </div>
+
+      <!-- 接續第 207 頁 4 What time / day? 問答句 -->
+      <div class="vocab-entry">
+        <table class="vocab-table" style="text-align: center; margin-bottom: 14px;">
+          <tbody>
+            <tr>
+              <td style="width: 33%; text-align: center;">What day</td>
+              <td style="width: 33%; text-align: center;">is</td>
+              <td style="width: 34%; text-align: center;">the class?</td>
+            </tr>
+            <tr>
+              <td style="text-align: center;">It</td>
+              <td style="text-align: center;">is</td>
+              <td style="text-align: center;">on   Monday.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="example-line">
+          <span class="tag-label">例</span>(1) A: What time is the basketball game?（籃球比賽是幾點？）<br>
+          <span style="padding-left: 28px;">B: It is at nine thirty.（它是在九點三十分。）</span><br>
+          <span style="padding-left: 28px;">(2) A: What day is your mother's birthday?（你媽媽的生日是星期幾？）</span><br>
+          <span style="padding-left: 28px;">B: It is on Friday.（它是在星期五。）</span>
+        </div>
+
+        <div class="your-turn-box">
+          <div style="margin-bottom: 6px;"><span class="your-turn-badge">Your turn</span></div>
+          <div style="font-weight: bold; margin-bottom: 6px;">●引導式翻譯</div>
+          <div style="line-height: 2;">
+            <div>1. A: <span class="blank-line" style="min-width: 180px;"><span class="blank-status">（原圖空白）</span></span> the PE class?（體育課是幾點？）</div>
+            <div style="padding-left: 18px;">B: It's <span class="blank-line"><span class="blank-status">（原圖空白）</span></span> two o'clock.（它是在兩點。）</div>
+            <div>2. A: <span class="blank-line" style="min-width: 180px;"><span class="blank-status">（原圖空白）</span></span> Museum Day?（博物館日是星期幾？）</div>
+            <div style="padding-left: 18px;">B: It's <span class="blank-line"><span class="blank-status">（原圖空白）</span></span> Wednesday.（它是在星期三。）</div>
+          </div>
+        </div>
+      </div>
+
+      <h2 class="section-heading"><span>文法加油站</span></h2>
+
+      <div class="vocab-entry">
+        <div style="font-weight: bold; margin-bottom: 14px;">一、語法測驗</div>
+
+        <div class="grammar-item">
+          <div>（ <span class="blank-status">（原圖空白）</span> ）1. Sam and Lisa <span class="blank-line"></span> now.</div>
+          <div class="grammar-sub" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; margin-top: 6px;">
+            <div>(A) dancing</div>
+            <div>(B) be dancing</div>
+            <div>(C) is dancing</div>
+            <div>(D) are dancing</div>
+          </div>
+        </div>
+
+        <div class="grammar-item">
+          <div>（ <span class="blank-status">（原圖空白）</span> ）2. A: What are you <span class="blank-line"></span>?</div>
+          <div style="padding-left: 44px;">B: Tea.</div>
+          <div class="grammar-sub" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; margin-top: 6px;">
+            <div>(A) drink</div>
+            <div>(B) drinking</div>
+            <div>(C) do</div>
+            <div>(D) doing</div>
+          </div>
+        </div>
+
+        <div class="grammar-item">
+          <div>（ <span class="blank-status">（原圖空白）</span> ）3. A: Are you reading the English book?</div>
+          <div style="padding-left: 44px;">B: No, <span class="blank-line"></span>.</div>
+          <div class="grammar-sub" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; margin-top: 6px;">
+            <div>(A) you're not</div>
+            <div>(B) you are</div>
+            <div>(C) I am</div>
+            <div>(D) we're not</div>
+          </div>
+        </div>
+
+        <div class="grammar-item">
+          <div>（ <span class="blank-status">（原圖空白）</span> ）4. A: <span class="blank-line"></span> is Teachers' Day?</div>
+          <div style="padding-left: 44px;">B: It's on Thursday.</div>
+          <div class="grammar-sub" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; margin-top: 6px;">
+            <div>(A) How</div>
+            <div>(B) Where</div>
+            <div>(C) What day</div>
+            <div>(D) What time</div>
+          </div>
+        </div>
+
+        <div class="grammar-item">
+          <div>（ <span class="blank-status">（原圖空白）</span> ）5. A: <span class="blank-line"></span> Kelly doing?</div>
+          <div style="padding-left: 44px;">B: She's playing with Spot.</div>
+          <div class="grammar-sub" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; margin-top: 6px;">
+            <div>(A) Is</div>
+            <div>(B) What's</div>
+            <div>(C) Who is</div>
+            <div>(D) Are</div>
+          </div>
+        </div>
+
+        <div class="grammar-item">
+          <div>（ <span class="blank-status">（原圖空白）</span> ）6. A: <span class="blank-line"></span> is the English class?</div>
+          <div style="padding-left: 44px;">B: It's at eight ten.</div>
+          <div class="grammar-sub" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; margin-top: 6px;">
+            <div>(A) How</div>
+            <div>(B) Where</div>
+            <div>(C) What day</div>
+            <div>(D) What time</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 第 209 頁 ==================== -->
+    <section id="page-209" class="page-block" data-page="209">
+      <div class="page-header">
+        <span class="page-badge">第 209 頁</span>
+        <span class="unit-header-text">Lesson 5</span>
+      </div>
+
+      <!-- 接續第 208 頁 一、語法測驗 -->
+      <div class="vocab-entry">
+        <div class="grammar-item">
+          <div>（ <span class="blank-status">（原圖空白）</span> ）7. New Year's Day is <span class="blank-line"></span> Tuesday.</div>
+          <div class="grammar-sub" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; margin-top: 6px;">
+            <div>(A) at</div>
+            <div>(B) near</div>
+            <div>(C) on</div>
+            <div>(D) under</div>
+          </div>
+        </div>
+
+        <div class="grammar-item">
+          <div>（ <span class="blank-status">（原圖空白）</span> ）8. The math class is <span class="blank-line"></span> 11 a.m.</div>
+          <div class="grammar-sub" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; margin-top: 6px;">
+            <div>(A) at</div>
+            <div>(B) near</div>
+            <div>(C) on</div>
+            <div>(D) under</div>
+          </div>
+        </div>
+
+        <div style="font-weight: bold; margin: 18px 0 10px 0;">二、依提示作答</div>
+
+        <div style="line-height: 2.2;">
+          <div>1. What is Bill doing now?（用「看電視」詳答）</div>
+          <div><span class="blank-line" style="width: 100%; text-align: left;"><span class="blank-status">（原圖空白）</span></span></div>
+          <div>2. What are the students doing?（用「吃午餐」詳答）</div>
+          <div><span class="blank-line" style="width: 100%; text-align: left;"><span class="blank-status">（原圖空白）</span></span></div>
+          <div>3. <u>Yes</u>, I'm having some juice.（造原問句）</div>
+          <div><span class="blank-line" style="width: 100%; text-align: left;"><span class="blank-status">（原圖空白）</span></span></div>
+          <div>4. Mother's Day is on <u>Sunday</u>.（造原問句）</div>
+          <div><span class="blank-line" style="width: 100%; text-align: left;"><span class="blank-status">（原圖空白）</span></span></div>
+          <div>5. What time is your cooking class?（用「下午兩點」詳答）</div>
+          <div><span class="blank-line" style="width: 100%; text-align: left;"><span class="blank-status">（原圖空白）</span></span></div>
+        </div>
+      </div>
+
+      <div class="info-card" style="background-color: #fdf8f3; border-color: #e6d5c3;">
+        <div class="info-card-title" style="color: #8c4a27; border-bottom-color: #e6d5c3;">Answers</div>
+
+        <div style="font-size: 0.92rem; line-height: 1.9; margin-bottom: 12px;">
+          <div><span class="entry-num" style="width: 20px; height: 20px; line-height: 20px; font-size: 0.8rem;">1</span>1. sitting  2. washing  3. closing  4. eating</div>
+          <div><span class="entry-num" style="width: 20px; height: 20px; line-height: 20px; font-size: 0.8rem;">2</span>1. Is Joe making a cake?  2. Are Molly and Katy drinking the milk?</div>
+          <div><span class="entry-num" style="width: 20px; height: 20px; line-height: 20px; font-size: 0.8rem;">3</span>1. He is eating an apple.  2. They are making dinner.</div>
+          <div style="padding-left: 26px;">3. I'm / We're downloading a song.</div>
+          <div><span class="entry-num" style="width: 20px; height: 20px; line-height: 20px; font-size: 0.8rem;">4</span>1. What; time; is; at  2. What; day; is; on</div>
+        </div>
+
+        <div style="font-weight: bold; margin-bottom: 6px;">文法加油站</div>
+        <div style="font-size: 0.92rem; line-height: 1.9;">
+          <div>一、1. D  2. B  3. D  4. C  5. B</div>
+          <div style="padding-left: 28px;">6. D  7. C  8. A</div>
+          <div>二、1. He is watching TV.</div>
+          <div style="padding-left: 28px;">2. They are having lunch.</div>
+          <div style="padding-left: 28px;">3. Are you having some juice?</div>
+          <div style="padding-left: 28px;">4. What day is Mother's Day?</div>
+          <div style="padding-left: 28px;">5. It's at 2 p.m.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 第 210 頁 ==================== -->
+    <section id="page-210" class="page-block" data-page="210">
+      <div class="page-header">
+        <span class="page-badge">第 210 頁</span>
+        <span class="unit-header-text">國中英語</span>
+      </div>
+
+      <h2 class="section-heading"><span>Pronunciation</span></h2>
+
+      <table class="vocab-table" style="text-align: center; margin-bottom: 16px;">
+        <thead>
+          <tr>
+            <th style="width: 20%; text-align: center;">i<br>/ ɪ /</th>
+            <th style="width: 20%; text-align: center;">i_e<br>/ aɪ /</th>
+            <th style="width: 20%; text-align: center;">ie<br>/ aɪ /</th>
+            <th style="width: 20%; text-align: center;">igh<br>/ aɪ /</th>
+            <th style="width: 20%; text-align: center;">y<br>/ aɪ /</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="text-align: center;">is</td>
+            <td style="text-align: center;">bike</td>
+            <td style="text-align: center;">die</td>
+            <td style="text-align: center;">high</td>
+            <td style="text-align: center;">fly</td>
+          </tr>
+          <tr>
+            <td style="text-align: center;">it</td>
+            <td style="text-align: center;">five</td>
+            <td style="text-align: center;">lie</td>
+            <td style="text-align: center;">light</td>
+            <td style="text-align: center;">my</td>
+          </tr>
+          <tr>
+            <td style="text-align: center;">his</td>
+            <td style="text-align: center;">ride</td>
+            <td style="text-align: center;">pie</td>
+            <td style="text-align: center;">night</td>
+            <td style="text-align: center;">try</td>
+          </tr>
+          <tr>
+            <td style="text-align: center;">sit</td>
+            <td style="text-align: center;">time</td>
+            <td style="text-align: center;">tie</td>
+            <td style="text-align: center;">right</td>
+            <td style="text-align: center;">why</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="vocab-entry">
+        <ol class="usage-list" style="margin-bottom: 0;">
+          <li>/ɪ/ 是母音。發音方式和 /i/ 很類似。發 /i/ 的音時，前方的舌頭貼近口腔上面的上顎。發 /ɪ/ 的音時，前方的舌頭則是介於 /i/ 和 /e/ 的發音位置之間，舌頭及口腔肌肉都要放鬆。</li>
+          <li>/aɪ/ 是雙母音。由 /a/ 和 /ɪ/ 兩個母音組合而成。類似國語注音的ㄞ。</li>
+        </ol>
+      </div>
+
+      <h2 class="section-heading">
+        <span>發音加油站</span>
+        <span class="track-badge">🎧 Track 38</span>
+      </h2>
+
+      <div class="vocab-entry">
+        <div style="font-weight: bold; margin-bottom: 10px;">●聽 CD，圈選出所唸的單字。</div>
+        <table class="knowledge-table">
+          <tbody>
+            <tr>
+              <td style="width: 33%;">1. (A) bite</td>
+              <td style="width: 33%;">(B) mite</td>
+              <td style="width: 34%;">(C) bit</td>
+            </tr>
+            <tr>
+              <td>2. (A) try</td>
+              <td>(B) chip</td>
+              <td>(C) tie</td>
+            </tr>
+            <tr>
+              <td>3. (A) relate</td>
+              <td>(B) rely</td>
+              <td>(C) relay</td>
+            </tr>
+            <tr>
+              <td>4. (A) sigh</td>
+              <td>(B) say</td>
+              <td>(C) side</td>
+            </tr>
+            <tr>
+              <td>5. (A) lie</td>
+              <td>(B) like</td>
+              <td>(C) line</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="info-card" style="background-color: #fdf8f3; border-color: #e6d5c3;">
+        <div class="info-card-title" style="color: #8c4a27; border-bottom-color: #e6d5c3;">Answers</div>
+        <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; font-size: 0.92rem;">
+          <div>1. C</div>
+          <div>2. B</div>
+          <div>3. B</div>
+          <div>4. A</div>
+          <div>5. A</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 第 211 頁 ==================== -->
+    <section id="page-211" class="page-block" data-page="211">
+      <div class="page-header">
+        <span class="page-badge">第 211 頁</span>
+        <span class="unit-header-text">Lesson 5</span>
+      </div>
+
+      <h2 class="section-heading"><span>English Club</span></h2>
+
+      <div class="vocab-entry">
+        <div style="margin-bottom: 12px;">
+          本課已學到用 What time is it? 詢問時間，而回答若是八點十分，最基本的方式是用 It's eight ten.，但回答的方式其實還有別的變化。
+        </div>
+        <div style="font-weight: bold; margin-bottom: 12px;">
+          以 30 分為分界點，有以下兩種說法：
+        </div>
+
+        <div style="margin-bottom: 16px;">
+          <div style="margin-bottom: 8px;"><span class="tag-label" style="background-color: #5b8c2a;">1. 小於 30 分</span></div>
+          <div style="padding: 8px 12px; background-color: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 6px; margin-bottom: 8px; text-align: center; color: #475569; font-size: 0.92rem;">
+            [時鐘插圖：時針指向 8 與 9 之間，分針指向 3（8:15）]
+          </div>
+          <div>
+            上圖顯示是 15 分。我們可以說 It's eight fifteen. 或 It's fifteen after eight. 或 It's fifteen past eight.。後面兩種敘述字面上是「八點過十五分」，也就是 8:15。past 是介系詞，意思是「經過、超過」。
+          </div>
+        </div>
+
+        <div>
+          <div style="margin-bottom: 8px;"><span class="tag-label" style="background-color: #5b8c2a;">2. 大於 30 分</span></div>
+          <div style="padding: 8px 12px; background-color: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 6px; margin-bottom: 8px; text-align: center; color: #475569; font-size: 0.92rem;">
+            [時鐘插圖：時針接近 9，分針指向 10（8:50）]
+          </div>
+          <div>
+            上圖顯示是 50 分。我們可以說 It's eight fifty. 或 It's ten to nine.。後面的敘述字面上是「還有十分鐘就九點」，也就是 8:50。
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ▼▼▼ （第 212～217 頁）的 <section> 區塊 ▼▼▼ -->
+
+    <!-- ==================== 第 212 頁 ==================== -->
+    <section id="page-212" class="page-block" data-page="212">
+      <div class="page-header">
+        <span class="page-badge">第 212 頁</span>
+        <span class="unit-header-text">國中英語</span>
+      </div>
+
+      <h2 class="section-heading"><span>On Target</span></h2>
+
+      <div class="vocab-entry">
+        <div style="font-weight: bold; margin-bottom: 10px;">一、常考字彙</div>
+        <table class="vocab-table" style="margin-top: 0;">
+          <tbody>
+            <tr>
+              <td style="width: 20%;">1. birthday</td>
+              <td style="width: 30%;"><span class="pos-tag">名</span>生日</td>
+              <td style="width: 20%;">7. prepare</td>
+              <td style="width: 30%;"><span class="pos-tag">動</span>準備</td>
+            </tr>
+            <tr>
+              <td>2. party</td>
+              <td><span class="pos-tag">名</span>派對</td>
+              <td>8. o'clock</td>
+              <td><span class="pos-tag">副</span>……點鐘</td>
+            </tr>
+            <tr>
+              <td>3. weekend</td>
+              <td><span class="pos-tag">名</span>週末</td>
+              <td>9. everyone (everybody)</td>
+              <td><span class="pos-tag">代</span>每個人；各位</td>
+            </tr>
+            <tr>
+              <td>4. group</td>
+              <td><span class="pos-tag">名</span>團體</td>
+              <td>10. city</td>
+              <td><span class="pos-tag">名</span>城市</td>
+            </tr>
+            <tr>
+              <td>5. tonight</td>
+              <td><span class="pos-tag">副</span>今晚</td>
+              <td>11. shine</td>
+              <td><span class="pos-tag">動</span>照耀；發光</td>
+            </tr>
+            <tr>
+              <td>6. meeting</td>
+              <td><span class="pos-tag">名</span>會議</td>
+              <td>12. dinner</td>
+              <td><span class="pos-tag">名</span>晚餐</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="vocab-entry">
+        <div style="font-weight: bold; margin-bottom: 10px;">二、常考片語／慣用語／佳句</div>
+        <table class="vocab-table" style="margin-top: 0;">
+          <thead>
+            <tr>
+              <th style="width: 30%;">重要片語／慣用語／佳句</th>
+              <th style="width: 70%;">例 句</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1. Hurry up.<br>快一點。</td>
+              <td>
+                A: What time is it?（現在幾點？）<br>
+                B: It's six thirty. Hurry up.（六點半。快一點。）
+              </td>
+            </tr>
+            <tr>
+              <td>2. by the way<br>順帶一提</td>
+              <td>
+                OK, Una. By the way, there's a meeting this afternoon.<br>
+                （好的，Una。順帶一提，今天下午有個會議。）
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="vocab-entry">
+        <div style="font-weight: bold; margin-bottom: 10px;">三、重要句型</div>
+        <div class="grammar-item">
+          <div>1. 問：be 動詞＋主詞＋V-ing? 答：Yes, 主詞＋be 動詞. / No, 主詞＋be 動詞＋not.</div>
+          <div class="example-line">
+            <span class="tag-label">例</span>A: Is Jennifer reading?（Jennifer 正在閱讀嗎？）<br>
+            <span style="padding-left: 28px;">B: No, she is not.（不，她不是。）</span>
+          </div>
+        </div>
+        <div class="grammar-item">
+          <div>2. 問：What＋be 動詞＋主詞＋doing? 答：主詞＋be 動詞＋V-ing.</div>
+          <div class="example-line">
+            <span class="tag-label">例</span>A: What is Leo doing?（Leo 正在做什麼？）<br>
+            <span style="padding-left: 28px;">B: He is cooking.（他正在煮飯。）</span>
+          </div>
+        </div>
+        <div class="grammar-item">
+          <div>3. 問：What time＋is＋主詞? 答：It is＋at＋時間.</div>
+          <div class="example-line">
+            <span class="tag-label">例</span>A: What time is the English class?（英語課是幾點？）<br>
+            <span style="padding-left: 28px;">B: It's at ten o'clock.（它是在十點鐘。）</span>
+          </div>
+        </div>
+        <div class="grammar-item">
+          <div>4. 問：What day＋is＋主詞? 答：It is＋on＋星期名稱.</div>
+          <div class="example-line">
+            <span class="tag-label">例</span>A: What day is the group chat?（團體談話是在星期幾？）<br>
+            <span style="padding-left: 28px;">B: It is on Tuesday.（它是在星期二。）</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 第 213 頁 ==================== -->
+    <section id="page-213" class="page-block" data-page="213">
+      <div class="page-header">
+        <span class="page-badge">第 213 頁</span>
+        <span class="unit-header-text">Lesson 5</span>
+      </div>
+
+      <h2 class="section-heading"><span>自我挑戰</span></h2>
+
+      <div class="vocab-entry">
+        <div style="font-weight: bold; margin-bottom: 10px;"><span class="tag-label">聽力篇</span></div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; font-weight: bold; margin-bottom: 12px;">
+          <span>一、辨識句意</span>
+          <span class="track-badge">🎧 Track 39</span>
+        </div>
+
+        <div class="grammar-item">
+          <div>（ <span class="blank-status">（原圖空白）</span> ）1.</div>
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 6px; text-align: center;">
+            <div style="padding: 10px; border: 1px dashed #cbd5e1; border-radius: 6px; background-color: #f8fafc; font-size: 0.9rem;">
+              (A) [插圖：床上女孩拿著手機]
+            </div>
+            <div style="padding: 10px; border: 1px dashed #cbd5e1; border-radius: 6px; background-color: #f8fafc; font-size: 0.9rem;">
+              (B) [插圖：女孩拿著手機講電話]
+            </div>
+            <div style="padding: 10px; border: 1px dashed #cbd5e1; border-radius: 6px; background-color: #f8fafc; font-size: 0.9rem;">
+              (C) [插圖：女孩拿著平板電腦]
+            </div>
+          </div>
+        </div>
+
+        <div class="grammar-item">
+          <div>（ <span class="blank-status">（原圖空白）</span> ）2.</div>
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 6px; text-align: center;">
+            <div style="padding: 10px; border: 1px dashed #cbd5e1; border-radius: 6px; background-color: #f8fafc; font-size: 0.9rem;">
+              (A) [插圖：人在廚房／室內拿著器具操作]
+            </div>
+            <div style="padding: 10px; border: 1px dashed #cbd5e1; border-radius: 6px; background-color: #f8fafc; font-size: 0.9rem;">
+              (B) [插圖：人在流理台前拿杯子或水壺]
+            </div>
+            <div style="padding: 10px; border: 1px dashed #cbd5e1; border-radius: 6px; background-color: #f8fafc; font-size: 0.9rem;">
+              (C) [插圖：人在爐台旁拿鍋鏟烹調]
+            </div>
+          </div>
+        </div>
+
+        <div class="grammar-item">
+          <div>（ <span class="blank-status">（原圖空白）</span> ）3.</div>
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 6px; text-align: center;">
+            <div style="padding: 10px; border: 1px dashed #cbd5e1; border-radius: 6px; background-color: #f8fafc; font-size: 0.9rem;">
+              (A) [插圖：時鐘指向約 10:10，窗外夜空與月亮]
+            </div>
+            <div style="padding: 10px; border: 1px dashed #cbd5e1; border-radius: 6px; background-color: #f8fafc; font-size: 0.9rem;">
+              (B) [插圖：時鐘指向約 10:10，窗外白天景色]
+            </div>
+            <div style="padding: 10px; border: 1px dashed #cbd5e1; border-radius: 6px; background-color: #f8fafc; font-size: 0.9rem;">
+              (C) [插圖：時鐘指向約 8:10，窗外白天景色]
+            </div>
+          </div>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; font-weight: bold; margin: 18px 0 10px 0;">
+          <span>二、基本問答</span>
+          <span class="track-badge">🎧 Track 40</span>
+        </div>
+
+        <div class="grammar-item">
+          <div>（ <span class="blank-status">（原圖空白）</span> ）1. (A) It's on Saturday.  (B) Yes, it's Tuesday.  (C) No, it's Friday.</div>
+        </div>
+
+        <div class="grammar-item">
+          <div>（ <span class="blank-status">（原圖空白）</span> ）2. (A) It's seven thirty.</div>
+          <div style="padding-left: 44px;">(B) I'm looking for my schoolbag.</div>
+          <div style="padding-left: 44px;">(C) It's in the living room.</div>
+        </div>
+
+        <div class="grammar-item">
+          <div>（ <span class="blank-status">（原圖空白）</span> ）3. (A) It's at 1:30 p.m.</div>
+          <div style="padding-left: 44px;">(B) It's two forty.</div>
+          <div style="padding-left: 44px;">(C) It's on Monday.</div>
+        </div>
+
+        <div class="grammar-item">
+          <div>（ <span class="blank-status">（原圖空白）</span> ）4. (A) You can't read it with me.</div>
+          <div style="padding-left: 44px;">(B) The book is from my sister.</div>
+          <div style="padding-left: 44px;">(C) It's about animals.</div>
+        </div>
+
+        <div class="grammar-item">
+          <div>（ <span class="blank-status">（原圖空白）</span> ）5. (A) Yes, I'm making it for Dad.</div>
+          <div style="padding-left: 44px;">(B) No, I'm making it for Dad.</div>
+          <div style="padding-left: 44px;">(C) Yes, I'm eating a cake.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 第 214 頁 ==================== -->
+    <section id="page-214" class="page-block" data-page="214">
+      <div class="page-header">
+        <span class="page-badge">第 214 頁</span>
+        <span class="unit-header-text">國中英語</span>
+      </div>
+
+      <div class="vocab-entry">
+        <div style="display: flex; justify-content: space-between; align-items: center; font-weight: bold; margin-bottom: 12px;">
+          <span>三、言談理解</span>
+          <span class="track-badge">🎧 Track 41</span>
+        </div>
+
+        <div class="grammar-item">
+          <div>（ <span class="blank-status">（原圖空白）</span> ）1. (A) He is reading an English book.</div>
+          <div style="padding-left: 44px;">(B) He is teaching his students.</div>
+          <div style="padding-left: 44px;">(C) He is in a meeting.</div>
+        </div>
+
+        <div class="grammar-item">
+          <div>（ <span class="blank-status">（原圖空白）</span> ）2. (A) It's on Wednesday.</div>
+          <div style="padding-left: 44px;">(B) It's on Thursday.</div>
+          <div style="padding-left: 44px;">(C) It's on Saturday.</div>
+        </div>
+
+        <div class="grammar-item">
+          <div>（ <span class="blank-status">（原圖空白）</span> ）3. (A) He is sleeping.</div>
+          <div style="padding-left: 44px;">(B) He is in math class.</div>
+          <div style="padding-left: 44px;">(C) He is preparing for a class.</div>
+        </div>
+
+        <div class="grammar-item">
+          <div>（ <span class="blank-status">（原圖空白）</span> ）4. (A) It's 9 a.m.  (B) It's 10 a.m.  (C) It's 10 p.m.</div>
+        </div>
+
+        <div class="grammar-item">
+          <div>（ <span class="blank-status">（原圖空白）</span> ）5. (A) Betty's mother.  (B) Betty's father.  (C) Betty.</div>
+        </div>
+      </div>
+
+      <h2 class="section-heading"><span>段考篇</span></h2>
+
+      <div class="vocab-entry">
+        <div style="font-weight: bold; margin-bottom: 12px;">一、文意字彙</div>
+        <div style="line-height: 2;">
+          <div><span class="blank-line" style="min-width: 70px;"><span class="blank-status">（原圖空白）</span></span> 1. The day after（在……之後）Tuesday is W <span class="blank-line" style="min-width: 60px;"></span> y.</div>
+          <div><span class="blank-line" style="min-width: 70px;"><span class="blank-status">（原圖空白）</span></span> 2. The game is on the w <span class="blank-line" style="min-width: 60px;"></span> d, not on a weekday（週間）.</div>
+          <div><span class="blank-line" style="min-width: 70px;"><span class="blank-status">（原圖空白）</span></span> 3. The basketball game is at 8 t <span class="blank-line" style="min-width: 60px;"></span> t. Let's watch it at home.</div>
+          <div><span class="blank-line" style="min-width: 70px;"><span class="blank-status">（原圖空白）</span></span> 4. Joan is p <span class="blank-line" style="min-width: 60px;"></span> ring a cake for her mom. Her birthday is coming.</div>
+          <div><span class="blank-line" style="min-width: 70px;"><span class="blank-status">（原圖空白）</span></span> 5. E <span class="blank-line" style="min-width: 60px;"></span> e in Joan's class is tall. They are all between 1.75 m and 1.85 m.</div>
+          <div><span class="blank-line" style="min-width: 70px;"><span class="blank-status">（原圖空白）</span></span> 6. S <span class="blank-line" style="min-width: 60px;"></span> y is the day before（在……之前）Sunday.</div>
+          <div><span class="blank-line" style="min-width: 70px;"><span class="blank-status">（原圖空白）</span></span> 7. It's 11 o <span class="blank-line" style="min-width: 60px;"></span> k in the evening. It's time for bed.</div>
+          <div><span class="blank-line" style="min-width: 70px;"><span class="blank-status">（原圖空白）</span></span> 8. Anna's math class is on T <span class="blank-line" style="min-width: 60px;"></span> y, not on Tuesday.</div>
+          <div><span class="blank-line" style="min-width: 70px;"><span class="blank-status">（原圖空白）</span></span> 9. Sue's PE class is on F <span class="blank-line" style="min-width: 60px;"></span> y, not on Monday.</div>
+          <div><span class="blank-line" style="min-width: 70px;"><span class="blank-status">（原圖空白）</span></span> 10. It's 5:30 p.m. Ted is making d <span class="blank-line" style="min-width: 60px;"></span> r for his family.</div>
+        </div>
+
+        <div style="font-weight: bold; margin: 18px 0 12px 0;">二、語法測驗</div>
+
+        <div class="grammar-item">
+          <div>（ <span class="blank-status">（原圖空白）</span> ）1. Cindy <span class="blank-line"></span> in the new park now.</div>
+          <div class="grammar-sub" style="display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin-top: 6px;">
+            <div>(A) run</div>
+            <div>(B) are running</div>
+            <div>(C) am running</div>
+            <div>(D) is running</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 第 215 頁 ==================== -->
+    <section id="page-215" class="page-block" data-page="215">
+      <div class="page-header">
+        <span class="page-badge">第 215 頁</span>
+        <span class="unit-header-text">Lesson 5</span>
+      </div>
+
+      <!-- 接續第 214 頁 二、語法測驗 -->
+      <div class="vocab-entry">
+        <div class="grammar-item">
+          <div>（ <span class="blank-status">（原圖空白）</span> ）2. A: Are they <span class="blank-line"></span> on the bed?</div>
+          <div style="padding-left: 44px;">B: No, they are sleeping.</div>
+          <div class="grammar-sub" style="display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin-top: 6px;">
+            <div>(A) jump</div>
+            <div>(B) jumping</div>
+            <div>(C) are jumping</div>
+            <div>(D) to jump</div>
+          </div>
+        </div>
+
+        <div class="grammar-item">
+          <div>（ <span class="blank-status">（原圖空白）</span> ）3. A: <span class="blank-line"></span> are they <span class="blank-line"></span>?</div>
+          <div style="padding-left: 44px;">B: They are reading.</div>
+          <div class="grammar-sub" style="display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin-top: 6px;">
+            <div>(A) Who; do</div>
+            <div>(B) Where; doing</div>
+            <div>(C) What; doing</div>
+            <div>(D) What; do</div>
+          </div>
+        </div>
+
+        <div class="grammar-item">
+          <div>（ <span class="blank-status">（原圖空白）</span> ）4. A: Are you drinking juice?</div>
+          <div style="padding-left: 44px;">B: Yes, <span class="blank-line"></span>.</div>
+          <div class="grammar-sub" style="display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin-top: 6px;">
+            <div>(A) I am</div>
+            <div>(B) I'm</div>
+            <div>(C) you are</div>
+            <div>(D) we're</div>
+          </div>
+        </div>
+
+        <div class="grammar-item">
+          <div>（ <span class="blank-status">（原圖空白）</span> ）5. Look! Sara <span class="blank-line"></span> a birthday cake for Roy.</div>
+          <div class="grammar-sub" style="display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin-top: 6px;">
+            <div>(A) make</div>
+            <div>(B) is making</div>
+            <div>(C) are making</div>
+            <div>(D) am making</div>
+          </div>
+        </div>
+
+        <div class="grammar-item">
+          <div>（ <span class="blank-status">（原圖空白）</span> ）6. A: Is Lewis dancing now?</div>
+          <div style="padding-left: 44px;">B: <span class="blank-line"></span></div>
+          <div class="grammar-sub" style="display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin-top: 6px;">
+            <div>(A) No, he isn't.</div>
+            <div>(B) He is.</div>
+            <div>(C) No, he is dancing.</div>
+            <div>(D) Yes, he is cooking.</div>
+          </div>
+        </div>
+
+        <div class="grammar-item">
+          <div>（ <span class="blank-status">（原圖空白）</span> ）7. A: What day is Andy's welcome party?</div>
+          <div style="padding-left: 44px;">B: <span class="blank-line"></span> Friday.</div>
+          <div class="grammar-sub" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; margin-top: 6px;">
+            <div>(A) For</div>
+            <div>(B) On</div>
+            <div>(C) At</div>
+            <div>(D) In</div>
+          </div>
+        </div>
+
+        <div class="grammar-item">
+          <div>（ <span class="blank-status">（原圖空白）</span> ）8. A: What time is <span class="blank-line"></span>?</div>
+          <div style="padding-left: 44px;">B: It's 7:30.</div>
+          <div class="grammar-sub" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; margin-top: 6px;">
+            <div>(A) this</div>
+            <div>(B) that</div>
+            <div>(C) it</div>
+            <div>(D) time</div>
+          </div>
+        </div>
+
+        <div class="grammar-item">
+          <div>（ <span class="blank-status">（原圖空白）</span> ）9. A: <span class="blank-line"></span> is the English class?</div>
+          <div style="padding-left: 44px;">B: It's at nine o'clock.</div>
+          <div class="grammar-sub" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; margin-top: 6px;">
+            <div>(A) What time</div>
+            <div>(B) How old</div>
+            <div>(C) Where</div>
+            <div>(D) What</div>
+          </div>
+        </div>
+
+        <div class="grammar-item">
+          <div>（ <span class="blank-status">（原圖空白）</span> ）10. A: <span class="blank-line"></span> is Dad's birthday?</div>
+          <div style="padding-left: 44px;">B: It's on Friday.</div>
+          <div class="grammar-sub" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; margin-top: 6px;">
+            <div>(A) What time</div>
+            <div>(B) What day</div>
+            <div>(C) How old</div>
+            <div>(D) Where</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 第 216 頁 ==================== -->
+    <section id="page-216" class="page-block" data-page="216">
+      <div class="page-header">
+        <span class="page-badge">第 216 頁</span>
+        <span class="unit-header-text">國中英語</span>
+      </div>
+
+      <div class="vocab-entry">
+        <div style="font-weight: bold; margin-bottom: 14px;">三、完成句子與對話</div>
+
+        <div class="grammar-item">
+          <div>（ <span class="blank-status">（原圖空白）</span> ）1. A: <span class="blank-line"></span></div>
+          <div style="padding-left: 44px;">B: Yes, it is dirty（髒的）.</div>
+          <div class="grammar-sub" style="display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin-top: 6px;">
+            <div>(A) What's it?</div>
+            <div>(B) What time is it?</div>
+            <div>(C) What day is it?</div>
+            <div>(D) Are you washing the dog?</div>
+          </div>
+        </div>
+
+        <div class="grammar-item">
+          <div>（ <span class="blank-status">（原圖空白）</span> ）2. A: We're late for the meeting. <span class="blank-line"></span></div>
+          <div style="padding-left: 44px;">B: OK.</div>
+          <div class="grammar-sub" style="display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin-top: 6px;">
+            <div>(A) Stand up.</div>
+            <div>(B) Sit down.</div>
+            <div>(C) Hurry up.</div>
+            <div>(D) Listen to me.</div>
+          </div>
+        </div>
+
+        <div class="grammar-item">
+          <div>（ <span class="blank-status">（原圖空白）</span> ）3. A: <span class="blank-line"></span> Can we watch Katie's new movie today?</div>
+          <div style="padding-left: 44px;">B: No, it's only Tuesday. We can watch it on Friday.</div>
+          <div class="grammar-sub" style="display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin-top: 6px;">
+            <div>(A) What day is it?</div>
+            <div>(B) What time is it?</div>
+            <div>(C) How old is it?</div>
+            <div>(D) Where's the movie theater?</div>
+          </div>
+        </div>
+
+        <div class="grammar-item">
+          <div>（ <span class="blank-status">（原圖空白）</span> ）4. A: I'm hungry（飢餓的）. <span class="blank-line"></span></div>
+          <div style="padding-left: 44px;">B: It's twelve ten. It's time for lunch.</div>
+          <div class="grammar-sub" style="display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin-top: 6px;">
+            <div>(A) What day is it?</div>
+            <div>(B) How old is it?</div>
+            <div>(C) What time is it?</div>
+            <div>(D) What are you doing?</div>
+          </div>
+        </div>
+
+        <div class="grammar-item">
+          <div>（ <span class="blank-status">（原圖空白）</span> ）5. A: I have a meeting at ten.</div>
+          <div style="padding-left: 44px;">B: What's the meeting about?</div>
+          <div style="padding-left: 44px;">A: <span class="blank-line"></span></div>
+          <div class="grammar-sub" style="display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin-top: 6px;">
+            <div>(A) Don't be late.</div>
+            <div>(B) It's for everyone.</div>
+            <div>(C) It's about our new car.</div>
+            <div>(D) The group chat is on Monday.</div>
+          </div>
+        </div>
+
+        <div style="font-weight: bold; margin: 18px 0 12px 0;">四、依提示作答</div>
+
+        <div style="line-height: 2.2;">
+          <div>1. Jeff is <u>watching TV</u>.（依畫線部分造原問句）</div>
+          <div><span class="blank-line" style="width: 100%; text-align: left;"><span class="blank-status">（原圖空白）</span></span></div>
+          <div>2. They sit on the bed <u>every afternoon</u>.（將畫線部分改為 now，並改寫句子）</div>
+          <div><span class="blank-line" style="width: 100%; text-align: left;"><span class="blank-status">（原圖空白）</span></span></div>
+          <div>3. Is Lisa making dinner?（否定詳答）</div>
+          <div><span class="blank-line" style="width: 100%; text-align: left;"><span class="blank-status">（原圖空白）</span></span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 第 217 頁 ==================== -->
+    <section id="page-217" class="page-block" data-page="217">
+      <div class="page-header">
+        <span class="page-badge">第 217 頁</span>
+        <span class="unit-header-text">Lesson 5</span>
+      </div>
+
+      <!-- 接續第 216 頁 四、依提示作答 -->
+      <div class="vocab-entry">
+        <div style="line-height: 2.2; margin-bottom: 18px;">
+          <div>4. Amber is reading <u>an English book</u>.（依畫線部分造原問句）</div>
+          <div><span class="blank-line" style="width: 100%; text-align: left;"><span class="blank-status">（原圖空白）</span></span></div>
+          <div>5. Is Jason playing basketball with his brother?（肯定簡答）</div>
+          <div><span class="blank-line" style="width: 100%; text-align: left;"><span class="blank-status">（原圖空白）</span></span></div>
+        </div>
+
+        <div style="font-weight: bold; margin-bottom: 12px;">五、整句式翻譯</div>
+
+        <div style="line-height: 2.2; margin-bottom: 18px;">
+          <div>1. 它是一個跟來自巴黎的醫生們開會的會議。</div>
+          <div><span class="blank-line" style="width: 100%; text-align: left;"><span class="blank-status">（原圖空白）</span></span></div>
+          <div>2. 她正在 Mia 的生日派對上找她的哥哥。</div>
+          <div><span class="blank-line" style="width: 100%; text-align: left;"><span class="blank-status">（原圖空白）</span></span></div>
+          <div>3. 順帶一提，我正在跟我的姑姑吃晚餐。</div>
+          <div><span class="blank-line" style="width: 100%; text-align: left;"><span class="blank-status">（原圖空白）</span></span></div>
+          <div>4. 他們是我來自不同城市的好朋友。</div>
+          <div><span class="blank-line" style="width: 100%; text-align: left;"><span class="blank-status">（原圖空白）</span></span></div>
+          <div>5. 讓我們跟那些來自紐約市的學生們說再見。</div>
+          <div><span class="blank-line" style="width: 100%; text-align: left;"><span class="blank-status">（原圖空白）</span></span></div>
+        </div>
+
+        <div style="font-weight: bold; margin-bottom: 10px;">六、克漏字測驗</div>
+
+        <div style="background-color: #f9ecee; border: 1px solid #e6cfd3; border-radius: 6px; padding: 14px 16px; margin-bottom: 14px; line-height: 1.9;">
+          <div>  It's <span class="blank-line" style="min-width: 50px;">1.</span> 10:30 on Sunday. Duke and his family are having a great morning. Duke's grandmother is a housewife. She <span class="blank-line" style="min-width: 50px;">2.</span> dancing with her friends in the park. Duke's grandfather is a cook. He is talking to his daughter, Amy, on the phone. Duke's father is a teacher. He is making a cake for his father's birthday. Duke's mother is a nurse. She is <span class="blank-line" style="min-width: 50px;">3.</span> in front of the house. Duke's sister is a farmer. She is growing some bananas on the farm. Duke is a student. He is preparing for his math class <span class="blank-line" style="min-width: 50px;">4.</span> Monday. He is a good student. Everyone is busy. How about Peter? It is Duke's dog. It is sleeping on Duke's bed. It is making a lot of noise.</div>
+          <div style="margin-top: 8px; font-size: 0.88rem; color: #444;">
+            <span class="pos-tag">字</span>housewife 家庭主婦 grow 種 farm 農田 busy 忙碌的
+          </div>
+        </div>
+
+        <div class="grammar-item">
+          <div>（ <span class="blank-status">（原圖空白）</span> ）1. (A) at      (B) ×      (C) on      (D) of</div>
+        </div>
+
+        <div class="grammar-item">
+          <div>（ <span class="blank-status">（原圖空白）</span> ）2. (A) be      (B) are      (C) am      (D) is</div>
+        </div>
+
+        <div class="grammar-item">
+          <div>（ <span class="blank-status">（原圖空白）</span> ）3. (A) washing her car (B) watching TV (C) making dinner (D) going to bed</div>
+        </div>
+
+        <div class="grammar-item">
+          <div>（ <span class="blank-status">（原圖空白）</span> ）4. (A) in      (B) on      (C) at      (D) of</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ▼▼▼ （第 218～220 頁）的 <section> 區塊 ▼▼▼ -->
+
+    <!-- ==================== 第 218 頁 ==================== -->
+    <section id="page-218" class="page-block" data-page="218">
+      <div class="page-header">
+        <span class="page-badge">第 218 頁</span>
+        <span class="unit-header-text">國中英語</span>
+      </div>
+
+      <div class="vocab-entry">
+        <div style="font-weight: bold; margin-bottom: 12px;">七、閱讀測驗</div>
+
+        <div style="background-color: #f9ecee; border: 1px solid #e6cfd3; border-radius: 6px; padding: 14px 16px; margin-bottom: 14px; line-height: 1.85;">
+          <div>(Ted is talking to Ann on his smartphone.)</div>
+          <div>Ann: What's up?</div>
+          <div>Ted: My watch is missing.</div>
+          <div>Ann: Is it on your desk?</div>
+          <div>Ted: No, it isn't.</div>
+          <div>Ann: Is it in your pocket?</div>
+          <div>Ted: No, it isn't.</div>
+          <div>Ann: What is your mother doing?</div>
+          <div>Ted: She is reading a <u>magazine</u> about tea.</div>
+          <div>Ann: What is your father doing?</div>
+          <div>Ted: He is playing basketball with his brother, Bob, in the park.</div>
+          <div>Ann: What is your sister doing?</div>
+          <div>Ted: She is watching a TV program about Paris in the living room.</div>
+          <div>Ann: What is your brother doing?</div>
+          <div>Ted: He is listening to a song.</div>
+          <div>Ann: What is your cat doing?</div>
+          <div>Ted: It's playing.</div>
+          <div>Ann: What is it playing with?</div>
+          <div>Ted: MY WATCH! Thank you!</div>
+          <div style="margin-top: 8px; font-size: 0.88rem; color: #444;">
+            <span class="pos-tag">字</span>missing 不見的 pocket 口袋 program 節目 hand 手
+          </div>
+        </div>
+
+        <div class="grammar-item">
+          <div>（ <span class="blank-status">（原圖空白）</span> ）1. What is a "<u>magazine</u>"?</div>
+          <div class="grammar-sub" style="display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin-top: 6px;">
+            <div>(A) A toy.</div>
+            <div>(B) A book.</div>
+            <div>(C) A bird.</div>
+            <div>(D) An animal.</div>
+          </div>
+        </div>
+
+        <div class="grammar-item">
+          <div>（ <span class="blank-status">（原圖空白）</span> ）2. Who is NOT at home?</div>
+          <div class="grammar-sub" style="display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin-top: 6px;">
+            <div>(A) Ted.</div>
+            <div>(B) Ted's father.</div>
+            <div>(C) Ted's mother.</div>
+            <div>(D) Ted's sister.</div>
+          </div>
+        </div>
+
+        <div class="grammar-item">
+          <div>（ <span class="blank-status">（原圖空白）</span> ）3. Where is Ted's sister?</div>
+          <div class="grammar-sub" style="display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin-top: 6px;">
+            <div>(A) In the living room.</div>
+            <div>(B) In the bedroom.</div>
+            <div>(C) In the bathroom.</div>
+            <div>(D) In the dining room.</div>
+          </div>
+        </div>
+
+        <div class="grammar-item">
+          <div>（ <span class="blank-status">（原圖空白）</span> ）4. Which is true?</div>
+          <div class="grammar-sub" style="display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin-top: 6px;">
+            <div>(A) Bob is Ted's uncle.</div>
+            <div>(B) Ted's brother is playing basketball.</div>
+            <div>(C) Ted is playing with his cat.</div>
+            <div>(D) Ted's cat is looking for Ted's watch.</div>
+          </div>
+          <div style="text-align: right; margin-top: 6px; font-size: 0.88rem; color: #444;">
+            <span class="pos-tag">字</span>which 何者
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 第 219 頁 ==================== -->
+    <section id="page-219" class="page-block" data-page="219">
+      <div class="page-header">
+        <span class="page-badge">第 219 頁</span>
+        <span class="unit-header-text">Lesson 5</span>
+      </div>
+
+      <div class="info-card" style="background-color: #fdf8f3; border-color: #e6d5c3;">
+        <div class="info-card-title" style="color: #8c4a27; border-bottom-color: #e6d5c3;">Answers</div>
+
+        <div style="font-weight: bold; margin-bottom: 6px;">聽力篇</div>
+
+        <div style="font-weight: bold; margin-bottom: 4px;">一、辨識句意</div>
+        <div style="font-size: 0.92rem; margin-bottom: 10px;">
+          <div>〈音檔內容〉</div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4px;">
+            <div>1. Jill is looking for her smartphone.</div>
+            <div>2. Helen is making dinner in the kitchen.</div>
+          </div>
+          <div>3. It's 2 p.m. in Paris.</div>
+        </div>
+
+        <div style="font-weight: bold; margin-bottom: 4px;">二、基本問答</div>
+        <div style="font-size: 0.92rem; line-height: 1.75; margin-bottom: 10px;">
+          <div>〈音檔內容〉</div>
+          <div>1. What day is it? Is it Thursday?</div>
+          <div>2. It's time for school. What are you doing?</div>
+          <div>3. What time is the meeting?</div>
+          <div>4. You are reading a book. What is the book about?</div>
+          <div>5. Are you making a cake for Mom?</div>
+        </div>
+
+        <div style="font-weight: bold; margin-bottom: 4px;">三、言談理解</div>
+        <div style="font-size: 0.92rem; line-height: 1.75;">
+          <div>〈音檔內容〉</div>
+          <div>1. W: What are you doing, Parker?</div>
+          <div style="padding-left: 18px;">B: I'm in a meeting with students from Tokyo.</div>
+          <div style="padding-left: 18px;">W: What's the meeting about?</div>
+          <div style="padding-left: 18px;">B: It's about some English books.</div>
+          <div style="padding-left: 18px;">Q: What is Parker doing?</div>
+
+          <div>2. M: What day is today? Is it Thursday, Lisa?</div>
+          <div style="padding-left: 18px;">G: No, it's Wednesday.</div>
+          <div style="padding-left: 18px;">M: Your birthday is on Thursday, and your mom's birthday is on Saturday.</div>
+          <div style="padding-left: 18px;">G: Yes. I'm happy.</div>
+          <div style="padding-left: 18px;">Q: What day is Lisa's birthday?</div>
+
+          <div>3. W: Time for bed. What are you doing, Ed?</div>
+          <div style="padding-left: 18px;">B: I'm preparing for my math class. What time is it, Mom?</div>
+          <div style="padding-left: 18px;">W: It's eleven thirty. What time is the class?</div>
+          <div style="padding-left: 18px;">B: It's at eight ten in the morning.</div>
+          <div style="padding-left: 18px;">W: It's too late now. Time for bed.</div>
+          <div style="padding-left: 18px;">Q: What is Ed doing?</div>
+
+          <div>4. M: Good morning, Donna. It's 9 a.m. in Taiwan. I'm playing basketball in the park. What are you doing in Tokyo now?</div>
+          <div style="padding-left: 18px;">W: It's 10 a.m. I'm drawing now.</div>
+          <div style="padding-left: 18px;">M: Is it for your class?</div>
+          <div style="padding-left: 18px;">W: No, it's for my friend, Tina. Her birthday is on Monday.</div>
+          <div style="padding-left: 18px;">Q: What time is it in Tokyo?</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 第 220 頁 ==================== -->
+    <section id="page-220" class="page-block" data-page="220">
+      <div class="page-header">
+        <span class="page-badge">第 220 頁</span>
+        <span class="unit-header-text">國中英語</span>
+      </div>
+
+      <div class="info-card" style="background-color: #fdf8f3; border-color: #e6d5c3;">
+        <div class="info-card-title" style="color: #8c4a27; border-bottom-color: #e6d5c3;">Answers</div>
+
+        <div style="font-size: 0.92rem; line-height: 1.75; margin-bottom: 12px;">
+          <div>5. W: It's 5:30 p.m. now. Betty is reading a Chinese book in her bedroom. Betty's father is watching a basketball game in the living room. Betty's mother is dancing in the park. Betty's sister is making dinner in the kitchen.</div>
+          <div style="padding-left: 18px;">Q: Who is NOT at home now?</div>
+
+          <div style="font-weight: bold; margin-top: 8px; margin-bottom: 4px;">〈答案〉</div>
+          <div>一、1. A    2. C    3. B</div>
+          <div>二、1. C    2. B    3. A    4. C    5. B</div>
+          <div>三、1. C    2. B    3. C    4. B    5. A</div>
+        </div>
+
+        <div style="font-weight: bold; margin-bottom: 6px;">段考篇</div>
+        <div style="font-size: 0.92rem; line-height: 1.85;">
+          <div style="font-weight: bold;">一、文意字彙</div>
+          <div>1. Wednesday  2. weekend  3. tonight  4. preparing  5. Everyone</div>
+          <div>6. Saturday   7. o'clock   8. Thursday  9. Friday   10. dinner</div>
+
+          <div style="font-weight: bold; margin-top: 6px;">二、語法測驗</div>
+          <div>1. D    2. B    3. C    4. A    5. B</div>
+          <div>6. A    7. B    8. C    9. A    10. B</div>
+
+          <div style="font-weight: bold; margin-top: 6px;">三、完成句子與對話</div>
+          <div>1. D    2. C    3. A    4. C    5. C</div>
+
+          <div style="font-weight: bold; margin-top: 6px;">四、依提示作答</div>
+          <div>1. What is Jeff doing?</div>
+          <div>2. They are sitting on the bed now.</div>
+          <div>3. No, she isn't making dinner.</div>
+          <div>4. What is Amber reading?</div>
+          <div>5. Yes, he is.</div>
+
+          <div style="font-weight: bold; margin-top: 6px;">五、整句式翻譯</div>
+          <div>1. It's a meeting with doctors from Paris.</div>
+          <div>2. She is looking for her brother at Mia's birthday party.</div>
+          <div>3. By the way, I'm having / eating dinner with my aunt.</div>
+          <div>4. They are my good friends from different cities.</div>
+          <div>5. Let's say good-bye to those students from New York City.</div>
+
+          <div style="font-weight: bold; margin-top: 6px;">六、克漏字測驗</div>
+          <div>1. B    2. D    3. A    4. B</div>
+
+          <div style="font-weight: bold; margin-top: 6px;">七、閱讀測驗</div>
+          <div>1. B    2. B    3. A    4. A</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ▲▲▲ 第 218～220 頁結束 ▲▲▲ -->
+
+    <!-- ▲▲▲ 第 212～217 頁結束 ▲▲▲ -->
+
+    <!-- ▲▲▲ 第 206～211 頁結束 ▲▲▲ -->
+
+    <!-- ▲▲▲ 第 200～205 頁結束 ▲▲▲ -->
+
+    <!-- ▲▲▲ 第 194～199 頁結束 ▲▲▲ -->
+
+  </main>
+
+  <footer>
+    本批次轉錄範圍：第 187 頁 ～ 第 193 頁，共 7 頁轉錄完畢
+  </footer>
+
+  <script>
+    function scrollToPage(pageId) {
+      const target = document.getElementById(pageId);
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
+    function toggleHandwriting() {
+      const body = document.body;
+      const btn = document.getElementById('toggle-handwriting');
+      body.classList.toggle('hide-handwriting');
+      if (body.classList.contains('hide-handwriting')) {
+        btn.textContent = '顯示【手寫】筆記';
+      } else {
+        btn.textContent = '隱藏【手寫】筆記';
+      }
+    }
+  </script>
+</body>
+</html>
