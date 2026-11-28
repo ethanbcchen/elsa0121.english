@@ -1,0 +1,2751 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>國中九年級英語科全真模擬測驗（50題）｜P.54–56 閱讀與字彙文法精選</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      --bg-body: #0b1120;
+      --bg-header: #0f172a;
+      --bg-card: #111827;
+      --bg-card-inner: #1e293b;
+      --bg-option: #162032;
+      --bg-option-hover: #1e2d47;
+      --border-subtle: #263349;
+      --border-focus: #38bdf8;
+      --text-primary: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --accent-blue: #3b82f6;
+      --accent-blue-light: #60a5fa;
+      --accent-cyan: #22d3ee;
+      --accent-green: #10b981;
+      --accent-green-bg: rgba(16, 185, 129, 0.14);
+      --accent-red: #ef4444;
+      --accent-red-bg: rgba(239, 68, 68, 0.14);
+      --accent-amber: #f59e0b;
+      --radius-lg: 12px;
+      --radius-md: 8px;
+      --radius-sm: 6px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans TC", "Microsoft JhengHei", Roboto, sans-serif;
+      background-color: var(--bg-body);
+      color: var(--text-primary);
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    /* Top Navigation Bar */
+    .top-bar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background-color: var(--bg-header);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 10px 20px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.45);
+    }
+
+    .toolbar-left {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .secret-verify-btn {
+      background: transparent;
+      border: none;
+      color: #334155;
+      font-size: 14px;
+      cursor: pointer;
+      padding: 4px 6px;
+      border-radius: 4px;
+      transition: color 0.2s;
+      user-select: none;
+    }
+    .secret-verify-btn:hover {
+      color: #475569;
+    }
+
+    .timer-box {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: #1e293b;
+      border: 1px solid var(--border-subtle);
+      padding: 5px 10px;
+      border-radius: var(--radius-sm);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--accent-cyan);
+    }
+
+    .timer-input {
+      width: 52px;
+      background: #0f172a;
+      border: 1px solid #334155;
+      color: var(--text-primary);
+      border-radius: 4px;
+      padding: 2px 6px;
+      text-align: center;
+      font-size: 13px;
+    }
+
+    .btn {
+      border: none;
+      border-radius: var(--radius-sm);
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .btn:active {
+      transform: scale(0.98);
+    }
+    .btn-slate {
+      background: #334155;
+      color: #f8fafc;
+    }
+    .btn-slate:hover {
+      background: #475569;
+    }
+    .btn-status {
+      background: rgba(59, 130, 246, 0.16);
+      border: 1px solid rgba(59, 130, 246, 0.45);
+      color: var(--accent-blue-light);
+      cursor: default;
+    }
+    .btn-submit {
+      background: var(--accent-green);
+      color: #052e16;
+    }
+    .btn-submit:hover {
+      background: #34d399;
+    }
+    .btn-submit.submitted {
+      background: #1f2937;
+      color: #9ca3af;
+      border: 1px solid #374151;
+      cursor: default;
+    }
+    .btn-shuffle {
+      background: #1e293b;
+      color: #e2e8f0;
+      border: 1px solid #475569;
+    }
+    .btn-shuffle:hover {
+      background: #334155;
+    }
+
+    .exam-title-block {
+      text-align: right;
+      cursor: pointer;
+      user-select: none;
+    }
+    .exam-title-block h1 {
+      font-size: 17px;
+      font-weight: 700;
+      color: #f8fafc;
+      letter-spacing: 0.3px;
+    }
+    .exam-title-block p {
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    /* Main Split Layout */
+    .main-container {
+      display: flex;
+      height: calc(100vh - 64px);
+      overflow: hidden;
+    }
+
+    .left-pane, .right-pane {
+      width: 50%;
+      height: 100%;
+      overflow-y: auto;
+      padding: 18px 20px 60px;
+      scroll-behavior: smooth;
+    }
+
+    .left-pane {
+      border-right: 1px solid var(--border-subtle);
+      background-color: #0d1424;
+    }
+
+    .right-pane {
+      background-color: var(--bg-body);
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0b1120;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #28354d;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #3b4e70;
+    }
+
+    /* Cards & Panels */
+    .panel-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 16px 18px;
+      margin-bottom: 18px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+    }
+
+    .panel-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .panel-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--accent-blue-light);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .legend-tags {
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    /* Question Navigator Grid */
+    .nav-grid {
+      display: grid;
+      grid-template-columns: repeat(10, 1fr);
+      gap: 6px;
+    }
+
+    .nav-btn {
+      background: #1e293b;
+      border: 1px solid #334155;
+      color: #cbd5e1;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 6px 0;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.15s;
+      text-align: center;
+    }
+    .nav-btn:hover {
+      border-color: var(--accent-blue-light);
+      color: #fff;
+    }
+    .nav-btn.answered {
+      background: var(--accent-blue);
+      border-color: #60a5fa;
+      color: #ffffff;
+    }
+    .nav-btn.correct {
+      background: var(--accent-green);
+      border-color: #34d399;
+      color: #052e16;
+    }
+    .nav-btn.wrong {
+      background: var(--accent-red);
+      border-color: #f87171;
+      color: #ffffff;
+    }
+
+    /* Score & Weakness Diagnostic Panel */
+    #score-panel {
+      display: none;
+      border: 1px solid #3b82f6;
+      background: linear-gradient(180deg, #111c33 0%, #0f172a 100%);
+    }
+
+    .score-summary-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.15fr;
+      gap: 16px;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    .score-box {
+      background: #0b1221;
+      border: 1px solid #1e293b;
+      border-radius: var(--radius-md);
+      padding: 14px;
+      text-align: center;
+    }
+
+    .score-big {
+      font-size: 42px;
+      font-weight: 800;
+      color: var(--accent-cyan);
+      line-height: 1.15;
+      margin: 4px 0;
+    }
+
+    .score-sub {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-bottom: 12px;
+    }
+
+    .stat-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      padding: 4px 6px;
+      border-bottom: 1px dashed #1e293b;
+    }
+    .stat-row:last-child {
+      border-bottom: none;
+    }
+
+    .radar-wrap {
+      background: #0b1221;
+      border: 1px solid #1e293b;
+      border-radius: var(--radius-md);
+      padding: 10px;
+      height: 220px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .filter-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .btn-filter {
+      background: #1e293b;
+      color: #e2e8f0;
+      border: 1px solid #334155;
+    }
+    .btn-filter.active {
+      background: var(--accent-blue);
+      border-color: #60a5fa;
+      color: #fff;
+    }
+    .btn-copy-md {
+      background: #2563eb;
+      color: #fff;
+      margin-left: auto;
+    }
+    .btn-copy-md:hover {
+      background: #1d4ed8;
+    }
+
+    /* Reading Passages in Left Pane */
+    .passage-card {
+      background: #131c31;
+      border: 1px solid #263552;
+      border-radius: var(--radius-md);
+      padding: 15px 16px;
+      margin-bottom: 16px;
+      transition: box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+
+    @keyframes pulseBlueBorder {
+      0% {
+        box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.85);
+        border-color: #38bdf8;
+      }
+      50% {
+        box-shadow: 0 0 0 8px rgba(56, 189, 248, 0.15);
+        border-color: #7dd3fc;
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(56, 189, 248, 0);
+        border-color: #263552;
+      }
+    }
+
+    .passage-highlight {
+      animation: pulseBlueBorder 1.8s ease-out;
+    }
+
+    .passage-badge {
+      display: inline-block;
+      background: rgba(56, 189, 248, 0.15);
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      color: #7dd3fc;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 2px 9px;
+      border-radius: 4px;
+      margin-bottom: 8px;
+    }
+
+    .passage-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #f8fafc;
+      margin-bottom: 10px;
+    }
+
+    .passage-content {
+      font-size: 14.5px;
+      color: #cbd5e1;
+      line-height: 1.78;
+    }
+    .passage-content p {
+      margin-bottom: 10px;
+    }
+    .passage-content p:last-child {
+      margin-bottom: 0;
+    }
+
+    .vocab-box {
+      margin-top: 12px;
+      padding: 9px 12px;
+      background: #0f172a;
+      border-left: 3px solid var(--accent-cyan);
+      border-radius: 4px;
+      font-size: 13px;
+      color: #94a3b8;
+    }
+
+    /* Right Pane Question Cards */
+    .section-banner {
+      background: linear-gradient(90deg, #172554 0%, #1e293b 100%);
+      border-left: 4px solid var(--accent-blue-light);
+      padding: 12px 16px;
+      border-radius: var(--radius-md);
+      margin-bottom: 16px;
+    }
+    .section-banner h2 {
+      font-size: 16px;
+      color: #93c5fd;
+      margin-bottom: 2px;
+    }
+    .section-banner p {
+      font-size: 12.5px;
+      color: #cbd5e1;
+    }
+
+    .question-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 16px 18px;
+      margin-bottom: 16px;
+      transition: border-color 0.2s;
+    }
+    .question-card.card-correct {
+      border-color: rgba(16, 185, 129, 0.55);
+    }
+    .question-card.card-wrong {
+      border-color: rgba(239, 68, 68, 0.65);
+    }
+
+    .q-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      gap: 8px;
+    }
+
+    .q-num-badge {
+      background: #1e293b;
+      border: 1px solid #334155;
+      color: var(--accent-blue-light);
+      font-size: 13px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .q-num-badge:hover {
+      background: #2563eb;
+      color: #fff;
+      border-color: #60a5fa;
+    }
+
+    .q-category-tag {
+      font-size: 12px;
+      color: var(--text-secondary);
+      background: #1e293b;
+      padding: 3px 9px;
+      border-radius: 4px;
+      border: 1px solid #2d3b52;
+    }
+
+    .q-stem {
+      font-size: 15.5px;
+      font-weight: 500;
+      color: #f8fafc;
+      margin-bottom: 14px;
+      line-height: 1.65;
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .option-item {
+      background: var(--bg-option);
+      border: 1px solid #2b3a54;
+      border-radius: var(--radius-md);
+      padding: 10px 13px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-size: 14.5px;
+      color: #e2e8f0;
+      transition: all 0.15s ease;
+      user-select: none;
+    }
+    .option-item:hover:not(.locked) {
+      background: var(--bg-option-hover);
+      border-color: #4b6591;
+    }
+    .option-item.selected {
+      background: rgba(59, 130, 246, 0.2);
+      border-color: var(--accent-blue-light);
+      color: #ffffff;
+      font-weight: 600;
+    }
+    .option-item.opt-correct {
+      background: var(--accent-green-bg) !important;
+      border-color: var(--accent-green) !important;
+      color: #6ee7b7 !important;
+      font-weight: 700;
+    }
+    .option-item.opt-wrong {
+      background: var(--accent-red-bg) !important;
+      border-color: var(--accent-red) !important;
+      color: #fca5a5 !important;
+      text-decoration: line-through;
+    }
+
+    .radio-dot {
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      border: 2px solid #64748b;
+      flex-shrink: 0;
+      display: inline-block;
+      position: relative;
+    }
+    .option-item.selected .radio-dot {
+      border-color: var(--accent-blue-light);
+      background: var(--accent-blue-light);
+    }
+    .option-item.opt-correct .radio-dot {
+      border-color: var(--accent-green);
+      background: var(--accent-green);
+    }
+    .option-item.opt-wrong .radio-dot {
+      border-color: var(--accent-red);
+      background: var(--accent-red);
+    }
+
+    /* Explanation Box */
+    .explanation-box {
+      display: none;
+      margin-top: 14px;
+      padding: 14px 16px;
+      background: #0d1526;
+      border: 1px solid #263654;
+      border-radius: var(--radius-md);
+      font-size: 13.5px;
+      color: #cbd5e1;
+      line-height: 1.72;
+    }
+    .exp-header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #1e293b;
+    }
+    .exp-ans-pill {
+      background: var(--accent-green);
+      color: #052e16;
+      font-weight: 700;
+      padding: 2px 10px;
+      border-radius: 4px;
+      font-size: 13px;
+    }
+    .exp-cat-pill {
+      color: var(--accent-blue-light);
+      font-size: 12.5px;
+    }
+    .exp-row {
+      margin-bottom: 7px;
+    }
+    .exp-label {
+      font-weight: 700;
+      color: #f1f5f9;
+    }
+    .exp-distractors {
+      margin-top: 6px;
+      padding-left: 14px;
+    }
+    .exp-distractors li {
+      margin-bottom: 4px;
+    }
+    .kk-box {
+      margin-top: 8px;
+      padding: 7px 10px;
+      background: #131e36;
+      border-radius: 5px;
+      font-family: "Lucida Sans Unicode", "Arial Unicode MS", sans-serif;
+      color: #bae6fd;
+      font-size: 13px;
+    }
+
+    /* Modals (Parent History & Answer Key Verification) */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(2, 6, 23, 0.82);
+      z-index: 999;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .modal-box {
+      background: #0f172a;
+      border: 1px solid #334155;
+      border-radius: var(--radius-lg);
+      max-width: 860px;
+      width: 100%;
+      max-height: 85vh;
+      overflow-y: auto;
+      padding: 20px 24px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+    }
+    .modal-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #1e293b;
+    }
+    .modal-close {
+      background: #334155;
+      color: #fff;
+      border: none;
+      padding: 4px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    table.data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      margin-top: 10px;
+    }
+    table.data-table th, table.data-table td {
+      border: 1px solid #263349;
+      padding: 8px 10px;
+      text-align: left;
+    }
+    table.data-table th {
+      background: #1e293b;
+      color: #93c5fd;
+    }
+
+    /* Responsive Mobile Layout */
+    @media (max-width: 960px) {
+      .main-container {
+        flex-direction: column;
+        height: auto;
+        overflow: visible;
+      }
+      .left-pane, .right-pane {
+        width: 100%;
+        height: auto;
+        overflow: visible;
+        border-right: none;
+      }
+      .options-grid {
+        grid-template-columns: 1fr;
+      }
+      .score-summary-grid {
+        grid-template-columns: 1fr;
+      }
+      .exam-title-block {
+        text-align: left;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Control Bar -->
+  <header class="top-bar">
+    <div class="toolbar-left">
+      <button id="secret-verify-trigger" class="secret-verify-btn" title="題庫檢核">❖</button>
+      <div class="timer-box">
+        <span>⏱ 倒數：</span>
+        <span id="timer-display">50:00</span>
+        <input type="number" id="timer-minutes" class="timer-input" min="0" max="240" value="50" />
+        <span>分</span>
+        <button id="btn-set-timer" class="btn btn-slate">設定</button>
+        <button id="btn-pause-timer" class="btn btn-slate">暫停</button>
+      </div>
+      <div id="answered-counter" class="btn btn-status">已作答：0 / 15</div>
+      <button id="btn-submit-exam" class="btn btn-submit">提交試卷</button>
+      <button id="btn-shuffle-exam" class="btn btn-shuffle">重新測驗 (洗牌)</button>
+    </div>
+    <div id="exam-title-trigger" class="exam-title-block">
+      <h1>國中九年級英語科全真模擬測驗（會考題型實戰）</h1>
+      <p>測驗範圍：P.54–56 會考對話、德國押金回收制度與 AI 影視衝擊</p>
+    </div>
+  </header>
+
+  <!-- Dual-Column Main Container -->
+  <main class="main-container">
+    <!-- Left Column: Score Panel, Navigator & Reading Passages -->
+    <section class="left-pane" id="left-pane">
+
+      <!-- Post-Submission Score & Weakness Report -->
+      <div class="panel-card" id="score-panel">
+        <div class="panel-header">
+          <div class="panel-title">📊 測驗成績與弱點診斷分析報告</div>
+        </div>
+        <div class="score-summary-grid">
+          <div class="score-box">
+            <div style="font-size: 13px; color: #94a3b8;">總得分（滿分 100 分）</div>
+            <div class="score-big" id="final-score">0</div>
+            <div class="score-sub" id="score-detail-text">答對 0 / 15 題（答錯 0 題）</div>
+            <div id="dimension-stats-list"></div>
+          </div>
+          <div class="radar-wrap">
+            <canvas id="weaknessRadarChart"></canvas>
+          </div>
+        </div>
+        <div class="filter-actions">
+          <button id="btn-filter-all" class="btn btn-filter active">顯示全部題目</button>
+          <button id="btn-filter-wrong" class="btn btn-filter">只看錯題 (0)</button>
+          <button id="btn-copy-markdown" class="btn btn-copy-md">📋 一鍵複製錯題筆記 (Markdown)</button>
+        </div>
+      </div>
+
+      <!-- Question Navigator -->
+      <div class="panel-card">
+        <div class="panel-header">
+          <div class="panel-title">🧭 題號快速導覽（點擊跳轉至該題）</div>
+          <div class="legend-tags">藍：已答 ｜ 綠：答對 ｜ 紅：答錯</div>
+        </div>
+        <div class="nav-grid" id="nav-grid"></div>
+      </div>
+
+      <!-- Reading Passages & Reference Texts (Pages 54-56) -->
+      <div class="panel-card">
+        <div class="panel-header">
+          <div class="panel-title">📖 課文精讀與會考題組文本區（P.54–56 範圍對照）</div>
+        </div>
+        <p style="font-size: 12.5px; color: #94a3b8; margin-bottom: 14px;">
+          作答時可點擊右側任一題號徽章，左側將自動捲動並高亮對應的原始文本卡片。
+        </p>
+
+        <!-- Passage 1: Page 54 Dialogue -->
+        <article class="passage-card" id="passage-p54-dialogue">
+          <span class="passage-badge">文本一（P.54 會考體裁：對話）｜ 對應第 1～5、31～32 題</span>
+          <h3 class="passage-title">After School: Staying Up Late for a Science Report</h3>
+          <div class="passage-content">
+            <p><strong>Jason:</strong> Hey, Linda. You look tired today. Are you OK?</p>
+            <p><strong>Linda:</strong> No. I stayed up last night. I worked on my science report until 2 a.m. I can't even keep my eyes open now. I feel so sleepy.</p>
+            <p><strong>Jason:</strong> Well, I can tell that. You should <u>hit the sack</u> earlier tonight.</p>
+            <p><strong>Linda:</strong> I would like to, but the deadline is coming soon. I didn't think it would take so long to find the information I need.</p>
+            <p><strong>Jason:</strong> I know how that feels. But getting enough sleep is sometimes more important. If you don't sleep early, you'll feel tired and might make mistakes the next day.</p>
+            <p><strong>Linda:</strong> I agree. I almost fell asleep in each class today. I kept telling myself, "I need to sleep earlier and not stay up late again."</p>
+            <p><strong>Jason:</strong> That's right! Don't forget what you said. Go home and sleep before 10:00.</p>
+            <p><strong>Linda:</strong> Alright, I'll try my best. Maybe I'll just do a little more reading and then go to bed.</p>
+            <p><strong>Jason:</strong> Good idea! Hope you feel better. See you tomorrow!</p>
+            <p><strong>Linda:</strong> See you!</p>
+          </div>
+          <div class="vocab-box">
+            <strong>核心字彙片語：</strong> sleepy (adj.) 想睡覺的 ｜ tell (v.) 分辨；判斷 ｜ deadline (n.) 期限 ｜ information (n.) 資訊 ｜ hit the sack 上床睡覺
+          </div>
+        </article>
+
+        <!-- Passage 2: Page 55 Germany's Deposit Revolution -->
+        <article class="passage-card" id="passage-p55-deposit">
+          <span class="passage-badge">文本二（P.55 閱讀素養）｜ 對應第 6～10、33～35 題</span>
+          <h3 class="passage-title">Germany's Deposit Revolution</h3>
+          <div class="passage-content">
+            <p>What do you do with <u>empty</u> bottles? Do you throw them away? No. You can get some money back right now if you recycle them in Germany.</p>
+            <p>Germany has the deposit system. The deposit system, in simple terms, is when a customer pays a small fee to the store when they buy something in recyclable packaging. Then after the customer uses the product, the packaging is returned to the store or a recycling center, and the deposit is returned when the packaging is returned to the recycling center.</p>
+            <p>So, after you drink up bottled water, you can take the bottle back to the supermarket and get your deposit back by putting it in a bottle recycling machine. The bottle recycling machine will give you a receipt. You can get your money back or buy something else in the supermarket with the receipt.</p>
+            <p>With the deposit system, more and more people are willing to recycle empty bottles. Isn't the idea smart and easy for people to recycle plastic bottles?</p>
+          </div>
+          <div class="vocab-box">
+            <strong>核心字彙片語：</strong> deposit (n.) 押金 ｜ revolution (n.) 創舉；革新 ｜ recycle (v.) 回收 ｜ system (n.) 系統 ｜ term (n.) 詞彙 ｜ customer (n.) 消費者 ｜ fee (n.) 費用 ｜ receipt (n.) 收據 ｜ plastic (adj./n.) 塑膠 ｜ empty (adj.) 空的
+          </div>
+        </article>
+
+        <!-- Passage 3: Page 56 Is AI Good or Bad? -->
+        <article class="passage-card" id="passage-p56-ai">
+          <span class="passage-badge">文本三（P.56 跨域時事）｜ 對應第 11～15、36～38 題</span>
+          <h3 class="passage-title">Is AI Good or Bad?</h3>
+          <div class="passage-content">
+            <p>Artificial intelligence, or AI, is causing some problems in Hollywood. It's not just about money, but also about making movies and TV shows. AI can create things without people. This has even led to actors and writers going on strike.</p>
+            <p>Some actors are really worried and angry. They are afraid of losing control over their looks in movies. New actors are also scared because AI might take away their jobs. Also, the actors accused film companies of wanting to use actors' pictures without asking or telling them. Writers are afraid AI might take their story credit. They think AI should just be a useful tool at most.</p>
+            <p>AI is already in many parts of making movies, like making old actors look young again. Hollywood actors and writers understand <u>that</u>, but they want people to think about the ways of using AI, such as "How should people use it?" or "Who should control it?" In Hollywood, it is already difficult for writers and actors to get credit. Adding AI makes it even harder. Both sides are trying to find a way to use AI without losing their rights and credit.</p>
+          </div>
+          <div class="vocab-box">
+            <strong>核心字彙片語：</strong> Artificial intelligence (n.) 人工智慧 ｜ create (v.) 創作 ｜ go on strike 罷工 ｜ control (n./v.) 控制 ｜ accuse ... of 指控 ｜ credit (n.) 功勞；署名權 ｜ existing (adj.) 現存的
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Right Column: Question Cards & Interactive Options -->
+    <section class="right-pane" id="right-pane">
+      <div class="section-banner">
+        <h2>一、核心詞彙與片語運用（第 1～15 題）</h2>
+        <p>依據 P.54–56 課文與會考核心字彙命製，請選出最符合句意與語法結構的正確答案</p>
+      </div>
+      <div id="questions-container"></div>
+    </section>
+  </main>
+
+  <!-- Parent History Modal (5 clicks on title or Ctrl+Shift+P, password: 1234) -->
+  <div class="modal-overlay" id="parent-modal">
+    <div class="modal-box">
+      <div class="modal-top">
+        <h3>👨‍👩‍👧 家長監控中心：歷次測驗歷史紀錄表</h3>
+        <button class="modal-close" onclick="closeModal('parent-modal')">關閉</button>
+      </div>
+      <p style="font-size: 13px; color: #94a3b8; margin-bottom: 10px;">
+        系統自動記錄每次交卷時間、作答耗時、總得分、各維度正確率與錯題清單，協助追蹤學習狀況。
+      </p>
+      <div id="parent-history-content"></div>
+      <div style="margin-top: 14px; text-align: right;">
+        <button class="btn btn-slate" onclick="clearExamHistory()">清除歷史紀錄</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Verification Answer Key Modal (5 clicks on top-left ❖) -->
+  <div class="modal-overlay" id="verify-modal">
+    <div class="modal-box">
+      <div class="modal-top">
+        <h3>❖ 題庫視覺化檢核：答案分布與題目總表</h3>
+        <button class="modal-close" onclick="closeModal('verify-modal')">關閉</button>
+      </div>
+      <div id="verify-distribution" style="margin-bottom: 12px; font-size: 13.5px; color: #38bdf8;"></div>
+      <div id="verify-table-content"></div>
+    </div>
+  </div>
+
+  <script>
+    // =========================================================================
+    // 結構化試題資料庫（目前收錄第 1～15 題，依 P.54–56 自修內容精準命製）
+    // =========================================================================
+    const questionBank = [
+      {
+        id: 1,
+        section: "核心詞彙與片語",
+        dimension: "字彙",
+        categoryTag: "字彙｜語意辨析 (P.54)",
+        passageId: "passage-p54-dialogue",
+        stem: "Linda stayed up until 2 a.m. working on her science report, so she feels very ______ and can hardly keep her eyes open in class today.",
+        options: [
+          "sleepy",
+          "empty",
+          "existing",
+          "plastic"
+        ],
+        answerIndex: 0,
+        translation: "琳達昨晚熬夜寫自然科學報告直到凌晨兩點，所以她今天上課感到非常想睡覺，幾乎睜不開眼睛。",
+        corePoint: "本題測驗 P.54 對話中的核心形容詞 sleepy（想睡覺的；困倦的）。由前句 stayed up until 2 a.m.（熬夜到凌晨兩點）及後句 can hardly keep her eyes open（幾乎睜不開眼）可知，語意應為「想睡覺的」，故選 (A)。",
+        grammar: "S (she) + V (feels，連綴動詞) + adv. (very) + adj. (sleepy，主詞補語)。連綴動詞 feel 後方需接形容詞作補語。",
+        distractors: [
+          "(B) empty：意為「空的」，出自 P.55（empty bottles 空瓶），修飾容器或空間，不可用來形容人想睡覺。",
+          "(C) existing：意為「現存的；目前的」，出自 P.56 題目補充字彙（existing examples 現存的例子），與熬夜狀態無關。",
+          "(D) plastic：意為「塑膠的」，出自 P.55（plastic bottles 塑膠瓶），屬材質形容詞，語意不符。"
+        ],
+        kk: "ˈlɪndə sted ʌp ənˈtɪl tu eɪ ɛm ˈwɝkɪŋ ɑn hɝ ˈsaɪəns rɪˈpɔrt, so ʃi filz ˈvɛri ˈslipi ænd kæn ˈhɑrdli kip hɝ aɪz ˈopən ɪn klæs təˈde. ｜ 答案：sleepy /ˈslipi/；連讀提示：stayed up /sted‿ʌp/、eyes open /aɪz‿ˈopən/。"
+      },
+      {
+        id: 2,
+        section: "核心詞彙與片語",
+        dimension: "字彙",
+        categoryTag: "字彙｜一字多義 (P.54)",
+        passageId: "passage-p54-dialogue",
+        stem: "Even without looking at the clock, Jason could ______ from Linda's tired face that she did not get enough sleep last night.",
+        options: [
+          "accuse",
+          "create",
+          "tell",
+          "recycle"
+        ],
+        answerIndex: 2,
+        translation: "即使沒有看時鐘，傑森也能從琳達疲憊的臉色判斷出她昨晚沒有睡飽。",
+        corePoint: "本題測驗 P.54 單字表重點動詞 tell 的進階語意「分辨；判斷；看出」（原對話：Well, I can tell that.）。句中 from Linda's tired face 提示「透過觀察跡象來判斷」，故選 (C)。",
+        grammar: "S (Jason) + aux. (could) + V (tell) + 介系詞片語 (from...) + that 名詞子句（受詞）。",
+        distractors: [
+          "(A) accuse：意為「指控；控告」，出自 P.56（accuse ... of ...），通常接人作受詞並搭配介系詞 of，語意與結構皆不符。",
+          "(B) create：意為「創造；創作」，出自 P.56（AI can create things without people），無法接 that 子句表示「看出某事」。",
+          "(D) recycle：意為「回收再利用」，出自 P.55（recycle empty bottles），與觀察臉色無關。"
+        ],
+        kk: "ˈivən wɪˈðaʊt ˈlʊkɪŋ æt ðə klɑk, ˈdʒesən kʊd tɛl frʌm ˈlɪndəz taɪrd fes ðæt ʃi dɪd nɑt gɛt əˈnʌf slip læst naɪt. ｜ 答案：tell /tɛl/；連讀提示：looking at /ˈlʊkɪŋ‿æt/、get enough /gɛt‿əˈnʌf/。"
+      },
+      {
+        id: 3,
+        section: "核心詞彙與片語",
+        dimension: "字彙",
+        categoryTag: "字彙｜名詞語意 (P.54)",
+        passageId: "passage-p54-dialogue",
+        stem: "We have to hand in our group project by Friday afternoon because the ______ is coming very soon.",
+        options: [
+          "receipt",
+          "deadline",
+          "credit",
+          "revolution"
+        ],
+        answerIndex: 1,
+        translation: "我們必須在星期五下午前繳交小組專題報告，因為截止期限很快就要到了。",
+        corePoint: "本題測驗 P.54 對話與單字表核心名詞 deadline（截止期限；最後期限）。由前半句 hand in our group project by Friday afternoon（週五下午前繳交）可知，時間限制為「截止期限」，故選 (B)。",
+        grammar: "because 引導原因副詞子句：the + N (deadline) + beV (is) + V-ing (coming，現在進行式表近期即將發生的未來)。",
+        distractors: [
+          "(A) receipt：意為「收據」，出自 P.55（give you a receipt），與繳交報告的時間限制無關。",
+          "(C) credit：意為「功勞；署名權」，出自 P.56（get credit），無法搭配 is coming soon 表示時間逼近。",
+          "(D) revolution：意為「革新；創舉」，出自 P.55（Germany's Deposit Revolution），與作業繳交語境不合。"
+        ],
+        kk: "wi hæv tə hænd ɪn aʊr grup ˈprɑdʒɛkt baɪ ˈfraɪde ˌæftɚˈnun bɪˈkɔz ðə ˈdɛdˌlaɪn ɪz ˈkʌmɪŋ ˈvɛri sun. ｜ 答案：deadline /ˈdɛdˌlaɪn/；連讀提示：hand in /hænd‿ɪn/。"
+      },
+      {
+        id: 4,
+        section: "核心詞彙與片語",
+        dimension: "字彙",
+        categoryTag: "字彙｜不可數名詞 (P.54)",
+        passageId: "passage-p54-dialogue",
+        stem: "Linda spent hours searching online because she needed a lot of ______ to finish her science report.",
+        options: [
+          "customers",
+          "mistakes",
+          "information",
+          "packagings"
+        ],
+        answerIndex: 2,
+        translation: "琳達花了好幾個小時上網搜尋，因為她需要大量的資訊來完成她的自然科學報告。",
+        corePoint: "本題測驗 P.54 核心單字 information（資訊；資料），且該字在英文中為「不可數名詞」，不可加 -s。前有 a lot of 修飾，可接不可數名詞 information，語意完全符合 P.54 對話（find the information I need），故選 (C)。",
+        grammar: "S (she) + V (needed) + 數量詞片語 (a lot of) + 不可數名詞 (information) + 不定詞片語 (to finish...) 表目的。",
+        distractors: [
+          "(A) customers：意為「顧客；消費者」，出自 P.55，寫科學報告不需要上網搜尋「顧客」。",
+          "(B) mistakes：意為「錯誤」，出自 P.54（make mistakes），語意與「完成報告所需素材」相反。",
+          "(D) packagings：packaging（包裝材料）出自 P.55，為不可數名詞，加 -s 屬文法錯誤，且語意不合。"
+        ],
+        kk: "ˈlɪndə spɛnt aʊrz ˈsɝtʃɪŋ ˈɑnˌlaɪn bɪˈkɔz ʃi ˈnidɪd ə lɑt əv ˌɪnfɚˈmeʃən tə ˈfɪnɪʃ hɝ ˈsaɪəns rɪˈpɔrt. ｜ 答案：information /ˌɪnfɚˈmeʃən/；連讀提示：spent hours /spɛnt‿aʊrz/、a lot of /ə lɑt‿əv/。"
+      },
+      {
+        id: 5,
+        section: "核心詞彙與片語",
+        dimension: "語意邏輯",
+        categoryTag: "慣用語｜上下文推論 (P.54)",
+        passageId: "passage-p54-dialogue",
+        stem: "After studying for the big exam all day, Kevin was completely worn out and decided to ______ before 10:00 p.m.",
+        options: [
+          "go on strike",
+          "hit the sack",
+          "take away",
+          "throw away"
+        ],
+        answerIndex: 1,
+        translation: "為了大考讀了一整天的書之後，凱文筋疲力盡，決定在晚上十點前上床睡覺。",
+        corePoint: "本題測驗 P.54 對話中的核心美式慣用語 hit the sack（上床睡覺，同義於 go to bed）。由 was completely worn out（筋疲力盡）及 before 10:00 p.m. 可推知為「上床睡覺」，故選 (B)。",
+        grammar: "S (Kevin) + V1 (was...) + and + V2 (decided) + to V (hit the sack) + 介系詞片語 (before 10:00 p.m.)。",
+        distractors: [
+          "(A) go on strike：意為「罷工」，出自 P.56（actors and writers going on strike），學生讀書累了不會「罷工」。",
+          "(C) take away：意為「拿走；奪走」，出自 P.56（AI might take away their jobs），為及物片語，後方缺受詞且語意不合。",
+          "(D) throw away：意為「丟棄」，出自 P.55（throw them away），後方缺受詞且不符合睡眠語境。"
+        ],
+        kk: "ˈæftɚ ˈstʌdiɪŋ fɔr ðə bɪg ɪgˈzæm ɔl de, ˈkɛvɪn wɑz kəmˈplitli wɔrn aʊt ænd dɪˈsaɪdɪd tə hɪt ðə sæk bɪˈfɔr tɛn pi ɛm. ｜ 答案：hit the sack /hɪt ðə sæk/；連讀提示：worn out /wɔrn‿aʊt/。"
+      },
+      {
+        id: 6,
+        section: "核心詞彙與片語",
+        dimension: "字彙",
+        categoryTag: "字彙｜環保制度核心詞 (P.55)",
+        passageId: "passage-p55-deposit",
+        stem: "In Germany, when you buy a bottle of water, you pay a small ______ first, and you can get that money back after returning the bottle.",
+        options: [
+          "deposit",
+          "screen",
+          "report",
+          "tool"
+        ],
+        answerIndex: 0,
+        translation: "在德國，當你買一瓶水時，你會先支付一筆小額押金，而在歸還瓶子之後就可以把那筆錢拿回來。",
+        corePoint: "本題測驗 P.55 閱讀素養的核心主題字 deposit（押金；保證金）。文中明確定義：買飲料時先付小額費用，歸還空瓶時可退回該筆金額，此即「押金」，故選 (A)。",
+        grammar: "when 引導時間副詞子句：S (you) + V (pay) + O (a small deposit) + adv. (first)。",
+        distractors: [
+          "(B) screen：意為「螢幕」，與買水先付錢、還瓶退錢的機制無關。",
+          "(C) report：意為「報告」，出自 P.54（science report），語意完全不符。",
+          "(D) tool：意為「工具」，出自 P.56（a useful tool），無法搭配 pay a small... 表示金錢。"
+        ],
+        kk: "ɪn ˈdʒɝməni, hwɛn ju baɪ ə ˈbɑtəl əv ˈwɔtɚ, ju pe ə smɔl dɪˈpɑzɪt fɝst, ænd ju kæn gɛt ðæt ˈmʌni bæk ˈæftɚ rɪˈtɝnɪŋ ðə ˈbɑtəl. ｜ 答案：deposit /dɪˈpɑzɪt/；連讀提示：bottle of /ˈbɑtəl‿əv/。"
+      },
+      {
+        id: 7,
+        section: "核心詞彙與片語",
+        dimension: "字彙",
+        categoryTag: "字彙｜動詞語意 (P.55)",
+        passageId: "passage-p55-deposit",
+        stem: "To protect our earth, we should ______ plastic bottles and paper instead of throwing them into the trash can.",
+        options: [
+          "control",
+          "recycle",
+          "accuse",
+          "create"
+        ],
+        answerIndex: 1,
+        translation: "為了保護我們的地球，我們應該回收塑膠瓶和紙張，而不是把它們丟進垃圾桶。",
+        corePoint: "本題測驗 P.55 核心動詞 recycle（回收再利用）。由 To protect our earth（保護地球）與 instead of throwing them into the trash can（而不是丟進垃圾桶）的對比，可知應選「回收」，故選 (B)。",
+        grammar: "不定詞片語表目的 (To protect...) + S (we) + aux. (should) + V (recycle) + O (plastic bottles and paper)。",
+        distractors: [
+          "(A) control：意為「控制」，出自 P.56（losing control over），與資源分類環保行動不符。",
+          "(C) accuse：意為「指控」，出自 P.56（accused film companies），受詞為人或機構，不可接塑膠瓶。",
+          "(D) create：意為「製造；創作」，出自 P.56，製造更多塑膠瓶並不能保護地球。"
+        ],
+        kk: "tə prəˈtɛkt aʊr ɝθ, wi ʃʊd riˈsaɪkəl ˈplæstɪk ˈbɑtəlz ænd ˈpepɚ ɪnˈstɛd əv ˈθroɪŋ ðɛm ˈɪntə ðə træʃ kæn. ｜ 答案：recycle /riˈsaɪkəl/；連讀提示：protect our /prəˈtɛkt‿aʊr/、instead of /ɪnˈstɛd‿əv/。"
+      },
+      {
+        id: 8,
+        section: "核心詞彙與片語",
+        dimension: "字彙",
+        categoryTag: "字彙｜生活消費用語 (P.55)",
+        passageId: "passage-p55-deposit",
+        stem: "Please keep your ______ after paying at the supermarket. You will need it if you want to return the item or get your money back.",
+        options: [
+          "deadline",
+          "information",
+          "receipt",
+          "system"
+        ],
+        answerIndex: 2,
+        translation: "在超市結帳後請保留您的收據。如果您想退貨或領回退款，將會需要用到它。",
+        corePoint: "本題測驗 P.55 單字表核心名詞 receipt（收據；發票，注意字母 p 不發音 /rɪˈsit/）。P.55 課文提到機器會給一張 receipt，憑此可退錢或在超市折抵消費，故選 (C)。",
+        grammar: "祈使句：Please + 原形動詞 (keep) + O (your receipt) + 介系詞片語 (after paying...)。",
+        distractors: [
+          "(A) deadline：意為「截止期限」，出自 P.54，結帳後不會拿到「截止期限」。",
+          "(B) information：意為「資訊」，不可數名詞，前方不可加 your 來指稱單張憑證。",
+          "(D) system：意為「系統；制度」，出自 P.55（deposit system），無法作為退貨憑證攜帶。"
+        ],
+        kk: "pliz kip jʊr rɪˈsit ˈæftɚ ˈpeɪŋ æt ðə ˈsupɚˌmɑrkɪt. ju wɪl nid ɪt ɪf ju wɑnt tə rɪˈtɝn ði ˈaɪtəm ɔr gɛt jʊr ˈmʌni bæk. ｜ 答案：receipt /rɪˈsit/；連讀提示：paying at /ˈpeɪŋ‿æt/、need it if /nid‿ɪt‿ɪf/。"
+      },
+      {
+        id: 9,
+        section: "核心詞彙與片語",
+        dimension: "字彙",
+        categoryTag: "字彙｜情境語意推理 (P.55)",
+        passageId: "passage-p55-deposit",
+        stem: "The juice bottle is completely ______ now. You can put it into the bottle recycling machine outside the store.",
+        options: [
+          "sleepy",
+          "empty",
+          "useful",
+          "scared"
+        ],
+        answerIndex: 1,
+        translation: "這瓶果汁現在已經完全空了。你可以把它放進商店外面的瓶罐回收機裡。",
+        corePoint: "本題測驗 P.55 第 34 題會考猜測字義考點 empty（空的；內部沒有東西的）。唯有飲料喝完、瓶子「空了」，才能放進回收機，故選 (B)。",
+        grammar: "S (The juice bottle) + beV (is) + adv. (completely) + adj. (empty) + adv. (now)。",
+        distractors: [
+          "(A) sleepy：意為「想睡覺的」，出自 P.54，用來形容人而非果汁瓶。",
+          "(C) useful：意為「有用的」，出自 P.56（a useful tool），語意與放入回收機的前提無關。",
+          "(D) scared：意為「害怕的」，出自 P.56（New actors are also scared），形容人的情緒。"
+        ],
+        kk: "ðə dʒus ˈbɑtəl ɪz kəmˈplitli ˈɛmpti naʊ. ju kæn pʊt ɪt ˈɪntə ðə ˈbɑtəl riˈsaɪkəlɪŋ məˈʃin ˈaʊtˌsaɪd ðə stɔr. ｜ 答案：empty /ˈɛmpti/；連讀提示：bottle is /ˈbɑtəl‿ɪz/、put it into /pʊt‿ɪt‿ˈɪntə/。"
+      },
+      {
+        id: 10,
+        section: "核心詞彙與片語",
+        dimension: "字彙",
+        categoryTag: "字彙｜商業與制度名詞 (P.55)",
+        passageId: "passage-p55-deposit",
+        stem: "Every ______ who buys a drink in recyclable packaging at this store pays a small fee for the bottle.",
+        options: [
+          "writer",
+          "actor",
+          "customer",
+          "company"
+        ],
+        answerIndex: 2,
+        translation: "每一位在這家商店購買可回收包裝飲料的消費者，都要為瓶子支付一筆小額費用。",
+        corePoint: "本題測驗 P.55 核心名詞 customer（顧客；消費者）。由關係子句 who buys a drink ... at this store（在這家店買飲料的人）可知，主詞為「顧客」，故選 (C)。",
+        grammar: "Every + 單數可數名詞 (customer) + 關係子句 (who buys...) + 單數動詞 (pays)。",
+        distractors: [
+          "(A) writer：意為「編劇；作家」，出自 P.56，與商店購買飲料的普遍身分不符。",
+          "(B) actor：意為「演員」，出自 P.56，限定特定職業，不符合制度適用對象。",
+          "(D) company：意為「公司」，出自 P.56（film companies），關係代名詞應用 which 而非 who，且語意不合。"
+        ],
+        kk: "ˈɛvri ˈkʌstəmɚ hu baɪz ə drɪŋk ɪn riˈsaɪkələbəl ˈpækɪdʒɪŋ æt ðɪs stɔr pez ə smɔl fi fɔr ðə ˈbɑtəl. ｜ 答案：customer /ˈkʌstəmɚ/；連讀提示：buys a /baɪz‿ə/、drink in /drɪŋk‿ɪn/。"
+      },
+      {
+        id: 11,
+        section: "核心詞彙與片語",
+        dimension: "字彙",
+        categoryTag: "字彙｜固定搭配片語 (P.56)",
+        passageId: "passage-p56-ai",
+        stem: "Many Hollywood actors and writers decided to ______ because they were angry about how film companies used AI.",
+        options: [
+          "drink up",
+          "fall asleep",
+          "go on strike",
+          "try their best"
+        ],
+        answerIndex: 2,
+        translation: "許多好萊塢演員和編劇決定罷工，因為他們對電影公司使用人工智慧的方式感到憤怒。",
+        corePoint: "本題測驗 P.56 單字表與課文核心片語 go on strike（罷工）。由因為對電影公司感到憤怒而採取的抗議行動，可知為「罷工」，故選 (C)。",
+        grammar: "S (Many Hollywood actors and writers) + V (decided) + 不定詞片語 (to go on strike) + because 副詞子句。",
+        distractors: [
+          "(A) drink up：意為「喝光」，出自 P.55（after you drink up bottled water），與勞資抗議無關。",
+          "(B) fall asleep：意為「睡著」，出自 P.54（almost fell asleep in each class），與憤怒抗議語境相反。",
+          "(D) try their best：意為「盡全力」，出自 P.54（I'll try my best），無法表達抗議停工之意。"
+        ],
+        kk: "ˈmɛni ˈhɑliˌwʊd ˈæktɚz ænd ˈraɪtɚz dɪˈsaɪdɪd tə go ɑn straɪk bɪˈkɔz ðe wɝ ˈæŋgri əˈbaʊt haʊ fɪlm ˈkʌmpəniz juzd eɪ aɪ. ｜ 答案：go on strike /go ɑn straɪk/；連讀提示：angry about /ˈæŋgri‿əˈbaʊt/。"
+      },
+      {
+        id: 12,
+        section: "核心詞彙與片語",
+        dimension: "字彙",
+        categoryTag: "字彙｜動詞介系詞搭配 (P.56)",
+        passageId: "passage-p56-ai",
+        stem: "The actors ______ the film company of using their faces and voices in new movies without asking them first.",
+        options: [
+          "returned",
+          "accused",
+          "agreed",
+          "spent"
+        ],
+        answerIndex: 1,
+        translation: "這些演員指控該電影公司未經事先詢問，就在新電影中使用他們的臉孔與聲音。",
+        corePoint: "本題測驗 P.56 核心動詞搭配 accuse A of B（指控 A 做了 B 事）。題幹後方出現介系詞 of 與動名詞 using，且語意為未經同意使用肖像的「指控」，故選 (B)。",
+        grammar: "S (The actors) + V (accused) + O (the film company) + of + V-ing (using...)。",
+        distractors: [
+          "(A) returned：意為「歸還；返回」，出自 P.55，不與 of + V-ing 連用表指控。",
+          "(C) agreed：意為「同意」，出自 P.54（I agree），通常接 with 人或 to 事，且與 without asking 語意衝突。",
+          "(D) spent：意為「花費」，出自 P.54，句型為 spend 時間/金錢 (in) V-ing，不接人作受詞。"
+        ],
+        kk: "ði ˈæktɚz əˈkjuzd ðə fɪlm ˈkʌmpəni əv ˈjuzɪŋ ðɛr ˈfesɪz ænd ˈvɔɪsɪz ɪn nu ˈmuviz wɪˈðaʊt ˈæskɪŋ ðɛm fɝst. ｜ 答案：accused /əˈkjuzd/；連讀提示：company of /ˈkʌmpəni‿əv/、voices in /ˈvɔɪsɪz‿ɪn/。"
+      },
+      {
+        id: 13,
+        section: "核心詞彙與片語",
+        dimension: "字彙",
+        categoryTag: "字彙｜關鍵名詞辨析 (P.56)",
+        passageId: "passage-p56-ai",
+        stem: "In Hollywood, writers work hard on their scripts and want to get proper ______ for the stories they create.",
+        options: [
+          "fee",
+          "credit",
+          "packaging",
+          "sleep"
+        ],
+        answerIndex: 1,
+        translation: "在好萊塢，編劇們努力撰寫劇本，並希望為他們創作的故事獲得應有的功勞（署名權）。",
+        corePoint: "本題測驗 P.56 單字表核心名詞 credit（功勞；榮譽；演職員表署名）。文中反覆強調 Writers are afraid AI might take their story credit，故選 (B)。",
+        grammar: "S (writers) + V1 (work...) + and + V2 (want) + to get + O (proper credit) + 介系詞片語 (for the stories...)。",
+        distractors: [
+          "(A) fee：意為「費用；手續費」，出自 P.55（pays a small fee），並非編劇創作故事所爭取的榮譽署名。",
+          "(C) packaging：意為「包裝」，出自 P.55（recyclable packaging），與劇本創作完全無關。",
+          "(D) sleep：意為「睡眠」，出自 P.54（getting enough sleep），語意不符。"
+        ],
+        kk: "ɪn ˈhɑliˌwʊd, ˈraɪtɚz wɝk hɑrd ɑn ðɛr skrɪpts ænd wɑnt tə gɛt ˈprɑpɚ ˈkrɛdɪt fɔr ðə ˈstɔriz ðe kriˈet. ｜ 答案：credit /ˈkrɛdɪt/；連讀提示：work hard on /wɝk hɑrd‿ɑn/。"
+      },
+      {
+        id: 14,
+        section: "核心詞彙與片語",
+        dimension: "字彙",
+        categoryTag: "字彙｜動詞片語搭配 (P.56)",
+        passageId: "passage-p56-ai",
+        stem: "Actors are worried about losing ______ over how their looks are used when AI technology is added to movies.",
+        options: [
+          "control",
+          "receipt",
+          "revolution",
+          "report"
+        ],
+        answerIndex: 0,
+        translation: "演員們擔心，當電影加入人工智慧技術時，他們會失去對自己外貌使用方式的控制權。",
+        corePoint: "本題測驗 P.56 核心名詞 control（控制；支配權）及其固定搭配 lose control over...（失去對……的控制）。對應課文原句 They are afraid of losing control over their looks in movies，故選 (A)。",
+        grammar: "be worried about（擔心）+ V-ing (losing) + O (control) + 介系詞片語 (over how...)。",
+        distractors: [
+          "(B) receipt：意為「收據」，出自 P.55，無法與 lose ... over 搭配。",
+          "(C) revolution：意為「革新」，出自 P.55，語意與掌握自身肖像權無關。",
+          "(D) report：意為「報告」，出自 P.54，與外貌使用權無關。"
+        ],
+        kk: "ˈæktɚz ɑr ˈwɝid əˈbaʊt ˈluzɪŋ kənˈtrol ˈovɚ haʊ ðɛr lʊks ɑr juzd hwɛn eɪ aɪ tɛkˈnɑlədʒi ɪz ˈædɪd tə ˈmuviz. ｜ 答案：control /kənˈtrol/；連讀提示：worried about /ˈwɝid‿əˈbaʊt/、looks are /lʊks‿ɑr/。"
+      },
+      {
+        id: 15,
+        section: "核心詞彙與片語",
+        dimension: "字彙",
+        categoryTag: "字彙｜動詞語意 (P.56)",
+        passageId: "passage-p56-ai",
+        stem: "With the help of modern AI tools, filmmakers can ______ amazing scenes without spending millions of dollars.",
+        options: [
+          "create",
+          "borrow",
+          "forget",
+          "return"
+        ],
+        answerIndex: 0,
+        translation: "藉助現代人工智慧工具的幫助，電影製作人無需花費數百萬美元就能創作出驚人的場景。",
+        corePoint: "本題測驗 P.56 核心動詞 create（創作；創造）。對應課文 AI can create things without people，在電影製作語境中「創作出驚人場景」最為貼切，故選 (A)。",
+        grammar: "介系詞片語 (With the help of...) + S (filmmakers) + aux. (can) + V (create) + O (amazing scenes)。",
+        distractors: [
+          "(B) borrow：意為「借入」，電影場景是製作或生成的，而非向他人「借用」。",
+          "(C) forget：意為「忘記」，出自 P.54（Don't forget what you said），語意與借助工具製作場景相反。",
+          "(D) return：意為「歸還」，出自 P.55（returned to the store），語意不符。"
+        ],
+        kk: "wɪð ðə hɛlp əv ˈmɑdɚn eɪ aɪ tulz, ˈfɪlmˌmekɚz kæn kriˈet əˈmezɪŋ sinz wɪˈðaʊt ˈspɛndɪŋ ˈmɪljənz əv ˈdɑlɚz. ｜ 答案：create /kriˈet/；連讀提示：help of /hɛlp‿əv/、millions of /ˈmɪljənz‿əv/。"
+      },{
+        id: 16,
+        section: "文法與句型結構",
+        dimension: "文法",
+        categoryTag: "文法｜條件句時態 (P.54)",
+        passageId: "passage-p54-dialogue",
+        stem: "If Linda ______ enough sleep tonight, she will feel much better and won't fall asleep in class tomorrow.",
+        options: [
+          "gets",
+          "got",
+          "will get",
+          "is getting"
+        ],
+        answerIndex: 0,
+        translation: "如果琳達今晚有充足的睡眠，她明天就會覺得好多了，也不會在課堂上睡著。",
+        corePoint: "本題測驗 P.54 對話原句文法（If you don't sleep early, you'll feel tired...）：在 If 引導的條件副詞子句中，必須用「現在簡單式」代替「未來式」，主要子句則用 will + 原形動詞。主詞 Linda 為第三人稱單數，故動詞用 gets，選 (A)。",
+        grammar: "If + S (Linda) + V-s (gets，現在式代未來)..., S (she) + will + V (feel)...",
+        distractors: [
+          "(B) got：為過去簡單式，與句尾時間副詞 tomorrow（明天）及主要子句未來式 will feel 時態衝突。",
+          "(C) will get：台灣學生最常犯的直譯錯誤，在表「條件」的 if 副詞子句中不可使用未來式 will。",
+          "(D) is getting：為現在進行式，無法表達今晚睡飽的假設條件。"
+        ],
+        kk: "ɪf ˈlɪndə gɛts əˈnʌf slip təˈnaɪt, ʃi wɪl fil mʌtʃ ˈbɛtɚ ænd wont fɔl əˈslip ɪn klæs təˈmɑro. ｜ 答案：gets /gɛts/；連讀提示：gets enough /gɛts‿əˈnʌf/、fall asleep /fɔl‿əˈslip/。"
+      },
+      {
+        id: 17,
+        section: "文法與句型結構",
+        dimension: "文法",
+        categoryTag: "文法｜花費時間句型 (P.54)",
+        passageId: "passage-p54-dialogue",
+        stem: "Linda didn't think it would ______ her so long to find the information she needed for her science report.",
+        options: [
+          "spend",
+          "cost",
+          "take",
+          "pay"
+        ],
+        answerIndex: 2,
+        translation: "琳達原本沒想到找到她自然科學報告所需的資訊會花掉她這麼長的時間。",
+        corePoint: "本題測驗 P.54 對話原句句型（I didn't think it would take so long to find the information I need.）。虛主詞 it 開頭表示「做某事花費某人多少時間」時，固定使用動詞 take（It takes + 人 + 時間 + to V），故選 (C)。",
+        grammar: "It + would + take + O (her) + 時間副詞片語 (so long) + 不定詞片語 (to find...，真主詞)。",
+        distractors: [
+          "(A) spend：主詞必須是「人」（人 + spend + 時間 + V-ing），不可用虛主詞 it 作主詞。",
+          "(B) cost：雖可用 it 作主詞，但 cost 僅用於花費「金錢」，不可接時間 so long。",
+          "(D) pay：意為「付款」，出自 P.55（pays a small fee），主詞為人且僅指金錢支付。"
+        ],
+        kk: "ˈlɪndə ˈdɪdənt θɪŋk ɪt wʊd tek hɝ so lɔŋ tə faɪnd ði ˌɪnfɚˈmeʃən ʃi ˈnidɪd fɔr hɝ ˈsaɪəns rɪˈpɔrt. ｜ 答案：take /tek/；連讀提示：think it /θɪŋk‿ɪt/、find the /faɪnd ðə/。"
+      },
+      {
+        id: 18,
+        section: "文法與句型結構",
+        dimension: "文法",
+        categoryTag: "文法｜連綴動詞用法 (P.54)",
+        passageId: "passage-p54-dialogue",
+        stem: "Jason told Linda, \"You look ______ today because you stayed up late. Go home and get some rest!\"",
+        options: [
+          "tiredly",
+          "tired",
+          "tiring",
+          "to tire"
+        ],
+        answerIndex: 1,
+        translation: "傑森告訴琳達：「妳今天看起來很疲憊，因為妳熬夜了。回家去休息一下吧！」",
+        corePoint: "本題測驗 P.54 對話第一句核心文法（You look tired today.）。感官連綴動詞 look（看起來）後方須接「形容詞」作主詞補語；形容人的感受「感到疲倦的」用過去分詞形容詞 tired，故選 (B)。",
+        grammar: "S (You) + 連綴動詞 (look) + 形容詞主詞補語 (tired) + 時間副詞 (today)。",
+        distractors: [
+          "(A) tiredly：為副詞，連綴動詞 look 後方不可接副詞（若為一般動詞 look at 才用副詞）。",
+          "(C) tiring：為現在分詞形容詞，意為「令人疲憊的」，用來修飾事物（如 a tiring day），不可形容人本身的感受。",
+          "(D) to tire：為不定詞，連綴動詞 look 不接不定詞作補語。"
+        ],
+        kk: "ˈdʒesən told ˈlɪndə, ju lʊk taɪrd təˈde bɪˈkɔz ju sted ʌp let. go hom ænd gɛt sʌm rɛst! ｜ 答案：tired /taɪrd/；連讀提示：stayed up /sted‿ʌp/。"
+      },
+      {
+        id: 19,
+        section: "文法與句型結構",
+        dimension: "文法",
+        categoryTag: "文法｜動名詞當主詞 (P.54)",
+        passageId: "passage-p54-dialogue",
+        stem: "______ enough sleep every night is very important for junior high school students to stay healthy.",
+        options: [
+          "Get",
+          "Gets",
+          "Getting",
+          "Got"
+        ],
+        answerIndex: 2,
+        translation: "每晚獲得充足的睡眠對於國中生保持健康是非常重要的。",
+        corePoint: "本題測驗 P.54 對話原句文法（But getting enough sleep is sometimes more important.）。動詞片語置於句首當主詞時，必須改為「動名詞（V-ing）」或不定詞（To V），故選 (C)。",
+        grammar: "動名詞片語主詞 (Getting enough sleep every night) + 單數動詞 (is) + 形容詞補語 (very important)。",
+        distractors: [
+          "(A) Get：為原形動詞，原形動詞僅能用於祈使句開頭，不可直接當作直述句的主詞。",
+          "(B) Gets：為第三人稱單數現在式動詞，不可作為句子的主詞。",
+          "(D) Got：為過去式動詞，無法在句首擔任主詞成分。"
+        ],
+        kk: "ˈgɛtɪŋ əˈnʌf slip ˈɛvri naɪt ɪz ˈvɛri ɪmˈpɔrtənt fɔr ˈdʒunjɚ haɪ skul ˈstudənts tə ste ˈhɛlθi. ｜ 答案：Getting /ˈgɛtɪŋ/；連讀提示：Getting enough /ˈgɛtɪŋ‿əˈnʌf/、night is /naɪt‿ɪz/。"
+      },
+      {
+        id: 20,
+        section: "文法與句型結構",
+        dimension: "文法",
+        categoryTag: "文法｜使役與保持狀態動詞 (P.54)",
+        passageId: "passage-p54-dialogue",
+        stem: "After staying up all night, Linda drank a cup of coffee to keep her eyes ______ during the morning class.",
+        options: [
+          "open",
+          "opened",
+          "opening",
+          "to open"
+        ],
+        answerIndex: 0,
+        translation: "熬了一整夜之後，琳達喝了一杯咖啡，好讓自己的眼睛在早上的課堂上保持睜開。",
+        corePoint: "本題測驗 P.54 對話原句句型（I can't even keep my eyes open now.）。結構為 keep + 受詞（her eyes）+ 形容詞受詞補語（open，睜開的狀態），表示「使……保持某種狀態」，故選 (A)。",
+        grammar: "to keep（不定詞表目的）+ O (her eyes) + adj. (open，受詞補語)。",
+        distractors: [
+          "(B) opened：表示「被打開」的動作或過去式，強調狀態「睜開著的」應用形容詞 open。",
+          "(C) opening：為現在分詞，keep + O + V-ing 表示「讓某人持續做某動作」，眼睛不會持續做打開動作。",
+          "(D) to open：keep 後方不可接不定詞作受詞補語。"
+        ],
+        kk: "ˈæftɚ ˈsteɪŋ ʌp ɔl naɪt, ˈlɪndə dræŋk ə kʌp əv ˈkɔfi tə kip hɝ aɪz ˈopən ˈdjʊrɪŋ ðə ˈmɔrnɪŋ klæs. ｜ 答案：open /ˈopən/；連讀提示：staying up /ˈsteɪŋ‿ʌp/、cup of /kʌp‿əv/、eyes open /aɪz‿ˈopən/。"
+      },
+      {
+        id: 21,
+        section: "文法與句型結構",
+        dimension: "文法",
+        categoryTag: "文法｜被動語態結構 (P.55)",
+        passageId: "passage-p55-deposit",
+        stem: "In Germany, the deposit ______ to the customer right away when the empty bottle is returned to the recycling center.",
+        options: [
+          "returns",
+          "returned",
+          "is returned",
+          "has returned"
+        ],
+        answerIndex: 2,
+        translation: "在德國，當空瓶被歸還至回收中心時，押金就會立刻退還給消費者。",
+        corePoint: "本題測驗 P.55 課文原句核心文法（and the deposit is returned when the packaging is returned to the recycling center.）。主詞 the deposit（押金）為物品，只能「被退還」，且描述常態制度須用「現在簡單式被動語態（is + p.p.）」，故選 (C)。",
+        grammar: "S (the deposit，單數無生命主詞) + beV (is) + p.p. (returned) + 介系詞片語 (to the customer)。",
+        distractors: [
+          "(A) returns：為主動語態，押金本身不會自己「歸還」給消費者。",
+          "(B) returned：為過去式主動語態，既無被動意味，時態也與描述現行制度的現在式不符。",
+          "(D) has returned：為現在完成式主動語態，缺少被動結構 been。"
+        ],
+        kk: "ɪn ˈdʒɝməni, ðə dɪˈpɑzɪt ɪz rɪˈtɝnd tə ðə ˈkʌstəmɚ raɪt əˈwe hwɛn ði ˈɛmpti ˈbɑtəl ɪz rɪˈtɝnd tə ðə riˈsaɪkəlɪŋ ˈsɛntɚ. ｜ 答案：is returned /ɪz rɪˈtɝnd/；連讀提示：deposit is /dɪˈpɑzɪt‿ɪz/、right away /raɪt‿əˈwe/。"
+      },
+      {
+        id: 22,
+        section: "文法與句型結構",
+        dimension: "文法",
+        categoryTag: "文法｜介系詞後接動名詞 (P.55)",
+        passageId: "passage-p55-deposit",
+        stem: "Customers in Germany can get their money back by ______ empty plastic bottles into a recycling machine.",
+        options: [
+          "put",
+          "puts",
+          "putting",
+          "to put"
+        ],
+        answerIndex: 2,
+        translation: "德國的消費者可以藉由將空的塑膠瓶放進回收機裡來拿回他們的錢。",
+        corePoint: "本題測驗 P.55 課文原句文法（get your deposit back by putting it in a bottle recycling machine.）。介系詞 by（藉由……方式）後方若接動詞，必須使用「動名詞（V-ing）」，故選 (C)。",
+        grammar: "介系詞 (by) + 動名詞 (putting) + O (empty plastic bottles) + 介系詞片語 (into...)。",
+        distractors: [
+          "(A) put：為原形動詞，介系詞 by 後方不可直接接原形動詞。",
+          "(B) puts：為第三人稱單數現在式動詞，不可接在介系詞後方。",
+          "(D) to put：為不定詞，介系詞 by 後方接 V-ing 而非不定詞。"
+        ],
+        kk: "ˈkʌstəmɚz ɪn ˈdʒɝməni kæn gɛt ðɛr ˈmʌni bæk baɪ ˈpʊtɪŋ ˈɛmpti ˈplæstɪk ˈbɑtəlz ˈɪntə ə riˈsaɪkəlɪŋ məˈʃin. ｜ 答案：putting /ˈpʊtɪŋ/；連讀提示：Customers in /ˈkʌstəmɚz‿ɪn/、into a /ˈɪntə‿ə/。"
+      },
+      {
+        id: 23,
+        section: "文法與句型結構",
+        dimension: "文法",
+        categoryTag: "文法｜虛主詞 It 句型 (P.55)",
+        passageId: "passage-p55-deposit",
+        stem: "With the deposit system, it is very smart and easy for people ______ empty bottles in their daily lives.",
+        options: [
+          "recycle",
+          "recycled",
+          "to recycle",
+          "recycling"
+        ],
+        answerIndex: 2,
+        translation: "有了押金制度，人們在日常生活中回收空瓶變得非常聰明且容易。",
+        corePoint: "本題測驗 P.55 課文末句句型（Isn't the idea smart and easy for people to recycle plastic bottles?）。虛主詞句型「It is + adj. + for 人 + to V」中，真正的主詞為後方的不定詞片語（to recycle），故選 (C)。",
+        grammar: "虛主詞 (It) + beV (is) + adj. (smart and easy) + for 人 (for people) + 不定詞片語 (to recycle...，真主詞)。",
+        distractors: [
+          "(A) recycle：為原形動詞，在虛主詞 It is + adj. 句型中須用不定詞 to V。",
+          "(B) recycled：為過去式或過去分詞，無法擔任該句型的真主詞。",
+          "(D) recycling：動名詞通常置於句首當主詞；以虛主詞 It 開頭時，標準文法搭配為不定詞 to recycle。"
+        ],
+        kk: "wɪð ðə dɪˈpɑzɪt ˈsɪstəm, ɪt ɪz ˈvɛri smɑrt ænd ˈizi fɔr ˈpipəl tə riˈsaɪkəl ˈɛmpti ˈbɑtəlz ɪn ðɛr ˈdeli laɪvz. ｜ 答案：to recycle /tə riˈsaɪkəl/；連讀提示：it is /ɪt‿ɪz/、smart and easy /smɑrt‿ænd‿ˈizi/。"
+      },
+      {
+        id: 24,
+        section: "文法與句型結構",
+        dimension: "文法",
+        categoryTag: "文法｜否定疑問句結構 (P.55)",
+        passageId: "passage-p55-deposit",
+        stem: "______ the deposit system a great way to encourage more people to protect our environment?",
+        options: [
+          "Isn't",
+          "Doesn't",
+          "Hasn't",
+          "Won't"
+        ],
+        answerIndex: 0,
+        translation: "押金制度難道不是一個鼓勵更多人保護我們環境的好方法嗎？",
+        corePoint: "本題測驗 P.55 課文結尾否定疑問句型（Isn't the idea smart and easy...?）。句中主詞為 the deposit system（單數名詞），後方接名詞補語 a great way，沒有一般動詞，因此必須使用 be 動詞的否定縮寫 Isn't，故選 (A)。",
+        grammar: "否定疑問句：Isn't + S (the deposit system) + 主詞補語 (a great way) + 不定詞片語 (to encourage...)？",
+        distractors: [
+          "(B) Doesn't：助動詞，後方必須接原形一般動詞，但本句無一般動詞。",
+          "(C) Hasn't：助動詞，後方須接過去分詞構成完成式，結構不符。",
+          "(D) Won't：未來式助動詞，後方須接原形動詞（如 Won't it be...），不可直接接名詞片語。"
+        ],
+        kk: "ˈɪzənt ðə dɪˈpɑzɪt ˈsɪstəm ə gret we tə ɪnˈkɝɪdʒ mɔr ˈpipəl tə prəˈtɛkt aʊr ɪnˈvaɪrənmənt? ｜ 答案：Isn't /ˈɪzənt/；連讀提示：system a /ˈsɪstəm‿ə/、to encourage /tə‿ɪnˈkɝɪdʒ/。"
+      },
+      {
+        id: 25,
+        section: "文法與句型結構",
+        dimension: "文法",
+        categoryTag: "文法｜不定代名詞搭配 (P.55)",
+        passageId: "passage-p55-deposit",
+        stem: "With the receipt from the machine, you can either get cash back or buy ______ in the supermarket.",
+        options: [
+          "else something",
+          "something else",
+          "anything else",
+          "else anything"
+        ],
+        answerIndex: 1,
+        translation: "憑著機器給的收據，你可以選擇領回現金，或者在超市裡買點別的東西。",
+        corePoint: "本題測驗 P.55 課文原句語法（You can get your money back or buy something else in the supermarket with the receipt.）。修飾複合不定代名詞（something, anything 等）時，副詞 else 必須放在代名詞「後方」，且肯定句中用 something，故選 (B)。",
+        grammar: "buy + 複合不定代名詞 (something) + 後位修飾副詞 (else)。",
+        distractors: [
+          "(A) else something：語序錯誤，else 修飾不定代名詞時不可置於前方。",
+          "(C) anything else：anything 通常用於否定句或疑問句，本句為肯定陳述句，應用 something else。",
+          "(D) else anything：語序錯誤且否定/疑問詞誤用於肯定句。"
+        ],
+        kk: "wɪð ðə rɪˈsit frʌm ðə məˈʃin, ju kæn ˈiðɚ gɛt kæʃ bæk ɔr baɪ ˈsʌmθɪŋ ɛls ɪn ðə ˈsupɚˌmɑrkɪt. ｜ 答案：something else /ˈsʌmθɪŋ ɛls/；連讀提示：else in /ɛls‿ɪn/。"
+      },
+      {
+        id: 26,
+        section: "文法與句型結構",
+        dimension: "文法",
+        categoryTag: "文法｜對等連接詞 not only... but also... (P.56)",
+        passageId: "passage-p56-ai",
+        stem: "The problem caused by AI in Hollywood is not just about money, ______ about making movies and TV shows.",
+        options: [
+          "and also",
+          "but also",
+          "or also",
+          "so also"
+        ],
+        answerIndex: 1,
+        translation: "人工智慧在好萊塢引起的問題不僅關乎金錢，也關乎電影與電視節目的製作。",
+        corePoint: "本題測驗 P.56 課文第二句核心關聯連接詞（It's not just about money, but also about making movies and TV shows.）。not just / not only（不僅）固定與 but also（而且）搭配，連接兩個對等的介系詞片語（about money 與 about making...），故選 (B)。",
+        grammar: "not just + 介系詞片語 (about money), but also + 介系詞片語 (about making movies and TV shows)。",
+        distractors: [
+          "(A) and also：受到中文「不僅……而且……」直譯影響，英文固定搭配為 but also 而非 and also。",
+          "(C) or also：or 表示選擇「或者」，無法與 not just 構成遞進語氣。",
+          "(D) so also：so 表示因果「所以」，語意與結構皆錯誤。"
+        ],
+        kk: "ðə ˈprɑbləm kɔzd baɪ eɪ aɪ ɪn ˈhɑliˌwʊd ɪz nɑt dʒʌst əˈbaʊt ˈmʌni, bʌt ˈɔlso əˈbaʊt ˈmekɪŋ ˈmuviz ænd ti vi ʃoz. ｜ 答案：but also /bʌt ˈɔlso/；連讀提示：just about /dʒʌst‿əˈbaʊt/、but also about /bʌt‿ˈɔlso‿əˈbaʊt/。"
+      },
+      {
+        id: 27,
+        section: "文法與句型結構",
+        dimension: "文法",
+        categoryTag: "文法｜使役動詞 make 用法 (P.56)",
+        passageId: "passage-p56-ai",
+        stem: "AI technology is already used in movies to make old actors ______ young again on the big screen.",
+        options: [
+          "look",
+          "looks",
+          "looked",
+          "to look"
+        ],
+        answerIndex: 0,
+        translation: "人工智慧技術已經被運用在電影中，讓年長的演員在大銀幕上看起來再次年輕。",
+        corePoint: "本題測驗 P.56 課文第三段原句文法（like making old actors look young again）。使役動詞 make（讓；使）後方接「受詞 + 原形動詞（V）」，構成 make + O + V 句型，故選 (A)。",
+        grammar: "make（使役動詞）+ O (old actors) + 原形動詞補語 (look) + 形容詞 (young)。",
+        distractors: [
+          "(B) looks：使役動詞後方受詞補語須用原形動詞，不可隨主詞變化加 -s。",
+          "(C) looked：為過去式動詞，不適用於主動意味的使役動詞補語。",
+          "(D) to look：make 為主動使役動詞時，受詞補語必須省略 to（被動語態 be made to V 才保留 to）。"
+        ],
+        kk: "eɪ aɪ tɛkˈnɑlədʒi ɪz ɔlˈrɛdi juzd ɪn ˈmuviz tə mek old ˈæktɚz lʊk jʌŋ əˈgɛn ɑn ðə bɪg skrin. ｜ 答案：look /lʊk/；連讀提示：used in /juzd‿ɪn/、young again /jʌŋ‿əˈgɛn/。"
+      },
+      {
+        id: 28,
+        section: "文法與句型結構",
+        dimension: "文法",
+        categoryTag: "文法｜比較級修飾副詞 (P.56)",
+        passageId: "passage-p56-ai",
+        stem: "In Hollywood, it is already difficult for writers to get credit, and adding AI makes it ______ harder.",
+        options: [
+          "very",
+          "so",
+          "even",
+          "too"
+        ],
+        answerIndex: 2,
+        translation: "在好萊塢，編劇要獲得署名權已經很困難了，而加入人工智慧讓這件事變得更加困難。",
+        corePoint: "本題測驗 P.56 課文末段原句文法（Adding AI makes it even harder.）。修飾形容詞比較級（harder）時，必須使用比較級加強副詞（even, much, a lot, far），不可使用修飾原級的 very、so、too，故選 (C)。",
+        grammar: "S (Adding AI) + V (makes) + O (it) + 比較級加強副詞 (even) + 比較級形容詞補語 (harder)。",
+        distractors: [
+          "(A) very：僅能修飾原級形容詞（如 very hard），不可修飾比較級 harder。",
+          "(B) so：僅能修飾原級形容詞（如 so hard），不可直接修飾比較級。",
+          "(D) too：僅能修飾原級形容詞（如 too hard），不可修飾比較級。"
+        ],
+        kk: "ɪn ˈhɑliˌwʊd, ɪt ɪz ɔlˈrɛdi ˈdɪfəkəlt fɔr ˈraɪtɚz tə gɛt ˈkrɛdɪt, ænd ˈædɪŋ eɪ aɪ meks ɪt ˈivən ˈhɑrdɚ. ｜ 答案：even /ˈivən/；連讀提示：it is /ɪt‿ɪz/、makes it even /meks‿ɪt‿ˈivən/。"
+      },
+      {
+        id: 29,
+        section: "文法與句型結構",
+        dimension: "文法",
+        categoryTag: "文法｜導致片語 lead to + V-ing (P.56)",
+        passageId: "passage-p56-ai",
+        stem: "The argument over using AI without permission has even led to actors and writers ______ on strike.",
+        options: [
+          "go",
+          "goes",
+          "going",
+          "went"
+        ],
+        answerIndex: 2,
+        translation: "關於未經許可使用人工智慧的爭論，甚至導致演員和編劇舉行罷工。",
+        corePoint: "本題測驗 P.56 課文第一段末句核心文法（This has even led to actors and writers going on strike.）。片語 lead to 中的 to 為「介系詞」，後方接「受詞（actors and writers）+ 動名詞（going）」，故選 (C)。",
+        grammar: "has led to（介系詞 to）+ 動名詞意義上主詞 (actors and writers) + 動名詞 (going on strike)。",
+        distractors: [
+          "(A) go：學生易誤認 lead to 的 to 為不定詞而選原形 go，實際上此處 to 為介系詞，須接 V-ing。",
+          "(B) goes：第三人稱單數現在式動詞，不可置於介系詞之後。",
+          "(D) went：過去式動詞，文法結構錯誤。"
+        ],
+        kk: "ði ˈɑrgjəmənt ˈovɚ ˈjuzɪŋ eɪ aɪ wɪˈðaʊt pɚˈmɪʃən hæz ˈivən lɛd tə ˈæktɚz ænd ˈraɪtɚz ˈgoɪŋ ɑn straɪk. ｜ 答案：going /ˈgoɪŋ/；連讀提示：led to /lɛd‿tə/、going on /ˈgoɪŋ‿ɑn/。"
+      },
+      {
+        id: 30,
+        section: "文法與句型結構",
+        dimension: "文法",
+        categoryTag: "文法｜疑問詞 + 不定詞名詞片語 (P.56)",
+        passageId: "passage-p56-ai",
+        stem: "Both film companies and actors are trying to find a safe way ______ AI without losing their rights.",
+        options: [
+          "use",
+          "used",
+          "to use",
+          "uses"
+        ],
+        answerIndex: 2,
+        translation: "電影公司和演員雙方都在設法找到一種安全使用人工智慧而不損害自身權益的方法。",
+        corePoint: "本題測驗 P.56 課文末句文法（Both sides are trying to find a way to use AI without losing their rights and credit.）。名詞 a way（方法）後方常接「不定詞片語（to V）」作後位形容詞修飾語，表示「做……的方法」，故選 (C)。",
+        grammar: "find + O (a safe way) + 不定詞形容詞片語 (to use AI) + 介系詞片語 (without losing...)。",
+        distractors: [
+          "(A) use：為原形動詞，不可直接接在名詞 a safe way 後方修飾。",
+          "(B) used：為過去分詞，表被動「被使用的」，但此處主詞為人，意指「去使用 AI 的方法」，應用主動不定詞。",
+          "(D) uses：為第三人稱單數動詞，結構錯誤。"
+        ],
+        kk: "boθ fɪlm ˈkʌmpəniz ænd ˈæktɚz ɑr ˈtraɪŋ tə faɪnd ə sef we tə juz eɪ aɪ wɪˈðaʊt ˈluzɪŋ ðɛr raɪts. ｜ 答案：to use /tə juz/；連讀提示：find a /faɪnd‿ə/、use AI /juz‿eɪ aɪ/。"
+      },
+      {
+        id: 31,
+        section: "綜合克漏字測驗",
+        dimension: "語意邏輯",
+        categoryTag: "克漏字｜上下文連貫推理 (P.54)",
+        passageId: "passage-p54-dialogue",
+        stem: "【克漏字題組一（第 31～35 題）】\nMany junior high students have a hard time managing their time before exams. Take Kevin for example. Last night, he _(31)_ until 1:30 a.m. to finish his history report. When he arrived at school this morning, he felt so _(32)_ that he could hardly focus on the teacher's words. His classmate, Amy, noticed his tired face and said, \"You really need to _(33)_ earlier tonight!\" Kevin sighed and replied, \"I know, but the _(34)_ is tomorrow morning, and I still haven't found enough _(35)_ for the last part.\" Amy reminded him that getting enough sleep is much more important than staying up late.\n\n請問第 (31) 格最適合填入下列何者？",
+        options: [
+          "stayed up",
+          "went on strike",
+          "drank up",
+          "fell asleep"
+        ],
+        answerIndex: 0,
+        translation: "許多國中生在考前很難管理好自己的時間。以凱文為例。昨晚他熬夜到凌晨一點半才完成他的歷史報告。",
+        corePoint: "本題測驗 P.54 對話核心片語 stay up（熬夜）及其過去式變化。由時間副詞 Last night（昨晚）及 until 1:30 a.m. to finish his history report 可知，他「熬夜」到凌晨一點半，故選 (A)。",
+        grammar: "Last night（過去時間副詞）+ S (he) + 過去式動詞片語 (stayed up) + until 1:30 a.m.。",
+        distractors: [
+          "(B) went on strike：意為「罷工」，出自 P.56，學生寫報告不會罷工。",
+          "(C) drank up：意為「喝光」，出自 P.55，與完成報告無關。",
+          "(D) fell asleep：意為「睡著」，出自 P.54，若睡著了就無法寫報告直到凌晨一點半，語意矛盾。"
+        ],
+        kk: "læst naɪt, hi sted ʌp ənˈtɪl wʌn ˈθɝti eɪ ɛm tə ˈfɪnɪʃ hɪz ˈhɪstəri rɪˈpɔrt. ｜ 答案：stayed up /sted ʌp/；連讀提示：stayed up until /sted‿ʌp‿ənˈtɪl/。"
+      },
+      {
+        id: 32,
+        section: "綜合克漏字測驗",
+        dimension: "字彙",
+        categoryTag: "克漏字｜形容詞語意 (P.54)",
+        passageId: "passage-p54-dialogue",
+        stem: "【克漏字題組一（第 31～35 題）】\n... When he arrived at school this morning, he felt so _(32)_ that he could hardly focus on the teacher's words. ...\n\n請問第 (32) 格最適合填入下列何者？",
+        options: [
+          "sleepy",
+          "empty",
+          "plastic",
+          "useful"
+        ],
+        answerIndex: 0,
+        translation: "當他今天早上到達學校時，他感到如此想睡覺，以至於幾乎無法專心聽老師講話。",
+        corePoint: "本題測驗 P.54 核心形容詞 sleepy（想睡覺的）搭配 so... that...（如此……以至於……）結果子句。前文提到熬夜到凌晨一點半，故早上到校感到「想睡覺的」，選 (A)。",
+        grammar: "S (he) + felt（連綴動詞）+ so + adj. (sleepy) + that 結果副詞子句。",
+        distractors: [
+          "(B) empty：意為「空的」，出自 P.55，不可用來形容人困倦。",
+          "(C) plastic：意為「塑膠的」，出自 P.55，語意不符。",
+          "(D) useful：意為「有用的」，出自 P.56，與無法專心聽講語意相反。"
+        ],
+        kk: "hwɛn hi əˈraɪvd æt skul ðɪs ˈmɔrnɪŋ, hi fɛlt so ˈslipi ðæt hi kʊd ˈhɑrdli ˈfokəs ɑn ðə ˈtitʃɚz wɝdz. ｜ 答案：sleepy /ˈslipi/；連讀提示：arrived at /əˈraɪvd‿æt/、focus on /ˈfokəs‿ɑn/。"
+      },
+      {
+        id: 33,
+        section: "綜合克漏字測驗",
+        dimension: "語意邏輯",
+        categoryTag: "克漏字｜美式慣用語 (P.54)",
+        passageId: "passage-p54-dialogue",
+        stem: "【克漏字題組一（第 31～35 題）】\n... His classmate, Amy, noticed his tired face and said, \"You really need to _(33)_ earlier tonight!\" ...\n\n請問第 (33) 格最適合填入下列何者？",
+        options: [
+          "hit the sack",
+          "lose control",
+          "throw away",
+          "get credit"
+        ],
+        answerIndex: 0,
+        translation: "他的同學艾咪注意到他疲憊的臉色，說道：「你今晚真的需要早點上床睡覺！」",
+        corePoint: "本題測驗 P.54 對話關鍵慣用語 hit the sack（上床睡覺）。艾咪看到凱文臉色疲憊，建議他今晚早點「上床睡覺」，完全呼應 P.54 課文（You should hit the sack earlier tonight），故選 (A)。",
+        grammar: "S (You) + adv. (really) + V (need) + to + 原形動詞片語 (hit the sack) + adv. (earlier tonight)。",
+        distractors: [
+          "(B) lose control：意為「失去控制」，出自 P.56，語意不合。",
+          "(C) throw away：意為「丟棄」，出自 P.55，後方缺少受詞且語意無關。",
+          "(D) get credit：意為「獲得功勞」，出自 P.56，與睡眠建議無關。"
+        ],
+        kk: "ju ˈrɪli nid tə hɪt ðə sæk ˈɝliɚ təˈnaɪt! ｜ 答案：hit the sack /hɪt ðə sæk/；連讀提示：need to /nid‿tə/。"
+      },
+      {
+        id: 34,
+        section: "綜合克漏字測驗",
+        dimension: "字彙",
+        categoryTag: "克漏字｜名詞語意辨析 (P.54)",
+        passageId: "passage-p54-dialogue",
+        stem: "【克漏字題組一（第 31～35 題）】\n... Kevin sighed and replied, \"I know, but the _(34)_ is tomorrow morning, and I still haven't found enough _(35)_ for the last part.\" ...\n\n請問第 (34) 格最適合填入下列何者？",
+        options: [
+          "deadline",
+          "deposit",
+          "receipt",
+          "revolution"
+        ],
+        answerIndex: 0,
+        translation: "凱文嘆了口氣回答說：「我知道，但截止期限就在明天早上，而我還沒有找到足夠的資料來完成最後一部分。」",
+        corePoint: "本題測驗 P.54 核心名詞 deadline（截止期限）。凱文解釋自己無法早睡的原因是報告的「截止期限」就在明天早上，故選 (A)。",
+        grammar: "but + the + 單數名詞 (deadline) + beV (is) + 時間副詞片語 (tomorrow morning)。",
+        distractors: [
+          "(B) deposit：意為「押金」，出自 P.55，與報告繳交時間無關。",
+          "(C) receipt：意為「收據」，出自 P.55，與學校報告無關。",
+          "(D) revolution：意為「革新」，出自 P.55，語意不符。"
+        ],
+        kk: "aɪ no, bʌt ðə ˈdɛdˌlaɪn ɪz təˈmɑro ˈmɔrnɪŋ. ｜ 答案：deadline /ˈdɛdˌlaɪn/；連讀提示：deadline is /ˈdɛdˌlaɪn‿ɪz/。"
+      },
+      {
+        id: 35,
+        section: "綜合克漏字測驗",
+        dimension: "文法",
+        categoryTag: "克漏字｜可數與不可數名詞 (P.54)",
+        passageId: "passage-p54-dialogue",
+        stem: "【克漏字題組一（第 31～35 題）】\n... and I still haven't found enough _(35)_ for the last part.\" ...\n\n請問第 (35) 格最適合填入下列何者？",
+        options: [
+          "information",
+          "informations",
+          "customer",
+          "bottle"
+        ],
+        answerIndex: 0,
+        translation: "……而且我仍然還沒有找到足夠的資訊來完成最後一部分。",
+        corePoint: "本題同時測驗 P.54 核心單字 information（資訊）的語意與不可數名詞文法特性。寫歷史報告需要「資訊」，且 information 不可加 -s，故選 (A)。",
+        grammar: "haven't found（現在完成式）+ enough + 不可數名詞 (information)。",
+        distractors: [
+          "(B) informations：文法錯誤，information 為不可數名詞，絕不可在字尾加 -s。",
+          "(C) customer：意為「顧客」，為單數可數名詞，若用在此處需加冠詞或改複數，且語意不合。",
+          "(D) bottle：意為「瓶子」，出自 P.55，寫歷史報告不需要找瓶子。"
+        ],
+        kk: "ænd aɪ stɪl ˈhævənt faʊnd əˈnʌf ˌɪnfɚˈmeʃən fɔr ðə læst pɑrt. ｜ 答案：information /ˌɪnfɚˈmeʃən/；連讀提示：found enough /faʊnd‿əˈnʌf/。"
+      },
+      {
+        id: 36,
+        section: "綜合克漏字測驗",
+        dimension: "文法",
+        categoryTag: "克漏字｜被動語態與制度說明 (P.55)",
+        passageId: "passage-p55-deposit",
+        stem: "【克漏字題組二（第 36～40 題）】\nHave you ever heard of Germany's deposit system? It is a smart way to help people recycle _(36)_ bottles. When a _(37)_ buys a drink in recyclable packaging, a small fee _(38)_ to the price of the drink. After finishing the drink, the buyer can take the _(39)_ bottle back to a supermarket and put it into a recycling machine. The machine will then print out a _(40)_, which can be used to get cash back or buy other things in the store.\n\n請問第 (36) 格最適合填入下列何者？",
+        options: [
+          "plastic",
+          "sleepy",
+          "scared",
+          "existing"
+        ],
+        answerIndex: 0,
+        translation: "你曾經聽說過德國的押金制度嗎？這是一個幫助人們回收塑膠瓶的聰明方法。",
+        corePoint: "本題測驗 P.55 課文原詞搭配 plastic bottles（塑膠瓶）。全篇探討德國瓶罐回收制度，修飾 bottles 最貼切的材質形容詞為 plastic，故選 (A)。",
+        grammar: "recycle（原形動詞）+ adj. (plastic) + 複數名詞 (bottles)。",
+        distractors: [
+          "(B) sleepy：意為「想睡覺的」，出自 P.54，修飾人而非瓶子。",
+          "(C) scared：意為「害怕的」，出自 P.56，修飾人的情緒。",
+          "(D) existing：意為「現存的」，出自 P.56，非環保回收文本針對的材質分類。"
+        ],
+        kk: "ɪt ɪz ə smɑrt we tə hɛlp ˈpipəl riˈsaɪkəl ˈplæstɪk ˈbɑtəlz. ｜ 答案：plastic /ˈplæstɪk/；連讀提示：It is a /ɪt‿ɪz‿ə/。"
+      },
+      {
+        id: 37,
+        section: "綜合克漏字測驗",
+        dimension: "字彙",
+        categoryTag: "克漏字｜主題名詞辨析 (P.55)",
+        passageId: "passage-p55-deposit",
+        stem: "【克漏字題組二（第 36～40 題）】\n... When a _(37)_ buys a drink in recyclable packaging, a small fee _(38)_ to the price of the drink. ...\n\n請問第 (37) 格最適合填入下列何者？",
+        options: [
+          "customer",
+          "writer",
+          "actor",
+          "machine"
+        ],
+        answerIndex: 0,
+        translation: "當消費者購買可回收包裝的飲料時，一筆小額費用會被加進飲料的價格中。",
+        corePoint: "本題測驗 P.55 課文核心名詞 customer（消費者；顧客）。在商店購買飲料的主體為「消費者」，故選 (A)。",
+        grammar: "When + 不定冠詞 (a) + 單數可數名詞 (customer) + 單數動詞 (buys)。",
+        distractors: [
+          "(B) writer：意為「編劇；作家」，出自 P.56，與商店消費情境無關。",
+          "(C) actor：意為「演員」，出自 P.56，語意過於狹隘不符制度通則。",
+          "(D) machine：意為「機器」，出自 P.55，機器不會購買飲料。"
+        ],
+        kk: "hwɛn ə ˈkʌstəmɚ baɪz ə drɪŋk ɪn riˈsaɪkələbəl ˈpækɪdʒɪŋ. ｜ 答案：customer /ˈkʌstəmɚ/；連讀提示：buys a /baɪz‿ə/、drink in /drɪŋk‿ɪn/。"
+      },
+      {
+        id: 38,
+        section: "綜合克漏字測驗",
+        dimension: "文法",
+        categoryTag: "克漏字｜現在簡單式被動語態 (P.55)",
+        passageId: "passage-p55-deposit",
+        stem: "【克漏字題組二（第 36～40 題）】\n... When a customer buys a drink in recyclable packaging, a small fee _(38)_ to the price of the drink. ...\n\n請問第 (38) 格最適合填入下列何者？",
+        options: [
+          "adds",
+          "added",
+          "is added",
+          "was adding"
+        ],
+        answerIndex: 2,
+        translation: "……一筆小額費用會被加進飲料的價格中。",
+        corePoint: "本題測驗被動語態文法。主詞 a small fee（一筆小額費用）為無生命名詞，是被「加上（is added to）」飲料價格中的，且全段描述制度事實用現在簡單式，故選 (C)。",
+        grammar: "S (a small fee，單數) + beV (is) + p.p. (added) + 介系詞片語 (to the price of the drink)。",
+        distractors: [
+          "(A) adds：為主動語態，費用不會自己主動去加價。",
+          "(B) added：為過去式主動語態，既無被動意味，時態也不符。",
+          "(D) was adding：為過去進行式主動語態，文法與時態皆錯誤。"
+        ],
+        kk: "ə smɔl fi ɪz ˈædɪd tə ðə praɪs əv ðə drɪŋk. ｜ 答案：is added /ɪz ˈædɪd/；連讀提示：fee is added /fi‿ɪz‿ˈædɪd/、price of /praɪs‿əv/。"
+      },
+      {
+        id: 39,
+        section: "綜合克漏字測驗",
+        dimension: "語意邏輯",
+        categoryTag: "克漏字｜上下文語意推理 (P.55)",
+        passageId: "passage-p55-deposit",
+        stem: "【克漏字題組二（第 36～40 題）】\n... After finishing the drink, the buyer can take the _(39)_ bottle back to a supermarket and put it into a recycling machine. ...\n\n請問第 (39) 格最適合填入下列何者？",
+        options: [
+          "empty",
+          "full",
+          "heavy",
+          "angry"
+        ],
+        answerIndex: 0,
+        translation: "喝完飲料之後，購買者可以把空瓶子帶回超市並放進回收機裡。",
+        corePoint: "本題測驗 P.55 核心形容詞 empty（空的）。由前文 After finishing the drink（喝完飲料之後）可推理出，此時瓶子是「空的」，故選 (A)。",
+        grammar: "take + the + 形容詞 (empty) + 名詞 (bottle) + 副詞 (back)。",
+        distractors: [
+          "(B) full：意為「滿的」，飲料喝完後瓶子不會是滿的，語意矛盾。",
+          "(C) heavy：意為「重的」，喝完飲料的塑膠瓶應是輕的而非重的。",
+          "(D) angry：意為「生氣的」，出自 P.56，用來形容人的情緒。"
+        ],
+        kk: "ˈæftɚ ˈfɪnɪʃɪŋ ðə drɪŋk, ðə ˈbaɪɚ kæn tek ði ˈɛmpti ˈbɑtəl bæk tə ə ˈsupɚˌmɑrkɪt. ｜ 答案：empty /ˈɛmpti/；連讀提示：the empty /ði‿ˈɛmpti/。"
+      },
+      {
+        id: 40,
+        section: "綜合克漏字測驗",
+        dimension: "字彙",
+        categoryTag: "克漏字｜核心名詞辨析 (P.55)",
+        passageId: "passage-p55-deposit",
+        stem: "【克漏字題組二（第 36～40 題）】\n... The machine will then print out a _(40)_, which can be used to get cash back or buy other things in the store.\n\n請問第 (40) 格最適合填入下列何者？",
+        options: [
+          "receipt",
+          "deadline",
+          "report",
+          "credit"
+        ],
+        answerIndex: 0,
+        translation: "接著機器會印出一張收據，這張收據可以用來領回現金或在店裡購買其他商品。",
+        corePoint: "本題測驗 P.55 課文核心名詞 receipt（收據）。機器印出來的憑證，且後方關係子句說明可憑此領回現金或折抵消費，此物即為「收據」，故選 (A)。",
+        grammar: "print out + 不定冠詞 (a) + 單數可數名詞 (receipt)，後方接 which 引導非限定關係子句。",
+        distractors: [
+          "(B) deadline：意為「截止期限」，出自 P.54，機器不會印出截止期限。",
+          "(C) report：意為「報告」，出自 P.54，與超市回收機器無關。",
+          "(D) credit：意為「功勞；署名權」，出自 P.56，語意不符。"
+        ],
+        kk: "ðə məˈʃin wɪl ðɛn prɪnt aʊt ə rɪˈsit, hwɪtʃ kæn bi juzd tə gɛt kæʃ bæk. ｜ 答案：receipt /rɪˈsit/；連讀提示：print out a /prɪnt‿aʊt‿ə/。"
+      },
+      {
+        id: 41,
+        section: "閱讀理解測驗",
+        dimension: "細節理解",
+        categoryTag: "閱讀理解｜對話細節與推論 (P.54)",
+        passageId: "passage-p54-dialogue",
+        stem: "【閱讀題組一（第 41～45 題）｜請閱讀左側「文本一：After School 對話」並回答問題】\nWhy did Linda stay up until 2 a.m. last night?",
+        options: [
+          "She was watching movies and TV shows online.",
+          "She spent hours finding information for her science report.",
+          "She was preparing for a school trip with Jason.",
+          "She forgot to bring her homework home from school."
+        ],
+        answerIndex: 1,
+        translation: "琳達昨晚為什麼熬夜直到凌晨兩點？",
+        corePoint: "本題測驗對 P.54 對話細節的精準定位。Linda 在對話中明確表示：I worked on my science report until 2 a.m. 以及 I didn't think it would take so long to find the information I need.，故選 (B)。",
+        grammar: "Why + did + S (Linda) + 原形動詞片語 (stay up) + until 2 a.m. last night？",
+        distractors: [
+          "(A) 對話中完全未提及看電影或電視節目。",
+          "(C) 對話未提及校外教學，且是琳達獨自寫科學報告。",
+          "(D) 琳達並非忘記帶作業回家，而是找資料花費了比預期更長的時間。"
+        ],
+        kk: "hwaɪ dɪd ˈlɪndə ste ʌp ənˈtɪl tu eɪ ɛm læst naɪt? ｜ 答案：(B) She spent hours finding information for her science report."
+      },
+      {
+        id: 42,
+        section: "閱讀理解測驗",
+        dimension: "語意邏輯",
+        categoryTag: "閱讀理解｜會考慣用語推測字義 (P.54)",
+        passageId: "passage-p54-dialogue",
+        stem: "【閱讀題組一（第 41～45 題）｜請閱讀左側「文本一：After School 對話」並回答問題】\nIn the dialogue, Jason says, \"You should hit the sack earlier tonight.\" What does \"hit the sack\" mean?",
+        options: [
+          "To finish the science report quickly.",
+          "To go to bed and get some sleep.",
+          "To ask the teacher for a later deadline.",
+          "To search for more information online."
+        ],
+        answerIndex: 1,
+        translation: "在對話中，傑森說：「妳今晚應該早點 hit the sack。」請問 \"hit the sack\" 是什麼意思？",
+        corePoint: "本題源自 P.54 第 32 題會考「猜測字義」經典題型。從前後文 Linda 說自己很想睡覺（feel so sleepy），以及後面 Jason 說 If you don't sleep early... 與 Go home and sleep before 10:00，可明確推論 hit the sack 意為「上床睡覺」，故選 (B)。",
+        grammar: "What + does + 主詞 (\"hit the sack\") + 原形動詞 (mean)？",
+        distractors: [
+          "(A) 琳達接著回答 I would like to, but the deadline is coming soon，可見 hit the sack 與趕報告是對立的選項。",
+          "(C) 對話中並未提到向老師要求延後截止日期。",
+          "(D) 傑森勸她不要再熬夜，而非繼續上網找資料。"
+        ],
+        kk: "hwʌt dʌz hɪt ðə sæk min? ｜ 答案：(B) To go to bed and get some sleep."
+      },
+      {
+        id: 43,
+        section: "閱讀理解測驗",
+        dimension: "細節理解",
+        categoryTag: "閱讀理解｜因果關係理解 (P.54)",
+        passageId: "passage-p54-dialogue",
+        stem: "【閱讀題組一（第 41～45 題）｜請閱讀左側「文本一：After School 對話」並回答問題】\nAccording to Jason, what might happen if a person does NOT get enough sleep?",
+        options: [
+          "They will finish their school reports much faster.",
+          "They will feel tired and might make mistakes the next day.",
+          "They will find it easier to stay awake in every class.",
+          "They will remember all the information they read."
+        ],
+        answerIndex: 1,
+        translation: "根據傑森的說法，如果一個人沒有獲得充足的睡眠，可能會發生什麼事？",
+        corePoint: "本題測驗對 P.54 對話細節的掌握。Jason 原話為：If you don't sleep early, you'll feel tired and might make mistakes the next day.，與選項 (B) 完全一致。",
+        grammar: "According to + 名詞 (Jason), what + might + happen + if 條件子句？",
+        distractors: [
+          "(A) 與文意相反，睡眠不足會降低效率而非更快完成報告。",
+          "(C) 琳達今日幾乎每堂課都睡著（almost fell asleep in each class），並非更容易保持清醒。",
+          "(D) 對話並未提及睡眠不足能記住所有資訊。"
+        ],
+        kk: "əˈkɔrdɪŋ tə ˈdʒesən, hwʌt maɪt ˈhæpən ɪf ə ˈpɝsən dʌz nɑt gɛt əˈnʌf slip? ｜ 答案：(B) They will feel tired and might make mistakes the next day."
+      },
+      {
+        id: 44,
+        section: "閱讀理解測驗",
+        dimension: "細節理解",
+        categoryTag: "閱讀理解｜對話細節歸納 (P.54)",
+        passageId: "passage-p54-dialogue",
+        stem: "【閱讀題組一（第 41～45 題）｜請閱讀左側「文本一：After School 對話」並回答問題】\nWhat is Linda going to do after she goes home tonight?",
+        options: [
+          "She will stay up until 2 a.m. again to finish everything.",
+          "She will go straight to bed without doing any reading.",
+          "She will do a little more reading and then go to sleep.",
+          "She will call Jason to help her with the science report."
+        ],
+        answerIndex: 2,
+        translation: "琳達今晚回家後打算做什麼？",
+        corePoint: "本題測驗對話結尾的細節理解。Linda 在對話倒數第三句明確說道：Maybe I'll just do a little more reading and then go to bed.，因此她會稍微再讀一點書然後就去睡覺，故選 (C)。",
+        grammar: "What + is + S (Linda) + going to do + after 時間副詞子句？",
+        distractors: [
+          "(A) 琳達已承諾不再熬夜（not stay up late again）。",
+          "(B) 本選項為 P.54 第 31 題常見誘答（Linda will go sleep right after she goes home），忽略了她說會先「再讀一點書（do a little more reading）」。",
+          "(D) 對話中並未提到打電話請傑森幫忙寫報告。"
+        ],
+        kk: "hwʌt ɪz ˈlɪndə ˈgoɪŋ tə du ˈæftɚ ʃi goz hom təˈnaɪt? ｜ 答案：(C) She will do a little more reading and then go to sleep."
+      },
+      {
+        id: 45,
+        section: "閱讀理解測驗",
+        dimension: "細節理解",
+        categoryTag: "閱讀理解｜制度流程與推論 (P.55)",
+        passageId: "passage-p55-deposit",
+        stem: "【閱讀題組二（第 45～50 題）｜請閱讀左側「文本二：Germany's Deposit Revolution」與「文本三：Is AI Good or Bad?」並回答問題】\nIn Germany's deposit system, how can a customer get their deposit back after drinking bottled water?",
+        options: [
+          "By throwing the empty bottle into a street trash can.",
+          "By putting the empty bottle into a bottle recycling machine.",
+          "By mailing the receipt back to the water company.",
+          "By buying another bottle of water at a higher price."
+        ],
+        answerIndex: 1,
+        translation: "在德國的押金制度中，消費者喝完瓶裝水後如何拿回他們的押金？",
+        corePoint: "本題測驗 P.55 課文第三段核心流程理解。文中指出：you can take the bottle back to the supermarket and get your deposit back by putting it in a bottle recycling machine.，故選 (B)。",
+        grammar: "how + can + S (a customer) + get + O (their deposit) + back + after 介系詞片語？",
+        distractors: [
+          "(A) 第一段即說明在德國不是把空瓶直接丟掉（Do you throw them away? No.）。",
+          "(C) 收據是機器印給消費者在超市退錢或折抵消費用的，並非寄回給水公司。",
+          "(D) 憑收據可以在超市買其他東西，並非必須用更高價格買水才能退押金。"
+        ],
+        kk: "haʊ kæn ə ˈkʌstəmɚ gɛt ðɛr dɪˈpɑzɪt bæk ˈæftɚ ˈdrɪŋkɪŋ ˈbɑtəld ˈwɔtɚ? ｜ 答案：(B) By putting the empty bottle into a bottle recycling machine."
+      },
+      {
+        id: 46,
+        section: "閱讀理解測驗",
+        dimension: "語意邏輯",
+        categoryTag: "閱讀理解｜指代詞與篇章推論 (P.55)",
+        passageId: "passage-p55-deposit",
+        stem: "【閱讀題組二（第 45～50 題）｜請閱讀左側「文本二：Germany's Deposit Revolution」與「文本三：Is AI Good or Bad?」並回答問題】\nWhich of the following is TRUE about Germany's deposit system according to the reading?",
+        options: [
+          "Only empty glass bottles can be put into the recycling machine.",
+          "Customers can use the machine's receipt to buy other things in the supermarket.",
+          "People have to pay a large amount of money when they return bottles.",
+          "Fewer people are willing to recycle bottles because the system is too difficult."
+        ],
+        answerIndex: 1,
+        translation: "根據文章內容，下列關於德國押金制度的敘述何者正確？",
+        corePoint: "本題綜合測驗 P.55 第 33～35 題會考閱讀推敲文意能力。第三段末句明確指出：You can get your money back or buy something else in the supermarket with the receipt.，與選項 (B) 完全相符。",
+        grammar: "Which of the following + is + TRUE + about... according to the reading？",
+        distractors: [
+          "(A) 末段提到 recycle plastic bottles（塑膠瓶），並非僅限玻璃瓶。",
+          "(C) 買飲料時才付小額費用（small fee），還瓶子時是「領回押金」而非付錢。",
+          "(D) 末段指出 more and more people are willing to recycle（越來越多人願意回收），且制度既聰明又簡單。"
+        ],
+        kk: "hwɪtʃ əv ðə ˈfɑloɪŋ ɪz tru əˈbaʊt ˈdʒɝməniz dɪˈpɑzɪt ˈsɪstəm əˈkɔrdɪŋ tə ðə ˈridɪŋ? ｜ 答案：(B) Customers can use the machine's receipt to buy other things in the supermarket."
+      },
+      {
+        id: 47,
+        section: "閱讀理解測驗",
+        dimension: "細節理解",
+        categoryTag: "閱讀理解｜跨域時事細節 (P.56)",
+        passageId: "passage-p56-ai",
+        stem: "【閱讀題組二（第 45～50 題）｜請閱讀左側「文本二：Germany's Deposit Revolution」與「文本三：Is AI Good or Bad?」並回答問題】\nWhy did Hollywood actors and writers go on strike according to the reading?",
+        options: [
+          "Because AI tools are too expensive for film companies to buy.",
+          "Because they are worried AI could take away their jobs and story credit.",
+          "Because they think AI cannot help make good movies or TV shows.",
+          "Because old actors refuse to appear in any new Hollywood movies."
+        ],
+        answerIndex: 1,
+        translation: "根據文章內容，好萊塢演員和編劇為什麼要罷工？",
+        corePoint: "本題對應 P.56 第 36 題會考細節題。第二段清楚說明演員害怕失去外貌控制權與工作（AI might take away their jobs），編劇則擔心 AI 奪走他們的故事署名權（AI might take their story credit），故選 (B)。",
+        grammar: "Why + did + S (Hollywood actors and writers) + go on strike + according to the reading？",
+        distractors: [
+          "(A) 文本第一段強調 It's not just about money（不僅僅是錢的問題），也未說 AI 太貴。",
+          "(C) 文本指出 AI 已經在電影製作的許多環節發揮作用（如讓老演員變年輕），並非不能拍出好電影。",
+          "(D) 文中並未提及老演員拒絕演新電影。"
+        ],
+        kk: "hwaɪ dɪd ˈhɑliˌwʊd ˈæktɚz ænd ˈraɪtɚz go ɑn straɪk əˈkɔrdɪŋ tə ðə ˈridɪŋ? ｜ 答案：(B) Because they are worried AI could take away their jobs and story credit."
+      },
+      {
+        id: 48,
+        section: "閱讀理解測驗",
+        dimension: "細節理解",
+        categoryTag: "閱讀理解｜事實舉例定位 (P.56)",
+        passageId: "passage-p56-ai",
+        stem: "【閱讀題組二（第 45～50 題）｜請閱讀左側「文本二：Germany's Deposit Revolution」與「文本三：Is AI Good or Bad?」並回答問題】\nAccording to the reading, what is one existing example of how AI is already used in making movies?",
+        options: [
+          "Writing popular songs for famous singers.",
+          "Making old actors look young again on screen.",
+          "Selling movie tickets at supermarkets.",
+          "Creating entire movies without any human writers."
+        ],
+        answerIndex: 1,
+        translation: "根據文章內容，下列何者是人工智慧目前已經應用在電影製作中的現存實例？",
+        corePoint: "本題對應 P.56 第 37 題會考指出細節題。第三段首句明確舉例：AI is already in many parts of making movies, like making old actors look young again.，故選 (B)。",
+        grammar: "what + is + one existing example of + 名詞子句 (how AI is already used in making movies)？",
+        distractors: [
+          "(A) 文章未提及幫歌手寫流行歌曲。",
+          "(C) 超市出現於 P.55 的德國回收文章，屬跨篇干擾項。",
+          "(D) 這是演員和編劇擔憂的未來風險，而非第三段列舉的「現存應用實例」。"
+        ],
+        kk: "əˈkɔrdɪŋ tə ðə ˈridɪŋ, hwʌt ɪz wʌn ɪgˈzɪstɪŋ ɪgˈzæmpəl əv haʊ eɪ aɪ ɪz ɔlˈrɛdi juzd ɪn ˈmekɪŋ ˈmuviz? ｜ 答案：(B) Making old actors look young again on screen."
+      },
+      {
+        id: 49,
+        section: "閱讀理解測驗",
+        dimension: "語意邏輯",
+        categoryTag: "閱讀理解｜代名詞指代推論 (P.56)",
+        passageId: "passage-p56-ai",
+        stem: "【閱讀題組二（第 45～50 題）｜請閱讀左側「文本二：Germany's Deposit Revolution」與「文本三：Is AI Good or Bad?」並回答問題】\nIn the third paragraph, the author writes, \"Hollywood actors and writers understand that...\" What does the word \"that\" refer to?",
+        options: [
+          "AI is no longer useful in modern filmmaking.",
+          "AI is already helpful and used in many parts of making movies.",
+          "Film companies will never use actors' pictures again.",
+          "Writers do not need to get credit for their stories anymore."
+        ],
+        answerIndex: 1,
+        translation: "在第三段中，作者寫道：「好萊塢演員和編劇理解這一點（that）……」請問 \"that\" 這個字指的是什麼？",
+        corePoint: "本題對應 P.56 第 38 題會考猜測字義／指代推論題。前一句為 AI is already in many parts of making movies, like making old actors look young again.，緊接著說演員和編劇理解「這件事（that）」，即 AI 在電影製作許多方面確實有幫助，故選 (B)。",
+        grammar: "What + does + the word \"that\" + refer to？",
+        distractors: [
+          "(A) 與前句 AI is already in many parts of making movies 語意完全相反。",
+          "(C) 電影公司想要未經同意使用演員照片正是爭議所在，並非不再使用。",
+          "(D) 與末段強調編劇與演員極力爭取權益與署名權（rights and credit）不符。"
+        ],
+        kk: "hwʌt dʌz ðə wɝd ðæt rɪˈfɝ tu? ｜ 答案：(B) AI is already helpful and used in many parts of making movies."
+      },
+      {
+        id: 50,
+        section: "閱讀理解測驗",
+        dimension: "語意邏輯",
+        categoryTag: "閱讀理解｜主旨與作者觀點推論 (P.56)",
+        passageId: "passage-p56-ai",
+        stem: "【閱讀題組二（第 45～50 題）｜請閱讀左側「文本二：Germany's Deposit Revolution」與「文本三：Is AI Good or Bad?」並回答問題】\nWhat is the main idea of the last paragraph in \"Is AI Good or Bad?\"",
+        options: [
+          "AI should be completely banned from Hollywood forever.",
+          "Actors and writers want to stop making movies with film companies.",
+          "People need to find a balanced way to use AI while protecting rights and credit.",
+          "Adding AI makes it much easier for new writers to become famous."
+        ],
+        answerIndex: 2,
+        translation: "〈Is AI Good or Bad?〉一文最後一段的主旨是什麼？",
+        corePoint: "本題測驗對 P.56 末段主旨與結論的歸納能力。末段提到大家需要思考「如何使用 AI」與「由誰控制」，並以 Both sides are trying to find a way to use AI without losing their rights and credit. 作結，強調在善用 AI 與保障權益之間取得平衡，故選 (C)。",
+        grammar: "What + is + the main idea of + the last paragraph in \"Is AI Good or Bad?\"？",
+        distractors: [
+          "(A) 文中並未主張永久全面禁止 AI，而是認為 AI 頂多作為輔助工具並妥善規範。",
+          "(B) 演員和編劇是為了爭取合理規範而罷工，並非永遠不想拍電影。",
+          "(D) 與原句 Adding AI makes it even harder（加入 AI 讓獲得署名更困難）完全相反。"
+        ],
+        kk: "hwʌt ɪz ðə men aɪˈdiə əv ðə læst ˈpærəˌgræf ɪn ɪz eɪ aɪ gʊd ɔr bæd? ｜ 答案：(C) People need to find a balanced way to use AI while protecting rights and credit."
+      }
+    ];
+
+    // =========================================================================
+    // 應用程式狀態管理 (State Management)
+    // =========================================================================
+    let currentQuestions = [];
+    let userAnswers = {}; // { questionId: selectedOptionIndexInCurrentOrder }
+    let isSubmitted = false;
+    let filterMode = "all"; // 'all' | 'wrong'
+    let timerSeconds = 50 * 60;
+    let initialSetSeconds = 50 * 60;
+    let timerInterval = null;
+    let isPaused = false;
+    let radarChartInstance = null;
+
+    const STORAGE_KEY = "junior_high_eng_p54_56_history_v1";
+
+    // =========================================================================
+    // 初始化與工具函式
+    // =========================================================================
+    function cloneAndPrepareQuestions(shuffleAll = false) {
+      const cloned = questionBank.map((q) => {
+        const optionObjs = q.options.map((text, idx) => ({
+          text,
+          isCorrect: idx === q.answerIndex
+        }));
+        if (shuffleAll) {
+          for (let i = optionObjs.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [optionObjs[i], optionObjs[j]] = [optionObjs[j], optionObjs[i]];
+          }
+        }
+        return {
+          ...q,
+          displayOptions: optionObjs
+        };
+      });
+
+      if (shuffleAll) {
+        for (let i = cloned.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [cloned[i], cloned[j]] = [cloned[j], cloned[i]];
+        }
+      }
+      return cloned;
+    }
+
+    function initExam(shuffleAll = false) {
+      currentQuestions = cloneAndPrepareQuestions(shuffleAll);
+      userAnswers = {};
+      isSubmitted = false;
+      filterMode = "all";
+
+      // Reset UI elements
+      document.getElementById("score-panel").style.display = "none";
+      const submitBtn = document.getElementById("btn-submit-exam");
+      submitBtn.textContent = "提交試卷";
+      submitBtn.classList.remove("submitted");
+      submitBtn.disabled = false;
+
+      renderNavigator();
+      renderQuestions();
+      updateAnsweredCounter();
+      resetTimer();
+    }
+
+    // =========================================================================
+    // 渲染題號導覽與右側試題卡片
+    // =========================================================================
+    function renderNavigator() {
+      const navGrid = document.getElementById("nav-grid");
+      navGrid.innerHTML = "";
+      currentQuestions.forEach((q, idx) => {
+        const displayNum = idx + 1;
+        const btn = document.createElement("button");
+        btn.className = "nav-btn";
+        btn.id = `nav-btn-${q.id}`;
+        btn.textContent = displayNum;
+        btn.title = `跳至第 ${displayNum} 題`;
+        btn.onclick = () => {
+          const card = document.getElementById(`q-card-${q.id}`);
+          if (card) {
+            if (card.style.display === "none") {
+              setFilterMode("all");
+            }
+            card.scrollIntoView({ behavior: "smooth", block: "center" });
+          }
+          highlightPassage(q.passageId);
+        };
+        navGrid.appendChild(btn);
+      });
+    }
+
+    function renderQuestions() {
+      const container = document.getElementById("questions-container");
+      container.innerHTML = "";
+      const labels = ["(A)", "(B)", "(C)", "(D)"];
+
+      currentQuestions.forEach((q, idx) => {
+        const displayNum = idx + 1;
+        const card = document.createElement("div");
+        card.className = "question-card";
+        card.id = `q-card-${q.id}`;
+
+        const optionsHtml = q.displayOptions
+          .map((opt, optIdx) => {
+            return `
+              <div class="option-item" id="opt-${q.id}-${optIdx}" onclick="selectOption(${q.id}, ${optIdx})">
+                <span class="radio-dot"></span>
+                <span><strong>${labels[optIdx]}</strong> ${opt.text}</span>
+              </div>
+            `;
+          })
+          .join("");
+
+        const correctOptIdx = q.displayOptions.findIndex((o) => o.isCorrect);
+        const correctLabel = `${labels[correctOptIdx]} ${q.displayOptions[correctOptIdx].text}`;
+
+        const distractorsHtml = q.distractors
+          .map((d) => `<li>${d}</li>`)
+          .join("");
+
+        card.innerHTML = `
+          <div class="q-header">
+            <span class="q-num-badge" onclick="highlightPassage('${q.passageId}')" title="點擊對照左側課文文本">
+              第 ${displayNum} 題 🔍
+            </span>
+            <span class="q-category-tag">${q.categoryTag}</span>
+          </div>
+          <div class="q-stem">${q.stem}</div>
+          <div class="options-grid">
+            ${optionsHtml}
+          </div>
+          <div class="explanation-box" id="exp-${q.id}">
+            <div class="exp-header">
+              <span class="exp-ans-pill">正確答案：${correctLabel}</span>
+              <span class="exp-cat-pill">考點歸類：${q.categoryTag}</span>
+            </div>
+            <div class="exp-row"><span class="exp-label">【測驗卷原題目】</span>${q.stem}</div>
+            <div class="exp-row"><span class="exp-label">【繁體中文翻譯】</span>${q.translation}</div>
+            <div class="exp-row"><span class="exp-label">【核心考點說明】</span>${q.corePoint}</div>
+            <div class="exp-row"><span class="exp-label">【文法結構剖析】</span>${q.grammar}</div>
+            <div class="exp-row">
+              <span class="exp-label">【干擾項、誘答剖析】</span>
+              <ul class="exp-distractors">${distractorsHtml}</ul>
+            </div>
+            <div class="kk-box"><strong>【K.K. 音標與連讀說明】</strong>${q.kk}</div>
+          </div>
+        `;
+
+        container.appendChild(card);
+      });
+    }
+
+    // =========================================================================
+    // 左右雙向聯動高亮與作答邏輯
+    // =========================================================================
+    function highlightPassage(passageId) {
+      if (!passageId) return;
+      const target = document.getElementById(passageId);
+      if (!target) return;
+      target.scrollIntoView({ behavior: "smooth", block: "center" });
+      target.classList.remove("passage-highlight");
+      void target.offsetWidth; // trigger reflow
+      target.classList.add("passage-highlight");
+    }
+
+    function selectOption(qId, optIdx) {
+      if (isSubmitted) return;
+      userAnswers[qId] = optIdx;
+
+      const q = currentQuestions.find((item) => item.id === qId);
+      q.displayOptions.forEach((_, i) => {
+        const el = document.getElementById(`opt-${qId}-${i}`);
+        if (el) {
+          el.classList.toggle("selected", i === optIdx);
+        }
+      });
+
+      const navBtn = document.getElementById(`nav-btn-${qId}`);
+      if (navBtn) {
+        navBtn.classList.add("answered");
+      }
+
+      updateAnsweredCounter();
+    }
+
+    function updateAnsweredCounter() {
+      const answeredCount = Object.keys(userAnswers).length;
+      const total = currentQuestions.length;
+      document.getElementById("answered-counter").textContent = `已作答：${answeredCount} / ${total}`;
+    }
+
+    // =========================================================================
+    // 交卷批改、雷達圖繪製與 localStorage 紀錄
+    // =========================================================================
+    function submitExam(autoByTimeout = false) {
+      if (isSubmitted) return;
+
+      const answeredCount = Object.keys(userAnswers).length;
+      const total = currentQuestions.length;
+
+      if (!autoByTimeout && answeredCount < total) {
+        const confirmSubmit = confirm(
+          `您目前尚有 ${total - answeredCount} 題未作答，確定要現在交卷嗎？`
+        );
+        if (!confirmSubmit) return;
+      }
+
+      isSubmitted = true;
+      clearInterval(timerInterval);
+
+      const submitBtn = document.getElementById("btn-submit-exam");
+      submitBtn.textContent = "已交卷";
+      submitBtn.classList.add("submitted");
+      submitBtn.disabled = true;
+
+      let correctCount = 0;
+      const wrongList = [];
+      const dimStats = {
+        "字彙": { total: 0, correct: 0 },
+        "文法": { total: 0, correct: 0 },
+        "語意邏輯": { total: 0, correct: 0 },
+        "細節理解": { total: 0, correct: 0 }
+      };
+
+      const labels = ["(A)", "(B)", "(C)", "(D)"];
+
+      currentQuestions.forEach((q, idx) => {
+        const displayNum = idx + 1;
+        const selectedIdx = userAnswers[q.id];
+        const correctIdx = q.displayOptions.findIndex((o) => o.isCorrect);
+        const isCorrect = selectedIdx === correctIdx;
+
+        if (!dimStats[q.dimension]) {
+          dimStats[q.dimension] = { total: 0, correct: 0 };
+        }
+        dimStats[q.dimension].total += 1;
+
+        const card = document.getElementById(`q-card-${q.id}`);
+        const navBtn = document.getElementById(`nav-btn-${q.id}`);
+        const expBox = document.getElementById(`exp-${q.id}`);
+
+        // Lock options & style
+        q.displayOptions.forEach((_, i) => {
+          const optEl = document.getElementById(`opt-${q.id}-${i}`);
+          optEl.classList.add("locked");
+          if (i === correctIdx) {
+            optEl.classList.add("opt-correct");
+          } else if (i === selectedIdx && !isCorrect) {
+            optEl.classList.add("opt-wrong");
+          }
+        });
+
+        if (isCorrect) {
+          correctCount++;
+          dimStats[q.dimension].correct += 1;
+          card.classList.add("card-correct");
+          navBtn.classList.remove("answered");
+          navBtn.classList.add("correct");
+        } else {
+          card.classList.add("card-wrong");
+          navBtn.classList.remove("answered");
+          navBtn.classList.add("wrong");
+          wrongList.push({
+            num: displayNum,
+            id: q.id,
+            stem: q.stem,
+            userChoice: selectedIdx !== undefined ? `${labels[selectedIdx]} ${q.displayOptions[selectedIdx].text}` : "未作答",
+            correctChoice: `${labels[correctIdx]} ${q.displayOptions[correctIdx].text}`,
+            corePoint: q.corePoint,
+            translation: q.translation,
+            grammar: q.grammar
+          });
+        }
+
+        expBox.style.display = "block";
+      });
+
+      const score = Math.round((correctCount / total) * 100);
+      const wrongCount = total - correctCount;
+
+      document.getElementById("final-score").textContent = score;
+      document.getElementById("score-detail-text").textContent =
+        `答對 ${correctCount} / ${total} 題（答錯 ${wrongCount} 題）`;
+      document.getElementById("btn-filter-wrong").textContent = `只看錯題 (${wrongCount})`;
+
+      // Render Dimension Stats
+      const statsListEl = document.getElementById("dimension-stats-list");
+      const radarLabels = ["字彙", "文法", "語意邏輯", "細節理解"];
+      const radarValues = [];
+
+      statsListEl.innerHTML = radarLabels
+        .map((dim) => {
+          const st = dimStats[dim];
+          const pct = st.total > 0 ? Math.round((st.correct / st.total) * 100) : 0;
+          radarValues.push(pct);
+          return `
+            <div class="stat-row">
+              <span>${dim} (${st.correct}/${st.total})</span>
+              <strong style="color: ${pct >= 70 ? '#34d399' : '#f87171'};">${pct}%</strong>
+            </div>
+          `;
+        })
+        .join("");
+
+      renderRadarChart(radarLabels, radarValues);
+
+      const scorePanel = document.getElementById("score-panel");
+      scorePanel.style.display = "block";
+      document.getElementById("left-pane").scrollTo({ top: 0, behavior: "smooth" });
+
+      // Save to localStorage for Parent Monitoring
+      saveRecordToLocalStorage({
+        submittedAt: new Date().toLocaleString("zh-TW", { hour12: false }),
+        durationSeconds: Math.max(0, initialSetSeconds - timerSeconds),
+        score,
+        correctCount,
+        total,
+        dimensions: radarLabels.reduce((acc, dim, i) => {
+          acc[dim] = `${radarValues[i]}% (${dimStats[dim].correct}/${dimStats[dim].total})`;
+          return acc;
+        }, {}),
+        wrongQuestions: wrongList.map((w) => `第${w.num}題(選:${w.userChoice} / 正:${w.correctChoice})`)
+      });
+
+      window.__latestWrongList = wrongList;
+      window.__latestScoreSummary = { score, correctCount, total };
+    }
+
+    function renderRadarChart(labels, dataValues) {
+      const ctx = document.getElementById("weaknessRadarChart").getContext("2d");
+      if (radarChartInstance) {
+        radarChartInstance.destroy();
+      }
+      radarChartInstance = new Chart(ctx, {
+        type: "radar",
+        data: {
+          labels,
+          datasets: [
+            {
+              label: "得分率 (%)",
+              data: dataValues,
+              backgroundColor: "rgba(56, 189, 248, 0.25)",
+              borderColor: "#38bdf8",
+              pointBackgroundColor: "#38bdf8",
+              pointBorderColor: "#fff",
+              borderWidth: 2
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            r: {
+              min: 0,
+              max: 100,
+              ticks: {
+                stepSize: 20,
+                color: "#94a3b8",
+                backdropColor: "transparent",
+                font: { size: 10 }
+              },
+              grid: { color: "#1e293b" },
+              angleLines: { color: "#1e293b" },
+              pointLabels: {
+                color: "#e2e8f0",
+                font: { size: 12, weight: "bold" }
+              }
+            }
+          },
+          plugins: {
+            legend: { display: false }
+          }
+        }
+      });
+    }
+
+    // =========================================================================
+    // 錯題篩選與一鍵複製 Markdown 錯題筆記
+    // =========================================================================
+    function setFilterMode(mode) {
+      filterMode = mode;
+      document.getElementById("btn-filter-all").classList.toggle("active", mode === "all");
+      document.getElementById("btn-filter-wrong").classList.toggle("active", mode === "wrong");
+
+      currentQuestions.forEach((q) => {
+        const card = document.getElementById(`q-card-${q.id}`);
+        const selectedIdx = userAnswers[q.id];
+        const correctIdx = q.displayOptions.findIndex((o) => o.isCorrect);
+        const isCorrect = selectedIdx === correctIdx;
+
+        if (mode === "wrong" && isCorrect) {
+          card.style.display = "none";
+        } else {
+          card.style.display = "block";
+        }
+      });
+    }
+
+    function copyWrongNotesMarkdown() {
+      const wrongList = window.__latestWrongList || [];
+      const summary = window.__latestScoreSummary || { score: 0, correctCount: 0, total: currentQuestions.length };
+
+      let md = `# 📘 國中九年級英語科錯題複習筆記（P.54–56）\n\n`;
+      md += `- **測驗時間**：${new Date().toLocaleString("zh-TW", { hour12: false })}\n`;
+      md += `- **測驗成績**：${summary.score} 分（答對 ${summary.correctCount} / ${summary.total} 題）\n\n`;
+
+      if (wrongList.length === 0) {
+        md += `🎉 本次測驗全數答對，沒有錯題！繼續保持！\n`;
+      } else {
+        md += `## ❌ 錯題逐題解析\n\n`;
+        wrongList.forEach((w) => {
+          md += `### 第 ${w.num} 題\n`;
+          md += `- **原題目**：${w.stem}\n`;
+          md += `- **中文翻譯**：${w.translation}\n`;
+          md += `- **你的作答**：${w.userChoice}\n`;
+          md += `- **正確答案**：**${w.correctChoice}**\n`;
+          md += `- **核心考點**：${w.corePoint}\n`;
+          md += `- **文法剖析**：${w.grammar}\n\n---\n\n`;
+        });
+      }
+
+      navigator.clipboard.writeText(md).then(() => {
+        alert("✅ 錯題筆記（Markdown 格式）已成功複製到剪貼簿！可直接貼上至 Notion 或 Word。");
+      }).catch(() => {
+        alert("⚠️ 瀏覽器阻擋自動複製，請確認網站權限。");
+      });
+    }
+
+    // =========================================================================
+    // 倒數計時器功能 (240 ~ 0 分鐘)
+    // =========================================================================
+    function formatSeconds(sec) {
+      const m = Math.floor(sec / 60);
+      const s = sec % 60;
+      return `${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
+    }
+
+    function updateTimerUI() {
+      const display = document.getElementById("timer-display");
+      display.textContent = formatSeconds(timerSeconds);
+      display.style.color = timerSeconds <= 60 ? "#ef4444" : "#22d3ee";
+    }
+
+    function startTimer() {
+      clearInterval(timerInterval);
+      isPaused = false;
+      document.getElementById("btn-pause-timer").textContent = "暫停";
+      timerInterval = setInterval(() => {
+        if (!isPaused && !isSubmitted) {
+          if (timerSeconds > 0) {
+            timerSeconds--;
+            updateTimerUI();
+          } else {
+            clearInterval(timerInterval);
+            alert("⏰ 測驗時間到！系統將自動為您提交試卷。");
+            submitExam(true);
+          }
+        }
+      }, 1000);
+    }
+
+    function resetTimer() {
+      const minInput = parseInt(document.getElementById("timer-minutes").value, 10);
+      const validMin = isNaN(minInput) ? 50 : Math.max(0, Math.min(240, minInput));
+      document.getElementById("timer-minutes").value = validMin;
+      timerSeconds = validMin * 60;
+      initialSetSeconds = timerSeconds;
+      updateTimerUI();
+      startTimer();
+    }
+
+    // =========================================================================
+    // 家長監控紀錄 (localStorage + 連點標題5下 / Ctrl+Shift+P + 密碼1234)
+    // =========================================================================
+    function saveRecordToLocalStorage(record) {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        const list = raw ? JSON.parse(raw) : [];
+        list.unshift(record);
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(list.slice(0, 50)));
+      } catch (e) {
+        console.error("Failed to save history", e);
+      }
+    }
+
+    function openParentMonitor() {
+      const pwd = prompt("請輸入家長監控密碼：");
+      if (pwd !== "1234") {
+        if (pwd !== null) alert("密碼錯誤！");
+        return;
+      }
+
+      const raw = localStorage.getItem(STORAGE_KEY);
+      const list = raw ? JSON.parse(raw) : [];
+      const container = document.getElementById("parent-history-content");
+
+      if (list.length === 0) {
+        container.innerHTML = `<p style="color:#94a3b8; padding:16px 0;">目前尚無任何交卷紀錄。</p>`;
+      } else {
+        const rows = list
+          .map((item, i) => {
+            const mins = Math.floor(item.durationSeconds / 60);
+            const secs = item.durationSeconds % 60;
+            const dimStr = Object.entries(item.dimensions || {})
+              .map(([k, v]) => `${k}:${v}`)
+              .join("｜");
+            const wrongStr = (item.wrongQuestions || []).length > 0
+              ? item.wrongQuestions.join("<br>")
+              : "全對";
+            return `
+              <tr>
+                <td>${list.length - i}</td>
+                <td>${item.submittedAt}</td>
+                <td>${mins}分${secs}秒</td>
+                <td><strong style="color:#38bdf8;">${item.score} 分</strong> (${item.correctCount}/${item.total})</td>
+                <td>${dimStr}</td>
+                <td style="font-size:12px;">${wrongStr}</td>
+              </tr>
+            `;
+          })
+          .join("");
+
+        container.innerHTML = `
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>次序</th>
+                <th>交卷時間</th>
+                <th>作答耗時</th>
+                <th>得分</th>
+                <th>各維度統計</th>
+                <th>錯題清單</th>
+              </tr>
+            </thead>
+            <tbody>${rows}</tbody>
+          </table>
+        `;
+      }
+
+      document.getElementById("parent-modal").style.display = "flex";
+    }
+
+    function clearExamHistory() {
+      if (confirm("確定要清空所有歷次測驗紀錄嗎？")) {
+        localStorage.removeItem(STORAGE_KEY);
+        openParentMonitor();
+      }
+    }
+
+    // =========================================================================
+    // 題庫驗證總表 (左上角 ❖ 連點 5 下開啟)
+    // =========================================================================
+    function openVerifyModal() {
+      const labels = ["(A)", "(B)", "(C)", "(D)"];
+      const counts = { "(A)": 0, "(B)": 0, "(C)": 0, "(D)": 0 };
+
+      const rows = questionBank
+        .map((q) => {
+          const ansLabel = labels[q.answerIndex];
+          counts[ansLabel]++;
+          return `
+            <tr>
+              <td>第 ${q.id} 題</td>
+              <td>${q.categoryTag}</td>
+              <td><strong style="color:#34d399;">${ansLabel} ${q.options[q.answerIndex]}</strong></td>
+              <td>${q.stem}</td>
+            </tr>
+          `;
+        })
+        .join("");
+
+      document.getElementById("verify-distribution").innerHTML =
+        `<strong>答案選項分布統計（共 ${questionBank.length} 題）：</strong> ` +
+        `(A) ${counts["(A)"]} 題 ｜ (B) ${counts["(B)"]} 題 ｜ (C) ${counts["(C)"]} 題 ｜ (D) ${counts["(D)"]} 題`;
+
+      document.getElementById("verify-table-content").innerHTML = `
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th style="width:70px;">題號</th>
+              <th style="width:175px;">考點歸類</th>
+              <th style="width:160px;">標準答案</th>
+              <th>題幹內容</th>
+            </tr>
+          </thead>
+          <tbody>${rows}</tbody>
+        </table>
+      `;
+
+      document.getElementById("verify-modal").style.display = "flex";
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).style.display = "none";
+    }
+
+    // =========================================================================
+    // 事件綁定 (Event Listeners)
+    // =========================================================================
+    document.getElementById("btn-set-timer").addEventListener("click", () => {
+      if (isSubmitted) return;
+      resetTimer();
+    });
+
+    document.getElementById("btn-pause-timer").addEventListener("click", (e) => {
+      if (isSubmitted) return;
+      isPaused = !isPaused;
+      e.target.textContent = isPaused ? "繼續" : "暫停";
+    });
+
+    document.getElementById("btn-submit-exam").addEventListener("click", () => {
+      submitExam(false);
+    });
+
+    document.getElementById("btn-shuffle-exam").addEventListener("click", () => {
+      if (confirm("確定要重新測驗嗎？題目與選項順序將會隨機洗牌，目前作答紀錄將重置。")) {
+        initExam(true);
+      }
+    });
+
+    document.getElementById("btn-filter-all").addEventListener("click", () => setFilterMode("all"));
+    document.getElementById("btn-filter-wrong").addEventListener("click", () => setFilterMode("wrong"));
+    document.getElementById("btn-copy-markdown").addEventListener("click", copyWrongNotesMarkdown);
+
+    // 5 clicks on Title -> Parent Monitor
+    let titleClickCount = 0;
+    let titleClickTimer = null;
+    document.getElementById("exam-title-trigger").addEventListener("click", () => {
+      titleClickCount++;
+      clearTimeout(titleClickTimer);
+      titleClickTimer = setTimeout(() => { titleClickCount = 0; }, 1500);
+      if (titleClickCount >= 5) {
+        titleClickCount = 0;
+        openParentMonitor();
+      }
+    });
+
+    // Ctrl + Shift + P -> Parent Monitor
+    document.addEventListener("keydown", (e) => {
+      if (e.ctrlKey && e.shiftKey && (e.key === "P" || e.key === "p")) {
+        e.preventDefault();
+        openParentMonitor();
+      }
+    });
+
+    // 5 clicks on top-left ❖ -> Verification Table
+    let verifyClickCount = 0;
+    let verifyClickTimer = null;
+    document.getElementById("secret-verify-trigger").addEventListener("click", () => {
+      verifyClickCount++;
+      clearTimeout(verifyClickTimer);
+      verifyClickTimer = setTimeout(() => { verifyClickCount = 0; }, 1500);
+      if (verifyClickCount >= 5) {
+        verifyClickCount = 0;
+        openVerifyModal();
+      }
+    });
+
+    // Boot Application
+    window.addEventListener("DOMContentLoaded", () => {
+      initExam(false);
+    });
+  </script>
+</body>
+</html>

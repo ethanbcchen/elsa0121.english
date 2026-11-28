@@ -1,0 +1,2753 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>國三英文會考精準命題系統（第 1～15 題先導版｜Page 42–47）</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+  :root {
+    --bg-canvas: #eef1f5;
+    --bg-card: #ffffff;
+    --bg-subtle: #f8fafc;
+    --text-main: #1e293b;
+    --text-muted: #64748b;
+    --border-light: #cbd5e1;
+    --border-subtle: #e2e8f0;
+    --primary: #1d4ed8;
+    --primary-soft: #eff6ff;
+    --primary-border: #93c5fd;
+    --success: #15803d;
+    --success-bg: #dcfce7;
+    --success-border: #86efac;
+    --danger: #b91c1c;
+    --danger-bg: #fee2e2;
+    --danger-border: #fca5a5;
+    --warning: #b45309;
+    --warning-bg: #fef3c7;
+    --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.06);
+    --shadow-md: 0 4px 12px rgba(15, 23, 42, 0.08);
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: "Noto Sans TC", "Microsoft JhengHei", "PingFang TC", -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: var(--bg-canvas);
+    color: var(--text-main);
+    line-height: 1.65;
+    font-size: 15px;
+  }
+
+  /* 頂部工具列 */
+  .topbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: #ffffff;
+    border-bottom: 1px solid var(--border-light);
+    box-shadow: var(--shadow-sm);
+    padding: 10px 18px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .brand-area {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .secret-key-btn {
+    background: transparent;
+    border: none;
+    color: #94a3b8;
+    font-size: 13px;
+    cursor: pointer;
+    padding: 2px 4px;
+    user-select: none;
+    line-height: 1;
+  }
+
+  .secret-key-btn:hover {
+    color: #475569;
+  }
+
+  .main-title {
+    margin: 0;
+    font-size: 17px;
+    font-weight: 700;
+    color: #0f172a;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .scope-badge {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--primary);
+    background: var(--primary-soft);
+    border: 1px solid var(--primary-border);
+    padding: 2px 8px;
+    border-radius: 999px;
+  }
+
+  /* 計時器與操作按鈕群 */
+  .controls-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .timer-box {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: #f1f5f9;
+    border: 1px solid var(--border-light);
+    border-radius: 8px;
+    padding: 5px 10px;
+    font-weight: 600;
+    font-size: 14px;
+  }
+
+  .timer-display {
+    font-variant-numeric: tabular-nums;
+    color: #0f172a;
+    min-width: 58px;
+    text-align: center;
+  }
+
+  .timer-display.danger {
+    color: var(--danger);
+    animation: pulse 1s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.55; }
+  }
+
+  .timer-input {
+    width: 54px;
+    padding: 2px 6px;
+    border: 1px solid var(--border-light);
+    border-radius: 5px;
+    font-size: 13px;
+    text-align: center;
+    background: #fff;
+  }
+
+  .btn {
+    border: 1px solid transparent;
+    border-radius: 8px;
+    padding: 7px 13px;
+    font-size: 13.5px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .btn-primary {
+    background: var(--primary);
+    color: #ffffff;
+  }
+
+  .btn-primary:hover:not(:disabled) {
+    background: #1e40af;
+  }
+
+  .btn-secondary {
+    background: #ffffff;
+    color: var(--text-main);
+    border-color: var(--border-light);
+  }
+
+  .btn-secondary:hover:not(:disabled) {
+    background: #f8fafc;
+    border-color: #94a3b8;
+  }
+
+  .btn-success {
+    background: var(--success);
+    color: #ffffff;
+  }
+
+  .btn-success:hover:not(:disabled) {
+    background: #166534;
+  }
+
+  .btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+
+  /* 成績與弱點診斷面板 */
+  .result-panel {
+    display: none;
+    margin: 14px 18px 0;
+    background: var(--bg-card);
+    border: 1px solid var(--border-light);
+    border-radius: 12px;
+    padding: 18px 20px;
+    box-shadow: var(--shadow-md);
+  }
+
+  .result-panel.active {
+    display: block;
+  }
+
+  .result-top-grid {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 20px;
+    align-items: center;
+  }
+
+  @media (max-width: 900px) {
+    .result-top-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .score-summary-box {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 14px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .score-big {
+    font-size: 36px;
+    font-weight: 800;
+    color: var(--primary);
+    line-height: 1.1;
+  }
+
+  .score-meta {
+    font-size: 14px;
+    color: var(--text-muted);
+  }
+
+  .diag-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+    margin-top: 8px;
+  }
+
+  .diag-table th, .diag-table td {
+    border: 1px solid var(--border-subtle);
+    padding: 7px 10px;
+    text-align: left;
+  }
+
+  .diag-table th {
+    background: #f8fafc;
+    font-weight: 700;
+  }
+
+  .radar-box {
+    max-width: 360px;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .filter-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .filter-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  /* 左右雙欄主容器 */
+  .workspace {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    padding: 14px 18px 36px;
+    align-items: start;
+  }
+
+  @media (max-width: 960px) {
+    .workspace {
+      grid-template-columns: 1fr;
+    }
+    .left-pane {
+      position: static !important;
+      max-height: none !important;
+    }
+  }
+
+  /* 左側面板（50% 寬度，可獨立捲動） */
+  .left-pane {
+    position: sticky;
+    top: 72px;
+    max-height: calc(100vh - 90px);
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding-right: 4px;
+  }
+
+  .panel-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-light);
+    border-radius: 12px;
+    padding: 16px 18px;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .panel-title {
+    margin: 0 0 10px;
+    font-size: 15.5px;
+    font-weight: 700;
+    color: #0f172a;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  /* 題號快速導覽 */
+  .nav-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(38px, 1fr));
+    gap: 7px;
+  }
+
+  .nav-btn {
+    height: 36px;
+    border-radius: 7px;
+    border: 1px solid var(--border-light);
+    background: #ffffff;
+    color: var(--text-main);
+    font-weight: 700;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.12s ease;
+  }
+
+  .nav-btn:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+  }
+
+  .nav-btn.answered {
+    background: var(--primary);
+    color: #ffffff;
+    border-color: var(--primary);
+  }
+
+  .nav-btn.graded-correct {
+    background: var(--success-bg);
+    color: var(--success);
+    border-color: var(--success-border);
+  }
+
+  .nav-btn.graded-wrong {
+    background: var(--danger-bg);
+    color: var(--danger);
+    border-color: var(--danger-border);
+  }
+
+  /* 自修重點考點摘要卡片（左側參考與聯動目標） */
+  .study-ref-card {
+    border: 1px solid var(--border-subtle);
+    border-left: 4px solid var(--primary);
+    border-radius: 9px;
+    padding: 12px 14px;
+    background: #f8fafc;
+    margin-bottom: 10px;
+    transition: all 0.25s ease;
+  }
+
+  .study-ref-card.highlight-flash {
+    background: #dbeafe;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.25);
+  }
+
+  .study-ref-head {
+    font-weight: 700;
+    font-size: 14px;
+    color: #0f172a;
+    margin-bottom: 4px;
+  }
+
+  .study-ref-body {
+    font-size: 13.5px;
+    color: #334155;
+  }
+
+  .mini-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12.5px;
+    margin-top: 8px;
+    background: #fff;
+  }
+
+  .mini-table th, .mini-table td {
+    border: 1px solid #cbd5e1;
+    padding: 5px 8px;
+    text-align: left;
+  }
+
+  .mini-table th {
+    background: #e2e8f0;
+  }
+
+  /* 右側面板（50% 寬度，題目與作答區） */
+  .right-pane {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .question-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-light);
+    border-radius: 12px;
+    padding: 16px 18px;
+    box-shadow: var(--shadow-sm);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .question-card.correct-card {
+    border-color: var(--success-border);
+    background: #fafffb;
+  }
+
+  .question-card.wrong-card {
+    border-color: var(--danger-border);
+    background: #fffafa;
+  }
+
+  .question-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+
+  .q-badge-group {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 7px;
+  }
+
+  .q-num-badge {
+    background: var(--primary);
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    padding: 3px 10px;
+    font-weight: 700;
+    font-size: 13.5px;
+    cursor: pointer;
+  }
+
+  .q-num-badge:hover {
+    background: #1e40af;
+  }
+
+  .q-tag {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 999px;
+    background: #f1f5f9;
+    color: #475569;
+    border: 1px solid #e2e8f0;
+  }
+
+  .q-status-pill {
+    font-size: 12.5px;
+    font-weight: 700;
+    padding: 2px 9px;
+    border-radius: 999px;
+  }
+
+  .q-status-pill.correct {
+    background: var(--success-bg);
+    color: var(--success);
+  }
+
+  .q-status-pill.wrong {
+    background: var(--danger-bg);
+    color: var(--danger);
+  }
+
+  .question-stem {
+    font-size: 15.5px;
+    font-weight: 600;
+    color: #0f172a;
+    margin-bottom: 12px;
+    white-space: pre-line;
+  }
+
+  .options-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .option-btn {
+    width: 100%;
+    text-align: left;
+    background: #ffffff;
+    border: 1.5px solid var(--border-light);
+    border-radius: 8px;
+    padding: 9px 13px;
+    font-size: 14.5px;
+    color: var(--text-main);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.12s ease;
+  }
+
+  .option-btn:hover:not(:disabled) {
+    border-color: var(--primary);
+    background: var(--primary-soft);
+  }
+
+  .option-btn.selected {
+    border-color: var(--primary);
+    background: var(--primary-soft);
+    font-weight: 700;
+  }
+
+  .option-btn.reveal-correct {
+    border-color: var(--success);
+    background: var(--success-bg);
+    color: var(--success);
+    font-weight: 700;
+  }
+
+  .option-btn.reveal-wrong {
+    border-color: var(--danger);
+    background: var(--danger-bg);
+    color: var(--danger);
+    font-weight: 700;
+  }
+
+  .option-btn:disabled {
+    cursor: default;
+  }
+
+  .opt-key {
+    font-weight: 700;
+    min-width: 24px;
+  }
+
+  /* 逐題詳解區塊 */
+  .explanation-box {
+    display: none;
+    margin-top: 14px;
+    padding: 14px 16px;
+    border-radius: 9px;
+    background: #f8fafc;
+    border: 1px solid #cbd5e1;
+    font-size: 13.8px;
+    line-height: 1.65;
+  }
+
+  .explanation-box.show {
+    display: block;
+  }
+
+  .exp-item {
+    margin-bottom: 7px;
+  }
+
+  .exp-item:last-child {
+    margin-bottom: 0;
+  }
+
+  .exp-label {
+    font-weight: 700;
+    color: #0f172a;
+  }
+
+  /* 隱藏 Modal 視窗 */
+  .modal-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    background: rgba(15, 23, 42, 0.55);
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+  }
+
+  .modal-backdrop.open {
+    display: flex;
+  }
+
+  .modal-card {
+    background: #ffffff;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 780px;
+    max-height: 86vh;
+    overflow-y: auto;
+    padding: 20px 22px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+  }
+
+  .modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border-subtle);
+    padding-bottom: 10px;
+    margin-bottom: 14px;
+  }
+
+  .modal-title {
+    margin: 0;
+    font-size: 17px;
+    font-weight: 700;
+  }
+
+  .toast-msg {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1200;
+    background: #0f172a;
+    color: #ffffff;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-size: 13.5px;
+    font-weight: 600;
+    box-shadow: var(--shadow-md);
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.2s ease;
+    pointer-events: none;
+  }
+
+  .toast-msg.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+
+  <!-- 頂部導覽與計時控制列 -->
+  <header class="topbar">
+    <div class="brand-area">
+      <button id="secretAnswerKeyBtn" class="secret-key-btn" title="總表入口">❖</button>
+      <h1 id="mainTitle" class="main-title" title="國三英文測驗系統">國三英文會考精準命題系統</h1>
+      <span class="scope-badge">範圍：Page 42–47｜第 1–15 題先導版</span>
+    </div>
+
+    <div class="controls-bar">
+      <div class="timer-box">
+        <span>倒數計時：</span>
+        <span id="timerDisplay" class="timer-display">30:00</span>
+        <input id="customMinutesInput" class="timer-input" type="number" min="0" max="240" value="30" title="設定分鐘數（0～240）">
+        <button id="setTimerBtn" class="btn btn-secondary" style="padding:3px 8px;font-size:12px;">設定</button>
+      </div>
+
+      <button id="submitExamBtn" class="btn btn-primary">提交試卷</button>
+      <button id="reshuffleExamBtn" class="btn btn-secondary">重新測驗(洗牌)</button>
+    </div>
+  </header>
+
+  <!-- 交卷後成績與弱點診斷面板 -->
+  <section id="resultPanel" class="result-panel" aria-live="polite">
+    <div class="result-top-grid">
+      <div>
+        <div class="score-summary-box">
+          <div>
+            <div class="score-meta">本回得分（先導 15 題換算 100 分制）</div>
+            <div id="finalScoreText" class="score-big">0 分</div>
+          </div>
+          <div class="score-meta">
+            <div>答對題數：<strong id="correctCountText">0 / 15</strong></div>
+            <div>交卷時間：<strong id="submittedAtText">--</strong></div>
+            <div>作答耗時：<strong id="elapsedTimeText">--</strong></div>
+          </div>
+        </div>
+
+        <div style="font-weight:700;font-size:14.5px;margin-bottom:6px;">弱點診斷統計（依考點歸類）</div>
+        <table class="diag-table">
+          <thead>
+            <tr>
+              <th>考點維度／歸類</th>
+              <th>答對 / 題數</th>
+              <th>正確率</th>
+              <th>診斷建議</th>
+            </tr>
+          </thead>
+          <tbody id="diagTableBody"></tbody>
+        </table>
+      </div>
+
+      <div class="radar-box">
+        <div style="font-weight:700;font-size:14px;text-align:center;margin-bottom:6px;">四維能力雷達圖（得分率 %）</div>
+        <canvas id="radarChartCanvas"></canvas>
+      </div>
+    </div>
+
+    <div class="filter-toolbar">
+      <div class="filter-group">
+        <button id="showAllBtn" class="btn btn-secondary" style="background:#eff6ff;border-color:#93c5fd;color:#1d4ed8;">顯示全部</button>
+        <button id="showWrongOnlyBtn" class="btn btn-secondary">只看錯題</button>
+      </div>
+      <div class="filter-group">
+        <button id="copyWrongMdBtn" class="btn btn-success">一鍵複製錯題筆記（Markdown 格式）</button>
+        <button id="downloadDocBtn" class="btn btn-secondary">下載錯題 Word (.doc)</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 左右雙欄測驗主畫面 -->
+  <main class="workspace">
+    <!-- 左側面板：題號快速導覽 + Page 42-47 核心考點參考 -->
+    <aside class="left-pane">
+      <div class="panel-card">
+        <div class="panel-title">
+          <span>題號快速導覽（點擊跳轉；作答後底色轉藍）</span>
+          <span id="progressCounter" style="font-size:13px;color:var(--primary);">已作答 0 / 15</span>
+        </div>
+        <div id="questionNavGrid" class="nav-grid"></div>
+      </div>
+
+      <div class="panel-card">
+        <div class="panel-title">
+          <span>自修資料核心考點對照（Page 42–47）</span>
+          <span style="font-size:12px;color:var(--text-muted);">點擊題號徽章可聯動定位</span>
+        </div>
+
+        <div id="ref-p42-43" class="study-ref-card">
+          <div class="study-ref-head">【Page 42–43】時間詢問、What day 與序數／分數用法</div>
+          <div class="study-ref-body">
+            • 問幾點用 <strong>What time</strong>；問今天星期幾用 <strong>What day is it? / What day is today?</strong>（不加介系詞，答句可用 It's + 星期或 Today is + 星期）。<br>
+            • 問「某事件／活動在星期幾」用 <strong>What day is + (the) 名詞?</strong>，答句加 <strong>on + 星期</strong>。<br>
+            • 序數拼法：one→first, two→second, three→third, five→fifth, twelve→twelfth, eight→eighth, nine→ninth, twenty→twentieth, forty→fortieth；序數作形容詞前常加 <strong>the</strong> 或所有格，樓層用 <strong>on the + 序數 + floor</strong>；分數分子基數、分母序數（分子＞1 時分母加 <strong>-s</strong>，如 two fifths）。
+          </div>
+        </div>
+
+        <div id="ref-p44-45" class="study-ref-card">
+          <div class="study-ref-head">【Page 44–45】日期問答（What's the date）與時間介系詞</div>
+          <div class="study-ref-body">
+            • 日期寫基數或序數皆可，但<strong>須讀作序數</strong>；特定節日／生日日期用 <strong>It's + on + 月分 + 日期</strong>。<br>
+            • 時間介系詞階層：<strong>at</strong>＋短時間／時刻（at 11:00 p.m., at night）；<strong>on</strong>＋特定日子或特定日子的上午／下午／晚上（on July 18, 2018; on the morning of August 16）；<strong>in</strong>＋長期間（in November, in the spring of 2032, in the afternoon）。<br>
+            • <strong>until</strong>＋時間點（直到……）；<strong>for</strong>＋一段時間；every/this/that/last/next＋時間及 today/yesterday/tomorrow 前<strong>不加介系詞</strong>。
+          </div>
+          <table class="mini-table">
+            <thead>
+              <tr>
+                <th>介系詞／時間詞</th>
+                <th>核心用法</th>
+                <th>自修例句重點</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>on + 特定日期／時段</td>
+                <td>特定某日或該日早午晚</td>
+                <td>on July 18, 2018 / on the morning of August 16</td>
+              </tr>
+              <tr>
+                <td>until + 時間點</td>
+                <td>持續到某個時間點為止</td>
+                <td>stay at his office until 11:00 p.m.</td>
+              </tr>
+              <tr>
+                <td>in + 年／月／季／早午晚</td>
+                <td>較長時間區間</td>
+                <td>in the spring of 2032 / in the afternoon</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div id="ref-p46-47" class="study-ref-card">
+          <div class="study-ref-head">【Page 46–47】現在進行式、不可用進行式動詞與 There is/are</div>
+          <div class="study-ref-body">
+            • 現在進行式：<strong>be + V-ing</strong>（去 e 加 ing：write→writing；短母音＋子音重複字尾加 ing：sit→sitting, run→running, swim→swimming）。<br>
+            • 文法進階：表「擁有」的 <strong>have</strong>、表「看／聽」的知覺動詞 <strong>see / hear</strong>、連敘動詞與認知動詞（know, understand, forget, remember）<strong>通常不用於現在進行式</strong>（但 have 作「吃／喝／舉辦」或 see 作「送行／觀光」除外）。<br>
+            • <strong>There is / are</strong> 表「某地有某物／某人」，is 或 are 由<strong>後面的名詞主詞</strong>決定；「某人擁有」用 <strong>have / has</strong>，不可用 There is/are。
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- 右側面板：試題卡片作答區 -->
+    <section id="questionsContainer" class="right-pane"></section>
+  </main>
+
+  <!-- 隱藏 Modal 1：家長歷次測驗歷史紀錄表（連點標題 5 下 或 Ctrl+Shift+P） -->
+  <div id="parentHistoryModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="parentModalTitle">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h2 id="parentModalTitle" class="modal-title">歷次測驗歷史紀錄表（家長監看）</h2>
+        <button id="closeParentModalBtn" class="btn btn-secondary">關閉</button>
+      </div>
+      <div id="parentAuthBox">
+        <p style="margin-top:0;color:var(--text-muted);font-size:14px;">請輸入家長密碼以檢視孩子今日交卷次數、得分與作答紀錄：</p>
+        <div style="display:flex;gap:8px;align-items:center;">
+          <input id="parentPasswordInput" type="password" placeholder="請輸入密碼" style="padding:8px 12px;border:1px solid var(--border-light);border-radius:8px;font-size:14px;">
+          <button id="verifyParentBtn" class="btn btn-primary">驗證查看</button>
+        </div>
+        <div id="parentAuthError" style="color:var(--danger);font-size:13px;margin-top:6px;"></div>
+      </div>
+      <div id="parentRecordsContent" style="display:none;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+          <div id="todayAttemptsSummary" style="font-weight:700;font-size:14.5px;color:var(--primary);"></div>
+          <button id="clearHistoryBtn" class="btn btn-secondary" style="font-size:12.5px;padding:5px 10px;">清除歷史紀錄</button>
+        </div>
+        <div style="overflow-x:auto;">
+          <table class="diag-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>01.交卷時間</th>
+                <th>02.耗時</th>
+                <th>03.得分</th>
+                <th>04.各維度統計</th>
+                <th>05.錯題清單</th>
+              </tr>
+            </thead>
+            <tbody id="historyTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 隱藏 Modal 2：視覺化驗證題庫總表（左上角 ❖ 連點 5 下） -->
+  <div id="answerKeyModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="answerKeyModalTitle">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h2 id="answerKeyModalTitle" class="modal-title">答案與題目總表（驗證用）</h2>
+        <button id="closeAnswerKeyModalBtn" class="btn btn-secondary">關閉</button>
+      </div>
+      <div style="overflow-x:auto;">
+        <table class="diag-table">
+          <thead>
+            <tr>
+              <th>題號</th>
+              <th>考點維度</th>
+              <th>題目摘要</th>
+              <th>正確答案</th>
+            </tr>
+          </thead>
+          <tbody id="answerKeyTableBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div id="toastMsg" class="toast-msg"></div>
+
+<script>
+/**
+ * 國三英文測驗題庫陣列（先放入第 1～15 題，完整解析與誘答剖析）
+ * 欄位說明：
+ * - id: 題號
+ * - section: 大題區塊
+ * - category: 考點歸類（對應雷達圖與弱點診斷：'字彙' | '文法' | '語意邏輯' | '細節理解'）
+ * - refId: 左側自修考點卡片 ID（供點擊題號徽章雙向聯動高亮）
+ * - stem: 題幹
+ * - options: 選項陣列 [{ key: 'A', text: '...' }, ...]
+ * - answer: 正確選項字母 'A' | 'B' | 'C' | 'D'
+ * - translation: 繁體中文翻譯
+ * - coreConcept: 核心考點說明
+ * - grammar: 原句與答案相關文法說明
+ * - distractors: 干擾項、誘答剖析（逐一解釋其餘三個選項）
+ * - phonetics: 原句與答案 K.K.音標 & 連讀說明
+ */
+const QUESTION_BANK = [
+  {
+    id: 1,
+    section: "一、核心詞彙與片語運用",
+    category: "字彙",
+    refId: "ref-p42-43",
+    stem: "Ms. Lin lives on the ______ floor of that tall building, so she takes the elevator every morning.",
+    options: [
+      { key: "A", text: "twelfth" },
+      { key: "B", text: "twelve" },
+      { key: "C", text: "twelveth" },
+      { key: "D", text: "twelves" }
+    ],
+    answer: "A",
+    translation: "林小姐住在那棟高樓的「第十二」樓，所以她每天早上搭電梯。",
+    coreConcept: "自修第 43 頁「序數」要點指出，表示第幾層樓時通常使用「on + the + 序數 + floor」，且 12 的序數為 twelfth。",
+    grammar: "on + the + ordinal number (twelfth) + floor（介系詞片語作地方副詞，表示在第幾層樓）。",
+    distractors: [
+      "(B) twelve 為基數（12），不能直接放在「第……樓」的序數位置。",
+      "(C) twelveth 為常見拼字迷思，twelve 改序數時需將 ve 改為 f 再加 th（twelfth），不可保留 ve。",
+      "(D) twelves 為基數複數形式，不符合序數表示樓層的用法。"
+    ],
+    phonetics: "原句重音節奏：Ms. Lin lives on the TWELFTH floor of that TALL building. /twɛlfθ/；on the 連讀時 the 弱化為 /ðə/，twelfth 尾音 /lfθ/ 需清楚送氣摩擦。"
+  },
+  {
+    id: 2,
+    section: "一、核心詞彙與片語運用",
+    category: "字彙",
+    refId: "ref-p44-45",
+    stem: "Daniel stayed in his study ______ midnight to finish the science report for tomorrow's class.",
+    options: [
+      { key: "A", text: "until" },
+      { key: "B", text: "during" },
+      { key: "C", text: "among" },
+      { key: "D", text: "toward" }
+    ],
+    answer: "A",
+    translation: "丹尼爾待在書房「直到」午夜，以完成明天上課要用的自然報告。",
+    coreConcept: "自修第 45 頁「表時間的介系詞」明列「until + 時間點」表示「直到……（為止）」，符合 stayed（持續停留）到 midnight（午夜時間點）的語意。",
+    grammar: "S + V (stayed) + prep. phrase (until midnight) + to-V（不定詞片語表目的）。",
+    distractors: [
+      "(B) during 接「期間」（如 during the vacation），midnight 為明確時間點，故不搭配。",
+      "(C) among 表「在……之中（三者以上）」，屬空間／群體介系詞，不表時間終點。",
+      "(D) toward 表「朝向／接近」，無法精確表達「持續到午夜為止」的語境。"
+    ],
+    phonetics: "Daniel STAYED in his STUDY until MIDNIGHT. /ənˈtɪl/；stayed in 發生母音與母音的自然銜接，until 重音在第二音節 /tɪl/。"
+  },
+  {
+    id: 3,
+    section: "一、核心詞彙與片語運用",
+    category: "字彙",
+    refId: "ref-p42-43",
+    stem: "About two ______ of the students in our school ride bicycles or walk to campus every day.",
+    options: [
+      { key: "A", text: "fifths" },
+      { key: "B", text: "fifth" },
+      { key: "C", text: "five" },
+      { key: "D", text: "fives" }
+    ],
+    answer: "A",
+    translation: "我們學校大約有「五分之二」的學生每天騎腳踏車或走路到校園。",
+    coreConcept: "自修第 43 頁「補充：表示分數」說明：分子用基數、分母用序數；當分子為 2 或超過 2 時，分母序數需加 s，故「五分之二」為 two fifths。",
+    grammar: "Fraction: cardinal numerator (two) + plural ordinal denominator (fifths) + of + plural noun (the students).",
+    distractors: [
+      "(B) fifth 缺少複數 s；分子為 two（大於 1）時，分母序數必須加 s。",
+      "(C) five 為基數，分數的分母應用序數而非基數。",
+      "(D) fives 為基數複數，不符合英語分數的分母規則。"
+    ],
+    phonetics: "About TWO FIFTHS of the STUDENTS... /fɪfθs/；two fifths 連讀時 /uː/ 接 /f/，字尾 /fθs/ 需完整發出齒間摩擦與複數氣流。"
+  },
+  {
+    id: 4,
+    section: "一、核心詞彙與片語運用",
+    category: "字彙",
+    refId: "ref-p44-45",
+    stem: "The music festival will take place ______ the afternoon of October 10 in the city park.",
+    options: [
+      { key: "A", text: "on" },
+      { key: "B", text: "in" },
+      { key: "C", text: "at" },
+      { key: "D", text: "by" }
+    ],
+    answer: "A",
+    translation: "這場音樂節將於十月十日下午在市立公園舉行。",
+    coreConcept: "自修第 44 頁「表時間的介系詞」指出，「特定日子的上午／下午／晚上」必須用介系詞 on（例如 on the afternoon of December fifth）。",
+    grammar: "on + specific day/time (the afternoon of October 10) + place adverbial (in the city park).",
+    distractors: [
+      "(B) in 若單獨用 in the afternoon 指一般下午，但此處限定為「十月十日的下午」，故需用 on。",
+      "(C) at 用於短時間或特定時刻（如 at 3:00 p.m., at night），不用於特定日子的下午。",
+      "(D) by 表「在……之前（含期限）」，不符合「於某日下午舉行」的語意。"
+    ],
+    phonetics: "The MUSIC FES-ti-val will take PLACE on the af-ter-NOON of Oc-TO-ber TENTH. /ɑn/；take place 連讀為 /teɪk pleɪs/，on the 弱化為 /ɑn ðə/。"
+  },
+  {
+    id: 5,
+    section: "一、核心詞彙與片語運用",
+    category: "字彙",
+    refId: "ref-p42-43",
+    stem: "Kevin always finishes his homework ______ before he turns on his computer game.",
+    options: [
+      { key: "A", text: "first" },
+      { key: "B", text: "one" },
+      { key: "C", text: "once" },
+      { key: "D", text: "single" }
+    ],
+    answer: "A",
+    translation: "凱文在打開電腦遊戲之前，總是「先／首先」完成他的家庭作業。",
+    coreConcept: "自修第 43 頁「序數」要點 2 說明：序數作副詞時，前面可不加 the 或所有格，first 表示「首先、先」。",
+    grammar: "S + adv. (always) + V (finishes) + O + adv. (first) + before-clause.",
+    distractors: [
+      "(B) one 為基數，不作「首先」的副詞使用。",
+      "(C) once 意為「一次；一旦」，無法表達先後順序中「首先」的意思。",
+      "(D) single 為形容詞，意為「單一的、單身的」，詞性與語意皆不合。"
+    ],
+    phonetics: "KEV-in AL-ways FIN-ish-es his HOME-work FIRST. /fɝːst/；finishes his 中 his 常弱化為 /ɪz/，first 尾音 /st/ 清楚收尾。"
+  },
+  {
+    id: 6,
+    section: "一、核心詞彙與片語運用",
+    category: "字彙",
+    refId: "ref-p44-45",
+    stem: "Grandpa came to Tainan ______ July 18, 2022, and stayed with us for two weeks.",
+    options: [
+      { key: "A", text: "on" },
+      { key: "B", text: "in" },
+      { key: "C", text: "at" },
+      { key: "D", text: "to" }
+    ],
+    answer: "A",
+    translation: "爺爺於 2022 年 7 月 18 日來到臺南，並和我們住了兩個星期。",
+    coreConcept: "自修第 44 頁「日期的表示法」與「表時間的介系詞」指出，只要出現「某月某日」或「年／月／日」完整日期，一律使用介系詞 on。",
+    grammar: "S + V (came) + prep. phrase of place (to Tainan) + prep. phrase of date (on July 18, 2022).",
+    distractors: [
+      "(B) in 用於單獨的年、月、季或較長期間（如 in July, in 2022），有明確「日」時改用 on。",
+      "(C) at 用於具體時刻或短時間，不與具體日期搭配。",
+      "(D) to 在此處不作時間介系詞使用。"
+    ],
+    phonetics: "GRAND-pa CAME to Tai-NAN on Ju-LY eigh-TEENTH, TWEN-ty TWEN-ty-TWO. /ɑn/；came to 連讀自然，July 18 讀作 July eighteenth。"
+  },
+  {
+    id: 7,
+    section: "一、核心詞彙與片語運用",
+    category: "字彙",
+    refId: "ref-p46-47",
+    stem: "Look! The little puppy is ______ on the rug while the sun shines through the window.",
+    options: [
+      { key: "A", text: "lying" },
+      { key: "B", text: "lieing" },
+      { key: "C", text: "laying" },
+      { key: "D", text: "lies" }
+    ],
+    answer: "A",
+    translation: "看！陽光穿過窗戶照進來時，那隻小狗正「躺」在地毯上。",
+    coreConcept: "自修第 45 頁「現在分詞形成方式」指出，字尾為 ie 的動詞變現在分詞時，需去 ie 改為 y 再加 ing（lie → lying，躺／位於）。",
+    grammar: "Present continuous: be (is) + present participle (lying) + prep. phrase (on the rug).",
+    distractors: [
+      "(B) lieing 為拼字錯誤，ie 結尾動詞不可直接加 ing。",
+      "(C) laying 源自 lay（放置、下蛋），且為及物動詞需受詞，此處指小狗自己躺著，應用 lie 的現在分詞 lying。",
+      "(D) lies 為簡單現在式第三人稱單數動詞，與前面 is 無法構成正確時態。"
+    ],
+    phonetics: "LOOK! The LIT-tle PUP-py is LY-ing on the RUG. /ˈlaɪɪŋ/；is lying 連讀時 is /ɪz/ 與 lying /ˈlaɪɪŋ/ 緊密銜接。"
+  },
+  {
+    id: 8,
+    section: "一、核心詞彙與片語運用",
+    category: "字彙",
+    refId: "ref-p42-43",
+    stem: "Forty is the ______ form of forty, and we use it when talking about the 40th day.",
+    options: [
+      { key: "A", text: "fortieth" },
+      { key: "B", text: "fourtieth" },
+      { key: "C", text: "fourty" },
+      { key: "D", text: "forty-one" }
+    ],
+    answer: "A",
+    translation: "fortieth 是 forty 的序數形式，我們在談論第 40 天時會使用它。",
+    coreConcept: "自修第 43 頁「序數」表格明確列出「forty → fortieth」，提醒學生注意十位數去 y 改加 ieth，且 forty 拼法無 u。",
+    grammar: "N (Forty) + be (is) + det. (the) + adj. (fortieth) + N (form).",
+    distractors: [
+      "(B) fourtieth 多了字母 u，是學生常見的拼字干擾項。",
+      "(C) fourty 為基數 40 的常見誤拼，正確基數拼法為 forty。",
+      "(D) forty-one 為基數 41，與題意「第 40 天」不符。"
+    ],
+    phonetics: "FOR-ty is the FOR-ti-eth FORM of FOR-ty. /ˈfɔːrtiəθ/；fortieth 為三音節，重音落在第一音節 /ˈfɔːr/。"
+  },
+  {
+    id: 9,
+    section: "一、核心詞彙與片語運用",
+    category: "字彙",
+    refId: "ref-p46-47",
+    stem: "There are two ______ in the living room, so four people can sit comfortably together.",
+    options: [
+      { key: "A", text: "sofas" },
+      { key: "B", text: "sofa" },
+      { key: "C", text: "a sofa" },
+      { key: "D", text: "much sofa" }
+    ],
+    answer: "A",
+    translation: "客廳裡有兩張「沙發」，所以四個人可以一起舒服地坐著。",
+    coreConcept: "自修第 47 頁「There is/are 的用法」複數肯定句例句為「There are two sofas in the living room.」，are 後面需接複數名詞。",
+    grammar: "There are + plural noun (two sofas) + place adverbial (in the living room).",
+    distractors: [
+      "(B) sofa 為單數名詞，前面有 two（二），不可用單數。",
+      "(C) a sofa 為單數不定冠詞片語，與 two 及 are 衝突。",
+      "(D) much 修飾不可數名詞，sofa 為可數名詞且此處數量為 two。"
+    ],
+    phonetics: "There are TWO SO-fas in the LIV-ing ROOM. /ˈsoʊfəz/；There are 常弱化連讀為 /ðər ɑːr/，sofas 字尾發 /z/。"
+  },
+  {
+    id: 10,
+    section: "一、核心詞彙與片語運用",
+    category: "字彙",
+    refId: "ref-p44-45",
+    stem: "The cherry blossom trees in the mountain park bloom every spring, especially ______ April.",
+    options: [
+      { key: "A", text: "in" },
+      { key: "B", text: "on" },
+      { key: "C", text: "at" },
+      { key: "D", text: "until" }
+    ],
+    answer: "A",
+    translation: "山區公園裡的櫻花樹每年春天都會盛開，尤其是在「四月」。",
+    coreConcept: "自修第 44 頁「日期的表示法」與「表時間的介系詞」指出，月份前面須用介系詞 in（例如 in November, in June, in April）。",
+    grammar: "S + V (bloom) + adverbial of frequency (every spring) + prep. phrase of month (in April).",
+    distractors: [
+      "(B) on 用於特定日期或星期，April 僅為月份，不用 on。",
+      "(C) at 用於具體時刻或節日期間，不與單一月份搭配。",
+      "(D) until 表「直到……為止」，不符合「在四月盛開」的語意。"
+    ],
+    phonetics: "The CHER-ry BLOS-som TREES... BLOOM ev-ery SPRING, es-PE-cial-ly in A-pril. /ɪn/；especially in 連讀時 in 輕讀為 /ɪn/。"
+  },
+  {
+    id: 11,
+    section: "一、核心詞彙與片語運用",
+    category: "字彙",
+    refId: "ref-p42-43",
+    stem: "My sister is turning nine next month, and we are planning a surprise party for her ______ birthday.",
+    options: [
+      { key: "A", text: "ninth" },
+      { key: "B", text: "nineth" },
+      { key: "C", text: "nine" },
+      { key: "D", text: "ninetieth" }
+    ],
+    answer: "A",
+    translation: "我妹妹下個月就要滿九歲了，我們正計畫為她的「第九個」生日辦一場驚喜派對。",
+    coreConcept: "自修第 43 頁「序數」表格指出，nine 變序數時去 e 加 th，拼作「ninth」（如自修例句 on her ninetieth birthday 所示之序數規則）。",
+    grammar: "Possessive (her) + ordinal adj. (ninth) + N (birthday).",
+    distractors: [
+      "(B) nineth 為常見拼字錯誤，nine 變序數必須去掉字母 e 再加 th（ninth）。",
+      "(C) nine 為基數 9，「第九個生日」需用序數 ninth。",
+      "(D) ninetieth 為「第九十」，與題幹「turning nine（滿九歲）」語意不符。"
+    ],
+    phonetics: "My SIS-ter is TURN-ing NINE next MONTH... for her NINTH BIRTH-day. /naɪnθ/；ninth 尾音 /nθ/ 需清楚發出鼻音與齒間摩擦音。"
+  },
+  {
+    id: 12,
+    section: "一、核心詞彙與片語運用",
+    category: "字彙",
+    refId: "ref-p46-47",
+    stem: "Listen! The runners are ______ faster toward the finish line as the crowd cheers loudly.",
+    options: [
+      { key: "A", text: "running" },
+      { key: "B", text: "runing" },
+      { key: "C", text: "runs" },
+      { key: "D", text: "ran" }
+    ],
+    answer: "A",
+    translation: "聽！在觀眾大聲歡呼下，跑者們正朝終點線「跑」得更快。",
+    coreConcept: "自修第 45 頁「現在分詞形成方式」指出，句首有 Listen! 表示動作正在進行，且 run 屬「短母音＋子音」結尾，需重複字尾 n 再加 ing（running）。",
+    grammar: "Listen! + S (The runners) + be (are) + V-ing (running) + adv. (faster).",
+    distractors: [
+      "(B) runing 漏掉重複字尾的 n，違反短母音＋子音加 ing 的拼字規則。",
+      "(C) runs 為簡單現在式第三人稱單數動詞，無法與 are 搭配且主詞 runners 為複數。",
+      "(D) ran 為過去式，與句首 Listen! 及現在進行式結構不符。"
+    ],
+    phonetics: "LIS-ten! The RUN-ners are RUN-ning FAS-ter to-WARD the FIN-ish LINE. /ˈrʌnɪŋ/；are running 連讀時 /ɑːr/ 與 /ˈrʌnɪŋ/ 自然銜接。"
+  },
+  {
+    id: 13,
+    section: "一、核心詞彙與片語運用",
+    category: "字彙",
+    refId: "ref-p44-45",
+    stem: "We don't have any English classes ______ tomorrow afternoon, so we can practice speaking together.",
+    options: [
+      { key: "A", text: "(不填介系詞)" },
+      { key: "B", text: "on" },
+      { key: "C", text: "in" },
+      { key: "D", text: "at" }
+    ],
+    answer: "A",
+    translation: "我們明天下午沒有任何英文課，所以我們可以一起練習口說。",
+    coreConcept: "自修第 45 頁「前面不必加介系詞的狀況如下」明確指出，today / yesterday / tomorrow（＋時間，如 tomorrow afternoon）前面不加介系詞。",
+    grammar: "S + do not + V (have) + O + time adverbial without preposition (tomorrow afternoon).",
+    distractors: [
+      "(B) on 雖可用於特定日子的下午，但遇到 tomorrow afternoon 時依規則不加介系詞。",
+      "(C) in 不可加在 tomorrow afternoon 前面。",
+      "(D) at 不可加在 tomorrow afternoon 前面。"
+    ],
+    phonetics: "We DON'T have AN-y ENG-lish CLAS-ses to-MOR-row af-ter-NOON. /təˈmɔːroʊ ˌæftərˈnuːn/；don't have 連讀時 t 常弱化或與 h 銜接。"
+  },
+  {
+    id: 14,
+    section: "一、核心詞彙與片語運用",
+    category: "字彙",
+    refId: "ref-p42-43",
+    stem: "There are only ______ days left before the final exam, so everyone is reviewing carefully.",
+    options: [
+      { key: "A", text: "the last two" },
+      { key: "B", text: "two last the" },
+      { key: "C", text: "last the two" },
+      { key: "D", text: "two the last" }
+    ],
+    answer: "A",
+    translation: "距離期末考只剩「最後兩」天了，所以每個人都在仔細複習。",
+    coreConcept: "自修第 43 頁「序數」用法例句為「the last two days（最後兩天）」，說明需先寫序數／限定詞（the last），再寫基數（two）與名詞。",
+    grammar: "the + ordinal/limiting word (last) + cardinal number (two) + plural noun (days).",
+    distractors: [
+      "(B) two last the 詞序顛倒，基數 two 不可放在 the 之前。",
+      "(C) last the two 冠詞 the 位置錯誤，應置於整個片語最前方。",
+      "(D) two the last 詞序錯誤，不符合英語數詞與限定詞排列順序。"
+    ],
+    phonetics: "There are ON-ly the LAST TWO DAYS LEFT be-FORE the FI-nal ex-AM. /ðə læst tuː deɪz/；last two 連讀時 /st/ 與 /t/ 發生齒槽爆破音同化弱化。"
+  },
+  {
+    id: 15,
+    section: "一、核心詞彙與片語運用",
+    category: "字彙",
+    refId: "ref-p46-47",
+    stem: "Look at the blackboard! The teacher is ______ a helpful grammar chart for the class.",
+    options: [
+      { key: "A", text: "writing" },
+      { key: "B", text: "writeing" },
+      { key: "C", text: "writting" },
+      { key: "D", text: "writes" }
+    ],
+    answer: "A",
+    translation: "看黑板！老師正在為全班「寫」一張很有幫助的文法圖表。",
+    coreConcept: "自修第 45 頁「現在分詞形成方式」說明：字尾有不發音 e 的動詞變現在分詞時，需「去 e 再加 ing」，因此 write → writing。",
+    grammar: "Present continuous: S (The teacher) + be (is) + V-ing (writing) + O (a helpful grammar chart).",
+    distractors: [
+      "(B) writeing 未去掉字尾不發音的 e，為常見拼字錯誤。",
+      "(C) writting 誤將字尾 t 重複，write 字尾為 e，應去 e 加 ing。",
+      "(D) writes 為簡單現在式第三人稱單數動詞，無法與 be 動詞 is 搭配。"
+    ],
+    phonetics: "LOOK at the BLACK-board! The TEACH-er is WRIT-ing a HELP-ful GRAM-mar CHART. /ˈraɪtɪŋ/；Look at 連讀為 /lʊk ət/，writing a 連讀為 /ˈraɪtɪŋ ə/。"
+  },{
+    id: 16,
+    section: "二、文法與句型結構",
+    category: "文法",
+    refId: "ref-p42-43",
+    stem: "Sam: ______ does your brother have piano lessons at the music center?\nTina: He has them on Wednesdays and Fridays.",
+    options: [
+      { key: "A", text: "What days" },
+      { key: "B", text: "What time" },
+      { key: "C", text: "What's the date" },
+      { key: "D", text: "How long" }
+    ],
+    answer: "A",
+    translation: "阿山：你哥哥在音樂中心「星期幾」有鋼琴課？\n蒂娜：他每週三和週五有課。",
+    coreConcept: "自修第 42 頁「What day 的用法」第 3 點指出，詢問「某人在星期幾做某事」的句型為「What day(s) + 助動詞 + 主詞 + 原形動詞……?」，答句為 on + 星期名稱。",
+    grammar: "What days + aux. (does) + S (your brother) + V (have) + O (piano lessons) + place adverbial?",
+    distractors: [
+      "(B) What time 詢問「幾點鐘」，答句通常為具體時刻（如 at 7:15 p.m.），與「週三和週五」不符。",
+      "(C) What's the date 詢問「幾月幾號」，答句應為日期（如 July 18），而非星期幾。",
+      "(D) How long 詢問「多久（一段時間）」，與題意詢問「哪幾天」不同。"
+    ],
+    phonetics: "What DAYS does your BROTH-er have PI-a-no LES-sons? /wʌt deɪz/；does your 常連讀弱化，piano 重音在第二音節 /ˈæn/。"
+  },
+  {
+    id: 17,
+    section: "二、文法與句型結構",
+    category: "文法",
+    refId: "ref-p42-43",
+    stem: "Kevin: ______ is it today?\nMia: It's Tuesday. Let's bring our English workbooks to school.",
+    options: [
+      { key: "A", text: "What day" },
+      { key: "B", text: "What time" },
+      { key: "C", text: "What month" },
+      { key: "D", text: "How often" }
+    ],
+    answer: "A",
+    translation: "凱文：今天「星期幾」？\n米雅：今天是星期二。我們把英文習作帶去學校吧。",
+    coreConcept: "自修第 42 頁「What day 的用法」第 1 點說明，問「今天星期幾？」用「What day is it?」或「What day is today?」，且問句與答句皆不加介系詞。",
+    grammar: "What day + be (is) + S (it) + time adv. (today)? → Answer: It's + day of the week (Tuesday).",
+    distractors: [
+      "(B) What time 問幾點，答句為 It's eight o'clock，非星期二。",
+      "(C) What month 問幾月，答句應為月份名稱（如 May），非星期名稱。",
+      "(D) How often 問頻率（如 once a week），不符合答句 It's Tuesday 的直接對應。"
+    ],
+    phonetics: "What DAY is it to-DAY? It's TUES-day. /wʌt deɪ/；is it 連讀為 /ˈɪzɪt/，Tuesday 重音在第一音節 /ˈtuːzdeɪ/。"
+  },
+  {
+    id: 18,
+    section: "二、文法與句型結構",
+    category: "文法",
+    refId: "ref-p42-43",
+    stem: "Leo: ______ is Ann's birthday party?\nNora: It's on Sunday afternoon at her house.",
+    options: [
+      { key: "A", text: "What day" },
+      { key: "B", text: "What's the date" },
+      { key: "C", text: "Where" },
+      { key: "D", text: "Who" }
+    ],
+    answer: "A",
+    translation: "里歐：安的慶生派對在「星期幾」？\n諾拉：在星期日下午，在她家。",
+    coreConcept: "自修第 42 頁「What day 的用法」第 2 點說明，問「某事件或某活動在星期幾？」用「What day is + (the) 名詞?」，答句需加介系詞 on。",
+    grammar: "What day + be (is) + event noun phrase (Ann's birthday party)? → Answer: It's + on + day (Sunday afternoon).",
+    distractors: [
+      "(B) What's the date 問日期（幾月幾號），答句應為日期而非星期日。",
+      "(C) Where 問地點，答句應為地點名稱，非「星期日下午」。",
+      "(D) Who 問人，與答句時間資訊不符。"
+    ],
+    phonetics: "What DAY is Ann's BIRTH-day PAR-ty? It's on SUN-day af-ter-NOON. /wʌt deɪ/；Ann's birthday 連讀時 /z/ 接 /b/ 自然過渡。"
+  },
+  {
+    id: 19,
+    section: "二、文法與句型結構",
+    category: "文法",
+    refId: "ref-p42-43",
+    stem: "Lisa: ______ is it?\nPeter: It's eight o'clock now. We should hurry up.",
+    options: [
+      { key: "A", text: "What time" },
+      { key: "B", text: "What day" },
+      { key: "C", text: "What month" },
+      { key: "D", text: "How many" }
+    ],
+    answer: "A",
+    translation: "麗莎：現在「幾點」了？\n彼得：現在八點了。我們該快點了。",
+    coreConcept: "自修第 42 頁「即時演練」第 3 題對應情境：答句為「It's eight o'clock now.」，故問句須用「What time is it?」詢問時刻。",
+    grammar: "What time + be (is) + S (it)? → Answer: It's + hour + o'clock + adv. (now).",
+    distractors: [
+      "(B) What day 問星期幾，答句應為星期名稱，而非八點鐘。",
+      "(C) What month 問月份，與八點鐘無關。",
+      "(D) How many 問可數名詞數量，句型結構與語意皆不合。"
+    ],
+    phonetics: "What TIME is it? It's EIGHT o'CLOCK now. /wʌt taɪm/；eight o'clock 連讀為 /eɪt əˈklɑːk/。"
+  },
+  {
+    id: 20,
+    section: "二、文法與句型結構",
+    category: "文法",
+    refId: "ref-p44-45",
+    stem: "Max: ______ today?\nChloe: It's July 4. Let's buy some snacks for the picnic.",
+    options: [
+      { key: "A", text: "What's the date" },
+      { key: "B", text: "What day is" },
+      { key: "C", text: "What time is" },
+      { key: "D", text: "How old is" }
+    ],
+    answer: "A",
+    translation: "麥斯：今天「幾月幾號」？\n克洛伊：七月四號。我們買些點心去野餐吧。",
+    coreConcept: "自修第 44 頁「What's the date 的用法」說明，詢問日期用「What's the date today?」，答句為「It's + 月分 + 日期」，日期寫基數或序數皆可但須讀作序數（fourth）。",
+    grammar: "What's the date + adv. (today)? → Answer: It's + month (July) + date (4 / fourth).",
+    distractors: [
+      "(B) What day is 問星期幾，答句為星期名稱，非 July 4。",
+      "(C) What time is 問幾點鐘，與日期不同。",
+      "(D) How old is 問年齡，不符合 July 4 的日期答句。"
+    ],
+    phonetics: "What's the DATE to-DAY? It's Ju-LY FOURTH. /wʌts ðə deɪt/；July 4 讀作 /dʒʊˈlaɪ fɔːrθ/。"
+  },
+  {
+    id: 21,
+    section: "二、文法與句型結構",
+    category: "文法",
+    refId: "ref-p44-45",
+    stem: "Eric: What's the date of your sister's birthday?\nAmy: ______ December 25.",
+    options: [
+      { key: "A", text: "It's on" },
+      { key: "B", text: "It's in" },
+      { key: "C", text: "It's at" },
+      { key: "D", text: "They're on" }
+    ],
+    answer: "A",
+    translation: "艾瑞克：你妹妹的生日在幾月幾號？\n艾咪：在十二月二十五日。",
+    coreConcept: "自修第 44 頁「特定節日日期」的問答例句為「What's the date of your birthday? It's on December 25.」，單數生日日期前用 It's on + 月分 + 日期。",
+    grammar: "It's (It is) + on + month (December) + day (25 / twenty-fifth).",
+    distractors: [
+      "(B) It's in 錯誤使用介系詞 in；有明確「某月某日」時應使用 on。",
+      "(C) It's at 錯誤使用介系詞 at；at 不接具體月日。",
+      "(D) They're on 主詞誤用複數 They're，指單一「生日日期」應用單數 It's。"
+    ],
+    phonetics: "What's the DATE of your SIS-ter's BIRTH-day? It's on De-CEM-ber TWEN-ty-FIFTH. /ɪts ɑn/；It's on 連讀為 /ɪts ɑn/。"
+  },
+  {
+    id: 22,
+    section: "二、文法與句型結構",
+    category: "文法",
+    refId: "ref-p44-45",
+    stem: "Daniel and his cousin, Bill, visited their grandma in Kinmen ______ July 18, 2018.",
+    options: [
+      { key: "A", text: "on" },
+      { key: "B", text: "in" },
+      { key: "C", text: "at" },
+      { key: "D", text: "with" }
+    ],
+    answer: "A",
+    translation: "丹尼爾和他的表弟比爾於 2018 年 7 月 18 日去金門看望他們的奶奶。",
+    coreConcept: "自修第 45 頁「即時演練」第 1 題原題考點：完整日期（July 18, 2018）前需使用時間介系詞 on。",
+    grammar: "S (Daniel and his cousin, Bill) + V (visited) + O + prep. phrase of place + on + full date (July 18, 2018).",
+    distractors: [
+      "(B) in 僅用於年、月、季等較長期間，遇到具體日期 July 18, 2018 不可用 in。",
+      "(C) at 用於時刻或短時間，不能接完整日期。",
+      "(D) with 表「與……一起」或「帶有」，無法表達「在某日」的時間點。"
+    ],
+    phonetics: "DAN-iel and his COUS-in, Bill, VIS-it-ed their GRAND-ma in KIN-men on Ju-LY eigh-TEENTH, TWEN-ty EIGH-teen. /ɑn/。"
+  },
+  {
+    id: 23,
+    section: "二、文法與句型結構",
+    category: "文法",
+    refId: "ref-p44-45",
+    stem: "Amy: Why did Charlie stay at his office ______ 11:00 p.m. yesterday?\nIan: He had to finish his work.",
+    options: [
+      { key: "A", text: "until" },
+      { key: "B", text: "during" },
+      { key: "C", text: "for" },
+      { key: "D", text: "in" }
+    ],
+    answer: "A",
+    translation: "艾咪：查理昨天為什麼待在辦公室「直到」晚上十一點？\n伊恩：他必須把工作做完。",
+    coreConcept: "自修第 45 頁「即時演練」第 2 題原題考點：「until + 時間點」表示動作持續到某個時間點（11:00 p.m.）為止。",
+    grammar: "S + V (stay) + prep. phrase of place (at his office) + until + time point (11:00 p.m.) + time adv. (yesterday).",
+    distractors: [
+      "(B) during 後接「一段期間」（如 during the night），11:00 p.m. 為時間點，不適用。",
+      "(C) for 後接「一段時間長度」（如 for three hours），不接「晚上十一點」這個時間點。",
+      "(D) in 後接較長期間，不與「直到晚上十一點」的持續語意搭配。"
+    ],
+    phonetics: "Why did CHAR-lie STAY at his OF-fice un-TIL e-LEV-en P.M. YES-ter-day? /ənˈtɪl/；at his 連讀時 his 可弱化為 /ɪz/。"
+  },
+  {
+    id: 24,
+    section: "二、文法與句型結構",
+    category: "文法",
+    refId: "ref-p44-45",
+    stem: "Stella will leave for Canada ______ the morning of August 16, so we'd like to have a party for her.",
+    options: [
+      { key: "A", text: "on" },
+      { key: "B", text: "in" },
+      { key: "C", text: "at" },
+      { key: "D", text: "for" }
+    ],
+    answer: "A",
+    translation: "史黛拉將於八月十六日的上午動身前往加拿大，所以我們想為她辦一場派對。",
+    coreConcept: "自修第 45 頁「文法澄清題」第 1 題原題考點：「特定日子的上午／下午／晚上」使用介系詞 on（the morning of August 16 為八月十六日這特定一天的上午）。",
+    grammar: "S + will + V (leave for) + O + on + specific morning (the morning of August 16).",
+    distractors: [
+      "(B) in 一般用於不指定特定日期的 in the morning，此處指「八月十六日的上午」，故改用 on。",
+      "(C) at 用於短時間或時刻，不接「……的上午」。",
+      "(D) for 表目的或期間，此處需表達「在某日的上午」，應用 on。"
+    ],
+    phonetics: "STEL-la will LEAVE for CAN-a-da on the MORN-ing of Au-GUST six-TEENTH. /ɑn/；leave for 連讀，August 16 讀作 August sixteenth。"
+  },
+  {
+    id: 25,
+    section: "二、文法與句型結構",
+    category: "文法",
+    refId: "ref-p44-45",
+    stem: "The Huang family will visit England and France ______ the spring of 2032.",
+    options: [
+      { key: "A", text: "in" },
+      { key: "B", text: "on" },
+      { key: "C", text: "at" },
+      { key: "D", text: "for" }
+    ],
+    answer: "A",
+    translation: "黃家人將於 2032 年的春天造訪英國和法國。",
+    coreConcept: "自修第 45 頁「文法澄清題」第 2 題原題考點：季節（spring）與較長期間均使用介系詞 in（in the spring of 2032）。",
+    grammar: "S (The Huang family) + will + V (visit) + O (England and France) + in + season/period (the spring of 2032).",
+    distractors: [
+      "(B) on 用於特定日期或星期，季節「春天」應使用 in。",
+      "(C) at 用於具體時刻或節日期間，不與季節搭配。",
+      "(D) for 表持續一段時間，無法表達「在某個春天」的時間點／區間。"
+    ],
+    phonetics: "The HUANG FAM-i-ly will VIS-it ENG-land and FRANCE in the SPRING of TWEN-ty THIR-ty-TWO. /ɪn/；France in 連讀時 /s/ 接 /ɪn/。"
+  },
+  {
+    id: 26,
+    section: "二、文法與句型結構",
+    category: "文法",
+    refId: "ref-p46-47",
+    stem: "Jim: Where are you?\nIvy: In the park. I ______ my dog, Spot.",
+    options: [
+      { key: "A", text: "am walking" },
+      { key: "B", text: "walk" },
+      { key: "C", text: "walked" },
+      { key: "D", text: "will walk" }
+    ],
+    answer: "A",
+    translation: "吉姆：你在哪裡？\n艾薇：在公園。我正在遛我的狗史波。",
+    coreConcept: "自修第 46 頁「即時演練」第 1 題原題考點：對話詢問「現在在哪裡」，回答正在進行的動作（遛狗），需用現在進行式「am + V-ing」。",
+    grammar: "Present continuous: S (I) + am + V-ing (walking) + O (my dog, Spot).",
+    distractors: [
+      "(B) walk 為簡單現在式，多表習慣或規律動作，無法凸顯「此刻正在公園遛狗」的當下狀態。",
+      "(C) walked 為過去式，與對話現在情境不符。",
+      "(D) will walk 為未來式，不符合「現在在公園遛狗」的語境。"
+    ],
+    phonetics: "Where are YOU? In the PARK. I am WALK-ing my DOG, Spot. /æm ˈwɔːkɪŋ/；I am 常縮寫或連讀為 /aɪm/ 或 /aɪ æm/。"
+  },
+  {
+    id: 27,
+    section: "二、文法與句型結構",
+    category: "文法",
+    refId: "ref-p46-47",
+    stem: "Oliver's little sister was born last month. Now, he ______ two sisters.",
+    options: [
+      { key: "A", text: "has" },
+      { key: "B", text: "is having" },
+      { key: "C", text: "are having" },
+      { key: "D", text: "have" }
+    ],
+    answer: "A",
+    translation: "奧利佛的小妹妹上個月出生了。現在，他「有」兩個妹妹。",
+    coreConcept: "自修第 46 頁「即時演練」第 2 題與「文法進階」指出：表「擁有」的動詞 have 通常不用於現在進行式；主詞 he 為第三人稱單數，故用 has。",
+    grammar: "Simple present (stative possession): S (he) + V (has) + O (two sisters).",
+    distractors: [
+      "(B) is having 誤用現在進行式；have 解釋為「擁有」時不用進行式（除非作「吃、喝、舉辦」）。",
+      "(C) are having 既誤用進行式，主詞 he 亦非複數，不可用 are。",
+      "(D) have 主詞 he 為第三人稱單數，現在式動詞須加 s 變為 has。"
+    ],
+    phonetics: "OL-i-ver's LIT-tle SIS-ter was BORN last MONTH. Now, he HAS two SIS-ters. /hæz/；he has 連讀時 /h/ 可自然帶出。"
+  },
+  {
+    id: 28,
+    section: "二、文法與句型結構",
+    category: "文法",
+    refId: "ref-p46-47",
+    stem: "Excuse me. I really need to go now. My kids ______ for me at school.",
+    options: [
+      { key: "A", text: "are waiting" },
+      { key: "B", text: "wait" },
+      { key: "C", text: "waited" },
+      { key: "D", text: "is waiting" }
+    ],
+    answer: "A",
+    translation: "不好意思。我現在真的得走了。我的孩子們正在學校等我。",
+    coreConcept: "自修第 46 頁「即時演練」第 3 題（會考題）原題考點：由「I really need to go now」可知孩子們「此刻正在等我」，且主詞 My kids 為複數，故用 are waiting。",
+    grammar: "Present continuous: plural S (My kids) + are + V-ing (waiting) + for + O (me) + place adverbial (at school).",
+    distractors: [
+      "(B) wait 為簡單現在式，無法表達「現在此刻正在等候」的進行狀態。",
+      "(C) waited 為過去式，與「現在得走了」的時態不一致。",
+      "(D) is waiting 主詞 My kids 為複數，be 動詞不可用單數 is。"
+    ],
+    phonetics: "Ex-CUSE me. I REAL-ly NEED to GO now. My KIDS are WAIT-ing for ME at SCHOOL. /ɑːr ˈweɪtɪŋ/；waiting for 連讀時 for 常弱化為 /fər/。"
+  },
+  {
+    id: 29,
+    section: "二、文法與句型結構",
+    category: "文法",
+    refId: "ref-p46-47",
+    stem: "Sara: Is there a movie theater around here?\nPaul: ______ Go straight for two blocks and turn left, and you'll see it on the corner.",
+    options: [
+      { key: "A", text: "Yes, there is." },
+      { key: "B", text: "Yes, it is." },
+      { key: "C", text: "Yes, there are." },
+      { key: "D", text: "They are." }
+    ],
+    answer: "A",
+    translation: "莎拉：這附近有電影院嗎？\n保羅：是的，有。直走兩個街區再左轉，你就會在轉角看到它。",
+    coreConcept: "自修第 47 頁「即時演練」第 1 題原題考點：問句為「Is there + 單數名詞（a movie theater）?」，肯定簡答為「Yes, there is.」（注意肯定簡答不可縮寫為 Yes, there's.）。",
+    grammar: "Is there + singular N (a movie theater)? → Affirmative short answer: Yes, there is.",
+    distractors: [
+      "(B) Yes, it is. 問句為 There is 句型，回答「某地是否存在某物」應用 there is 而非 it is。",
+      "(C) Yes, there are. 問句主詞為單數 a movie theater，不可用複數 are 回答。",
+      "(D) They are. 主詞與句型皆不符 There is 存在句問答。"
+    ],
+    phonetics: "Is there a MO-vie THE-a-ter a-ROUND here? Yes, there IS. /jɛs ðər ɪz/；簡答句尾的 is 需重讀，不可弱化吞音。"
+  },
+  {
+    id: 30,
+    section: "二、文法與句型結構",
+    category: "文法",
+    refId: "ref-p46-47",
+    stem: "Look! ______ flowers and trees in the park. Everything looks so green and fresh.",
+    options: [
+      { key: "A", text: "There are" },
+      { key: "B", text: "There is" },
+      { key: "C", text: "They have" },
+      { key: "D", text: "It has" }
+    ],
+    answer: "A",
+    translation: "看！公園裡有花有樹。每樣東西看起來都好綠、好清新。",
+    coreConcept: "自修第 47 頁「There is/are 的用法」與「文法進階」指出：表「某地有某物」用 There is/are，is 或 are 由後面的名詞主詞決定；此處 flowers and trees 為複數，故用 There are。",
+    grammar: "There are + plural compound subject (flowers and trees) + place adverbial (in the park).",
+    distractors: [
+      "(B) There is 主詞 flowers and trees 為複數，不可用單數 is。",
+      "(C) They have 表「他們擁有」，不符合「公園裡有花和樹」的空間存在句意。",
+      "(D) It has 主詞單數且表「擁有」，與複數花樹及存在句用法不合。"
+    ],
+    phonetics: "LOOK! There are FLOW-ers and TREES in the PARK. /ðər ɑːr/；flowers and 連讀時 and 常弱化為 /ən/。"
+  },
+  {
+    id: 31,
+    section: "三、綜合克漏字測驗（第一篇：校園社團與行程安排）",
+    category: "語意邏輯",
+    refId: "ref-p42-43",
+    stem: "【第一篇：校園社團與行程安排】\nOur school's music club has a busy schedule this semester. First, let's check the calendar: __31__ is it today? It's Wednesday, so we have practice after school.",
+    options: [
+      { key: "A", text: "What day" },
+      { key: "B", text: "What time" },
+      { key: "C", text: "What's the date" },
+      { key: "D", text: "How many" }
+    ],
+    answer: "A",
+    translation: "【第一篇：校園社團與行程安排】\n我們學校的音樂社這學期行程很忙碌。首先，我們來看看行事曆：今天「星期幾」？今天是星期三，所以我們放學後有練習。",
+    coreConcept: "自修第 42 頁「What day 的用法」：由下文答句「It's Wednesday」可知是在問星期幾，用「What day is it today?」。",
+    grammar: "What day + be (is) + S (it) + adv. (today)? → It's + day (Wednesday).",
+    distractors: [
+      "(B) What time 問幾點，與答句 It's Wednesday 不符。",
+      "(C) What's the date 問日期（幾月幾號），與答句星期三不符。",
+      "(D) How many 問數量，與問星期幾無關。"
+    ],
+    phonetics: "First, let's CHECK the CAL-en-dar: what DAY is it to-DAY? /wʌt deɪ/；It's Wednesday 讀作 /ɪts ˈwɛnzdeɪ/，d 不發音。"
+  },
+  {
+    id: 32,
+    section: "三、綜合克漏字測驗（第一篇：校園社團與行程安排）",
+    category: "文法",
+    refId: "ref-p44-45",
+    stem: "【第一篇：校園社團與行程安排】\nOur big winter concert will be held __32__ December 20, right before the winter break starts.",
+    options: [
+      { key: "A", text: "on" },
+      { key: "B", text: "in" },
+      { key: "C", text: "at" },
+      { key: "D", text: "from" }
+    ],
+    answer: "A",
+    translation: "【第一篇：校園社團與行程安排】\n我們的大型冬季音樂會將於「十二月二十日」舉行，就在寒假開始前。",
+    coreConcept: "自修第 44 頁「表時間的介系詞」：具體日期「December 20」前面須使用介系詞 on。",
+    grammar: "will be held + on + specific date (December 20).",
+    distractors: [
+      "(B) in 用於單獨月份或年份，有明確「日」時改用 on。",
+      "(C) at 用於短時間或時刻，不接具體月日。",
+      "(D) from 通常搭配 to 表示起訖時間（from A to B），此處僅為單一日期。"
+    ],
+    phonetics: "Our BIG WIN-ter CON-cert will be HELD on De-CEM-ber TWEN-ti-ETH. /ɑn/；held on 連讀為 /hɛld ɑn/。"
+  },
+  {
+    id: 33,
+    section: "三、綜合克漏字測驗（第一篇：校園社團與行程安排）",
+    category: "字彙",
+    refId: "ref-p42-43",
+    stem: "【第一篇：校園社團與行程安排】\nThe rehearsal room is on the __33__ floor of the arts building, so members need to climb up two flights of stairs.",
+    options: [
+      { key: "A", text: "third" },
+      { key: "B", text: "three" },
+      { key: "C", text: "threeth" },
+      { key: "D", text: "thirds" }
+    ],
+    answer: "A",
+    translation: "【第一篇：校園社團與行程安排】\n排練室在藝術大樓的「三」樓，所以社員需要爬兩層樓梯。",
+    coreConcept: "自修第 43 頁「序數」：表示第幾層樓用「on the + 序數 + floor」，3 的序數為 third（爬兩層樓梯到三樓）。",
+    grammar: "on the + ordinal number (third) + floor.",
+    distractors: [
+      "(B) three 為基數 3，不能放在「第幾樓」的位置。",
+      "(C) threeth 為錯誤拼字，three 改序數為不規則變化 third。",
+      "(D) thirds 為分數「三分之幾」的複數形式，不表樓層。"
+    ],
+    phonetics: "The re-HEARS-al ROOM is on the THIRD FLOOR of the ARTS BUILD-ing. /θɝːd/；third 尾音 /d/ 清楚，注意齒間摩擦音 /θ/。"
+  },
+  {
+    id: 34,
+    section: "三、綜合克漏字測驗（第一篇：校園社團與行程安排）",
+    category: "文法",
+    refId: "ref-p44-45",
+    stem: "【第一篇：校園社團與行程安排】\nWe usually practice __34__ 5:30 p.m., and then everyone goes home for dinner with their family.",
+    options: [
+      { key: "A", text: "until" },
+      { key: "B", text: "during" },
+      { key: "C", text: "in" },
+      { key: "D", text: "on" }
+    ],
+    answer: "A",
+    translation: "【第一篇：校園社團與行程安排】\n我們通常練習「到」下午五點半，然後大家回家和家人吃晚餐。",
+    coreConcept: "自修第 45 頁「表時間的介系詞」：「until + 時間點」表示練習持續到下午五點半為止。",
+    grammar: "S + adv. (usually) + V (practice) + until + time point (5:30 p.m.).",
+    distractors: [
+      "(B) during 接期間，不接具體時刻 5:30 p.m.。",
+      "(C) in 不與具體時刻搭配。",
+      "(D) on 用於日期／星期／特定日早午晚，不接具體時刻。"
+    ],
+    phonetics: "We U-su-al-ly PRAC-tice un-TIL FIVE THIR-ty P.M. /ənˈtɪl/；practice until 連讀自然。"
+  },
+  {
+    id: 35,
+    section: "三、綜合克漏字測驗（第一篇：校園社團與行程安排）",
+    category: "語意邏輯",
+    refId: "ref-p44-45",
+    stem: "【第一篇：校園社團與行程安排】\nRemember not to miss our rehearsal __35__ tomorrow evening because we will check the stage cues.",
+    options: [
+      { key: "A", text: "(不填介系詞)" },
+      { key: "B", text: "on" },
+      { key: "C", text: "in" },
+      { key: "D", text: "at" }
+    ],
+    answer: "A",
+    translation: "【第一篇：校園社團與行程安排】\n記得「明天晚上」不要錯過我們的排練，因為我們要確認舞臺提示。",
+    coreConcept: "自修第 45 頁「前面不必加介系詞的狀況如下」：today / yesterday / tomorrow（＋時間，如 tomorrow evening）前面不必加介系詞。",
+    grammar: "Imperative: Remember not to + V (miss) + O + time adverbial without preposition (tomorrow evening).",
+    distractors: [
+      "(B) on 不可加在 tomorrow evening 前。",
+      "(C) in 不可加在 tomorrow evening 前。",
+      "(D) at 不可加在 tomorrow evening 前。"
+    ],
+    phonetics: "Re-MEM-ber NOT to MISS our re-HEARS-al to-MOR-row EVE-ning. /təˈmɔːroʊ ˈiːvnɪŋ/；evening 常讀作兩音節 /ˈiːvnɪŋ/。"
+  },
+  {
+    id: 36,
+    section: "三、綜合克漏字測驗（第二篇：圖書館自習室的此刻景象）",
+    category: "文法",
+    refId: "ref-p46-47",
+    stem: "【第二篇：圖書館自習室的此刻景象】\nQuiet, please! Look around the study room right now. __36__ many students reading quietly at the wooden tables.",
+    options: [
+      { key: "A", text: "There are" },
+      { key: "B", text: "There is" },
+      { key: "C", text: "It is" },
+      { key: "D", text: "They have" }
+    ],
+    answer: "A",
+    translation: "【第二篇：圖書館自習室的此刻景象】\n請安靜！看看現在的自習室四周。「有」許多學生正在木桌旁安靜地看書。",
+    coreConcept: "自修第 47 頁「There is/are 的用法」：表某地有某物／某人，且後方名詞 many students 為複數，故用 There are。",
+    grammar: "There are + plural noun phrase (many students) + V-ing (reading quietly) + place adverbial.",
+    distractors: [
+      "(B) There is 主詞 many students 為複數，不可用單數 is。",
+      "(C) It is 不作「某處有……」的存在句型。",
+      "(D) They have 表「他們擁有」，與「自習室裡有許多學生」語意不合。"
+    ],
+    phonetics: "Quiet, PLEASE! Look a-ROUND the STUD-y ROOM right NOW. There are MAN-y STU-dents READ-ing QUI-et-ly. /ðər ɑːr/。"
+  },
+  {
+    id: 37,
+    section: "三、綜合克漏字測驗（第二篇：圖書館自習室的此刻景象）",
+    category: "字彙",
+    refId: "ref-p46-47",
+    stem: "【第二篇：圖書館自習室的此刻景象】\nNear the window, a boy is __37__ carefully on a soft cushion while taking notes.",
+    options: [
+      { key: "A", text: "sitting" },
+      { key: "B", text: "siting" },
+      { key: "C", text: "sits" },
+      { key: "D", text: "sat" }
+    ],
+    answer: "A",
+    translation: "【第二篇：圖書館自習室的此刻景象】\n靠窗的地方，一個男孩正仔細地「坐」在柔軟的坐墊上一邊做筆記。",
+    coreConcept: "自修第 45 頁「現在分詞形成方式」：sit 屬「短母音＋子音」結尾，變現在分詞需重複字尾 t 再加 ing，拼作 sitting。",
+    grammar: "Present continuous: S (a boy) + is + V-ing (sitting) + adv. (carefully) + prep. phrase (on a soft cushion).",
+    distractors: [
+      "(B) siting 漏掉重複字尾 t，拼字錯誤。",
+      "(C) sits 為簡單現在式第三人稱單數動詞，無法與 is 搭配。",
+      "(D) sat 為過去式，不符合「right now 此刻正在進行」的語境。"
+    ],
+    phonetics: "Near the WIN-dow, a BOY is SIT-ting CARE-ful-ly on a SOFT CUSH-ion. /ˈsɪtɪŋ/；is sitting 連讀自然。"
+  },
+  {
+    id: 38,
+    section: "三、綜合克漏字測驗（第二篇：圖書館自習室的此刻景象）",
+    category: "文法",
+    refId: "ref-p46-47",
+    stem: "【第二篇：圖書館自習室的此刻景象】\nNext to him, a girl __38__ her new English dictionary right now because she wants to check an unfamiliar word.",
+    options: [
+      { key: "A", text: "has" },
+      { key: "B", text: "is having" },
+      { key: "C", text: "are having" },
+      { key: "D", text: "have" }
+    ],
+    answer: "A",
+    translation: "【第二篇：圖書館自習室的此刻景象】\n在他旁邊，一個女孩此刻「擁有」她的英文字典，因為她想查一個不熟悉的單字。",
+    coreConcept: "自修第 46 頁「文法進階」：即使句中有 right now，但 have 表「擁有」時通常不用現在進行式；主詞 a girl 為單數，故用 has。",
+    grammar: "Simple present (possession): singular S (a girl) + V (has) + O (her new English dictionary) + right now.",
+    distractors: [
+      "(B) is having 誤用現在進行式；have 表「擁有」時不可用進行式。",
+      "(C) are having 既誤用進行式，主詞 a girl 亦非複數。",
+      "(D) have 主詞 a girl 為第三人稱單數，動詞須用 has。"
+    ],
+    phonetics: "Next to HIM, a GIRL has her NEW ENG-lish DIC-tion-ar-y right NOW. /hæz/；dictionary 為四音節 /ˈdɪkʃəˌnɛri/。"
+  },
+  {
+    id: 39,
+    section: "三、綜合克漏字測驗（第二篇：圖書館自習室的此刻景象）",
+    category: "語意邏輯",
+    refId: "ref-p46-47",
+    stem: "【第二篇：圖書館自習室的此刻景象】\nEveryone __39__ the study rules here, so the room stays peaceful and quiet.",
+    options: [
+      { key: "A", text: "knows" },
+      { key: "B", text: "is knowing" },
+      { key: "C", text: "are knowing" },
+      { key: "D", text: "know" }
+    ],
+    answer: "A",
+    translation: "【第二篇：圖書館自習室的此刻景象】\n這裡的每個人都「知道」自習室的規則，所以這個房間保持平靜與安靜。",
+    coreConcept: "自修第 46 頁「文法進階」：認知動詞 know 通常不用於現在進行式；且不定代名詞 Everyone 作主詞時，動詞用單數形 knows。",
+    grammar: "Indefinite pronoun S (Everyone) + singular V (knows) + O (the study rules).",
+    distractors: [
+      "(B) is knowing 誤用現在進行式；認知動詞 know 通常不以進行式呈現。",
+      "(C) are knowing 既誤用進行式，Everyone 亦須搭單數動詞。",
+      "(D) know 動詞未加 s，Everyone 作主詞時需用單數動詞 knows。"
+    ],
+    phonetics: "EV-ery-ONE knows the STUD-y RULES here, so the ROOM stays PEACE-ful. /noʊz/；Everyone 通常讀作三音節 /ˈɛvriˌwʌn/。"
+  },
+  {
+    id: 40,
+    section: "三、綜合克漏字測驗（第二篇：圖書館自習室的此刻景象）",
+    category: "細節理解",
+    refId: "ref-p46-47",
+    stem: "【第二篇：圖書館自習室的此刻景象】\nIn the corner, __40__ an old man telling stories about old Tainan to two young kids.",
+    options: [
+      { key: "A", text: "there is" },
+      { key: "B", text: "there are" },
+      { key: "C", text: "it has" },
+      { key: "D", text: "they have" }
+    ],
+    answer: "A",
+    translation: "【第二篇：圖書館自習室的此刻景象】\n在角落裡，「有一位」老先生正在向兩個小孩講述舊臺南的故事。",
+    coreConcept: "自修第 47 頁「There is/are 的用法」要點 2：表示「有……正在某處做某事」可用「There + be + 名詞 + V-ing + 地方副詞」；此處主詞 an old man 為單數，故用 there is。",
+    grammar: "There is + singular N (an old man) + V-ing (telling stories...) + prep. phrase (to two young kids).",
+    distractors: [
+      "(B) there are 主詞 an old man 為單數，不可用複數 are。",
+      "(C) it has 句型錯誤，不符合「角落裡有一位老先生正在……」的存在句結構。",
+      "(D) they have 主詞與句型皆不符。"
+    ],
+    phonetics: "In the COR-ner, there is an OLD MAN TELL-ing STO-ries a-BOUT old Tai-NAN. /ðər ɪz/；an old 連讀自然。"
+  },
+  {
+    id: 41,
+    section: "四、閱讀理解測驗（第一篇：校園校慶與時間表公告）",
+    category: "細節理解",
+    refId: "ref-p44-45",
+    stem: "【第一篇：校園校慶與時間表公告】\nOur school will celebrate its 60th anniversary on Saturday, November 14, 2026. The opening ceremony starts at 8:30 a.m. in the gym. From 9:00 a.m. to 11:30 a.m., classes will hold fun booths on the playground. Lunch break is from 11:30 a.m. until 1:00 p.m. In the afternoon, the student band will perform at 2:00 p.m., and the closing event will end at 4:00 p.m. Please remember not to bring pets to campus.\n\n41. When will our school celebrate its 60th anniversary?",
+    options: [
+      { key: "A", text: "On Saturday, November 14, 2026." },
+      { key: "B", text: "In the spring of 2026." },
+      { key: "C", text: "At 11:30 a.m. on Friday." },
+      { key: "D", text: "Until 8:30 a.m. on November 14." }
+    ],
+    answer: "A",
+    translation: "【第一篇：校園校慶與時間表公告】\n我們學校將於 2026 年 11 月 14 日星期六慶祝六十週年校慶。開幕典禮於上午 8:30 在體育館開始。上午 9:00 至 11:30，各班將在操場舉辦趣味攤位。午餐休息時間從上午 11:30 直到下午 1:00。下午 2:00 學生樂團將演出，閉幕活動將於下午 4:00 結束。請記得不要帶寵物到校園。\n\n41. 我們學校將於何時慶祝六十週年校慶？",
+    coreConcept: "自修第 44 頁「日期的表示法」與「表時間的介系詞」：完整日期（年、月、日、星期）前用 on，文本第一句即明示為「on Saturday, November 14, 2026」。",
+    grammar: "Wh-question (When) + future tense (will celebrate) → Prepositional time phrase (On Saturday, November 14, 2026).",
+    distractors: [
+      "(B) 文本寫的是 November（十一月），非 spring（春天）。",
+      "(C) 文本寫的是 Saturday（星期六），非 Friday（星期五），11:30 a.m. 亦非校慶日期。",
+      "(D) 8:30 a.m. 是開幕典禮開始時間，並非校慶日期。"
+    ],
+    phonetics: "On SAT-ur-day, No-VEM-ber FOUR-TEENTH, TWEN-ty TWEN-ty-SIX. /ɑn ˈsætərdi noʊˈvɛmbər ˌfɔːrˈtiːnθ/。"
+  },
+  {
+    id: 42,
+    section: "四、閱讀理解測驗（第一篇：校園校慶與時間表公告）",
+    category: "細節理解",
+    refId: "ref-p44-45",
+    stem: "【第一篇：校園校慶與時間表公告】\n42. How long does the lunch break last according to the announcement?",
+    options: [
+      { key: "A", text: "From 11:30 a.m. until 1:00 p.m." },
+      { key: "B", text: "From 8:30 a.m. to 9:00 a.m." },
+      { key: "C", text: "From 2:00 p.m. until 4:00 p.m." },
+      { key: "D", text: "Only on Sunday afternoon." }
+    ],
+    answer: "A",
+    translation: "42. 根據公告，午餐休息時間從何時到何時？",
+    coreConcept: "自修第 45 頁「表時間的介系詞」：文本指出「Lunch break is from 11:30 a.m. until 1:00 p.m.」，運用 from ... until ... 標示時間區間。",
+    grammar: "S (Lunch break) + be (is) + from + start time (11:30 a.m.) + until + end time (1:00 p.m.).",
+    distractors: [
+      "(B) 8:30 a.m. 為開幕典禮開始時間，非午餐休息時段。",
+      "(C) 2:00 p.m. 至 4:00 p.m. 為下午樂團演出與閉幕時段。",
+      "(D) 公告未提及 Sunday afternoon。"
+    ],
+    phonetics: "From e-LEV-en THIR-ty A.M. un-TIL ONE P.M. /frʌm ... ənˈtɪl/。"
+  },
+  {
+    id: 43,
+    section: "四、閱讀理解測驗（第一篇：校園校慶與時間表公告）",
+    category: "語意邏輯",
+    refId: "ref-p44-45",
+    stem: "【第一篇：校園校慶與時間表公告】\n43. What happens during the morning after the opening ceremony ends around 9:00 a.m.?",
+    options: [
+      { key: "A", text: "Classes hold fun booths on the playground." },
+      { key: "B", text: "The closing event begins in the gym." },
+      { key: "C", text: "Students bring pets to the classroom." },
+      { key: "D", text: "The school finishes all activities for the day." }
+    ],
+    answer: "A",
+    translation: "43. 開幕典禮約在上午 9:00 結束後，上午時段會有什麼活動？",
+    coreConcept: "文本說明「From 9:00 a.m. to 11:30 a.m., classes will hold fun booths on the playground.」，直接對應上午 9:00 後的活動。",
+    grammar: "From + time + to + time, + S (classes) + will + V (hold) + O (fun booths) + place.",
+    distractors: [
+      "(B) 閉幕活動在下午 4:00 結束，並非上午 9:00 開始。",
+      "(C) 公告明確要求「not to bring pets to campus」，與選項相反。",
+      "(D) 全日活動在下午 4:00 才結束，上午尚未結束。"
+    ],
+    phonetics: "CLAS-ses will HOLD FUN BOOTHS on the PLAY-ground. /ˈklæsɪz wɪl hoʊld fʌn buːðz/。"
+  },
+  {
+    id: 44,
+    section: "四、閱讀理解測驗（第一篇：校園校慶與時間表公告）",
+    category: "細節理解",
+    refId: "ref-p42-43",
+    stem: "【第一篇：校園校慶與時間表公告】\n44. Which ordinal number appears in the first sentence of the announcement?",
+    options: [
+      { key: "A", text: "60th (sixtieth)" },
+      { key: "B", text: "14th (fourteenth)" },
+      { key: "C", text: "2nd (second)" },
+      { key: "D", text: "1st (first)" }
+    ],
+    answer: "A",
+    translation: "44. 公告的第一句出現了哪一個序數？",
+    coreConcept: "自修第 43 頁「序數」：第一句「60th anniversary」中的 60th 為序數（sixtieth）。",
+    grammar: "Ordinal adjective (60th) + singular noun (anniversary).",
+    distractors: [
+      "(B) 14th 出現在日期 November 14, 2026，不在第一句（第一句僅到 60th anniversary）。",
+      "(C) 2nd 未出現在文本中。",
+      "(D) 1st 未出現在文本中。"
+    ],
+    phonetics: "SIX-ti-eth an-ni-VER-sa-ry. /ˈsɪkstiəθ ˌænəˈvɝːsəri/。"
+  },
+  {
+    id: 45,
+    section: "四、閱讀理解測驗（第一篇：校園校慶與時間表公告）",
+    category: "語意邏輯",
+    refId: "ref-p44-45",
+    stem: "【第一篇：校園校慶與時間表公告】\n45. Which of the following statements is TRUE about the school anniversary?",
+    options: [
+      { key: "A", text: "The student band performs in the afternoon." },
+      { key: "B", text: "The opening ceremony is on the playground." },
+      { key: "C", text: "Lunch break starts at 2:00 p.m." },
+      { key: "D", text: "Visitors are asked to bring pets." }
+    ],
+    answer: "A",
+    translation: "45. 關於這場校慶，下列哪一項敘述是正確的？",
+    coreConcept: "文本指出「In the afternoon, the student band will perform at 2:00 p.m.」，與選項 (A) 完全一致。",
+    grammar: "In the afternoon + S (the student band) + will + V (perform) + at + time.",
+    distractors: [
+      "(B) 開幕典禮在體育館（in the gym），不在操場。",
+      "(C) 午餐休息時間是 11:30 a.m. until 1:00 p.m.，下午 2:00 是樂團演出。",
+      "(D) 公告要求「not to bring pets to campus」，並非要求帶寵物。"
+    ],
+    phonetics: "The STU-dent BAND will per-FORM in the af-ter-NOON. /ðə ˈstuːdənt bænd wɪl pərˈfɔːrm/。"
+  },
+  {
+    id: 46,
+    section: "四、閱讀理解測驗（第二篇：社區公園的午後觀察）",
+    category: "細節理解",
+    refId: "ref-p46-47",
+    stem: "【第二篇：社區公園的午後觀察】\nIt is 4:15 p.m. in Sunny Park. There are two big trees near the pond, and there is an old man sitting under one tree and reading a newspaper. Two boys are running near the path, while a little girl is lying on the grass and watching the clouds. Many people love spending time here because the air is fresh. Everyone knows the park rules: keep the grass clean and do not pick the flowers.\n\n46. What is the old man doing under the tree at 4:15 p.m.?",
+    options: [
+      { key: "A", text: "He is sitting and reading a newspaper." },
+      { key: "B", text: "He is running near the path." },
+      { key: "C", text: "He is picking the flowers." },
+      { key: "D", text: "He is lying on the grass." }
+    ],
+    answer: "A",
+    translation: "【第二篇：社區公園的午後觀察】\n現在是陽光公園下午 4:15。池塘附近有兩棵大樹，有一位老先生正坐在一棵樹下看報紙。兩個男孩正在小徑附近跑步，而一個小女孩正躺在草地上看雲。許多人喜歡在這裡度過時光，因為空氣很清新。每個人都知道公園規定：保持草地乾淨，不要摘花。\n\n46. 下午 4:15 時，那位老先生在樹下做什麼？",
+    coreConcept: "自修第 46–47 頁「現在進行式」與「There + be + 名詞 + V-ing」：文本寫道「there is an old man sitting under one tree and reading a newspaper」。",
+    grammar: "There is + singular N (an old man) + V-ing (sitting ... and reading ...).",
+    distractors: [
+      "(B) 跑步的是兩個男孩（Two boys are running），不是老先生。",
+      "(C) 公園規定「do not pick the flowers」，並非老先生在摘花。",
+      "(D) 躺在草地上的是小女孩（a little girl is lying on the grass），不是老先生。"
+    ],
+    phonetics: "He is SIT-ting and READ-ing a NEWS-pa-per. /hi ɪz ˈsɪtɪŋ ənd ˈriːdɪŋ ə ˈnuːzpeɪpər/。"
+  },
+  {
+    id: 47,
+    section: "四、閱讀理解測驗（第二篇：社區公園的午後觀察）",
+    category: "細節理解",
+    refId: "ref-p46-47",
+    stem: "【第二篇：社區公園的午後觀察】\n47. Where is the little girl in the passage?",
+    options: [
+      { key: "A", text: "She is lying on the grass." },
+      { key: "B", text: "She is inside the pond." },
+      { key: "C", text: "She is in the classroom." },
+      { key: "D", text: "She is at the library desk." }
+    ],
+    answer: "A",
+    translation: "47. 短文中的小女孩在哪裡？",
+    coreConcept: "自修第 45 頁「lie → lying」與第 46 頁「現在進行式」：文本明示「a little girl is lying on the grass and watching the clouds」。",
+    grammar: "S (a little girl) + is + V-ing (lying) + prep. phrase (on the grass).",
+    distractors: [
+      "(B) 池塘（pond）在兩棵大樹附近，小女孩是在草地上。",
+      "(C) 短文場景為社區公園，非教室。",
+      "(D) 短文場景為社區公園，非圖書館櫃檯。"
+    ],
+    phonetics: "She is LY-ing on the GRASS. /ʃi ɪz ˈlaɪɪŋ ɑn ðə ɡræs/。"
+  },
+  {
+    id: 48,
+    section: "四、閱讀理解測驗（第二篇：社區公園的午後觀察）",
+    category: "語意邏輯",
+    refId: "ref-p46-47",
+    stem: "【第二篇：社區公園的午後觀察】\n48. Why do many people like spending time in Sunny Park?",
+    options: [
+      { key: "A", text: "Because the air is fresh." },
+      { key: "B", text: "Because there are no trees there." },
+      { key: "C", text: "Because they can pick flowers." },
+      { key: "D", text: "Because it is midnight now." }
+    ],
+    answer: "A",
+    translation: "48. 為什麼許多人喜歡在陽光公園度過時光？",
+    coreConcept: "文本指出「Many people love spending time here because the air is fresh.」，由 because 引出原因。",
+    grammar: "S + V (love) + V-ing (spending time) + here + because-clause (the air is fresh).",
+    distractors: [
+      "(B) 文本說「There are two big trees near the pond」，並非沒有樹。",
+      "(C) 規定「do not pick the flowers」，不可摘花。",
+      "(D) 現在是 4:15 p.m.（下午 4:15），不是午夜。"
+    ],
+    phonetics: "Be-CAUSE the AIR is FRESH. /bɪˈkɔːz ði ɛr ɪz frɛʃ/；the air 連讀時 the 讀作 /ði/。"
+  },
+  {
+    id: 49,
+    section: "四、閱讀理解測驗（第二篇：社區公園的午後觀察）",
+    category: "語意邏輯",
+    refId: "ref-p46-47",
+    stem: "【第二篇：社區公園的午後觀察】\n49. What can we infer about the visitors in Sunny Park from the last sentence?",
+    options: [
+      { key: "A", text: "They are aware of the rules to keep the grass clean and leave flowers alone." },
+      { key: "B", text: "They do not know how to read or follow rules." },
+      { key: "C", text: "They are all taking an English test." },
+      { key: "D", text: "They live inside the pond." }
+    ],
+    answer: "A",
+    translation: "49. 從最後一句，我們可以推論陽光公園的訪客具備什麼認知？",
+    coreConcept: "自修第 46 頁「know」用法與閱讀推論：最後一句「Everyone knows the park rules: keep the grass clean and do not pick the flowers.」，可推論訪客知道保持草地乾淨且不摘花。",
+    grammar: "Inference from: Everyone + V (knows) + O (the park rules) + appositive/explanation.",
+    distractors: [
+      "(B) 與「Everyone knows the park rules」相反。",
+      "(C) 短文未提及參加英文測驗。",
+      "(D) 顯然不符合常識與文意。"
+    ],
+    phonetics: "KEEP the GRASS CLEAN and DO NOT PICK the FLOW-ers. /kiːp ðə ɡræs kliːn/。"
+  },
+  {
+    id: 50,
+    section: "四、閱讀理解測驗（第二篇：社區公園的午後觀察）",
+    category: "細節理解",
+    refId: "ref-p46-47",
+    stem: "【第二篇：社區公園的午後觀察】\n50. According to the passage, how many big trees are near the pond?",
+    options: [
+      { key: "A", text: "Two." },
+      { key: "B", text: "Zero." },
+      { key: "C", text: "Twenty." },
+      { key: "D", text: "Forty." }
+    ],
+    answer: "A",
+    translation: "50. 根據短文，池塘附近有幾棵大樹？",
+    coreConcept: "自修第 47 頁「There are」句型：文本第二句明示「There are two big trees near the pond」，數量為 two（兩棵）。",
+    grammar: "There are + number (two) + adj. (big) + plural N (trees) + prep. phrase (near the pond).",
+    distractors: [
+      "(B) 池塘附近有兩棵大樹，不是零棵。",
+      "(C) 文本為 two，非 twenty（二十）。",
+      "(D) 文本為 two，非 forty（四十）。"
+    ],
+    phonetics: "TWO BIG TREES near the POND. /tuː bɪɡ triːz nɪr ðə pɑnd/。"
+  }
+];
+
+// 狀態管理變數
+const STORAGE_HISTORY_KEY = "junior_high_eng_exam_history_v1";
+const PARENT_PASSCODE = "1234";
+
+let userAnswers = {}; // { [questionId]: 'A' | 'B' | 'C' | 'D' }
+let isSubmitted = false;
+let currentFilterMode = "all"; // 'all' | 'wrong'
+let totalSecondsLeft = 30 * 60;
+let initialAllocatedSeconds = 30 * 60;
+let timerIntervalId = null;
+let examStartTimeMs = Date.now();
+let radarChartInstance = null;
+
+// 隱藏入口連擊計數器
+let titleClickCount = 0;
+let secretIconClickCount = 0;
+
+// DOM 元素參照
+const questionsContainer = document.getElementById("questionsContainer");
+const questionNavGrid = document.getElementById("questionNavGrid");
+const progressCounter = document.getElementById("progressCounter");
+const timerDisplay = document.getElementById("timerDisplay");
+const customMinutesInput = document.getElementById("customMinutesInput");
+const setTimerBtn = document.getElementById("setTimerBtn");
+const submitExamBtn = document.getElementById("submitExamBtn");
+const reshuffleExamBtn = document.getElementById("reshuffleExamBtn");
+const resultPanel = document.getElementById("resultPanel");
+const finalScoreText = document.getElementById("finalScoreText");
+const correctCountText = document.getElementById("correctCountText");
+const submittedAtText = document.getElementById("submittedAtText");
+const elapsedTimeText = document.getElementById("elapsedTimeText");
+const diagTableBody = document.getElementById("diagTableBody");
+const showAllBtn = document.getElementById("showAllBtn");
+const showWrongOnlyBtn = document.getElementById("showWrongOnlyBtn");
+const copyWrongMdBtn = document.getElementById("copyWrongMdBtn");
+const downloadDocBtn = document.getElementById("downloadDocBtn");
+const toastMsg = document.getElementById("toastMsg");
+
+// 顯示提示訊息
+function showToast(message) {
+  toastMsg.textContent = message;
+  toastMsg.classList.add("visible");
+  clearTimeout(showToast._timeout);
+  showToast._timeout = setTimeout(() => {
+    toastMsg.classList.remove("visible");
+  }, 2400);
+}
+
+// 格式化秒數為 MM:SS
+function formatSeconds(sec) {
+  const safeSec = Math.max(0, Math.floor(sec));
+  const m = String(Math.floor(safeSec / 60)).padStart(2, "0");
+  const s = String(safeSec % 60).padStart(2, "0");
+  return `${m}:${s}`;
+}
+
+// 格式化耗時
+function formatDuration(sec) {
+  const m = Math.floor(sec / 60);
+  const s = sec % 60;
+  if (m === 0) return `${s} 秒`;
+  return `${m} 分 ${s} 秒`;
+}
+
+// 更新倒數計時顯示
+function renderTimer() {
+  timerDisplay.textContent = formatSeconds(totalSecondsLeft);
+  if (totalSecondsLeft <= 60 && totalSecondsLeft > 0) {
+    timerDisplay.classList.add("danger");
+  } else {
+    timerDisplay.classList.remove("danger");
+  }
+}
+
+// 啟動倒數計時器
+function startTimerLoop() {
+  clearInterval(timerIntervalId);
+  timerIntervalId = setInterval(() => {
+    if (isSubmitted) {
+      clearInterval(timerIntervalId);
+      return;
+    }
+    if (totalSecondsLeft > 0) {
+      totalSecondsLeft -= 1;
+      renderTimer();
+      if (totalSecondsLeft === 0) {
+        showToast("倒數時間到，系統自動提交試卷！");
+        handleSubmitExam();
+      }
+    }
+  }, 1000);
+}
+
+// 設定倒數計時器分鐘數（0 ~ 240 分鐘）
+function handleSetCustomTimer() {
+  if (isSubmitted) {
+    showToast("試卷已提交，請先按「重新測驗(洗牌)」");
+    return;
+  }
+  let mins = parseInt(customMinutesInput.value, 10);
+  if (Number.isNaN(mins)) mins = 30;
+  mins = Math.max(0, Math.min(240, mins));
+  customMinutesInput.value = mins;
+  totalSecondsLeft = mins * 60;
+  initialAllocatedSeconds = mins * 60;
+  examStartTimeMs = Date.now();
+  renderTimer();
+  showToast(`已設定倒數計時為 ${mins} 分鐘`);
+}
+
+// 雙向聯動：點擊右側題號徽章，左側平滑捲動至對應考點卡片並閃爍藍框
+function focusLeftReference(refId) {
+  const targetCard = document.getElementById(refId);
+  if (!targetCard) return;
+  targetCard.scrollIntoView({ behavior: "smooth", block: "center" });
+  targetCard.classList.remove("highlight-flash");
+  void targetCard.offsetWidth; // 觸發重繪
+  targetCard.classList.add("highlight-flash");
+  setTimeout(() => {
+    targetCard.classList.remove("highlight-flash");
+  }, 1500);
+}
+
+// 跳轉至右側特定題目
+function scrollToQuestionCard(qId) {
+  const card = document.getElementById(`q-card-${qId}`);
+  if (!card) return;
+  card.scrollIntoView({ behavior: "smooth", block: "center" });
+}
+
+// 渲染左側題號快速導覽
+function renderQuestionNav() {
+  questionNavGrid.innerHTML = "";
+  let answeredCount = 0;
+
+  QUESTION_BANK.forEach((q) => {
+    const selectedKey = userAnswers[q.id];
+    if (selectedKey) answeredCount += 1;
+
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "nav-btn";
+    btn.textContent = q.id;
+    btn.title = `跳轉至第 ${q.id} 題`;
+
+    if (isSubmitted) {
+      if (selectedKey === q.answer) {
+        btn.classList.add("graded-correct");
+      } else {
+        btn.classList.add("graded-wrong");
+      }
+    } else if (selectedKey) {
+      btn.classList.add("answered");
+    }
+
+    btn.addEventListener("click", () => scrollToQuestionCard(q.id));
+    questionNavGrid.appendChild(btn);
+  });
+
+  progressCounter.textContent = `已作答 ${answeredCount} / ${QUESTION_BANK.length}`;
+}
+
+// 渲染右側題目卡片與解析
+function renderQuestions() {
+  questionsContainer.innerHTML = "";
+
+  QUESTION_BANK.forEach((q) => {
+    const selectedKey = userAnswers[q.id] || null;
+    const isCorrect = selectedKey === q.answer;
+
+    // 若交卷後開啟「只看錯題」，答對題目隱藏
+    if (isSubmitted && currentFilterMode === "wrong" && isCorrect) {
+      return;
+    }
+
+    const card = document.createElement("article");
+    card.className = "question-card";
+    card.id = `q-card-${q.id}`;
+
+    if (isSubmitted) {
+      card.classList.add(isCorrect ? "correct-card" : "wrong-card");
+    }
+
+    // 題頭徽章
+    const header = document.createElement("div");
+    header.className = "question-header";
+
+    const badgeGroup = document.createElement("div");
+    badgeGroup.className = "q-badge-group";
+
+    const numBtn = document.createElement("button");
+    numBtn.type = "button";
+    numBtn.className = "q-num-badge";
+    numBtn.textContent = `第 ${q.id} 題`;
+    numBtn.title = "點擊此題號徽章，左側考點將自動捲動並藍框閃爍";
+    numBtn.addEventListener("click", () => focusLeftReference(q.refId));
+
+    const secTag = document.createElement("span");
+    secTag.className = "q-tag";
+    secTag.textContent = q.section;
+
+    const catTag = document.createElement("span");
+    catTag.className = "q-tag";
+    catTag.textContent = `考點：${q.category}`;
+
+    badgeGroup.appendChild(numBtn);
+    badgeGroup.appendChild(secTag);
+    badgeGroup.appendChild(catTag);
+    header.appendChild(badgeGroup);
+
+    if (isSubmitted) {
+      const statusPill = document.createElement("span");
+      statusPill.className = `q-status-pill ${isCorrect ? "correct" : "wrong"}`;
+      statusPill.textContent = isCorrect ? "答對 ✓" : `答錯 ✗（正解：${q.answer}）`;
+      header.appendChild(statusPill);
+    }
+
+    card.appendChild(header);
+
+    // 題幹
+    const stemEl = document.createElement("div");
+    stemEl.className = "question-stem";
+    stemEl.textContent = q.stem;
+    card.appendChild(stemEl);
+
+    // 選項列表
+    const optList = document.createElement("div");
+    optList.className = "options-list";
+
+    q.options.forEach((opt) => {
+      const optBtn = document.createElement("button");
+      optBtn.type = "button";
+      optBtn.className = "option-btn";
+      optBtn.disabled = isSubmitted;
+
+      if (!isSubmitted && selectedKey === opt.key) {
+        optBtn.classList.add("selected");
+      }
+
+      if (isSubmitted) {
+        if (opt.key === q.answer) {
+          optBtn.classList.add("reveal-correct");
+        } else if (selectedKey === opt.key && opt.key !== q.answer) {
+          optBtn.classList.add("reveal-wrong");
+        }
+      }
+
+      optBtn.innerHTML = `<span class="opt-key">(${opt.key})</span><span>${opt.text}</span>`;
+
+      optBtn.addEventListener("click", () => {
+        if (isSubmitted) return;
+        userAnswers[q.id] = opt.key;
+        renderQuestionNav();
+        renderQuestions();
+      });
+
+      optList.appendChild(optBtn);
+    });
+
+    card.appendChild(optList);
+
+    // 交卷後顯示逐題完整解析
+    const expBox = document.createElement("div");
+    expBox.className = `explanation-box ${isSubmitted ? "show" : ""}`;
+
+    const distractorsHtml = q.distractors
+      .map((d) => `<div style="margin-left:10px;">• ${d}</div>`)
+      .join("");
+
+    expBox.innerHTML = `
+      <div class="exp-item"><span class="exp-label">【測驗卷原題目】</span>第 ${q.id} 題 — ${q.stem}</div>
+      <div class="exp-item"><span class="exp-label">【繁體中文翻譯】</span>${q.translation}</div>
+      <div class="exp-item"><span class="exp-label">【答案】</span>(${q.answer})</div>
+      <div class="exp-item"><span class="exp-label">【核心考點說明】</span>${q.coreConcept}</div>
+      <div class="exp-item"><span class="exp-label">【考點歸類】</span>${q.category}</div>
+      <div class="exp-item"><span class="exp-label">【文法】</span>${q.grammar}</div>
+      <div class="exp-item"><span class="exp-label">【干擾項、誘答剖析】</span>${distractorsHtml}</div>
+      <div class="exp-item"><span class="exp-label">【音標】</span>${q.phonetics}</div>
+    `;
+
+    card.appendChild(expBox);
+    questionsContainer.appendChild(card);
+  });
+}
+
+// 計算各維度統計與雷達圖
+function computeDiagnosticsAndRadar() {
+  const dimensions = ["字彙", "文法", "語意邏輯", "細節理解"];
+  const stats = {};
+  dimensions.forEach((dim) => {
+    stats[dim] = { total: 0, correct: 0 };
+  });
+
+  let totalCorrect = 0;
+  const wrongIds = [];
+
+  QUESTION_BANK.forEach((q) => {
+    const dim = dimensions.includes(q.category) ? q.category : "字彙";
+    stats[dim].total += 1;
+    if (userAnswers[q.id] === q.answer) {
+      stats[dim].correct += 1;
+      totalCorrect += 1;
+    } else {
+      wrongIds.push(q.id);
+    }
+  });
+
+  const score100 = Math.round((totalCorrect / QUESTION_BANK.length) * 100);
+  const nowStr = new Date().toLocaleString("zh-TW", { hour12: false });
+  const elapsedSec = Math.max(1, Math.round((Date.now() - examStartTimeMs) / 1000));
+  const elapsedStr = formatDuration(elapsedSec);
+
+  finalScoreText.textContent = `${score100} 分`;
+  correctCountText.textContent = `${totalCorrect} / ${QUESTION_BANK.length}`;
+  submittedAtText.textContent = nowStr;
+  elapsedTimeText.textContent = elapsedStr;
+
+  // 渲染弱點診斷表
+  diagTableBody.innerHTML = "";
+  const rateArray = [];
+  const dimSummaryParts = [];
+
+  dimensions.forEach((dim) => {
+    const { total, correct } = stats[dim];
+    const rate = total > 0 ? Math.round((correct / total) * 100) : 100;
+    rateArray.push(rate);
+    dimSummaryParts.push(`${dim}:${rate}%`);
+
+    let advice = "表現穩健，維持現行複習節奏。";
+    if (total === 0) {
+      advice = "本先導批次暫無此類題目（將於第 16～50 題擴充）。";
+    } else if (rate < 60) {
+      advice = "優先加強本維度自修規則與拼字／介系詞辨析。";
+    } else if (rate < 85) {
+      advice = "留意易混淆誘答選項與句型細節，再做錯題回顧。";
+    }
+
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td><strong>${dim}</strong></td>
+      <td>${correct} / ${total}</td>
+      <td>${total > 0 ? rate + "%" : "—"}</td>
+      <td>${advice}</td>
+    `;
+    diagTableBody.appendChild(tr);
+  });
+
+  // 繪製 Chart.js 雷達圖
+  const ctx = document.getElementById("radarChartCanvas").getContext("2d");
+  if (radarChartInstance) {
+    radarChartInstance.destroy();
+  }
+  radarChartInstance = new Chart(ctx, {
+    type: "radar",
+    data: {
+      labels: dimensions,
+      datasets: [{
+        label: "得分率（%）",
+        data: rateArray,
+        backgroundColor: "rgba(29, 78, 216, 0.2)",
+        borderColor: "rgba(29, 78, 216, 1)",
+        borderWidth: 2,
+        pointBackgroundColor: "rgba(29, 78, 216, 1)"
+      }]
+    },
+    options: {
+      responsive: true,
+      scales: {
+        r: {
+          min: 0,
+          max: 100,
+          ticks: {
+            stepSize: 25
+          }
+        }
+      },
+      plugins: {
+        legend: {
+          display: false
+        }
+      }
+    }
+  });
+
+  // 寫入 localStorage（01.交卷時間 02.耗時 03.得分 04.各維度統計 05.錯題清單）
+  const recordEntry = {
+    submittedAt: nowStr,
+    elapsed: elapsedStr,
+    score: score100,
+    dimensionsSummary: dimSummaryParts.join(" | "),
+    wrongList: wrongIds.length > 0 ? wrongIds.map((id) => `第${id}題`).join(", ") : "無（全對）"
+  };
+
+  const existing = JSON.parse(localStorage.getItem(STORAGE_HISTORY_KEY) || "[]");
+  existing.unshift(recordEntry);
+  localStorage.setItem(STORAGE_HISTORY_KEY, JSON.stringify(existing));
+}
+
+// 提交試卷
+function handleSubmitExam() {
+  if (isSubmitted) return;
+  isSubmitted = true;
+  clearInterval(timerIntervalId);
+  submitExamBtn.disabled = true;
+  setTimerBtn.disabled = true;
+  customMinutesInput.disabled = true;
+
+  currentFilterMode = "all";
+  showAllBtn.style.background = "#eff6ff";
+  showAllBtn.style.borderColor = "#93c5fd";
+  showAllBtn.style.color = "#1d4ed8";
+  showWrongOnlyBtn.style.background = "#ffffff";
+  showWrongOnlyBtn.style.borderColor = "#cbd5e1";
+  showWrongOnlyBtn.style.color = "#1e293b";
+
+  computeDiagnosticsAndRadar();
+  resultPanel.classList.add("active");
+  renderQuestionNav();
+  renderQuestions();
+  window.scrollTo({ top: 0, behavior: "smooth" });
+  showToast("試卷已提交並完成自動批改！");
+}
+
+// 重新測驗（題目順序與選項順序皆隨機洗牌）
+function shuffleArray(arr) {
+  const copy = [...arr];
+  for (let i = copy.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+  return copy;
+}
+
+function handleReshuffleExam() {
+  // 打亂選項順序並重新對應正確答案字母 A/B/C/D
+  const keys = ["A", "B", "C", "D"];
+  const shuffledQuestions = shuffleArray(QUESTION_BANK).map((q) => {
+    const correctOptionObj = q.options.find((o) => o.key === q.answer);
+    const shuffledOpts = shuffleArray(q.options);
+    const remappedOpts = shuffledOpts.map((opt, idx) => ({
+      key: keys[idx],
+      text: opt.text
+    }));
+    const newCorrectIdx = shuffledOpts.findIndex((o) => o.text === correctOptionObj.text);
+    return {
+      ...q,
+      options: remappedOpts,
+      answer: keys[newCorrectIdx]
+    };
+  });
+
+  // 更新 QUESTION_BANK 內容
+  QUESTION_BANK.splice(0, QUESTION_BANK.length, ...shuffledQuestions);
+
+  userAnswers = {};
+  isSubmitted = false;
+  currentFilterMode = "all";
+  totalSecondsLeft = initialAllocatedSeconds > 0 ? initialAllocatedSeconds : 1800;
+  examStartTimeMs = Date.now();
+
+  submitExamBtn.disabled = false;
+  setTimerBtn.disabled = false;
+  customMinutesInput.disabled = false;
+  resultPanel.classList.remove("active");
+
+  renderTimer();
+  startTimerLoop();
+  renderQuestionNav();
+  renderQuestions();
+  showToast("已重新洗牌題目與選項，開始新測驗！");
+}
+
+// 產生錯題筆記文字（Markdown 格式）
+function buildWrongNotesMarkdown() {
+  const wrongQs = QUESTION_BANK.filter((q) => userAnswers[q.id] !== q.answer);
+  if (wrongQs.length === 0) {
+    return "# 國三英文錯題筆記\n\n太棒了！本回測驗全數答對，無錯題紀錄。";
+  }
+
+  const lines = [
+    "# 國三英文錯題筆記（Page 42–47）",
+    ""
+  ];
+
+  wrongQs.forEach((q) => {
+    const picked = userAnswers[q.id] || "未作答";
+    lines.push(`## 第 ${q.id} 題（考點：${q.category}）`);
+    lines.push(`- **測驗卷原題目**：${q.stem}`);
+    lines.push(`- **你的作答**：(${picked}) ｜ **正確答案**：(${q.answer})`);
+    lines.push(`- **繁體中文翻譯**：${q.translation}`);
+    lines.push(`- **核心考點說明**：${q.coreConcept}`);
+    lines.push(`- **文法**：${q.grammar}`);
+    lines.push(`- **干擾項、誘答剖析**：${q.distractors.join(" / ")}`);
+    lines.push(`- **音標**：${q.phonetics}`);
+    lines.push("");
+  });
+
+  return lines.join("\n");
+}
+
+// 一鍵複製錯題筆記（Markdown）
+async function handleCopyWrongMarkdown() {
+  const mdText = buildWrongNotesMarkdown();
+  try {
+    await navigator.clipboard.writeText(mdText);
+    showToast("已複製錯題筆記（Markdown），可直接貼至 Notion！");
+  } catch {
+    const textarea = document.createElement("textarea");
+    textarea.value = mdText;
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand("copy");
+    document.body.removeChild(textarea);
+    showToast("已複製錯題筆記（Markdown）！");
+  }
+}
+
+// 下載錯題 Word (.doc)
+function handleDownloadWrongDoc() {
+  const mdText = buildWrongNotesMarkdown();
+  const escapedHtml = mdText
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/\n/g, "<br>");
+
+  const docContent = `
+    <html xmlns:o="urn:schemas-microsoft-com:office:office"
+          xmlns:w="urn:schemas-microsoft-com:office:word"
+          xmlns="http://www.w3.org/TR/REC-html40">
+    <head><meta charset="utf-8"><title>國三英文錯題筆記</title></head>
+    <body style="font-family: 'Noto Sans TC', 'Microsoft JhengHei', sans-serif; line-height: 1.6;">
+      ${escapedHtml}
+    </body></html>
+  `;
+
+  const blob = new Blob(["\ufeff", docContent], {
+    type: "application/msword;charset=utf-8"
+  });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "國三英文錯題筆記.doc";
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  showToast("已下載「國三英文錯題筆記.doc」");
+}
+
+// 家長歷史紀錄 Modal 控制
+const parentHistoryModal = document.getElementById("parentHistoryModal");
+const parentAuthBox = document.getElementById("parentAuthBox");
+const parentRecordsContent = document.getElementById("parentRecordsContent");
+const parentPasswordInput = document.getElementById("parentPasswordInput");
+const parentAuthError = document.getElementById("parentAuthError");
+const verifyParentBtn = document.getElementById("verifyParentBtn");
+const closeParentModalBtn = document.getElementById("closeParentModalBtn");
+const historyTableBody = document.getElementById("historyTableBody");
+const todayAttemptsSummary = document.getElementById("todayAttemptsSummary");
+const clearHistoryBtn = document.getElementById("clearHistoryBtn");
+
+function openParentModal() {
+  parentAuthBox.style.display = "block";
+  parentRecordsContent.style.display = "none";
+  parentPasswordInput.value = "";
+  parentAuthError.textContent = "";
+  parentHistoryModal.classList.add("open");
+  parentPasswordInput.focus();
+}
+
+function renderParentHistoryTable() {
+  const list = JSON.parse(localStorage.getItem(STORAGE_HISTORY_KEY) || "[]");
+  const todayPrefix = new Date().toLocaleDateString("zh-TW");
+  const todayCount = list.filter((item) => item.submittedAt.startsWith(todayPrefix)).length;
+
+  todayAttemptsSummary.textContent = `今日（${todayPrefix}）累計交卷次數：${todayCount} 次（總紀錄 ${list.length} 筆）`;
+  historyTableBody.innerHTML = "";
+
+  if (list.length === 0) {
+    historyTableBody.innerHTML = `<tr><td colspan="6" style="text-align:center;color:#64748b;">尚無交卷紀錄</td></tr>`;
+    return;
+  }
+
+  list.forEach((item, idx) => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td>${idx + 1}</td>
+      <td>${item.submittedAt}</td>
+      <td>${item.elapsed}</td>
+      <td><strong>${item.score} 分</strong></td>
+      <td>${item.dimensionsSummary}</td>
+      <td>${item.wrongList}</td>
+    `;
+    historyTableBody.appendChild(tr);
+  });
+}
+
+verifyParentBtn.addEventListener("click", () => {
+  if (parentPasswordInput.value === PARENT_PASSCODE) {
+    parentAuthBox.style.display = "none";
+    parentRecordsContent.style.display = "block";
+    renderParentHistoryTable();
+  } else {
+    parentAuthError.textContent = "密碼錯誤，請重新輸入。";
+  }
+});
+
+clearHistoryBtn.addEventListener("click", () => {
+  localStorage.removeItem(STORAGE_HISTORY_KEY);
+  renderParentHistoryTable();
+  showToast("已清除歷次測驗歷史紀錄");
+});
+
+closeParentModalBtn.addEventListener("click", () => {
+  parentHistoryModal.classList.remove("open");
+});
+
+// 連點標題 5 下開啟家長監看
+document.getElementById("mainTitle").addEventListener("click", () => {
+  titleClickCount += 1;
+  if (titleClickCount >= 5) {
+    titleClickCount = 0;
+    openParentModal();
+  }
+});
+
+// 快捷鍵 Ctrl + Shift + P 開啟家長監看
+document.addEventListener("keydown", (e) => {
+  if (e.ctrlKey && e.shiftKey && (e.key === "P" || e.key === "p")) {
+    e.preventDefault();
+    openParentModal();
+  }
+});
+
+// 視覺化驗證總表 Modal（左上角 ❖ 連點 5 下）
+const answerKeyModal = document.getElementById("answerKeyModal");
+const answerKeyTableBody = document.getElementById("answerKeyTableBody");
+const closeAnswerKeyModalBtn = document.getElementById("closeAnswerKeyModalBtn");
+
+function openAnswerKeyModal() {
+  answerKeyTableBody.innerHTML = "";
+  QUESTION_BANK.forEach((q) => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td>第 ${q.id} 題</td>
+      <td>${q.category}</td>
+      <td>${q.stem}</td>
+      <td><strong>(${q.answer})</strong></td>
+    `;
+    answerKeyTableBody.appendChild(tr);
+  });
+  answerKeyModal.classList.add("open");
+}
+
+document.getElementById("secretAnswerKeyBtn").addEventListener("click", () => {
+  secretIconClickCount += 1;
+  if (secretIconClickCount >= 5) {
+    secretIconClickCount = 0;
+    openAnswerKeyModal();
+  }
+});
+
+closeAnswerKeyModalBtn.addEventListener("click", () => {
+  answerKeyModal.classList.remove("open");
+});
+
+// 篩選與匯出事件綁定
+showAllBtn.addEventListener("click", () => {
+  currentFilterMode = "all";
+  showAllBtn.style.background = "#eff6ff";
+  showAllBtn.style.borderColor = "#93c5fd";
+  showAllBtn.style.color = "#1d4ed8";
+  showWrongOnlyBtn.style.background = "#ffffff";
+  showWrongOnlyBtn.style.borderColor = "#cbd5e1";
+  showWrongOnlyBtn.style.color = "#1e293b";
+  renderQuestions();
+});
+
+showWrongOnlyBtn.addEventListener("click", () => {
+  currentFilterMode = "wrong";
+  showWrongOnlyBtn.style.background = "#fee2e2";
+  showWrongOnlyBtn.style.borderColor = "#fca5a5";
+  showWrongOnlyBtn.style.color = "#b91c1c";
+  showAllBtn.style.background = "#ffffff";
+  showAllBtn.style.borderColor = "#cbd5e1";
+  showAllBtn.style.color = "#1e293b";
+  renderQuestions();
+});
+
+setTimerBtn.addEventListener("click", handleSetCustomTimer);
+submitExamBtn.addEventListener("click", handleSubmitExam);
+reshuffleExamBtn.addEventListener("click", handleReshuffleExam);
+copyWrongMdBtn.addEventListener("click", handleCopyWrongMarkdown);
+downloadDocBtn.addEventListener("click", handleDownloadWrongDoc);
+
+// 初始化執行
+renderTimer();
+startTimerLoop();
+renderQuestionNav();
+renderQuestions();
+</script>
+</body>
+</html>

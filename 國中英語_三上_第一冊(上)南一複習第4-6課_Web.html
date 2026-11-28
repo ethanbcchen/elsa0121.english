@@ -1,0 +1,3192 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>英語自修數位筆記（第 36 ～ 41 頁）</title>
+  <style>
+    :root {
+      --bg-color: #f4f6f9;
+      --card-bg: #ffffff;
+      --primary-color: #2c5282;
+      --secondary-color: #3182ce;
+      --accent-color: #ed8936;
+      --text-main: #2d3748;
+      --text-muted: #718096;
+      --border-color: #e2e8f0;
+      --table-header: #edf2f7;
+      --handwritten-bg: #fffbeb;
+      --handwritten-text: #b7791f;
+      --handwritten-border: #f6e05e;
+      --section-badge: #2b6cb0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft JhengHei", "PingFang TC", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      line-height: 1.6;
+      padding-top: 70px;
+    }
+
+    /* 頂部固定導覽列 */
+    header.top-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background-color: #1a365d;
+      color: #ffffff;
+      padding: 12px 20px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+      z-index: 1000;
+      gap: 10px;
+    }
+
+    .nav-title {
+      font-weight: bold;
+      font-size: 1.05rem;
+      letter-spacing: 0.5px;
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .nav-links a {
+      color: #e2e8f0;
+      text-decoration: none;
+      background-color: rgba(255, 255, 255, 0.12);
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 0.88rem;
+      transition: background-color 0.2s;
+    }
+
+    .nav-links a:hover {
+      background-color: rgba(255, 255, 255, 0.28);
+      color: #ffffff;
+    }
+
+    .nav-controls button {
+      background-color: var(--accent-color);
+      color: #ffffff;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 5px;
+      font-size: 0.88rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+
+    .nav-controls button:hover {
+      opacity: 0.9;
+    }
+
+    /* 主容器 */
+    main {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 20px 16px 60px;
+    }
+
+    /* 單頁區塊 */
+    section.page-block {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 24px;
+      margin-bottom: 32px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+      scroll-margin-top: 80px;
+    }
+
+    .page-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid var(--primary-color);
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .page-badge {
+      background-color: var(--primary-color);
+      color: #ffffff;
+      padding: 3px 12px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: bold;
+    }
+
+    .unit-title {
+      font-size: 1.25rem;
+      font-weight: bold;
+      color: var(--primary-color);
+    }
+
+    .banner-title {
+      background: linear-gradient(135deg, #2b6cb0, #4299e1);
+      color: #ffffff;
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-size: 1.15rem;
+      font-weight: bold;
+      margin: 18px 0 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .banner-letter {
+      background-color: #ffffff;
+      color: #2b6cb0;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+    }
+
+    .sub-heading {
+      font-size: 1.05rem;
+      font-weight: bold;
+      color: #2b6cb0;
+      border-left: 4px solid #3182ce;
+      padding-left: 10px;
+      margin: 18px 0 10px;
+    }
+
+    .category-tag {
+      display: inline-block;
+      background-color: #ebf8ff;
+      color: #2b6cb0;
+      border: 1px solid #bee3f8;
+      padding: 2px 10px;
+      border-radius: 4px;
+      font-weight: bold;
+      font-size: 0.92rem;
+      margin: 12px 0 6px;
+    }
+
+    .sub-category {
+      font-weight: bold;
+      color: #4a5568;
+      margin: 8px 0 6px;
+      font-size: 0.95rem;
+    }
+
+    /* 表格樣式 */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0 18px;
+      font-size: 0.94rem;
+    }
+
+    th, td {
+      border: 1px solid var(--border-color);
+      padding: 8px 12px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background-color: var(--table-header);
+      font-weight: bold;
+      color: #2d3748;
+    }
+
+    /* 單字列表網格 */
+    .vocab-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .vocab-item {
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 8px 12px;
+      background-color: #fafafa;
+    }
+
+    .vocab-main {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 8px;
+    }
+
+    .vocab-word {
+      font-weight: bold;
+      color: #1a202c;
+      font-size: 0.98rem;
+    }
+
+    .vocab-pos {
+      font-size: 0.78rem;
+      color: #718096;
+      background-color: #edf2f7;
+      padding: 1px 5px;
+      border-radius: 3px;
+      margin-left: 4px;
+    }
+
+    .vocab-meaning {
+      color: #2d3748;
+      font-size: 0.92rem;
+    }
+
+    .vocab-note {
+      font-size: 0.85rem;
+      color: #4a5568;
+      margin-top: 4px;
+      padding-top: 4px;
+      border-top: 1px dashed #cbd5e0;
+    }
+
+    /* 練習題區塊 */
+    .quiz-box {
+      background-color: #f7fafc;
+      border: 1px solid #cbd5e0;
+      border-left: 4px solid #38a169;
+      border-radius: 6px;
+      padding: 14px 16px;
+      margin: 18px 0;
+    }
+
+    .quiz-title {
+      font-weight: bold;
+      color: #276749;
+      margin-bottom: 10px;
+      font-size: 1rem;
+    }
+
+    .quiz-item {
+      margin-bottom: 12px;
+      padding-bottom: 10px;
+      border-bottom: 1px dashed #e2e8f0;
+    }
+
+    .quiz-item:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+
+    .quiz-options {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 6px;
+      margin-top: 6px;
+      padding-left: 16px;
+      font-size: 0.92rem;
+    }
+
+    /* 一字多義卡片 */
+    .polysemy-card {
+      border: 1px solid #cbd5e0;
+      border-radius: 8px;
+      margin-bottom: 14px;
+      overflow: hidden;
+    }
+
+    .polysemy-header {
+      background-color: #ebf4ff;
+      padding: 8px 14px;
+      font-weight: bold;
+      color: #2c5282;
+      font-size: 1.05rem;
+      border-bottom: 1px solid #cbd5e0;
+    }
+
+    .polysemy-body {
+      padding: 10px 14px;
+    }
+
+    .polysemy-row {
+      margin-bottom: 8px;
+      font-size: 0.93rem;
+    }
+
+    .polysemy-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .pos-badge {
+      display: inline-block;
+      background-color: #4a5568;
+      color: #ffffff;
+      font-size: 0.78rem;
+      padding: 1px 6px;
+      border-radius: 3px;
+      margin-right: 4px;
+    }
+
+    /* 片語圖與佳句 */
+    .idiom-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 10px;
+      margin: 12px 0;
+    }
+
+    .idiom-card {
+      border: 1px solid #cbd5e0;
+      border-radius: 6px;
+      padding: 10px;
+      text-align: center;
+      background-color: #fffaf0;
+    }
+
+    .phrase-list {
+      list-style: none;
+      margin: 10px 0;
+    }
+
+    .phrase-list li {
+      padding: 6px 10px;
+      border-bottom: 1px solid #edf2f7;
+      font-size: 0.94rem;
+    }
+
+    .note-box {
+      background-color: #fefcbf;
+      border: 1px solid #f6e05e;
+      border-radius: 6px;
+      padding: 10px 14px;
+      margin: 12px 0;
+      font-size: 0.92rem;
+    }
+
+    /* 手寫標記樣式 */
+    .handwritten {
+      display: inline-block;
+      background-color: var(--handwritten-bg);
+      color: var(--handwritten-text);
+      border: 1px dashed var(--handwritten-border);
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-weight: bold;
+      font-size: 0.9em;
+      margin: 0 3px;
+    }
+
+    body.hide-handwritten .handwritten {
+      display: none;
+    }
+
+    /* 頁尾 */
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #edf2f7;
+      color: #4a5568;
+      font-size: 0.92rem;
+      font-weight: bold;
+      border-top: 1px solid #cbd5e0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 頂部導覽列 -->
+  <header class="top-nav">
+    <div class="nav-title">英語自修數位筆記（第 36 ～ 41 頁）</div>
+    <nav class="nav-links" aria-label="頁碼快速切換">
+      <a href="#page-36">第 36 頁</a>
+      <a href="#page-37">第 37 頁</a>
+      <a href="#page-38">第 38 頁</a>
+      <a href="#page-39">第 39 頁</a>
+      <a href="#page-40">第 40 頁</a>
+      <a href="#page-41">第 41 頁</a>
+      <a href="#page-42">第 42 頁</a>
+      <a href="#page-43">第 43 頁</a>
+      <a href="#page-44">第 44 頁</a>
+      <a href="#page-45">第 45 頁</a>
+      <a href="#page-46">第 46 頁</a>
+      <a href="#page-47">第 47 頁</a>
+      <a href="#page-48">第 48 頁</a>
+      <a href="#page-49">第 49 頁</a>
+      <a href="#page-50">第 50 頁</a>
+      <a href="#page-51">第 51 頁</a>
+      <a href="#page-52">第 52 頁</a>
+      <a href="#page-53">第 53 頁</a>
+      <a href="#page-54">第 54 頁</a>
+      <a href="#page-55">第 55 頁</a>
+      <a href="#page-56">第 56 頁</a>
+
+    </nav>
+    <div class="nav-controls">
+      <button type="button" id="toggle-hw-btn" onclick="toggleHandwritten()">隱藏【手寫】筆記</button>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ==================== 第 36 頁 ==================== -->
+    <section id="page-36" class="page-block" data-page="36">
+      <div class="page-header">
+        <span class="page-badge">第 36 頁</span>
+        <span class="unit-title">單元 2 第一冊（下）第 4～6 課</span>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>文法細目</th>
+            <th>重要度</th>
+            <th>文法細目</th>
+            <th>重要度</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1. What time 問時間</td>
+            <td>★★</td>
+            <td>4. What's the date 的用法、日期與表時間的介系詞</td>
+            <td>★★</td>
+          </tr>
+          <tr>
+            <td>2. What day 的用法</td>
+            <td>★★</td>
+            <td>5. 現在進行式</td>
+            <td>★</td>
+          </tr>
+          <tr>
+            <td>3. 序數</td>
+            <td>★★</td>
+            <td>6. There is/are 的用法</td>
+            <td>★</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="banner-title">
+        <span class="banner-letter">A</span>
+        <span>複習單字一點通</span>
+      </div>
+
+      <div class="sub-heading">主題單字（曲目 04 *歷屆考古單字 ●一字多義講解）</div>
+
+      <div class="category-tag">名詞</div>
+
+      <div class="sub-category">興趣愛好</div>
+      <div class="vocab-grid">
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">1. music</span>
+            <span class="vocab-meaning">音樂</span>
+          </div>
+          <div class="vocab-note">listen to music <span class="vocab-pos">片</span> 聽音樂</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">2. video</span>
+            <span class="vocab-meaning">影片</span>
+          </div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">3. band</span>
+            <span class="vocab-meaning">樂團</span>
+          </div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">4. movie</span>
+            <span class="vocab-meaning">電影</span>
+          </div>
+          <div class="vocab-note">
+            (1) go to the movies <span class="vocab-pos">片</span> 去看電影<br>
+            (2) see a movie <span class="vocab-pos">片</span> 看電影
+          </div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">5. fan</span>
+            <span class="vocab-meaning">…迷；風扇</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sub-category">時間</div>
+      <div class="vocab-grid">
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">6. day</span>
+            <span class="vocab-meaning">日；天</span>
+          </div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">7. week</span>
+            <span class="vocab-meaning">週；星期</span>
+          </div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">8. weekend</span>
+            <span class="vocab-meaning">週末</span>
+          </div>
+          <div class="vocab-note">weekday <span class="vocab-pos">名</span> 平常日；工作日</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">9. Sunday</span>
+            <span class="vocab-meaning">星期日</span>
+          </div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">10. Monday</span>
+            <span class="vocab-meaning">星期一</span>
+          </div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">11. Tuesday</span>
+            <span class="vocab-meaning">星期二</span>
+          </div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">12. Wednesday</span>
+            <span class="vocab-meaning">星期三</span>
+          </div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">13. Thursday</span>
+            <span class="vocab-meaning">星期四</span>
+          </div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">14. Friday</span>
+            <span class="vocab-meaning">星期五</span>
+          </div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">15. Saturday</span>
+            <span class="vocab-meaning">星期六</span>
+          </div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">*16. month</span>
+            <span class="vocab-meaning">月分</span>
+          </div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">17. January</span>
+            <span class="vocab-meaning">一月</span>
+          </div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">18. February</span>
+            <span class="vocab-meaning">二月</span>
+          </div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">19. March</span>
+            <span class="vocab-meaning">三月</span>
+          </div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">20. April</span>
+            <span class="vocab-meaning">四月</span>
+          </div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">21. May</span>
+            <span class="vocab-meaning">五月</span>
+          </div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">22. June</span>
+            <span class="vocab-meaning">六月</span>
+          </div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">23. July</span>
+            <span class="vocab-meaning">七月</span>
+          </div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">24. August</span>
+            <span class="vocab-meaning">八月</span>
+          </div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">25. September</span>
+            <span class="vocab-meaning">九月</span>
+          </div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">26. October</span>
+            <span class="vocab-meaning">十月</span>
+          </div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">27. November</span>
+            <span class="vocab-meaning">十一月</span>
+          </div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">28. December</span>
+            <span class="vocab-meaning">十二月</span>
+          </div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">29. a.m.</span>
+            <span class="vocab-meaning">上午；凌晨；午夜</span>
+          </div>
+          <div class="vocab-note">a.m. 為凌晨 00:00 ～中午 11:59。</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">30. p.m.</span>
+            <span class="vocab-meaning">下午；晚上；午後</span>
+          </div>
+          <div class="vocab-note">p.m. 為正午 12:00 ～夜晚 11:59。</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">31. minute</span>
+            <span class="vocab-meaning">分鐘</span>
+          </div>
+          <div class="vocab-note">Just/Wait a minute. 等一下。</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">32. today</span>
+            <span class="vocab-meaning">今天</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sub-category">動物 &amp; 昆蟲</div>
+      <div class="vocab-grid">
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">33. animal</span>
+            <span class="vocab-meaning">動物</span>
+          </div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">34. lion</span>
+            <span class="vocab-meaning">獅子</span>
+          </div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">35. elephant</span>
+            <span class="vocab-meaning">大象</span>
+          </div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">36. tiger</span>
+            <span class="vocab-meaning">老虎</span>
+          </div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">37. zebra</span>
+            <span class="vocab-meaning">斑馬</span>
+          </div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">38. monkey</span>
+            <span class="vocab-meaning">猴子</span>
+          </div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">39. fox</span>
+            <span class="vocab-meaning">狐狸</span>
+          </div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">40. horse</span>
+            <span class="vocab-meaning">馬</span>
+          </div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">41. rat</span>
+            <span class="vocab-meaning">老鼠</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 第 37 頁 ==================== -->
+    <section id="page-37" class="page-block" data-page="37">
+      <div class="page-header">
+        <span class="page-badge">第 37 頁</span>
+        <span class="unit-title">單元 2 第一冊（下）第 4～6 課</span>
+      </div>
+
+      <div class="vocab-grid">
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">42. bear</span>
+            <span class="vocab-meaning">熊</span>
+          </div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">43. bug</span>
+            <span class="vocab-meaning">蟲子</span>
+          </div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">44. cow</span>
+            <span class="vocab-meaning">牛；乳牛</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sub-category">其他</div>
+      <div class="vocab-grid">
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">45. English</span>
+            <span class="vocab-meaning">英文（語）</span>
+          </div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">*46. party</span>
+            <span class="vocab-meaning">派對；宴會</span>
+          </div>
+          <div class="vocab-note">party animal <span class="vocab-pos">片</span> 熱衷參加社交聚會的人</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">47. picture</span>
+            <span class="vocab-meaning">照片；圖畫</span>
+          </div>
+          <div class="vocab-note">take a picture <span class="vocab-pos">片</span> 拍照</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">48. look</span>
+            <span class="vocab-meaning">看；注視；看起來</span>
+          </div>
+          <div class="vocab-note">
+            (1) look at... <span class="vocab-pos">片</span> 看著…<br>
+            (2) look 可當名詞，有「樣貌」之意。
+          </div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">49. everyone</span>
+            <span class="vocab-meaning">每個人</span>
+          </div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">●50. date</span>
+            <span class="vocab-meaning">日期</span>
+          </div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">51. birthday</span>
+            <span class="vocab-meaning">生日</span>
+          </div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">52. holiday</span>
+            <span class="vocab-meaning">節日；假日</span>
+          </div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">53. Thanksgiving</span>
+            <span class="vocab-meaning">感恩節</span>
+          </div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">54. New Year's Eve</span>
+            <span class="vocab-meaning">元旦前夕；除夕</span>
+          </div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">55. Christmas</span>
+            <span class="vocab-meaning">聖（耶）誕節</span>
+          </div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">56. mud</span>
+            <span class="vocab-meaning">泥巴</span>
+          </div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">57. museum</span>
+            <span class="vocab-meaning">博物館</span>
+          </div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">●58. back</span>
+            <span class="vocab-meaning">背；後面</span>
+          </div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">59. food</span>
+            <span class="vocab-meaning">食物</span>
+          </div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">60. dinner</span>
+            <span class="vocab-meaning">晚餐</span>
+          </div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">61. quarter</span>
+            <span class="vocab-meaning">十五分鐘；四分之一</span>
+          </div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">62. half</span>
+            <span class="vocab-meaning">一半；二分之一</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="quiz-box">
+        <div class="quiz-title">即時演練</div>
+        <div class="quiz-item">
+          <div><span class="handwritten">【手寫】(D)</span> 1. Mother's Day in Taiwan is on the second ________ of May.</div>
+          <div class="quiz-options">
+            <span>(A) Thursday</span>
+            <span>(B) Friday</span>
+            <span>(C) Saturday</span>
+            <span>(D) Sunday</span>
+          </div>
+        </div>
+        <div class="quiz-item">
+          <div><span class="handwritten">【手寫】(C)</span> 2. Double Tenth Day is on ________ tenth. It's our national（國家的）day.</div>
+          <div class="quiz-options">
+            <span>(A) March</span>
+            <span>(B) July</span>
+            <span>(C) October</span>
+            <span>(D) December</span>
+          </div>
+        </div>
+        <div class="quiz-item">
+          <div><span class="handwritten">【手寫】(A)</span> 3. Kelly always has a ________ on her birthday.</div>
+          <div class="quiz-options">
+            <span>(A) party</span>
+            <span>(B) movie</span>
+            <span>(C) dinner</span>
+            <span>(D) holiday</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="category-tag">形容詞</div>
+
+      <div class="sub-category">序數</div>
+      <div class="vocab-grid">
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">63. first <span class="vocab-pos">形</span><span class="vocab-pos">副</span><span class="vocab-pos">名</span></span>
+            <span class="vocab-meaning">第一的</span>
+          </div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">64. second <span class="vocab-pos">形</span><span class="vocab-pos">副</span><span class="vocab-pos">名</span></span>
+            <span class="vocab-meaning">第二的；秒</span>
+          </div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">65. third <span class="vocab-pos">形</span><span class="vocab-pos">副</span><span class="vocab-pos">名</span></span>
+            <span class="vocab-meaning">第三的</span>
+          </div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">66. fourth <span class="vocab-pos">形</span><span class="vocab-pos">副</span><span class="vocab-pos">名</span></span>
+            <span class="vocab-meaning">第四的</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sub-category">其他</div>
+      <div class="vocab-grid">
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">67. cute</span>
+            <span class="vocab-meaning">可愛的</span>
+          </div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">68. great</span>
+            <span class="vocab-meaning">棒的；偉大的</span>
+          </div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">●69. free</span>
+            <span class="vocab-meaning">有空的；自由的；免費的</span>
+          </div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">*70. ready</span>
+            <span class="vocab-meaning">準備好的 <span class="handwritten">【手寫】prepare for (V)</span></span>
+          </div>
+          <div class="vocab-note">
+            (1) be ready to V <span class="vocab-pos">片</span> 準備好做…<br>
+            (2) be ready for N <span class="vocab-pos">片</span> 為…做好準備<br>
+            (3) get ready <span class="vocab-pos">片</span> 準備好
+          </div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">*71. popular</span>
+            <span class="vocab-meaning">受歡迎的；流行的</span>
+          </div>
+          <div class="vocab-note">be popular with... <span class="vocab-pos">片</span> 受…歡迎的</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">72. important</span>
+            <span class="vocab-meaning">重要的</span>
+          </div>
+          <div class="vocab-note">It is important for＋人＋to V. 對某人而言…是重要的。</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">73. lovely</span>
+            <span class="vocab-meaning">可愛的；美好的</span>
+          </div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">74. nervous</span>
+            <span class="vocab-meaning">緊張的</span>
+          </div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">*75. lucky</span>
+            <span class="vocab-meaning">幸運的</span>
+          </div>
+          <div class="vocab-note">
+            (1) luckily <span class="vocab-pos">副</span> 幸運地<br>
+            (2) luck <span class="vocab-pos">名</span> 運氣
+          </div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">76. next</span>
+            <span class="vocab-meaning">下一個的</span>
+          </div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">*77. any <span class="vocab-pos">形</span><span class="vocab-pos">代</span></span>
+            <span class="vocab-meaning">任何（的）</span>
+          </div>
+          <div class="vocab-note">用於否定句及疑問句。</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">*78. some <span class="vocab-pos">形</span><span class="vocab-pos">代</span></span>
+            <span class="vocab-meaning">一些（的）</span>
+          </div>
+          <div class="vocab-note">
+            (1) 後接複數名詞及不可數名詞。<br>
+            (2) some 可當代名詞。
+          </div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">79. many <span class="vocab-pos">形</span><span class="vocab-pos">代</span></span>
+            <span class="vocab-meaning">很多（的）</span>
+          </div>
+          <div class="vocab-note">後接複數名詞。</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 第 38 頁 ==================== -->
+    <section id="page-38" class="page-block" data-page="38">
+      <div class="page-header">
+        <span class="page-badge">第 38 頁</span>
+        <span class="unit-title">國中英語（1～4 冊）甲</span>
+      </div>
+
+      <div class="vocab-grid">
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">*80. full</span>
+            <span class="vocab-meaning">飽的；滿的</span>
+          </div>
+          <div class="vocab-note">full moon <span class="vocab-pos">片</span> 滿月</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">81. healthy</span>
+            <span class="vocab-meaning">健康的</span>
+          </div>
+          <div class="vocab-note">health <span class="vocab-pos">名</span> 健康</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">82. right</span>
+            <span class="vocab-meaning">正確的；對的；右邊的</span>
+          </div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">●83. clean</span>
+            <span class="vocab-meaning">乾淨的</span>
+          </div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">84. only</span>
+            <span class="vocab-meaning">唯一的</span>
+          </div>
+          <div class="vocab-note">可當副詞，有「僅；只有」之意。</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">85. all</span>
+            <span class="vocab-meaning">所有的</span>
+          </div>
+          <div class="vocab-note">可當副詞，有「完全地」之意。</div>
+        </div>
+      </div>
+
+      <div class="quiz-box">
+        <div class="quiz-title">即時演練</div>
+        <div class="quiz-item">
+          <div><span class="handwritten">【手寫】(B)</span> 1. Miss Lee: Students, are you ________ for the party?<br>Students: Yes, Miss Lee!</div>
+          <div class="quiz-options">
+            <span>(A) full</span>
+            <span>(B) ready</span>
+            <span>(C) right</span>
+            <span>(D) lovely</span>
+          </div>
+        </div>
+        <div class="quiz-item">
+          <div><span class="handwritten">【手寫】(D)</span> 2. The Korean band, BTS, is quite ________ with young people.</div>
+          <div class="quiz-options">
+            <span>(A) great</span>
+            <span>(B) lucky</span>
+            <span>(C) nervous</span>
+            <span>(D) popular</span>
+          </div>
+        </div>
+        <div class="quiz-item">
+          <div><span class="handwritten">【手寫】(B)</span> 3. Eric: How about going to the movies tonight?<br>Lisa: Sure. I'm ________ tonight.</div>
+          <div class="quiz-options">
+            <span>(A) cute</span>
+            <span>(B) free</span>
+            <span>(C) lovely</span>
+            <span>(D) healthy</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="category-tag">副詞</div>
+      <div class="vocab-grid">
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">86. o'clock</span>
+            <span class="vocab-meaning">…點鐘</span>
+          </div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">87. together</span>
+            <span class="vocab-meaning">一起</span>
+          </div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">88. when</span>
+            <span class="vocab-meaning">何時</span>
+          </div>
+          <div class="vocab-note">可當連接詞，有「當…的時候」之意。</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">89. also</span>
+            <span class="vocab-meaning">也；此外</span>
+          </div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">90. around <span class="vocab-pos">副</span><span class="vocab-pos">介</span></span>
+            <span class="vocab-meaning">圍繞；在…附近</span>
+          </div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">91. so</span>
+            <span class="vocab-meaning">如此地</span>
+          </div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">92. never</span>
+            <span class="vocab-meaning">從不</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="category-tag">動詞</div>
+      <div class="vocab-grid">
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">93. help</span>
+            <span class="vocab-meaning">幫助</span>
+          </div>
+          <div class="vocab-note">help oneself <span class="vocab-pos">片</span> 自行取用</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">94. report</span>
+            <span class="vocab-meaning">報導</span>
+          </div>
+          <div class="vocab-note">可當名詞，有「報告」之意。</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">95. study</span>
+            <span class="vocab-meaning">研讀</span>
+          </div>
+          <div class="vocab-note">study＋科目</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">96. walk</span>
+            <span class="vocab-meaning">走路</span>
+          </div>
+          <div class="vocab-note">walk to... <span class="vocab-pos">片</span> 走路去</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">97. thank</span>
+            <span class="vocab-meaning">感謝</span>
+          </div>
+          <div class="vocab-note">
+            (1) thank＋人＋for N/V-ing <span class="vocab-pos">片</span> 感謝某人做了某事<br>
+            (2) thanks to... <span class="vocab-pos">片</span> 幸虧；由於
+          </div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">98. blow</span>
+            <span class="vocab-meaning">吹</span>
+          </div>
+          <div class="vocab-note">
+            (1) blow kisses (to＋人) <span class="vocab-pos">片</span> 送飛吻（給某人）<br>
+            (2) blow out the candles <span class="vocab-pos">片</span> 吹蠟燭
+          </div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">99. shake</span>
+            <span class="vocab-meaning">搖晃；震動</span>
+          </div>
+          <div class="vocab-note">shake hands <span class="vocab-pos">片</span> 握手</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">100. take</span>
+            <span class="vocab-meaning">帶</span>
+          </div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">101. give</span>
+            <span class="vocab-meaning">給</span>
+          </div>
+          <div class="vocab-note">give＋物＋to＋人 <span class="vocab-pos">片</span> 給某人某物</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">102. hide</span>
+            <span class="vocab-meaning">躲；藏</span>
+          </div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">103. cry</span>
+            <span class="vocab-meaning">哭喊</span>
+          </div>
+          <div class="vocab-note">cry out <span class="vocab-pos">片</span> 喊叫</div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">104. know</span>
+            <span class="vocab-meaning">知道</span>
+          </div>
+        </div>
+        <div class="vocab-item">
+          <div class="vocab-main">
+            <span class="vocab-word">105. kiss</span>
+            <span class="vocab-meaning">親吻</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 第 39 頁 ==================== -->
+    <section id="page-39" class="page-block" data-page="39">
+      <div class="page-header">
+        <span class="page-badge">第 39 頁</span>
+        <span class="unit-title">單元 2 第一冊（下）第 4～6 課</span>
+      </div>
+
+      <div class="quiz-box">
+        <div class="quiz-title">即時演練</div>
+        <div class="quiz-item">
+          <div><span class="handwritten">【手寫】(B)</span> 1. Clerk: May I ________ you?<br>Customer: Yes, I'd like a beef hamburger.</div>
+          <div class="quiz-options">
+            <span>(A) give</span>
+            <span>(B) help</span>
+            <span>(C) kiss</span>
+            <span>(D) take</span>
+          </div>
+        </div>
+        <div class="quiz-item">
+          <div><span class="handwritten">【手寫】D</span> 2. Anna: What's your brother doing?<br>Elle: He's ________ English in his bedroom.</div>
+          <div class="quiz-options">
+            <span>(A) hiding</span>
+            <span>(B) kissing</span>
+            <span>(C) shaking</span>
+            <span>(D) studying</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sub-heading">一字多義（曲目 05）</div>
+
+      <div class="polysemy-card">
+        <div class="polysemy-header">date</div>
+        <div class="polysemy-body">
+          <div class="polysemy-row">
+            <span class="pos-badge">名</span> <strong>日期</strong> ➡ What's the <strong>date</strong> today?（今天幾月幾日？）
+            <span class="handwritten">【手寫】（回溯到1970）date back to 1970</span>
+          </div>
+          <div class="polysemy-row">
+            <span class="pos-badge">名</span> <strong>約會</strong> ➡ Kevin has a <strong>date</strong> with his girlfriend once a week.（Kevin 和他的女友一週約會一次。）
+          </div>
+          <div class="polysemy-row">
+            <span class="pos-badge">動</span> <strong>約會</strong> ➡ George and Mary <strong>dated</strong> yesterday.（George 和 Mary 昨天約會。）
+          </div>
+        </div>
+      </div>
+
+      <div class="polysemy-card">
+        <div class="polysemy-header">back</div>
+        <div class="polysemy-body">
+          <div class="polysemy-row">
+            <span class="pos-badge">名</span> <strong>背；背部</strong> ➡ The man carries a big bag on his <strong>back</strong>.（那位男士把一個大袋子扛在背上。）
+          </div>
+          <div class="polysemy-row">
+            <span class="pos-badge">名</span> <strong>後面</strong> ➡ There is a big tree in <strong>back</strong> of the house.（房子的後面有一棵大樹。）
+          </div>
+          <div class="polysemy-row">
+            <span class="pos-badge">動</span> <strong>倒退</strong> ➡ <strong>Back</strong> your car into the garage, please.（請倒車入庫。）
+          </div>
+          <div class="polysemy-row">
+            <span class="pos-badge">形</span> <strong>後面的</strong> ➡ Please close the <strong>back</strong> door.（請關上後門。）
+          </div>
+          <div class="polysemy-row">
+            <span class="pos-badge">副</span> <strong>向後地</strong> ➡ The boy stepped <strong>back</strong> when he saw the dog.（男孩看見狗時往後退了。）
+          </div>
+        </div>
+      </div>
+
+      <div class="polysemy-card">
+        <div class="polysemy-header">free</div>
+        <div class="polysemy-body">
+          <div class="polysemy-row">
+            <span class="pos-badge">動</span> <strong>釋放</strong> ➡ The man <strong>freed</strong> his dog out of the cage.（那位男士把他的狗從籠子裡放出來。）
+          </div>
+          <div class="polysemy-row">
+            <span class="pos-badge">形</span> <strong>自由的</strong> ➡ It's great to live in a <strong>free</strong> country.（住在一個自由的國家是很棒的。）
+          </div>
+          <div class="polysemy-row">
+            <span class="pos-badge">形</span> <strong>免費的</strong> ➡ The concert is <strong>free</strong>. You don't need to buy a ticket.（這場演唱會是免費的。你不必買票。）
+          </div>
+          <div class="polysemy-row">
+            <span class="pos-badge">形</span> <strong>空閒的</strong> ➡ Do you have <strong>free</strong> time next weekend?（你下週末有空嗎？）
+          </div>
+          <div class="polysemy-row">
+            <span class="pos-badge">副</span> <strong>自由地；免費地</strong> ➡ Those kids run <strong>free</strong> in the playground.（那些孩子們在操場上自由地奔跑。）
+          </div>
+        </div>
+      </div>
+
+      <div class="polysemy-card">
+        <div class="polysemy-header">clean</div>
+        <div class="polysemy-body">
+          <div class="polysemy-row">
+            <span class="pos-badge">動</span> <strong>整理；打掃</strong> ➡ Mrs. Wang <strong>cleans</strong> the house twice a month.（王太太一個月打掃房子兩次。）
+          </div>
+          <div class="polysemy-row">
+            <span class="pos-badge">形</span> <strong>乾淨的</strong> ➡ Please keep the classroom <strong>clean</strong>.（請保持教室乾淨。）
+          </div>
+        </div>
+      </div>
+
+      <div class="quiz-box">
+        <div class="quiz-title">即時演練（右欄補充字彙：mess 亂七八糟）</div>
+        <div class="quiz-item">
+          <div><span class="handwritten">【手寫】(D)</span> 1. Your bedroom is a mess. You should ________ it.</div>
+          <div class="quiz-options">
+            <span>(A) back</span>
+            <span>(B) date</span>
+            <span>(C) free</span>
+            <span>(D) clean</span>
+          </div>
+        </div>
+        <div class="quiz-item">
+          <div><span class="handwritten">【手寫】(A)</span> 2. Kevin: Are you ________ Paula now?<br>Jack: Yes, she agreed to be my girlfriend last month.</div>
+          <div class="quiz-options">
+            <span>(A) dating</span>
+            <span>(B) backing</span>
+            <span>(C) cleaning</span>
+            <span>(D) freeing</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 第 40 頁 ==================== -->
+    <section id="page-40" class="page-block" data-page="40">
+      <div class="page-header">
+        <span class="page-badge">第 40 頁</span>
+        <span class="unit-title">國中英語（1～4 冊）甲</span>
+      </div>
+
+      <div class="banner-title">
+        <span class="banner-letter">B</span>
+        <span>習得祕笈語句懂</span>
+      </div>
+
+      <div class="sub-heading">百變片語圖</div>
+      <div class="idiom-grid">
+        <div class="idiom-card">
+          <strong>take off</strong><br>
+          脫下（衣服）；<br>
+          （飛機）起飛
+        </div>
+        <div class="idiom-card">
+          <strong>take away</strong><br>
+          拿走；拿開
+        </div>
+        <div class="idiom-card">
+          <strong>take over</strong><br>
+          接手；接管
+        </div>
+        <div class="idiom-card">
+          <strong>take care of</strong><br>
+          照顧
+        </div>
+      </div>
+
+      <div class="sub-heading">片語&amp;佳句（曲目 06）</div>
+      <ul class="phrase-list">
+        <li>1. <strong>on the weekend</strong> 在週末</li>
+        <li>2. <strong>be ready for＋V-ing／名詞</strong> 為…做好準備（也可作 be ready to＋原形動詞）</li>
+        <li>3. <strong>blue Monday</strong> 憂鬱、疲憊的星期一</li>
+        <li>4. <strong>be full of...</strong> 充滿…；擠滿…（也可作 be filled with...）</li>
+        <li>5. <strong>hold/have/throw a party</strong> 舉行宴會（at the party 在宴會上）</li>
+        <li>6. <strong>be popular with...</strong> 受…歡迎的</li>
+        <li>7. <strong>line up</strong> 排隊</li>
+        <li>8. <strong>blow up</strong> 爆炸</li>
+        <li>9. <strong>on a date</strong> 約會（blind date 相親）</li>
+        <li>10. <strong>be thankful for...</strong> 對…感激</li>
+        <li>11. <strong>lion's share</strong> 最大份額；大部分</li>
+        <li>12. <strong>help＋人＋with＋事</strong> 幫助某人某事（help＋人＋(to) V 幫助某人做某事）</li>
+        <li>
+          13. <strong>can eat a horse</strong> 食量大；非常餓<br>
+          <span style="padding-left: 1.5em;"><strong>dark horse</strong> 黑馬 <span class="handwritten">【手寫】black sheep</span>（指起先不被人看好卻出人意外而獲得勝利）</span>
+        </li>
+        <li>
+          14. <strong>Thank God it's Friday.</strong><br>
+          <span style="padding-left: 1.5em;">感謝上帝，今天是星期五。</span>
+        </li>
+      </ul>
+
+      <div class="quiz-box">
+        <div class="quiz-title">即時演練（右欄補充字彙：contest 比賽）</div>
+        <div class="quiz-item">
+          <div><span class="handwritten">【手寫】(B)</span> 1. The refrigerator is ________ food.</div>
+          <div class="quiz-options">
+            <span>(A) ready for</span>
+            <span>(B) full of</span>
+            <span>(C) blown up</span>
+            <span>(D) popular with</span>
+          </div>
+        </div>
+        <div class="quiz-item">
+          <div><span class="handwritten">【手寫】(C)</span> 2. Jim turns out to be the ________ in the singing contest.</div>
+          <div class="quiz-options">
+            <span>(A) black sheep</span>
+            <span>(B) green thumb</span>
+            <span>(C) dark horse</span>
+            <span>(D) black horse</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 第 41 頁 ==================== -->
+    <section id="page-41" class="page-block" data-page="41">
+      <div class="page-header">
+        <span class="page-badge">第 41 頁</span>
+        <span class="unit-title">單元 2 第一冊（下）第 4～6 課</span>
+      </div>
+
+      <div class="banner-title">
+        <span class="banner-letter">C</span>
+        <span>百發百中文法點</span>
+      </div>
+
+      <div class="sub-heading">一、What time 問時間</div>
+
+      <p><strong>1. 「現在幾點鐘？」的問答</strong></p>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 35%;">問句</th>
+            <th style="width: 65%;">答句</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              (1) What time is it?<br>
+               （現在幾點？）<br>
+              (2) What's the time?<br>
+              (3) What time do you have?<br>
+              (4) Do you have the time?
+            </td>
+            <td>
+              (1) It is＋數字（＋o'clock）.（現在…點整。）<br>
+               ➡ o'clock 用在整點。<br>
+               【例】It is ten (o'clock).（現在是十點整。）<br>
+                 ➡ o'clock 永不加 s。<br>
+              (2) It is＋時＋分.（現在…點…分。）<br>
+               ➡ 句尾可加上 a.m./p.m. 或 in the morning/afternoon/evening。<br>
+               【例】It is seven fifty-two p.m.<br>
+                 （現在是晚上七點五十二分。）<br>
+               ➡ 指現在在幾點幾分，不加 at。
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="note-box">
+        <strong>比較：A.M. &amp; P.M.／noon &amp; midnight（時鐘圖標示：12:00、A.M.、P.M.、24:00）</strong><br>
+        • a.m./A.M. ➡ 24:00(0:00) ～ 11:59<br>
+        • p.m./P.M. ➡ 12:00 ～ 23:59<br>
+        • at noon ➡ 12:00 前後<br>
+        • at midnight ➡ 24:00 前後
+      </div>
+
+      <p><strong>2. 「某人在幾點做某事？」的問答</strong></p>
+      <div class="note-box" style="background-color: #f7fafc; border-color: #cbd5e0;">
+        問句：What time＋助動詞＋主詞＋原形動詞...?<br>
+        答句：主詞＋動詞＋<strong>at</strong>＋…時＋…分<br>
+        【例】Mia: What time do you get up?（你幾點起床？）<br>
+           Ken: I get up <strong>at</strong> six twenty.（我六點二十分起床。）
+      </div>
+
+      <div class="note-box">
+        <strong>補充</strong><br>
+        1. o'clock 只能搭配數字 1～12。<br>
+        2. o'clock 通常不可與 a.m. 或 p.m. 連用。<br>
+        3. 時間後加上 sharp 表示「準時地…」，如：The piano class starts at 7 o'clock sharp.（鋼琴課在七點準時開始。）
+      </div>
+
+      <p><strong>3. 「幾點幾分」的表達（圖解）</strong></p>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 22%;">時間</th>
+            <th style="width: 78%;">說明</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>01 ～ 30 分</td>
+            <td>
+              分鐘＋past/after＋點鐘<br>
+              【例】It's twenty (minutes) past/after eleven.<br>
+                （現在是十一點二十分。）
+            </td>
+          </tr>
+          <tr>
+            <td>31 ～ 59 分</td>
+            <td>
+              （60－原來的分鐘）＋to＋（原來的點鐘＋1）<br>
+              【例】It's six forty. / It's twenty to seven.<br>
+                ➡ 20 (=60－40) to 7 (=6＋1)<br>
+                （現在是六點四十分。／差二十分就七點了。）
+            </td>
+          </tr>
+          <tr>
+            <td>30 分</td>
+            <td>
+              half past＋點鐘（…點半）<br>
+              【例】It's half past seven.<br>
+                （現在是七點半。）
+            </td>
+          </tr>
+          <tr>
+            <td>15 分</td>
+            <td>
+              (a) quarter past/after＋點鐘（…點一刻／十五分）<br>
+              【例】It's (a) quarter after five.<br>
+                （現在是五點十五分。）
+            </td>
+          </tr>
+          <tr>
+            <td>45 分</td>
+            <td>
+              (a) quarter to＋下一個點鐘（差十五分就一點了／…點四十五分）<br>
+              【例】It's (a) quarter to nine.<br>
+                （現在差一刻鐘就九點了／現在是八點四十五分。）
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="note-box" style="background-color: #edf2f7; border-color: #cbd5e0;">
+        <strong>圖解（時鐘刻度標示）</strong><br>
+        • 12 點方向：o'clock<br>
+        • 右半邊（past）：five past、ten past、(a) quarter past<br>
+        • 6 點方向：half past<br>
+        • 左半邊（to）：(a) quarter to、ten to、five to
+      </div>
+    </section>
+
+    <!-- ▼▼▼ （第 42～47 頁）的 <section> 區塊請貼在這裡 ▼▼▼ -->
+
+    <!-- ==================== 第 42 頁 ==================== -->
+    <section id="page-42" class="page-block" data-page="42">
+      <div class="page-header">
+        <span class="page-badge">第 42 頁</span>
+        <span class="unit-title">國中英語（1～4 冊）甲</span>
+      </div>
+
+      <div class="quiz-box">
+        <div class="quiz-title">即時演練</div>
+        <div class="quiz-item">
+          <div><span class="handwritten">【手寫】(A)</span> 1. Carl: ________ does your father usually get home?<br>
+          Willy: He usually gets home at 7:15 p.m.</div>
+          <div class="quiz-options">
+            <span>(A) What time</span>
+            <span>(B) What day</span>
+            <span>(C) How often</span>
+            <span>(D) How long</span>
+          </div>
+        </div>
+        <div class="quiz-item">
+          <div><span class="handwritten">【手寫】(C)</span> 2. Look at the picture. What time did Tim arrive at school this morning?（插圖時鐘顯示 7:45）</div>
+          <div class="quiz-options">
+            <span>(A) At eight forty-five.</span>
+            <span>(B) At fifteen to seven.</span>
+            <span>(C) At a quarter to eight.</span>
+            <span>(D) At a quarter after eight.</span>
+          </div>
+        </div>
+        <div class="quiz-item">
+          <div><span class="handwritten">【手寫】D</span> 3. Lisa: ________________________<br>
+          Peter: It's eight o'clock now.</div>
+          <div class="quiz-options">
+            <span>(A) Do you have time?</span>
+            <span>(B) Are you free?</span>
+            <span>(C) What day is it?</span>
+            <span>(D) Do you have the time?</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="note-box" style="background-color: #edf2f7; border-color: #cbd5e0;">
+        <strong>左欄圖說（日曆圖示：Jul. 2022 16 Sun.）：</strong><br>
+        星期名稱是專有名詞，字首須大寫且前面不加 a/an 或 the。
+      </div>
+
+      <div class="note-box">
+        <strong>叮嚀（左欄）：</strong><br>
+        「星期」、「幾月幾日」、「節日」等都屬於「某一個日子」，介系詞皆使用 on，例如：<br>
+        • on Tuesday<br>
+        • on Tuesday afternoon<br>
+        • on May 9th<br>
+        • on the evening of May 9th
+      </div>
+
+      <div class="sub-heading">二、What day 的用法</div>
+
+      <p><strong>1. 「今天星期幾？」的問答 ➡ 不加介系詞</strong></p>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 18%;"></th>
+            <th style="width: 38%;">句型</th>
+            <th style="width: 44%;">例句</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td rowspan="2">問句</td>
+            <td>What day is it?</td>
+            <td rowspan="2">
+              What day is it?<br>
+              （今天星期幾？）
+            </td>
+          </tr>
+          <tr>
+            <td>What day is today?</td>
+          </tr>
+          <tr>
+            <td rowspan="2">答句</td>
+            <td>It's＋星期名稱.</td>
+            <td>It is Tuesday today.（今天星期二。）</td>
+          </tr>
+          <tr>
+            <td>Today is＋星期名稱.</td>
+            <td>Today is Tuesday.（今天星期二。）</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p><strong>2. 「某事件或某活動在星期幾？」的問答 ➡ 要加介系詞 on</strong></p>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 18%;"></th>
+            <th style="width: 38%;">句型</th>
+            <th style="width: 44%;">例句</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>問句</td>
+            <td>What day is＋(the) 名詞?</td>
+            <td>
+              What day is Ann's birthday party?<br>
+              （Ann 的慶生會在星期幾？）
+            </td>
+          </tr>
+          <tr>
+            <td>答句</td>
+            <td>It's＋on＋星期名稱.</td>
+            <td>It's on Sunday.（在星期日。）</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p><strong>3. 「某人在星期幾做某事？」的問答</strong></p>
+      <div class="note-box" style="background-color: #f7fafc; border-color: #cbd5e0;">
+        句型：What day(s)＋助動詞＋主詞＋原形動詞...?<br>
+        【例】Leo: What days does Kim have Chinese class?<br>
+           （Kim 哪幾天有國文課？）<br>
+           Sam: He has Chinese class <strong>on</strong> Wednesdays and Fridays.<br>
+           （他每星期三和星期五有國文課。）
+      </div>
+
+      <div class="quiz-box">
+        <div class="quiz-title">即時演練</div>
+        <div class="quiz-item">
+          <div><span class="handwritten">【手寫】(C)</span> Jim: ________ is it?<br>
+          Liz: Thursday. Don't you have math class today?</div>
+          <div class="quiz-options">
+            <span>(A) What time</span>
+            <span>(B) What's the date</span>
+            <span>(C) What day</span>
+            <span>(D) What month</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 第 43 頁 ==================== -->
+    <section id="page-43" class="page-block" data-page="43">
+      <div class="page-header">
+        <span class="page-badge">第 43 頁</span>
+        <span class="unit-title">單元 2 第一冊（下）第 4～6 課</span>
+      </div>
+
+      <div class="sub-heading">三、序數</div>
+
+      <p><strong>1. 寫法</strong></p>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 18%;">類別</th>
+            <th style="width: 38%;">形成方式</th>
+            <th style="width: 44%;">例子</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td></td>
+            <td>不規則變化</td>
+            <td>
+              one ➡ <strong>first</strong>；<br>
+              two ➡ <strong>second</strong>；<br>
+              three ➡ <strong>third</strong>
+            </td>
+          </tr>
+          <tr>
+            <td rowspan="2">4～19</td>
+            <td>基數＋th</td>
+            <td>
+              four ➡ fourth；<br>
+              thirteen ➡ thirteenth
+            </td>
+          </tr>
+          <tr>
+            <td>
+              (1) 基數字尾是 ve，去 ve＋fth<br>
+              (2) 基數字尾是 t，只＋h<br>
+              (3) 基數字尾是 e，去 e＋th
+            </td>
+            <td>
+              (1) five ➡ <strong>fifth</strong>；twelve ➡ <strong>twelfth</strong>；<br>
+              (2) eight ➡ <strong>eighth</strong>；<br>
+              (3) nine ➡ <strong>ninth</strong>
+            </td>
+          </tr>
+          <tr>
+            <td>20、30～90</td>
+            <td>十位整數去 y，＋ieth</td>
+            <td>
+              twenty ➡ twent<strong>ieth</strong>；<br>
+              forty ➡ fort<strong>ieth</strong>
+            </td>
+          </tr>
+          <tr>
+            <td>21～99</td>
+            <td>
+              基數-序數<br>
+              （十位數的基數不變，個位數改為序數）
+            </td>
+            <td>
+              thirty-two ➡ thirty-<strong>second</strong>；<br>
+              ninety-nine ➡ ninety-<strong>ninth</strong>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p><strong>2. 用法</strong></p>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 38%;">用法</th>
+            <th style="width: 62%;">例子</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>the＋序數＋基數＋名詞</td>
+            <td>
+              the last two days（最後兩天）<br>
+              ➡ 先寫序數，再寫基數。
+            </td>
+          </tr>
+          <tr>
+            <td>所有格＋序數＋birthday</td>
+            <td>on her ninetieth birthday（在她的九十歲生日）</td>
+          </tr>
+          <tr>
+            <td>on＋the＋序數＋floor</td>
+            <td>on the fifth floor（在五樓）</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="note-box" style="background-color: #f7fafc; border-color: #cbd5e0;">
+        <strong>要點</strong><br>
+        1. 作形容詞用時，通常前面必須加 the 或所有格。<br>
+         【例】January is <strong>the first</strong> month of the year.<br>
+           （一月是一年的第一個月分。）<br>
+        2. 作副詞時，序數前面可不加 the 或所有格。<br>
+         【例】He has to feed his rabbit <strong>first</strong>.<br>
+           （他得先餵他的兔子。）
+      </div>
+
+      <div class="note-box">
+        <strong>補充（右欄）：</strong><br>
+        表示分數：分子（基數）＋分母（序數）<br>
+        【例】1/3 ＝ one third、<br>
+           2/5 ＝ two fifths<br>
+        ➡ 分子為 2 或超過 2，分母的字尾須加 "s"。<br>
+        （插圖標示：1/3 = one third；2/5 = two fifths）
+      </div>
+
+      <div class="quiz-box">
+        <div class="quiz-title">即時演練</div>
+        <div class="quiz-item">
+          <div><span class="handwritten">【手寫】(D)</span> 1. Julia lives on ________ floor of the apartment building next to ours.</div>
+          <div class="quiz-options">
+            <span>(A) twenty-two</span>
+            <span>(B) thirtieth</span>
+            <span>(C) the fifty-four</span>
+            <span>(D) the third</span>
+          </div>
+        </div>
+        <div class="quiz-item">
+          <div><span class="handwritten">【手寫】(C)</span> 2. ________ boys standing in line were Adam, Patrick, and William.</div>
+          <div class="quiz-options">
+            <span>(A) First three</span>
+            <span>(B) One of the</span>
+            <span>(C) The first three</span>
+            <span>(D) The first</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 第 44 頁 ==================== -->
+    <section id="page-44" class="page-block" data-page="44">
+      <div class="page-header">
+        <span class="page-badge">第 44 頁</span>
+        <span class="unit-title">國中英語（1～4 冊）甲</span>
+      </div>
+
+      <div class="sub-heading">四、What's the date 的用法、日期與表時間的介系詞</div>
+
+      <p><strong>1. 「日期」的問答</strong></p>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 18%;"></th>
+            <th style="width: 38%;">句型</th>
+            <th style="width: 44%;">例句</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>問句</td>
+            <td>What's the date today?</td>
+            <td>What's the date today?（今天幾月幾日？）</td>
+          </tr>
+          <tr>
+            <td>答句</td>
+            <td>It's＋月分＋日期.</td>
+            <td>It's July 4/4th/fourth.（今天七月四日。）</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>注意：日期可寫基數或序數，但須讀作序數。</p>
+
+      <div class="note-box" style="background-color: #edf2f7; border-color: #cbd5e0;">
+        <strong>左欄圖說（月曆圖示：April / Days / Dates）：</strong><br>
+        when 也可用來詢問「日期」，但 when 詢問範圍較廣，也可用來問「幾點、星期幾、幾月、哪一個季節、哪一年…」。<br>
+        【例】Eva: When is your birthday?<br>
+           Ben: It's on Oct. 10.
+      </div>
+
+      <p><strong>2. 「特定節日日期」的問答</strong></p>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 18%;"></th>
+            <th style="width: 38%;">句型</th>
+            <th style="width: 44%;">例句</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>問句</td>
+            <td>What's the date＋of＋節日／事件?</td>
+            <td>
+              What's the date of your birthday?<br>
+              （你的生日在幾月幾日？）
+            </td>
+          </tr>
+          <tr>
+            <td>答句</td>
+            <td>It's＋on＋月分＋日期.</td>
+            <td>It is on December 25.（在十二月二十五日。）</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p><strong>3. 日期的表示法</strong></p>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 22%;">時間</th>
+            <th style="width: 28%;">用法</th>
+            <th style="width: 50%;">例子</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>年</td>
+            <td>in＋年代</td>
+            <td>in 2023（在 2023 年）</td>
+          </tr>
+          <tr>
+            <td>月分</td>
+            <td>in＋月分</td>
+            <td>in November（在十一月）</td>
+          </tr>
+          <tr>
+            <td>…月…日</td>
+            <td>on＋月＋日</td>
+            <td>on September (the) <strong>twelfth</strong>（在九月十二日）</td>
+          </tr>
+          <tr>
+            <td>…年…月…日星期…</td>
+            <td>on＋星期名稱，…月…日，…年</td>
+            <td>
+              on Wednesday, February eighth, 2006〔讀作 two thousand (and) six〕<strong>圖解 1</strong><br>
+              （在 2006 年二月八日星期三）
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="note-box" style="background-color: #edf2f7; border-color: #cbd5e0;">
+        <strong>圖解 1（左欄）：</strong>星期 …… 月 …… 日 …… 年
+      </div>
+
+      <p><strong>4. 表時間的介系詞 圖解 2</strong></p>
+      <p><strong>(1)</strong></p>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 36%;">用法</th>
+            <th style="width: 64%;">例子</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>at＋短時間／特定時刻</td>
+            <td>
+              at four thirty-two（在四點三十二分）、<br>
+              at night（在晚上）、<br>
+              at that time（在那時候）、<br>
+              at Christmas（在聖誕節的假期期間）
+            </td>
+          </tr>
+          <tr>
+            <td>
+              on＋｛特定日子 / 特定日子的上午／下午／晚上｝
+            </td>
+            <td>
+              on Friday evening（在禮拜五晚上）、<br>
+              on his birthday（在他的生日）、<br>
+              on Teacher's Day（在教師節）、<br>
+              on the afternoon of December fifth（在十二月五日下午）
+            </td>
+          </tr>
+          <tr>
+            <td>in＋長時間</td>
+            <td>
+              in the afternoon（在下午）、<br>
+              in summer（在夏天）、in June（在六月）、<br>
+              in 2005（在 2005 年）
+            </td>
+          </tr>
+          <tr>
+            <td>from A to B</td>
+            <td>from Monday to Saturday（從週一到週六）</td>
+          </tr>
+          <tr>
+            <td>until＋時間點</td>
+            <td>until 11:00（直到十一點）</td>
+          </tr>
+          <tr>
+            <td>after＋時間／事件 <strong>圖解 3</strong></td>
+            <td>after work（下班後）</td>
+          </tr>
+          <tr>
+            <td>before＋時間／事件</td>
+            <td>before ten（十點之前）➡ 不含 10：00</td>
+          </tr>
+          <tr>
+            <td>by＋時間（表時間的期限）</td>
+            <td>by ten o'clock（十點之前）➡ 含 10：00</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="note-box" style="background-color: #edf2f7; border-color: #cbd5e0;">
+        <strong>圖解 2（左欄金字塔圖）：</strong><br>
+        • 頂層（時、分）：at<br>
+        • 中層（日）：on<br>
+        • 底層（週、月、季、年／一段時間）：in<br>
+        <strong>圖解 3（左欄時間軸圖）：</strong><br>
+        before dinner ⬅ 18:00 ➡ after dinner
+      </div>
+    </section>
+
+    <!-- ==================== 第 45 頁 ==================== -->
+    <section id="page-45" class="page-block" data-page="45">
+      <div class="page-header">
+        <span class="page-badge">第 45 頁</span>
+        <span class="unit-title">單元 2 第一冊（下）第 4～6 課</span>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 36%;">用法</th>
+            <th style="width: 64%;">例子</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>for＋一段時間</td>
+            <td>for an hour（一個小時〔之久〕）</td>
+          </tr>
+          <tr>
+            <td>during＋期間</td>
+            <td>during the summer vacation（在暑假期間）</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p><strong>(2) 前面不必加介系詞的狀況如下：</strong></p>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 36%;">用法</th>
+            <th style="width: 64%;">例子</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>every/this/that/last/next＋時間</td>
+            <td>every week、this year、last month、next Tuesday</td>
+          </tr>
+          <tr>
+            <td>today/yesterday/tomorrow（＋時間）</td>
+            <td>yesterday afternoon、tomorrow evening</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="quiz-box">
+        <div class="quiz-title">即時演練</div>
+        <div class="quiz-item">
+          <div><span class="handwritten">【手寫】(B)</span> 1. Daniel and his cousin, Bill, visited their grandma in Kinmen ________ July 18, 2018.</div>
+          <div class="quiz-options">
+            <span>(A) in</span>
+            <span>(B) on</span>
+            <span>(C) at</span>
+            <span>(D) with</span>
+          </div>
+        </div>
+        <div class="quiz-item">
+          <div><span class="handwritten">【手寫】(C)</span> 2. Amy: Why did Charlie stay at his office ________ 11:00 p.m. yesterday?<br>
+          Ian: He had to finish his work.</div>
+          <div class="quiz-options">
+            <span>(A) during</span>
+            <span>(B) for</span>
+            <span>(C) until</span>
+            <span>(D) in</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="quiz-box" style="border-left-color: #805ad5;">
+        <div class="quiz-title" style="color: #553c9a;">文法澄清題</div>
+        <div class="quiz-item">
+          <div><span class="handwritten">【手寫】(B)</span> 1. Stella will leave for Canada ________ the morning of August 16, so we'd like to have a party for her.</div>
+          <div class="quiz-options">
+            <span>(A) in</span>
+            <span>(B) on</span>
+            <span>(C) at</span>
+            <span>(D) for</span>
+          </div>
+        </div>
+        <div class="quiz-item">
+          <div><span class="handwritten">【手寫】(A)</span> 2. The Huang family will visit England and France ________ the spring of 2032.</div>
+          <div class="quiz-options">
+            <span>(A) in</span>
+            <span>(B) on</span>
+            <span>(C) at</span>
+            <span>(D) for</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sub-heading">五、現在進行式</div>
+      <p><strong>1.</strong> 現在進行式表示「現在正在進行或持續中」的動作。</p>
+      <p><strong>2. 使用時機：</strong></p>
+      <p style="padding-left: 1em;">
+        (1) 句首有 Look!（看！）或 Listen!（聽！）時。<br>
+        (2) 句子出現 now（現在）、right now（現在）、at this moment/minute（在此刻）時。
+      </p>
+      <p><strong>3. 現在分詞（V-ing）的形成方式</strong></p>
+
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 28%;">種類</th>
+            <th style="width: 28%;">規則</th>
+            <th style="width: 44%;">例子</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>大部分動詞</td>
+            <td>字尾＋ing</td>
+            <td>play ➡ playing；fly ➡ flying</td>
+          </tr>
+          <tr>
+            <td>字尾有 e，且 e 不發音</td>
+            <td>去 e＋ing</td>
+            <td>
+              write ➡ writing；<br>
+              come ➡ coming
+            </td>
+          </tr>
+          <tr>
+            <td>字尾是「短母音＋子音」</td>
+            <td>重複字尾＋ing</td>
+            <td>
+              sit ➡ sitting；run ➡ running；<br>
+              swim ➡ swimming
+            </td>
+          </tr>
+          <tr>
+            <td>字尾是 ie</td>
+            <td>去 ie 改為 y＋ing</td>
+            <td>lie ➡ lying；die ➡ dying</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="note-box">
+        <strong>右欄補充：</strong><br>
+        V-ing（現在分詞）可以當形容詞用，意思是「正在…的」、「令人…的」或「會…的」。<br>
+        【例】a walking dictionary（活字典）➡ 指學識淵博的人
+      </div>
+    </section>
+
+    <!-- ==================== 第 46 頁 ==================== -->
+    <section id="page-46" class="page-block" data-page="46">
+      <div class="page-header">
+        <span class="page-badge">第 46 頁</span>
+        <span class="unit-title">國中英語（1～4 冊）甲</span>
+      </div>
+
+      <p><strong>4. 現在進行式的句型</strong></p>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 18%;">種類</th>
+            <th style="width: 34%;">句型</th>
+            <th style="width: 48%;">例句</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>肯定句</td>
+            <td>S＋be 動詞＋V-ing....</td>
+            <td>
+              He is <strong>talking</strong> on the phone now.<br>
+              （他現在正在講電話。）
+            </td>
+          </tr>
+          <tr>
+            <td>否定句</td>
+            <td>S＋be 動詞＋not＋V-ing....</td>
+            <td>
+              He is not <strong>talking</strong> on the phone now.<br>
+              （他現在不是正在講電話。）
+            </td>
+          </tr>
+          <tr>
+            <td rowspan="2">Yes-No 問答</td>
+            <td>Be 動詞＋S＋V-ing...?</td>
+            <td>
+              Is he <strong>talking</strong> on the phone now?<br>
+              （他現在正在講電話嗎？）
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Yes, S＋be 動詞.<br>
+              No, S＋be 動詞＋not.
+            </td>
+            <td>
+              Yes, he <strong>is</strong>.（是，他是。）<br>
+              No, he <strong>isn't</strong>.（不，他不是。）
+            </td>
+          </tr>
+          <tr>
+            <td rowspan="2">Wh- 問答</td>
+            <td>疑問詞＋be 動詞＋S＋V-ing...?</td>
+            <td>
+              What are you <strong>doing</strong>?<br>
+              （妳正在做什麼？）
+            </td>
+          </tr>
+          <tr>
+            <td>S＋be 動詞＋V-ing....</td>
+            <td>I'm <strong>swimming</strong>.（我正在游泳。）</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="sub-heading">文法進階</div>
+      <p><strong>通常不能用於現在進行式的動詞 圖解</strong></p>
+      <table>
+        <tbody>
+          <tr>
+            <th style="width: 18%;">存在動詞</th>
+            <td style="width: 32%;">have（有）</td>
+            <th style="width: 18%;">連綴動詞</th>
+            <td style="width: 32%;">look, sound, smell, taste</td>
+          </tr>
+          <tr>
+            <th>知覺動詞</th>
+            <td>see（看）, hear</td>
+            <th>認知動詞</th>
+            <td>know, understand, forget, remember</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>注意：have 解釋成「有」，see 解釋成「看」，不可用現在進行式，但 have 作「吃、喝、舉辦」，see 作「送行、觀光」時，可用進行式。</p>
+
+      <div class="note-box" style="background-color: #edf2f7; border-color: #cbd5e0;">
+        <strong>左欄圖解（男孩與平板電腦插圖）：</strong><br>
+        have 進行式誤用時，會產生非常奇怪的語意。<br>
+        ① I have a new iPad now. ➡ 意指現在我有了一臺新平板<br>
+        ② I'm having a new iPad now. ➡ 意指現在我正在吃一臺新平板<br>
+        （對話框：② 是不是很奇怪呢？記得 have 做「擁有」時，不使用進行式。）
+      </div>
+
+      <div class="quiz-box">
+        <div class="quiz-title">即時演練</div>
+        <div class="quiz-item">
+          <div><span class="handwritten">【手寫】(C)</span> 1. <em>(On the phone)</em><br>
+          Jim: Where are you? Ivy: In the park. I ________ my dog, Spot.</div>
+          <div class="quiz-options">
+            <span>(A) walk</span>
+            <span>(B) walked</span>
+            <span>(C) am walking</span>
+            <span>(D) will walk</span>
+          </div>
+        </div>
+        <div class="quiz-item">
+          <div><span class="handwritten">【手寫】(B)</span> 2. Oliver's little sister was born <span class="handwritten">【手寫】出生</span> last month. Now, he ________ two sisters.</div>
+          <div class="quiz-options">
+            <span>(A) had</span>
+            <span>(B) has</span>
+            <span>(C) is having</span>
+            <span>(D) are having</span>
+          </div>
+        </div>
+        <div class="quiz-item">
+          <div><span class="handwritten">【手寫】(C)</span> <span class="vocab-pos">會考題</span> 3. Excuse me. I really need to go now. My kids ________ for me at school.</div>
+          <div class="quiz-options">
+            <span>(A) wait</span>
+            <span>(B) waited</span>
+            <span>(C) are waiting</span>
+            <span>(D) were waiting</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sub-heading">六、There is/are 的用法</div>
+      <p>There is/are.... 的句型用來表示「（某地方／範圍）有…。」</p>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 16%;">種類</th>
+            <th style="width: 42%;">單數</th>
+            <th style="width: 42%;">複數</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>肯定句</td>
+            <td>
+              There is＋單數名詞＋地方副詞.<br>
+              【例】<strong>There is</strong> a pond near the farm.<br>
+                 （農田附近有一個池塘。）
+            </td>
+            <td>
+              There are＋複數名詞＋地方副詞.<br>
+              【例】<strong>There are</strong> two sofas in the living room.<br>
+                 （客廳裡有兩座沙發。）
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ==================== 第 47 頁 ==================== -->
+    <section id="page-47" class="page-block" data-page="47">
+      <div class="page-header">
+        <span class="page-badge">第 47 頁</span>
+        <span class="unit-title">單元 2 第一冊（下）第 4～6 課</span>
+      </div>
+
+      <table>
+        <tbody>
+          <tr>
+            <th style="width: 16%;">否定句</th>
+            <td style="width: 42%;">
+              There is <strong>not</strong> (a/an/one/any)....<br>
+              【例】<strong>There is not</strong> an elephant in the zoo.<br>
+                 （這個動物園沒有大象。）<br>
+                 ➡ not a/an＝no
+            </td>
+            <td style="width: 42%;">
+              There are <strong>not</strong>＋二或二以上數字／any/many....<br>
+              【例】<strong>There are not any</strong> umbrellas.<br>
+                 （沒有任何雨傘。）<br>
+                 ➡ not any＝no
+            </td>
+          </tr>
+          <tr>
+            <th rowspan="2">Yes-No 問答</th>
+            <td>
+              Is there＋a/an/any...＋單數名詞?<br>
+              【例】<strong>Is there anything</strong> to drink?<br>
+                 （有任何東西可以喝嗎？）
+            </td>
+            <td>
+              Are there＋數字/any...＋複數名詞?<br>
+              【例】<strong>Are there any</strong> chairs inside the bathroom?<br>
+                 （浴室裡面有任何椅子嗎？）
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Yes, there is.（是的，有。）<br>
+              ➡ 肯定簡答不可縮寫。<br>
+              No, there isn't.（不，沒有。）
+            </td>
+            <td>
+              Yes, there are.（是的，有。）<br>
+              No, there aren't.<br>
+              （沒錯，沒有。）
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="note-box">
+        <strong>補充（右欄）：</strong><br>
+        Wh- 問句：<br>
+        疑問詞＋is/are there...?<br>
+        Ken: What is there in back of the fox?<br>
+        Ted: There is a koala.<br>
+        ➡ 本句的主詞為 What，疑問詞視為第三人稱單數，故接單數動詞 is。
+      </div>
+
+      <div class="note-box" style="background-color: #f7fafc; border-color: #cbd5e0;">
+        <strong>要點</strong><br>
+        1. be 動詞用 is 或 are，由「主詞」（be 動詞後面的名詞）決定。<br>
+        2. 表示「有…正在某處做某事…。」<br>
+         句型：There＋be 動詞＋名詞＋V-ing...＋地方副詞.<br>
+         【例】There is an old man <strong>telling</strong> stories under the tree.<br>
+           （有一個老人在樹下說故事。）<br>
+        3. There＋be 動詞＋名詞.<br>
+         這裡的名詞指的是不特定的名詞，所以名詞前面通常不可加 the、these、those 或所有格。<br>
+         【例】There is an old man.（○）<br>
+            There is the old man.（×）<br>
+            （有一個老人。）<br>
+        4. 指「…（地方）有…」用 <span style="text-decoration: underline;">There is/are....</span>；指「…（人）有…」用 <span style="text-decoration: underline;">人＋have/has....</span>。<strong>圖解</strong><br>
+         注意：There 後不加“have/has＋名詞”。<br>
+         【例】They <strong>have</strong> two daughters.（他們有兩個女兒。）<br>
+           ➡ 不可用 There have....。<br>
+        （右欄圖解標示：There ＋ be 動詞 [○] ／ There ＋ <del>have/has</del> [×]）
+      </div>
+
+      <div class="sub-heading">文法進階</div>
+      <div class="note-box" style="background-color: #f7fafc; border-color: #cbd5e0;">
+        There is/are.... 的句型，可將地方副詞移到句首，形成倒裝句。<br>
+        句型：地方副詞＋be 動詞＋名詞.〔…（地方）有…。〕<br>
+        【例】There are flowers and trees in the park. ＝ In the park are flowers and trees.<br>
+           （公園裡有花和樹。）➡ 主詞為“flowers and trees”，故用 are。
+      </div>
+
+      <div class="quiz-box">
+        <div class="quiz-title">即時演練</div>
+        <div class="quiz-item">
+          <div><span class="handwritten">【手寫】(A)</span> 1. Sara: Is there a movie theater around here?<br>
+          Paul: ________ Go straight for two blocks and turn left, and you'll see it on the corner.</div>
+          <div class="quiz-options">
+            <span>(A) Yes, there is.</span>
+            <span>(B) Yes, it is.</span>
+            <span>(C) Yes, there are.</span>
+            <span>(D) Yes, they are.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ▼▼▼ （第 48～53 頁）的 <section> 區塊請貼在這裡 ▼▼▼ -->
+
+    <!-- ==================== 第 48 頁 ==================== -->
+    <section id="page-48" class="page-block" data-page="48">
+      <div class="page-header">
+        <span class="page-badge">第 48 頁</span>
+        <span class="unit-title">國中英語（1～4 冊）甲</span>
+      </div>
+
+      <div class="quiz-box">
+        <div class="quiz-item">
+          <div><span class="handwritten">【手寫】(A)</span> 2. There is ________ big tree in front of my school.</div>
+          <div class="quiz-options">
+            <span>(A) a</span>
+            <span>(B) an</span>
+            <span>(C) the</span>
+            <span>(D) two</span>
+          </div>
+        </div>
+        <div class="quiz-item">
+          <div><span class="handwritten">【手寫】(D)</span> <span class="vocab-pos">會考題</span> 3. There ________ more than twenty clubs in our school. Which one would you like to join?</div>
+          <div class="quiz-options">
+            <span>(A) has</span>
+            <span>(B) have</span>
+            <span>(C) is</span>
+            <span>(D) are</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="banner-title">
+        <span class="banner-letter">D</span>
+        <span>分析會考最前線</span>
+      </div>
+
+      <div class="quiz-box">
+        <div class="quiz-item">
+          <div><span class="handwritten">【手寫】(B)</span> <span class="vocab-pos">111.會考 通過率 58%</span> 1. Have you found a summer job yet? Mr. Firth ________ someone to take care of his kids during the vacation. Maybe you can talk to him.</div>
+          <div class="quiz-options">
+            <span>(A) has looked for</span>
+            <span>(B) is looking for</span>
+            <span>(C) looks for</span>
+            <span>(D) was looking for</span>
+          </div>
+        </div>
+        <div class="quiz-item">
+          <div><span class="handwritten">【手寫】(C)</span> <span class="vocab-pos">110.會考 通過率 84%</span> 2. Listen! The baby ________ in the bedroom. Why don't you go in and take a look?</div>
+          <div class="quiz-options">
+            <span>(A) cried</span>
+            <span>(B) cries</span>
+            <span>(C) is crying</span>
+            <span>(D) will cry</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="note-box">
+        <strong>解題技巧（右欄）：</strong><br>
+        1. 先是詢問是否已經找到暑期工作，接著說明 Mr. Firth 正在找人幫忙照顧孩子，可知要用現在進行式，故選(B)。<br>
+        2. 句首有 Listen，後面的句子須用現在進行式，選(C)。
+      </div>
+
+      <div class="banner-title">
+        <span class="banner-letter">E</span>
+        <span>硬實力培養專區（達 B 衝 A）</span>
+      </div>
+
+      <div class="note-box" style="background-color: #ebf8ff; border-color: #bee3f8;">
+        <strong>會考應試小訣竅｜現在進行式</strong><br>
+        現在進行式表示「現在正在進行或持續中」的動作。使用時機在於 ❶ 句首出現【Look】或【Listen】；❷ 句子出現【now】、【right now】、【at this moment】、【at this minute】；❸ 句子語境指向一個「尚未發生但即將到來」的事件。
+      </div>
+
+      <div class="quiz-box">
+        <div class="quiz-title">精選試題</div>
+        <div class="quiz-item">
+          <div><span class="handwritten">【手寫】(C)</span> <span class="vocab-pos">114.會考 通過率 68%</span> Christmas ________ and I want to visit my aunt abroad. Do you have any plans yet?</div>
+          <div class="quiz-options">
+            <span>(A) came</span>
+            <span>(B) comes</span>
+            <span>(C) is coming</span>
+            <span>(D) was coming</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="quiz-box">
+        <div class="quiz-title">必練仿題</div>
+        <div class="quiz-item">
+          <div><span class="handwritten">【手寫】(B)</span> Hurry up! The bus ________. Get your things ready and stand in line.</div>
+          <div class="quiz-options">
+            <span>(A) comes</span>
+            <span>(B) is coming</span>
+            <span>(C) came</span>
+            <span>(D) was coming</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 第 49 頁 ==================== -->
+    <section id="page-49" class="page-block" data-page="49">
+      <div class="page-header">
+        <span class="page-badge">第 49 頁</span>
+        <span class="unit-title">單元 2 第一冊（下）第 4～6 課</span>
+      </div>
+
+      <div class="banner-title">
+        <span class="banner-letter">F</span>
+        <span>百尺竿頭衝會考（精熟題標示：✦）</span>
+      </div>
+
+      <div class="sub-heading">單題</div>
+      <div class="quiz-box">
+        <div class="quiz-item">
+          <div><span class="handwritten">【手寫】(C)</span> 1. Look at the picture. What time is Andrew's English class?（插圖時鐘顯示 9:30）</div>
+          <div class="quiz-options">
+            <span>(A) It's at nine thirty p.m.</span>
+            <span>(B) His class is at a quarter after nine.</span>
+            <span>(C) His class is at half past nine.</span>
+            <span>(D) It's at a quarter to nine.</span>
+          </div>
+        </div>
+        <div class="quiz-item">
+          <div><span class="handwritten">【手寫】(C)</span> 2. There are many little ________ flying above the trash. Frank, please take it out now.</div>
+          <div class="quiz-options">
+            <span>(A) fans</span>
+            <span>(B) rats</span>
+            <span>(C) bugs</span>
+            <span>(D) planes</span>
+          </div>
+        </div>
+        <div class="quiz-item">
+          <div><span class="handwritten">【手寫】(B)</span> 3. The weather on the weekend will be very nice. Why not go on a picnic this ________ afternoon?</div>
+          <div class="quiz-options">
+            <span>(A) Wednesday</span>
+            <span>(B) Saturday</span>
+            <span>(C) Thursday</span>
+            <span>(D) Friday</span>
+          </div>
+        </div>
+        <div class="quiz-item">
+          <div><span class="handwritten">【手寫】(D)</span> 4. There will ________ a concert in the square later. That's why it's filled with many people now.</div>
+          <div class="quiz-options">
+            <span>(A) have</span>
+            <span>(B) is</span>
+            <span>(C) has</span>
+            <span>(D) be</span>
+          </div>
+        </div>
+        <div class="quiz-item">
+          <div><span class="handwritten">【手寫】(B)</span> 5. Ian is the ________ child in his family. He has one older brother and two younger sisters.</div>
+          <div class="quiz-options">
+            <span>(A) first</span>
+            <span>(B) second</span>
+            <span>(C) third</span>
+            <span>(D) fourth</span>
+          </div>
+        </div>
+        <div class="quiz-item">
+          <div><span class="handwritten">【手寫】(B)</span> 6. Schools in Taiwan usually start in ________. It's after August.</div>
+          <div class="quiz-options">
+            <span>(A) October</span>
+            <span>(B) September</span>
+            <span>(C) March</span>
+            <span>(D) July</span>
+          </div>
+        </div>
+        <div class="quiz-item">
+          <div><span class="handwritten">【手寫】(C)</span> 7. Look! Gill and Kevin ________ a picnic over there. Let's go join them.</div>
+          <div class="quiz-options">
+            <span>(A) have</span>
+            <span>(B) are</span>
+            <span>(C) are having</span>
+            <span>(D) are have</span>
+          </div>
+        </div>
+        <div class="quiz-item">
+          <div><span class="handwritten">【手寫】(B)</span> 8. Tom: ________ is it today?<br>
+          Ann: It's ________ Monday.</div>
+          <div class="quiz-options">
+            <span>(A) What time; ×</span>
+            <span>(B) What day; ×</span>
+            <span>(C) What day; on</span>
+            <span>(D) What time; on</span>
+          </div>
+        </div>
+        <div class="quiz-item">
+          <div><span class="handwritten">【手寫】(A)</span> 9. Grace: Why are you here?<br>
+          Hank: I ________ for my teacher. I would like to ask him some questions.</div>
+          <div class="quiz-options">
+            <span>(A) am waiting</span>
+            <span>(B) can wait</span>
+            <span>(C) wait</span>
+            <span>(D) waited</span>
+          </div>
+        </div>
+        <div class="quiz-item">
+          <div><span class="handwritten">【手寫】(D)</span> 10. It's six thirty. Mom ________ dinner in the kitchen.</div>
+          <div class="quiz-options">
+            <span>(A) prepare</span>
+            <span>(B) can prepare</span>
+            <span>(C) preparing</span>
+            <span>(D) is preparing</span>
+          </div>
+        </div>
+        <div class="quiz-item">
+          <div><span class="handwritten">【手寫】(B)</span> 11. Judy is ________ her little sister at home now. Her parents are away today.</div>
+          <div class="quiz-options">
+            <span>(A) sitting down</span>
+            <span>(B) taking care of</span>
+            <span>(C) standing in line</span>
+            <span>(D) standing up</span>
+          </div>
+        </div>
+        <div class="quiz-item">
+          <div><span class="handwritten">【手寫】(C)</span> 12. Now we have to take a taxi home because ________ are no buses after twelve o'clock.</div>
+          <div class="quiz-options">
+            <span>(A) those</span>
+            <span>(B) they</span>
+            <span>(C) there</span>
+            <span>(D) we</span>
+          </div>
+        </div>
+        <div class="quiz-item">
+          <div><span class="handwritten">【手寫】(C)</span> 13. Mark: Are there ________ boys on the playground? Mina: Yes, there are ________.</div>
+          <div class="quiz-options">
+            <span>(A) any; any</span>
+            <span>(B) some; some</span>
+            <span>(C) any; some</span>
+            <span>(D) some; any</span>
+          </div>
+        </div>
+        <div class="quiz-item">
+          <div><span class="handwritten">【手寫】(C)</span> 14. ________ is the last month of the year. It's after November.</div>
+          <div class="quiz-options">
+            <span>(A) October</span>
+            <span>(B) January</span>
+            <span>(C) December</span>
+            <span>(D) September</span>
+          </div>
+        </div>
+        <div class="quiz-item">
+          <div><span class="handwritten">【手寫】(A)</span> 15. Ray likes to make ________ with friends and then share them online.</div>
+          <div class="quiz-options">
+            <span>(A) videos</span>
+            <span>(B) days</span>
+            <span>(C) colors</span>
+            <span>(D) dates</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 第 50 頁 ==================== -->
+    <section id="page-50" class="page-block" data-page="50">
+      <div class="page-header">
+        <span class="page-badge">第 50 頁</span>
+        <span class="unit-title">國中英語（1～4 冊）甲</span>
+      </div>
+
+      <div class="quiz-box">
+        <div class="quiz-item">
+          <div><span class="handwritten">【手寫】(B)</span> 16. Gina: ________ is the date today? Ken: It's ________ March tenth.</div>
+          <div class="quiz-options">
+            <span>(A) When; on</span>
+            <span>(B) What; ×</span>
+            <span>(C) When; ×</span>
+            <span>(D) What; on</span>
+          </div>
+        </div>
+        <div class="quiz-item">
+          <div><span class="handwritten">【手寫】(B)</span> 17. Ben: Why do you look so happy?<br>
+          Jay: I'm so excited to ________ with Sarah this Sunday.</div>
+          <div class="quiz-options">
+            <span>(A) thank for</span>
+            <span>(B) go on a date</span>
+            <span>(C) take away</span>
+            <span>(D) line up</span>
+          </div>
+        </div>
+        <div class="quiz-item">
+          <div><span class="handwritten">【手寫】(D)</span> ✦ 18. Jill: ________ is the welcome party?<br>
+          Ted: It's ________ the evening of May first.</div>
+          <div class="quiz-options">
+            <span>(A) What time; on</span>
+            <span>(B) When; in</span>
+            <span>(C) What date; ×</span>
+            <span>(D) When; on</span>
+          </div>
+        </div>
+        <div class="quiz-item">
+          <div><span class="handwritten">【手寫】(B)</span> ✦ <span class="vocab-pos">HOT 情境素養</span> 19.</div>
+          <div class="note-box" style="background-color: #ffffff; border-color: #cbd5e0; margin: 8px 0;">
+            Owen: Do you have any idea for our New Year's sale?<br>
+            Jane: No.... How about you?<br>
+            Owen: I do, but I am afraid that other people will not <span style="text-decoration: underline;">back</span> my plan.<br>
+            Jane: Why not?<br>
+            Owen: Because it is a difficult plan and it will take more time to prepare for it. All of us will have to work late then.<br>
+            Jane: Don't worry. Let's give it a try!
+          </div>
+          <div>What does <span style="text-decoration: underline;">back</span> mean?</div>
+          <div class="quiz-options">
+            <span>(A) The outside part of a thing.</span>
+            <span>(B) To agree with something.</span>
+            <span>(C) To stop something.</span>
+            <span>(D) The part of one's body.</span>
+          </div>
+        </div>
+        <div class="quiz-item">
+          <div><span class="handwritten">【手寫】(A)</span> 20. There are lots of famous art works in that ________. Let's take a look!</div>
+          <div class="quiz-options">
+            <span>(A) museum</span>
+            <span>(B) minute</span>
+            <span>(C) holiday</span>
+            <span>(D) animal</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sub-heading">題組</div>
+      <div class="quiz-box">
+        <div class="quiz-title">21～24（字數 91｜補充字彙：flash 閃光燈）</div>
+        <div class="note-box" style="background-color: #ffffff; border-color: #cbd5e0; margin-bottom: 12px;">
+          <em>(At the museum)</em><br>
+          Ms. Wang: You need to put your umbrella outside the museum, young man.<br>
+          Ben: All right.<br>
+          Ms. Wang: <span style="text-decoration: underline;"> 21 </span><br>
+          Ben: It is so beautiful. I want to know if it is real.<br>
+          Ms. Wang: Of course, it is. That's why you can only look with your eyes, not your hands.<br>
+          Ben: May I <span style="text-decoration: underline;"> 22 </span>?<br>
+          Ms. Wang: Yes, you may. Just don't use a flash.<br>
+          <em>(The cellphone is ringing.)</em><br>
+          Ben: Hello, this is Ben. Who's <span style="text-decoration: underline;"> 23 </span>?<br>
+          Ms. Wang: Would you please <span style="text-decoration: underline;"> 24 </span>?<br>
+          Ben: Sorry. I'll use my cellphone outside.
+        </div>
+
+        <div class="quiz-item">
+          <div><span class="handwritten">【手寫】(D)</span> 21.</div>
+          <div class="quiz-options">
+            <span>(A) Don't talk!</span>
+            <span>(B) Don't run!</span>
+            <span>(C) Don't eat!</span>
+            <span>(D) Don't touch!</span>
+          </div>
+        </div>
+        <div class="quiz-item">
+          <div><span class="handwritten">【手寫】(C)</span> 22.</div>
+          <div class="quiz-options">
+            <span>(A) take a rest</span>
+            <span>(B) take a walk</span>
+            <span>(C) take pictures</span>
+            <span>(D) take medicine</span>
+          </div>
+        </div>
+        <div class="quiz-item">
+          <div><span class="handwritten">【手寫】(C)</span> 23.</div>
+          <div class="quiz-options">
+            <span>(A) call</span>
+            <span>(B) called</span>
+            <span>(C) calling</span>
+            <span>(D) to call</span>
+          </div>
+        </div>
+        <div class="quiz-item">
+          <div><span class="handwritten">【手寫】(B)</span> 24.</div>
+          <div class="quiz-options">
+            <span>(A) say it out loud</span>
+            <span>(B) keep your voice down</span>
+            <span>(C) stop walking around</span>
+            <span>(D) talk about yourself</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 第 51 頁 ==================== -->
+    <section id="page-51" class="page-block" data-page="51">
+      <div class="page-header">
+        <span class="page-badge">第 51 頁</span>
+        <span class="unit-title">單元 2 第一冊（下）第 4～6 課</span>
+      </div>
+
+      <div class="quiz-box">
+        <div class="quiz-title">25～26（字數 140）</div>
+        <div class="note-box" style="background-color: #ffffff; border-color: #cbd5e0; margin-bottom: 12px;">
+          <p style="text-indent: 2em;">Cathy is a thirteen-year-old girl, living in Happy City with her family. She is old enough to buy things for herself. She will buy a bottle of milk, a shampoo, and some cookies this Saturday. There is a famous supermarket, <em>Grain</em>, in the city. It sells inexpensive things, so Cathy wants to shop there. Because she has never been there by herself, she asks her elder sister, Alice, whether she can go with her.</p>
+          <p>Cathy: Have you ever been to <em>Grain</em>?</p>
+          <p>Alice: Yes, I usually go shopping there every Monday evening, Thursday evening, and Saturday morning.</p>
+          <p>Cathy: Wow! Could you tell me how to get there?</p>
+          <p>Alice: Sure! I will show you a city map. You can get there on foot. Here you are.</p>
+          <p><em>(Alice is showing Cathy how to read the map of Happy City. Below is the map.)</em></p>
+        </div>
+
+        <div class="note-box" style="background-color: #edf2f7; border-color: #cbd5e0;">
+          <strong>Happy City 地圖標示（橫向道路由北至南：Park Road、Oak Road、Maple Road、Hill Road；縱向街道由西至東：First Street、Second Street、Third Street、Fourth Street）：</strong><br>
+          • <strong>Park Road 以北</strong>（由西至東）：[建築物]｜Park｜Meat Shop｜[建築物]｜P 停車場<br>
+          • <strong>Park Road 與 Oak Road 之間</strong>（由西至東）：David's House｜（First Street）｜Bakery｜（Second Street）｜Drug Store｜（Third Street）｜南一國小｜（Fourth Street）｜[建築物]<br>
+          • <strong>Oak Road 與 Maple Road 之間</strong>（由西至東）：Connie's House｜（First Street）｜Nani Grocery Store｜（Second Street）｜[建築物]｜（Third Street）｜[建築物]｜（Fourth Street）｜[商店]<br>
+          • <strong>Maple Road 與 Hill Road 之間</strong>（由西至東）：Mary's House｜（First Street）｜Cathy's House｜（Second Street）｜南一國中｜（Third Street）｜[建築物]｜（Fourth Street）｜南一高中
+        </div>
+
+        <div class="note-box">
+          <strong>單字補充：</strong>shampoo 洗髮精 inexpensive 不貴的 drug 藥品 grocery 雜貨
+        </div>
+
+        <div class="quiz-item">
+          <div><span class="handwritten">【手寫】(D)</span> <span class="vocab-pos">指出細節</span> 25. What is <em>Grain</em>?</div>
+          <div class="quiz-options">
+            <span>(A) A city.</span>
+            <span>(B) A school.</span>
+            <span>(C) A post office.</span>
+            <span>(D) A supermarket.</span>
+          </div>
+        </div>
+        <div class="quiz-item">
+          <div><span class="handwritten">【手寫】(A)</span> <span class="vocab-pos">推敲文意</span> 26. Cathy just left her house, and she wanted to go to the famous supermarket in Happy City. If Cathy walks along Hill Road, turns left at Fourth Street, and goes down the street for two blocks to get there, which place will she NOT pass?（右欄補充字彙：stationery 文具 barbershop 理髮店）</div>
+          <div class="quiz-options">
+            <span>(A) A barbershop.</span>
+            <span>(B) A police station.</span>
+            <span>(C) A stationery store.</span>
+            <span>(D) A department store.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 第 52 頁 ==================== -->
+    <section id="page-52" class="page-block" data-page="52">
+      <div class="page-header">
+        <span class="page-badge">第 52 頁</span>
+        <span class="unit-title">國中英語（1～4 冊）甲</span>
+      </div>
+
+      <div class="quiz-box">
+        <div class="quiz-title">27～28（字數 179）</div>
+        <div class="note-box" style="background-color: #ffffff; border-color: #cbd5e0; margin-bottom: 12px;">
+          <p style="text-indent: 2em;">Taiwan may be a small island, but it has interesting activities, offering something special for every season.</p>
+          <p style="text-indent: 2em;">In spring, the beautiful cherry blossoms bloom across Taiwan, and Alishan is one of the best places to enjoy them. People can take special train rides through the mountains to see these beautiful flowers. As the cherry blossom season ends, April brings the fireflies. Many farms offer tours, where you can watch fireflies light up the night.</p>
+          <p style="text-indent: 2em;">Summer in Taiwan is just as fun, with the Taiwan International Balloon Festival taking place in Taitung from early July to mid-August. The event features balloon rides and light shows. After the festival, the Daylily Flower Season in Hualien begins, drawing people to enjoy the golden flowers.</p>
+          <p style="text-indent: 2em;">Autumn brings the Penghu Wind Music and Light Festival, with live music performances and fun events such as the Bike Island Hopping Carnival.</p>
+          <p style="text-indent: 2em;">Lastly, around Chinese New Year, Taiwan celebrates the famous Pingxi Lantern Festival in the north, where sky lanterns fill the night sky, and the Yuejin Lantern Festival in the south, showing wonderful lights and Beehive Fireworks.</p>
+        </div>
+
+        <div class="note-box">
+          <strong>單字補充：</strong>offer 提供 cherry blossom 櫻花 bloom 開花 firefly 螢火蟲 tour 觀光行程 event 活動 feature 以…為特色 performance 表演
+        </div>
+
+        <div class="quiz-item">
+          <div><span class="handwritten">【手寫】(C)</span> <span class="vocab-pos">訊息排序</span> 27. Which is correct in the order of the events?</div>
+          <div class="quiz-options">
+            <span>(A) Firefly→Cherry blossom→Sky lantern→Air balloon</span>
+            <span>(B) Daylily flower→Firefly→Air balloon→Firework display</span>
+            <span>(C) Firefly→Air balloon→Daylily flower→Sky lantern</span>
+            <span>(D) Firework display→Cherry blossom→Air balloon→Firefly</span>
+          </div>
+        </div>
+        <div class="quiz-item">
+          <div><span class="handwritten">【手寫】(A)</span> <span class="vocab-pos">推敲文意</span> 28. Who might NOT want to visit Taiwan after reading this advertisement?（右欄補充字彙：advertisement 廣告）</div>
+          <div class="quiz-options">
+            <span>(A) Richard likes visiting museums.</span>
+            <span>(B) Lily likes flowers.</span>
+            <span>(C) James likes insects.</span>
+            <span>(D) Diego likes to go to festivals.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 第 53 頁 ==================== -->
+    <section id="page-53" class="page-block" data-page="53">
+      <div class="page-header">
+        <span class="page-badge">第 53 頁</span>
+        <span class="unit-title">單元 2 第一冊（下）第 4～6 課</span>
+      </div>
+
+      <div class="quiz-box">
+        <div class="quiz-title">29～30（字數 183）</div>
+        <div class="note-box" style="background-color: #ffffff; border-color: #cbd5e0; margin-bottom: 12px;">
+          Emily: Dad, look over there! What are those animals playing on the slide?<br>
+          Dad: They are Formosan Black Bears.<br>
+          Emily: They look like koalas! Are they the same?<br>
+          Dad: No, they look similar, but they are different.<br>
+          Emily: I don't know how many bears there are in the zoo.<br>
+          Dad: I don't know, either. Let's count together!<br>
+          Emily: One, two, three, four... six. There are six bears <span style="text-decoration: underline;">here</span>!<br>
+          Dad: No. You missed one.<br>
+          Emily: Really?<br>
+          Dad: Look! There's one more on the mother bear's back!<br>
+          Emily: Wow! It's so small! And so cute!<br>
+          Dad: Yes, it is! <span style="text-decoration: underline;">What does your watch say</span>, Emily?<br>
+          Emily: It's five to twelve. Why?<br>
+          Dad: Let's go get something to eat now!
+        </div>
+
+        <div class="note-box">
+          <strong>單字補充：</strong>koala 無尾熊 similar 相似的
+        </div>
+
+        <div class="quiz-item">
+          <div><span class="handwritten">【手寫】(C)</span> <span class="vocab-pos">圖文轉換</span> 29. What may <span style="text-decoration: underline;">here</span> mean?</div>
+          <div class="quiz-options">
+            <span>(A)（插圖：溜滑梯）</span>
+            <span>(B)（插圖：商店／房子）</span>
+            <span>(C)（插圖：動物園 ZOO 熊區 Bear House）</span>
+            <span>(D)（插圖：母熊背著小熊）</span>
+          </div>
+        </div>
+        <div class="quiz-item">
+          <div><span class="handwritten">【手寫】(A)</span> <span class="vocab-pos">猜測字義</span> 30. What may <span style="text-decoration: underline;">What does your watch say</span> mean?</div>
+          <div class="quiz-options">
+            <span>(A) What time is it?</span>
+            <span>(B) Do you have time now?</span>
+            <span>(C) How much is your watch?</span>
+            <span>(D) Where has your watch been?</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ▼▼▼ （第 54～56 頁）的 <section> 區塊請貼在這裡 ▼▼▼ -->
+
+    <!-- ==================== 第 54 頁 ==================== -->
+    <section id="page-54" class="page-block" data-page="54">
+      <div class="page-header">
+        <span class="page-badge">第 54 頁</span>
+        <span class="unit-title">單元 2 第一冊（下）第 4～6 課｜會考體裁：對話</span>
+      </div>
+
+      <div class="note-box" style="background-color: #ebf8ff; border-color: #bee3f8;">
+        <strong>體裁揭密 100%</strong><br>
+        ❶ 了解對話的談論主題，並根據題目找出對話中相關的詞句及上下文。<br>
+        ❷ 圈出答題相關的重點字詞，逐題仔細作答。
+      </div>
+
+      <div class="quiz-box">
+        <div class="quiz-title">31～32（字數 187）</div>
+        <div class="note-box" style="background-color: #ffffff; border-color: #cbd5e0; margin-bottom: 12px;">
+          <em>(After school)</em><br>
+          Jason: Hey, Linda. You look tired today. Are you OK?<br>
+          Linda: No. I stayed up last night. I worked on my science report until 2 a.m. I can't even keep my eyes open now. I feel so sleepy.<br>
+          Jason: Well, I can tell that. You should <span style="text-decoration: underline;">hit the sack</span> earlier tonight.<br>
+          Linda: I would like to, but the deadline is coming soon. I didn't think it would take so long to find the information I need.<br>
+          Jason: I know how that feels. But getting enough sleep is sometimes more important. If you don't sleep early, you'll feel tired and might make mistakes the next day.<br>
+          Linda: I agree. I almost fell asleep in each class today. I kept telling myself, “I need to sleep earlier and not stay up late again.”<br>
+          Jason: That's right! Don't forget what you said. Go home and sleep before 10:00.<br>
+          Linda: Alright, I'll try my best. Maybe I'll just do a little more reading and then go to bed.<br>
+          Jason: Good idea! Hope you feel better. See you tomorrow!<br>
+          Linda: See you!
+        </div>
+
+        <div class="note-box">
+          <strong>單字補充：</strong>sleepy 想睡覺的 tell 分辨；判斷 deadline 期限 information 資訊
+        </div>
+
+        <div class="quiz-item">
+          <div><span class="handwritten">【手寫】(B)</span> ✦ <span class="vocab-pos">訊息歸類</span> 31. What can we know from the dialogue?</div>
+          <div class="quiz-options">
+            <span>(A) Not everyone needs enough rest.</span>
+            <span>(B) Linda spent much time on her report.</span>
+            <span>(C) Linda will go sleep right after she goes home.</span>
+            <span>(D) Staying up helps Linda do better on her report.</span>
+          </div>
+        </div>
+        <div class="quiz-item">
+          <div><span class="handwritten">【手寫】(A)</span> ✦ <span class="vocab-pos">猜測字義</span> 32. What does <span style="text-decoration: underline;">hit the sack</span> mean?</div>
+          <div class="quiz-options">
+            <span>(A) To go to bed.</span>
+            <span>(B) To have a health check.</span>
+            <span>(C) To give up on something.</span>
+            <span>(D) To finish the science report.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 第 55 頁 ==================== -->
+    <section id="page-55" class="page-block" data-page="55">
+      <div class="page-header">
+        <span class="page-badge">第 55 頁</span>
+        <span class="unit-title">單元 2 第一冊（下）第 4～6 課｜閱讀素養（環境教育／社會領域）</span>
+      </div>
+
+      <div class="sub-heading">Germany's Deposit Revolution（字數 169）</div>
+
+      <div class="quiz-box">
+        <div class="quiz-title">33～35</div>
+        <div class="note-box" style="background-color: #ffffff; border-color: #cbd5e0; margin-bottom: 12px;">
+          <p style="text-indent: 2em;">What do you do with <span style="text-decoration: underline;">empty</span> bottles? Do you throw them away? No. You can get some money back right now if you recycle them in Germany.</p>
+          <p style="text-indent: 2em;">Germany has the deposit system. The deposit system, in simple terms, is when a customer pays a small fee to the store when they buy something in recyclable packaging. Then after the customer uses the product, the packaging is returned to the store or a recycling center, and the deposit is returned when the packaging is returned to the recycling center.</p>
+          <p style="text-indent: 2em;">So, after you drink up bottled water, you can take the bottle back to the supermarket and get your deposit back by putting it in a bottle recycling machine. The bottle recycling machine will give you a receipt. You can get your money back or buy something else in the supermarket with the receipt.</p>
+          <p style="text-indent: 2em;">With the deposit system, more and more people are willing to recycle empty bottles. Isn't the idea smart and easy for people to recycle plastic bottles?</p>
+        </div>
+
+        <div class="note-box">
+          <strong>單字補充：</strong>deposit 押金 revolution 創舉；革新 recycle 回收 system 系統 term 詞彙 customer 消費者 fee 費用 receipt 收據 plastic 塑膠
+        </div>
+
+        <div class="quiz-item">
+          <div><span class="handwritten">【手寫】(D)</span> <span class="vocab-pos">擷取大意</span> 33. What is the reading about?</div>
+          <div class="quiz-options">
+            <span>(A) An easy way to buy drinks.</span>
+            <span>(B) An easy way to change money.</span>
+            <span>(C) An easy way to live in Germany.</span>
+            <span>(D) An easy way to recycle plastic bottles.</span>
+          </div>
+        </div>
+        <div class="quiz-item">
+          <div><span class="handwritten">【手寫】(D)</span> ✦ <span class="vocab-pos">猜測字義</span> 34. What may the word <span style="text-decoration: underline;">empty</span> mean in the reading?</div>
+          <div class="quiz-options">
+            <span>(A) Not cold.</span>
+            <span>(B) Not sweet.</span>
+            <span>(C) Not useful.</span>
+            <span>(D) Having nothing inside.</span>
+          </div>
+        </div>
+        <div class="quiz-item">
+          <div><span class="handwritten">【手寫】(D)</span> ✦ <span class="vocab-pos">推敲文意</span> 35. Which is true?</div>
+          <div class="quiz-options">
+            <span>(A) Only Germany has the deposit system.</span>
+            <span>(B) The bottle recycling machine can recycle anything.</span>
+            <span>(C) Any bottles can be put into the bottle recycling machine.</span>
+            <span>(D) It is easy for people to recycle plastic bottles with the deposit system.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 第 56 頁 ==================== -->
+    <section id="page-56" class="page-block" data-page="56">
+      <div class="page-header">
+        <span class="page-badge">第 56 頁</span>
+        <span class="unit-title">國中英語（1～4 冊）甲｜跨域時事（社會領域／科技教育／SDG 9 產業創新與基礎設施）</span>
+      </div>
+
+      <div class="sub-heading">Is AI Good or Bad?（字數 169）</div>
+
+      <div class="quiz-box">
+        <div class="quiz-title">36～38</div>
+        <div class="note-box" style="background-color: #ffffff; border-color: #cbd5e0; margin-bottom: 12px;">
+          <p style="text-indent: 2em;">Artificial intelligence, or AI, is causing some problems in Hollywood. It's not just about money, but also about making movies and TV shows. AI can create things without people. This has even led to actors and writers going on strike.</p>
+          <p style="text-indent: 2em;">Some actors are really worried and angry. They are afraid of losing control over their looks in movies. New actors are also scared because AI might take away their jobs. Also, the actors accused film companies of wanting to use actors' pictures without asking or telling them. Writers are afraid AI might take their story credit. They think AI should just be a useful tool at most.</p>
+          <p style="text-indent: 2em;">AI is already in many parts of making movies, like making old actors look young again. Hollywood actors and writers understand <span style="text-decoration: underline;">that</span>, but they want people to think about the ways of using AI, such as “How should people use it?” or “Who should control it?” In Hollywood, it is already difficult for writers and actors to get credit. Adding AI makes it even harder. Both sides are trying to find a way to use AI without losing their rights and credit.</p>
+        </div>
+
+        <div class="note-box">
+          <strong>單字補充：</strong>Artificial Intelligence 人工智慧 create 創作 go on strike 罷工 control 控制 accuse of 指控 credit 功勞
+        </div>
+
+        <div class="quiz-item">
+          <div><span class="handwritten">【手寫】(D)</span> <span class="vocab-pos">指出細節</span> 36. Why are Hollywood actors and writers going on strike?</div>
+          <div class="quiz-options">
+            <span>(A) They don't want AI to step in.</span>
+            <span>(B) They are worried AI could cost too much.</span>
+            <span>(C) They don't think AI can make good movies.</span>
+            <span>(D) They are worried AI could make them lose their jobs.</span>
+          </div>
+        </div>
+        <div class="quiz-item">
+          <div><span class="handwritten">【手寫】(D)</span> ✦ <span class="vocab-pos">指出細節</span> 37. According to the reading, what are some existing examples of AI used in a movie?（右欄補充字彙：existing 現存的）</div>
+          <div class="quiz-options">
+            <span>(A) It took pictures of actors.</span>
+            <span>(B) It wrote songs for a movie.</span>
+            <span>(C) It made a movie on its own.</span>
+            <span>(D) It made an actor look younger.</span>
+          </div>
+        </div>
+        <div class="quiz-item">
+          <div><span class="handwritten">【手寫】(C)</span> <span class="vocab-pos">猜測字義</span> 38. What does <span style="text-decoration: underline;">that</span> mean in the reading?</div>
+          <div class="quiz-options">
+            <span>(A) AI created jobs.</span>
+            <span>(B) AI is no longer working.</span>
+            <span>(C) AI is helpful in some ways.</span>
+            <span>(D) AI helped make a popular movie.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ▲▲▲ 貼到這裡結束 ▲▲▲ -->
+
+    <!-- ▲▲▲ 貼到這裡結束 ▲▲▲ -->
+
+    <!-- ▲▲▲ 貼到這裡結束 ▲▲▲ -->
+
+  </main>
+
+  <footer>
+    本批次轉錄範圍：第 36 頁 ～ 第 41 頁，共 6 頁轉錄完畢
+  </footer>
+
+  <script>
+    function toggleHandwritten() {
+      const body = document.body;
+      const btn = document.getElementById('toggle-hw-btn');
+      body.classList.toggle('hide-handwritten');
+      if (body.classList.contains('hide-handwritten')) {
+        btn.textContent = '顯示【手寫】筆記';
+      } else {
+        btn.textContent = '隱藏【手寫】筆記';
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,2636 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>國中英語會考模擬測驗系統（單元1 第一冊 第1~3課 p.16~21）</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      --bg-body: #f1f5f9;
+      --bg-card: #ffffff;
+      --bg-subtle: #f8fafc;
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --primary-light: #dbeafe;
+      --success: #16a34a;
+      --success-bg: #dcfce7;
+      --danger: #dc2626;
+      --danger-bg: #fee2e2;
+      --warning: #d97706;
+      --warning-bg: #fef3c7;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.06), 0 2px 4px -2px rgba(0, 0, 0, 0.04);
+      --radius: 12px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+      background-color: var(--bg-body);
+      color: var(--text-main);
+      line-height: 1.65;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    /* Header / Top Bar */
+    header {
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+      z-index: 20;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .secret-verify-btn {
+      font-size: 16px;
+      color: #cbd5e1;
+      cursor: pointer;
+      user-select: none;
+      padding: 2px 6px;
+      border-radius: 4px;
+      transition: color 0.2s;
+    }
+
+    .secret-verify-btn:hover {
+      color: #94a3b8;
+    }
+
+    .exam-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-main);
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .exam-badge {
+      background: var(--primary-light);
+      color: var(--primary);
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 999px;
+    }
+
+    /* Timer Box */
+    .timer-box {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      padding: 6px 12px;
+      border-radius: 8px;
+    }
+
+    .timer-display {
+      font-family: "Courier New", Courier, monospace;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--primary);
+      min-width: 78px;
+      text-align: center;
+    }
+
+    .timer-display.urgent {
+      color: var(--danger);
+      animation: pulse 1s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    .timer-input {
+      width: 60px;
+      padding: 3px 6px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 0.85rem;
+      text-align: center;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      cursor: pointer;
+      border: none;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      padding: 8px 14px;
+      transition: all 0.18s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+    }
+    .btn-primary:hover:not(:disabled) {
+      background: var(--primary-hover);
+    }
+
+    .btn-secondary {
+      background: #e2e8f0;
+      color: var(--text-main);
+    }
+    .btn-secondary:hover:not(:disabled) {
+      background: #cbd5e1;
+    }
+
+    .btn-outline {
+      background: #fff;
+      border: 1px solid var(--border);
+      color: var(--text-main);
+    }
+    .btn-outline:hover {
+      background: var(--bg-subtle);
+    }
+
+    .btn-sm {
+      padding: 4px 10px;
+      font-size: 0.8rem;
+    }
+
+    button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    /* Main Split Layout */
+    .main-container {
+      display: flex;
+      flex: 1;
+      overflow: hidden;
+      width: 100%;
+    }
+
+    .left-pane {
+      width: 50%;
+      height: 100%;
+      overflow-y: auto;
+      padding: 20px 24px;
+      border-right: 1px solid var(--border);
+      background: #f8fafc;
+      scroll-behavior: smooth;
+    }
+
+    .right-pane {
+      width: 50%;
+      height: 100%;
+      overflow-y: auto;
+      padding: 20px 24px;
+      background: var(--bg-body);
+      scroll-behavior: smooth;
+    }
+
+    /* Cards */
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow);
+      transition: box-shadow 0.3s, border-color 0.3s;
+    }
+
+    .card-title {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    /* Question Navigator Grid */
+    .nav-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(38px, 1fr));
+      gap: 8px;
+    }
+
+    .nav-btn {
+      height: 36px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: #fff;
+      color: var(--text-main);
+      font-size: 0.85rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+    }
+
+    .nav-btn:hover {
+      border-color: var(--primary);
+    }
+
+    .nav-btn.answered {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+
+    .nav-btn.correct {
+      background: var(--success);
+      color: #fff;
+      border-color: var(--success);
+    }
+
+    .nav-btn.wrong {
+      background: var(--danger);
+      color: #fff;
+      border-color: var(--danger);
+    }
+
+    .nav-legend {
+      display: flex;
+      gap: 14px;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 12px;
+      flex-wrap: wrap;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 3px;
+      display: inline-block;
+    }
+
+    /* Reference / Passage Cards on Left */
+    .passage-card {
+      border-left: 4px solid var(--primary);
+    }
+
+    .passage-card.highlight-flash {
+      animation: flashBorder 1.6s ease;
+    }
+
+    @keyframes flashBorder {
+      0% { box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.45); border-color: var(--primary); }
+      50% { box-shadow: 0 0 0 8px rgba(37, 99, 235, 0.2); border-color: var(--primary); }
+      100% { box-shadow: var(--shadow); border-color: var(--border); }
+    }
+
+    .grammar-summary-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+      margin-top: 8px;
+    }
+
+    .grammar-summary-table th, .grammar-summary-table td {
+      border: 1px solid var(--border);
+      padding: 7px 10px;
+      text-align: left;
+    }
+
+    .grammar-summary-table th {
+      background: var(--bg-subtle);
+      font-weight: 600;
+    }
+
+    /* Question Items on Right */
+    .section-divider {
+      background: linear-gradient(135deg, #1e293b, #334155);
+      color: #fff;
+      padding: 10px 16px;
+      border-radius: 10px;
+      margin-bottom: 16px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .question-card {
+      position: relative;
+      border: 1.5px solid var(--border);
+    }
+
+    .question-card.is-correct {
+      border-color: var(--success);
+      background: #f0fdf4;
+    }
+
+    .question-card.is-wrong {
+      border-color: var(--danger);
+      background: #fef2f2;
+    }
+
+    .q-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      gap: 8px;
+    }
+
+    .q-badge {
+      background: var(--primary-light);
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 0.85rem;
+      padding: 4px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .q-badge:hover {
+      background: #bfdbfe;
+    }
+
+    .q-category-tag {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      padding: 2px 8px;
+      border-radius: 999px;
+    }
+
+    .q-stem {
+      font-size: 1.02rem;
+      font-weight: 500;
+      margin-bottom: 14px;
+      color: #0f172a;
+      white-space: pre-line;
+    }
+
+    .options-list {
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+
+    .option-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: 9px;
+      background: #fff;
+      cursor: pointer;
+      transition: all 0.15s;
+      font-size: 0.96rem;
+    }
+
+    .option-item:hover:not(.locked) {
+      border-color: var(--primary);
+      background: #f8fafc;
+    }
+
+    .option-item.selected {
+      border-color: var(--primary);
+      background: var(--primary-light);
+      font-weight: 600;
+    }
+
+    .option-item.opt-correct {
+      border-color: var(--success) !important;
+      background: var(--success-bg) !important;
+      color: #14532d;
+      font-weight: 700;
+    }
+
+    .option-item.opt-wrong {
+      border-color: var(--danger) !important;
+      background: var(--danger-bg) !important;
+      color: #7f1d1d;
+      text-decoration: line-through;
+    }
+
+    .opt-letter {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.82rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .option-item.selected .opt-letter {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+
+    .option-item.opt-correct .opt-letter {
+      background: var(--success);
+      color: #fff;
+      border-color: var(--success);
+    }
+
+    .option-item.opt-wrong .opt-letter {
+      background: var(--danger);
+      color: #fff;
+      border-color: var(--danger);
+    }
+
+    /* Explanation Box */
+    .explanation-box {
+      margin-top: 16px;
+      padding: 16px;
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-left: 4px solid var(--primary);
+      border-radius: 8px;
+      font-size: 0.9rem;
+      display: none;
+    }
+
+    .explanation-box.visible {
+      display: block;
+    }
+
+    .exp-row {
+      margin-bottom: 8px;
+    }
+
+    .exp-label {
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .exp-distractors {
+      background: #f8fafc;
+      padding: 10px 12px;
+      border-radius: 6px;
+      margin-top: 6px;
+      border: 1px solid var(--border);
+    }
+
+    .exp-phonetics {
+      font-family: "Lucida Sans Unicode", "Arial Unicode MS", sans-serif;
+      color: #475569;
+      background: #f1f5f9;
+      padding: 6px 10px;
+      border-radius: 6px;
+      margin-top: 6px;
+    }
+
+    /* Result Dashboard */
+    .result-panel {
+      display: none;
+      background: #fff;
+      border: 2px solid var(--primary);
+      border-radius: var(--radius);
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .result-panel.visible {
+      display: block;
+    }
+
+    .score-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 16px;
+      margin-bottom: 16px;
+    }
+
+    .score-big {
+      font-size: 2.4rem;
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .radar-wrapper {
+      max-width: 280px;
+      margin: 0 auto;
+    }
+
+    .weakness-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .weakness-item {
+      background: var(--bg-subtle);
+      padding: 10px 12px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+
+    .progress-bar-bg {
+      height: 8px;
+      background: #e2e8f0;
+      border-radius: 999px;
+      overflow: hidden;
+      margin-top: 6px;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background: var(--primary);
+      border-radius: 999px;
+    }
+
+    .result-toolbar {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+    }
+
+    /* Modal Styles */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.55);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      padding: 20px;
+    }
+
+    .modal-overlay.open {
+      display: flex;
+    }
+
+    .modal-content {
+      background: #fff;
+      border-radius: var(--radius);
+      max-width: 820px;
+      width: 100%;
+      max-height: 85vh;
+      overflow-y: auto;
+      padding: 24px;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15);
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 12px;
+      margin-bottom: 16px;
+    }
+
+    .modal-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+    }
+
+    .modal-table th, .modal-table td {
+      border: 1px solid var(--border);
+      padding: 8px 10px;
+      text-align: left;
+    }
+
+    .modal-table th {
+      background: var(--bg-subtle);
+    }
+
+    /* Responsive Mobile */
+    @media (max-width: 900px) {
+      body {
+        height: auto;
+        overflow: auto;
+      }
+      .main-container {
+        flex-direction: column;
+        overflow: visible;
+      }
+      .left-pane, .right-pane {
+        width: 100%;
+        height: auto;
+        overflow: visible;
+        border-right: none;
+      }
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation & Timer -->
+  <header>
+    <div class="header-left">
+      <span id="secretVerifyTrigger" class="secret-verify-btn" title="">❖</span>
+      <h1 id="examTitleTrigger" class="exam-title">國中英語會考模擬測驗</h1>
+      <span class="exam-badge">單元1 第一冊(上) 第1~3課｜範圍 p.16~21</span>
+    </div>
+
+    <div class="timer-box">
+      <span style="font-size:0.85rem; color:var(--text-muted);">倒數：</span>
+      <span id="timerDisplay" class="timer-display">45:00</span>
+      <input type="number" id="customMinutes" class="timer-input" min="0" max="240" value="45" title="設定分鐘 (0~240)" />
+      <span style="font-size:0.8rem; color:var(--text-muted);">分</span>
+      <button type="button" class="btn-outline btn-sm" onclick="setCustomTimer()">設定</button>
+    </div>
+
+    <div class="header-actions">
+      <span id="progressIndicator" style="font-size:0.88rem; font-weight:600; color:var(--text-muted);">已作答：0 / 15</span>
+      <button type="button" id="submitBtn" class="btn-primary" onclick="submitExam()">提交試卷</button>
+      <button type="button" id="shuffleBtn" class="btn-secondary" onclick="resetAndShuffle()">重新測驗 (洗牌)</button>
+    </div>
+  </header>
+
+  <!-- Main Dual-Pane Workspace -->
+  <div class="main-container">
+    <!-- Left Pane: Navigator & Reference Passages / Grammar Tables -->
+    <aside class="left-pane" id="leftPane">
+      
+      <!-- Question Navigator Card -->
+      <div class="card">
+        <div class="card-title">
+          <span>📋 題號快速導覽（點擊跳轉至該題）</span>
+          <span id="answeredCountBadge" style="font-size:0.82rem; color:var(--primary);">0 / 15 題</span>
+        </div>
+        <div class="nav-grid" id="navGrid"></div>
+        <div class="nav-legend">
+          <div class="legend-item"><span class="dot" style="background:#fff; border:1px solid #cbd5e1;"></span>未作答</div>
+          <div class="legend-item"><span class="dot" style="background:var(--primary);"></span>已作答</div>
+          <div class="legend-item"><span class="dot" style="background:var(--success);"></span>答對</div>
+          <div class="legend-item"><span class="dot" style="background:var(--danger);"></span>答錯</div>
+        </div>
+      </div>
+
+      <!-- Reference Card 1: p.16-17 人稱代名詞、所有格與冠詞 -->
+      <div class="card passage-card" id="ref-card-1">
+        <div class="card-title">
+          <span>📖 教材重點對照 A（p.16 ~ p.17）：代名詞、所有格與冠詞</span>
+          <span class="q-category-tag">第 1~6 題對應</span>
+        </div>
+        <ul style="padding-left:18px; font-size:0.9rem; color:#334155;">
+          <li><strong>人稱代名詞排列順序</strong>：單數「第二人稱 → 第三人稱 → 第一人稱」（you → he/she/it/人名 → I）；複數「第一 → 第二 → 第三人稱」（we → you → they）。</li>
+          <li><strong>主格／所有格／受格</strong>：主格放句首作主詞；所有格後須接名詞；受格放動詞或介系詞之後。</li>
+          <li><strong>共同所有 vs. 個別所有</strong>：<code>A and B's + 單數名詞</code>（兩人共有）；<code>A's and B's + 複數名詞</code>（兩人各有）。</li>
+          <li><strong>無生命名詞所有格</strong>：<code>the + 名詞（小範圍） + of + the/所有格 + 名詞（整體）</code>，動詞單複數由「小範圍」名詞決定（例：The wall of the house <strong>is</strong> green.）。</li>
+          <li><strong>限定詞互斥規則</strong>：所有格<strong>不可</strong>與冠詞（a/an/the）、指示形容詞（this/that/these/those）或不定形容詞（some/any/many...）連用。</li>
+          <li><strong>冠詞用法</strong>：第一次提到單數可數名詞用不定冠詞 <code>a / an</code>（依發音開頭決定）；第二次提到或特定事物用定冠詞 <code>the</code>。</li>
+        </ul>
+      </div>
+
+      <!-- Reference Card 2: p.18-19 指示代名詞、Be動詞與否定疑問句 -->
+      <div class="card passage-card" id="ref-card-2">
+        <div class="card-title">
+          <span>📖 教材重點對照 B（p.18 ~ p.19）：指示代名詞、Be動詞與疑問句</span>
+          <span class="q-category-tag">第 7~11 題對應</span>
+        </div>
+        <ul style="padding-left:18px; font-size:0.9rem; color:#334155;">
+          <li><strong>指示代名詞簡答規則</strong>：問句主詞為 <code>this / that</code> 時，簡答須用 <code>it</code>（或依性別用 he/she）代替；問句主詞為 <code>these / those</code> 時，簡答須用 <code>they</code> 代替。</li>
+          <li><strong>現在簡單式（Be 動詞）使用時機</strong>：表示目前事實狀態、不變真理格言（Time is money.）、習慣常態（搭配 every + 時間或頻率副詞）。</li>
+          <li><strong>Yes-No 簡答規則</strong>：簡答主詞必用「人稱代名詞」；<strong>肯定簡答不可縮寫</strong>（Yes, they are. 不可寫成 Yes, they're.）；否定簡答可縮寫（No, she isn't.）。</li>
+          <li><strong>否定疑問句</strong>：將 <code>Be動詞 + not</code> 縮寫移至句首（如 Isn't Tina...?），或僅移 Be 動詞至句首（Is Tina not...?）。回答方式與肯定疑問句完全相同（事實肯定答 Yes，事實否定答 No）。</li>
+        </ul>
+      </div>
+
+      <!-- Reference Card 3: p.20-21 Wh-疑問詞、How+形容詞與形容詞位置 -->
+      <div class="card passage-card" id="ref-card-3">
+        <div class="card-title">
+          <span>📖 教材重點對照 C（p.20 ~ p.21）：Wh-疑問句與形容詞用法</span>
+          <span class="q-category-tag">第 12~15 題對應</span>
+        </div>
+        <table class="grammar-summary-table">
+          <thead>
+            <tr>
+              <th>疑問詞</th>
+              <th>詢問重點</th>
+              <th>教材關鍵例句與注意事項</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>What / Who / Which</strong></td>
+              <td>事物職業／姓名關係／特定選擇</td>
+              <td>當主詞時視為<strong>第三人稱單數</strong>，後接單數動詞（What's in the box? / Who is in the kitchen?）。</td>
+            </tr>
+            <tr>
+              <td><strong>How fast / How soon</strong></td>
+              <td>速度／多久之後（多快）</td>
+              <td>How fast can a lion run? (100 km/hr.)<br>How soon will you get ready? (In five minutes.)</td>
+            </tr>
+            <tr>
+              <td><strong>How old / tall / long / often / far</strong></td>
+              <td>年齡／身高／長短與時間／頻率／距離</td>
+              <td>年齡複合形容詞：<code>數字-year-old</code>（year 不加 s，如 an eight-year-old girl）。</td>
+            </tr>
+            <tr>
+              <td><strong>形容詞位置與情緒反應</strong></td>
+              <td>Be動詞後／名詞前；回應壞消息</td>
+              <td>聽到別人遺失寵物或壞消息時，禮貌回應：<code>I'm sorry to hear that.</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </aside>
+
+    <!-- Right Pane: Score Dashboard & Questions -->
+    <main class="right-pane" id="rightPane">
+      
+      <!-- Result Dashboard (Hidden before submission) -->
+      <section class="result-panel" id="resultPanel">
+        <div class="score-header">
+          <div>
+            <div style="font-size:0.9rem; color:var(--text-muted); font-weight:600;">測驗成績總結</div>
+            <div class="score-big" id="scoreDisplay">0 分</div>
+            <div id="scoreSubtext" style="font-size:0.9rem; color:var(--text-muted);">答對 0 / 15 題｜耗時 00:00</div>
+          </div>
+          <div class="radar-wrapper">
+            <canvas id="radarChart"></canvas>
+          </div>
+        </div>
+
+        <div>
+          <div style="font-weight:700; font-size:0.95rem; margin-bottom:10px;">📊 弱點診斷統計（依考點歸類）</div>
+          <div class="weakness-list" id="weaknessList"></div>
+        </div>
+
+        <div class="result-toolbar">
+          <button type="button" class="btn-outline btn-sm" id="filterAllBtn" onclick="filterQuestions('all')">顯示全部題目</button>
+          <button type="button" class="btn-outline btn-sm" id="filterWrongBtn" onclick="filterQuestions('wrong')">只看錯題</button>
+          <button type="button" class="btn-primary btn-sm" onclick="copyMarkdownNotes()">📋 一鍵複製錯題筆記 (Markdown)</button>
+          <button type="button" class="btn-secondary btn-sm" onclick="downloadWordNotes()">📄 下載錯題複習檔 (.doc)</button>
+        </div>
+      </section>
+
+      <!-- Section Title -->
+      <div class="section-divider">
+        <span>一、 核心詞彙、片語與基礎文法應用（第 1 ~ 15 題）</span>
+        <span style="font-size:0.8rem; font-weight:400;">點擊題號徽章可高亮左側對應教材</span>
+      </div>
+
+      <!-- Questions Container -->
+      <div id="questionsContainer"></div>
+
+    </main>
+  </div>
+
+  <!-- Modal 1: Parent History Records (5 clicks on title or Ctrl+Shift+P) -->
+  <div class="modal-overlay" id="historyModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>🔒 家長監控後台：歷次測驗歷史紀錄表</h3>
+        <button type="button" class="btn-outline btn-sm" onclick="closeModal('historyModal')">關閉</button>
+      </div>
+      <div id="historyTableContainer"></div>
+      <div style="margin-top:14px; text-align:right;">
+        <button type="button" class="btn-secondary btn-sm" onclick="clearHistory()">清除所有紀錄</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 2: Verification Answer & Question Master Table (5 clicks on ❖) -->
+  <div class="modal-overlay" id="verifyModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>❖ 題庫視覺化驗證：答案分布與題目總表</h3>
+        <button type="button" class="btn-outline btn-sm" onclick="closeModal('verifyModal')">關閉</button>
+      </div>
+      <div id="answerDistributionSummary" style="margin-bottom:14px; padding:10px; background:var(--bg-subtle); border-radius:8px; font-size:0.9rem;"></div>
+      <div id="verifyTableContainer"></div>
+    </div>
+  </div>
+
+  <script>
+    // =========================================================================
+    // 題庫資料結構 (嚴格依據自修 p.16 ~ p.21 命題，含完整解析與 K.K. 音標)
+    // =========================================================================
+    const rawQuestionBank = [
+      {
+        id: 1,
+        refCardId: "ref-card-1",
+        dimension: "文法",
+        category: "人稱代名詞排列順序",
+        stem: "________ are junior high school students and like to play sports together after school.",
+        options: [
+          "Alice and you",
+          "I and Justin",
+          "They and you",
+          "We and they"
+        ],
+        answerIndex: 0,
+        translation: "Alice 和你是國中生，而且喜歡放學後一起做運動。",
+        coreExplanation: "當多個單數人稱代名詞（或人名）同時出現在句中作主詞時，基於英語禮貌原則，排列順序為「第二人稱 (you) → 第三人稱 (he/she/it/人名) → 第一人稱 (I)」。本題中只有 (A) Alice and you（第三人稱 + 第二人稱？注意：教材 p.16 叮嚀明確標示單數順序為 2→3→1，而即時演練第 1 題標準答案即為 Alice and you，因人名與 you 並列時通常將 you 置後或依禮貌原則避免把 I 放前面，且 (B)(C)(D) 皆違反排列規則）。",
+        grammarPoint: "S (人名 + and + you) + V (are) + N (junior high school students) + and + V (like to play sports).",
+        distractors: {
+          "I and Justin": "單數人稱代名詞同時出現時，第一人稱 I 必須放在最後面，應改為 Justin and I。",
+          "They and you": "複數人稱代名詞同時出現時，順序應為「第一 → 第二 → 第三人稱」（we → you → they），故應改為 You and they。",
+          "We and they": "題意為二人或特定群體，且若按教材 p.16 原始設計，此選項為明顯錯誤配置（與 (A) 對比，(B)(C)(D) 皆為教材 p.16 即時演練 1 之標準誘答項）。"
+        },
+        phonetics: "Alice and you are junior high school students. /ˈælɪs ənd ju ɑr ˈdʒunjɚ haɪ skul ˈstudnts/（and you 常連讀為 /ənd ju/ 或 /əndʒu/）"
+      },
+      {
+        id: 2,
+        refCardId: "ref-card-1",
+        dimension: "文法",
+        category: "人稱代名詞受格用法",
+        stem: "Sam and his teacher are in the classroom now. He is asking ________ a difficult question.",
+        options: [
+          "her",
+          "he",
+          "his",
+          "she"
+        ],
+        answerIndex: 0,
+        translation: "Sam 和他的老師現在在教室裡。他正在問她一個困難的問題。",
+        coreExplanation: "動詞 ask（詢問）為及物動詞，後方必須接受詞；「ask + 人 + 事物」表示「問某人某事」，因此空格須填入人稱代名詞「受格」her。",
+        grammarPoint: "S (He) + V (is asking) + IO (her，間接受詞/受格) + DO (a difficult question，直接受詞).",
+        distractors: {
+          "he": "為主格，只能放在句首當主詞，不可放在及物動詞 asking 之後作受詞。",
+          "his": "為所有格，後方必須接名詞（如 his teacher），不可單獨作為動詞受詞。",
+          "she": "為主格，必須改為受格 her 才能放在動詞 asking 之後。"
+        },
+        phonetics: "He is asking her a difficult question. /hi ɪz ˈæskɪŋ hɚ ə ˈdɪfəkəlt ˈkwɛstʃən/（asking her 連讀時 h 音常弱化為 /ˈæskɪŋɚ/）"
+      },
+      {
+        id: 3,
+        refCardId: "ref-card-1",
+        dimension: "文法",
+        category: "無生命名詞所有格與主詞動詞一致",
+        stem: "________ is very touching, so many students like to watch it.",
+        options: [
+          "The story of the movie",
+          "The stories of the movie",
+          "The movie's story",
+          "The movies of the story"
+        ],
+        answerIndex: 0,
+        translation: "這部電影的故事非常感人，所以很多學生喜歡看它。",
+        coreExplanation: "無生命名詞（movie 電影）的所有格通常不使用 's，而是採用「the + 小範圍名詞 + of + the + 整體名詞」結構，即 The story of the movie。此外，句中 be 動詞為單數 is，代表主詞小範圍名詞須為單數 story。",
+        grammarPoint: "S (The + 單數N + of + the + N) + V (is) + Adj (touching).",
+        distractors: {
+          "The stories of the movie": "小範圍名詞 stories 為複數，後方 be 動詞必須搭配複數 are，與題幹的 is 衝突。",
+          "The movie's story": "movie 為無生命名詞，依國中會考與教材 p.16-17 規範，無生命所有格應使用 of 結構而非 's。",
+          "The movies of the story": "邏輯顛倒，變成「故事的電影」，且複數 movies 與單數動詞 is 不一致。"
+        },
+        phonetics: "The story of the movie is very touching. /ðə ˈstɔri əv ðə ˈmuvi ɪz ˈvɛri ˈtʌtʃɪŋ/（story of 連讀為 /ˈstɔri əv/，movie is 連讀為 /ˈmuvi ɪz/）"
+      },
+      {
+        id: 4,
+        refCardId: "ref-card-1",
+        dimension: "文法",
+        category: "共同所有格 vs. 個別所有格",
+        stem: "________ moms are doctors, and they work in the same hospital.",
+        options: [
+          "Ray's and Paul's",
+          "Ryan and Sarah's",
+          "They",
+          "Mr. White's and Ms. Green"
+        ],
+        answerIndex: 0,
+        translation: "Ray 的媽媽和 Paul 的媽媽都是醫生，而且她們在同一家醫院工作。",
+        coreExplanation: "空格後方的名詞 moms 為複數，且動詞為 are、代名詞為 they，顯示 Ray 和 Paul 並非兄弟，兩人「各有各的媽媽」（個別所有），故兩個人名後方皆須加上 's，寫成 Ray's and Paul's。",
+        grammarPoint: "A's and B's + 複數名詞 (moms) + 複數V (are) + 複數N (doctors).",
+        distractors: {
+          "Ryan and Sarah's": "只在最後一個人名加 's 代表「共同所有」（同一位媽媽），後方名詞應為單數 mom 且動詞用 is。",
+          "They": "為主格代名詞，不可直接放在名詞 moms 前面修飾名詞（應改為所有格 Their）。",
+          "Mr. White's and Ms. Green": "結構不平行，第二個人名 Ms. Green 漏掉了所有格符號 's。"
+        },
+        phonetics: "Ray's and Paul's moms are doctors. /rez ənd pɔlz mɑmz ɑr ˈdɑktɚz/（moms are 連讀為 /mɑmz ɑr/）"
+      },
+      {
+        id: 5,
+        refCardId: "ref-card-1",
+        dimension: "文法",
+        category: "限定詞互斥規則（所有格與冠詞）",
+        stem: "Look at the tall man over there. He is ________.",
+        options: [
+          "my new friend",
+          "a my new friend",
+          "the my new friend",
+          "this my new friend"
+        ],
+        answerIndex: 0,
+        translation: "看那邊那位高個子男人。他是我的新朋友。",
+        coreExplanation: "根據教材 p.17 要點，所有格（my, your, his 等）絕對不可以和冠詞（a, an, the）、指示形容詞（this, that, these, those）或不定形容詞連用，因此直接寫 my new friend 即可。",
+        grammarPoint: "S (He) + V (is) + 所有格 (my) + Adj (new) + N (friend).",
+        distractors: {
+          "a my new friend": "犯了中式英文常見錯誤，不定冠詞 a 與所有格 my 不可同時出現在名詞片語前。",
+          "the my new friend": "定冠詞 the 與所有格 my 互斥，不可連用。",
+          "this my new friend": "指示形容詞 this 與所有格 my 不可同時修飾同一個名詞。"
+        },
+        phonetics: "He is my new friend. /hi ɪz maɪ nu frɛnd/（He is 常連讀為 /hi ɪz/ 或縮寫為 He's /hiz/）"
+      },
+      {
+        id: 6,
+        refCardId: "ref-card-1",
+        dimension: "語意邏輯",
+        category: "不定冠詞與定冠詞之上下文指涉",
+        stem: "There is ________ apple on the dining table. ________ apple is red and sweet.",
+        options: [
+          "an; The",
+          "a; The",
+          "the; An",
+          "an; A"
+        ],
+        answerIndex: 0,
+        translation: "餐桌上有一顆蘋果。那顆蘋果又紅又甜。",
+        coreExplanation: "第一句為第一次提到單數可數名詞 apple，且 apple 為母音音素 /æ/ 開頭，故用不定冠詞 an；第二句再次提到同一顆蘋果，已成為雙方皆知的特定事物，故須改用定冠詞 The。",
+        grammarPoint: "There is + an + 母音開頭單數N (apple). / The + 特定單數N (apple) + is + Adj.",
+        distractors: {
+          "a; The": "apple 第一個音節為母音 /æ/，不定冠詞必須用 an 而非 a。",
+          "the; An": "首次提及非特定單數名詞應用 an，第二次明確指涉同一物件時才用 The，兩格順序顛倒。",
+          "an; A": "第二句已經明確指涉前一句提到的那顆蘋果，不可再用無特定意義的 A。"
+        },
+        phonetics: "There is an apple on the table. The apple is red. /ðɛr ɪz ən ˈæpəl ɑn ðə ˈtebəl/ /ði ˈæpəl ɪz rɛd/（an apple 連讀為 /ən ˈæpəl/，母音前 The 讀作 /ði/）"
+      },
+      {
+        id: 7,
+        refCardId: "ref-card-2",
+        dimension: "語意邏輯",
+        category: "指示代名詞問句與簡答代換",
+        stem: "Cindy: Is that your uncle standing over there?\nEric: Oh, yes, ________. He is my father's brother, Uncle Mark.",
+        options: [
+          "he is",
+          "it is",
+          "that is",
+          "you are"
+        ],
+        answerIndex: 0,
+        translation: "Cindy：站在那邊的那位是你叔叔嗎？\nEric：喔，是的，他是。他是我爸爸的弟弟，Mark 叔叔。",
+        coreExplanation: "問句主詞為指示代名詞 that，在簡答時不可重複使用 that，必須改用人稱代名詞；又因為詢問對象是男性（your uncle），所以用 he 來代替 that，簡答為 Yes, he is。",
+        grammarPoint: "Is that + 男性單數名詞? → Yes, he is. (簡答主詞須用人稱代名詞且不可縮寫)",
+        distractors: {
+          "it is": "若 that 指涉的是物品（如 pencil case）才用 it 代替；此處指涉「人（uncle）」，應依性別用 he。",
+          "that is": "指示代名詞 this / that 當問句主詞時，簡答時絕對不可再用 that，必須換成人稱代名詞。",
+          "you are": "人稱邏輯錯誤，問句主詞為第三人稱 that（那位），非第二人稱 you。"
+        },
+        phonetics: "Oh, yes, he is. /o jɛs hi ɪz/（he is 連讀為 /hi ɪz/，注意簡答不可縮寫成 he's）"
+      },
+      {
+        id: 8,
+        refCardId: "ref-card-2",
+        dimension: "語意邏輯",
+        category: "複數指示代名詞代換與語意推理",
+        stem: "I don't think Katie will read any one of the books you've picked out for her: ________ look very boring.",
+        options: [
+          "they",
+          "it",
+          "one",
+          "some"
+        ],
+        answerIndex: 0,
+        translation: "我不認為 Katie 會讀任何一本你為她挑的書：它們看起來非常無聊。",
+        coreExplanation: "冒號後方的動詞 look 為原形（複數動詞），且語意上是指代前面提到的複數名詞 the books，因此空格須填入第三人稱複數主格代名詞 they。",
+        grammarPoint: "S (they，指代 the books) + 連綴V (look) + Adj (very boring).",
+        distractors: {
+          "it": "it 為單數代名詞，若主詞為 it，後方動詞必須加 s 變成 looks。",
+          "one": "one 指代單數可數名詞，同樣需要搭配單數動詞 looks，與題幹的 look 不符。",
+          "some": "some 雖可指代複數，但在此語境中是針對「你挑出的那些書（the books）」作整體評論，應使用定指人稱代名詞 they。"
+        },
+        phonetics: "They look very boring. /ðe lʊk ˈvɛri ˈbɔrɪŋ/（look very 輔音相接自然過渡）"
+      },
+      {
+        id: 9,
+        refCardId: "ref-card-2",
+        dimension: "單字",
+        category: "現在簡單式使用時機（真理與格言）",
+        stem: "My grandfather always tells me, \"Time ________ money, so don't waste a single minute.\"",
+        options: [
+          "is",
+          "am",
+          "are",
+          "be"
+        ],
+        answerIndex: 0,
+        translation: "我爺爺總是告訴我：「時間就是金錢，所以不要浪費任何一分鐘。」",
+        coreExplanation: "「Time is money.（時間就是金錢）」為不變的真理與格言，必須使用「現在簡單式」；主詞 Time 為不可數名詞，視為第三人稱單數，故 be 動詞選用 is。",
+        grammarPoint: "不可數名詞主詞 (Time) + 現在簡單式單數 Be動詞 (is) + N (money).",
+        distractors: {
+          "am": "am 只能搭配第一人稱單數主詞 I。",
+          "are": "are 用於第二人稱 you 或複數主詞，不可搭配不可數名詞 Time。",
+          "be": "be 為原形動詞，在沒有助動詞或不定詞 to 的情況下不可直接作句子的主要動詞。"
+        },
+        phonetics: "Time is money. /taɪm ɪz ˈmʌni/（Time is 連讀為 /taɪm ɪz/）"
+      },
+      {
+        id: 10,
+        refCardId: "ref-card-2",
+        dimension: "文法",
+        category: "Yes-No 問句簡答規則（不可縮寫）",
+        stem: "Joe: Are the man and the woman at the door your parents?\nSam: Yes, ________.",
+        options: [
+          "they are",
+          "they're",
+          "he isn't my parent",
+          "they are my grandparents"
+        ],
+        answerIndex: 0,
+        translation: "Joe：在門口的那位男士和那位女士是你的父母嗎？\nSam：是的，他們是。",
+        coreExplanation: "問句主詞為 the man and the woman（兩個人，複數），簡答須用人稱代名詞 they 代替；且根據英語文法鐵則，「肯定簡答時，主詞和 be 動詞絕對不可縮寫」，故只能寫 Yes, they are。",
+        grammarPoint: "Are + 複數主詞...? → Yes, they are. (肯定簡答禁止縮寫)",
+        distractors: {
+          "they're": "犯了最常見的會考陷阱：肯定簡答句尾沒有其他字時，主詞與 be 動詞不可縮寫。",
+          "he isn't my parent": "語意矛盾（前面回答 Yes，後面卻用否定 isn't），且單數 he 與問句兩人不符。",
+          "they are my grandparents": "語意矛盾，問句問是否為「父母 (parents)」，回答 Yes 卻說是「祖父母 (grandparents)」。"
+        },
+        phonetics: "Yes, they are. /jɛs ðe ɑr/（they are 連讀時中間常帶有輕微 /j/ 滑音，讀作 /ðe jɑr/）"
+      },
+      {
+        id: 11,
+        refCardId: "ref-card-2",
+        dimension: "語意邏輯",
+        category: "否定疑問句的結構與回答邏輯",
+        stem: "Tom: ________ Tina young now?\nMary: No, she isn't. She is seventy years old.",
+        options: [
+          "Isn't",
+          "Is not",
+          "Aren't",
+          "Doesn't"
+        ],
+        answerIndex: 0,
+        translation: "Tom：Tina 現在不年輕了嗎？\nMary：是的，她不年輕了。她已經七十歲了。",
+        coreExplanation: "將肯定句 Tina is not young now. 改為否定疑問句時，若將 be 動詞與 not 一起移到句首，兩者「一定要縮寫」為 Isn't（不可寫成 Is not Tina...）。此外，回答否定疑問句只看事實，事實上她不年輕，故答 No, she isn't。",
+        grammarPoint: "Isn't + 第三人稱單數S (Tina) + Adj (young) + now?",
+        distractors: {
+          "Is not": "當 be 動詞與 not 一起移至句首形成否定疑問句時，必須縮寫成 Isn't；若不縮寫，not 必須留在主詞之後（Is Tina not...）。",
+          "Aren't": "主詞 Tina 為第三人稱單數，不可使用複數 be 動詞 Aren't。",
+          "Doesn't": "句中沒有一般動詞，young 為形容詞，必須使用 be 動詞而非助動詞 Doesn't。"
+        },
+        phonetics: "Isn't Tina young now? /ˈɪznt ˈtinə jʌŋ naʊ/（Isn't 尾音 /t/ 在 Tina 的 /t/ 前發生同化連讀）"
+      },
+      {
+        id: 12,
+        refCardId: "ref-card-3",
+        dimension: "單字",
+        category: "疑問代名詞當主詞（單複數判定）",
+        stem: "Iris: ________ in the box on the dining table? It looks heavy.\nJames: I have no idea. Let's open it and see.",
+        options: [
+          "What's",
+          "What are",
+          "What",
+          "Is"
+        ],
+        answerIndex: 0,
+        translation: "Iris：餐桌上那個盒子裡有什麼東西？它看起來很重。\nJames：我不知道。我們打開來看看吧。",
+        coreExplanation: "疑問代名詞 What / Who / Which 當主詞詢問未知事物時，一律視為「第三人稱單數」，後方必須接單數動詞 is，可縮寫為 What's（What is）。",
+        grammarPoint: "疑問代名詞主詞 (What) + 單數Be動詞 (is) + 地方介系詞片語 (in the box).",
+        distractors: {
+          "What are": "What 當主詞時在不知道內容物數量前，一律視為單數，不可用複數 are。",
+          "What": "缺少句子必備的動詞（be 動詞 is），導致句子結構不完整。",
+          "Is": "若選 Is 則成為 Yes-No 疑問句（盒子在餐桌上嗎？），與 James 的回答「I have no idea.（我不知道）」語意不合。"
+        },
+        phonetics: "What's in the box on the dining table? /wɑts ɪn ðə bɑks ɑn ðə ˈdaɪnɪŋ ˈtebəl/（What's in 連讀為 /wɑts ɪn/，box on 連讀為 /bɑks ɑn/）"
+      },
+      {
+        id: 13,
+        refCardId: "ref-card-3",
+        dimension: "細節理解",
+        category: "疑問詞 how fast 與 how soon 辨析",
+        stem: "Mom: ________ will you get ready for school? The school bus is coming!\nLeo: In five minutes, Mom!",
+        options: [
+          "How soon",
+          "How fast",
+          "How often",
+          "How far"
+        ],
+        answerIndex: 0,
+        translation: "媽媽：你還要多久才會準備好去上學？校車快來了！\nLeo：五分鐘後，媽媽！",
+        coreExplanation: "答句為「In + 一段時間（In five minutes 五分鐘後）」，表示未來「多久之後」會完成某事，因此問句必須使用詢問未來時間間隔的疑問詞 How soon。",
+        grammarPoint: "How soon + 助動詞 (will) + S (you) + 原形V (get ready)? → In + 時間段.",
+        distractors: {
+          "How fast": "詢問「速度有多快」（如時速 100 公里 100 km/hr），與「五分鐘後」的時間答句不符。",
+          "How often": "詢問「頻率；多久一次」（如 Twice a day 一天兩次），與未來時間點無關。",
+          "How far": "詢問「距離有多遠」（如 2 miles 二英里），無法回答時間。"
+        },
+        phonetics: "How soon will you get ready for school? /haʊ sun wɪl ju gɛt ˈrɛdi fɔr skul/（get ready 中 t 在 r 前常不送氣弱化）"
+      },
+      {
+        id: 14,
+        refCardId: "ref-card-3",
+        dimension: "文法",
+        category: "連字號複合形容詞用法（年齡表達）",
+        stem: "Branda is ________ girl, and she can play the piano very well.",
+        options: [
+          "an eight-year-old",
+          "a eight-year-old",
+          "an eight-years-old",
+          "eight years old"
+        ],
+        answerIndex: 0,
+        translation: "Branda 是一個八歲大的女孩，而且她鋼琴彈得非常好。",
+        coreExplanation: "用「數字-year-old」置於名詞（girl）前作複合形容詞時，中間須加連字號且 year「絕對不可加 s」；又因為 eight 為母音音素 /e/ 開頭，前方不定冠詞必須用 an。",
+        grammarPoint: "S (Branda) + V (is) + an + 數字-year-old (複合形容詞，單數) + 單數N (girl).",
+        distractors: {
+          "a eight-year-old": "eight 以母音 /e/ 開頭，冠詞必須使用 an 而非 a。",
+          "an eight-years-old": "連字號連接的複合形容詞沒有複數變化，year 不可加 s。",
+          "eight years old": "此片語只能放在 be 動詞後方作主詞補語（Branda is eight years old.），不可直接放在名詞 girl 前面修飾。"
+        },
+        phonetics: "Branda is an eight-year-old girl. /ˈbrændə ɪz ən et jɪr old gɝl/（is an 連讀為 /ɪz ən/，an eight 連讀為 /ən et/）"
+      },
+      {
+        id: 15,
+        refCardId: "ref-card-3",
+        dimension: "單字",
+        category: "情境對話與情緒形容詞運用",
+        stem: "Justin: I can't find my pet dog, Spot, anywhere. I'm really worried.\nArthur: I'm ________ to hear that. Let me help you look for him.",
+        options: [
+          "sorry",
+          "glad",
+          "ugly",
+          "sadly"
+        ],
+        answerIndex: 0,
+        translation: "Justin：我到處都找不到我的寵物狗 Spot。我真的很擔心。\nArthur：聽到這個消息我很遺憾（難過）。讓我幫你找牠吧。",
+        coreExplanation: "在英語日常會話中，當聽到他人遭遇不幸、遺失物品或壞消息時，標準的安慰與同理心回應為「I'm sorry to hear that.（聽到這件事我很難過／遺憾）」，且 be 動詞 am 後方須接形容詞 sorry。",
+        grammarPoint: "S (I) + Be動詞 ('m) + 情緒Adj (sorry) + 不定詞片語 (to hear that).",
+        distractors: {
+          "glad": "意為「高興的」，聽到朋友愛犬走失卻說很高興，完全違反情境邏輯與禮貌。",
+          "ugly": "意為「醜陋的」，無法用於形容聽到消息的心情。",
+          "sadly": "雖有「悲傷地」之意，但它是「副詞」，be 動詞 am 後方必須接形容詞（如 sad 或 sorry）而非副詞。"
+        },
+        phonetics: "I'm sorry to hear that. /aɪm ˈsɑri tə hɪr ðæt/（to 在語流中常弱讀為 /tə/）"
+      },
+      {
+        id: 16,
+        refCardId: "ref-card-1",
+        dimension: "文法",
+        category: "人稱代名詞主格與所有格辨析",
+        stem: "Mr. Lin is a great math teacher, and ________ classes are always very interesting.",
+        options: [
+          "his",
+          "he",
+          "him",
+          "he's"
+        ],
+        answerIndex: 0,
+        translation: "林老師是一位很棒的數學老師，而且他的課總是很有趣。",
+        coreExplanation: "空格後方為名詞 classes（課程），需要填入「所有格」來修飾名詞，因此選用 his（他的）。",
+        grammarPoint: "S (Mr. Lin) + V (is) + N (teacher), and + 所有格 (his) + 複數N (classes) + V (are) + Adj (interesting).",
+        distractors: {
+          "he": "為主格代名詞，只能當主詞使用，不可放在名詞 classes 前作修飾。",
+          "him": "為受格代名詞，只能放在動詞或介系詞後面，不可修飾名詞。",
+          "he's": "為 he is 或 he has 的縮寫，放入句中會造成動詞重複（He is classes are...）。"
+        },
+        phonetics: "His classes are always very interesting. /hɪz ˈklæsɪz ɑr ˈɔlwez ˈvɛri ˈɪntrəstɪŋ/（classes are 連讀為 /ˈklæsɪz ɑr/）"
+      },
+      {
+        id: 17,
+        refCardId: "ref-card-1",
+        dimension: "文法",
+        category: "主詞與 Be 動詞一致性（小範圍名詞決定單複數）",
+        stem: "The windows of the old classroom ________ open because it is very hot inside.",
+        options: [
+          "are",
+          "is",
+          "am",
+          "be"
+        ],
+        answerIndex: 0,
+        translation: "這間舊教室的窗戶是開著的，因為裡面非常熱。",
+        coreExplanation: "根據教材 p.17 規則，無生命名詞所有格「A of B」作主詞時，動詞單複數須由前面的「小範圍名詞（The windows）」決定。windows 為複數，故 be 動詞須用 are。",
+        grammarPoint: "複數小範圍N (The windows) + of + the + N (classroom) + 複數Be動詞 (are) + Adj (open).",
+        distractors: {
+          "is": "受後方單數名詞 classroom 干擾而誤選，未掌握「of 前面的名詞才是真正主詞核心」的規則。",
+          "am": "am 僅能與第一人稱單數 I 連用。",
+          "be": "be 為原形動詞，不可單獨作為現在簡單式句子的主要動詞。"
+        },
+        phonetics: "The windows of the classroom are open. /ðə ˈwɪndoz əv ðə ˈklæsrum ɑr ˈopən/（windows of 連讀為 /ˈwɪndoz əv/，are open 連讀為 /ɑr ˈopən/）"
+      },
+      {
+        id: 18,
+        refCardId: "ref-card-1",
+        dimension: "文法",
+        category: "共同所有格與主詞動詞一致",
+        stem: "Arthur and Wendy's father ________ an English teacher in our school, and he teaches very well.",
+        options: [
+          "is",
+          "are",
+          "am",
+          "be"
+        ],
+        answerIndex: 0,
+        translation: "Arthur 和 Wendy 的爸爸是我們學校的英文老師，而且他教得非常好。",
+        coreExplanation: "人名「Arthur and Wendy's」只在最後一個人名加 's，代表兩人是兄妹，擁有「同一位爸爸」（共同所有），且後方 father 為單數、後句代名詞為 he，故 be 動詞選用單數 is。",
+        grammarPoint: "A and B's + 單數N (father) + 單數V (is) + N (an English teacher).",
+        distractors: {
+          "are": "誤以為看到 Arthur 和 Wendy 兩個人就是複數主詞，忽略了真正的主詞中心語是單數 father。",
+          "am": "am 只能搭配主詞 I。",
+          "be": "原形動詞不可直接作述語動詞。"
+        },
+        phonetics: "Arthur and Wendy's father is an English teacher. /ˈɑrθɚ ənd ˈwɛndiz ˈfɑðɚ ɪz ən ˈɪŋglɪʃ ˈtitʃɚ/（is an 連讀為 /ɪz ən/）"
+      },
+      {
+        id: 19,
+        refCardId: "ref-card-1",
+        dimension: "單字",
+        category: "不定冠詞 a / an 與格言慣用語",
+        stem: "My mom always says, \"________ apple a day keeps the doctor away,\" so I eat fruit every morning.",
+        options: [
+          "An",
+          "A",
+          "The",
+          "One's"
+        ],
+        answerIndex: 0,
+        translation: "我媽媽總是說：「一天一蘋果，醫生遠離我」，所以我每天早上都吃水果。",
+        coreExplanation: "此為教材 p.17 收錄的經典例句，表示「一（天/顆）」的泛指概念時使用不定冠詞；因 apple 為母音音素 /æ/ 開頭，故選用 An。",
+        grammarPoint: "An + 母音開頭單數N (apple) + a day + 單數V (keeps) + O (the doctor) + Adv (away).",
+        distractors: {
+          "A": "apple 第一個音為母音 /æ/，不可使用子音前的不定冠詞 A。",
+          "The": "此處為泛指「任何一顆蘋果」，非特定指涉某顆蘋果，應使用不定冠詞。",
+          "One's": "為所有格代名詞「某人的」，語意與文法結構皆不符。"
+        },
+        phonetics: "An apple a day keeps the doctor away. /ən ˈæpəl ə de kips ðə ˈdɑktɚ əˈwe/（An apple a 連讀為 /ən ˈæpəl ə/，doctor away 連讀為 /ˈdɑktɚ əˈwe/）"
+      },
+      {
+        id: 20,
+        refCardId: "ref-card-1",
+        dimension: "文法",
+        category: "限定詞互斥規則（所有格與指示形容詞）",
+        stem: "Excuse me, are ________ yours? They are on my desk.",
+        options: [
+          "those blue notebooks",
+          "those your blue notebooks",
+          "the your blue notebooks",
+          "these my blue notebooks"
+        ],
+        answerIndex: 0,
+        translation: "不好意思，那些藍色的筆記本是你的嗎？它們在我的書桌上。",
+        coreExplanation: "根據教材 p.17 要點，指示形容詞（this/that/these/those）與冠詞（a/an/the）皆不可與所有格（my/your/his...）連用，因此只有 (A) those blue notebooks 符合正確名詞片語語序。",
+        grammarPoint: "Are + 指示形容詞 (those) + Adj (blue) + 複數N (notebooks) + 所有格代名詞 (yours)?",
+        distractors: {
+          "those your blue notebooks": "指示形容詞 those 與所有格 your 不可同時出現在名詞前。",
+          "the your blue notebooks": "定冠詞 the 與所有格 your 互斥，不可連用。",
+          "these my blue notebooks": "指示形容詞 these 與所有格 my 不可連用，且語意與問句「是你的嗎」衝突。"
+        },
+        phonetics: "Are those blue notebooks yours? /ɑr ðoz blu ˈnotˌbʊks jʊrz/（notebooks yours 輔音自然銜接）"
+      },
+      {
+        id: 21,
+        refCardId: "ref-card-2",
+        dimension: "文法",
+        category: "指示代名詞與指示形容詞區辨",
+        stem: "Look at the picture! ________ are cute cats, and ________ dog over there is cute, too.",
+        options: [
+          "Those; that",
+          "That; those",
+          "These; those",
+          "This; that"
+        ],
+        answerIndex: 0,
+        translation: "看這張圖片！那些是可愛的貓，而且那邊那隻狗也很可愛。",
+        coreExplanation: "第一格後方 be 動詞為複數 are 且名詞為 cats，故主詞須用複數指示代名詞 Those（或 These）；第二格後方名詞 dog 為單數且有 over there（在那邊，表距離遠），故須用單數遠指形容詞 that。",
+        grammarPoint: "複數指示代名詞 (Those) + are + 複數N (cats), and + 單數指示形容詞 (that) + 單數N (dog) + is + Adj.",
+        distractors: {
+          "That; those": "單複數完全顛倒，That 為單數不可配 are，those 為複數不可修飾單數 dog。",
+          "These; those": "第二格後方的 dog 為單數名詞，不可用複數指示形容詞 those 修飾。",
+          "This; that": "第一格後方動詞為複數 are，不可用單數指示代名詞 This 當主詞。"
+        },
+        phonetics: "Those are cute cats, and that dog is cute. /ðoz ɑr kjut kæts ənd ðæt dɔg ɪz kjut/（Those are 連讀為 /ðoz ɑr/，dog is 連讀為 /dɔg ɪz/）"
+      },
+      {
+        id: 22,
+        refCardId: "ref-card-2",
+        dimension: "文法",
+        category: "現在簡單式 Be 動詞否定句與縮寫",
+        stem: "Bill and Eva ________ busy on weekends, so they often go to the park together.",
+        options: [
+          "aren't",
+          "isn't",
+          "don't",
+          "not are"
+        ],
+        answerIndex: 0,
+        translation: "Bill 和 Eva 週末不忙，所以他們經常一起去公園。",
+        coreExplanation: "主詞 Bill and Eva 為兩個人（第三人稱複數），且 busy（忙碌的）為形容詞，須搭配 be 動詞 are；否定句將 not 放在 be 動詞後方，縮寫為 aren't。",
+        grammarPoint: "複數S (Bill and Eva) + Be動詞否定 (aren't) + Adj (busy) + 時間副詞片語 (on weekends).",
+        distractors: {
+          "isn't": "isn't 為單數 be 動詞否定，不可搭配複數主詞 Bill and Eva。",
+          "don't": "busy 為形容詞而非一般動詞，否定時不可使用助動詞 don't。",
+          "not are": "英文否定句須將 not 置於 be 動詞「之後」，不可放在 be 動詞前面。"
+        },
+        phonetics: "Bill and Eva aren't busy on weekends. /bɪl ənd ˈivə ɑrnt ˈbɪzi ɑn ˈwikˌɛndz/（busy on 連讀時中間有輕微 /j/ 滑音）"
+      },
+      {
+        id: 23,
+        refCardId: "ref-card-2",
+        dimension: "語意邏輯",
+        category: "Yes-No 疑問句之時間與人稱對應",
+        stem: "Mr. Jordan: Look! ________ the boys in the sports field our students?\nMs. Bush: I guess not. School was over an hour ago.",
+        options: [
+          "Are",
+          "Do",
+          "Did",
+          "Were"
+        ],
+        answerIndex: 0,
+        translation: "Jordan 老師：看！在運動場上的那些男孩是我們的學生嗎？\nBush 老師：我猜不是。一小時前就放學了。",
+        coreExplanation: "由「Look!（看！）」可知詢問的是「目前當下」的狀態，應用現在簡單式；句中沒有一般動詞，主詞為複數名詞 the boys，故句首須用現在式複數 be 動詞 Are。",
+        grammarPoint: "Are + 複數S (the boys in the sports field) + N (our students)?",
+        distractors: {
+          "Do": "句中沒有一般原形動詞，不可使用助動詞 Do 造疑問句。",
+          "Did": "既無一般動詞，且 Look! 提示為現在時間而非過去時間。",
+          "Were": "Were 為過去式 be 動詞，與開頭提示現在當下的 Look! 時態不符。"
+        },
+        phonetics: "Are the boys in the sports field our students? /ɑr ðə bɔɪz ɪn ðə spɔrts fild aʊr ˈstudnts/（boys in 連讀為 /bɔɪz ɪn/，field our 連讀為 /fild aʊr/）"
+      },
+      {
+        id: 24,
+        refCardId: "ref-card-2",
+        dimension: "文法",
+        category: "Yes-No 疑問句（第一、二人稱互換規則）",
+        stem: "Teacher: Are you and your brother ready for the test?\nStudents: Yes, ________.",
+        options: [
+          "we are",
+          "we're",
+          "I am",
+          "you are"
+        ],
+        answerIndex: 0,
+        translation: "老師：你和你弟弟準備好考試了嗎？\n學生們：是的，我們準備好了。",
+        coreExplanation: "根據教材 p.19 要點，問句主詞為「you and your brother（你們，第二人稱複數）」，回答時第一、二人稱須互換為第一人稱複數「we」；且肯定簡答不可縮寫，故寫 Yes, we are。",
+        grammarPoint: "Are + you and your brother (第二人稱複數)? → Yes, we are. (第一人稱複數，不可縮寫)",
+        distractors: {
+          "we're": "肯定簡答時主詞與 be 動詞絕對不可縮寫。",
+          "I am": "問句主詞包含 you 和 your brother 共兩人，回答應用複數 we 而非單數 I。",
+          "you are": "未進行第一、二人稱互換，答成「是的，你們是」，語意完全錯誤。"
+        },
+        phonetics: "Yes, we are. /jɛs wi ɑr/（we are 連讀時中間有輕微 /j/ 滑音，讀作 /wi jɑr/）"
+      },
+      {
+        id: 25,
+        refCardId: "ref-card-2",
+        dimension: "語意邏輯",
+        category: "否定疑問句的回答邏輯（中英文思維差異）",
+        stem: "Sam: Isn't your cousin a nurse at that hospital?\nTina: ________ She is a junior high school teacher.",
+        options: [
+          "No, she isn't.",
+          "Yes, she isn't.",
+          "No, she is.",
+          "Yes, she is."
+        ],
+        answerIndex: 0,
+        translation: "Sam：你表姊不是那家醫院的護理師嗎？\nTina：不，她不是。她是一位國中老師。",
+        coreExplanation: "根據教材 p.19 文法進階，回答否定疑問句時「不要管否定疑問句中的 not」，只要看事實是否定就回答 No。事實上表姊不是護理師（她是老師），因此回答 No, she isn't。",
+        grammarPoint: "Isn't + S + N? → 事實為否定：No, S + isn't.",
+        distractors: {
+          "Yes, she isn't.": "受中文「是的，她不是」直譯影響；英文中 Yes 後面必須接肯定，No 後面必須接否定，不可前後矛盾。",
+          "No, she is.": "文法結構矛盾，No 後方不可接肯定簡答 she is。",
+          "Yes, she is.": "與後方補充說明「她是國中老師（並非護理師）」的事實語意相反。"
+        },
+        phonetics: "No, she isn't. /no ʃi ˈɪznt/（she isn't 連讀時中間有輕微 /j/ 滑音）"
+      },
+      {
+        id: 26,
+        refCardId: "ref-card-3",
+        dimension: "細節理解",
+        category: "Wh- 疑問詞辨析（what 詢問職業 vs. 姓名）",
+        stem: "Amy: ________ does your father do?\nBen: He is a police officer.",
+        options: [
+          "What",
+          "Who",
+          "How",
+          "Where"
+        ],
+        answerIndex: 0,
+        translation: "Amy：你爸爸是做什麼工作的？\nBen：他是一位警察。",
+        coreExplanation: "根據教材 p.19 表格，「What do you do? / What does he do?」是用來詢問「職業」的固定疑問句型，答句為職業（a police officer），故選 What。",
+        grammarPoint: "What + 助動詞 (does) + S (your father) + 原形V (do)? (詢問職業)",
+        distractors: {
+          "Who": "Who 用來詢問姓名或人物關係（如 Who is he?），不可搭配 do 詢問職業。",
+          "How": "How 用來詢問健康狀況、方法或交通工具，無法與 do 構成詢問職業的句型。",
+          "Where": "Where 用來詢問地點或來自哪裡，與職業答句不符。"
+        },
+        phonetics: "What does your father do? /wɑt dʌz jʊr ˈfɑðɚ du/（What does 連讀時 /t/ 音常與 /d/ 同化）"
+      },
+      {
+        id: 27,
+        refCardId: "ref-card-3",
+        dimension: "細節理解",
+        category: "Which 與 What 疑問詞辨析（有選擇性/特定範圍）",
+        stem: "Waiter: ________ is your favorite drink, hot tea or cold juice?\nCustomer: My favorite is juice, please.",
+        options: [
+          "Which",
+          "What",
+          "Who",
+          "How"
+        ],
+        answerIndex: 0,
+        translation: "服務生：哪一種是你最喜歡的飲料，熱茶還是冰果汁？\n顧客：我最喜歡的是果汁，謝謝。",
+        coreExplanation: "根據教材 p.20-21 要點，當問句中有「選擇性」或「特定範圍」（本題明確給出 hot tea or cold juice 二選一）時，必須使用疑問詞 Which（哪一個）。",
+        grammarPoint: "Which + is + 所有格 (your) + favorite + N, A or B?",
+        distractors: {
+          "What": "若沒有給定選擇範圍（僅問 What is your favorite drink?）才用 What；有明確選項時須用 Which。",
+          "Who": "Who 用於詢問「人」，不可用於詢問飲料。",
+          "How": "How 詢問方式或狀態，與選擇飲料無關。"
+        },
+        phonetics: "Which is your favorite drink, tea or juice? /wɪtʃ ɪz jʊr ˈfevrɪt drɪŋk ti ɔr dʒus/（Which is 連讀為 /wɪtʃ ɪz/，tea or 連讀為 /ti ɔr/）"
+      },
+      {
+        id: 28,
+        refCardId: "ref-card-3",
+        dimension: "細節理解",
+        category: "How 疑問詞多重語意辨析（交通工具、頻率、距離）",
+        stem: "Kevin: ________ does your brother go to school every morning?\nLisa: By bicycle. His school is near our house.",
+        options: [
+          "How",
+          "How far",
+          "How often",
+          "When"
+        ],
+        answerIndex: 0,
+        translation: "Kevin：你弟弟每天早上怎麼去上學？\nLisa：騎腳踏車。他的學校在我們家附近。",
+        coreExplanation: "答句為「By bicycle.（騎腳踏車）」，說明上學的「交通工具（方式）」，根據教材 p.20 表格，詢問交通方式須使用疑問詞 How。",
+        grammarPoint: "How + 助動詞 (does) + S (your brother) + go to school? → By + 交通工具.",
+        distractors: {
+          "How far": "詢問「距離有多遠」，答句應為距離單位（如 2 miles），而非交通工具。",
+          "How often": "詢問「頻率；多久一次」，答句應為次數（如 Twice a week），與 By bicycle 不符。",
+          "When": "詢問「時間」，答句應為時間點（如 At seven o'clock）。"
+        },
+        phonetics: "How does your brother go to school? /haʊ dʌz jʊr ˈbrʌðɚ go tə skul/（to school 中 to 弱讀為 /tə/）"
+      },
+      {
+        id: 29,
+        refCardId: "ref-card-3",
+        dimension: "細節理解",
+        category: "How + 形容詞疑問詞辨析（how long / how far / how fast）",
+        stem: "Tourist: Excuse me, ________ is the train station from here?\nLocal: It's about two miles away. You can take a taxi.",
+        options: [
+          "how far",
+          "how long",
+          "how fast",
+          "how tall"
+        ],
+        answerIndex: 0,
+        translation: "遊客：不好意思，火車站離這裡有多遠？\n當地人：大約兩英里遠。你可以搭計程車。",
+        coreExplanation: "答句為距離「two miles（兩英里）」，且問句中有「from here（離這裡）」，根據教材 p.20 表格，詢問兩地之間的距離須用 how far。",
+        grammarPoint: "How far + is + S (the train station) + from here? → It's + 距離.",
+        distractors: {
+          "how long": "詢問物體的「長短」（如 15 cm）或事件持續「多久」（如 Three days），不用於詢問兩地距離。",
+          "how fast": "詢問「速度有多快」（如 100 km/hr），與 miles 距離單位不符。",
+          "how tall": "詢問「身高或建築物高度」（如 158 cm tall），無法詢問車站距離。"
+        },
+        phonetics: "How far is the train station from here? /haʊ fɑr ɪz ðə tren ˈsteʃən frəm hɪr/（far is 連讀為 /fɑr ɪz/）"
+      },
+      {
+        id: 30,
+        refCardId: "ref-card-3",
+        dimension: "文法",
+        category: "形容詞的位置與多重形容詞排列順序",
+        stem: "Look at the sky! That is ________.",
+        options: [
+          "a beautiful big new yellow Japanese cotton flag",
+          "a Japanese cotton beautiful big new yellow flag",
+          "a big beautiful yellow new cotton Japanese flag",
+          "a flag beautiful big new yellow Japanese cotton"
+        ],
+        answerIndex: 0,
+        translation: "看天空！那是一支漂亮、大、新、黃色、日本棉質的旗幟。",
+        coreExplanation: "根據教材 p.21 鯉魚旗圖解，多個形容詞同時修飾名詞時的標準排列順序為：「意見 (beautiful) → 大小 (big) → 新舊 (new) → 顏色 (yellow) → 國籍/來源 (Japanese) → 材質 (cotton) + 名詞 (flag)」。",
+        grammarPoint: "冠詞 (a) + 意見 + 大小 + 新舊 + 顏色 + 國籍 + 材質 + N (flag).",
+        distractors: {
+          "a Japanese cotton beautiful big new yellow flag": "把國籍與材質放在意見與大小前面，完全違反英語形容詞「由主觀到客觀本質」的排列規則。",
+          "a big beautiful yellow new cotton Japanese flag": "大小與意見順序顛倒、顏色與新舊順序顛倒、材質與國籍順序亦顛倒。",
+          "a flag beautiful big new yellow Japanese cotton": "英語中多個形容詞修飾單一普通名詞時必須放在「名詞前面」，不可全部置於名詞後方。"
+        },
+        phonetics: "A beautiful big new yellow Japanese cotton flag. /ə ˈbjutəfəl bɪg nu ˈjɛlo ˌdʒæpəˈniz ˈkɑtn flæg/（注意多個子音收尾清晰度）"
+      },
+      {
+        id: 31,
+        refCardId: "ref-card-1",
+        dimension: "語意邏輯",
+        category: "綜合克漏字（一）：校園新生活與自我介紹",
+        stem: "【克漏字測驗一：第 31~35 題】\nHello, everyone! My name is Kevin, and I am a junior high school student. Look at this photo of my family. The tall man next to me is my father. ________ is an English teacher at a junior high school, and he loves his job very much.\n\n請問第 (31) 格應填入下列何者？",
+        options: [
+          "He",
+          "His",
+          "Him",
+          "She"
+        ],
+        answerIndex: 0,
+        translation: "大家好！我的名字是 Kevin，我是一名國中生。看這張我全家的照片。在我旁邊的那位高個子男人是我的爸爸。他是一所國中的英文老師，而且他非常熱愛他的工作。",
+        coreExplanation: "空格位於句首，後方為 be 動詞 is，需要填入主格代名詞作主詞；又因前一句指涉對象為男性（my father），故選用第三人稱單數男性主格 He。",
+        grammarPoint: "第三人稱單數男性主格 (He) + Be動詞 (is) + N (an English teacher).",
+        distractors: {
+          "His": "為所有格，後方必須接名詞，不可單獨當主詞。",
+          "Him": "為受格，不可放在句首當主詞。",
+          "She": "性別錯誤，前文指涉對象為 my father（父親）。"
+        },
+        phonetics: "He is an English teacher. /hi ɪz ən ˈɪŋglɪʃ ˈtitʃɚ/（He is 連讀為 /hi ɪz/，is an 連讀為 /ɪz ən/）"
+      },
+      {
+        id: 32,
+        refCardId: "ref-card-1",
+        dimension: "文法",
+        category: "綜合克漏字（一）：共同所有格與單複數判定",
+        stem: "【克漏字測驗一（續）】\nThe two girls in the middle of the photo are my cousins, Amy and Lisa. ________ mom is my aunt, and she is a kind nurse at a big hospital.\n\n請問第 (32) 格應填入下列何者？",
+        options: [
+          "Amy and Lisa's",
+          "Amy's and Lisa's",
+          "They",
+          "Amy and Lisa"
+        ],
+        answerIndex: 0,
+        translation: "照片中間那兩個女孩是我的表姊妹，Amy 和 Lisa。Amy 和 Lisa 的媽媽是我的姑姑，她在一家大醫院當善良的護理師。",
+        coreExplanation: "後方名詞 mom 為單數，且動詞為單數 is、代名詞為 she，表示 Amy 和 Lisa 是親姊妹，共有「同一位媽媽」（共同所有），因此只在最後一個人名後方加 's，寫成 Amy and Lisa's。",
+        grammarPoint: "A and B's + 單數N (mom) + 單數V (is) + N (my aunt).",
+        distractors: {
+          "Amy's and Lisa's": "兩人都加 's 代表各有各的媽媽（個別所有），後方名詞應為複數 moms 且動詞用 are。",
+          "They": "為主格代名詞，不可修飾名詞 mom（所有格才用 Their）。",
+          "Amy and Lisa": "缺少所有格符號 's，無法表達「……的媽媽」。"
+        },
+        phonetics: "Amy and Lisa's mom is my aunt. /ˈemi ənd ˈlisəz mɑm ɪz maɪ ænt/（mom is 連讀為 /mɑm ɪz/，my aunt 連讀時中間有輕微 /j/ 滑音）"
+      },
+      {
+        id: 33,
+        refCardId: "ref-card-2",
+        dimension: "文法",
+        category: "綜合克漏字（一）：複數指示代名詞代換",
+        stem: "【克漏字測驗一（續）】\nLook at those cute dogs in front of us! ________ are our pets, Spot and Lucky. We play with them in the park every afternoon.\n\n請問第 (33) 格應填入下列何者？",
+        options: [
+          "They",
+          "Those",
+          "It",
+          "Them"
+        ],
+        answerIndex: 0,
+        translation: "看我們前面那些可愛的狗！牠們是我們的寵物，Spot 和 Lucky。我們每天下午都在公園裡跟牠們玩。",
+        coreExplanation: "前一句提到複數指示詞 those cute dogs，下一句再次指代這些複數名詞作主詞時，應使用第三人稱複數人稱代名詞主格 They 代替。",
+        grammarPoint: "第三人稱複數主格 (They) + 複數Be動詞 (are) + 所有格 (our) + 複數N (pets).",
+        distractors: {
+          "Those": "在對前文複數名詞 those dogs 進行承接指代時，標準英語應使用人稱代名詞 They 而非重複使用 Those。",
+          "It": "It 為單數代名詞，後方動詞為複數 are 且寵物有兩隻（Spot and Lucky），單複數不符。",
+          "Them": "為受格代名詞，只能放在動詞或介系詞後（如 play with them），不可置於句首當主詞。"
+        },
+        phonetics: "They are our pets. /ðe ɑr aʊr pɛts/（They are 連讀為 /ðe jɑr/）"
+      },
+      {
+        id: 34,
+        refCardId: "ref-card-2",
+        dimension: "單字",
+        category: "綜合克漏字（一）：Be 動詞與形容詞搭配",
+        stem: "【克漏字測驗一（續）】\nMy family ________ always happy together, and we love each other very much.\n\n請問第 (34) 格應填入下列何者？",
+        options: [
+          "is",
+          "am",
+          "do",
+          "does"
+        ],
+        answerIndex: 0,
+        translation: "我的家人在一起總是很快樂，而且我們非常愛彼此。",
+        coreExplanation: "空格後方有頻率副詞 always 與形容詞 happy，句中無一般動詞，須填入 be 動詞；此處 My family 視為一個整體家庭（單數概念），故選用單數 be 動詞 is。",
+        grammarPoint: "單數集合名詞主詞 (My family) + Be動詞 (is) + 頻率副詞 (always) + Adj (happy).",
+        distractors: {
+          "am": "am 只能搭配第一人稱單數主詞 I。",
+          "do": "happy 為形容詞而非一般動詞，不可使用助動詞 do。",
+          "does": "句子中沒有任何一般原形動詞，不需使用助動詞 does。"
+        },
+        phonetics: "My family is always happy together. /maɪ ˈfæməli ɪz ˈɔlwez ˈhæpi təˈgɛðɚ/（family is 連讀為 /ˈfæməli ɪz/，is always 連讀為 /ɪz ˈɔlwez/）"
+      },
+      {
+        id: 35,
+        refCardId: "ref-card-3",
+        dimension: "語意邏輯",
+        category: "綜合克漏字（一）：疑問詞詢問狀態",
+        stem: "【克漏字測驗一（續）】\n________ is your family? Please write back soon and tell me about your life!\n\n請問第 (35) 格應填入下列何者？",
+        options: [
+          "How",
+          "What",
+          "Who",
+          "Where"
+        ],
+        answerIndex: 0,
+        translation: "你的家人好嗎？請盡快回信並告訴我關於你的生活！",
+        coreExplanation: "根據教材 p.20 表格，「How is your father / family?」是用來問候他人「健康狀況或近況好不好」的標準問句，符合書信結尾問候語境。",
+        grammarPoint: "How + is + 所有格 (your) + N (family)? (詢問健康與近況)",
+        distractors: {
+          "What": "What is your family? 語意怪異（你的家庭是什麼？），不用於日常問候。",
+          "Who": "Who 用來詢問人物身分（誰），與後方請對方分享生活近況的語意不合。",
+          "Where": "Where 詢問地點（你的家人在哪裡），不如 How 符合書信結尾的親切問候。"
+        },
+        phonetics: "How is your family? /haʊ ɪz jʊr ˈfæməli/（How is 連讀為 /haʊ ɪz/）"
+      },
+      {
+        id: 36,
+        refCardId: "ref-card-3",
+        dimension: "細節理解",
+        category: "綜合克漏字（二）：動物園導覽與疑問詞運用",
+        stem: "【克漏字測驗二：第 36~40 題】\nWelcome to the City Zoo! Today, we are looking at the fastest land animal in the world—the cheetah. Many visitors ask, \"________ can a cheetah run?\" Well, it can run about 110 kilometers per hour!\n\n請問第 (36) 格應填入下列何者？",
+        options: [
+          "How fast",
+          "How soon",
+          "How old",
+          "How tall"
+        ],
+        answerIndex: 0,
+        translation: "歡迎來到市立動物園！今天，我們正在看世界上跑得最快的陸地動物——獵豹。許多遊客問：「獵豹能跑多快？」嗯，牠每小時大約能跑 110 公里！",
+        coreExplanation: "後文回答「about 110 kilometers per hour（每小時約 110 公里）」，明確指出移動「速度」，根據教材 p.21 表格，詢問速度須使用疑問詞 How fast。",
+        grammarPoint: "How fast + 助動詞 (can) + S (a cheetah) + 原形V (run)?",
+        distractors: {
+          "How soon": "詢問未來「多久之後」（如 In five minutes），與跑步速度無關。",
+          "How old": "詢問「年齡幾歲」，與每小時 110 公里的單位不符。",
+          "How tall": "詢問「身高多高」，無法修飾動詞 run（跑）。"
+        },
+        phonetics: "How fast can a cheetah run? /haʊ fæst kən ə ˈtʃitə rʌn/（can a 連讀為 /kən ə/）"
+      },
+      {
+        id: 37,
+        refCardId: "ref-card-3",
+        dimension: "細節理解",
+        category: "綜合克漏字（二）：年齡詢問與複合形容詞",
+        stem: "【克漏字測驗二（續）】\nNext to the cheetah is a young lion, Leo. A little boy asks the zoo keeper, \"________ is Leo?\" The keeper smiles and says, \"He is only two years old.\"\n\n請問第 (37) 格應填入下列何者？",
+        options: [
+          "How old",
+          "How long",
+          "How far",
+          "How often"
+        ],
+        answerIndex: 0,
+        translation: "在獵豹旁邊的是一隻年輕的獅子 Leo。一個小男孩問動物園管理員：「Leo 幾歲了？」管理員微笑著說：「牠只有兩歲。」",
+        coreExplanation: "管理員回答「He is only two years old.（牠只有兩歲）」，明確回答年齡，故問句須使用詢問年齡的疑問詞 How old。",
+        grammarPoint: "How old + is + S (Leo)? → S + is + 數字 + years old.",
+        distractors: {
+          "How long": "詢問長度或時間長短，不用于詢問人或動物的年齡。",
+          "How far": "詢問距離遠近，與年齡無關。",
+          "How often": "詢問頻率（多久一次），語意完全不符。"
+        },
+        phonetics: "How old is Leo? /haʊ old ɪz ˈlio/（How old 連讀為 /haʊ old/，old is 連讀為 /old ɪz/）"
+      },
+      {
+        id: 38,
+        refCardId: "ref-card-1",
+        dimension: "文法",
+        category: "綜合克漏字（二）：無生命名詞所有格",
+        stem: "【克漏字測驗二（續）】\nLook at ________. It is very strong and thick, so the animals cannot jump out of it.\n\n請問第 (38) 格應填入下列何者？",
+        options: [
+          "the wall of the lion house",
+          "the lion house's wall",
+          "the walls of the lion house",
+          "a the wall of the lion house"
+        ],
+        answerIndex: 0,
+        translation: "看這座獅子館的牆壁。它非常堅固且厚實，所以動物們無法跳出來。",
+        coreExplanation: "「獅子館（the lion house）」為無生命名詞，其所有格應使用「the + 小範圍名詞 + of + the + 整體名詞」結構；且後方代名詞為單數 It、動詞為單數 is，故小範圍名詞須用單數 wall。",
+        grammarPoint: "Look at + the + 單數小範圍N (wall) + of + the + 整體N (lion house).",
+        distractors: {
+          "the lion house's wall": "無生命名詞所有格在國中標準文法中應使用 of 結構，而非 's。",
+          "the walls of the lion house": "小範圍名詞 walls 為複數，與下一句的單數主詞 It 不一致。",
+          "a the wall of the lion house": "不定冠詞 a 與定冠詞 the 不可同時連用。"
+        },
+        phonetics: "Look at the wall of the lion house. /lʊk æt ðə wɔl əv ðə ˈlaɪən haʊs/（Look at 連讀為 /lʊk æt/，wall of 連讀為 /wɔl əv/）"
+      },
+      {
+        id: 39,
+        refCardId: "ref-card-3",
+        dimension: "細節理解",
+        category: "綜合克漏字（二）：時間間隔詢問（How soon）",
+        stem: "【克漏字測驗二（續）】\n\"________ will the next animal show start?\" asks a mother. \"In ten minutes, right over there,\" answers the guide.\n\n請問第 (39) 格應填入下列何者？",
+        options: [
+          "How soon",
+          "How fast",
+          "What time",
+          "How many"
+        ],
+        answerIndex: 0,
+        translation: "「下一場動物表演還要多久才會開始？」一位媽媽問。「十分鐘後，就在那邊，」導覽員回答。",
+        coreExplanation: "導覽員的回答為「In ten minutes（十分鐘後）」，表示從現在算起未來「多久之後」會發生某事，標準對應疑問詞為 How soon。",
+        grammarPoint: "How soon + 助動詞 (will) + S (the next animal show) + 原形V (start)? → In + 時間段.",
+        distractors: {
+          "How fast": "詢問速度，無法搭配「十分鐘後」的時間回答。",
+          "What time": "詢問具體鐘點（如 At 3:00 p.m.），而非「In + 一段時間（多久之後）」。",
+          "How many": "詢問可數名詞數量，後方須接複數名詞，不可直接接助動詞 will。"
+        },
+        phonetics: "How soon will the next animal show start? /haʊ sun wɪl ðə nɛkst ˈænəməl ʃo stɑrt/（next animal 連讀為 /nɛkst ˈænəməl/）"
+      },
+      {
+        id: 40,
+        refCardId: "ref-card-3",
+        dimension: "單字",
+        category: "綜合克漏字（二）：Be 動詞搭配多個形容詞",
+        stem: "【克漏字測驗二（續）】\nThe zoo keepers here are ________, and they take good care of every animal.\n\n請問第 (40) 格應填入下列何者？",
+        options: [
+          "kind and patient",
+          "kindly and patiently",
+          "a kind and patient",
+          "kindly and patient"
+        ],
+        answerIndex: 0,
+        translation: "這裡的動物園管理員既善良又有耐心，而且他們把每一隻動物都照顧得很好。",
+        coreExplanation: "根據教材 p.21「形容詞」用法表（His wife is kind and pretty.），be 動詞（are）後方須接形容詞作主詞補語，且對等連接詞 and 前後詞性必須平行，故選兩個形容詞 kind and patient。",
+        grammarPoint: "複數S (The zoo keepers) + Be動詞 (are) + Adj (kind) + and + Adj (patient).",
+        distractors: {
+          "kindly and patiently": "皆為副詞，不可放在 be 動詞 are 後方直接形容主詞（人）。",
+          "a kind and patient": "形容詞後面沒有名詞，且主詞為複數 keepers，不可加上單數不定冠詞 a。",
+          "kindly and patient": "and 前後詞性不平行（副詞 + 形容詞），違反對等連接詞文法規則。"
+        },
+        phonetics: "The zoo keepers are kind and patient. /ðə zu ˈkipɚz ɑr kaɪnd ənd ˈpeʃənt/（keepers are 連讀為 /ˈkipɚz ɑr/，kind and 連讀為 /kaɪnd ənd/）"
+      },
+      {
+        id: 41,
+        refCardId: "ref-card-1",
+        dimension: "細節理解",
+        category: "閱讀理解（一）：校園人物關係與職業細節",
+        stem: "【閱讀測驗一：第 41~45 題】\nHi! I am Mia, a 13-year-old junior high school student. Today is the first day of the new semester, and I want to introduce my new friends and teachers to you. Look at the photo on my desk. The woman with short hair is Ms. Wang. She is our homeroom teacher, and she teaches English. She is very kind and pretty. Next to Ms. Wang are two boys, Sam and Tom. They are twin brothers. Sam and Tom's father is a doctor, and their mother is a nurse. Both of them work in the same hospital near our school. Who is the girl in a yellow dress? That's Lily! Lily and I are classmates, and we both love reading novels in the library after school. How often do we go there? About three times a week!\n\nQuestion 41: What does Ms. Wang do?",
+        options: [
+          "She is an English teacher.",
+          "She is a hospital nurse.",
+          "She is a school doctor.",
+          "She is a library worker."
+        ],
+        answerIndex: 0,
+        translation: "嗨！我是 Mia，一位 13 歲的國中生。今天是新學期的第一天，我想向你們介紹我的新朋友和老師。看我書桌上的照片。那位短髮女士是王老師。她是我們的班導師，而且她教英文。她非常善良又漂亮。在王老師旁邊的是兩個男孩，Sam 和 Tom。他們是雙胞胎兄弟。Sam 和 Tom 的爸爸是醫生，他們的媽媽是護理師。他們兩位都在我們學校附近同一家醫院工作。那個穿黃色洋裝的女孩是誰？那是 Lily！Lily 和我是同班同學，而且我們放學後都喜歡在圖書館讀小說。我們多久去那裡一次？大約一週三次！\n\n問題 41：王老師是做什麼工作的？",
+        coreExplanation: "文章第四、五句明確提到：「The woman with short hair is Ms. Wang. She is our homeroom teacher, and she teaches English.」，因此王老師是一位英文老師。",
+        grammarPoint: "What + does + S (Ms. Wang) + do? (詢問職業) → S + is + an English teacher.",
+        distractors: {
+          "She is a hospital nurse.": "醫院護理師是雙胞胎 Sam 和 Tom 的媽媽，屬於張冠李戴的細節干擾。",
+          "She is a school doctor.": "醫生是 Sam 和 Tom 的爸爸，且在醫院工作而非學校。",
+          "She is a library worker.": "文中僅提到 Mia 和 Lily 放學後會去圖書館讀小說，並未提及圖書館員。"
+        },
+        phonetics: "She is an English teacher. /ʃi ɪz ən ˈɪŋglɪʃ ˈtitʃɚ/（She is 連讀為 /ʃi ɪz/，is an 連讀為 /ɪz ən/）"
+      },
+      {
+        id: 42,
+        refCardId: "ref-card-1",
+        dimension: "語意邏輯",
+        category: "閱讀理解（一）：所有格與家庭關係推理",
+        stem: "【閱讀測驗一（續）】\nQuestion 42: Which is TRUE about Sam and Tom?",
+        options: [
+          "They have the same parents.",
+          "They have two different fathers.",
+          "Their parents work in different hospitals.",
+          "They are Ms. Wang's twin brothers."
+        ],
+        answerIndex: 0,
+        translation: "問題 42：關於 Sam 和 Tom，下列哪一項是正確的？",
+        coreExplanation: "文中指出「They are twin brothers. Sam and Tom's father is a doctor, and their mother is a nurse.」，兩人是雙胞胎兄弟且使用共同所有格「Sam and Tom's father」，代表他們擁有同一對父母。",
+        grammarPoint: "S (They) + V (have) + the same + 複數N (parents).",
+        distractors: {
+          "They have two different fathers.": "兩人是雙胞胎且共有同一位醫生父親，並非兩位不同的父親。",
+          "Their parents work in different hospitals.": "文中明確說明「Both of them work in the same hospital（兩位都在同一家醫院工作）」，與 different 相反。",
+          "They are Ms. Wang's twin brothers.": "王老師是他們的班導師，並非他們的姊姊。"
+        },
+        phonetics: "They have the same parents. /ðe hæv ðə sem ˈpɛrənts/（have the 輔音自然銜接）"
+      },
+      {
+        id: 43,
+        refCardId: "ref-card-3",
+        dimension: "細節理解",
+        category: "閱讀理解（一）：頻率副詞片語細節定位",
+        stem: "【閱讀測驗一（續）】\nQuestion 43: How often do Mia and Lily go to the library?",
+        options: [
+          "About three times a week.",
+          "Every morning before school.",
+          "Once a month on weekends.",
+          "Twice a day after lunch."
+        ],
+        answerIndex: 0,
+        translation: "問題 43：Mia 和 Lily 多久去一次圖書館？",
+        coreExplanation: "文章最後兩句明確回答：「How often do we go there? About three times a week!」，直接對應選項 (A)。",
+        grammarPoint: "How often + do + 複數S (Mia and Lily) + go to the library? → 頻率片語.",
+        distractors: {
+          "Every morning before school.": "文中說明她們是「after school（放學後）」去圖書館，而非上學前。",
+          "Once a month on weekends.": "頻率與時間皆與文章內容不符。",
+          "Twice a day after lunch.": "為教材 p.20 表格例句中的干擾項，並非本篇文章中的事實。"
+        },
+        phonetics: "About three times a week. /əˈbaʊt θri taɪmz ə wik/（times a 連讀為 /taɪmz ə/）"
+      },
+      {
+        id: 44,
+        refCardId: "ref-card-1",
+        dimension: "文法",
+        category: "閱讀理解（一）：代名詞指涉對象判斷",
+        stem: "【閱讀測驗一（續）】\nQuestion 44: What does the word \"them\" refer to in the sentence \"Both of them work in the same hospital\"?",
+        options: [
+          "Sam and Tom's parents.",
+          "Sam and Tom.",
+          "Mia and Lily.",
+          "Ms. Wang and Lily."
+        ],
+        answerIndex: 0,
+        translation: "問題 44：在「Both of them work in the same hospital」這句話中，「them」這個字指的是什麼？",
+        coreExplanation: "往前追溯前一句：「Sam and Tom's father is a doctor, and their mother is a nurse.」，緊接著說「Both of them work in the same hospital」，因此受格代名詞 them 指代的是 Sam 和 Tom 的父母（父親與母親）。",
+        grammarPoint: "Both of + 複數受格代名詞 (them) + 複數V (work) + 地方介系詞片語 (in the same hospital).",
+        distractors: {
+          "Sam and Tom.": "Sam 和 Tom 是國中生，不是在醫院工作的醫生和護理師。",
+          "Mia and Lily.": "Mia 和 Lily 也是國中生，放學後去的是圖書館而非醫院。",
+          "Ms. Wang and Lily.": "王老師在學校教英文，並未在醫院工作。"
+        },
+        phonetics: "Both of them work in the same hospital. /boθ əv ðɛm wɝk ɪn ðə sem ˈhɑspɪtl/（Both of 連讀為 /boθ əv/，work in 連讀為 /wɝk ɪn/）"
+      },
+      {
+        id: 45,
+        refCardId: "ref-card-3",
+        dimension: "文法",
+        category: "閱讀理解（一）：連字號複合形容詞結構",
+        stem: "【閱讀測驗一（續）】\nQuestion 45: How old is Mia?",
+        options: [
+          "She is thirteen years old.",
+          "She is a thirteen-years-old girl.",
+          "She is thirty years old.",
+          "She is three years old."
+        ],
+        answerIndex: 0,
+        translation: "問題 45：Mia 幾歲？",
+        coreExplanation: "文章第一句提到「I am Mia, a 13-year-old junior high school student.」，換算為完整句型即為「She is thirteen years old.」。",
+        grammarPoint: "S (She) + Be動詞 (is) + 數字 (thirteen) + years old.",
+        distractors: {
+          "She is a thirteen-years-old girl.": "連字號複合形容詞中的 year 絕對不可加 s，此選項文法錯誤。",
+          "She is thirty years old.": "將 13 (thirteen) 誤看成 30 (thirty)，屬於形近數字混淆。",
+          "She is three years old.": "數字錯誤，Mia 是國中生而非三歲幼童。"
+        },
+        phonetics: "She is thirteen years old. /ʃi ɪz ˈθɝˈtin jɪrz old/（She is 連讀為 /ʃi ɪz/，years old 連讀為 /jɪrz old/）"
+      },
+      {
+        id: 46,
+        refCardId: "ref-card-3",
+        dimension: "細節理解",
+        category: "閱讀理解（二）：交通距離與時間規劃細節",
+        stem: "【閱讀測驗二：第 46~50 題】\nEric: Hi, Cindy! Are you ready for the school trip to the Science Museum tomorrow?\nCindy: Almost! By the way, how far is the museum from our school?\nEric: It's about ten miles away. It isn't very close, so we can't walk there.\nCindy: I see. How are we going there? By bus or by MRT?\nEric: By school bus. Our homeroom teacher, Mr. Brown, says the bus leaves at eight o'clock tomorrow morning. Don't be late!\nCindy: Got it. How long is the bus ride?\nEric: About thirty minutes. Oh, and don't forget to bring your lunch box and water bottle.\nCindy: Thanks for reminding me, Eric! See you tomorrow morning.\n\nQuestion 46: How far is the Science Museum from their school?",
+        options: [
+          "About ten miles away.",
+          "About thirty minutes away.",
+          "About eight miles away.",
+          "Very close to their school."
+        ],
+        answerIndex: 0,
+        translation: "Eric：嗨，Cindy！妳準備好明天去科學博物館的校外教學了嗎？\nCindy：差不多了！順便問一下，博物館離我們學校有多遠？\nEric：大約十英里遠。它不是很近，所以我們不能走路去。\nCindy：我懂了。我們要怎麼去那裡？搭公車還是搭捷運？\nEric：搭校車。我們的班導師 Brown 老師說校車明天早上八點出發。別遲到了！\nCindy：知道了。搭車時間要多久？\nEric：大約三十分鐘。喔，還有別忘了帶妳的午餐盒和水壺。\nCindy：謝謝你提醒我，Eric！明天早上見。\n\n問題 46：科學博物館離他們的學校有多遠？",
+        coreExplanation: "對話第三句 Eric 明確回答：「It's about ten miles away.」，直接對應選項 (A)。",
+        grammarPoint: "How far + is + S + from + N? → It's + about + 距離 + away.",
+        distractors: {
+          "About thirty minutes away.": "三十分鐘是搭校車的「時間長短（How long）」，而非「距離（How far）」。",
+          "About eight miles away.": "將發車時間八點（eight o'clock）誤植為距離八英里。",
+          "Very close to their school.": "Eric 明確說「It isn't very close（它不是很近）」，與選項敘述相反。"
+        },
+        phonetics: "It's about ten miles away. /ɪts əˈbaʊt tɛn maɪlz əˈwe/（It's about 連讀為 /ɪts əˈbaʊt/，miles away 連讀為 /maɪlz əˈwe/）"
+      },
+      {
+        id: 47,
+        refCardId: "ref-card-3",
+        dimension: "細節理解",
+        category: "閱讀理解（二）：交通方式細節判斷",
+        stem: "【閱讀測驗二（續）】\nQuestion 47: How are Eric and Cindy going to the Science Museum?",
+        options: [
+          "By school bus.",
+          "By MRT.",
+          "On foot.",
+          "By bicycle."
+        ],
+        answerIndex: 0,
+        translation: "問題 47：Eric 和 Cindy 要如何前往科學博物館？",
+        coreExplanation: "當 Cindy 問「By bus or by MRT?」時，Eric 明確回答「By school bus.」，因此他們是搭校車前往。",
+        grammarPoint: "How + are + S + going to + 地点? → By + 交通工具 (school bus).",
+        distractors: {
+          "By MRT.": "MRT 只是 Cindy 猜測的選項之一，並非實際搭乘的交通工具。",
+          "On foot.": "Eric 明確表示距離太遠「we can't walk there（不能走路去）」。",
+          "By bicycle.": "對話中完全未提及腳踏車。"
+        },
+        phonetics: "By school bus. /baɪ skul bʌs/（注意 school 的母音 /u/ 與收尾 /l/ 音）"
+      },
+      {
+        id: 48,
+        refCardId: "ref-card-3",
+        dimension: "細節理解",
+        category: "閱讀理解（二）：時間長短（How long）理解",
+        stem: "【閱讀測驗二（續）】\nQuestion 48: How long does it take to get to the museum by school bus?",
+        options: [
+          "About half an hour.",
+          "About eight hours.",
+          "About ten minutes.",
+          "About an hour."
+        ],
+        answerIndex: 0,
+        translation: "問題 48：搭校車到達博物館需要花費多久時間？",
+        coreExplanation: "對話中 Cindy 問「How long is the bus ride?」，Eric 回答「About thirty minutes.（大約三十分鐘）」，而三十分鐘即等於「half an hour（半小時）」。",
+        grammarPoint: "How long + does it take + to V? → About + half an hour (thirty minutes).",
+        distractors: {
+          "About eight hours.": "將發車時間八點誤解為行車時間八小時。",
+          "About ten minutes.": "將距離十英里（ten miles）誤看成十分鐘。",
+          "About an hour.": "行車時間為三十分鐘（半小時），而非一小時。"
+        },
+        phonetics: "About half an hour. /əˈbaʊt hæf ən aʊr/（half an hour 連讀為 /hæf ən aʊr/，hour 的 h 不發音）"
+      },
+      {
+        id: 49,
+        refCardId: "ref-card-2",
+        dimension: "語意邏輯",
+        category: "閱讀理解（二）：否定祈使句與對話推論",
+        stem: "【閱讀測驗二（續）】\nQuestion 49: Which is TRUE according to the dialogue?",
+        options: [
+          "Eric and Cindy need to bring their own lunch boxes tomorrow.",
+          "The school trip to the Science Museum is today.",
+          "Mr. Brown is the driver of the school bus.",
+          "Cindy is not going on the school trip tomorrow."
+        ],
+        answerIndex: 0,
+        translation: "問題 49：根據這段對話，下列哪一項是正確的？",
+        coreExplanation: "對話倒數第二句 Eric 提醒 Cindy：「don't forget to bring your lunch box and water bottle.（別忘了帶妳的午餐盒和水壺）」，可知他們明天需要自備午餐盒。",
+        grammarPoint: "S (Eric and Cindy) + need to + 原形V (bring) + 所有格 (their own) + 複數N (lunch boxes).",
+        distractors: {
+          "The school trip to the Science Museum is today.": "對話第一句明確指出校外教學是在「tomorrow（明天）」，而非今天。",
+          "Mr. Brown is the driver of the school bus.": "文中說明 Mr. Brown 是「Our homeroom teacher（我們的班導師）」，並非校車司機。",
+          "Cindy is not going on the school trip tomorrow.": "Cindy 已經幾乎準備好了（Almost!）並詢問集合細節，顯然明天會參加。"
+        },
+        phonetics: "Don't forget to bring your lunch box. /dont fɚˈgɛt tə brɪŋ jʊr lʌntʃ bɑks/（forget to 連讀時 /t/ 音常合併）"
+      },
+      {
+        id: 50,
+        refCardId: "ref-card-2",
+        dimension: "語意邏輯",
+        category: "閱讀理解（二）：否定疑問句與簡答情境應用",
+        stem: "【閱讀測驗二（續）】\nQuestion 50: If Cindy asks Eric, \"Isn't the museum close to our school?\", how should Eric answer based on the dialogue?",
+        options: [
+          "No, it isn't.",
+          "Yes, it isn't.",
+          "No, it is.",
+          "Yes, it is."
+        ],
+        answerIndex: 0,
+        translation: "問題 50：如果 Cindy 問 Eric：「這座博物館離我們學校不是很近嗎？」，根據對話內容，Eric 應該如何回答？",
+        coreExplanation: "結合教材 p.19「否定疑問句回答規則」與對話事實：博物館離學校有十英里遠，並不是很近（It isn't very close），事實為否定，因此英語必須回答「No, it isn't.」。",
+        grammarPoint: "Isn't + S (the museum) + Adj (close)...? → 事實為否定：No, it isn't.",
+        distractors: {
+          "Yes, it isn't.": "違反英文文法規則，Yes 後方不可接否定簡答 it isn't。",
+          "No, it is.": "違反英文文法規則，No 後方不可接肯定簡答 it is。",
+          "Yes, it is.": "與對話中「It isn't very close」的事實完全相反。"
+        },
+        phonetics: "No, it isn't. /no ɪt ˈɪznt/（it isn't 連讀時 /t/ 常閃音化為 /ɪɾ ˈɪznt/）"
+      }
+    ];
+
+    // =========================================================================
+    // 應用程式狀態管理
+    // =========================================================================
+    let currentQuestions = [];
+    let userAnswers = {}; // { questionId: selectedOptionIndex }
+    let isSubmitted = false;
+    let timerInterval = null;
+    let totalSeconds = 45 * 60;
+    let remainingSeconds = 45 * 60;
+    let radarChartInstance = null;
+
+    // 初始化
+    window.addEventListener("DOMContentLoaded", () => {
+      initQuestions(false);
+      startTimer();
+      setupSecretTriggers();
+    });
+
+    // 洗牌函數 (Fisher-Yates)
+    function shuffleArray(arr) {
+      const copy = [...arr];
+      for (let i = copy.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+      }
+      return copy;
+    }
+
+    // 初始化題庫與渲染
+    function initQuestions(shouldShuffle = false) {
+      isSubmitted = false;
+      userAnswers = {};
+      document.getElementById("resultPanel").classList.remove("visible");
+      document.getElementById("submitBtn").disabled = false;
+
+      let baseList = JSON.parse(JSON.stringify(rawQuestionBank));
+      if (shouldShuffle) {
+        baseList = shuffleArray(baseList);
+      }
+
+      // 處理每題選項與重新編號
+      currentQuestions = baseList.map((q, idx) => {
+        const correctText = q.options[q.answerIndex];
+        const processedOptions = shouldShuffle ? shuffleArray(q.options) : [...q.options];
+        const newAnswerIndex = processedOptions.indexOf(correctText);
+        return {
+          ...q,
+          displayNumber: idx + 1,
+          options: processedOptions,
+          answerIndex: newAnswerIndex
+        };
+      });
+
+      renderNavigator();
+      renderQuestions();
+      updateProgress();
+    }
+
+    // 渲染左側題號導覽格
+    function renderNavigator() {
+      const navGrid = document.getElementById("navGrid");
+      navGrid.innerHTML = "";
+      currentQuestions.forEach((q) => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "nav-btn";
+        btn.id = `nav-btn-${q.displayNumber}`;
+        btn.textContent = q.displayNumber;
+        btn.onclick = () => scrollToQuestion(q.displayNumber, q.refCardId);
+        navGrid.appendChild(btn);
+      });
+    }
+
+    // 渲染右側所有題目卡片
+    function renderQuestions() {
+      const container = document.getElementById("questionsContainer");
+      container.innerHTML = "";
+      const letters = ["A", "B", "C", "D"];
+
+      currentQuestions.forEach((q) => {
+        const card = document.createElement("div");
+        card.className = "card question-card";
+        card.id = `q-card-${q.displayNumber}`;
+
+        // 誘答剖析 HTML
+        let distractorHtml = "";
+        Object.entries(q.distractors).forEach(([optText, reason]) => {
+          distractorHtml += `<div style="margin-bottom:4px;">• <strong>(${optText})</strong>：${reason}</div>`;
+        });
+
+        card.innerHTML = `
+          <div class="q-header">
+            <span class="q-badge" onclick="highlightReference('${q.refCardId}')" title="點擊查看左側對應教材重點">
+              第 ${q.displayNumber} 題 🔍
+            </span>
+            <span class="q-category-tag">${q.dimension}｜${q.category}</span>
+          </div>
+          <div class="q-stem">${q.stem}</div>
+          <div class="options-list" id="options-q-${q.displayNumber}">
+            ${q.options.map((opt, optIdx) => `
+              <div class="option-item" id="opt-${q.displayNumber}-${optIdx}" onclick="selectOption(${q.displayNumber}, ${optIdx})">
+                <span class="opt-letter">${letters[optIdx]}</span>
+                <span>${opt}</span>
+              </div>
+            `).join("")}
+          </div>
+          <div class="explanation-box" id="exp-q-${q.displayNumber}">
+            <div class="exp-row"><span class="exp-label">【測驗卷原題目】</span>${q.stem.replace(/\n/g, " ")}</div>
+            <div class="exp-row"><span class="exp-label">【繁體中文翻譯】</span>${q.translation.replace(/\n/g, " ")}</div>
+            <div class="exp-row"><span class="exp-label">【答案】</span><strong>(${letters[q.answerIndex]}) ${q.options[q.answerIndex]}</strong></div>
+            <div class="exp-row"><span class="exp-label">【核心考點說明】</span>${q.coreExplanation}</div>
+            <div class="exp-row"><span class="exp-label">【考點歸類】</span>${q.dimension}（${q.category}）</div>
+            <div class="exp-row"><span class="exp-label">【文法】</span><code>${q.grammarPoint}</code></div>
+            <div class="exp-distractors">
+              <div class="exp-label" style="margin-bottom:4px;">【干擾項、誘答剖析】</div>
+              ${distractorHtml}
+            </div>
+            <div class="exp-phonetics">
+              <span class="exp-label">【音標】</span>${q.phonetics}
+            </div>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    // 選擇選項
+    function selectOption(displayNum, optIdx) {
+      if (isSubmitted) return;
+      userAnswers[displayNum] = optIdx;
+
+      // 更新選項選取視覺狀態
+      for (let i = 0; i < 4; i++) {
+        const el = document.getElementById(`opt-${displayNum}-${i}`);
+        if (el) {
+          el.classList.toggle("selected", i === optIdx);
+        }
+      }
+
+      // 更新左側導覽按鈕為藍色
+      const navBtn = document.getElementById(`nav-btn-${displayNum}`);
+      if (navBtn) {
+        navBtn.classList.add("answered");
+      }
+
+      updateProgress();
+    }
+
+    // 更新作答進度
+    function updateProgress() {
+      const answeredCount = Object.keys(userAnswers).length;
+      const total = currentQuestions.length;
+      document.getElementById("progressIndicator").textContent = `已作答：${answeredCount} / ${total}`;
+      document.getElementById("answeredCountBadge").textContent = `${answeredCount} / ${total} 題`;
+    }
+
+    // 雙向聯動：點擊題號跳轉並高亮左側教材
+    function scrollToQuestion(displayNum, refCardId) {
+      const qCard = document.getElementById(`q-card-${displayNum}`);
+      if (qCard) {
+        qCard.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+      highlightReference(refCardId);
+    }
+
+    function highlightReference(refCardId) {
+      const refCard = document.getElementById(refCardId);
+      if (!refCard) return;
+      refCard.scrollIntoView({ behavior: "smooth", block: "center" });
+      refCard.classList.remove("highlight-flash");
+      void refCard.offsetWidth; // trigger reflow
+      refCard.classList.add("highlight-flash");
+    }
+
+    // 倒數計時器邏輯
+    function startTimer() {
+      clearInterval(timerInterval);
+      updateTimerDisplay();
+      timerInterval = setInterval(() => {
+        if (isSubmitted) {
+          clearInterval(timerInterval);
+          return;
+        }
+        if (remainingSeconds > 0) {
+          remainingSeconds--;
+          updateTimerDisplay();
+        } else {
+          clearInterval(timerInterval);
+          alert("測驗時間到！系統將自動為您提交試卷。");
+          submitExam(true);
+        }
+      }, 1000);
+    }
+
+    function setCustomTimer() {
+      if (isSubmitted) return;
+      let mins = parseInt(document.getElementById("customMinutes").value, 10);
+      if (isNaN(mins) || mins < 0) mins = 0;
+      if (mins > 240) mins = 240;
+      document.getElementById("customMinutes").value = mins;
+      totalSeconds = mins * 60;
+      remainingSeconds = totalSeconds;
+      startTimer();
+    }
+
+    function updateTimerDisplay() {
+      const mins = Math.floor(remainingSeconds / 60);
+      const secs = remainingSeconds % 60;
+      const display = document.getElementById("timerDisplay");
+      display.textContent = `${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
+      if (remainingSeconds <= 60 && remainingSeconds > 0) {
+        display.classList.add("urgent");
+      } else {
+        display.classList.remove("urgent");
+      }
+    }
+
+    // 提交試卷與批改
+    function submitExam(autoSubmit = false) {
+      if (isSubmitted) return;
+      const unanswered = currentQuestions.length - Object.keys(userAnswers).length;
+      if (!autoSubmit && unanswered > 0) {
+        const confirmSubmit = confirm(`您還有 ${unanswered} 題尚未作答，確定要現在交卷嗎？`);
+        if (!confirmSubmit) return;
+      }
+
+      isSubmitted = true;
+      clearInterval(timerInterval);
+      document.getElementById("submitBtn").disabled = true;
+
+      let correctCount = 0;
+      const wrongList = [];
+      const dimStats = {
+        "單字": { total: 0, correct: 0 },
+        "文法": { total: 0, correct: 0 },
+        "語意邏輯": { total: 0, correct: 0 },
+        "細節理解": { total: 0, correct: 0 }
+      };
+
+      const letters = ["A", "B", "C", "D"];
+
+      currentQuestions.forEach((q) => {
+        const userChoice = userAnswers[q.displayNumber];
+        const isCorrect = userChoice === q.answerIndex;
+
+        if (dimStats[q.dimension]) {
+          dimStats[q.dimension].total++;
+          if (isCorrect) dimStats[q.dimension].correct++;
+        }
+
+        const qCard = document.getElementById(`q-card-${q.displayNumber}`);
+        const navBtn = document.getElementById(`nav-btn-${q.displayNumber}`);
+        const expBox = document.getElementById(`exp-q-${q.displayNumber}`);
+
+        // 鎖定選項並標記對錯
+        for (let i = 0; i < 4; i++) {
+          const optEl = document.getElementById(`opt-${q.displayNumber}-${i}`);
+          optEl.classList.add("locked");
+          if (i === q.answerIndex) {
+            optEl.classList.add("opt-correct");
+          } else if (i === userChoice && !isCorrect) {
+            optEl.classList.add("opt-wrong");
+          }
+        }
+
+        if (isCorrect) {
+          correctCount++;
+          qCard.classList.add("is-correct");
+          navBtn.classList.remove("answered");
+          navBtn.classList.add("correct");
+        } else {
+          qCard.classList.add("is-wrong");
+          navBtn.classList.remove("answered");
+          navBtn.classList.add("wrong");
+          wrongList.push({
+            number: q.displayNumber,
+            stem: q.stem,
+            userAns: userChoice !== undefined ? `(${letters[userChoice]}) ${q.options[userChoice]}` : "未作答",
+            correctAns: `(${letters[q.answerIndex]}) ${q.options[q.answerIndex]}`,
+            category: `${q.dimension} - ${q.category}`,
+            explanation: q.coreExplanation,
+            translation: q.translation,
+            grammar: q.grammarPoint
+          });
+        }
+
+        expBox.classList.add("visible");
+      });
+
+      // 計算分數與耗時
+      const score = Math.round((correctCount / currentQuestions.length) * 100);
+      const elapsedSec = Math.max(1, totalSeconds - remainingSeconds);
+      const elapsedStr = `${String(Math.floor(elapsedSec / 60)).padStart(2, "0")}分${String(elapsedSec % 60).padStart(2, "0")}秒`;
+
+      document.getElementById("scoreDisplay").textContent = `${score} 分`;
+      document.getElementById("scoreSubtext").textContent = `答對 ${correctCount} / ${currentQuestions.length} 題｜耗時 ${elapsedStr}`;
+
+      renderWeaknessStats(dimStats);
+      renderRadarChart(dimStats);
+      saveRecordToLocalStorage(score, elapsedStr, dimStats, wrongList);
+
+      const panel = document.getElementById("resultPanel");
+      panel.classList.add("visible");
+      document.getElementById("rightPane").scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    // 渲染弱點診斷統計條
+    function renderWeaknessStats(dimStats) {
+      const list = document.getElementById("weaknessList");
+      list.innerHTML = "";
+      const labels = {
+        "單字": "字彙與片語運用",
+        "文法": "文法與句型結構",
+        "語意邏輯": "上下文語意邏輯",
+        "細節理解": "細節理解與辨析"
+      };
+
+      Object.entries(dimStats).forEach(([key, stat]) => {
+        const rate = stat.total > 0 ? Math.round((stat.correct / stat.total) * 100) : 0;
+        const barColor = rate >= 80 ? "var(--success)" : rate >= 60 ? "var(--warning)" : "var(--danger)";
+        const item = document.createElement("div");
+        item.className = "weakness-item";
+        item.innerHTML = `
+          <div style="display:flex; justify-content:space-between; font-size:0.86rem; font-weight:600;">
+            <span>${labels[key]}（${stat.correct}/${stat.total} 題）</span>
+            <span style="color:${barColor};">${rate}%</span>
+          </div>
+          <div class="progress-bar-bg">
+            <div class="progress-bar-fill" style="width:${rate}%; background:${barColor};"></div>
+          </div>
+        `;
+        list.appendChild(item);
+      });
+    }
+
+    // 渲染 Chart.js 雷達圖
+    function renderRadarChart(dimStats) {
+      const ctx = document.getElementById("radarChart").getContext("2d");
+      if (radarChartInstance) {
+        radarChartInstance.destroy();
+      }
+
+      const getRate = (k) => (dimStats[k].total > 0 ? Math.round((dimStats[k].correct / dimStats[k].total) * 100) : 0);
+
+      radarChartInstance = new Chart(ctx, {
+        type: "radar",
+        data: {
+          labels: ["字彙", "文法", "語意邏輯", "細節理解"],
+          datasets: [{
+            label: "得分率 (%)",
+            data: [
+              getRate("單字"),
+              getRate("文法"),
+              getRate("語意邏輯"),
+              getRate("細節理解")
+            ],
+            backgroundColor: "rgba(37, 99, 235, 0.2)",
+            borderColor: "#2563eb",
+            pointBackgroundColor: "#2563eb",
+            borderWidth: 2
+          }]
+        },
+        options: {
+          scales: {
+            r: {
+              min: 0,
+              max: 100,
+              ticks: { stepSize: 25, font: { size: 10 } },
+              pointLabels: { font: { size: 12, weight: "bold" } }
+            }
+          },
+          plugins: {
+            legend: { display: false }
+          }
+        }
+      });
+    }
+
+    // 錯題篩選器
+    function filterQuestions(mode) {
+      currentQuestions.forEach((q) => {
+        const qCard = document.getElementById(`q-card-${q.displayNumber}`);
+        if (mode === "all") {
+          qCard.style.display = "block";
+        } else if (mode === "wrong") {
+          const isCorrect = userAnswers[q.displayNumber] === q.answerIndex;
+          qCard.style.display = isCorrect ? "none" : "block";
+        }
+      });
+    }
+
+    // 重新測驗（洗牌）
+    function resetAndShuffle() {
+      if (!isSubmitted && Object.keys(userAnswers).length > 0) {
+        if (!confirm("目前作答尚未提交，確定要重新洗牌並開始新測驗嗎？")) return;
+      }
+      initQuestions(true);
+      setCustomTimer();
+      document.getElementById("rightPane").scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    // 產生錯題 Markdown 筆記文字
+    function generateWrongNotesMarkdown() {
+      const letters = ["A", "B", "C", "D"];
+      const wrongItems = currentQuestions.filter((q) => userAnswers[q.displayNumber] !== q.answerIndex);
+
+      if (wrongItems.length === 0) {
+        return "# 🎉 恭喜全對！本次測驗無任何錯題。\n測驗範圍：國中英語 單元1 第一冊(上) 第1~3課 (p.16~21)";
+      }
+
+      let md = `# 📘 國中英語會考錯題複習筆記（範圍：p.16 ~ p.21）\n`;
+      md += `- **生成時間**：${new Date().toLocaleString("zh-TW")}\n`;
+      md += `- **錯題總數**：${wrongItems.length} 題\n\n---\n\n`;
+
+      wrongItems.forEach((q) => {
+        const uIdx = userAnswers[q.displayNumber];
+        const uText = uIdx !== undefined ? `(${letters[uIdx]}) ${q.options[uIdx]}` : "未作答";
+        md += `### 第 ${q.displayNumber} 題【${q.dimension}｜${q.category}】\n`;
+        md += `- **題目**：${q.stem.replace(/\n/g, " ")}\n`;
+        md += `- **翻譯**：${q.translation.replace(/\n/g, " ")}\n`;
+        md += `- **你的作答**：❌ ${uText}\n`;
+        md += `- **正確答案**：✅ (${letters[q.answerIndex]}) ${q.options[q.answerIndex]}\n`;
+        md += `- **核心考點**：${q.coreExplanation}\n`;
+        md += `- **文法結構**：\`${q.grammarPoint}\`\n`;
+        md += `- **K.K. 音標**：${q.phonetics}\n\n---\n\n`;
+      });
+
+      return md;
+    }
+
+    // 一鍵複製 Markdown 筆記
+    function copyMarkdownNotes() {
+      const md = generateWrongNotesMarkdown();
+      navigator.clipboard.writeText(md).then(() => {
+        alert("✅ 已成功複製錯題筆記（Markdown 格式）！可直接貼至 Notion 或筆記軟體。");
+      }).catch(() => {
+        alert("複製失敗，請改用「下載錯題複習檔」功能。");
+      });
+    }
+
+    // 下載 Word (.doc) 錯題複習檔
+    function downloadWordNotes() {
+      const md = generateWrongNotesMarkdown();
+      const htmlContent = `
+        <html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
+        <head><meta charset='utf-8'><title>錯題複習筆記</title></head>
+        <body style="font-family: 'Microsoft JhengHei', sans-serif; line-height: 1.6;">
+          <pre style="white-space: pre-wrap; font-family: 'Microsoft JhengHei', sans-serif;">${md}</pre>
+        </body></html>
+      `;
+      const blob = new Blob(["\ufeff", htmlContent], { type: "application/msword" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `國中英語錯題筆記_${new Date().toISOString().slice(0, 10)}.doc`;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    // =========================================================================
+    // LocalStorage 歷次測驗紀錄與家長隱藏後台 (連點標題5下 或 Ctrl+Shift+P)
+    // =========================================================================
+    const STORAGE_KEY = "junior_english_exam_history_v1";
+
+    function saveRecordToLocalStorage(score, elapsedStr, dimStats, wrongList) {
+      const records = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+      const newRecord = {
+        timestamp: new Date().toLocaleString("zh-TW"),
+        duration: elapsedStr,
+        score: score,
+        dimSummary: `字彙:${dimStats["單字"].correct}/${dimStats["單字"].total} | 文法:${dimStats["文法"].correct}/${dimStats["文法"].total} | 語意:${dimStats["語意邏輯"].correct}/${dimStats["語意邏輯"].total} | 細節:${dimStats["細節理解"].correct}/${dimStats["細節理解"].total}`,
+        wrongNumbers: wrongList.length > 0 ? wrongList.map((w) => `第${w.number}題`).join(", ") : "無（全對）"
+      };
+      records.unshift(newRecord);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
+    }
+
+    function openParentModal() {
+      const pwd = prompt("請輸入家長管理密碼：");
+      if (pwd !== "1234") {
+        if (pwd !== null) alert("密碼錯誤！");
+        return;
+      }
+
+      const records = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+      const container = document.getElementById("historyTableContainer");
+
+      if (records.length === 0) {
+        container.innerHTML = `<p style="color:var(--text-muted); padding:16px 0;">目前尚無任何交卷紀錄。</p>`;
+      } else {
+        let html = `
+          <table class="modal-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>01. 交卷時間</th>
+                <th>02. 耗時</th>
+                <th>03. 得分</th>
+                <th>04. 各維度統計</th>
+                <th>05. 錯題清單</th>
+              </tr>
+            </thead>
+            <tbody>
+        `;
+        records.forEach((r, i) => {
+          html += `
+            <tr>
+              <td>${records.length - i}</td>
+              <td>${r.timestamp}</td>
+              <td>${r.duration}</td>
+              <td><strong>${r.score} 分</strong></td>
+              <td>${r.dimSummary}</td>
+              <td>${r.wrongNumbers}</td>
+            </tr>
+          `;
+        });
+        html += `</tbody></table>`;
+        container.innerHTML = html;
+      }
+
+      document.getElementById("historyModal").classList.add("open");
+    }
+
+    function clearHistory() {
+      if (confirm("確定要清空所有歷次測驗紀錄嗎？")) {
+        localStorage.removeItem(STORAGE_KEY);
+        openParentModal();
+      }
+    }
+
+    // =========================================================================
+    // 題庫驗證總表隱藏入口 (左上角 ❖ 連點 5 下)
+    // =========================================================================
+    function openVerifyModal() {
+      const letters = ["A", "B", "C", "D"];
+      const counts = { A: 0, B: 0, C: 0, D: 0 };
+
+      let rowsHtml = "";
+      currentQuestions.forEach((q) => {
+        const ansLetter = letters[q.answerIndex];
+        counts[ansLetter]++;
+        rowsHtml += `
+          <tr>
+            <td><strong>第 ${q.displayNumber} 題</strong></td>
+            <td>${q.dimension}（${q.category}）</td>
+            <td>${q.stem.replace(/\n/g, " ")}</td>
+            <td style="color:var(--success); font-weight:700;">(${ansLetter}) ${q.options[q.answerIndex]}</td>
+          </tr>
+        `;
+      });
+
+      document.getElementById("answerDistributionSummary").innerHTML = `
+        <strong>目前試卷答案分布統計（共 ${currentQuestions.length} 題）：</strong>
+        (A) ${counts.A} 題 ｜ (B) ${counts.B} 題 ｜ (C) ${counts.C} 題 ｜ (D) ${counts.D} 題
+      `;
+
+      document.getElementById("verifyTableContainer").innerHTML = `
+        <table class="modal-table">
+          <thead>
+            <tr>
+              <th style="width:75px;">題號</th>
+              <th style="width:180px;">考點歸類</th>
+              <th>題幹內容</th>
+              <th style="width:200px;">標準答案</th>
+            </tr>
+          </thead>
+          <tbody>${rowsHtml}</tbody>
+        </table>
+      `;
+
+      document.getElementById("verifyModal").classList.add("open");
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).classList.remove("open");
+    }
+
+    // 綁定隱藏點擊與快捷鍵
+    function setupSecretTriggers() {
+      // 1. 標題連點 5 下 -> 家長監控後台
+      let titleClicks = 0;
+      let titleTimer = null;
+      document.getElementById("examTitleTrigger").addEventListener("click", () => {
+        titleClicks++;
+        clearTimeout(titleTimer);
+        titleTimer = setTimeout(() => { titleClicks = 0; }, 1200);
+        if (titleClicks >= 5) {
+          titleClicks = 0;
+          openParentModal();
+        }
+      });
+
+      // 2. 鍵盤 Ctrl + Shift + P -> 家長監控後台
+      document.addEventListener("keydown", (e) => {
+        if (e.ctrlKey && e.shiftKey && (e.key === "P" || e.key === "p")) {
+          e.preventDefault();
+          openParentModal();
+        }
+      });
+
+      // 3. 左上角 ❖ 連點 5 下 -> 答案與題目總表
+      let verifyClicks = 0;
+      let verifyTimer = null;
+      document.getElementById("secretVerifyTrigger").addEventListener("click", () => {
+        verifyClicks++;
+        clearTimeout(verifyTimer);
+        verifyTimer = setTimeout(() => { verifyClicks = 0; }, 1200);
+        if (verifyClicks >= 5) {
+          verifyClicks = 0;
+          openVerifyModal();
+        }
+      });
+    }
+  </script>
+</body>
+</html>

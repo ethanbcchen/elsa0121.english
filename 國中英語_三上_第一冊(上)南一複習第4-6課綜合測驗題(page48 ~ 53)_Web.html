@@ -1,0 +1,2466 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>國中英語會考衝刺測驗系統（Page 48–53 單元複習）</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <style>
+    :root {
+      --bg-app: #eef2f6;
+      --bg-card: #ffffff;
+      --bg-subtle: #f8fafc;
+      --primary: #1d4ed8;
+      --primary-hover: #1e40af;
+      --primary-soft: #eff6ff;
+      --primary-border: #93c5fd;
+      --text-main: #0f172a;
+      --text-secondary: #475569;
+      --text-muted: #64748b;
+      --border-color: #cbd5e1;
+      --success: #15803d;
+      --success-bg: #dcfce7;
+      --success-border: #86efac;
+      --danger: #b91c1c;
+      --danger-bg: #fee2e2;
+      --danger-border: #fca5a5;
+      --warning: #b45309;
+      --warning-bg: #fef3c7;
+      --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.08);
+      --shadow-md: 0 4px 12px rgba(15, 23, 42, 0.1);
+      --radius-md: 10px;
+      --radius-lg: 14px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", Arial, sans-serif;
+      background-color: var(--bg-app);
+      color: var(--text-main);
+      line-height: 1.65;
+    }
+
+    /* Top Header */
+    .top-bar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+      padding: 10px 18px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .secret-diamond {
+      user-select: none;
+      cursor: pointer;
+      color: #94a3b8;
+      font-size: 13px;
+      padding: 2px 4px;
+      border-radius: 4px;
+      transition: color 0.2s ease, transform 0.2s ease;
+    }
+
+    .secret-diamond:hover {
+      color: var(--primary);
+    }
+
+    .main-title {
+      margin: 0;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-main);
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .badge-scope {
+      background: var(--primary-soft);
+      color: var(--primary);
+      border: 1px solid var(--primary-border);
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 999px;
+    }
+
+    /* Timer & Action Controls */
+    .controls-group {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .timer-box {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--bg-subtle);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 5px 10px;
+    }
+
+    .timer-display {
+      font-family: "JetBrains Mono", "Consolas", monospace;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--primary);
+      min-width: 74px;
+      text-align: center;
+    }
+
+    .timer-display.danger-time {
+      color: var(--danger);
+      animation: pulseText 1s infinite;
+    }
+
+    @keyframes pulseText {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.55; }
+    }
+
+    .timer-input {
+      width: 64px;
+      padding: 3px 6px;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      font-size: 0.85rem;
+      text-align: center;
+    }
+
+    .btn {
+      border: none;
+      border-radius: var(--radius-md);
+      padding: 8px 14px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #ffffff;
+    }
+
+    .btn-primary:hover:not(:disabled) {
+      background: var(--primary-hover);
+    }
+
+    .btn-secondary {
+      background: #e2e8f0;
+      color: var(--text-main);
+    }
+
+    .btn-secondary:hover:not(:disabled) {
+      background: #cbd5e1;
+    }
+
+    .btn-outline {
+      background: #ffffff;
+      color: var(--primary);
+      border: 1px solid var(--primary);
+    }
+
+    .btn-outline:hover:not(:disabled) {
+      background: var(--primary-soft);
+    }
+
+    .btn-outline.active {
+      background: var(--primary);
+      color: #ffffff;
+    }
+
+    .btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    /* Summary & Radar Panel */
+    .summary-section {
+      max-width: 1600px;
+      margin: 14px auto 0;
+      padding: 0 16px;
+      display: none;
+    }
+
+    .summary-section.visible {
+      display: block;
+    }
+
+    .summary-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      padding: 20px;
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 20px;
+      align-items: center;
+    }
+
+    @media (max-width: 900px) {
+      .summary-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .score-banner {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 14px;
+      margin-bottom: 12px;
+    }
+
+    .score-num {
+      font-size: 2.4rem;
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    .score-meta {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+    }
+
+    .dimension-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      font-size: 0.9rem;
+    }
+
+    .dimension-table th,
+    .dimension-table td {
+      border: 1px solid var(--border-color);
+      padding: 8px 10px;
+      text-align: left;
+    }
+
+    .dimension-table th {
+      background: var(--bg-subtle);
+      font-weight: 700;
+    }
+
+    .chart-box {
+      max-width: 360px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .post-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+      padding-top: 14px;
+      border-top: 1px dashed var(--border-color);
+    }
+
+    /* Dual-Pane Workspace */
+    .workspace {
+      max-width: 1600px;
+      margin: 14px auto 32px;
+      padding: 0 16px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      align-items: start;
+    }
+
+    @media (max-width: 960px) {
+      .workspace {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .pane {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+      padding: 18px;
+      max-height: calc(100vh - 105px);
+      overflow-y: auto;
+    }
+
+    @media (max-width: 960px) {
+      .pane {
+        max-height: none;
+        overflow-y: visible;
+      }
+    }
+
+    .pane-header {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-main);
+      border-bottom: 2px solid var(--primary-soft);
+      padding-bottom: 8px;
+      margin-bottom: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* Question Navigator */
+    .nav-grid {
+      display: grid;
+      grid-template-columns: repeat(10, 1fr);
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+
+    @media (max-width: 600px) {
+      .nav-grid {
+        grid-template-columns: repeat(5, 1fr);
+      }
+    }
+
+    .nav-btn {
+      padding: 6px 0;
+      border: 1px solid var(--border-color);
+      background: var(--bg-subtle);
+      color: var(--text-main);
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .nav-btn.answered {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+    }
+
+    .nav-btn.correct-q {
+      background: var(--success);
+      color: #ffffff;
+      border-color: var(--success);
+    }
+
+    .nav-btn.wrong-q {
+      background: var(--danger);
+      color: #ffffff;
+      border-color: var(--danger);
+    }
+
+    /* Left Pane Reference / Passage Cards */
+    .ref-card {
+      background: var(--bg-subtle);
+      border: 1px solid var(--border-color);
+      border-left: 4px solid var(--primary);
+      border-radius: var(--radius-md);
+      padding: 14px 16px;
+      margin-bottom: 14px;
+      transition: box-shadow 0.25s ease, border-color 0.25s ease;
+    }
+
+    .ref-card.highlight-flash {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.28);
+    }
+
+    .ref-card-title {
+      font-weight: 700;
+      color: var(--primary);
+      font-size: 0.95rem;
+      margin-bottom: 6px;
+    }
+
+    .ref-passage-en {
+      font-size: 0.96rem;
+      color: var(--text-main);
+      margin-bottom: 8px;
+    }
+
+    .ref-passage-zh {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      border-top: 1px dashed #cbd5e1;
+      padding-top: 6px;
+    }
+
+    /* Question Cards on Right Pane */
+    .q-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      margin-bottom: 16px;
+      transition: border-color 0.2s ease, background-color 0.2s ease;
+    }
+
+    .q-card.is-correct {
+      border-color: var(--success-border);
+      background-color: #f6fef9;
+    }
+
+    .q-card.is-wrong {
+      border-color: var(--danger-border);
+      background-color: #fff8f8;
+    }
+
+    .q-top-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .q-badge {
+      background: var(--primary-soft);
+      color: var(--primary);
+      border: 1px solid var(--primary-border);
+      font-weight: 700;
+      font-size: 0.85rem;
+      padding: 2px 10px;
+      border-radius: 999px;
+      cursor: pointer;
+    }
+
+    .q-badge:hover {
+      background: var(--primary);
+      color: #ffffff;
+    }
+
+    .q-tag {
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 6px;
+      background: #f1f5f9;
+      color: var(--text-secondary);
+    }
+
+    .q-stem {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: var(--text-main);
+    }
+
+    .options-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .option-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 12px;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      cursor: pointer;
+      background: #ffffff;
+      transition: all 0.15s ease;
+      font-size: 0.94rem;
+    }
+
+    .option-item:hover {
+      border-color: var(--primary);
+      background: var(--primary-soft);
+    }
+
+    .option-item.selected {
+      border-color: var(--primary);
+      background: var(--primary-soft);
+      font-weight: 600;
+    }
+
+    .option-item.correct-answer {
+      border-color: var(--success);
+      background: var(--success-bg);
+      color: var(--success);
+      font-weight: 700;
+    }
+
+    .option-item.wrong-choice {
+      border-color: var(--danger);
+      background: var(--danger-bg);
+      color: var(--danger);
+      font-weight: 700;
+    }
+
+    .option-item.disabled {
+      cursor: default;
+    }
+
+    /* Detailed Explanation Block */
+    .explanation-box {
+      display: none;
+      margin-top: 14px;
+      padding: 14px;
+      border-radius: 8px;
+      background: var(--bg-subtle);
+      border: 1px solid var(--border-color);
+      font-size: 0.9rem;
+    }
+
+    .explanation-box.show {
+      display: block;
+    }
+
+    .exp-line {
+      margin-bottom: 6px;
+    }
+
+    .exp-label {
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .exp-sublist {
+      margin: 4px 0 6px 18px;
+      padding: 0;
+    }
+
+    /* Modals */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.55);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 300;
+      padding: 16px;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .modal-panel {
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      max-width: 820px;
+      width: 100%;
+      max-height: 85vh;
+      overflow-y: auto;
+      padding: 20px;
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--border-color);
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 10px;
+      margin-bottom: 14px;
+    }
+
+    .modal-title {
+      margin: 0;
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+
+    .history-table,
+    .key-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+    }
+
+    .history-table th,
+    .history-table td,
+    .key-table th,
+    .key-table td {
+      border: 1px solid var(--border-color);
+      padding: 8px;
+      text-align: left;
+    }
+
+    .history-table th,
+    .key-table th {
+      background: var(--bg-subtle);
+    }
+
+    .toast-notice {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #0f172a;
+      color: #ffffff;
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      z-index: 500;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.25s ease;
+      pointer-events: none;
+    }
+
+    .toast-notice.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+  <!-- Top Bar -->
+  <header class="top-bar">
+    <div class="brand-group">
+      <span id="secretDiamond" class="secret-diamond" title="題庫檢視">❖</span>
+      <h1 id="mainTitle" class="main-title">國中英語會考衝刺測驗系統</h1>
+      <span class="badge-scope">國三｜Page 48–53</span>
+    </div>
+
+    <div class="controls-group">
+      <div class="timer-box">
+        <span>⏱ 倒數</span>
+        <span id="timerDisplay" class="timer-display">60:00</span>
+        <input id="timerMinutesInput" class="timer-input" type="number" min="0" max="240" value="60" title="設定分鐘數 (0~240)" />
+        <button id="applyTimerBtn" class="btn btn-secondary" type="button" style="padding: 4px 8px; font-size: 0.8rem;">設定</button>
+        <button id="toggleTimerBtn" class="btn btn-secondary" type="button" style="padding: 4px 8px; font-size: 0.8rem;">暫停</button>
+      </div>
+
+      <button id="submitExamBtn" class="btn btn-primary" type="button">提交試卷</button>
+      <button id="reshuffleExamBtn" class="btn btn-secondary" type="button">重新測驗(洗牌)</button>
+    </div>
+  </header>
+
+  <!-- Post-Submission Summary & Radar Panel -->
+  <section id="summarySection" class="summary-section" aria-live="polite">
+    <div class="summary-card">
+      <div class="summary-grid">
+        <div>
+          <div class="score-banner">
+            <span id="finalScoreText" class="score-num">0 分</span>
+            <span id="finalStatsText" class="score-meta">答對 0 / 0 題｜耗時 00:00</span>
+          </div>
+          <div style="font-weight: 700; margin-bottom: 6px;">弱點診斷統計（依考點歸類）</div>
+          <table class="dimension-table">
+            <thead>
+              <tr>
+                <th>考點維度</th>
+                <th>答對 / 題數</th>
+                <th>正確率</th>
+              </tr>
+            </thead>
+            <tbody id="dimensionStatsBody"></tbody>
+          </table>
+        </div>
+        <div class="chart-box">
+          <canvas id="radarChartCanvas"></canvas>
+        </div>
+      </div>
+
+      <div class="post-actions">
+        <button id="filterAllBtn" class="btn btn-outline active" type="button">顯示全部</button>
+        <button id="filterWrongBtn" class="btn btn-outline" type="button">只看錯題</button>
+        <button id="copyWrongMdBtn" class="btn btn-secondary" type="button">一鍵複製錯題筆記（Markdown 格式）</button>
+        <button id="downloadWordBtn" class="btn btn-secondary" type="button">下載錯題報告（Word .doc）</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Dual-Pane Main Content -->
+  <main class="workspace">
+    <!-- Left Pane: Navigator & Reference Cards / Passages -->
+    <section id="leftPane" class="pane">
+      <div class="pane-header">
+        <span>題號快速導覽與文本對照區</span>
+        <span id="progressIndicator" style="font-size: 0.85rem; color: var(--text-secondary);">已作答 0 題</span>
+      </div>
+
+      <div id="questionNavGrid" class="nav-grid"></div>
+      <div id="referenceCardsContainer"></div>
+    </section>
+
+    <!-- Right Pane: Questions & Explanations -->
+    <section id="rightPane" class="pane">
+      <div class="pane-header">
+        <span>測驗作答區</span>
+        <span style="font-size: 0.85rem; color: var(--text-secondary);">點擊題號徽章可聯動左側文本</span>
+      </div>
+      <div id="questionsContainer"></div>
+    </section>
+  </main>
+
+  <!-- Parent History Modal -->
+  <div id="historyModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="historyModalTitle">
+    <div class="modal-panel">
+      <div class="modal-header">
+        <h2 id="historyModalTitle" class="modal-title">歷次測驗歷史紀錄表（家長檢視）</h2>
+        <button id="closeHistoryBtn" class="btn btn-secondary" type="button">關閉</button>
+      </div>
+      <div id="historyContentArea"></div>
+    </div>
+  </div>
+
+  <!-- Answer & Question Master Key Modal -->
+  <div id="masterKeyModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="masterKeyModalTitle">
+    <div class="modal-panel">
+      <div class="modal-header">
+        <h2 id="masterKeyModalTitle" class="modal-title">答案與題目總表（題庫驗證）</h2>
+        <button id="closeMasterKeyBtn" class="btn btn-secondary" type="button">關閉</button>
+      </div>
+      <div id="masterKeyContentArea"></div>
+    </div>
+  </div>
+
+  <div id="toastNotice" class="toast-notice"></div>
+
+  <script>
+    // =========================================================================
+    // 題庫資料區（第 1～15 題；第 16～50 題請接續放入陣列）
+    // =========================================================================
+    const QUESTION_BANK = [
+      {
+        id: 1,
+        section: "一、 核心詞彙與片語運用",
+        level: "基礎記憶題",
+        dimension: "字彙",
+        category: "單字",
+        refCardId: "ref-p48-50-vocab",
+        stem: "There are many little ______ flying above the trash can. Please take it out right now so the room stays clean.",
+        options: ["fans", "rats", "bugs", "planes"],
+        answer: "bugs",
+        translation: "垃圾桶上方有許多小蟲在飛。請立刻把垃圾拿出去，好讓房間保持乾淨。",
+        corePoint: "根據句意「垃圾桶上方飛著（flying above）」與「小（little）」，最符合情境的單字是 bugs（小蟲／昆蟲）。",
+        grammarAnalysis: "There are + 複數名詞 (many little bugs) + 現在分詞片語 (flying above the trash can) 作後位修飾，說明飛翔的動作。",
+        distractorAnalysis: {
+          fans: "電風扇或粉絲，不會成群在垃圾桶上方飛舞，不符合語意。",
+          rats: "老鼠通常在地面活動，較少以「flying above（在上方飛）」描述。",
+          planes: "飛機體積龐大且在天空飛行，與室內垃圾桶情境完全不合。"
+        },
+        phonetics: "原句重點：There are many little bugs flying above the trash can. /ðɛr ɑr ˈmɛni ˈlɪtəl bʌɡz ˈflaɪɪŋ əˈbʌv ðə træʃ kæn/；連讀提示：many little 語速快時常見輕彈音 [ɾ]，flying above 可自然連讀。"
+      },
+      {
+        id: 2,
+        section: "一、 核心詞彙與片語運用",
+        level: "基礎記憶題",
+        dimension: "字彙",
+        category: "單字",
+        refCardId: "ref-p48-50-vocab",
+        stem: "There are lots of famous art ______ in that city museum. Let's visit it this afternoon.",
+        options: ["works", "minutes", "holidays", "animals"],
+        answer: "works",
+        translation: "那座市立美術館裡有許多著名的藝術作品。我們今天下午去參觀吧。",
+        corePoint: "art works（或 artworks）在此表示「藝術作品」，搭配前方的 famous 與 museum 語意最精確。",
+        grammarAnalysis: "There are lots of + 複數名詞 (famous art works) 表示存在許多可數事物；work 作「作品」解時為可數名詞。",
+        distractorAnalysis: {
+          minutes: "分鐘，與「著名的藝術……」語意無法搭配。",
+          holidays: "假期，不符合美術館展品之語境。",
+          animals: "動物，美術館展示的是藝術品而非動物園動物。"
+        },
+        phonetics: "原句重點：There are lots of famous art works in that city museum. /ðɛr ɑr lɑts əv ˈfeɪməs ɑrt wɜrks ɪn ðæt ˈsɪti mjuˈziəm/；art works 連讀時尾音與字首母音銜接自然。"
+      },
+      {
+        id: 3,
+        section: "一、 核心詞彙與片語運用",
+        level: "基礎記憶題",
+        dimension: "字彙",
+        category: "單字",
+        refCardId: "ref-p48-50-vocab",
+        stem: "______ is the twelfth and last month of the year, right after November.",
+        options: ["October", "January", "December", "September"],
+        answer: "December",
+        translation: "十二月是一年當中的第十二個月也是最後一個月，緊接在十一月之後。",
+        corePoint: "直接測試月份字彙與順序常識：一年的第 12 個月、在 November 之後的是 December（十二月）。",
+        grammarAnalysis: "December + be動詞 (is) + 最高級／序數名詞片語 (the twelfth and last month of the year)，作主詞補語。",
+        distractorAnalysis: {
+          October: "十月，是一年的第十個月，在 November 之前。",
+          January: "一月，是一年的第一個月，非最後一個月。",
+          September: "九月，是一年的第九個月，與題意不符。"
+        },
+        phonetics: "原句重點：December is the twelfth and last month of the year. /dɪˈsɛmbər ɪz ðə twɛlfθ ænd læst mʌnθ əv ðə jɪr/；December 重音在第二音節 -sem-。"
+      },
+      {
+        id: 4,
+        section: "一、 核心詞彙與片語運用",
+        level: "基礎記憶題",
+        dimension: "字彙",
+        category: "單字",
+        refCardId: "ref-p48-50-vocab",
+        stem: "Classes in Taiwan usually begin in ______, right after the summer vacation in August.",
+        options: ["October", "September", "March", "July"],
+        answer: "September",
+        translation: "台灣的學校課程通常在九月開始，就在八月暑假結束之後。",
+        corePoint: "依據台灣學制與月份順序常識，八月（August）暑假過後開學的月份是 September（九月）。",
+        grammarAnalysis: "S (Classes) + Adv. (usually) + V (begin) + 介系詞片語 (in September)，表示習慣性事實用現在簡單式。",
+        distractorAnalysis: {
+          October: "十月，非一般學期開學月份。",
+          March: "三月，在春季而非八月暑假後。",
+          July: "七月，正值暑假期間，非開學月。"
+        },
+        phonetics: "原句重點：Classes in Taiwan usually begin in September. /ˈklæsɪz ɪn ˌtaɪˈwɑn ˈjuʒuəli bɪˈɡɪn ɪn sɛpˈtɛmbər/；usually 常見發音為 /ˈjuʒuəli/。"
+      },
+      {
+        id: 5,
+        section: "一、 核心詞彙與片語運用",
+        level: "基礎記憶題",
+        dimension: "字彙",
+        category: "單字",
+        refCardId: "ref-p48-50-vocab",
+        stem: "Ray enjoys making short ______ with his classmates and sharing them online.",
+        options: ["videos", "days", "colors", "dates"],
+        answer: "videos",
+        translation: "Ray 喜歡和同學一起拍短片，並把影片分享到網路上。",
+        corePoint: "根據動詞片語 making short ______ 與後文 sharing them online（在線上分享它們），最合理的是 videos（影片）。",
+        grammarAnalysis: "enjoy + V-ing (making short videos) + and + V-ing (sharing them online)，連接兩個平行動名詞片語。",
+        distractorAnalysis: {
+          days: "天／日子，無法「製作短天數」並分享。",
+          colors: "顏色，與「和同學一起拍……」語境不符。",
+          dates: "日期／約會，不符合網路分享影片的語意。"
+        },
+        phonetics: "原句重點：Ray enjoys making short videos and sharing them online. /reɪ ɪnˈdʒɔɪz ˈmeɪkɪŋ ʃɔrt ˈvɪdioʊz ænd ˈʃɛrɪŋ ðɛm ˌɑnˈlaɪn/；videos 開頭為短母音 /ɪ/。"
+      },
+      {
+        id: 6,
+        section: "一、 核心詞彙與片語運用",
+        level: "基礎記憶題",
+        dimension: "字彙",
+        category: "單字",
+        refCardId: "ref-p48-50-vocab",
+        stem: "Daniel is the ______ child in his family because he has one older brother and two younger sisters.",
+        options: ["first", "second", "third", "fourth"],
+        answer: "second",
+        translation: "Daniel 在家裡是排行第二的孩子，因為他有一個哥哥和兩個妹妹。",
+        corePoint: "家中有「一位哥哥（older brother）」在前，因此 Daniel 排行「第二（second）」。",
+        grammarAnalysis: "S (Daniel) + be (is) + 定冠詞與序數 (the second child) + 原因子句 (because he has...)。",
+        distractorAnalysis: {
+          first: "第一，若已有哥哥在先，Daniel 並非老大。",
+          third: "第三，題目只提到一位哥哥，並無兩位兄長。",
+          fourth: "第四，人數與家庭排行推算不符。"
+        },
+        phonetics: "原句重點：Daniel is the second child in his family. /ˈdænjəl ɪz ðə ˈsɛkənd tʃaɪld ɪn hɪz ˈfæməli/；second 重音在第一音節。"
+      },
+      {
+        id: 7,
+        section: "一、 核心詞彙與片語運用",
+        level: "基礎記憶題",
+        dimension: "字彙",
+        category: "片語",
+        refCardId: "ref-p48-50-vocab",
+        stem: "I am really excited to ______ with Sarah this Sunday afternoon at the coffee shop.",
+        options: ["go on a date", "take away", "line up", "give up"],
+        answer: "go on a date",
+        translation: "這個星期日下午能在咖啡店和 Sarah 約會，我真的感到非常興奮。",
+        corePoint: "表示「與某人約會」的道地片語為 go on a date with + 人，符合「興奮」與「星期日下午在咖啡店」的語境。",
+        grammarAnalysis: "be excited to + 原形動詞 (go on a date with Sarah)，表示對即將進行的活動感到雀躍。",
+        distractorAnalysis: {
+          "take away": "外帶／拿走，缺少受詞且與「和 Sarah 約會」語意不順。",
+          "line up": "排隊，未表達與某人相約出遊之意。",
+          "give up": "放棄，與「excited（感到興奮）」的正面情緒衝突。"
+        },
+        phonetics: "原句重點：I am really excited to go on a date with Sarah. /aɪ æm ˈrɪli ɪkˈsaɪtɪd tu ɡoʊ ɑn ə deɪt wɪð ˈsɛrə/；go on a date 可自然連讀。"
+      },
+      {
+        id: 8,
+        section: "一、 核心詞彙與片語運用",
+        level: "基礎記憶題",
+        dimension: "字彙",
+        category: "單字",
+        refCardId: "ref-p50-51-grain",
+        stem: "The new neighborhood store sells ______ goods, so many students like to shop there with their allowance.",
+        options: ["inexpensive", "expensive", "heavy", "noisy"],
+        answer: "inexpensive",
+        translation: "這家新的社區商店販售價格實惠的商品，因此許多學生喜歡用零用錢在那裡購物。",
+        corePoint: "由後果「學生喜歡用零用錢在那裡購物」可推知商品價格親民，inexpensive 意為「不貴的／價格實惠的」。",
+        grammarAnalysis: "V (sells) + 形容詞修飾名詞 (inexpensive goods)，so 引導結果子句。",
+        distractorAnalysis: {
+          expensive: "昂貴的，與學生用零用錢常去買的邏輯相反。",
+          heavy: "重的，指重量而非價格。",
+          noisy: "吵鬧的，指聲音而非商品特性。"
+        },
+        phonetics: "原句重點：The store sells inexpensive goods. /ðə stɔr sɛlz ˌɪnɪkˈspɛnsɪv ɡʊdz/；inexpensive 重音在 -spen-。"
+      },
+      {
+        id: 9,
+        section: "一、 核心詞彙與片語運用",
+        level: "基礎記憶題",
+        dimension: "字彙",
+        category: "單字",
+        refCardId: "ref-p50-51-grain",
+        stem: "Before going to bed, Cathy always washes her hair with mild ______.",
+        options: ["shampoo", "ticket", "envelope", "bridge"],
+        answer: "shampoo",
+        translation: "睡覺前，Cathy 總是會用溫和的洗髮精洗頭。",
+        corePoint: "依據動作「洗頭（washes her hair）」與形容詞「溫和的（mild）」，正確名詞為 shampoo（洗髮精）。",
+        grammarAnalysis: "介系詞片語作時間狀語 (Before going to bed) + 主詞 (Cathy) + 頻率副詞 (always) + V (washes) + O (her hair) + 方式狀語 (with mild shampoo)。",
+        distractorAnalysis: {
+          ticket: "票／罰單，與洗頭無關。",
+          envelope: "信封，文具用品，非洗髮用品。",
+          bridge: "橋樑，建築設施，與語意不合。"
+        },
+        phonetics: "原句重點：Cathy washes her hair with mild shampoo. /ˈkæθi ˈwɑʃɪz hɜr hɛr wɪð maɪld ʃæmˈpu/；shampoo 重音在第二音節 -poo-。"
+      },
+      {
+        id: 10,
+        section: "一、 核心詞彙與片語運用",
+        level: "基礎記憶題",
+        dimension: "字彙",
+        category: "單字",
+        refCardId: "ref-p50-51-grain",
+        stem: "Please stop by the ______ on your way home and pick up some cold medicine for Grandpa.",
+        options: ["drug store", "library", "theater", "station"],
+        answer: "drug store",
+        translation: "回家的路上請順道去藥局，幫爺爺買一些感冒藥。",
+        corePoint: "要購買「感冒藥（cold medicine）」，應前往 drug store（藥局／藥妝店）。",
+        grammarAnalysis: "祈使句以原形動詞開頭 (Please stop by... and pick up...)，連接兩個並列動作。",
+        distractorAnalysis: {
+          library: "圖書館，借閱書籍處，不販售藥品。",
+          theater: "劇院／電影院，觀賞表演或電影場所。",
+          station: "車站，搭乘大眾運輸工具處。"
+        },
+        phonetics: "原句重點：Stop by the drug store and pick up some medicine. /stɑp baɪ ðə drʌɡ stɔr ænd pɪk ʌp sʌm ˈmɛdəsɪn/；pick up 可連讀為 /ˈpɪk ʌp/。"
+      },
+      {
+        id: 11,
+        section: "一、 核心詞彙與片語運用",
+        level: "基礎記憶題",
+        dimension: "字彙",
+        category: "單字",
+        refCardId: "ref-p51-map",
+        stem: "Ethan needs to buy a notebook and two pens, so he is walking to the ______.",
+        options: ["stationery store", "hospital", "bakery", "bank"],
+        answer: "stationery store",
+        translation: "Ethan 需要買一本筆記本和兩支筆，所以他正走向文具店。",
+        corePoint: "筆記本（notebook）與筆（pens）屬於文具類，購買地點為 stationery store（文具店）。",
+        grammarAnalysis: "不定詞表目的 (To buy a notebook and two pens) + 連接詞 (so) + 現在進行式 (he is walking to...)。",
+        distractorAnalysis: {
+          hospital: "醫院，就醫場所，不賣筆記本與筆。",
+          bakery: "麵包店，販售烘焙糕點。",
+          bank: "銀行，辦理金融存提款業務。"
+        },
+        phonetics: "原句重點：He is walking to the stationery store. /hi ɪz ˈwɔkɪŋ tu ðə ˈsteɪʃəˌnɛri stɔr/；stationery（文具）拼法為 -ery，注意與 stationary（靜止的）區別。"
+      },
+      {
+        id: 12,
+        section: "一、 核心詞彙與片語運用",
+        level: "基礎記憶題",
+        dimension: "字彙",
+        category: "單字",
+        refCardId: "ref-p52-53-festivals",
+        stem: "In spring, cherry blossoms ______ on the mountains, attracting many visitors to take photos.",
+        options: ["bloom", "melt", "freeze", "sink"],
+        answer: "bloom",
+        translation: "春天時，山上的櫻花盛開，吸引許多遊客前來拍照。",
+        corePoint: "主詞為花朵「櫻花（cherry blossoms）」，在春天綻放的動詞為 bloom（開花／盛開）。",
+        grammarAnalysis: "S (cherry blossoms) + V (bloom) + 地點副詞片語 (on the mountains) + 現在分詞片語表伴隨結果 (attracting many visitors...)。",
+        distractorAnalysis: {
+          melt: "融化，多用於冰、雪或固體受熱。",
+          freeze: "結冰／凍結，與春天花開情境相反。",
+          sink: "下沉，多指船隻或物體沉入水中。"
+        },
+        phonetics: "原句重點：Cherry blossoms bloom on the mountains. /ˈtʃɛri ˈblɑsəmz blum ɑn ðə ˈmaʊntənz/；bloom 為長母音 /u/。"
+      },
+      {
+        id: 13,
+        section: "一、 核心詞彙與片語運用",
+        level: "基礎記憶題",
+        dimension: "字彙",
+        category: "單字",
+        refCardId: "ref-p52-53-festivals",
+        stem: "Many local farms ______ guided night tours so visitors can watch fireflies glow in the dark.",
+        options: ["offer", "hide", "borrow", "lose"],
+        answer: "offer",
+        translation: "許多當地農場提供導覽夜間行程，讓遊客能在黑暗中觀賞螢火蟲發光。",
+        corePoint: "農場對遊客「提供」夜間導覽行程，動詞選用 offer（提供）。",
+        grammarAnalysis: "S (Many local farms) + V (offer) + O (guided night tours) + 目的子句 (so visitors can watch...)。",
+        distractorAnalysis: {
+          hide: "隱藏，語意不符提供行程之情境。",
+          borrow: "借入，農場是提供活動而非向人借行程。",
+          lose: "失去／遺失，與行程安排無關。"
+        },
+        phonetics: "原句重點：Many farms offer guided night tours. /ˈmɛni fɑrmz ˈɔfər ˈɡaɪdɪd naɪt tʊrz/；offer 重音在第一音節。"
+      },
+      {
+        id: 14,
+        section: "一、 核心詞彙與片語運用",
+        level: "基礎記憶題",
+        dimension: "字彙",
+        category: "單字",
+        refCardId: "ref-p52-53-festivals",
+        stem: "The music festival ______ live band performances and light shows by the harbor every autumn.",
+        options: ["features", "forgets", "delays", "breaks"],
+        answer: "features",
+        translation: "這場音樂節每年秋天都在港邊以現場樂團演出與燈光秀為特色。",
+        corePoint: "活動以特定節目「為特色／主打」，動詞用 features（以……為特色）。",
+        grammarAnalysis: "單數主詞 (The music festival) + 單數動詞 (features) + 受詞 (live band performances and light shows) + 時間副詞 (every autumn)。",
+        distractorAnalysis: {
+          forgets: "忘記，活動不會「忘記」節目內容。",
+          delays: "延誤／延遲，every autumn 表常態特色，非延誤。",
+          breaks: "打破／損壞，與演出與燈光秀搭配不當。"
+        },
+        phonetics: "原句重點：The festival features live performances. /ðə ˈfɛstəvəl ˈfitʃərz laɪv pərˈfɔrmənsɪz/；features 重音在第一音節。"
+      },
+      {
+        id: 15,
+        section: "一、 核心詞彙與片語運用",
+        level: "基礎記憶題",
+        dimension: "字彙",
+        category: "單字",
+        refCardId: "ref-p53-bears",
+        stem: "Formosan Black Bears and koalas look ______ at first glance, but they have many differences.",
+        options: ["similar", "hungry", "afraid", "empty"],
+        answer: "similar",
+        translation: "台灣黑熊和無尾熊乍看之下長得很像，但牠們其實有許多不同之處。",
+        corePoint: "由後句轉折「但牠們有許多不同（but they have many differences）」可知前句指「看起來相似」，選用 similar（相似的）。",
+        grammarAnalysis: "連綴動詞 (look) + 形容詞作主詞補語 (similar) + 轉折連接詞 (but) + 對比子句。",
+        distractorAnalysis: {
+          hungry: "飢餓的，與後文「有許多不同」缺乏邏輯對比。",
+          afraid: "害怕的，未表達外貌相似之意。",
+          empty: "空的，形容容器或空間，不適用比較動物外貌。"
+        },
+        phonetics: "原句重點：They look similar, but they are different. /ðeɪ lʊk ˈsɪmələr bʌt ðeɪ ɑr ˈdɪfərənt/；similar 重音在第一音節。"
+      },
+      {
+        id: 16,
+        section: "二、 文法與句型結構",
+        level: "中階應用題",
+        dimension: "文法",
+        category: "文法",
+        refCardId: "ref-p48-50-vocab",
+        stem: "There ______ more than twenty student clubs in our school this semester. Which one would you like to join?",
+        options: ["are", "is", "has", "have"],
+        answer: "are",
+        translation: "這學期我們學校有超過二十個學生社團。你想加入哪一個？",
+        corePoint: "There be 句型表示「某處有某物」，動詞單複數須與後方真正主詞一致；more than twenty student clubs 為複數名詞，故用 are。",
+        grammarAnalysis: "There + be (are) + 複數主詞 (more than twenty student clubs) + 地點副詞片語 (in our school)。",
+        distractorAnalysis: {
+          is: "單數 be 動詞，但後方主詞 clubs 為複數。",
+          has: "中式英文常見錯誤，誤將「有」直譯為 have/has；There be 句型不可與 have/has 混用。",
+          have: "同上，There be 句型中應使用 be 動詞而非一般動詞 have。"
+        },
+        phonetics: "原句重點：There are more than twenty student clubs in our school. /ðɛr ɑr mɔr ðæn ˈtwɛnti ˈstudənt klʌbz ɪn aʊər skul/；There are 連讀時常見 /ðɛr ɑr/。"
+      },
+      {
+        id: 17,
+        section: "二、 文法與句型結構",
+        level: "中階應用題",
+        dimension: "文法",
+        category: "文法",
+        refCardId: "ref-p48-50-vocab",
+        stem: "There ______ a big outdoor concert in the city square tomorrow evening, so the square is already full of people setting up the stage.",
+        options: ["will be", "will have", "is", "has"],
+        answer: "will be",
+        translation: "明天晚上在市民廣場將會有一場大型戶外演唱會，所以廣場上現在已經擠滿了搭舞台的人。",
+        corePoint: "時間副詞 tomorrow evening 表示未來時間，搭配「某處將有某活動」的 There be 句型，未來式為 There will be。",
+        grammarAnalysis: "There + 助動詞 (will) + 原形動詞 (be) + 單數名詞片語 (a big outdoor concert) + 時間副詞 (tomorrow evening)。",
+        distractorAnalysis: {
+          "will have": "受中文「將會有」直譯影響，誤用 have；There be 句型未來式須為 will be。",
+          is: "現在簡單式，與明確未來時間 tomorrow evening 不符。",
+          has: "不可用於 There be 句型，且時態亦與未來時間不符。"
+        },
+        phonetics: "原句重點：There will be a big concert in the square tomorrow evening. /ðɛr wɪl bi ə bɪɡ ˈkɑnsərt ɪn ðə skwɛr təˈmɑroʊ ˈivnɪŋ/；will be 銜接清晰。"
+      },
+      {
+        id: 18,
+        section: "二、 文法與句型結構",
+        level: "中階應用題",
+        dimension: "文法",
+        category: "文法",
+        refCardId: "ref-p48-50-vocab",
+        stem: "Listen! The baby ______ loudly in the bedroom. Let's go in and check on him.",
+        options: ["is crying", "cries", "cried", "will cry"],
+        answer: "is crying",
+        translation: "聽！寶寶正在臥室裡大聲哭泣。我們進去看看他吧。",
+        corePoint: "句首出現提醒注意的動詞 Listen!，暗示動作「此刻正在進行」，故須使用現在進行式 is crying。",
+        grammarAnalysis: "祈使提醒動詞 (Listen!) + 主詞 (The baby) + 現在進行式 (is + V-ing: is crying) + 地點副詞片語 (in the bedroom)。",
+        distractorAnalysis: {
+          cries: "現在簡單式，多表習慣或事實，不符合 Listen! 所提示的當下進行動作。",
+          cried: "過去簡單式，與當下正在發生的情境不符。",
+          "will cry": "未來簡單式，表示尚未發生的動作，與「聽！正在哭」矛盾。"
+        },
+        phonetics: "原句重點：Listen! The baby is crying in the bedroom. /ˈlɪsən ðə ˈbeɪbi ɪz ˈkraɪɪŋ ɪn ðə ˈbɛdrum/；Listen 中的 t 不發音。"
+      },
+      {
+        id: 19,
+        section: "二、 文法與句型結構",
+        level: "中階應用題",
+        dimension: "文法",
+        category: "文法",
+        refCardId: "ref-p48-50-vocab",
+        stem: "Look! Gill and Kevin ______ a picnic under the trees over there. Let's walk over and join them.",
+        options: ["are having", "have", "are have", "had"],
+        answer: "are having",
+        translation: "看！Gill 和 Kevin 正在那邊的樹下野餐。我們走過去加入他們吧。",
+        corePoint: "句首出現 Look! 提示動作正在眼前進行，且主詞 Gill and Kevin 為複數，現在進行式應為 are having。",
+        grammarAnalysis: "提醒動詞 (Look!) + 複數主詞 (Gill and Kevin) + 現在進行式 (are having) + 受詞 (a picnic)。",
+        distractorAnalysis: {
+          have: "現在簡單式，無法體現 Look! 所強調的「此時此刻正在野餐」。",
+          "are have": "文法結構錯誤，be 動詞後方接進行式須將動詞改為 V-ing（having），不可接原形。",
+          had: "過去式，與現在眼前看到的畫面不符。"
+        },
+        phonetics: "原句重點：Look! Gill and Kevin are having a picnic over there. /lʊk ɡɪl ænd ˈkɛvɪn ɑr ˈhævɪŋ ə ˈpɪknɪk ˈoʊvər ðɛr/；having a 可連讀為 /ˈhævɪŋ ə/。"
+      },
+      {
+        id: 20,
+        section: "二、 文法與句型結構",
+        level: "中階應用題",
+        dimension: "文法",
+        category: "文法",
+        refCardId: "ref-p48-50-vocab",
+        stem: "Hurry up! The school bus ______. Grab your backpack and stand in line by the gate.",
+        options: ["is coming", "comes", "came", "was coming"],
+        answer: "is coming",
+        translation: "快一點！校車快來了。抓起你的背包到大門口排隊。",
+        corePoint: "來去動詞（come, go, leave, arrive 等）可用「現在進行式」表達「即將發生／快要到來」的未來語意，搭配 Hurry up! 最自然。",
+        grammarAnalysis: "祈使句 (Hurry up!) + 主詞 (The school bus) + 現在進行式代未來 (is coming)。",
+        distractorAnalysis: {
+          comes: "現在簡單式多表固定時刻表，在此催促語境中不如 is coming 表達「馬上就要到了」貼切。",
+          came: "過去式，表示已經來過，與催促「快一點」矛盾。",
+          "was coming": "過去進行式，時間軸錯誤。"
+        },
+        phonetics: "原句重點：Hurry up! The school bus is coming. /ˈhɜri ʌp ðə skul bʌs ɪz ˈkʌmɪŋ/；Hurry up 連讀為 /ˈhɜri ʌp/。"
+      },
+      {
+        id: 21,
+        section: "二、 文法與句型結構",
+        level: "中階應用題",
+        dimension: "文法",
+        category: "文法",
+        refCardId: "ref-p48-50-vocab",
+        stem: "Tom: ______ is it today?\nAnn: It's Monday, so we have basketball practice after school.",
+        options: ["What day", "What time", "What date", "Which month"],
+        answer: "What day",
+        translation: "Tom：今天是星期幾？\nAnn：今天是星期一，所以我們放學後有籃球練習。",
+        corePoint: "回答為星期名稱「Monday」，詢問「星期幾」的固定疑問詞片語為 What day。",
+        grammarAnalysis: "疑問詞片語 (What day) + be 動詞 (is) + 虛主詞 (it) + 時間副詞 (today)?",
+        distractorAnalysis: {
+          "What time": "詢問「幾點幾分」，回答應為具體鐘點（如 at seven thirty）。",
+          "What date": "詢問「幾月幾號」，回答應為月份加序數日期（如 March tenth）。",
+          "Which month": "詢問「哪一個月」，與回答星期一不符。"
+        },
+        phonetics: "原句重點：What day is it today? It's Monday. /wɑt deɪ ɪz ɪt təˈdeɪ ɪts ˈmʌndeɪ/；is it 可連讀為 /ɪz ɪt/。"
+      },
+      {
+        id: 22,
+        section: "二、 文法與句型結構",
+        level: "中階應用題",
+        dimension: "文法",
+        category: "文法",
+        refCardId: "ref-p48-50-vocab",
+        stem: "Gina: ______ is the date of our school talent show?\nKen: It's ______ March tenth.",
+        options: ["What; ×", "When; on", "What; on", "When; ×"],
+        answer: "What; ×",
+        translation: "Gina：我們學校才藝表演是幾月幾號？\nKen：是三月十日。",
+        corePoint: "詢問日期句型為「What is the date...?」；而「It's + 日期」中，日期直接作主詞補語，前面不加介系詞 on（僅在動作發生於某日才用 on + 日期）。",
+        grammarAnalysis: "疑問句：What + be (is) + the date...?；答句：It + is + 日期名詞片語 (March tenth)，無需介系詞。",
+        distractorAnalysis: {
+          "When; on": "When 詢問時間（It's on March tenth），但題幹已有 the date，不可用 When is the date；且 It's 後直接接日期不加 on。",
+          "What; on": "It's 後若加 on March tenth 變成「它在三月十日上」，文法冗贅錯誤。",
+          "When; ×": "不可用 When 搭配 is the date 詢問日期。"
+        },
+        phonetics: "原句重點：What is the date? It's March tenth. /wɑt ɪz ðə deɪt ɪts mɑrtʃ tɛnθ/；tenth 字尾清齒間音 /θ/ 須咬舌。"
+      },
+      {
+        id: 23,
+        section: "二、 文法與句型結構",
+        level: "中階應用題",
+        dimension: "文法",
+        category: "文法",
+        refCardId: "ref-p48-50-vocab",
+        stem: "Jill: ______ is the welcome party for the new students?\nTed: It's ______ the evening of May first.",
+        options: ["When; on", "What time; on", "When; in", "What date; ×"],
+        answer: "When; on",
+        translation: "Jill：新生歡迎派對是什麼時候？\nTed：是在五月一日的晚上。",
+        corePoint: "答句包含日期與時段「the evening of May first」，詢問時間用 When；只要出現「特定某一日的早／午／晚」，介系詞一律用 on。",
+        grammarAnalysis: "When + is + 主詞 (the welcome party)? 答句：It's + 介系詞 (on) + 特定日期的晚間 (the evening of May first)。",
+        distractorAnalysis: {
+          "What time; on": "What time 針對精確幾點幾分提問，答句並無鐘點。",
+          "When; in": "一般泛指晚上用 in the evening，但一旦限定為「五月一日的晚上（特定日期）」，介系詞須改為 on。",
+          "What date; ×": "What date 僅問日期，但答句重點在特定日子的晚間時段，應以 When 提問並加 on。"
+        },
+        phonetics: "原句重點：When is the welcome party? It's on the evening of May first. /wɛn ɪz ðə ˈwɛlkəm ˈpɑrti ɪts ɑn ði ˈivnɪŋ əv meɪ fɜrst/；the 在母音開頭 evening 前讀 /ði/。"
+      },
+      {
+        id: 24,
+        section: "二、 文法與句型結構",
+        level: "中階應用題",
+        dimension: "文法",
+        category: "文法",
+        refCardId: "ref-p48-50-vocab",
+        stem: "Now we have to take a taxi home because ______ are no buses running after midnight.",
+        options: ["there", "they", "those", "we"],
+        answer: "there",
+        translation: "現在我們必須搭計程車回家，因為午夜過後就沒有公車行駛了。",
+        corePoint: "表示「某時間或某地沒有某物」的固定存在句型為 there are no + 複數名詞，不可用人稱代名詞 they。",
+        grammarAnalysis: "原因子句：because + 虛詞 (there) + be 動詞 (are) + 否定形容詞 (no) + 複數名詞 (buses) + 現在分詞 (running)。",
+        distractorAnalysis: {
+          they: "人稱代名詞「他們／它們」，無法引導「存在與否」的句子，屬台灣學生高頻錯誤。",
+          those: "指示代名詞「那些」，不能構成 there be 存在句型。",
+          we: "人稱代名詞「我們」，語意與文法結構皆不通。"
+        },
+        phonetics: "原句重點：Because there are no buses after midnight. /bɪˈkɔz ðɛr ɑr noʊ ˈbʌsɪz ˈæftər ˈmɪdˌnaɪt/；there are 連讀流暢。"
+      },
+      {
+        id: 25,
+        section: "二、 文法與句型結構",
+        level: "中階應用題",
+        dimension: "文法",
+        category: "文法",
+        refCardId: "ref-p48-50-vocab",
+        stem: "Mark: Are there ______ boys practicing on the playground right now?\nMina: Yes, there are ______.",
+        options: ["any; some", "some; any", "any; any", "some; some"],
+        answer: "any; some",
+        translation: "Mark：現在操場上有任何男生在練習嗎？\nMina：是的，有一些。",
+        corePoint: "在一般疑問句中詢問「是否有任何……」通常使用 any；而在肯定簡答中表示「有一些」則須改用 some（後省略 boys）。",
+        grammarAnalysis: "疑問句：Are there + any + 複數名詞 (boys)...? 肯定回答：Yes, there are + some (boys)。",
+        distractorAnalysis: {
+          "some; any": "將肯定句用的 some 與疑問／否定句用的 any 位置顛倒。",
+          "any; any": "肯定回答中不可用 any 表示「有一些」。",
+          "some; some": "一般單純詢問數量有無（非邀請或請求）時，疑問句應用 any。"
+        },
+        phonetics: "原句重點：Are there any boys on the playground? Yes, there are some. /ɑr ðɛr ˈɛni bɔɪz ɑn ðə ˈpleɪˌɡraʊnd jɛs ðɛr ɑr sʌm/；there any 可連讀。"
+      },
+      {
+        id: 26,
+        section: "二、 文法與句型結構",
+        level: "中階應用題",
+        dimension: "文法",
+        category: "文法",
+        refCardId: "ref-p48-50-vocab",
+        stem: "Judy is ______ her little sister at home now because their parents are away on business today.",
+        options: ["taking care of", "standing in line", "sitting down", "standing up"],
+        answer: "taking care of",
+        translation: "Judy 現在正在家裡照顧她的妹妹，因為他們的父母今天出差不在家。",
+        corePoint: "根據原因「父母今天不在家」，Judy 在家對妹妹進行的動作是「照顧（take care of）」，搭配現在進行式為 taking care of。",
+        grammarAnalysis: "S (Judy) + be (is) + 現在分詞片語 (taking care of) + O (her little sister) + 地點與時間副詞。",
+        distractorAnalysis: {
+          "standing in line": "排隊，且為不及物片語，後方不可直接接受詞 her little sister。",
+          "sitting down": "坐下，不及物動詞片語，無法接妹妹作受詞。",
+          "standing up": "站起來，語意與文法皆不合。"
+        },
+        phonetics: "原句重點：Judy is taking care of her little sister. /ˈdʒudi ɪz ˈteɪkɪŋ kɛr əv hɜr ˈlɪtəl ˈsɪstər/；care of 連讀為 /kɛr əv/。"
+      },
+      {
+        id: 27,
+        section: "二、 文法與句型結構",
+        level: "中階應用題",
+        dimension: "文法",
+        category: "文法",
+        refCardId: "ref-p50-51-grain",
+        stem: "Ms. Wang: Welcome to the art museum, young man. You can only look with your eyes, not your hands. ______\nBen: Oh, I'm sorry. I won't do that again.",
+        options: ["Don't touch!", "Don't eat!", "Don't talk!", "Don't run!"],
+        answer: "Don't touch!",
+        translation: "王小姐：歡迎來到美術館，年輕人。你只能用眼睛看，不能用手。請勿觸摸！\nBen：喔，抱歉。我不會再那樣做了。",
+        corePoint: "前句明確提示「只能用眼睛看，不能用手（not your hands）」，因此接續的禁止祈使句為 Don't touch!（請勿觸摸！）。",
+        grammarAnalysis: "否定祈使句：Don't + 原形動詞 (touch)!",
+        distractorAnalysis: {
+          "Don't eat!": "請勿飲食，與前句「不能用手（not your hands）」缺乏直接對應。",
+          "Don't talk!": "請勿交談，針對聲音而非手部動作。",
+          "Don't run!": "請勿奔跑，針對腳步動作而非手部觸碰展品。"
+        },
+        phonetics: "原句重點：You can only look with your eyes, not your hands. Don't touch! /ju kæn ˈoʊnli lʊk wɪð jʊr aɪz nɑt jʊr hændz doʊnt tʌtʃ/；Don't 尾音 t 在子音 t 前常不爆破。"
+      },
+      {
+        id: 28,
+        section: "二、 文法與句型結構",
+        level: "中階應用題",
+        dimension: "文法",
+        category: "文法",
+        refCardId: "ref-p50-51-grain",
+        stem: "Ben: This painting is amazing! May I ______ here?\nMs. Wang: Yes, you may. Just remember not to use a flash.",
+        options: ["take pictures", "take medicine", "take a rest", "take a walk"],
+        answer: "take pictures",
+        translation: "Ben：這幅畫真令人驚豔！我可以在這裡拍照嗎？\n王小姐：可以，你可以拍。只要記得不要使用閃光燈。",
+        corePoint: "由管理員回應「不要使用閃光燈（not to use a flash）」可推知 Ben 徵求許可的動作是「拍照（take pictures）」。",
+        grammarAnalysis: "徵求許可疑問句：May + I + 原形動詞片語 (take pictures) + 地點副詞 (here)?",
+        distractorAnalysis: {
+          "take medicine": "吃藥，與「不要使用閃光燈」毫無關聯。",
+          "take a rest": "休息一下，不需要用到閃光燈。",
+          "take a walk": "散步，與觀賞畫作及閃光燈提示不符。"
+        },
+        phonetics: "原句重點：May I take pictures here? Just don't use a flash. /meɪ aɪ teɪk ˈpɪktʃərz hɪr dʒʌst doʊnt juz ə flæʃ/；use a 連讀為 /juz ə/。"
+      },
+      {
+        id: 29,
+        section: "二、 文法與句型結構",
+        level: "中階應用題",
+        dimension: "文法",
+        category: "文法",
+        refCardId: "ref-p50-51-grain",
+        stem: "(Ben's cellphone is ringing loudly inside the quiet exhibition hall.)\nMs. Wang: Excuse me, sir. Would you please ______?\nBen: Sorry! I'll step outside to answer my phone.",
+        options: ["keep your voice down", "say it out loud", "talk about yourself", "turn up the music"],
+        answer: "keep your voice down",
+        translation: "（Ben 的手機在安靜的展廳裡大聲響起。）\n王小姐：不好意思，先生。可以請你放低音量嗎？\nBen：抱歉！我會走到外面接電話。",
+        corePoint: "在安靜的美術館展廳內手機鈴響並講電話，館員禮貌請求對方「放低音量（keep your voice down）」。",
+        grammarAnalysis: "委婉請求句型：Would you please + 原形動詞片語 (keep your voice down)?",
+        distractorAnalysis: {
+          "say it out loud": "大聲說出來，與安靜展廳的要求完全相反。",
+          "talk about yourself": "談談你自己，語意離題。",
+          "turn up the music": "把音樂轉大聲，與美術館禮儀相反。"
+        },
+        phonetics: "原句重點：Would you please keep your voice down? /wʊd ju pliz kip jʊr vɔɪs daʊn/；Would you 連讀常產生同化音 /ˈwʊdʒu/。"
+      },
+      {
+        id: 30,
+        section: "二、 文法與句型結構",
+        level: "中階應用題",
+        dimension: "文法",
+        category: "文法",
+        refCardId: "ref-p53-bears",
+        stem: "Dad: Look at the clock on the wall. ______\nEmily: It's five to twelve. Why?\nDad: Let's go get something to eat for lunch now!",
+        options: ["What does your watch say?", "Do you have time now?", "How much is your watch?", "Where did you buy your watch?"],
+        answer: "What does your watch say?",
+        translation: "爸爸：看看牆上的時鐘。你的手錶顯示幾點了？\nEmily：現在是十一點五十五分。怎麼了嗎？\n爸爸：我們現在去吃點午餐吧！",
+        corePoint: "Emily 回答具體時刻「It's five to twelve（十一點五十五分）」，在英文中「What does your watch say?」是詢問「你的錶現在幾點？」的道地慣用語（等同 What time is it?）。",
+        grammarAnalysis: "疑問句：What + does + 主詞 (your watch) + 原形動詞 (say)? 以無生命主詞 watch 搭配 say 表示「顯示（時間）」。",
+        distractorAnalysis: {
+          "Do you have time now?": "意為「你現在有空嗎？」，是問是否有空閒，而非問幾點鐘。",
+          "How much is your watch?": "詢問「你的手錶多少錢？」，回答應為價格。",
+          "Where did you buy your watch?": "詢問「你在哪裡買手錶的？」，回答應為地點。"
+        },
+        phonetics: "原句重點：What does your watch say? It's five to twelve. /wɑt dʌz jʊr wɑtʃ seɪ ɪts faɪv tu twɛlv/；does your 連讀時常見 /dʌz jʊr/。"
+      },
+      {
+        id: 31,
+        section: "三、 綜合克漏字測驗（第一篇：美術館參觀禮儀與電話禮節）",
+        level: "進階邏輯與克漏字",
+        dimension: "語意邏輯",
+        category: "篇章結構",
+        refCardId: "ref-p50-51-grain",
+        stem: "【克漏字第 1 篇】\n(At the City Art Museum)\nMs. Wang: Good afternoon, young man. Before entering the gallery, you need to put your wet umbrella in the stand outside. (31) ______\nBen: All right, Ms. Wang. Thank you for reminding me.",
+        options: [
+          "The floor inside must stay dry and safe.",
+          "You can open it inside the hall.",
+          "It is raining heavily outside right now.",
+          "The museum closes at five o'clock."
+        ],
+        answer: "The floor inside must stay dry and safe.",
+        translation: "（在市立美術館）\n王小姐：午安，年輕人。進入展廳前，你需要把濕雨傘放在外面的傘架上。(31) 裡面的地板必須保持乾燥與安全。\nBen：好的，王小姐。謝謝妳的提醒。",
+        corePoint: "前句要求將「濕雨傘（wet umbrella）」放在館外，緊接著說明規定背後的原因：「館內地板必須保持乾燥與安全」，前後因果連貫最緊密。",
+        grammarAnalysis: "主詞 (The floor inside) + 情態助動詞 (must) + 連綴動詞 (stay) + 並列形容詞補語 (dry and safe)。",
+        distractorAnalysis: {
+          "You can open it inside the hall.": "與前句「把濕雨傘放外面」完全矛盾。",
+          "It is raining heavily outside right now.": "僅陳述天氣，未解釋為何不能帶傘進館，邏輯銜接較弱。",
+          "The museum closes at five o'clock.": "閉館時間與放置雨傘的規定無關。"
+        },
+        phonetics: "原句重點：The floor inside must stay dry and safe. /ðə flɔr ˌɪnˈsaɪd mʌst steɪ draɪ ænd seɪf/；must stay 兩個 s 音自然融合。"
+      },
+      {
+        id: 32,
+        section: "三、 綜合克漏字測驗（第一篇：美術館參觀禮儀與電話禮節）",
+        level: "進階邏輯與克漏字",
+        dimension: "語意邏輯",
+        category: "篇章結構",
+        refCardId: "ref-p50-51-grain",
+        stem: "【克漏字第 1 篇】\n(Inside the gallery, Ben walks close to an oil painting and reaches out his hand.)\nMs. Wang: Stop right there! (32) ______\nBen: Oh, I'm sorry. The colors look so real that I wanted to feel the paint.",
+        options: [
+          "Don't touch the painting!",
+          "Don't look at the painting!",
+          "Please buy this painting!",
+          "Please clean the painting!"
+        ],
+        answer: "Don't touch the painting!",
+        translation: "（在展廳內，Ben 走近一幅油畫並伸出手。）\n王小姐：就停在那裡！(32) 請勿觸摸畫作！\nBen：喔，抱歉。顏色看起來太逼真了，所以我才想摸摸看顏料。",
+        corePoint: "情境提示 Ben「伸出手（reaches out his hand）」，且後句 Ben 解釋「我想摸摸看顏料（wanted to feel the paint）」，故館員制止他「Don't touch the painting!」。",
+        grammarAnalysis: "否定祈使句：Don't + 原形及物動詞 (touch) + 受詞 (the painting)!",
+        distractorAnalysis: {
+          "Don't look at the painting!": "美術館歡迎觀眾用眼睛欣賞，禁止觀看違反常理。",
+          "Please buy this painting!": "美術館展品非一般商品，館員不會叫遊客買畫。",
+          "Please clean the painting!": "館員不會要求遊客擦拭油畫。"
+        },
+        phonetics: "原句重點：Don't touch the painting! /doʊnt tʌtʃ ðə ˈpeɪntɪŋ/；painting 重音在第一音節。"
+      },
+      {
+        id: 33,
+        section: "三、 綜合克漏字測驗（第一篇：美術館參觀禮儀與電話禮節）",
+        level: "進階邏輯與克漏字",
+        dimension: "文法",
+        category: "文法",
+        refCardId: "ref-p50-51-grain",
+        stem: "【克漏字第 1 篇】\nMs. Wang: I understand, but you can only admire the art works with your eyes. (33) ______ you have any questions about the artist, you can read the card next to the frame.",
+        options: ["If", "Because", "Although", "Until"],
+        answer: "If",
+        translation: "王小姐：我理解，但你只能用眼睛欣賞藝術作品。(33) 如果你對藝術家有任何疑問，你可以閱讀畫框旁邊的說明卡。",
+        corePoint: "前子句提出假設條件「你對藝術家有任何疑問」，後子句提供解決方式「可以閱讀說明卡」，表條件的從屬連接詞應選 If（如果）。",
+        grammarAnalysis: "條件副詞子句 (If + S + V...) + 主要子句 (S + can + 原形動詞...)，表示「若……則可……」。",
+        distractorAnalysis: {
+          Because: "因為，館員並不知道 Ben 是否真的有疑問，此處為條件假設而非既定因果。",
+          Although: "雖然，語意為讓步轉折，與「有疑問就看說明卡」邏輯不符。",
+          Until: "直到……為止，時間連接詞，語意不通。"
+        },
+        phonetics: "原句重點：If you have any questions about the artist... /ɪf ju hæv ˈɛni ˈkwɛstʃənz əˈbaʊt ði ˈɑrtɪst/；have any 連讀為 /hæv ˈɛni/。"
+      },
+      {
+        id: 34,
+        section: "三、 綜合克漏字測驗（第一篇：美術館參觀禮儀與電話禮節）",
+        level: "進階邏輯與克漏字",
+        dimension: "文法",
+        category: "文法",
+        refCardId: "ref-p50-51-grain",
+        stem: "【克漏字第 1 篇】\n(Suddenly, Ben's phone rings. He answers it right away.)\nBen: Hello, this is Ben speaking. Who's (34) ______?",
+        options: ["calling", "call", "called", "to call"],
+        answer: "calling",
+        translation: "（突然間，Ben 的手機響了。他立刻接起來。）\nBen：喂，我是 Ben。請問是哪位來電？",
+        corePoint: "電話英語中詢問對方「請問是哪位打來的？」的固定說法為「Who's calling?」（Who is calling 的縮寫，現在進行式）。",
+        grammarAnalysis: "疑問詞主詞 (Who) + be 動詞縮寫 ('s = is) + 現在分詞 (calling)?",
+        distractorAnalysis: {
+          call: "原形動詞，不可直接接在 Who's（Who is）後方。",
+          called: "過去分詞，若用 Who's called 變成被動語態「誰被呼叫」，不符電話用語。",
+          "to call": "不定詞，表示「誰將要去打電話」，非詢問正在通話的來電者。"
+        },
+        phonetics: "原句重點：Hello, this is Ben. Who's calling? /həˈloʊ ðɪs ɪz bɛn huz ˈkɔlɪŋ/；this is 連讀為 /ðɪs ɪz/。"
+      },
+      {
+        id: 35,
+        section: "三、 綜合克漏字測驗（第一篇：美術館參觀禮儀與電話禮節）",
+        level: "進階邏輯與克漏字",
+        dimension: "語意邏輯",
+        category: "推論",
+        refCardId: "ref-p50-51-grain",
+        stem: "【克漏字第 1 篇】\nMs. Wang: Excuse me. Would you please keep your voice down? Other visitors are trying to enjoy the quiet space.\nBen: Oh, I'm truly sorry. I'll (35) ______ to finish this call.",
+        options: [
+          "use my cellphone outside",
+          "turn on the flash now",
+          "touch the painting again",
+          "bring my umbrella inside"
+        ],
+        answer: "use my cellphone outside",
+        translation: "王小姐：不好意思。可以請你放低音量嗎？其他訪客正試著享受這個安靜的空間。\nBen：喔，真的很抱歉。我會到外面使用手機把這通電話講完。",
+        corePoint: "為了不打擾展廳內其他需要安靜的訪客，Ben 禮貌致歉並採取的正確行動是「到外面使用手機（use my cellphone outside）」。",
+        grammarAnalysis: "主詞 (I) + 助動詞縮寫 ('ll = will) + 原形動詞片語 (use my cellphone outside) + 不定詞表目的 (to finish this call)。",
+        distractorAnalysis: {
+          "turn on the flash now": "打開閃光燈，違反美術館禁止用閃光燈的規定，且與講電話無關。",
+          "touch the painting again": "再次觸摸畫作，為禁止行為。",
+          "bring my umbrella inside": "把雨傘帶進館內，為禁止行為。"
+        },
+        phonetics: "原句重點：I'll use my cellphone outside to finish this call. /aɪl juz maɪ ˈsɛlˌfoʊn ˌaʊtˈsaɪd tu ˈfɪnɪʃ ðɪs kɔl/；cellphone 重音在第一音節。"
+      },
+      {
+        id: 36,
+        section: "三、 綜合克漏字測驗（第二篇：計畫周末購物與提案討論）",
+        level: "進階邏輯與克漏字",
+        dimension: "文法",
+        category: "文法",
+        refCardId: "ref-p50-51-grain",
+        stem: "【克漏字第 2 篇】\nCathy is a thirteen-year-old girl living in Happy City with her family. She is old enough to buy daily things (36) ______. This Saturday, she plans to buy a bottle of milk, mild shampoo, and some cookies at Grain.",
+        options: ["by herself", "by himself", "by myself", "by ourselves"],
+        answer: "by herself",
+        translation: "Cathy 是一位和家人住在快樂市的十三歲女孩。她已經夠大了，可以自己買日常用品。這個星期六，她計畫去 Grain 買一瓶牛奶、溫和洗髮精和一些餅乾。",
+        corePoint: "主詞為女性第三人稱單數 She（指 Cathy），反身代名詞片語「獨自／靠自己」須與主詞性別及單複數一致，故用 by herself。",
+        grammarAnalysis: "S (She) + be (is) + 形容詞 (old) + 副詞 (enough) + 不定詞片語 (to buy daily things by herself)。",
+        distractorAnalysis: {
+          "by himself": "他自己，用於男性單數主詞 he，與 Cathy 不符。",
+          "by myself": "我自己，用於第一人稱單數 I。",
+          "by ourselves": "我們自己，用於第一人稱複數 we。"
+        },
+        phonetics: "原句重點：She is old enough to buy things by herself. /ʃi ɪz oʊld ɪˈnʌf tu baɪ θɪŋz baɪ hɜrˈsɛlf/；old enough 連讀為 /oʊld ɪˈnʌf/。"
+      },
+      {
+        id: 37,
+        section: "三、 綜合克漏字測驗（第二篇：計畫周末購物與提案討論）",
+        level: "進階邏輯與克漏字",
+        dimension: "文法",
+        category: "文法",
+        refCardId: "ref-p50-51-grain",
+        stem: "【克漏字第 2 篇】\nBecause Cathy has never been to that supermarket alone, she asks her elder sister, Alice, (37) ______ she can go with her on Saturday morning.",
+        options: ["whether", "what", "which", "where"],
+        answer: "whether",
+        translation: "因為 Cathy 從來沒有獨自去過那家超市，她問她的姊姊 Alice 星期六早上是否能陪她一起去。",
+        corePoint: "「ask + 人 + whether/if + 子句」表示「詢問某人是否……」，後方子句 she can go with her 結構完整，缺少表「是否」的連接詞 whether。",
+        grammarAnalysis: "V (asks) + 間接受詞 (her elder sister) + 直接受詞名詞子句 (whether she can go with her)。",
+        distractorAnalysis: {
+          what: "疑問代名詞「什麼」，後方子句並不缺主詞或受詞，不可用 what。",
+          which: "疑問代名詞「哪一個」，語意不合。",
+          where: "疑問副詞「哪裡」，後方已有 with her 完整語意，非詢問地點。"
+        },
+        phonetics: "原句重點：She asks her sister whether she can go with her. /ʃi æsks hɜr ˈsɪstər ˈwɛðər ʃi kæn ɡoʊ wɪð hɜr/；asks 連續子音 /sks/ 須發清楚。"
+      },
+      {
+        id: 38,
+        section: "三、 綜合克漏字測驗（第二篇：計畫周末購物與提案討論）",
+        level: "進階邏輯與克漏字",
+        dimension: "文法",
+        category: "文法",
+        refCardId: "ref-p50-51-grain",
+        stem: "【克漏字第 2 篇】\nAlice: Sure! I usually shop at Grain every Monday evening and Saturday morning. You can get there (38) ______ foot in ten minutes. Here, let me show you the city map.",
+        options: ["on", "by", "in", "with"],
+        answer: "on",
+        translation: "Alice：當然可以！我通常每個星期一晚上和星期六早上都會去 Grain 購物。你可以走路十分鐘就到那裡。來，讓我給你看這張城市地圖。",
+        corePoint: "表示交通方式「步行／走路」的固定介系詞片語為 on foot（注意 foot 為單數且不加冠詞），不可用 by。",
+        grammarAnalysis: "S (You) + can + V (get) + 地點副詞 (there) + 方式介系詞片語 (on foot)。",
+        distractorAnalysis: {
+          by: "交通工具如 by bus / by bike 用 by，但「步行」是例外，固定用 on foot。",
+          in: "in 搭配有頂棚的交通工具（如 in a car），不與 foot 連用。",
+          with: "with 表使用工具或伴隨，不構成「步行」片語。"
+        },
+        phonetics: "原句重點：You can get there on foot in ten minutes. /ju kæn ɡɛt ðɛr ɑn fʊt ɪn tɛn ˈmɪnɪts/；foot 為短母音 /ʊ/。"
+      },
+      {
+        id: 39,
+        section: "三、 綜合克漏字測驗（第二篇：計畫周末購物與提案討論）",
+        level: "進階邏輯與克漏字",
+        dimension: "語意邏輯",
+        category: "推論",
+        refCardId: "ref-p48-50-vocab",
+        stem: "【克漏字第 2 篇】\n(Meanwhile, at the office, Owen and Jane are discussing a New Year's sale.)\nOwen: I have an idea for our sale, but I am afraid other team members will not (39) ______ my plan because it requires everyone to work late.",
+        options: ["back", "hide", "drop", "miss"],
+        answer: "back",
+        translation: "（同時，在辦公室裡，Owen 和 Jane 正在討論新年特賣會。）\nOwen：我對這次特賣會有些點子，但我擔心其他團隊成員不會支持我的計畫，因為這需要大家加班。",
+        corePoint: "back 在此作及物動詞，意為「支持／贊同（to agree with or support）」，符合「擔心大家因為要加班而不支持計畫」的語意。",
+        grammarAnalysis: "助動詞否定 (will not) + 原形動詞 (back) + 受詞 (my plan) + 原因子句 (because it requires...)。",
+        distractorAnalysis: {
+          hide: "隱藏，團隊成員不會去「隱藏」Owen 的計畫。",
+          drop: "掉落／放棄，通常指提案者自己放棄，而非他人不支持。",
+          miss: "錯過／想念，與計畫是否獲得贊同無關。"
+        },
+        phonetics: "原句重點：I am afraid other people will not back my plan. /aɪ æm əˈfreɪd ˈʌðər ˈpipəl wɪl nɑt bæk maɪ plæn/；I am 常見縮讀為 I'm /aɪm/。"
+      },
+      {
+        id: 40,
+        section: "三、 綜合克漏字測驗（第二篇：計畫周末購物與提案討論）",
+        level: "進階邏輯與克漏字",
+        dimension: "語意邏輯",
+        category: "篇章結構",
+        refCardId: "ref-p48-50-vocab",
+        stem: "【克漏字第 2 篇】\nJane: Don't worry too much. Your plan is creative and helpful for our sales. (40) ______ Let's present it at the meeting!",
+        options: [
+          "Let's give it a try!",
+          "Let's throw it away!",
+          "We shouldn't tell anyone.",
+          "Nobody likes working here."
+        ],
+        answer: "Let's give it a try!",
+        translation: "Jane：別太擔心。你的計畫很有創意，對我們的銷售也有幫助。(40) 我們來試試看吧！我們在會議上提出來報告吧！",
+        corePoint: "Jane 先安撫 Owen「別太擔心（Don't worry）」並肯定其計畫有創意，接著自然提出正面鼓勵：「Let's give it a try!（我們來試試看吧！）」。",
+        grammarAnalysis: "祈使句提案：Let's (= Let us) + 原形動詞 (give) + 間接受詞 (it) + 直接受詞 (a try)!",
+        distractorAnalysis: {
+          "Let's throw it away!": "我們把它丟掉吧，與前句稱讚計畫有創意完全矛盾。",
+          "We shouldn't tell anyone.": "不應該告訴任何人，與後句「在會議上報告」衝突。",
+          "Nobody likes working here.": "負面消極言論，不符合鼓勵同事的語氣。"
+        },
+        phonetics: "原句重點：Don't worry. Let's give it a try! /doʊnt ˈwɜri lɛts ɡɪv ɪt ə traɪ/；give it a 連讀為 /ˈɡɪv ɪt ə/。"
+      },
+      {
+        id: 41,
+        section: "四、 閱讀理解測驗（第一篇：Happy City 地圖導覽與 Grain 超市）",
+        level: "進階邏輯與克漏字",
+        dimension: "細節理解",
+        category: "細節理解",
+        refCardId: "ref-p51-map",
+        stem: "【閱讀第 1 篇｜請參閱左側 Happy City 路線與文字說明】\nText: Cathy lives on Hill Road in Happy City. She wants to walk to Grain, a famous supermarket selling inexpensive daily goods on Park Road. Her sister Alice tells her: \"Leave our house on Hill Road, walk east to Fourth Street, turn left onto Fourth Street, and go straight north for two blocks across Maple Road and Oak Road. You will see Grain right at the corner of Park Road and Fourth Street.\"\n\nQuestion: What is Grain?",
+        options: ["A supermarket.", "A post office.", "A high school.", "A stationery store."],
+        answer: "A supermarket.",
+        translation: "【閱讀第 1 篇】\n文本：Cathy 住在快樂市的 Hill Road。她想走路去位於 Park Road 上、販售平價日常用品的知名超市 Grain。她的姊姊 Alice 告訴她：「離開我們在 Hill Road 的家，往東走到 Fourth Street，左轉進入 Fourth Street，接著往北直走兩個街區，穿過 Maple Road 和 Oak Road。你就會在 Park Road 和 Fourth Street 的轉角看到 Grain。」\n\n問題：Grain 是什麼場所？",
+        corePoint: "文本第二句明確指出「Grain, a famous supermarket selling inexpensive daily goods」，因此 Grain 是一家超市（A supermarket）。",
+        grammarAnalysis: "同位語結構：Grain, a famous supermarket (名詞片語作同位語補充說明 Grain 的性質)。",
+        distractorAnalysis: {
+          "A post office.": "郵局，非文本對 Grain 的定義。",
+          "A high school.": "高中，與販售平價日用品的描述不符。",
+          "A stationery store.": "文具店，屬於沿途或市區其他商店，非 Grain 本身。"
+        },
+        phonetics: "原句重點：Grain is a famous supermarket in Happy City. /ɡreɪn ɪz ə ˈfeɪməs ˈsupərˌmɑrkɪt ɪn ˈhæpi ˈsɪti/；supermarket 重音在第一音節。"
+      },
+      {
+        id: 42,
+        section: "四、 閱讀理解測驗（第一篇：Happy City 地圖導覽與 Grain 超市）",
+        level: "進階邏輯與克漏字",
+        dimension: "細節理解",
+        category: "細節理解",
+        refCardId: "ref-p51-map",
+        stem: "【閱讀第 1 篇】\nWhy does Cathy want to shop at Grain this Saturday?",
+        options: [
+          "Because the goods there are inexpensive.",
+          "Because she works there every Monday evening.",
+          "Because it is the only store on Hill Road.",
+          "Because she wants to buy a city map there."
+        ],
+        answer: "Because the goods there are inexpensive.",
+        translation: "【閱讀第 1 篇】\n為什麼 Cathy 這個星期六想去 Grain 購物？",
+        corePoint: "根據自修第 51 頁與題幹文本，Grain 以販售「不貴的／平價商品（inexpensive things/goods）」聞名，這是 Cathy 想去那裡購物的主因。",
+        grammarAnalysis: "疑問詞 (Why) 詢問原因，以 Because 引導完整原因子句作答。",
+        distractorAnalysis: {
+          "Because she works there every Monday evening.": "張冠李戴，是姊姊 Alice 每個星期一晚上去那裡購物，而非 Cathy 在那裡工作。",
+          "Because it is the only store on Hill Road.": "地點錯誤，Grain 位於 Park Road，而非 Hill Road。",
+          "Because she wants to buy a city map there.": "地圖是姊姊 Alice 拿給她看的，非去超市購買的物品。"
+        },
+        phonetics: "原句重點：It sells inexpensive things, so Cathy wants to shop there. /ɪt sɛlz ˌɪnɪkˈspɛnsɪv θɪŋz soʊ ˈkæθi wɑnts tu ʃɑp ðɛr/；wants to 連讀自然。"
+      },
+      {
+        id: 43,
+        section: "四、 閱讀理解測驗（第一篇：Happy City 地圖導覽與 Grain 超市）",
+        level: "進階邏輯與克漏字",
+        dimension: "細節理解",
+        category: "細節理解",
+        refCardId: "ref-p51-map",
+        stem: "【閱讀第 1 篇】\nAlong Fourth Street between Hill Road and Park Road, there are a police station, a stationery store, and a department store on the corners, while a barbershop is located on First Street near Oak Road. If Cathy follows Alice's directions to Grain, which place will she NOT pass?",
+        options: ["A barbershop.", "A police station.", "A stationery store.", "A department store."],
+        answer: "A barbershop.",
+        translation: "【閱讀第 1 篇】\n在 Hill Road 和 Park Road 之間的 Fourth Street 沿途轉角設有警察局、文具店和百貨公司，而理髮店則位於靠近 Oak Road 的 First Street 上。如果 Cathy 依照 Alice 的指示前往 Grain，她「不會」經過哪個地方？",
+        corePoint: "Cathy 沿著 Fourth Street 往北走兩個街區，會經過 police station、stationery store 與 department store；而 barbershop 位於西側的 First Street，因此不會經過。",
+        grammarAnalysis: "條件子句 (If Cathy follows...) + 否定疑問句 (which place will she NOT pass?)，注意大寫強調的 NOT。",
+        distractorAnalysis: {
+          "A police station.": "位於 Fourth Street 沿線轉角，Cathy 步行途中會經過。",
+          "A stationery store.": "位於 Fourth Street 沿線轉角，Cathy 步行途中會經過。",
+          "A department store.": "位於 Fourth Street 沿線轉角，Cathy 步行途中會經過。"
+        },
+        phonetics: "原句重點：Which place will she not pass? A barbershop. /wɪtʃ pleɪs wɪl ʃi nɑt pæs ə ˈbɑrbərˌʃɑp/；barbershop 重音在第一音節。"
+      },
+      {
+        id: 44,
+        section: "四、 閱讀理解測驗（第一篇：Happy City 地圖導覽與 Grain 超市）",
+        level: "進階邏輯與克漏字",
+        dimension: "語意邏輯",
+        category: "推論",
+        refCardId: "ref-p51-map",
+        stem: "【閱讀第 1 篇】\nWhat can we infer about Cathy from the passage?",
+        options: [
+          "This Saturday will be her first time visiting Grain.",
+          "She does not know how to read any English words.",
+          "She always goes shopping with her friends on Thursdays.",
+          "She lives far away and must take a train to Grain."
+        ],
+        answer: "This Saturday will be her first time visiting Grain.",
+        translation: "【閱讀第 1 篇】\n從這段文章中我們可以推論出關於 Cathy 的什麼事情？",
+        corePoint: "自修第 51 頁對話明確提到「Because she has never been there by herself（因為她從未獨自去過那裡）」且詢問如何前往，可合理推論這星期六將是她首次前往 Grain。",
+        grammarAnalysis: "infer about + 人 + from + 資料來源，表「從……推論出關於某人的訊息」。",
+        distractorAnalysis: {
+          "She does not know how to read any English words.": "過度推論，她只是沒去過該超市需要看路線，並非不識字。",
+          "She always goes shopping with her friends on Thursdays.": "錯誤，星期四晚上去購物的是姊姊 Alice。",
+          "She lives far away and must take a train to Grain.": "錯誤，Alice 說可以步行（on foot）抵達，距離並不遠。"
+        },
+        phonetics: "原句重點：She has never been there by herself. /ʃi hæz ˈnɛvər bɪn ðɛr baɪ hɜrˈsɛlf/；has never 連讀流暢。"
+      },
+      {
+        id: 45,
+        section: "四、 閱讀理解測驗（第一篇：Happy City 地圖導覽與 Grain 超市）",
+        level: "進階邏輯與克漏字",
+        dimension: "細節理解",
+        category: "細節理解",
+        refCardId: "ref-p51-map",
+        stem: "【閱讀第 1 篇】\nIf Cathy walks straight north along Fourth Street from Hill Road to Park Road, which street does she cross FIRST?",
+        options: ["Maple Road.", "Oak Road.", "Park Road.", "First Street."],
+        answer: "Maple Road.",
+        translation: "【閱讀第 1 篇】\n如果 Cathy 從 Hill Road 沿著 Fourth Street 筆直往北走到 Park Road，她「最先」會橫越哪一條路？",
+        corePoint: "依地圖由南向北的東西向道路順序為 Hill Road → Maple Road → Oak Road → Park Road，因此從 Hill Road 往北走最先橫越的是 Maple Road。",
+        grammarAnalysis: "which street + 助動詞 (does) + S (she) + V (cross) + 序數副詞 (FIRST)?",
+        distractorAnalysis: {
+          "Oak Road.": "Oak Road 在 Maple Road 的北邊，是第二條橫越的道路。",
+          "Park Road.": "Park Road 是終點所在的道路，最後才抵達。",
+          "First Street.": "First Street 是與 Fourth Street 平行的南北向街道，往北走不會橫越它。"
+        },
+        phonetics: "原句重點：Which street does she cross first? Maple Road. /wɪtʃ strit dʌz ʃi krɔs fɜrst ˈmeɪpəl roʊd/；cross first 尾音子音群須清晰。"
+      },
+      {
+        id: 46,
+        section: "四、 閱讀理解測驗（第二篇：台灣四季精選活動導覽）",
+        level: "進階邏輯與克漏字",
+        dimension: "細節理解",
+        category: "細節理解",
+        refCardId: "ref-p52-53-festivals",
+        stem: "【閱讀第 2 篇｜台灣四季特色活動】\nText: Taiwan may be a small island, but it offers wonderful activities in every season. In spring, cherry blossoms bloom across the mountains, and visitors take forest trains to admire them. As the cherry blossom season ends in April, fireflies light up the night sky, and many farms offer evening tours. Summer brings the International Balloon Festival in Taitung from early July to mid-August, followed by the Daylily Flower Season in Hualien. In autumn, Penghu hosts the Wind Music and Light Festival with live performances. Finally, around Chinese New Year, people celebrate the Pingxi Lantern Festival with sky lanterns in the north and the Yanshui Beehive Fireworks in the south.\n\nQuestion: Which order of seasonal events is TRUE according to the travel guide?",
+        options: [
+          "Cherry blossom → Firefly → Air balloon → Sky lantern",
+          "Firefly → Cherry blossom → Sky lantern → Air balloon",
+          "Daylily flower → Firefly → Air balloon → Beehive fireworks",
+          "Beehive fireworks → Cherry blossom → Air balloon → Firefly"
+        ],
+        answer: "Cherry blossom → Firefly → Air balloon → Sky lantern",
+        translation: "【閱讀第 2 篇】\n文本：台灣或許是一座小島，但每個季節都提供精彩的活動。春天時，櫻花在山間盛開，遊客搭乘森林小火車欣賞花海。四月櫻花季結束時，螢火蟲點亮夜空，許多農場也提供夜間導覽。夏天在台東從七月初到八月中旬有國際熱氣球嘉年華，接著是花蓮的金針花季。秋天時，澎湖舉辦結合現場演出的風音樂燈光節。最後，在農曆新年前後，人們在北部慶祝平溪天燈節，在南部則有鹽水蜂炮。\n\n問題：根據這篇旅遊指南，下列哪一個季節活動順序是正確的？",
+        corePoint: "依文章時間軸排序：春季櫻花（Cherry blossom）→ 四月螢火蟲（Firefly）→ 夏季熱氣球（Air balloon）→ 農曆新年平溪天燈（Sky lantern），順序完全正確。",
+        grammarAnalysis: "名詞片語序列題，依據篇章時間連接詞（In spring → April → Summer → In autumn → Finally, around Chinese New Year）定位順序。",
+        distractorAnalysis: {
+          "Firefly → Cherry blossom → Sky lantern → Air balloon": "櫻花先於四月螢火蟲，且夏季熱氣球在農曆新年天燈之前，順序錯亂。",
+          "Daylily flower → Firefly → Air balloon → Beehive fireworks": "金針花季在夏季熱氣球之後，非最早出現。",
+          "Beehive fireworks → Cherry blossom → Air balloon → Firefly": "螢火蟲在四月（春季末），早於夏季的熱氣球。"
+        },
+        phonetics: "原句重點：Cherry blossoms bloom in spring, and April brings the fireflies. /ˈtʃɛri ˈblɑsəmz blum ɪn sprɪŋ ænd ˈeɪprəl brɪŋz ðə ˈfaɪərˌflaɪz/；fireflies 為複合名詞，重音在第一音節。"
+      },
+      {
+        id: 47,
+        section: "四、 閱讀理解測驗（第二篇：台灣四季精選活動導覽）",
+        level: "進階邏輯與克漏字",
+        dimension: "語意邏輯",
+        category: "推論",
+        refCardId: "ref-p52-53-festivals",
+        stem: "【閱讀第 2 篇】\nWho might NOT be interested in visiting Taiwan after reading this travel advertisement?",
+        options: [
+          "Richard, who only enjoys visiting indoor art museums.",
+          "Lily, who loves taking photos of blooming flowers.",
+          "James, who is fascinated by glowing insects at night.",
+          "Diego, who enjoys joining outdoor music festivals."
+        ],
+        answer: "Richard, who only enjoys visiting indoor art museums.",
+        translation: "【閱讀第 2 篇】\n讀完這篇旅遊廣告後，誰可能「沒有」興趣造訪台灣？",
+        corePoint: "全篇介紹的皆為賞花、賞螢、熱氣球、音樂節與天燈等戶外自然與節慶活動，完全未提及室內美術館，因此只喜歡參觀室內美術館的 Richard 最可能不感興趣。",
+        grammarAnalysis: "非限定關係子句：人名 + , who + 關係子句，用來補充說明每個人的興趣偏好。",
+        distractorAnalysis: {
+          "Lily, who loves taking photos of blooming flowers.": "喜歡賞花的人會被春天的櫻花與夏天的金針花吸引。",
+          "James, who is fascinated by glowing insects at night.": "喜歡發光昆蟲的人會想參加四月的夜間賞螢行程。",
+          "Diego, who enjoys joining outdoor music festivals.": "喜歡戶外音樂節的人會對澎湖的音樂燈光節感興趣。"
+        },
+        phonetics: "原句重點：Who might not want to visit Taiwan after reading this advertisement? /hu maɪt nɑt wɑnt tu ˈvɪzɪt ˌtaɪˈwɑn ˈæftər ˈridɪŋ ðɪs ˌædvərˈtaɪzmənt/；advertisement 美式重音在 -tise-。"
+      },
+      {
+        id: 48,
+        section: "四、 閱讀理解測驗（第二篇：台灣四季精選活動導覽）",
+        level: "進階邏輯與克漏字",
+        dimension: "細節理解",
+        category: "細節理解",
+        refCardId: "ref-p52-53-festivals",
+        stem: "【閱讀第 2 篇】\nWhen does the Taiwan International Balloon Festival take place in Taitung?",
+        options: [
+          "From early July to mid-August.",
+          "In April right after the cherry blossoms.",
+          "Around Chinese New Year in winter.",
+          "During the autumn wind season."
+        ],
+        answer: "From early July to mid-August.",
+        translation: "【閱讀第 2 篇】\n台灣國際熱氣球嘉年華何時在台東舉行？",
+        corePoint: "文章第三段明確說明「Summer brings the International Balloon Festival in Taitung from early July to mid-August」，故選從七月初到八月中旬。",
+        grammarAnalysis: "片語 take place 意為「舉行／發生」（無被動語態），搭配時間介系詞片語 from... to...。",
+        distractorAnalysis: {
+          "In April right after the cherry blossoms.": "四月櫻花季後是螢火蟲季，非熱氣球嘉年華。",
+          "Around Chinese New Year in winter.": "農曆新年前後是平溪天燈節與鹽水蜂炮。",
+          "During the autumn wind season.": "秋季是澎湖風音樂燈光節。"
+        },
+        phonetics: "原句重點：It takes place from early July to mid-August. /ɪt teɪks pleɪs frʌm ˈɜrli dʒuˈlaɪ tu mɪd ˈɔɡəst/；July 重音在第二音節。"
+      },
+      {
+        id: 49,
+        section: "四、 閱讀理解測驗（第二篇：台灣四季精選活動導覽）",
+        level: "進階邏輯與克漏字",
+        dimension: "語意邏輯",
+        category: "推論",
+        refCardId: "ref-p52-53-festivals",
+        stem: "【閱讀第 2 篇】\nWhat does \"them\" refer to in the sentence \"visitors take forest trains to admire them\"?",
+        options: [
+          "The cherry blossoms.",
+          "The fireflies.",
+          "The sky lanterns.",
+          "The local farms."
+        ],
+        answer: "The cherry blossoms.",
+        translation: "【閱讀第 2 篇】\n在「遊客搭乘森林小火車欣賞它們（them）」這句話中，\"them\" 指的是什麼？",
+        corePoint: "代名詞指涉題須往前找最鄰近的複數名詞；前半句為「cherry blossoms bloom across the mountains（櫻花在山間盛開）」，故 them 指代的就是櫻花。",
+        grammarAnalysis: "代名詞一致性：複數名詞 (cherry blossoms) → 受格複數代名詞 (them)。",
+        distractorAnalysis: {
+          "The fireflies.": "螢火蟲在下一句四月才出現，非搭森林小火車欣賞的對象。",
+          "The sky lanterns.": "天燈在文章最後一段農曆新年才提及。",
+          "The local farms.": "當地農場在後面賞螢段落才出現。"
+        },
+        phonetics: "原句重點：Visitors take forest trains to admire them. /ˈvɪzɪtərz teɪk ˈfɔrɪst treɪnz tu ədˈmaɪər ðɛm/；to admire 連讀流暢。"
+      },
+      {
+        id: 50,
+        section: "四、 閱讀理解測驗（第二篇：台灣四季精選活動導覽）",
+        level: "進階邏輯與克漏字",
+        dimension: "語意邏輯",
+        category: "推論",
+        refCardId: "ref-p53-bears",
+        stem: "【閱讀第 2 篇｜延伸情境對照】\nAt the zoo, Emily points to the bear enclosure and says, \"One, two, three, four... six. There are six bears here!\" Her dad smiles and replies, \"No, you missed one. Look! There's a tiny baby bear riding on the mother bear's back!\" How many bears are actually in the enclosure?",
+        options: ["Seven.", "Six.", "Five.", "Eight."],
+        answer: "Seven.",
+        translation: "【閱讀第 2 篇｜延伸情境對照】\n在動物園裡，Emily 指著熊區說：「一、二、三、四……六。這裡有六隻熊！」爸爸微笑回答：「不，妳漏算了一隻。看！有一隻小小的熊寶寶正趴在熊媽媽的背上！」請問園區裡實際上總共有幾隻熊？",
+        corePoint: "根據自修第 53 頁對話邏輯，Emily 數出 6 隻（There are six bears here!），爸爸提醒她漏算了 1 隻在母熊背上的小熊（you missed one），因此 6 + 1 = 7 隻。",
+        grammarAnalysis: "數量推理：six bears + one more on the mother bear's back = seven bears。",
+        distractorAnalysis: {
+          "Six.": "這是 Emily 一開始漏算後的錯誤數字。",
+          "Five.": "計算錯誤，比實際數量少了兩隻。",
+          "Eight.": "計算錯誤，多算了一隻。"
+        },
+        phonetics: "原句重點：There's one more on the mother bear's back! /ðɛrz wʌn mɔr ɑn ðə ˈmʌðər bɛrz bæk/；more on 連讀為 /mɔr ɑn/。"
+      }
+    ];
+
+    // Left Pane Reference Cards (100% grounded in Pages 48-53)
+    const REFERENCE_CARDS = [
+      {
+        id: "ref-p48-50-vocab",
+        title: "【Page 48–50 單字、時間與日常情境要點】",
+        passageEn: "Key vocabulary & expressions from pp. 48–50 include bugs, art works, December (after November), September (after August), making videos, ordinal birth order (first, second, third), and going on a date.",
+        passageZh: "第 48–50 頁涵蓋昆蟲／小蟲、藝術作品、十二月與九月等月份順序、拍影片、家庭排行序數以及約會等核心字彙與表達。"
+      },
+      {
+        id: "ref-p50-51-grain",
+        title: "【Page 50–51 情境文本：Cathy 與超市 Grain】",
+        passageEn: "Cathy wants to buy a bottle of milk, mild shampoo, and cookies at Grain, a city supermarket known for inexpensive goods. People also buy daily items like medicine at a drug store.",
+        passageZh: "Cathy 打算到以價格實惠聞名的超市 Grain 購買牛奶、溫和洗髮精與餅乾；日常購買藥品則常在藥局（drug store）。"
+      },
+      {
+        id: "ref-p51-map",
+        title: "【Page 51 城市地圖與商店功能】",
+        passageEn: "City map items include a stationery store (for notebooks, pens, and school supplies), bakery, bank, and hospital.",
+        passageZh: "地圖與生活設施包含販售筆記本、筆與文具的文具店（stationery store），以及麵包店、銀行與醫院等場所。"
+      },
+      {
+        id: "ref-p52-53-festivals",
+        title: "【Page 52–53 四季活動與慶典】",
+        passageEn: "Spring brings cherry blossoms that bloom on mountains and fireflies with guided farm night tours; summer features balloon and flower festivals; autumn features music performances and light shows; around Chinese New Year lantern festivals are celebrated.",
+        passageZh: "春天有山區盛開的櫻花與農場夜間螢火蟲導覽；夏季有熱氣球與花季；秋天有音樂演出與燈光秀；農曆新年前後則有燈節活動。"
+      },
+      {
+        id: "ref-p53-bears",
+        title: "【Page 53 動物觀察對話：台灣黑熊與無尾熊】",
+        passageEn: "Formosan Black Bears and koalas can look similar at a quick glance, yet they differ in appearance, habitat, and behavior.",
+        passageZh: "台灣黑熊與無尾熊乍看之下有些相似，但在外觀、棲息地與習性上各有不同。"
+      }
+    ];
+
+    // Application State
+    const PARENT_PASSWORD = "1234";
+    const HISTORY_STORAGE_KEY = "ceec_eng_p48_53_history_v1";
+
+    let currentQuestions = [...QUESTION_BANK];
+    let userAnswers = {}; // { [questionId]: optionString }
+    let isSubmitted = false;
+    let currentFilter = "ALL"; // "ALL" | "WRONG"
+
+    // Timer state (seconds)
+    let initialSeconds = 60 * 60;
+    let remainingSeconds = 60 * 60;
+    let elapsedSeconds = 0;
+    let timerInterval = null;
+    let isTimerPaused = false;
+
+    // Secret counters
+    let titleClickCount = 0;
+    let diamondClickCount = 0;
+    let radarChartInstance = null;
+
+    // DOM Elements
+    const timerDisplay = document.getElementById("timerDisplay");
+    const timerMinutesInput = document.getElementById("timerMinutesInput");
+    const applyTimerBtn = document.getElementById("applyTimerBtn");
+    const toggleTimerBtn = document.getElementById("toggleTimerBtn");
+    const submitExamBtn = document.getElementById("submitExamBtn");
+    const reshuffleExamBtn = document.getElementById("reshuffleExamBtn");
+
+    const summarySection = document.getElementById("summarySection");
+    const finalScoreText = document.getElementById("finalScoreText");
+    const finalStatsText = document.getElementById("finalStatsText");
+    const dimensionStatsBody = document.getElementById("dimensionStatsBody");
+
+    const filterAllBtn = document.getElementById("filterAllBtn");
+    const filterWrongBtn = document.getElementById("filterWrongBtn");
+    const copyWrongMdBtn = document.getElementById("copyWrongMdBtn");
+    const downloadWordBtn = document.getElementById("downloadWordBtn");
+
+    const questionNavGrid = document.getElementById("questionNavGrid");
+    const referenceCardsContainer = document.getElementById("referenceCardsContainer");
+    const questionsContainer = document.getElementById("questionsContainer");
+    const progressIndicator = document.getElementById("progressIndicator");
+
+    const mainTitle = document.getElementById("mainTitle");
+    const secretDiamond = document.getElementById("secretDiamond");
+    const historyModal = document.getElementById("historyModal");
+    const closeHistoryBtn = document.getElementById("closeHistoryBtn");
+    const historyContentArea = document.getElementById("historyContentArea");
+
+    const masterKeyModal = document.getElementById("masterKeyModal");
+    const closeMasterKeyBtn = document.getElementById("closeMasterKeyBtn");
+    const masterKeyContentArea = document.getElementById("masterKeyContentArea");
+    const toastNotice = document.getElementById("toastNotice");
+
+    function showToast(msg) {
+      toastNotice.textContent = msg;
+      toastNotice.classList.add("visible");
+      clearTimeout(showToast._timer);
+      showToast._timer = setTimeout(() => {
+        toastNotice.classList.remove("visible");
+      }, 2400);
+    }
+
+    function formatClock(sec) {
+      const safe = Math.max(0, Math.floor(sec));
+      const m = Math.floor(safe / 60);
+      const s = safe % 60;
+      return `${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
+    }
+
+    function updateTimerUI() {
+      timerDisplay.textContent = formatClock(remainingSeconds);
+      if (remainingSeconds <= 300 && remainingSeconds > 0) {
+        timerDisplay.classList.add("danger-time");
+      } else {
+        timerDisplay.classList.remove("danger-time");
+      }
+    }
+
+    function startTimerLoop() {
+      clearInterval(timerInterval);
+      timerInterval = setInterval(() => {
+        if (isSubmitted || isTimerPaused) return;
+        elapsedSeconds += 1;
+        if (remainingSeconds > 0) {
+          remainingSeconds -= 1;
+          updateTimerUI();
+        } else {
+          submitExam(true);
+        }
+      }, 1000);
+    }
+
+    applyTimerBtn.addEventListener("click", () => {
+      if (isSubmitted) {
+        showToast("已交卷，請按「重新測驗(洗牌)」後再調整時間");
+        return;
+      }
+      const rawMin = parseInt(timerMinutesInput.value, 10);
+      if (Number.isNaN(rawMin) || rawMin < 0 || rawMin > 240) {
+        showToast("請輸入 0 至 240 分鐘之間的數字");
+        return;
+      }
+      initialSeconds = rawMin * 60;
+      remainingSeconds = initialSeconds;
+      elapsedSeconds = 0;
+      isTimerPaused = false;
+      toggleTimerBtn.textContent = "暫停";
+      updateTimerUI();
+      showToast(`倒數計時已設為 ${rawMin} 分鐘`);
+    });
+
+    toggleTimerBtn.addEventListener("click", () => {
+      if (isSubmitted) return;
+      isTimerPaused = !isTimerPaused;
+      toggleTimerBtn.textContent = isTimerPaused ? "繼續" : "暫停";
+      showToast(isTimerPaused ? "計時已暫停" : "計時已繼續");
+    });
+
+    function shuffleArray(arr) {
+      const copy = [...arr];
+      for (let i = copy.length - 1; i > 0; i -= 1) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+      }
+      return copy;
+    }
+
+    function prepareShuffledExam() {
+      const shuffledQ = shuffleArray(QUESTION_BANK).map((q) => ({
+        ...q,
+        shuffledOptions: shuffleArray(q.options)
+      }));
+      currentQuestions = shuffledQ;
+      userAnswers = {};
+      isSubmitted = false;
+      currentFilter = "ALL";
+      elapsedSeconds = 0;
+      remainingSeconds = initialSeconds;
+      isTimerPaused = false;
+
+      toggleTimerBtn.textContent = "暫停";
+      submitExamBtn.disabled = false;
+      summarySection.classList.remove("visible");
+      filterAllBtn.classList.add("active");
+      filterWrongBtn.classList.remove("active");
+
+      renderReferenceCards();
+      renderNavigatorAndQuestions();
+      updateProgressText();
+      updateTimerUI();
+      startTimerLoop();
+    }
+
+    function renderReferenceCards() {
+      referenceCardsContainer.innerHTML = REFERENCE_CARDS.map(
+        (card) => `
+          <article id="${card.id}" class="ref-card">
+            <div class="ref-card-title">${card.title}</div>
+            <div class="ref-passage-en">${card.passageEn}</div>
+            <div class="ref-passage-zh">${card.passageZh}</div>
+          </article>
+        `
+      ).join("");
+    }
+
+    function highlightRefCard(refCardId) {
+      const target = document.getElementById(refCardId);
+      if (!target) return;
+      target.scrollIntoView({ behavior: "smooth", block: "center" });
+      target.classList.remove("highlight-flash");
+      void target.offsetWidth;
+      target.classList.add("highlight-flash");
+      setTimeout(() => {
+        target.classList.remove("highlight-flash");
+      }, 1400);
+    }
+
+    function updateProgressText() {
+      const answeredCount = Object.keys(userAnswers).length;
+      progressIndicator.textContent = `已作答 ${answeredCount} / ${currentQuestions.length} 題`;
+    }
+
+    function renderNavigatorAndQuestions() {
+      // Navigator
+      questionNavGrid.innerHTML = currentQuestions
+        .map((q, idx) => {
+          const displayNo = idx + 1;
+          const chosen = userAnswers[q.id];
+          let cls = "nav-btn";
+          if (isSubmitted) {
+            if (chosen === q.answer) {
+              cls += " correct-q";
+            } else {
+              cls += " wrong-q";
+            }
+          } else if (chosen) {
+            cls += " answered";
+          }
+          return `<button type="button" class="${cls}" data-q-index="${idx}" title="跳轉至第 ${displayNo} 題">${displayNo}</button>`;
+        })
+        .join("");
+
+      // Questions
+      questionsContainer.innerHTML = currentQuestions
+        .map((q, idx) => {
+          const displayNo = idx + 1;
+          const chosen = userAnswers[q.id];
+          const isCorrect = isSubmitted && chosen === q.answer;
+          const isWrong = isSubmitted && chosen !== q.answer;
+
+          if (isSubmitted && currentFilter === "WRONG" && isCorrect) {
+            return "";
+          }
+
+          let cardClass = "q-card";
+          if (isSubmitted) {
+            cardClass += isCorrect ? " is-correct" : " is-wrong";
+          }
+
+          const optionsHtml = q.shuffledOptions
+            .map((opt, optIdx) => {
+              const labelChar = String.fromCharCode(65 + optIdx);
+              let optClass = "option-item";
+              if (isSubmitted) {
+                optClass += " disabled";
+                if (opt === q.answer) {
+                  optClass += " correct-answer";
+                } else if (opt === chosen && opt !== q.answer) {
+                  optClass += " wrong-choice";
+                }
+              } else if (chosen === opt) {
+                optClass += " selected";
+              }
+
+              return `
+                <div class="${optClass}" data-qid="${q.id}" data-opt="${encodeURIComponent(opt)}">
+                  <span><strong>(${labelChar})</strong> ${opt}</span>
+                </div>
+              `;
+            })
+            .join("");
+
+          const distractorItems = Object.entries(q.distractorAnalysis)
+            .map(([keyOpt, reason]) => `<li><strong>${keyOpt}</strong>：${reason}</li>`)
+            .join("");
+
+          const expClass = isSubmitted ? "explanation-box show" : "explanation-box";
+
+          return `
+            <article id="q-card-${q.id}" class="${cardClass}">
+              <div class="q-top-row">
+                <button type="button" class="q-badge" data-ref-id="${q.refCardId}" title="點擊查看左側對應文本">第 ${displayNo} 題</button>
+                <span class="q-tag">${q.level}</span>
+                <span class="q-tag">${q.dimension}</span>
+              </div>
+              <div class="q-stem">${q.stem}</div>
+              <div class="options-list">${optionsHtml}</div>
+
+              <div class="${expClass}">
+                <div class="exp-line"><span class="exp-label">【測驗卷原題目】</span>${q.stem}</div>
+                <div class="exp-line"><span class="exp-label">【繁體中文翻譯】</span>${q.translation}</div>
+                <div class="exp-line"><span class="exp-label">【答案】</span>${q.answer}</div>
+                <div class="exp-line"><span class="exp-label">【核心考點說明】</span>${q.corePoint}</div>
+                <div class="exp-line"><span class="exp-label">【考點歸類】</span>${q.dimension}（${q.category}）</div>
+                <div class="exp-line"><span class="exp-label">【文法】</span>${q.grammarAnalysis}</div>
+                <div class="exp-line">
+                  <span class="exp-label">【干擾項、誘答剖析】</span>
+                  <ul class="exp-sublist">${distractorItems}</ul>
+                </div>
+                <div class="exp-line"><span class="exp-label">【音標】</span>${q.phonetics}</div>
+              </div>
+            </article>
+          `;
+        })
+        .join("");
+
+      bindDynamicEvents();
+    }
+
+    function bindDynamicEvents() {
+      // Navigator click -> scroll to question
+      questionNavGrid.querySelectorAll(".nav-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const idx = parseInt(btn.getAttribute("data-q-index"), 10);
+          const qObj = currentQuestions[idx];
+          if (!qObj) return;
+          const cardEl = document.getElementById(`q-card-${qObj.id}`);
+          if (cardEl) {
+            cardEl.scrollIntoView({ behavior: "smooth", block: "center" });
+          }
+        });
+      });
+
+      // Option selection
+      questionsContainer.querySelectorAll(".option-item:not(.disabled)").forEach((optEl) => {
+        optEl.addEventListener("click", () => {
+          if (isSubmitted) return;
+          const qid = parseInt(optEl.getAttribute("data-qid"), 10);
+          const optVal = decodeURIComponent(optEl.getAttribute("data-opt"));
+          userAnswers[qid] = optVal;
+          updateProgressText();
+          renderNavigatorAndQuestions();
+        });
+      });
+
+      // Question badge -> bidirectional link to left reference card
+      questionsContainer.querySelectorAll(".q-badge").forEach((badgeEl) => {
+        badgeEl.addEventListener("click", () => {
+          const refId = badgeEl.getAttribute("data-ref-id");
+          highlightRefCard(refId);
+        });
+      });
+    }
+
+    function computeDimensionStats() {
+      const dims = ["字彙", "文法", "語意邏輯", "細節理解"];
+      const statsMap = {};
+      dims.forEach((d) => {
+        statsMap[d] = { total: 0, correct: 0 };
+      });
+
+      currentQuestions.forEach((q) => {
+        const d = dims.includes(q.dimension) ? q.dimension : "字彙";
+        statsMap[d].total += 1;
+        if (userAnswers[q.id] === q.answer) {
+          statsMap[d].correct += 1;
+        }
+      });
+
+      return dims.map((d) => {
+        const { total, correct } = statsMap[d];
+        const rate = total > 0 ? Math.round((correct / total) * 100) : 0;
+        return { dimension: d, total, correct, rate };
+      });
+    }
+
+    function renderRadarChart(dimStats) {
+      const ctx = document.getElementById("radarChartCanvas").getContext("2d");
+      if (radarChartInstance) {
+        radarChartInstance.destroy();
+      }
+      radarChartInstance = new Chart(ctx, {
+        type: "radar",
+        data: {
+          labels: dimStats.map((item) => item.dimension),
+          datasets: [
+            {
+              label: "得分率 (%)",
+              data: dimStats.map((item) => item.rate),
+              fill: true,
+              backgroundColor: "rgba(29, 78, 216, 0.2)",
+              borderColor: "rgb(29, 78, 216)",
+              pointBackgroundColor: "rgb(29, 78, 216)",
+              pointBorderColor: "#fff"
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          scales: {
+            r: {
+              min: 0,
+              max: 100,
+              ticks: {
+                stepSize: 25
+              }
+            }
+          }
+        }
+      });
+    }
+
+    function saveAttemptHistory(score, correctCount, totalCount, dimStats, wrongList) {
+      const existing = JSON.parse(localStorage.getItem(HISTORY_STORAGE_KEY) || "[]");
+      const record = {
+        id: Date.now(),
+        submittedAt: new Date().toLocaleString("zh-TW", { hour12: false }),
+        elapsed: formatClock(elapsedSeconds),
+        score,
+        correctCount,
+        totalCount,
+        dimensions: dimStats,
+        wrongIds: wrongList.map((w) => w.id)
+      };
+      existing.unshift(record);
+      localStorage.setItem(HISTORY_STORAGE_KEY, JSON.stringify(existing.slice(0, 50)));
+    }
+
+    function submitExam(autoByTimeout = false) {
+      if (isSubmitted) return;
+      isSubmitted = true;
+      submitExamBtn.disabled = true;
+
+      const totalCount = currentQuestions.length;
+      let correctCount = 0;
+      const wrongList = [];
+
+      currentQuestions.forEach((q, idx) => {
+        const chosen = userAnswers[q.id];
+        if (chosen === q.answer) {
+          correctCount += 1;
+        } else {
+          wrongList.push({ ...q, displayNo: idx + 1, userChoice: chosen || "未作答" });
+        }
+      });
+
+      const score = totalCount > 0 ? Math.round((correctCount / totalCount) * 100) : 0;
+      const dimStats = computeDimensionStats();
+
+      finalScoreText.textContent = `${score} 分`;
+      finalStatsText.textContent = `答對 ${correctCount} / ${totalCount} 題｜耗時 ${formatClock(elapsedSeconds)}`;
+
+      dimensionStatsBody.innerHTML = dimStats
+        .map(
+          (item) => `
+            <tr>
+              <td>${item.dimension}</td>
+              <td>${item.correct} / ${item.total}</td>
+              <td>${item.rate}%</td>
+            </tr>
+          `
+        )
+        .join("");
+
+      summarySection.classList.add("visible");
+      renderRadarChart(dimStats);
+      renderNavigatorAndQuestions();
+      saveAttemptHistory(score, correctCount, totalCount, dimStats, wrongList);
+
+      if (autoByTimeout) {
+        showToast("時間到，系統已自動提交試卷！");
+      } else {
+        showToast(`交卷完成！本次得分 ${score} 分`);
+      }
+    }
+
+    submitExamBtn.addEventListener("click", () => {
+      if (isSubmitted) return;
+      const unanswered = currentQuestions.length - Object.keys(userAnswers).length;
+      if (unanswered > 0) {
+        const ok = confirm(`尚有 ${unanswered} 題未作答，確定要提交試卷嗎？`);
+        if (!ok) return;
+      }
+      submitExam(false);
+    });
+
+    reshuffleExamBtn.addEventListener("click", () => {
+      prepareShuffledExam();
+      showToast("已重新洗牌題目與選項順序");
+    });
+
+    filterAllBtn.addEventListener("click", () => {
+      currentFilter = "ALL";
+      filterAllBtn.classList.add("active");
+      filterWrongBtn.classList.remove("active");
+      renderNavigatorAndQuestions();
+    });
+
+    filterWrongBtn.addEventListener("click", () => {
+      currentFilter = "WRONG";
+      filterWrongBtn.classList.add("active");
+      filterAllBtn.classList.remove("active");
+      renderNavigatorAndQuestions();
+    });
+
+    function buildWrongNotesMarkdown() {
+      const lines = ["# 國中英語錯題複習筆記（Page 48–53）", ""];
+      let hasWrong = false;
+      currentQuestions.forEach((q, idx) => {
+        const chosen = userAnswers[q.id];
+        if (chosen !== q.answer) {
+          hasWrong = true;
+          lines.push(`## 第 ${idx + 1} 題（${q.dimension}｜${q.category}）`);
+          lines.push(`- **原題目**：${q.stem}`);
+          lines.push(`- **您的作答**：${chosen || "未作答"}｜**正確答案**：${q.answer}`);
+          lines.push(`- **中文翻譯**：${q.translation}`);
+          lines.push(`- **核心考點**：${q.corePoint}`);
+          lines.push(`- **文法解析**：${q.grammarAnalysis}`);
+          lines.push(`- **音標與連讀**：${q.phonetics}`);
+          lines.push("");
+        }
+      });
+      if (!hasWrong) {
+        lines.push("太棒了！本次測驗全數答對，無錯題需要複習。");
+      }
+      return lines.join("\n");
+    }
+
+    copyWrongMdBtn.addEventListener("click", async () => {
+      const md = buildWrongNotesMarkdown();
+      try {
+        await navigator.clipboard.writeText(md);
+        showToast("已複製錯題筆記（Markdown 格式）");
+      } catch {
+        const ta = document.createElement("textarea");
+        ta.value = md;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        document.body.removeChild(ta);
+        showToast("已複製錯題筆記（Markdown 格式）");
+      }
+    });
+
+    downloadWordBtn.addEventListener("click", () => {
+      const md = buildWrongNotesMarkdown();
+      const htmlDoc = `
+        <html xmlns:o="urn:schemas-microsoft-com:office:office"
+              xmlns:w="urn:schemas-microsoft-com:office:word"
+              xmlns="http://www.w3.org/TR/REC-html40">
+        <head><meta charset="utf-8"><title>錯題複習報告</title></head>
+        <body><pre style="font-family: 'Microsoft JhengHei', sans-serif; white-space: pre-wrap;">${md.replace(/</g, "&lt;")}</pre></body>
+        </html>
+      `;
+      const blob = new Blob(["\ufeff", htmlDoc], { type: "application/msword" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "英文錯題複習筆記.doc";
+      a.click();
+      URL.revokeObjectURL(url);
+      showToast("已下載 Word 錯題報告（.doc）");
+    });
+
+    // Secret Parent History Access (5 clicks on title OR Ctrl+Shift+P)
+    function openParentHistoryModal() {
+      const pwd = prompt("請輸入家長檢視密碼：");
+      if (pwd !== PARENT_PASSWORD) {
+        if (pwd !== null) showToast("密碼錯誤");
+        return;
+      }
+
+      const records = JSON.parse(localStorage.getItem(HISTORY_STORAGE_KEY) || "[]");
+      if (records.length === 0) {
+        historyContentArea.innerHTML = "<p>目前尚無交卷歷史紀錄。</p>";
+      } else {
+        const rows = records
+          .map(
+            (r, idx) => `
+              <tr>
+                <td>${records.length - idx}</td>
+                <td>${r.submittedAt}</td>
+                <td>${r.elapsed}</td>
+                <td><strong>${r.score} 分</strong>（${r.correctCount}/${r.totalCount}）</td>
+                <td>${r.dimensions.map((d) => `${d.dimension}:${d.rate}%`).join("、")}</td>
+                <td>${r.wrongIds.length > 0 ? r.wrongIds.join(", ") : "無"}</td>
+              </tr>
+            `
+          )
+          .join("");
+
+        historyContentArea.innerHTML = `
+          <p style="color: var(--text-secondary); font-size: 0.9rem;">累計交卷次數：<strong>${records.length}</strong> 次</p>
+          <table class="history-table">
+            <thead>
+              <tr>
+                <th>次序</th>
+                <th>01. 交卷時間</th>
+                <th>02. 耗時</th>
+                <th>03. 得分</th>
+                <th>04. 各維度統計</th>
+                <th>05. 錯題題號</th>
+              </tr>
+            </thead>
+            <tbody>${rows}</tbody>
+          </table>
+        `;
+      }
+      historyModal.classList.add("open");
+    }
+
+    mainTitle.addEventListener("click", () => {
+      titleClickCount += 1;
+      if (titleClickCount >= 5) {
+        titleClickCount = 0;
+        openParentHistoryModal();
+      }
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === "p") {
+        e.preventDefault();
+        openParentHistoryModal();
+      }
+    });
+
+    closeHistoryBtn.addEventListener("click", () => {
+      historyModal.classList.remove("open");
+    });
+
+    // Secret Master Key Table (5 clicks on subtle ❖ in top-left)
+    secretDiamond.addEventListener("click", () => {
+      diamondClickCount += 1;
+      if (diamondClickCount >= 5) {
+        diamondClickCount = 0;
+        const rows = currentQuestions
+          .map(
+            (q, idx) => `
+              <tr>
+                <td>第 ${idx + 1} 題</td>
+                <td>${q.dimension}</td>
+                <td>${q.stem}</td>
+                <td><strong>${q.answer}</strong></td>
+              </tr>
+            `
+          )
+          .join("");
+
+        masterKeyContentArea.innerHTML = `
+          <table class="key-table">
+            <thead>
+              <tr>
+                <th>題號</th>
+                <th>考點</th>
+                <th>題目摘要</th>
+                <th>標準答案</th>
+              </tr>
+            </thead>
+            <tbody>${rows}</tbody>
+          </table>
+        `;
+        masterKeyModal.classList.add("open");
+      }
+    });
+
+    closeMasterKeyBtn.addEventListener("click", () => {
+      masterKeyModal.classList.remove("open");
+    });
+
+    // Initial Boot
+    prepareShuffledExam();
+  </script>
+</body>
+</html>

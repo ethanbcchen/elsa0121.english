@@ -1,0 +1,2756 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>國中三年級英文科全真模擬測驗 (50題) — 閱讀素養與跨域時事 (p.34-35)</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      --bg-body: #0f172a;
+      --bg-panel: #1e293b;
+      --bg-card: #162032;
+      --bg-card-hover: #1e2b42;
+      --bg-input: #0f172a;
+      --border-color: #334155;
+      --border-highlight: #38bdf8;
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --text-accent: #38bdf8;
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --success: #16a34a;
+      --success-bg: rgba(22, 163, 74, 0.16);
+      --danger: #dc2626;
+      --danger-bg: rgba(220, 38, 38, 0.16);
+      --warning: #d97706;
+      --radius-lg: 12px;
+      --radius-md: 8px;
+      --shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+      background-color: var(--bg-body);
+      color: var(--text-main);
+      line-height: 1.65;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Top Header Bar */
+    header.top-bar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: linear-gradient(180deg, #0b1120 0%, #131c31 100%);
+      border-bottom: 1px solid var(--border-color);
+      padding: 12px 24px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+    }
+
+    .controls-group {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .timer-box {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #1e293b;
+      border: 1px solid var(--border-color);
+      padding: 6px 12px;
+      border-radius: var(--radius-md);
+      font-weight: 600;
+      color: #fbbf24;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .timer-box input {
+      width: 56px;
+      background: var(--bg-input);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 3px 6px;
+      border-radius: 4px;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    button {
+      cursor: pointer;
+      border: none;
+      border-radius: var(--radius-md);
+      padding: 7px 14px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: all 0.18s ease;
+      font-family: inherit;
+    }
+
+    .btn-secondary {
+      background: #334155;
+      color: #f8fafc;
+    }
+    .btn-secondary:hover {
+      background: #475569;
+    }
+
+    .btn-status {
+      background: rgba(37, 99, 235, 0.2);
+      border: 1px solid #3b82f6;
+      color: #93c5fd;
+      cursor: default;
+    }
+
+    .btn-submit {
+      background: #16a34a;
+      color: #ffffff;
+      box-shadow: 0 2px 8px rgba(22, 163, 74, 0.35);
+    }
+    .btn-submit:hover:not(:disabled) {
+      background: #15803d;
+    }
+    .btn-submit:disabled {
+      background: #334155;
+      color: #94a3b8;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+
+    .btn-reset {
+      background: #0f766e;
+      color: #ffffff;
+    }
+    .btn-reset:hover {
+      background: #115e59;
+    }
+
+    .title-area {
+      text-align: right;
+      user-select: none;
+    }
+
+    .title-area h1 {
+      font-size: 1.15rem;
+      color: #38bdf8;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .secret-diamond {
+      color: #475569;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: color 0.2s;
+      padding: 2px 4px;
+    }
+    .secret-diamond:hover {
+      color: #94a3b8;
+    }
+
+    .title-area .subtitle {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* Main Split Layout */
+    .main-container {
+      display: flex;
+      flex: 1;
+      height: calc(100vh - 68px);
+      overflow: hidden;
+    }
+
+    .left-pane, .right-pane {
+      width: 50%;
+      height: 100%;
+      overflow-y: auto;
+      padding: 20px 24px 60px 24px;
+      scroll-behavior: smooth;
+    }
+
+    .left-pane {
+      border-right: 1px solid var(--border-color);
+      background-color: #0d1424;
+    }
+
+    .right-pane {
+      background-color: var(--bg-body);
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0f172a;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #334155;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #475569;
+    }
+
+    /* Cards & Sections */
+    .panel-card {
+      background: var(--bg-panel);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 18px 20px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .panel-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #fbbf24;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .legend {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    /* Navigator Grid */
+    .nav-grid {
+      display: grid;
+      grid-template-columns: repeat(10, 1fr);
+      gap: 6px;
+    }
+
+    .nav-btn {
+      background: #0f172a;
+      border: 1px solid #334155;
+      color: #cbd5e1;
+      padding: 6px 0;
+      font-size: 0.82rem;
+      border-radius: 6px;
+      text-align: center;
+      font-weight: 600;
+    }
+    .nav-btn:hover {
+      border-color: var(--border-highlight);
+      color: #ffffff;
+    }
+    .nav-btn.answered {
+      background: #2563eb;
+      border-color: #3b82f6;
+      color: #ffffff;
+    }
+    .nav-btn.correct {
+      background: #16a34a;
+      border-color: #22c55e;
+      color: #ffffff;
+    }
+    .nav-btn.wrong {
+      background: #dc2626;
+      border-color: #ef4444;
+      color: #ffffff;
+    }
+
+    /* Score & Radar Report Card */
+    #report-panel {
+      display: none;
+      border: 1px solid #3b82f6;
+      background: linear-gradient(145deg, #162238 0%, #1e293b 100%);
+    }
+
+    .report-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .score-summary {
+      background: rgba(15, 23, 42, 0.65);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      text-align: center;
+      border: 1px solid var(--border-color);
+    }
+
+    .score-big {
+      font-size: 3rem;
+      font-weight: 800;
+      color: #38bdf8;
+      line-height: 1.1;
+      margin: 6px 0;
+    }
+
+    .score-sub {
+      font-size: 0.9rem;
+      color: #cbd5e1;
+      margin-bottom: 12px;
+    }
+
+    .stat-list {
+      text-align: left;
+      font-size: 0.85rem;
+      border-top: 1px solid var(--border-color);
+      padding-top: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .stat-row {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .radar-wrapper {
+      position: relative;
+      height: 230px;
+      width: 100%;
+    }
+
+    .report-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .filter-btn {
+      background: #0f172a;
+      border: 1px solid #334155;
+      color: #cbd5e1;
+      font-size: 0.82rem;
+      padding: 6px 12px;
+    }
+    .filter-btn.active {
+      background: #2563eb;
+      border-color: #3b82f6;
+      color: #fff;
+    }
+
+    .copy-btn {
+      background: #0284c7;
+      color: #fff;
+      font-size: 0.82rem;
+      padding: 6px 12px;
+      margin-left: auto;
+    }
+    .copy-btn:hover {
+      background: #0369a1;
+    }
+
+    /* Reading & Cloze Passages on Left */
+    .passage-card {
+      background: #131d31;
+      border: 1px solid #2a3954;
+      border-radius: var(--radius-md);
+      padding: 16px 18px;
+      margin-bottom: 16px;
+      transition: all 0.3s ease;
+    }
+
+    @keyframes flashBlue {
+      0% { box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.85); border-color: #38bdf8; background: #1a2c4e; }
+      50% { box-shadow: 0 0 22px 4px rgba(56, 189, 248, 0.65); border-color: #7dd3fc; background: #1e355e; }
+      100% { box-shadow: 0 0 0 0 rgba(56, 189, 248, 0); border-color: #2a3954; background: #131d31; }
+    }
+
+    .passage-card.highlight-flash {
+      animation: flashBlue 1.6s ease-out;
+    }
+
+    .passage-badge {
+      display: inline-block;
+      background: rgba(56, 189, 248, 0.15);
+      color: #38bdf8;
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 2px 10px;
+      border-radius: 4px;
+      margin-bottom: 8px;
+    }
+
+    .passage-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #f8fafc;
+      margin-bottom: 10px;
+    }
+
+    .passage-text {
+      font-size: 0.96rem;
+      color: #e2e8f0;
+      line-height: 1.8;
+      text-align: justify;
+    }
+
+    .passage-text p {
+      margin-bottom: 12px;
+      text-indent: 1.5em;
+    }
+
+    .vocab-box {
+      margin-top: 12px;
+      padding: 10px 14px;
+      background: rgba(15, 23, 42, 0.75);
+      border-left: 3px solid #fbbf24;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      color: #cbd5e1;
+    }
+
+    .diagram-box {
+      margin-top: 12px;
+      padding: 12px;
+      background: #0f172a;
+      border: 1px dashed #475569;
+      border-radius: 8px;
+      font-size: 0.86rem;
+      color: #93c5fd;
+      text-align: center;
+    }
+
+    /* Right Pane Question Cards */
+    .section-banner {
+      margin: 6px 0 16px 0;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .section-banner h2 {
+      font-size: 1.12rem;
+      color: #38bdf8;
+    }
+
+    .section-banner p {
+      font-size: 0.84rem;
+      color: var(--text-muted);
+    }
+
+    .question-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 18px 20px;
+      margin-bottom: 18px;
+      transition: border-color 0.2s;
+    }
+
+    .question-card.is-correct {
+      border-color: var(--success);
+    }
+    .question-card.is-wrong {
+      border-color: var(--danger);
+    }
+
+    .q-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .q-num-badge {
+      background: #1e293b;
+      color: #38bdf8;
+      border: 1px solid #334155;
+      padding: 3px 10px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 0.86rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .q-num-badge:hover {
+      background: #2563eb;
+      color: #ffffff;
+      border-color: #3b82f6;
+    }
+
+    .q-tag {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      background: #0f172a;
+      padding: 3px 10px;
+      border-radius: 6px;
+      border: 1px solid #1e293b;
+    }
+
+    .q-stem {
+      font-size: 1rem;
+      color: #f8fafc;
+      margin-bottom: 14px;
+      font-weight: 500;
+      line-height: 1.65;
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .option-label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #0f172a;
+      border: 1px solid #334155;
+      border-radius: var(--radius-md);
+      padding: 10px 14px;
+      cursor: pointer;
+      font-size: 0.94rem;
+      color: #e2e8f0;
+      transition: all 0.15s ease;
+    }
+
+    .option-label:hover:not(.locked) {
+      border-color: #38bdf8;
+      background: #17233b;
+    }
+
+    .option-label.selected {
+      border-color: #3b82f6;
+      background: rgba(37, 99, 235, 0.22);
+      color: #ffffff;
+      font-weight: 600;
+    }
+
+    .option-label.opt-correct {
+      border-color: #22c55e !important;
+      background: var(--success-bg) !important;
+      color: #86efac !important;
+      font-weight: 700;
+    }
+
+    .option-label.opt-wrong {
+      border-color: #ef4444 !important;
+      background: var(--danger-bg) !important;
+      color: #fca5a5 !important;
+      text-decoration: line-through;
+    }
+
+    .option-radio {
+      width: 16px;
+      height: 16px;
+      accent-color: #3b82f6;
+      flex-shrink: 0;
+    }
+
+    /* Detailed Explanation Box */
+    .explanation-box {
+      display: none;
+      margin-top: 16px;
+      padding-top: 14px;
+      border-top: 1px dashed #334155;
+      font-size: 0.9rem;
+      color: #cbd5e1;
+    }
+
+    .ans-banner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(22, 163, 74, 0.18);
+      border: 1px solid rgba(34, 197, 94, 0.45);
+      color: #86efac;
+      padding: 7px 12px;
+      border-radius: 6px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      font-size: 0.88rem;
+    }
+
+    .ans-banner.wrong-banner {
+      background: rgba(220, 38, 38, 0.18);
+      border-color: rgba(239, 68, 68, 0.45);
+      color: #fca5a5;
+    }
+
+    .exp-item {
+      margin-bottom: 8px;
+      line-height: 1.65;
+    }
+
+    .exp-label {
+      color: #f8fafc;
+      font-weight: 700;
+    }
+
+    .exp-distractors {
+      margin: 4px 0 8px 18px;
+      color: #94a3b8;
+    }
+
+    .exp-distractors li {
+      margin-bottom: 4px;
+    }
+
+    .phonetic-tag {
+      display: inline-block;
+      background: #0f172a;
+      border: 1px solid #334155;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-family: "Lucida Sans Unicode", "Arial Unicode MS", sans-serif;
+      color: #fbbf24;
+      font-size: 0.86rem;
+      margin-top: 2px;
+    }
+
+    /* Modals (Parent History & Answer Key Verification) */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(2, 6, 23, 0.82);
+      z-index: 999;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-box {
+      background: #1e293b;
+      border: 1px solid #475569;
+      border-radius: var(--radius-lg);
+      width: 100%;
+      max-width: 820px;
+      max-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 10px 35px rgba(0, 0, 0, 0.6);
+    }
+
+    .modal-head {
+      padding: 16px 20px;
+      border-bottom: 1px solid #334155;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .modal-head h3 {
+      color: #38bdf8;
+      font-size: 1.1rem;
+    }
+
+    .modal-body {
+      padding: 20px;
+      overflow-y: auto;
+      font-size: 0.9rem;
+    }
+
+    table.data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 8px;
+    }
+
+    table.data-table th, table.data-table td {
+      border: 1px solid #334155;
+      padding: 8px 10px;
+      text-align: left;
+    }
+
+    table.data-table th {
+      background: #0f172a;
+      color: #38bdf8;
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #16a34a;
+      color: #fff;
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-weight: 600;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.4);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s;
+      z-index: 1200;
+    }
+    .toast.show {
+      opacity: 1;
+    }
+
+    /* Responsive Mobile/Tablet */
+    @media (max-width: 960px) {
+      .main-container {
+        flex-direction: column;
+        height: auto;
+        overflow: visible;
+      }
+      .left-pane, .right-pane {
+        width: 100%;
+        height: auto;
+        overflow: visible;
+      }
+      .left-pane {
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+      }
+      .options-grid {
+        grid-template-columns: 1fr;
+      }
+      .report-grid {
+        grid-template-columns: 1fr;
+      }
+      .title-area {
+        text-align: left;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Control Bar -->
+  <header class="top-bar">
+    <div class="controls-group">
+      <div class="timer-box">
+        <span>⏱ 倒數：<span id="timer-display">50:00</span></span>
+        <input type="number" id="timer-minutes" value="50" min="0" max="240" title="設定倒數分鐘數 (0~240)" />
+        <span>分</span>
+      </div>
+      <button class="btn-secondary" id="btn-set-time">設定</button>
+      <button class="btn-secondary" id="btn-pause-time">暫停</button>
+      <button class="btn-status" id="status-badge">已作答：0 / 15</button>
+      <button class="btn-submit" id="btn-submit">提交試卷</button>
+      <button class="btn-reset" id="btn-reset">重新測驗 (洗牌)</button>
+    </div>
+
+    <div class="title-area">
+      <h1>
+        <span class="secret-diamond" id="secret-verify-trigger" title="題庫校驗">❖</span>
+        <span id="secret-parent-trigger">國中三年級英文科全真模擬測驗 (50題)</span>
+      </h1>
+      <div class="subtitle">自修範圍 p.34–p.35：閱讀素養《跨國界母愛》與跨域時事《雨水回收》綜合評量</div>
+    </div>
+  </header>
+
+  <!-- Main Dual-Column Workspace -->
+  <div class="main-container">
+    <!-- Left Column: Navigation, Score Report, Passages & Reference -->
+    <aside class="left-pane" id="left-pane">
+      
+      <!-- Post-Submission Diagnostic Report -->
+      <section class="panel-card" id="report-panel">
+        <div class="panel-header">
+          <div class="panel-title">📊 測驗成績與弱點診斷分析報告</div>
+        </div>
+        <div class="report-grid">
+          <div class="score-summary">
+            <div style="font-size: 0.85rem; color: #94a3b8;">總得分 (滿分 100 分)</div>
+            <div class="score-big" id="total-score">0</div>
+            <div class="score-sub" id="correct-count-text">答對 0 / 15 題 (答錯 15 題)</div>
+            <div class="stat-list" id="category-stats">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+          <div class="radar-wrapper">
+            <canvas id="radarChart"></canvas>
+          </div>
+        </div>
+        <div class="report-actions">
+          <button class="filter-btn active" id="filter-all">顯示全部題目</button>
+          <button class="filter-btn" id="filter-wrong">只看錯題 (0)</button>
+          <button class="copy-btn" id="btn-copy-md">📋 一鍵複製錯題筆記 (Markdown)</button>
+        </div>
+      </section>
+
+      <!-- Question Quick Navigator -->
+      <section class="panel-card">
+        <div class="panel-header">
+          <div class="panel-title">🧭 題號快速導覽 (點擊跳轉至該題)</div>
+          <div class="legend">藍：已答 ｜ 綠：答對 ｜ 紅：答錯</div>
+        </div>
+        <div class="nav-grid" id="nav-grid">
+          <!-- Buttons generated dynamically -->
+        </div>
+      </section>
+
+      <!-- Reading & Source Texts Panel -->
+      <section class="panel-card">
+        <div class="panel-header">
+          <div class="panel-title">📖 文本依據與閱讀題組區 (雙向聯動對照)</div>
+        </div>
+        <p style="font-size: 0.84rem; color: var(--text-muted); margin-bottom: 14px;">
+          點擊右側任一題的「第 X 題」徽章，左側將自動捲動並閃爍高亮對應的自修原文段落與重點字彙。
+        </p>
+
+        <!-- Passage 1: Page 34 -->
+        <div class="passage-card" id="passage-p34">
+          <span class="passage-badge">自修 p.34 閱讀素養 ｜ 對應第 1～8、31～35、41～45 題</span>
+          <div class="passage-title">A Mother’s Love Across Borders: Facing Challenges in Taiwan</div>
+          <div class="passage-text">
+            <p>In Taiwan, many children are raised by foreign mothers. These mothers are often called foreign spouses. For most of them, raising a child in a new country is not an easy job. One of the problems is language. Many foreign mothers do not speak Chinese well, so it’s hard for them to help their kids with homework. Their children may also feel shy when using their mother’s language. This would make them miss the chance to learn two cultures. Another problem is that some foreign spouses come from poor families, so they cannot pay for more classes for their children. Also, if they don’t have much education, they may not know how to help their children with their learning.</p>
+            <p>Not having enough family time is another problem. A woman from Vietnam said, “I have to work long hours. After a tiring day, I feel too <u>exhausted</u> to take care of my children and their homework.” Worst of all, discrimination against these foreign mothers and their children is still common. Sometimes, these kids face bullying at school.</p>
+            <p>It is clear that foreign spouses and their kids must deal with these challenges. If we can help them more, they can have a better life here.</p>
+          </div>
+          <div class="vocab-box">
+            <strong>【p.34 核心字彙與片語】</strong><br>
+            border (n.) 國界 ｜ challenge (n.) 挑戰 ｜ spouse (n.) 配偶 ｜ culture (n.) 文化 ｜ discrimination (n.) 歧視 ｜ against (prep.) 針對 ｜ bullying (n.) 霸凌 ｜ deal with (phr.) 處理；解決 ｜ exhausted (adj.) 筋疲力竭的
+          </div>
+        </div>
+
+        <!-- Passage 2: Page 35 -->
+        <div class="passage-card" id="passage-p35">
+          <span class="passage-badge">自修 p.35 跨域時事 ｜ 對應第 9～15、36～40、46～50 題</span>
+          <div class="passage-title">Rainwater Harvesting</div>
+          <div class="passage-text">
+            <p>Did you know that Taiwan is facing water stress? This means that as people living on this island, we should try to save water. Because Taiwan is such a small island, building a new reservoir is very difficult. There are other ways to make the best use of the water we get.</p>
+            <p>Rainwater harvesting is a good idea that some buildings in Taiwan use to save water. We do get a lot of rain here, but most of it goes back into the sea without being used. If we save the rain and use it later, this will fix a lot of problems.</p>
+            <p>Buildings with rainwater harvesting work like this: the rain will run down the roof and into the gutter, where it will go under the ground into the main tank. Before flowing into the main tank, the water will go through a filter, which will make sure that the water kept is clean. This way, we can keep the water from the rain under the house! The water can be used to water plants, wash cars, and more, so it will also help save some money.</p>
+            <p>If this sounds good to you, call <u>us</u> for more information!</p>
+          </div>
+          <div class="diagram-box">
+            <strong>【RAINWATER HARVESTING 系統流程圖解】</strong><br>
+            Rain (雨水) ➔ Roof (屋頂) ➔ Gutter (排水溝) ➔ Filter (過濾器) ➔ Underground Main Tank (地下主儲水槽) ➔ Garden watering (澆花) / Clothes washing (洗衣) / Toilet flushing (沖馬桶) / Car washing (洗車)
+          </div>
+          <div class="vocab-box">
+            <strong>【p.35 核心字彙與片語】</strong><br>
+            rainwater harvesting (n. phr.) 雨水回收 ｜ stress (n.) 壓力 ｜ reservoir (n.) 水庫 ｜ flow (v.) 流動 ｜ make the best use of (phr.) 充分利用 ｜ gutter (n.) 排水溝 ｜ filter (n.) 過濾器
+          </div>
+        </div>
+
+      </section>
+    </aside>
+
+    <!-- Right Column: Question Items -->
+    <main class="right-pane" id="right-pane">
+      <div class="section-banner">
+        <h2>一、核心詞彙與片語運用 (Vocabulary & Idioms)</h2>
+        <p>請根據自修 p.34–35 課文語境、核心字彙表與片語用法，選出最適當的答案（每題 2 分，目前載入第 1～15 題）。</p>
+      </div>
+
+      <div id="questions-container">
+        <!-- Questions rendered dynamically from JSON -->
+      </div>
+    </main>
+  </div>
+
+  <!-- Parent History Modal -->
+  <div class="modal-overlay" id="parent-modal">
+    <div class="modal-box">
+      <div class="modal-head">
+        <h3>🔒 家長監控後台：歷次測驗歷史紀錄表</h3>
+        <button class="btn-secondary" onclick="closeModal('parent-modal')">關閉</button>
+      </div>
+      <div class="modal-body">
+        <p style="color: var(--text-muted); margin-bottom: 10px;">系統自動記錄每次交卷時間、作答耗時、總分與弱點分布，協助追蹤學習誠實度與複習成效。</p>
+        <div id="history-table-wrapper"></div>
+        <div style="margin-top: 14px; text-align: right;">
+          <button class="btn-secondary" style="background: #991b1b;" onclick="clearHistory()">清除歷史紀錄</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Answer Key Verification Modal -->
+  <div class="modal-overlay" id="verify-modal">
+    <div class="modal-box">
+      <div class="modal-head">
+        <h3>❖ 題庫校驗：答案分布與題目總表</h3>
+        <button class="btn-secondary" onclick="closeModal('verify-modal')">關閉</button>
+      </div>
+      <div class="modal-body">
+        <div id="answer-distribution-summary" style="margin-bottom: 12px; padding: 10px; background: #0f172a; border-radius: 6px; color: #fbbf24;"></div>
+        <div id="verify-table-wrapper"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast">已成功複製錯題筆記！</div>
+
+  <script>
+    // =========================================================================
+    // 1. 結構化題庫資料 (JSON 陣列：目前包含第 1～15 題，可於末尾直接擴充至 50 題)
+    // =========================================================================
+    const rawQuestionBank = [
+      {
+        id: 1,
+        section: "一、核心詞彙與片語運用",
+        category: "字彙",
+        subTag: "基礎記憶 | p.34 核心單字",
+        passageId: "passage-p34",
+        question: "Many foreign ______ in Taiwan work very hard to raise their children and learn a new language at the same time.",
+        translation: "在台灣，許多外籍配偶非常努力工作以撫養孩子，並同時學習一門新的語言。",
+        options: [
+          "spouses",
+          "borders",
+          "filters",
+          "reservoirs"
+        ],
+        answerIndex: 0,
+        corePoint: "根據語意「撫養孩子並學習新語言」及課文第一段 'These mothers are often called foreign spouses'，應選 spouses（配偶）。",
+        grammar: "Many (adj.) + foreign (adj.) + spouses (複數可數名詞作主詞) + work (複數動詞)。",
+        distractors: [
+          "(B) borders：意為「國界、邊界」，人無法作為「外籍邊界」，語意不符。",
+          "(C) filters：意為「過濾器」，屬於 p.35 雨水回收裝置名詞，與育兒無關。",
+          "(D) reservoirs：意為「水庫」，為 p.35 蓄水設施名詞，屬干擾單字。"
+        ],
+        phonetics: "spouses /ˈspaʊzɪz/；foreign spouses /ˈfɔrən ˈspaʊzɪz/（注意字尾 -es 發 /ɪz/ 音）"
+      },
+      {
+        id: 2,
+        section: "一、核心詞彙與片語運用",
+        category: "字彙",
+        subTag: "基礎記憶 | p.34 猜測字義",
+        passageId: "passage-p34",
+        question: "After working for twelve hours without a break, Mrs. Nguyen felt too ______ to help her son with his math homework.",
+        translation: "在沒有休息連續工作十二小時後，阮太太感到筋疲力竭，無法幫兒子看數學作業。",
+        options: [
+          "exhausted",
+          "excited",
+          "surprised",
+          "common"
+        ],
+        answerIndex: 0,
+        corePoint: "呼應 p.34 第 36 題課文原句 'After a tiring day, I feel too exhausted to take care of my children'，exhausted 意為「筋疲力竭的（extremely tired）」。",
+        grammar: "feel (連綴動詞) + too + exhausted (過去分詞當形容詞，表人的感受) + to V (太……而不能……)。",
+        distractors: [
+          "(B) excited：意為「感到興奮的」，連續工作 12 小時應是疲累而非興奮，屬形近字誘答。",
+          "(C) surprised：意為「感到驚訝的」，與長時間勞動後的體力透支語意不符。",
+          "(D) common：意為「普遍的、常見的」，通常用來形容事物或現象（如 discrimination is common），不用來形容人工作後的疲態。"
+        ],
+        phonetics: "exhausted /ɪɡˈzɔstɪd/（注意 h 不發音，字首 ex- 在母音前發 /ɪɡz/）"
+      },
+      {
+        id: 3,
+        section: "一、核心詞彙與片語運用",
+        category: "語意邏輯",
+        subTag: "基礎記憶 | p.34 片語運用",
+        passageId: "passage-p34",
+        question: "When new immigrants move to a different country, they often have to ______ many problems, such as language and money.",
+        translation: "當新移民搬到不同的國家時，他們經常必須處理許多問題，例如語言和金錢。",
+        options: [
+          "deal with",
+          "run down",
+          "go through",
+          "pay for"
+        ],
+        answerIndex: 0,
+        corePoint: "課文末段 'foreign spouses and their kids must deal with these challenges'，deal with 意為「處理、應對（問題或挑戰）」。",
+        grammar: "have to (半助動詞，後接原形動詞) + deal with + N. (受詞)。",
+        distractors: [
+          "(B) run down：在 p.35 課文中意為「（雨水）沿著……流下」，不與 problems 搭配。",
+          "(C) go through：在 p.35 課文中意為「通過（過濾器）」，雖有「經歷」之意，但不如 deal with 精準對應「解決處理問題」。",
+          "(D) pay for：在 p.34 課文中意為「支付……的費用（pay for more classes）」，無法搭配「支付問題」。"
+        ],
+        phonetics: "deal with /dil wɪð/（雙母音 /i/ 接 /l/ 時舌尖需上頂齒齦）"
+      },
+      {
+        id: 4,
+        section: "一、核心詞彙與片語運用",
+        category: "字彙",
+        subTag: "基礎記憶 | p.34 核心單字",
+        passageId: "passage-p34",
+        question: "Learning both their father’s and mother’s languages gives children a great chance to understand two different ______.",
+        translation: "同時學習父親和母親的語言，給了孩子了解兩種不同文化的絕佳機會。",
+        options: [
+          "cultures",
+          "challenges",
+          "gutters",
+          "plants"
+        ],
+        answerIndex: 0,
+        corePoint: "對應 p.34 課文 'This would make them miss the chance to learn two cultures'，學習雙親母語能認識兩種「文化（cultures）」。",
+        grammar: "understand (及物動詞) + two (數詞) + different (形容詞) + cultures (複數名詞)。",
+        distractors: [
+          "(B) challenges：意為「挑戰」，學習雙語帶來的正面機會應是理解文化，而非僅理解挑戰。",
+          "(C) gutters：意為「排水溝」，為 p.35 建築構造單字，語意完全不合。",
+          "(D) plants：意為「植物」，出自 p.35 'water plants'，屬跨頁單字干擾。"
+        ],
+        phonetics: "cultures /ˈkʌltʃɚz/（注意 -ture 發 /tʃɚ/，複數加 -s 發濁音 /z/）"
+      },
+      {
+        id: 5,
+        section: "一、核心詞彙與片語運用",
+        category: "字彙",
+        subTag: "基礎記憶 | p.34 核心單字",
+        passageId: "passage-p34",
+        question: "Everyone should be treated fairly. We must say no to any kind of ______ against people from other countries.",
+        translation: "每個人都應該受到公平對待。我們必須對任何針對外國人的歧視說不。",
+        options: [
+          "discrimination",
+          "education",
+          "information",
+          "harvesting"
+        ],
+        answerIndex: 0,
+        corePoint: "根據前句「每個人應被公平對待」及介系詞 against 搭配，應選 discrimination（歧視），出自課文 'discrimination against these foreign mothers'。",
+        grammar: "any kind of + 不可數抽象名詞 (discrimination) + against + N. (針對……的歧視)。",
+        distractors: [
+          "(B) education：意為「教育」，出自 p.34 'don't have much education'，不能說「反對針對外國人的教育」。",
+          "(C) information：意為「資訊」，出自 p.35 'call us for more information'，不與 against 連用。",
+          "(D) harvesting：意為「採收、收集」，出自 p.35 'Rainwater harvesting'，字尾同為 -ing/-tion 具視覺干擾。"
+        ],
+        phonetics: "discrimination /dɪˌskrɪməˈneʃən/（重音在倒數第二音節 -na-）"
+      },
+      {
+        id: 6,
+        section: "一、核心詞彙與片語運用",
+        category: "字彙",
+        subTag: "基礎記憶 | p.34 核心單字",
+        passageId: "passage-p34",
+        question: "Schools should create a safe environment so that students will never face ______ from their classmates.",
+        translation: "學校應該營造安全的環境，好讓學生永遠不會面臨來自同學的霸凌。",
+        options: [
+          "bullying",
+          "flowing",
+          "flushing",
+          "washing"
+        ],
+        answerIndex: 0,
+        corePoint: "對應 p.34 課文原句 'Sometimes, these kids face bullying at school'，安全環境是為了避免「霸凌（bullying）」。",
+        grammar: "face (及物動詞，面臨) + bullying (動名詞/不可數名詞作受詞)。",
+        distractors: [
+          "(B) flowing：意為「流動」，出自 p.35 'Before flowing into the main tank'。",
+          "(C) flushing：意為「沖洗（馬桶）」，出自 p.35 圖解 'Toilet flushing'。",
+          "(D) washing：意為「清洗」，出自 p.35 圖解 'Clothes washing / Car washing'。"
+        ],
+        phonetics: "bullying /ˈbʊlɪɪŋ/（注意 u 發短母音 /ʊ/，而非 /ʌ/）"
+      },
+      {
+        id: 7,
+        section: "一、核心詞彙與片語運用",
+        category: "字彙",
+        subTag: "基礎記憶 | p.34 核心單字",
+        passageId: "passage-p34",
+        question: "Starting a new life across national ______ takes a lot of courage because everything feels unfamiliar at first.",
+        translation: "跨越國界展開新生活需要很大的勇氣，因為起初一切都感覺很陌生。",
+        options: [
+          "borders",
+          "tanks",
+          "roofs",
+          "toilets"
+        ],
+        answerIndex: 0,
+        corePoint: "對應 p.34 標題 'A Mother's Love Across Borders' 及單字表 border（國界），across national borders 意為「跨越國界」。",
+        grammar: "across (介系詞，橫越) + national (形容詞) + borders (複數名詞)。",
+        distractors: [
+          "(B) tanks：意為「儲水槽」，出自 p.35 'main tank'，無法與「展開新生活」搭配。",
+          "(C) roofs：意為「屋頂」，出自 p.35 'run down the roof'。",
+          "(D) toilets：意為「馬桶」，出自 p.35 圖解 'Toilet flushing'。"
+        ],
+        phonetics: "borders /ˈbɔrdɚz/（注意 or 發 /ɔr/，與 boarder 同音）"
+      },
+      {
+        id: 8,
+        section: "一、核心詞彙與片語運用",
+        category: "字彙",
+        subTag: "基礎記憶 | p.34 核心單字",
+        passageId: "passage-p34",
+        question: "Learning to speak and write Chinese well is one of the biggest ______ for mothers who just moved to Taiwan.",
+        translation: "學會流利地說和寫中文，對剛搬來台灣的母親而言是最大的挑戰之一。",
+        options: [
+          "challenges",
+          "chances",
+          "stress",
+          "islands"
+        ],
+        answerIndex: 0,
+        corePoint: "由句型 'one of the + 最高級 + 複數名詞' 及文意「剛搬來就要學好中文」可知為「挑戰（challenges）」。",
+        grammar: "one of the + biggest (最高級) + challenges (必須用複數可數名詞)。",
+        distractors: [
+          "(B) chances：意為「機會」，字形與 challenges 極為相似（形近字誘答），但文意強調克服困難，故選 challenges。",
+          "(C) stress：意為「壓力」，為不可數名詞，無法放入 'one of the + 複數名詞' 結構中。",
+          "(D) islands：意為「島嶼」，出自 p.35 'on this island'，語意不合。"
+        ],
+        phonetics: "challenges /ˈtʃælɪndʒɪz/（字首 ch 發 /tʃ/，字尾 -ges 發 /dʒɪz/）"
+      },
+      {
+        id: 9,
+        section: "一、核心詞彙與片語運用",
+        category: "字彙",
+        subTag: "基礎記憶 | p.35 核心單字",
+        passageId: "passage-p35",
+        question: "When it does not rain for several months, the water level in the ______ drops quickly and causes water shortages.",
+        translation: "當連續幾個月沒有下雨時，水庫的水位會迅速下降並造成缺水。",
+        options: [
+          "reservoir",
+          "gutter",
+          "filter",
+          "garden"
+        ],
+        answerIndex: 0,
+        corePoint: "對應 p.35 課文 'building a new reservoir is very difficult'，儲水並受降雨量影響水位的大型設施為「水庫（reservoir）」。",
+        grammar: "in the + reservoir (單數可數名詞，表特定水庫) + drops (第三人稱單數動詞)。",
+        distractors: [
+          "(B) gutter：意為「排水溝」，僅在降雨時導水，不會長期蓄水並有水位高低變化。",
+          "(C) filter：意為「過濾器」，功能是淨化水質而非蓄水。",
+          "(D) garden：意為「花園」，出自 p.35 圖解 'Garden watering'，非儲水設施。"
+        ],
+        phonetics: "reservoir /ˈrɛzɚˌvwɑr/（源自法語，注意字尾 -voir 發 /vwɑr/）"
+      },
+      {
+        id: 10,
+        section: "一、核心詞彙與片語運用",
+        category: "字彙",
+        subTag: "基礎記憶 | p.35 核心單字",
+        passageId: "passage-p35",
+        question: "Taiwan is facing serious water ______ because of its small land area and high population density.",
+        translation: "由於土地面積小且人口密度高，台灣正面臨嚴重的缺水壓力。",
+        options: [
+          "stress",
+          "rain",
+          "education",
+          "homework"
+        ],
+        answerIndex: 0,
+        corePoint: "直接對應 p.35 課文首句 'Did you know that Taiwan is facing water stress?'，water stress 為環境科學專有名詞「水資源壓力／缺水壓力」。",
+        grammar: "is facing (現在進行式及物動詞) + serious (形容詞) + water stress (複合不可數名詞)。",
+        distractors: [
+          "(B) rain：意為「雨水」，課文提到 'We do get a lot of rain here'，台灣並非沒有雨，而是留不住水。",
+          "(C) education：意為「教育」，出自 p.34，與水資源無關。",
+          "(D) homework：意為「家庭作業」，出自 p.34，語意不符。"
+        ],
+        phonetics: "water stress /ˈwɔtɚ strɛs/（注意 st- 連音不送氣，發 /sd/ 音感）"
+      },
+      {
+        id: 11,
+        section: "一、核心詞彙與片語運用",
+        category: "字彙",
+        subTag: "基礎記憶 | p.35 核心單字",
+        passageId: "passage-p35",
+        question: "Before going into the underground tank, rainwater passes through a ______ to remove leaves and dirt.",
+        translation: "在進入地下儲水槽之前，雨水會經過一個過濾器以去除樹葉和泥沙。",
+        options: [
+          "filter",
+          "roof",
+          "sea",
+          "house"
+        ],
+        answerIndex: 0,
+        corePoint: "對應 p.35 課文 'Before flowing into the main tank, the water will go through a filter, which will make sure that the water kept is clean.'。",
+        grammar: "pass through (穿過) + a + filter (單數可數名詞) + to remove... (表目的不定詞片語)。",
+        distractors: [
+          "(B) roof：意為「屋頂」，雨水是從屋頂流下（run down the roof），而非穿過屋頂過濾雜質。",
+          "(C) sea：意為「大海」，課文指未回收的雨水會流回大海（goes back into the sea）。",
+          "(D) house：意為「房子」，儲水槽位於房子底下（under the house），房子本身不是過濾裝置。"
+        ],
+        phonetics: "filter /ˈfɪltɚ/（字尾 -er 捲舌音 /ɚ/）"
+      },
+      {
+        id: 12,
+        section: "一、核心詞彙與片語運用",
+        category: "字彙",
+        subTag: "基礎記憶 | p.35 核心單字",
+        passageId: "passage-p35",
+        question: "In the rainy season, rivers ______ quickly down the mountains and carry a lot of water into the ocean.",
+        translation: "在雨季時，河水迅速地從山上流下，並將大量的水帶入海洋。",
+        options: [
+          "flow",
+          "save",
+          "build",
+          "wash"
+        ],
+        answerIndex: 0,
+        corePoint: "對應 p.35 單字表 flow（流動）及課文 'Before flowing into the main tank'，形容液體「流動」用 flow。",
+        grammar: "rivers (複數主詞) + flow (不及物動詞原形，表自然現象真理) + quickly (副詞修飾動詞)。",
+        distractors: [
+          "(B) save：意為「節省、儲存」，河水往海裡流是流失而非節省。",
+          "(C) build：意為「建造」，主詞為 rivers，河水無法執行建造動作。",
+          "(D) wash：意為「清洗」，及物動詞用法不符 'wash down the mountains' 語意。"
+        ],
+        phonetics: "flow /flo/（長雙母音 /o/，注意與 floor /flɔr/ 區分）"
+      },
+      {
+        id: 13,
+        section: "一、核心詞彙與片語運用",
+        category: "語意邏輯",
+        subTag: "基礎記憶 | p.35 固定片語",
+        passageId: "passage-p35",
+        question: "Since fresh water is precious on this island, we should learn how to ______ every drop of rain we collect.",
+        translation: "既然淡水在這座島上非常珍貴，我們應該學習如何充分利用我們收集到的每一滴雨水。",
+        options: [
+          "make the best use of",
+          "take care of",
+          "pay for",
+          "deal with"
+        ],
+        answerIndex: 0,
+        corePoint: "對應 p.35 課文 'There are other ways to make the best use of the water we get'，意為「充分利用……」。",
+        grammar: "learn + how to + make the best use of (片語動詞) + N. (受詞)。",
+        distractors: [
+          "(B) take care of：出自 p.34 'take care of my children'，意為「照顧」，受詞通常為人或寵物，不搭配「一滴雨水」。",
+          "(C) pay for：出自 p.34 'pay for more classes'，意為「付錢購買」，雨水是天然收集而來，不需付費。",
+          "(D) deal with：出自 p.34 'deal with these challenges'，意為「處理（困難或問題）」，珍貴的雨水是資源而非麻煩。"
+        ],
+        phonetics: "make the best use of /mek ðə bɛst jus əv/（注意 use 作名詞時字尾 s 發清音 /s/，動詞才發 /z/）"
+      },
+      {
+        id: 14,
+        section: "一、核心詞彙與片語運用",
+        category: "字彙",
+        subTag: "基礎記憶 | p.35 課文細節單字",
+        passageId: "passage-p35",
+        question: "If leaves block the ______ along the edge of the roof, rainwater will overflow instead of going into the pipe.",
+        translation: "如果樹葉堵住了屋頂邊緣的排水溝，雨水就會滿溢出來，而不會流入水管中。",
+        options: [
+          "gutter",
+          "tank",
+          "country",
+          "chance"
+        ],
+        answerIndex: 0,
+        corePoint: "對應 p.35 課文 'the rain will run down the roof and into the gutter' 及系統圖解，屋頂邊緣承接雨水的溝槽稱為 gutter（排水溝）。",
+        grammar: "block (及物動詞) + the + gutter (單數可數名詞) + along the edge of the roof (介系詞片語作後位修飾)。",
+        distractors: [
+          "(B) tank：意為「儲水槽」，位於地下（under the ground），不在屋頂邊緣。",
+          "(C) country：意為「國家」，出自 p.34 'in a new country'，語意不合。",
+          "(D) chance：意為「機會」，出自 p.34 'miss the chance'，抽象名詞無法被樹葉堵住。"
+        ],
+        phonetics: "gutter /ˈɡʌtɚ/（短母音 /ʌ/，美式英語 tt 夾在母音間常閃音化類似 /d/）"
+      },
+      {
+        id: 15,
+        section: "一、核心詞彙與片語運用",
+        category: "字彙",
+        subTag: "基礎記憶 | p.35 複合名詞",
+        passageId: "passage-p35",
+        question: "______ is an eco-friendly way for modern buildings to collect rain from roofs and reuse it for daily cleaning.",
+        translation: "雨水回收是現代建築從屋頂收集雨水並將其重複用於日常清潔的一種環保方式。",
+        options: [
+          "Rainwater harvesting",
+          "Garden watering",
+          "Toilet flushing",
+          "Car washing"
+        ],
+        answerIndex: 0,
+        corePoint: "對應 p.35 標題與主旨 'Rainwater harvesting is a good idea that some buildings in Taiwan use to save water.'。",
+        grammar: "Rainwater harvesting (複合動名詞片語當主詞，視為單數) + is (單數動詞)。",
+        distractors: [
+          "(B) Garden watering：意為「花園澆水」，是回收雨水後的「用途」之一，而非收集雨水的系統名稱。",
+          "(C) Toilet flushing：意為「馬桶沖水」，同為回收雨水的下游用途。",
+          "(D) Car washing：意為「洗車」，亦為回收雨水後的用途，非收集系統本身。"
+        ],
+        phonetics: "Rainwater harvesting /ˈrenˌwɔtɚ ˈhɑrvɪstɪŋ/（複合名詞重音落在第一個字 Rain-）"
+      },
+      {
+        id: 16,
+        section: "二、文法與句型結構",
+        category: "文法",
+        subTag: "中階應用 | 關係子句與先行詞",
+        passageId: "passage-p35",
+        question: "Rainwater harvesting is a practical method ______ several modern buildings in Taiwan use to reduce daily tap water consumption.",
+        translation: "雨水回收是台灣幾棟現代建築用來減少日常自來水消耗的一種實用方法。",
+        options: [
+          "which",
+          "who",
+          "where",
+          "what"
+        ],
+        answerIndex: 0,
+        corePoint: "對應 p.35 課文句型 'Rainwater harvesting is a good idea that some buildings in Taiwan use to save water.'。先行詞 a practical method 為事物，且後方 'several modern buildings... use [__]' 缺受詞，故用關係代名詞 which 或 that。",
+        grammar: "先行詞 (a practical method, 事物) + 關係代名詞 which (作 use 的受詞，可省略) + S (several modern buildings...) + V (use) + to V (目的)。",
+        distractors: [
+          "(B) who：先行詞為「人」時才使用，不可指代「方法（method）」。",
+          "(C) where：為關係副詞，表地點且後方子句須為完整句（不缺主詞或受詞）；此處 use 缺少受詞，不可用 where。",
+          "(D) what：複合關係代名詞，本身已包含先行詞（= the thing which），前方不可再出現先行詞 a practical method。"
+        ],
+        phonetics: "method that /ˈmɛθəd ðæt/；which several /wɪtʃ ˈsɛvərəl/（注意 method 字尾 /θ/ 咬舌清音）"
+      },
+      {
+        id: 17,
+        section: "二、文法與句型結構",
+        category: "文法",
+        subTag: "中階應用 | 動名詞作主詞",
+        passageId: "passage-p34",
+        question: "______ enough time with their children is difficult for foreign spouses who work long hours every day.",
+        translation: "對每天長時間工作的異國配偶而言，花足夠的時間陪伴孩子是很困難的。",
+        options: [
+          "Spending",
+          "Spend",
+          "Spent",
+          "Spends"
+        ],
+        answerIndex: 0,
+        corePoint: "對應 p.34 第二段首句 'Not having enough family time is another problem.'。單一動作或事件作句首主詞時，須使用動名詞（V-ing），動詞視為單數（is difficult）。",
+        grammar: "動名詞片語 Spending enough time with their children (單數主詞) + is (單數 be 動詞) + difficult (形容詞)。",
+        distractors: [
+          "(B) Spend：原形動詞不可直接作句首主詞（祈使句除外，但此句已有主要動詞 is）。",
+          "(C) Spent：過去分詞或過去式動詞，皆不能直接作主詞。",
+          "(D) Spends：第三人稱單數現在式動詞，不能作主詞。"
+        ],
+        phonetics: "Spending enough /ˈspɛndɪŋ ɪˈnʌf/（注意 spending 字尾 -ing 連讀 enough 時可順暢銜接母音 /ɪ/）"
+      },
+      {
+        id: 18,
+        section: "二、文法與句型結構",
+        category: "文法",
+        subTag: "中階應用 | 虛主詞 It 句型",
+        passageId: "passage-p34",
+        question: "Because many foreign mothers are not familiar with Chinese yet, ______ hard for them to explain school assignments clearly.",
+        translation: "因為許多外籍母親對中文還不熟悉，所以對她們來說清楚解釋學校作業很困難。",
+        options: [
+          "it is",
+          "they are",
+          "there is",
+          "that has"
+        ],
+        answerIndex: 0,
+        corePoint: "改寫自 p.34 第一段 'it’s hard for them to help their kids with homework.'。標準句型為 It is + adj. + for + O. + to V.，it 為形式主詞，真正主詞為後方不定詞片語。",
+        grammar: "It (形式主詞) + is + hard (adj.) + for them (受格受詞) + to explain... (真正主詞)。",
+        distractors: [
+          "(B) they are：常見中式直譯錯誤，學生常誤把後面的 them 轉成主詞 they，忽略真正困難的是「解釋作業這件事」而非人。",
+          "(C) there is：表「某地有某物」，後通常接名詞，不接形容詞 hard 與不定詞 to V。",
+          "(D) that has：代名詞與動詞搭配錯誤，不符合 'It is adj. for sb. to V.' 結構。"
+        ],
+        phonetics: "it is hard /ɪt ɪz hɑrd/（口語常縮略為 it’s hard /ɪts hɑrd/，注意 h 發音清楚）"
+      },
+      {
+        id: 19,
+        section: "二、文法與句型結構",
+        category: "文法",
+        subTag: "中階應用 | 疑問詞 + 不定詞",
+        passageId: "passage-p34",
+        question: "If parents do not have much formal education, they may not know ______ their children with daily study.",
+        translation: "如果父母沒有受過太多正式教育，他們可能不知道該如何協助孩子的日常學習。",
+        options: [
+          "how to help",
+          "what to help",
+          "how helping",
+          "what helping"
+        ],
+        answerIndex: 0,
+        corePoint: "對應 p.34 第一段末句 'they may not know how to help their children with their learning.'。help sb. with sth. 為完整及物結構，詢問「方式／方法」應使用疑問詞 how + to V。",
+        grammar: "know + how to help (疑問詞 + 不定詞作 know 的受詞) + their children + with daily study。",
+        distractors: [
+          "(B) what to help：what 多作代名詞缺受詞，而 help 已有受詞 their children，語法與語意皆不自然。",
+          "(C) how helping：疑問詞後應接原形不定詞 to V，不可直接接動名詞 V-ing。",
+          "(D) what helping：同時違反疑問詞語意與不定詞結構規則。"
+        ],
+        phonetics: "how to help /haʊ tə hɛlp/（弱讀時 to 常弱化為 /tə/）"
+      },
+      {
+        id: 20,
+        section: "二、文法與句型結構",
+        category: "文法",
+        subTag: "中階應用 | 使役動詞 make 用法",
+        passageId: "passage-p34",
+        question: "Feeling shy about speaking their mother tongue can ______ children miss the chance to learn two cultures.",
+        translation: "對說母語感到害羞，可能會讓孩子錯失學習兩種文化的機會。",
+        options: [
+          "make",
+          "let’s",
+          "have to",
+          "want"
+        ],
+        answerIndex: 0,
+        corePoint: "改寫自 p.34 第一段 'This would make them miss the chance to learn two cultures.'。助動詞 can 後接原形動詞 make（使役動詞），使役動詞後接受詞與原形動詞 miss（不加 to）。",
+        grammar: "can (情態助動詞) + make (使役動詞原形) + children (受詞) + miss (原形動詞作受詞補語)。",
+        distractors: [
+          "(B) let’s：let’s 是 let us 的縮寫，表「讓我們一起……」，不能放在助動詞 can 之後。",
+          "(C) have to：意為「必須」，語意上無法使孩子「必須錯失機會」。",
+          "(D) want：want 作及物動詞時，後接受詞須用 want sb. to V.，不能直接接原形動詞 miss。"
+        ],
+        phonetics: "make children miss /mek ˈtʃɪldrən mɪs/（注意 miss 的原形動詞不加 to）"
+      },
+      {
+        id: 21,
+        section: "二、文法與句型結構",
+        category: "文法",
+        subTag: "中階應用 | 介系詞 + 動名詞",
+        passageId: "passage-p35",
+        question: "Most of the rainwater in Taiwan flows back into the sea without ______ used if we do not collect it.",
+        translation: "如果我們不收集雨水，台灣大部分的雨水在沒有被利用的情況下就會流回大海。",
+        options: [
+          "being",
+          "be",
+          "been",
+          "is"
+        ],
+        answerIndex: 0,
+        corePoint: "對應 p.35 第二段 'most of it goes back into the sea without being used.'。介系詞 without 後須接動名詞；雨水是「被使用」，故用被動動名詞 being + p.p. (used)。",
+        grammar: "without (介系詞) + being used (被動動名詞，表「未被使用」)。",
+        distractors: [
+          "(B) be：介系詞後不可直接接動詞原形 be。",
+          "(C) been：過去分詞不能單獨緊接在介系詞 without 之後。",
+          "(D) is：定式動詞不能直接放在介系詞 without 之後。"
+        ],
+        phonetics: "without being used /wɪˈðaʊt ˈbiɪŋ juzd/（注意 used 在此作過去分詞表「被使用」，發 /juzd/）"
+      },
+      {
+        id: 22,
+        section: "二、文法與句型結構",
+        category: "文法",
+        subTag: "中階應用 | 介系詞後接動名詞",
+        passageId: "passage-p35",
+        question: "______ into the underground main tank, rainwater goes through a filter to keep it clean.",
+        translation: "在流入地下主儲水槽之前，雨水會經過過濾器以保持水質乾淨。",
+        options: [
+          "Before flowing",
+          "Before flow",
+          "After flowed",
+          "Before flows"
+        ],
+        answerIndex: 0,
+        corePoint: "直接對應 p.35 第三段 'Before flowing into the main tank, the water will go through a filter...'。before 在此為介系詞，後接動名詞 flowing。",
+        grammar: "Before (介系詞) + flowing into the main tank (動名詞片語) + , + 主要子句。",
+        distractors: [
+          "(B) Before flow：介系詞後不可直接用動詞原形 flow。",
+          "(C) After flowed：時態與邏輯錯誤，雨水是在「進入儲水槽之前」先經過濾器，且 flowed 非正確分詞形式。",
+          "(D) Before flows：介系詞後不接第三人稱單數定式動詞 flows。"
+        ],
+        phonetics: "Before flowing /bɪˈfɔr ˈfloɪŋ/（注意 flowing 為兩音節 /ˈflo-ɪŋ/）"
+      },
+      {
+        id: 23,
+        section: "二、文法與句型結構",
+        category: "文法",
+        subTag: "中階應用 | 祈使句與條件句",
+        passageId: "passage-p35",
+        question: "______ we save rainwater during heavy storms and use it later, we can solve many water problems.",
+        translation: "如果我們在豪雨期間儲存雨水並在之後使用，就能解決許多缺水問題。",
+        options: [
+          "If",
+          "Unless",
+          "Although",
+          "Before"
+        ],
+        answerIndex: 0,
+        corePoint: "對應 p.35 第二段末句 'If we save the rain and use it later, this will fix a lot of problems.'。連接詞 If 引導條件副詞子句，表「如果」。",
+        grammar: "If + S + V (現在式表未來或通則條件) + , + S + can/will + V (主要子句)。",
+        distractors: [
+          "(B) Unless：意為「除非（= if not）」，若填入會變成「除非我們存雨水，否則能解決問題」，邏輯矛盾。",
+          "(C) Although：意為「雖然」，表讓步轉折，不符合條件因果關係。",
+          "(D) Before：意為「在……之前」，無法表達「存水後解決問題」的條件推論。"
+        ],
+        phonetics: "If we save /ɪf wi sev/（注意 save 字尾 v 需輕咬下唇發濁音 /v/）"
+      },
+      {
+        id: 24,
+        section: "二、文法與句型結構",
+        category: "文法",
+        subTag: "中階應用 | 動名詞片語作主詞",
+        passageId: "passage-p35",
+        question: "______ a new reservoir on a small island like Taiwan is not easy because of limited land.",
+        translation: "像台灣這樣的小島要建造一座新水庫並不容易，因為土地有限。",
+        options: [
+          "Building",
+          "Build",
+          "Built",
+          "Builds"
+        ],
+        answerIndex: 0,
+        corePoint: "對應 p.35 第一段 'Because Taiwan is such a small island, building a new reservoir is very difficult.'。動名詞 Building a new reservoir 作主詞，後接單數動詞 is。",
+        grammar: "動名詞片語 Building a new reservoir (單數主詞) + is + not easy (形容詞補語)。",
+        distractors: [
+          "(B) Build：動詞原形不可直接作句首主詞。",
+          "(C) Built：過去式或過去分詞不可直接作主詞。",
+          "(D) Builds：第三人稱單數動詞不可直接作主詞。"
+        ],
+        phonetics: "Building a new /ˈbɪldɪŋ ə nu/（注意 build 字尾 d 與 -ing 連讀為 /ˈbɪldɪŋ/）"
+      },
+      {
+        id: 25,
+        section: "二、文法與句型結構",
+        category: "文法",
+        subTag: "中階應用 | 被動語態與分詞後位修飾",
+        passageId: "passage-p34",
+        question: "In many communities in Taiwan, young children ______ by their mothers and grandmothers at home.",
+        translation: "在台灣許多社區裡，年幼的孩子是由母親和祖母在家中撫養長大的。",
+        options: [
+          "are raised",
+          "raise",
+          "are raising",
+          "raised"
+        ],
+        answerIndex: 0,
+        corePoint: "對應 p.34 首句 'In Taiwan, many children are raised by foreign mothers.'。主詞 young children 與動詞 raise 之間為被動關係（孩子「被撫養」），故用被動語態 be + p.p. (are raised)。",
+        grammar: "young children (複數主詞) + are raised (現在式被動語態) + by their mothers and grandmothers。",
+        distractors: [
+          "(B) raise：主動語態，若用 raise 則主詞 children 變成「撫養別人」，語意顛倒。",
+          "(C) are raising：現在進行式主動語態，不符合「孩子被照顧」的被動語意。",
+          "(D) raised：過去式主動或過去分詞，單獨使用缺少 be 動詞構成完整謂語。"
+        ],
+        phonetics: "are raised /ɑr rezd/（注意 raise 發 /rez/，字尾 s 發濁音 /z/）"
+      },
+      {
+        id: 26,
+        section: "二、文法與句型結構",
+        category: "文法",
+        subTag: "中階應用 | 頻率副詞與 be 動詞位置",
+        passageId: "passage-p34",
+        question: "Foreign mothers who come to a new country ______ as foreign spouses in daily conversations.",
+        translation: "來到新國家的外籍母親，在日常對話中經常被稱為外籍配偶。",
+        options: [
+          "are often called",
+          "often are called",
+          "call often",
+          "are calling often"
+        ],
+        answerIndex: 0,
+        corePoint: "對應 p.34 第一段 'These mothers are often called foreign spouses.'。頻率副詞 often 須放在 be 動詞（are）之後、過去分詞（called）之前。",
+        grammar: "主詞 (Foreign mothers who...) + be 動詞 (are) + 頻率副詞 (often) + 過去分詞 (called) + as + N.。",
+        distractors: [
+          "(B) often are called：國三會考高頻考點，頻率副詞置於 be 動詞「前」為錯誤詞序。",
+          "(C) call often：主動語態且位置錯誤，母親是「被稱呼」而非主動稱呼別人。",
+          "(D) are calling often：進行式主動語態，不符合被動語意。"
+        ],
+        phonetics: "are often called /ɑr ˈɔfən kɔld/（注意 often 的 t 通常不發音，發 /ˈɔfən/）"
+      },
+      {
+        id: 27,
+        section: "二、文法與句型結構",
+        category: "文法",
+        subTag: "中階應用 | 助動詞 do 強調句型",
+        passageId: "passage-p35",
+        question: "Taiwan is an island with rich rainfall; we ______ get a lot of rain, though most of it flows into the sea.",
+        translation: "台灣是一座雨量豐富的島嶼；我們確實下了很多雨，雖然大部分都流進了大海。",
+        options: [
+          "do",
+          "does",
+          "are",
+          "were"
+        ],
+        answerIndex: 0,
+        corePoint: "對應 p.35 第二段 'We do get a lot of rain here...'。在肯定句中於原形動詞前加上助動詞 do / does / did，表示「確實、真的」的強調語氣；主詞為 we，故用 do。",
+        grammar: "we (第一人稱複數主詞) + do (強調助動詞) + get (原形動詞) + a lot of rain。",
+        distractors: [
+          "(B) does：主詞為 we，不可搭配第三人稱單數助動詞 does。",
+          "(C) are：be 動詞不能直接放在原形動詞 get 前面構成強調句型。",
+          "(D) were：過去式 be 動詞，且時態與後方現在式 flows 不一致。"
+        ],
+        phonetics: "do get /du ɡɛt/（強調語氣時 do 發重讀 /du/，而非弱讀 /də/）"
+      },
+      {
+        id: 28,
+        section: "二、文法與句型結構",
+        category: "文法",
+        subTag: "中階應用 | 不可數名詞與 much 修飾",
+        passageId: "passage-p34",
+        question: "If a mother does not have ______ formal education, she may find it hard to guide her kids’ schoolwork.",
+        translation: "如果一位母親沒有受過太多正式教育，她可能會覺得引導孩子的課業很困難。",
+        options: [
+          "much",
+          "many",
+          "a few",
+          "several"
+        ],
+        answerIndex: 0,
+        corePoint: "對應 p.34 第一段 'if they don’t have much education...'。education 為不可數名詞，否定句中表示「許多」須用 much。",
+        grammar: "does not have + much (修飾不可數名詞) + formal education (不可數名詞)。",
+        distractors: [
+          "(B) many：many 修飾「可數複數名詞」，不可修飾不可數名詞 education。",
+          "(C) a few：意為「有一些（正面）」，修飾可數複數名詞，與否定句 don't have 語意衝突。",
+          "(D) several：意為「幾個」，僅修飾可數複數名詞。"
+        ],
+        phonetics: "much education /mʌtʃ ˌɛdʒəˈkeʃən/（注意 education 重音在 -ka- /ˌɛdʒəˈkeʃən/）"
+      },
+      {
+        id: 29,
+        section: "二、文法與句型結構",
+        category: "文法",
+        subTag: "中階應用 | 分詞作形容詞修飾名詞",
+        passageId: "passage-p35",
+        question: "Using a filter before the tank helps make sure that the water ______ in the system stays clean.",
+        translation: "在儲水槽前使用過濾器，有助於確保系統中儲存的水保持乾淨。",
+        options: [
+          "kept",
+          "keep",
+          "keeping",
+          "keeps"
+        ],
+        answerIndex: 0,
+        corePoint: "對應 p.35 第三段 'which will make sure that the water kept is clean.'。the water 與 keep 之間為被動關係（水「被留存」），故用過去分詞 kept 作後位修飾。",
+        grammar: "the water + kept (過去分詞片語作後位修飾，= that is kept) + is (單數動詞) + clean (形容詞)。",
+        distractors: [
+          "(B) keep：原形動詞不能直接作名詞 water 的後位修飾。",
+          "(C) keeping：現在分詞表主動進行，水無法主動「保存」自己。",
+          "(D) keeps：定式動詞，句子已有主要動詞 is，不可再出現未連接的定式動詞 keeps。"
+        ],
+        phonetics: "water kept /ˈwɔtɚ kɛpt/（注意 kept 字尾 p 與 is 連讀）"
+      },
+      {
+        id: 30,
+        section: "二、文法與句型結構",
+        category: "文法",
+        subTag: "中階應用 | 情態副詞與句首語氣",
+        passageId: "passage-p34",
+        question: "______, discrimination against foreign mothers and their children still happens in some places.",
+        translation: "最糟糕的是，針對外籍母親及其子女的歧視在某些地方仍然發生。",
+        options: [
+          "Worst of all",
+          "First of all",
+          "In a word",
+          "At first"
+        ],
+        answerIndex: 0,
+        corePoint: "直接對應 p.34 第二段 'Worst of all, discrimination against these foreign mothers and their children is still common.'。Worst of all 用於列舉多項問題後引出「最嚴重、最糟糕的一點」。",
+        grammar: "Worst of all (最高級片語作句首插入語) + , + 完整敘述句。",
+        distractors: [
+          "(B) First of all：意為「首先」，通常用於列舉第一點，而非放在前面幾項困難之後總結最嚴重的問題。",
+          "(C) In a word：意為「總而言之」，表歸納總結，不符合此處凸顯最惡劣情況的語境。",
+          "(D) At first：意為「起初、一開始」，強調時間先後對比（常與 later 或 then 相對）。"
+        ],
+        phonetics: "Worst of all /wɜrst əv ɔl/（注意 worst 字尾 -rst 音群，all 發 /ɔl/）"
+      },
+
+      // =======================================================================
+      // 三、綜合克漏字測驗 (Cloze Test) — 第 31～40 題（每篇 5 題，共 2 篇）
+      // =======================================================================
+      {
+        id: 31,
+        section: "三、綜合克漏字測驗",
+        category: "語意邏輯",
+        subTag: "中階應用 | 克漏字篇一 (p.34 延伸) 第 1 題",
+        passageId: "passage-p34",
+        question: "[克漏字篇一：Supporting New Immigrant Families in Taiwan]\nMany foreign spouses come to Taiwan to build a new life and raise their children. However, adapting to a new society is ___(31)___ simple. Language barriers often make it hard for them to help their kids with homework.",
+        translation: "[克漏字篇一：支持台灣的新住民家庭] 許多外籍配偶來到台灣展開新生活並撫養孩子。然而，適應新社會並非簡單的事。語言隔閡常使她們難以協助孩子寫作業。",
+        options: [
+          "far from",
+          "full of",
+          "proud of",
+          "famous for"
+        ],
+        answerIndex: 0,
+        corePoint: "呼應 p.34 第一段 'raising a child in a new country is not an easy job.'。far from + adj./N. 意為「遠非、一點也不」，符合「適應新社會絕非簡單」的語意。",
+        grammar: "adapting to a new society (動名詞主詞) + is + far from + simple (形容詞，表強烈否定語氣)。",
+        distractors: [
+          "(B) full of：意為「充滿……的」，與後文「語言隔閡使她們難以協助作業」的困難語境不符。",
+          "(C) proud of：意為「以……為傲」，通常接人或成就，不接 simple。",
+          "(D) famous for：意為「以……聞名」，語意不合。"
+        ],
+        phonetics: "far from simple /fɑr frʌm ˈsɪmpəl/（注意 far 捲舌音 /fɑr/ 與 from 連接）"
+      },
+      {
+        id: 32,
+        section: "三、綜合克漏字測驗",
+        category: "文法",
+        subTag: "中階應用 | 克漏字篇一 (p.34 延伸) 第 2 題",
+        passageId: "passage-p34",
+        question: "[克漏字篇一續文]\nIn addition, some families face financial pressure and cannot afford extra classes. When mothers work long hours, they may feel too tired ___(32)___ after their children’s daily needs.",
+        translation: "[克漏字篇一續文] 此外，部分家庭面臨經濟壓力，負擔不起額外的課程。當母親長時間工作時，她們可能會累到無力照顧孩子的日常需求。",
+        options: [
+          "to look",
+          "looking",
+          "looked",
+          "look"
+        ],
+        answerIndex: 0,
+        corePoint: "呼應 p.34 第二段 'too exhausted to take care of my children'。句型為 too + adj. + to V.（太……而不能……），此處 look after 為固定片語「照顧」，故填 to look。",
+        grammar: "too + tired (adj.) + to look after (不定詞作結果/程度副詞子句，表「太累而無法照顧」)。",
+        distractors: [
+          "(B) looking：動名詞或現在分詞，不符合 too... to V. 句型。",
+          "(C) looked：過去式或過去分詞，不可接在 too tired 之後表「無法做到」。",
+          "(D) look：缺少不定詞標記 to，不符合 too + adj. + to V. 結構。"
+        ],
+        phonetics: "too tired to look after /tu taɪrd tə lʊk ˈæftɚ/（注意 look after 連讀為 /lʊ ˈkæftɚ/）"
+      },
+      {
+        id: 33,
+        section: "三、綜合克漏字測驗",
+        category: "語意邏輯",
+        subTag: "中階應用 | 克漏字篇一 (p.34 延伸) 第 3 題",
+        passageId: "passage-p34",
+        question: "[克漏字篇一續文]\nEven more concerning, some children experience unfair treatment and school bullying because of their family background. ___(33)___, communities and schools should offer caring support instead of prejudice.",
+        translation: "[克漏字篇一續文] 更令人擔憂的是，有些孩子因家庭背景而遭遇不公平對待與校園霸凌。因此，社區與學校應該提供關懷與支持，而不是偏見。",
+        options: [
+          "Therefore",
+          "Instead",
+          "Otherwise",
+          "However"
+        ],
+        answerIndex: 0,
+        corePoint: "前句指出孩子面臨不公平對待與霸凌的問題，後句提出「社區與學校應提供關懷支持」的因應做法，兩者為因果推論關係，故選 Therefore（因此）。",
+        grammar: "Therefore (連接副詞，表結果/推論) + , + communities and schools should offer...",
+        distractors: [
+          "(B) Instead：意為「反而、取而代之」，通常用於對比前後兩句的替代動作，不如 Therefore 貼切表達因問題而採取行動的推論。",
+          "(C) Otherwise：意為「否則」，表負面假設結果。",
+          "(D) However：意為「然而」，表語意轉折，此處非逆轉前句。"
+        ],
+        phonetics: "Therefore /ˈðɛrˌfɔr/（字首 th 發濁音 /ð/，注意與 there 區分）"
+      },
+      {
+        id: 34,
+        section: "三、綜合克漏字測驗",
+        category: "文法",
+        subTag: "中階應用 | 克漏字篇一 (p.34 延伸) 第 4 題",
+        passageId: "passage-p34",
+        question: "[克漏字篇一續文]\nWhen children feel respected for ___(34)___ they are, they become more confident and willing to share their feelings with family members.",
+        translation: "[克漏字篇一續文] 當孩子因為「原本的自己」而受到尊重時，他們會變得更有自信，也更願意與家人分享感受。",
+        options: [
+          "who",
+          "which",
+          "whose",
+          "whom"
+        ],
+        answerIndex: 0,
+        corePoint: "此處由 who 引導名詞子句，who they are 意為「他們原本是什麼樣的人／真實的自我」，為英文常見固定表達（be who you are / who they are）。",
+        grammar: "for (介系詞) + who they are (疑問代名詞 who 引導名詞子句作介系詞受詞，are 為連綴動詞)。",
+        distractors: [
+          "(B) which：指代事物或選擇，指代「人的身分特質」應選 who。",
+          "(C) whose：表所屬關係「誰的」，後方需接名詞，此處為 they are。",
+          "(D) whom：受格疑問代名詞，在 be 動詞後作主詞補語時習慣用主格 who。"
+        ],
+        phonetics: "who they are /hu ðe ɑr/（注意 who 發 /hu/，w 不發音）"
+      },
+      {
+        id: 35,
+        section: "三、綜合克漏字測驗",
+        category: "文法",
+        subTag: "中階應用 | 克漏字篇一 (p.34 延伸) 第 5 題",
+        passageId: "passage-p34",
+        question: "[克漏字篇一續文]\nAs p.34 reminds us, if we ___(35)___ a hand to foreign spouses and their children, everyone in our society can grow together in harmony.",
+        translation: "[克漏字篇一續文] 正如第 34 頁提醒我們的，如果我們向外籍配偶及其子女伸出援手，我們社會中的每個人都能在和諧中共同成長。",
+        options: [
+          "lend",
+          "will lend",
+          "lent",
+          "are lending"
+        ],
+        answerIndex: 0,
+        corePoint: "呼應 p.34 末段 'If we can help them more, they can have a better life here.'。在 if 條件子句中，表示未來或一般條件時，動詞須用現在式（lend a hand 意為「幫忙、伸出援手」），不可用 will lend。",
+        grammar: "if + we (主詞) + lend (現在式動詞) + a hand to... (條件子句) , + everyone can grow... (主要子句)。",
+        distractors: [
+          "(B) will lend：國三會考必考盲點，if 條件子句中不可使用未來式 will 表未來條件。",
+          "(C) lent：過去式動詞，與主要子句 can grow 現在時態不搭配。",
+          "(D) are lending：此處表達一般性條件假設，非正在進行的動作。"
+        ],
+        phonetics: "lend a hand /lɛnd ə hænd/（注意 lend 與 a 連讀為 /ˈlɛn də/）"
+      },
+      {
+        id: 36,
+        section: "三、綜合克漏字測驗",
+        category: "語意邏輯",
+        subTag: "中階應用 | 克漏字篇二 (p.35 延伸) 第 1 題",
+        passageId: "passage-p35",
+        question: "[克漏字篇二：Smart Ways to Save Water at Home]\nLiving on an island with limited water storage means we cannot waste water. Rainwater harvesting is one smart way ___(36)___ daily water use.",
+        translation: "[克漏字篇二：居家節水妙方] 住在蓄水有限的島嶼上，意味著我們不能浪費水。雨水回收是減少日常用水量的聰明方法之一。",
+        options: [
+          "to reduce",
+          "reducing",
+          "reduced",
+          "reduce"
+        ],
+        answerIndex: 0,
+        corePoint: "在抽象名詞 way（方法）之後，常用不定詞 to V. 作後位定語，表示「……的方法」（a way to reduce daily water use）。",
+        grammar: "one smart way + to reduce (不定詞作後位修飾，說明 way 的目的/內容) + daily water use。",
+        distractors: [
+          "(B) reducing：雖有動名詞用法，但國三會考與課文常見搭配以 a way to V. 最為標準。",
+          "(C) reduced：過去分詞，無法直接修飾 way 表達「用來減少……的方法」。",
+          "(D) reduce：動詞原形不可直接接在名詞 way 後作定語。"
+        ],
+        phonetics: "to reduce /tə rɪˈdus/（注意 reduce 重音在第二音節 -duce）"
+      },
+      {
+        id: 37,
+        section: "三、綜合克漏字測驗",
+        category: "文法",
+        subTag: "中階應用 | 克漏字篇二 (p.35 延伸) 第 2 題",
+        passageId: "passage-p35",
+        question: "[克漏字篇二續文]\nWhen it rains, water runs off the roof into a gutter, ___(37)___ carries it toward the underground system.",
+        translation: "[克漏字篇二續文] 下雨時，水從屋頂流進排水溝，排水溝再將水引導至地下系統。",
+        options: [
+          "which",
+          "who",
+          "what",
+          "where"
+        ],
+        answerIndex: 0,
+        corePoint: "逗號後方為非限定用法關係子句，先行詞為 a gutter（排水溝，屬事物），且子句中缺少主詞，故須使用關係代名詞 which。",
+        grammar: "a gutter (先行詞，事物) + , + which (關係代名詞作主詞) + carries (單數動詞) + it...",
+        distractors: [
+          "(B) who：僅用於指人，不可指代 gutter。",
+          "(C) what：不能用於逗號後的非限定關係子句，且前方已有先行詞 a gutter。",
+          "(D) where：為關係副詞，後方子句需有完整主詞與受詞；此處 carries 缺主詞，不可用 where。"
+        ],
+        phonetics: "which carries /wɪtʃ ˈkæriz/（注意 carry 字尾 y 改 i 加 -es 發 /ˈkæriz/）"
+      },
+      {
+        id: 38,
+        section: "三、綜合克漏字測驗",
+        category: "語意邏輯",
+        subTag: "中階應用 | 克漏字篇二 (p.35 延伸) 第 3 題",
+        passageId: "passage-p35",
+        question: "[克漏字篇二續文]\nA filter cleans the water before it enters the tank, so we do not have to worry ___(38)___ dirt blocking the pipes.",
+        translation: "[克漏字篇二續文] 過濾器會在水進入儲水槽前將水淨化，因此我們不必擔心泥沙堵塞水管。",
+        options: [
+          "about",
+          "at",
+          "in",
+          "with"
+        ],
+        answerIndex: 0,
+        corePoint: "worry about 為固定片語，意為「擔心……」，此處指不必擔心泥沙堵塞管線。",
+        grammar: "worry about + N./V-ing (worry about dirt blocking the pipes)。",
+        distractors: [
+          "(B) at：worry 很少與 at 搭配，常見搭配為 surprised at 或 good at。",
+          "(C) in：不與 worry 構成「擔心」片語。",
+          "(D) with：常與 busy / pleased / angry 搭配，不與 worry 連用。"
+        ],
+        phonetics: "worry about /ˈwɜri əˈbaʊt/（注意 about 首音節弱化為 /ə/）"
+      },
+      {
+        id: 39,
+        section: "三、綜合克漏字測驗",
+        category: "文法",
+        subTag: "中階應用 | 克漏字篇二 (p.35 延伸) 第 4 題",
+        passageId: "passage-p35",
+        question: "[克漏字篇二續文]\nCollected rainwater is great for watering plants and washing cars, ___(39)___ it should not be used as drinking water without proper treatment.",
+        translation: "[克漏字篇二續文] 收集到的雨水非常適合用來澆花和洗車，但若未經適當處理，則不應作為飲用水。",
+        options: [
+          "though",
+          "so",
+          "because",
+          "unless"
+        ],
+        answerIndex: 0,
+        corePoint: "前句說明回收雨水適合澆花、洗車的優點，後句提醒未經處理不可當飲用水的安全限制，兩者為語意轉折關係，故選 though（雖然／不過）。",
+        grammar: "主要子句 + , + though (對等/讓步連接詞，表轉折) + it should not be used...",
+        distractors: [
+          "(B) so：意為「所以」，表因果結果，不符合「適合洗車但不可直接飲用」的轉折邏輯。",
+          "(C) because：意為「因為」，不能直接當作飲用水的原因不是「適合洗車」。",
+          "(D) unless：意為「除非」，語意邏輯不順。"
+        ],
+        phonetics: "though it should /ðo ɪt ʃʊd/（注意 though 字尾 gh 不發音，發 /ðo/）"
+      },
+      {
+        id: 40,
+        section: "三、綜合克漏字測驗",
+        category: "語意邏輯",
+        subTag: "中階應用 | 克漏字篇二 (p.35 延伸) 第 5 題",
+        passageId: "passage-p35",
+        question: "[克漏字篇二續文]\nIf you want to learn more about setting up a rainwater system, feel free to ___(40)___ our team for more details.",
+        translation: "[克漏字篇二續文] 如果你想進一步了解如何架設雨水系統，歡迎隨時聯繫我們的團隊以取得更多詳細資訊。",
+        options: [
+          "contact",
+          "ignore",
+          "waste",
+          "lose"
+        ],
+        answerIndex: 0,
+        corePoint: "呼應 p.35 末句 'If this sounds good to you, call us for more information!'。想取得更多資訊時，應「聯繫（contact）」團隊。",
+        grammar: "feel free to + contact (原形動詞，聯繫) + our team + for more details。",
+        distractors: [
+          "(B) ignore：意為「忽視、不理會」，與「想了解更多」的動機相反。",
+          "(C) waste：意為「浪費」，與聯繫團隊取得資訊無關。",
+          "(D) lose：意為「失去、迷失」，語意不合。"
+        ],
+        phonetics: "contact our team /ˈkɑntækt ˈaʊɚ tim/（注意 contact 重音在第一音節）"
+      },
+
+      // =======================================================================
+      // 四、閱讀理解測驗 (Reading Comprehension) — 第 41～50 題（每篇 5 題，共 2 篇）
+      // =======================================================================
+      {
+        id: 41,
+        section: "四、閱讀理解測驗",
+        category: "細節理解",
+        subTag: "進階邏輯 | 閱讀篇一 (p.34) 第 1 題",
+        passageId: "passage-p34",
+        question: "According to the reading on page 34, why is it sometimes hard for foreign mothers to help their children with homework?",
+        translation: "根據第 34 頁的閱讀文章，為什麼外籍母親有時很難幫孩子寫作業？",
+        options: [
+          "Many of them do not speak Chinese well.",
+          "Their children refuse to do any homework.",
+          "Schools do not allow parents to help.",
+          "They live far away from all schools."
+        ],
+        answerIndex: 0,
+        corePoint: "直接對應 p.34 第一段：'Many foreign mothers do not speak Chinese well, so it’s hard for them to help their kids with homework.'，故選 (A)。",
+        grammar: "Why + be + adj. + for + O. + to V.? 回答時直接指出中文能力不足的事實。",
+        distractors: [
+          "(B) Their children refuse to do any homework：文中未提及孩子拒絕寫所有作業。",
+          "(C) Schools do not allow parents to help：文中未提及學校禁止家長協助。",
+          "(D) They live far away from all schools：文中未提及住處距離學校很遠。"
+        ],
+        phonetics: "speak Chinese well /spik tʃaɪˈniz wɛl/（注意 Chinese 重音在最後音節 -nese）"
+      },
+      {
+        id: 42,
+        section: "四、閱讀理解測驗",
+        category: "語意邏輯",
+        subTag: "進階邏輯 | 閱讀篇一 (p.34) 第 2 題",
+        passageId: "passage-p34",
+        question: "What might happen if children feel shy about using their mother’s language?",
+        translation: "如果孩子對使用母親的語言感到害羞，可能會發生什麼事？",
+        options: [
+          "They may miss the chance to learn two cultures.",
+          "They will forget how to speak Chinese.",
+          "They will no longer need to go to school.",
+          "They can easily pay for extra classes."
+        ],
+        answerIndex: 0,
+        corePoint: "對應 p.34 第一段：'Their children may also feel shy when using their mother’s language. This would make them miss the chance to learn two cultures.'。",
+        grammar: "What might happen if + S + V...? 測驗跨句指代（This 指代前句現象）與因果理解。",
+        distractors: [
+          "(B) They will forget how to speak Chinese：文中未提及會忘記說中文。",
+          "(C) They will no longer need to go to school：與文意完全無關。",
+          "(D) They can easily pay for extra classes：家庭經濟狀況與「害羞不說母語」無此因果。"
+        ],
+        phonetics: "two cultures /tu ˈkʌltʃɚz/（注意 two 與 cultures 連讀時的重音節奏）"
+      },
+      {
+        id: 43,
+        section: "四、閱讀理解測驗",
+        category: "細節理解",
+        subTag: "進階邏輯 | 閱讀篇一 (p.34) 第 3 題",
+        passageId: "passage-p34",
+        question: "Why did the woman from Vietnam say she felt too exhausted after a tiring day?",
+        translation: "那位來自越南的女性為什麼說她在疲累的一天結束後感到筋疲力竭？",
+        options: [
+          "She had to work long hours.",
+          "She traveled around the world all day.",
+          "She spent the whole day resting at home.",
+          "She did not have any job to do."
+        ],
+        answerIndex: 0,
+        corePoint: "對應 p.34 第二段：A woman from Vietnam said, “I have to work long hours. After a tiring day, I feel too exhausted...” 原因在於長時間工作。",
+        grammar: "Why did + S + V...? 回答時將文中現在式 have to 轉為過去敘事時的 had to。",
+        distractors: [
+          "(B) She traveled around the world all day：文中未提及環遊世界。",
+          "(C) She spent the whole day resting at home：若整天在家休息，較不會因工作疲累而無法照顧孩子。",
+          "(D) She did not have any job to do：與她長時間工作的事實相反。"
+        ],
+        phonetics: "work long hours /wɜrk lɔŋ ˈaʊɚz/（注意 hours 首音節 h 不發音，發 /ˈaʊɚz/）"
+      },
+      {
+        id: 44,
+        section: "四、閱讀理解測驗",
+        category: "語意邏輯",
+        subTag: "進階邏輯 | 閱讀篇一 (p.34) 第 4 題",
+        passageId: "passage-p34",
+        question: "Which of the following is NOT mentioned as a challenge on page 34?",
+        translation: "下列何者【沒有】在第 34 頁中被提及為一項挑戰？",
+        options: [
+          "Lack of public transportation in cities.",
+          "Language problems and helping with homework.",
+          "Poor family money and limited education.",
+          "Not having enough family time and school bullying."
+        ],
+        answerIndex: 0,
+        corePoint: "題幹含【NOT】，需找出未提及項。第 34 頁提及語言、作業、經濟、教育程度、家庭時間不足與校園霸凌，唯獨「都市缺乏大眾運輸（Lack of public transportation in cities）」未出現。",
+        grammar: "否定細節篩選題：逐一核對段落要點，排除已出現的 (B)、(C)、(D)。",
+        distractors: [
+          "(B) Language problems and helping with homework：第一段明確提及。",
+          "(C) Poor family money and limited education：第一段明確提及（poor families / don't have much education）。",
+          "(D) Not having enough family time and school bullying：第二段明確提及。"
+        ],
+        phonetics: "public transportation /ˈpʌblɪk ˌtrænspɚˈteʃən/（注意 transportation 重音在 -ta-）"
+      },
+      {
+        id: 45,
+        section: "四、閱讀理解測驗",
+        category: "語意邏輯",
+        subTag: "進階邏輯 | 閱讀篇一 (p.34) 第 5 題",
+        passageId: "passage-p34",
+        question: "What is the author’s attitude toward helping foreign spouses and their children in the last paragraph?",
+        translation: "在最後一段中，作者對於幫助外籍配偶及其子女持何種態度？",
+        options: [
+          "Supportive and hopeful for a better life.",
+          "Indifferent and unwilling to get involved.",
+          "Doubtful that any help can ever work.",
+          "Angry at children who cannot speak Chinese."
+        ],
+        answerIndex: 0,
+        corePoint: "對應 p.34 末段：'It is clear that foreign spouses and their kids must deal with these challenges. If we can help them more, they can have a better life here.' 展現支持與正向期許。",
+        grammar: "態度推論題（Author's Attitude）：依據末段正向條件句 'If we can help them more, they can have a better life here' 推論。",
+        distractors: [
+          "(B) Indifferent and unwilling to get involved：與作者呼籲提供更多協助的立場相反。",
+          "(C) Doubtful that any help can ever work：文中認為給予更多協助能帶來更好的生活，並非懷疑無效。",
+          "(D) Angry at children who cannot speak Chinese：文中未責怪不會說中文的孩子。"
+        ],
+        phonetics: "better life /ˈbɛtɚ laɪf/（注意 better 的 tt 在美式英語中常閃音化）"
+      },
+      {
+        id: 46,
+        section: "四、閱讀理解測驗",
+        category: "細節理解",
+        subTag: "進階邏輯 | 閱讀篇二 (p.35) 第 1 題",
+        passageId: "passage-p35",
+        question: "Why is building a new reservoir very difficult in Taiwan according to page 35?",
+        translation: "根據第 35 頁，為什麼在台灣建造一座新水庫非常困難？",
+        options: [
+          "Because Taiwan is such a small island.",
+          "Because there is never any rain in Taiwan.",
+          "Because reservoirs are too small to hold water.",
+          "Because people in Taiwan dislike clean water."
+        ],
+        answerIndex: 0,
+        corePoint: "直接對應 p.35 第一段：'Because Taiwan is such a small island, building a new reservoir is very difficult.'。",
+        grammar: "Why is + N. + adj. in + Place? 因果定位題，直接對應 Because 子句。",
+        distractors: [
+          "(B) Because there is never any rain in Taiwan：與第二段 'We do get a lot of rain here' 矛盾。",
+          "(C) Because reservoirs are too small to hold water：文中未提及水庫太小無法裝水。",
+          "(D) Because people in Taiwan dislike clean water：與文意完全不符。"
+        ],
+        phonetics: "small island /smɔl ˈaɪlənd/（注意 island 首音節 s 不發音，發 /ˈaɪlənd/）"
+      },
+      {
+        id: 47,
+        section: "四、閱讀理解測驗",
+        category: "細節理解",
+        subTag: "進階邏輯 | 閱讀篇二 (p.35) 第 2 題",
+        passageId: "passage-p35",
+        question: "In the rainwater harvesting system on page 35, what happens right after rain runs down the roof into the gutter and before it enters the main tank?",
+        translation: "在第 35 頁的雨水回收系統中，雨水沿著屋頂流進排水溝之後、進入主儲水槽之前，會發生什麼事？",
+        options: [
+          "It goes through a filter to make sure the water kept is clean.",
+          "It turns directly into drinking water in the clouds.",
+          "It goes back into the sea without being used.",
+          "It is boiled on the roof before flowing down."
+        ],
+        answerIndex: 0,
+        corePoint: "對應 p.35 第三段：'the rain will run down the roof and into the gutter, where it will go under the ground into the main tank. Before flowing into the main tank, the water will go through a filter...'。",
+        grammar: "流程排序與細節理解：Roof ➔ Gutter ➔ Filter ➔ Main Tank。",
+        distractors: [
+          "(B) It turns directly into drinking water in the clouds：無此流程敘述。",
+          "(C) It goes back into the sea without being used：此為「未收集利用」的雨水去向，非系統過濾步驟。",
+          "(D) It is boiled on the roof before flowing down：文中無此描述。"
+        ],
+        phonetics: "through a filter /θru ə ˈfɪltɚ/（注意 through 發 /θru/，清齒擦音 + /r/）"
+      },
+      {
+        id: 48,
+        section: "四、閱讀理解測驗",
+        category: "語意邏輯",
+        subTag: "進階邏輯 | 閱讀篇二 (p.35) 第 3 題",
+        passageId: "passage-p35",
+        question: "Which of the following daily uses of harvested rainwater is shown in the diagram on page 35?",
+        translation: "第 35 頁的圖解中，展示了回收雨水的下列哪一項日常用途？",
+        options: [
+          "Clothes washing and toilet flushing.",
+          "Cooking hot soup and making tea.",
+          "Filling up swimming pools for diving.",
+          "Washing dishes in restaurants only."
+        ],
+        answerIndex: 0,
+        corePoint: "觀察 p.35 下方 RAINWATER HARVESTING 圖解標示，包含 Garden watering、Clothes washing、Toilet flushing 與 Car washing，故選 (A)。",
+        grammar: "圖文對照題（Diagram Comprehension）：核對圖解右側分支標示。",
+        distractors: [
+          "(B) Cooking hot soup and making tea：圖解未標示烹飪或泡茶用途。",
+          "(C) Filling up swimming pools for diving：圖解未出現游泳池。",
+          "(D) Washing dishes in restaurants only：圖解未提及餐廳洗碗。"
+        ],
+        phonetics: "clothes washing /kloðz ˈwɑʃɪŋ/（注意 clothes 複數發 /kloðz/ 或 /kloz/）"
+      },
+      {
+        id: 49,
+        section: "四、閱讀理解測驗",
+        category: "語意邏輯",
+        subTag: "進階邏輯 | 閱讀篇二 (p.35) 第 4 題",
+        passageId: "passage-p35",
+        question: "Who might 'us' refer to in the last sentence, “If this sounds good to you, call us for more information!”?",
+        translation: "在最後一句「如果這聽起來對你不錯，請致電 us 索取更多資訊！」中，'us' 最可能指誰？",
+        options: [
+          "People or groups who provide rainwater harvesting systems or information.",
+          "Wild animals living deep in the ocean.",
+          "Students who are taking an English test.",
+          "People who want to stop all rainfall."
+        ],
+        answerIndex: 0,
+        corePoint: "呼應 p.35 第 37 題「推敲文意」考點。全文介紹雨水回收系統的運作與好處，文末呼籲有興趣者來電洽詢更多資訊，故 us 指提供相關系統或資訊的單位／人員。",
+        grammar: "代名詞指代推論（Pronoun Reference）：依據全文主題與文末宣傳邀約語氣推斷。",
+        distractors: [
+          "(B) Wild animals living deep in the ocean：海洋生物無法接聽電話提供資訊。",
+          "(C) Students who are taking an English test：與文章情境無關。",
+          "(D) People who want to stop all rainfall：無人能停止降雨，且與文章主張矛盾。"
+        ],
+        phonetics: "more information /mɔr ˌɪnfɚˈmeʃən/（注意 information 重音在 -ma-）"
+      },
+      {
+        id: 50,
+        section: "四、閱讀理解測驗",
+        category: "細節理解",
+        subTag: "進階邏輯 | 閱讀篇二 (p.35) 第 5 題",
+        passageId: "passage-p35",
+        question: "Which sentence best matches the writer’s viewpoint in “Rainwater Harvesting” on page 35?",
+        translation: "哪一句話最符合第 35 頁〈雨水回收〉一文中作者的觀點？",
+        options: [
+          "Everyone can help save water by using rainwater in daily life.",
+          "We should raise water prices to solve all water problems.",
+          "Rainwater harvesting will only cost us more money in the long run.",
+          "Not having enough reservoirs is the only problem we need to fix."
+        ],
+        answerIndex: 0,
+        corePoint: "呼應 p.35 第 38 題「作者觀點」考點。文章指出台灣面臨缺水壓力、建新水庫不易，而回收雨水可用於澆花、洗車並節省金錢，因此支持在日常生活中利用雨水節水。",
+        grammar: "觀點整合題（Writer's Viewpoint）：綜合全文對節水與雨水回收的正面評價。",
+        distractors: [
+          "(B) We should raise water prices to solve all water problems：文中未主張調漲水價。",
+          "(C) Rainwater harvesting will only cost us more money in the long run：與第三段 'it will also help save some money' 相反。",
+          "(D) Not having enough reservoirs is the only problem we need to fix：文中指出還有其他方法可充分利用水資源，並非唯一問題。"
+        ],
+        phonetics: "save water /sev ˈwɔtɚ/（注意 water 美式發音為 /ˈwɔtɚ/）"
+      }
+    ];
+
+    // =========================================================================
+    // 2. 應用程式狀態管理 (State)
+    // =========================================================================
+    let currentQuestions = [];
+    let userAnswers = {}; // { questionId: selectedOptionText }
+    let isSubmitted = false;
+    let filterMode = "all"; // 'all' | 'wrong'
+    let timerSeconds = 50 * 60;
+    let timerInterval = null;
+    let isTimerPaused = false;
+    let initialDurationSeconds = 50 * 60;
+    let radarChartInstance = null;
+
+    // 隱藏觸發計數器
+    let parentClickCount = 0;
+    let verifyClickCount = 0;
+
+    // =========================================================================
+    // 3. 初始化與洗牌邏輯
+    // =========================================================================
+    function shuffleArray(arr) {
+      const copy = [...arr];
+      for (let i = copy.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+      }
+      return copy;
+    }
+
+    function initQuiz(shuffleMode = false) {
+      isSubmitted = false;
+      userAnswers = {};
+      filterMode = "all";
+
+      // 複製題庫並處理選項洗牌
+      let prepared = rawQuestionBank.map((q) => {
+        const correctText = q.options[q.answerIndex];
+        const opts = shuffleMode ? shuffleArray(q.options) : [...q.options];
+        return {
+          ...q,
+          displayOptions: opts,
+          correctText: correctText
+        };
+      });
+
+      if (shuffleMode) {
+        prepared = shuffleArray(prepared);
+      }
+
+      currentQuestions = prepared;
+
+      // 重置 UI
+      document.getElementById("report-panel").style.display = "none";
+      document.getElementById("btn-submit").disabled = false;
+      document.getElementById("btn-submit").textContent = "提交試卷";
+      document.getElementById("filter-all").classList.add("active");
+      document.getElementById("filter-wrong").classList.remove("active");
+
+      renderNavGrid();
+      renderQuestions();
+      updateStatusBadge();
+      resetTimerFromInput();
+    }
+
+    // =========================================================================
+    // 4. 渲染題號導覽與試題卡片
+    // =========================================================================
+    function renderNavGrid() {
+      const grid = document.getElementById("nav-grid");
+      grid.innerHTML = "";
+      currentQuestions.forEach((q, idx) => {
+        const displayNum = idx + 1;
+        const btn = document.createElement("button");
+        btn.className = "nav-btn";
+        btn.id = `nav-btn-${q.id}`;
+        btn.textContent = displayNum;
+        btn.title = `跳至第 ${displayNum} 題`;
+        btn.onclick = () => {
+          const targetCard = document.getElementById(`q-card-${q.id}`);
+          if (targetCard) {
+            if (targetCard.style.display === "none") {
+              setFilter("all");
+            }
+            targetCard.scrollIntoView({ behavior: "smooth", block: "center" });
+          }
+        };
+        grid.appendChild(btn);
+      });
+    }
+
+    function renderQuestions() {
+      const container = document.getElementById("questions-container");
+      container.innerHTML = "";
+      const letters = ["(A)", "(B)", "(C)", "(D)"];
+
+      currentQuestions.forEach((q, idx) => {
+        const displayNum = idx + 1;
+        const card = document.createElement("div");
+        card.className = "question-card";
+        card.id = `q-card-${q.id}`;
+
+        const optionsHtml = q.displayOptions
+          .map((optText, optIdx) => {
+            const letter = letters[optIdx];
+            return `
+              <label class="option-label" id="opt-label-${q.id}-${optIdx}" data-opt="${escapeHtml(optText)}">
+                <input type="radio" class="option-radio" name="q_${q.id}" value="${escapeHtml(optText)}" onchange="handleSelect(${q.id}, ${optIdx}, this.value)" />
+                <span><strong>${letter}</strong> ${escapeHtml(optText)}</span>
+              </label>
+            `;
+          })
+          .join("");
+
+        const distractorsHtml = q.distractors
+          .map((d) => `<li>${escapeHtml(d)}</li>`)
+          .join("");
+
+        card.innerHTML = `
+          <div class="q-header">
+            <span class="q-num-badge" onclick="linkToPassage('${q.passageId}')" title="點擊定位左側對應閱讀文本">第 ${displayNum} 題 🔗</span>
+            <span class="q-tag">${escapeHtml(q.subTag)}</span>
+          </div>
+          <div class="q-stem">${escapeHtml(q.question)}</div>
+          <div class="options-grid" id="opts-grid-${q.id}">
+            ${optionsHtml}
+          </div>
+          <div class="explanation-box" id="exp-box-${q.id}">
+            <div class="ans-banner" id="ans-banner-${q.id}"></div>
+            <div class="exp-item"><span class="exp-label">【測驗卷原題目】</span>${escapeHtml(q.question)}</div>
+            <div class="exp-item"><span class="exp-label">【繁體中文翻譯】</span>${escapeHtml(q.translation)}</div>
+            <div class="exp-item"><span class="exp-label">【考點歸類】</span>${escapeHtml(q.category)}（${escapeHtml(q.subTag)}）</div>
+            <div class="exp-item"><span class="exp-label">【核心考點說明】</span>${escapeHtml(q.corePoint)}</div>
+            <div class="exp-item"><span class="exp-label">【文法結構剖析】</span>${escapeHtml(q.grammar)}</div>
+            <div class="exp-item">
+              <span class="exp-label">【干擾項、誘答剖析】</span>
+              <ul class="exp-distractors">${distractorsHtml}</ul>
+            </div>
+            <div class="exp-item"><span class="exp-label">【音標與連讀】</span><span class="phonetic-tag">${escapeHtml(q.phonetics)}</span></div>
+          </div>
+        `;
+
+        container.appendChild(card);
+      });
+    }
+
+    function escapeHtml(str) {
+      if (!str) return "";
+      return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+
+    // =========================================================================
+    // 5. 雙向聯動與作答互動
+    // =========================================================================
+    function linkToPassage(passageId) {
+      const passageEl = document.getElementById(passageId);
+      if (!passageEl) return;
+      passageEl.scrollIntoView({ behavior: "smooth", block: "center" });
+      passageEl.classList.remove("highlight-flash");
+      void passageEl.offsetWidth; // trigger reflow
+      passageEl.classList.add("highlight-flash");
+    }
+
+    function handleSelect(qId, optIdx, optValue) {
+      if (isSubmitted) return;
+      userAnswers[qId] = optValue;
+
+      // 更新選項高亮
+      const labels = document.querySelectorAll(`#opts-grid-${qId} .option-label`);
+      labels.forEach((lbl, idx) => {
+        lbl.classList.toggle("selected", idx === optIdx);
+      });
+
+      // 更新左側導覽按鈕為藍色
+      const navBtn = document.getElementById(`nav-btn-${qId}`);
+      if (navBtn) {
+        navBtn.classList.add("answered");
+      }
+
+      updateStatusBadge();
+    }
+
+    function updateStatusBadge() {
+      const answeredCount = Object.keys(userAnswers).length;
+      const total = currentQuestions.length;
+      document.getElementById("status-badge").textContent = `已作答：${answeredCount} / ${total}`;
+    }
+
+    // =========================================================================
+    // 6. 交卷批改、雷達圖與 localStorage 紀錄
+    // =========================================================================
+    function submitQuiz(autoTriggered = false) {
+      if (isSubmitted) return;
+      const total = currentQuestions.length;
+      const answeredCount = Object.keys(userAnswers).length;
+
+      if (!autoTriggered && answeredCount < total) {
+        const confirmSubmit = confirm(`您還有 ${total - answeredCount} 題尚未作答，確定要現在提交試卷嗎？`);
+        if (!confirmSubmit) return;
+      }
+
+      isSubmitted = true;
+      clearInterval(timerInterval);
+      document.getElementById("btn-submit").disabled = true;
+      document.getElementById("btn-submit").textContent = "已交卷";
+
+      let correctCount = 0;
+      const wrongList = [];
+      const letters = ["(A)", "(B)", "(C)", "(D)"];
+
+      // 四大維度統計初始化
+      const dimensions = {
+        "字彙": { correct: 0, total: 0 },
+        "文法": { correct: 0, total: 0 },
+        "語意邏輯": { correct: 0, total: 0 },
+        "細節理解": { correct: 0, total: 0 }
+      };
+
+      currentQuestions.forEach((q, idx) => {
+        const displayNum = idx + 1;
+        const userChoice = userAnswers[q.id];
+        const isCorrect = userChoice === q.correctText;
+
+        const catKey = dimensions[q.category] ? q.category : "字彙";
+        dimensions[catKey].total += 1;
+        if (isCorrect) {
+          correctCount += 1;
+          dimensions[catKey].correct += 1;
+        } else {
+          wrongList.push({
+            num: displayNum,
+            id: q.id,
+            question: q.question,
+            userChoice: userChoice || "未作答",
+            correctText: q.correctText,
+            category: q.category,
+            corePoint: q.corePoint
+          });
+        }
+
+        // 鎖定選項並標記綠/紅
+        const labels = document.querySelectorAll(`#opts-grid-${q.id} .option-label`);
+        const radios = document.querySelectorAll(`#opts-grid-${q.id} .option-radio`);
+        radios.forEach((r) => (r.disabled = true));
+
+        let correctLetter = "";
+        labels.forEach((lbl, optIdx) => {
+          lbl.classList.add("locked");
+          const optText = q.displayOptions[optIdx];
+          if (optText === q.correctText) {
+            lbl.classList.add("opt-correct");
+            correctLetter = `${letters[optIdx]} ${optText}`;
+          } else if (optText === userChoice && !isCorrect) {
+            lbl.classList.add("opt-wrong");
+          }
+        });
+
+        // 卡片邊框與導覽色塊
+        const card = document.getElementById(`q-card-${q.id}`);
+        const navBtn = document.getElementById(`nav-btn-${q.id}`);
+        if (isCorrect) {
+          card.classList.add("is-correct");
+          if (navBtn) {
+            navBtn.classList.remove("answered");
+            navBtn.classList.add("correct");
+          }
+        } else {
+          card.classList.add("is-wrong");
+          if (navBtn) {
+            navBtn.classList.remove("answered");
+            navBtn.classList.add("wrong");
+          }
+        }
+
+        // 展開解析區
+        const expBox = document.getElementById(`exp-box-${q.id}`);
+        const ansBanner = document.getElementById(`ans-banner-${q.id}`);
+        expBox.style.display = "block";
+        if (isCorrect) {
+          ansBanner.className = "ans-banner";
+          ansBanner.innerHTML = `<span>✔ 答對！正確答案：${escapeHtml(correctLetter)}</span><span>考點：${escapeHtml(q.category)}</span>`;
+        } else {
+          ansBanner.className = "ans-banner wrong-banner";
+          ansBanner.innerHTML = `<span>✘ 答錯（您的選擇：${escapeHtml(userChoice || "未作答")}）｜正確答案：${escapeHtml(correctLetter)}</span><span>考點：${escapeHtml(q.category)}</span>`;
+        }
+      });
+
+      // 計算 100 分制總分
+      const score = Math.round((correctCount / total) * 100);
+      const wrongCount = total - correctCount;
+
+      document.getElementById("total-score").textContent = score;
+      document.getElementById("correct-count-text").textContent = `答對 ${correctCount} / ${total} 題 (答錯 ${wrongCount} 題)`;
+      document.getElementById("filter-wrong").textContent = `只看錯題 (${wrongCount})`;
+
+      // 渲染四大維度統計列
+      const statListEl = document.getElementById("category-stats");
+      statListEl.innerHTML = "";
+      const radarLabels = ["字彙", "文法", "語意邏輯", "細節理解"];
+      const radarRates = [];
+
+      radarLabels.forEach((label) => {
+        const d = dimensions[label];
+        const rate = d.total > 0 ? Math.round((d.correct / d.total) * 100) : 0;
+        radarRates.push(rate);
+        const row = document.createElement("div");
+        row.className = "stat-row";
+        row.innerHTML = `<span>${label} (${d.correct}/${d.total})</span><strong style="color:${rate >= 80 ? '#4ade80' : rate >= 60 ? '#fbbf24' : '#f87171'}">${d.total > 0 ? rate + '%' : '待擴充'}</strong>`;
+        statListEl.appendChild(row);
+      });
+
+      // 顯示成績面板並繪製雷達圖
+      const reportPanel = document.getElementById("report-panel");
+      reportPanel.style.display = "block";
+      document.getElementById("left-pane").scrollTo({ top: 0, behavior: "smooth" });
+      renderRadarChart(radarLabels, radarRates);
+
+      // 儲存至 localStorage 供家長查核
+      saveAttemptToHistory(score, correctCount, total, dimensions, wrongList);
+    }
+
+    function renderRadarChart(labels, dataRates) {
+      const ctx = document.getElementById("radarChart").getContext("2d");
+      if (radarChartInstance) {
+        radarChartInstance.destroy();
+      }
+      radarChartInstance = new Chart(ctx, {
+        type: "radar",
+        data: {
+          labels: labels,
+          datasets: [{
+            label: "得分率 (%)",
+            data: dataRates,
+            backgroundColor: "rgba(56, 189, 248, 0.25)",
+            borderColor: "#38bdf8",
+            pointBackgroundColor: "#38bdf8",
+            pointBorderColor: "#fff",
+            borderWidth: 2
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            r: {
+              min: 0,
+              max: 100,
+              ticks: {
+                stepSize: 20,
+                color: "#94a3b8",
+                backdropColor: "transparent",
+                font: { size: 10 }
+              },
+              grid: { color: "rgba(148, 163, 184, 0.2)" },
+              angleLines: { color: "rgba(148, 163, 184, 0.2)" },
+              pointLabels: {
+                color: "#f1f5f9",
+                font: { size: 12, weight: "bold" }
+              }
+            }
+          },
+          plugins: {
+            legend: { display: false }
+          }
+        }
+      });
+    }
+
+    // =========================================================================
+    // 7. 錯題篩選與 Markdown 筆記匯出
+    // =========================================================================
+    function setFilter(mode) {
+      filterMode = mode;
+      document.getElementById("filter-all").classList.toggle("active", mode === "all");
+      document.getElementById("filter-wrong").classList.toggle("active", mode === "wrong");
+
+      currentQuestions.forEach((q) => {
+        const card = document.getElementById(`q-card-${q.id}`);
+        const isCorrect = userAnswers[q.id] === q.correctText;
+        if (mode === "wrong" && isCorrect) {
+          card.style.display = "none";
+        } else {
+          card.style.display = "block";
+        }
+      });
+    }
+
+    function copyWrongNotesMarkdown() {
+      if (!isSubmitted) return;
+      const lines = [
+        `# 國中三年級英文科全真模擬測驗 — 錯題復盤筆記`,
+        `- 測驗範圍：自修 p.34–p.35（閱讀素養 & 跨域時事）`,
+        `- 總得分：${document.getElementById("total-score").textContent} 分`,
+        `---`
+      ];
+
+      let wrongCounter = 0;
+      currentQuestions.forEach((q, idx) => {
+        const userChoice = userAnswers[q.id];
+        if (userChoice !== q.correctText) {
+          wrongCounter++;
+          lines.push(`### 第 ${idx + 1} 題 [${q.category}]`);
+          lines.push(`- **原題目**：${q.question}`);
+          lines.push(`- **中文翻譯**：${q.translation}`);
+          lines.push(`- **我的作答**：~~${userChoice || "未作答"}~~`);
+          lines.push(`- **正確答案**：**${q.correctText}**`);
+          lines.push(`- **核心考點**：${q.corePoint}`);
+          lines.push(`- **文法結構**：${q.grammar}`);
+          lines.push(`- **K.K. 音標**：\`${q.phonetics}\``);
+          lines.push(``);
+        }
+      });
+
+      if (wrongCounter === 0) {
+        lines.push(`🎉 本次測驗全數答對，無錯題紀錄！`);
+      }
+
+      navigator.clipboard.writeText(lines.join("\n")).then(() => {
+        showToast("已將錯題筆記 (Markdown) 複製到剪貼簿！");
+      });
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById("toast");
+      toast.textContent = msg;
+      toast.classList.add("show");
+      setTimeout(() => toast.classList.remove("show"), 2600);
+    }
+
+    // =========================================================================
+    // 8. 倒數計時器功能 (0 ~ 240 分鐘)
+    // =========================================================================
+    function startTimer() {
+      clearInterval(timerInterval);
+      timerInterval = setInterval(() => {
+        if (isTimerPaused || isSubmitted) return;
+        if (timerSeconds <= 0) {
+          clearInterval(timerInterval);
+          alert("測驗時間結束，系統將自動為您交卷！");
+          submitQuiz(true);
+          return;
+        }
+        timerSeconds--;
+        updateTimerDisplay();
+      }, 1000);
+    }
+
+    function updateTimerDisplay() {
+      const mins = Math.floor(timerSeconds / 60);
+      const secs = timerSeconds % 60;
+      document.getElementById("timer-display").textContent =
+        `${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
+    }
+
+    function resetTimerFromInput() {
+      let mins = parseInt(document.getElementById("timer-minutes").value, 10);
+      if (isNaN(mins) || mins < 0) mins = 0;
+      if (mins > 240) mins = 240;
+      document.getElementById("timer-minutes").value = mins;
+      timerSeconds = mins * 60;
+      initialDurationSeconds = timerSeconds;
+      isTimerPaused = false;
+      document.getElementById("btn-pause-time").textContent = "暫停";
+      updateTimerDisplay();
+      if (mins > 0) {
+        startTimer();
+      } else {
+        clearInterval(timerInterval);
+      }
+    }
+
+    // =========================================================================
+    // 9. 家長監控 localStorage 歷史紀錄 & 題庫校驗隱藏入口
+    // =========================================================================
+    const STORAGE_KEY = "junior_high_eng_p34_35_history";
+
+    function saveAttemptToHistory(score, correctCount, total, dimensions, wrongList) {
+      const now = new Date();
+      const timeStr = `${now.getFullYear()}/${String(now.getMonth()+1).padStart(2,'0')}/${String(now.getDate()).padStart(2,'0')} ${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}:${String(now.getSeconds()).padStart(2,'0')}`;
+      const elapsedSec = Math.max(1, initialDurationSeconds - timerSeconds);
+      const elapsedStr = `${Math.floor(elapsedSec / 60)}分${elapsedSec % 60}秒`;
+
+      const record = {
+        time: timeStr,
+        duration: elapsedStr,
+        score: score,
+        accuracy: `${correctCount}/${total}`,
+        dimensions: dimensions,
+        wrongNums: wrongList.map(w => `#${w.num}(${w.userChoice}→${w.correctText})`).join(", ") || "全對"
+      };
+
+      const existing = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+      existing.unshift(record);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(existing));
+    }
+
+    function openParentDashboard() {
+      const pwd = prompt("請輸入家長監控密碼：");
+      if (pwd !== "1234") {
+        if (pwd !== null) alert("密碼錯誤！");
+        return;
+      }
+      const records = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+      const wrapper = document.getElementById("history-table-wrapper");
+      if (records.length === 0) {
+        wrapper.innerHTML = `<p style="color:#94a3b8; padding:16px 0;">目前尚無任何交卷紀錄。</p>`;
+      } else {
+        const rows = records.map((r, i) => `
+          <tr>
+            <td>${records.length - i}</td>
+            <td>${r.time}</td>
+            <td>${r.duration}</td>
+            <td><strong style="color:${r.score >= 80 ? '#4ade80' : '#f87171'}">${r.score} 分</strong> (${r.accuracy})</td>
+            <td style="font-size:0.8rem;">${escapeHtml(r.wrongNums)}</td>
+          </tr>
+        `).join("");
+        wrapper.innerHTML = `
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>次序</th>
+                <th>交卷時間</th>
+                <th>作答耗時</th>
+                <th>得分</th>
+                <th>錯題清單</th>
+              </tr>
+            </thead>
+            <tbody>${rows}</tbody>
+          </table>
+        `;
+      }
+      document.getElementById("parent-modal").style.display = "flex";
+    }
+
+    function clearHistory() {
+      if (confirm("確定要清空所有歷次測驗紀錄嗎？")) {
+        localStorage.removeItem(STORAGE_KEY);
+        openParentDashboard();
+      }
+    }
+
+    function openVerifyModal() {
+      const counts = { A: 0, B: 0, C: 0, D: 0 };
+      const letters = ["A", "B", "C", "D"];
+      const rows = currentQuestions.map((q, idx) => {
+        const ansIdx = q.displayOptions.indexOf(q.correctText);
+        const letter = letters[ansIdx] || "?";
+        if (counts[letter] !== undefined) counts[letter]++;
+        return `
+          <tr>
+            <td>第 ${idx + 1} 題</td>
+            <td>${escapeHtml(q.category)}</td>
+            <td><strong style="color:#4ade80;">(${letter}) ${escapeHtml(q.correctText)}</strong></td>
+            <td style="font-size:0.82rem;">${escapeHtml(q.question)}</td>
+          </tr>
+        `;
+      }).join("");
+
+      document.getElementById("answer-distribution-summary").innerHTML =
+        `<strong>答案分布統計（目前載入 ${currentQuestions.length} 題）：</strong> (A) ${counts.A} 題 ｜ (B) ${counts.B} 題 ｜ (C) ${counts.C} 題 ｜ (D) ${counts.D} 題`;
+
+      document.getElementById("verify-table-wrapper").innerHTML = `
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th style="width:75px;">題號</th>
+              <th style="width:90px;">考點</th>
+              <th style="width:200px;">標準答案</th>
+              <th>題幹摘要</th>
+            </tr>
+          </thead>
+          <tbody>${rows}</tbody>
+        </table>
+      `;
+      document.getElementById("verify-modal").style.display = "flex";
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).style.display = "none";
+    }
+
+    // =========================================================================
+    // 10. 事件綁定
+    // =========================================================================
+    document.getElementById("btn-set-time").addEventListener("click", resetTimerFromInput);
+    document.getElementById("btn-pause-time").addEventListener("click", function () {
+      if (isSubmitted) return;
+      isTimerPaused = !isTimerPaused;
+      this.textContent = isTimerPaused ? "繼續" : "暫停";
+    });
+    document.getElementById("btn-submit").addEventListener("click", () => submitQuiz(false));
+    document.getElementById("btn-reset").addEventListener("click", () => {
+      if (confirm("確定要重新測驗並隨機打亂題目與選項順序嗎？")) {
+        initQuiz(true);
+      }
+    });
+
+    document.getElementById("filter-all").addEventListener("click", () => setFilter("all"));
+    document.getElementById("filter-wrong").addEventListener("click", () => setFilter("wrong"));
+    document.getElementById("btn-copy-md").addEventListener("click", copyWrongNotesMarkdown);
+
+    // 連點標題 5 下開啟家長後台
+    document.getElementById("secret-parent-trigger").addEventListener("click", () => {
+      parentClickCount++;
+      if (parentClickCount >= 5) {
+        parentClickCount = 0;
+        openParentDashboard();
+      }
+    });
+
+    // 快捷鍵 Ctrl + Shift + P 開啟家長後台
+    document.addEventListener("keydown", (e) => {
+      if (e.ctrlKey && e.shiftKey && (e.key === "P" || e.key === "p")) {
+        e.preventDefault();
+        openParentDashboard();
+      }
+    });
+
+    // 左上角 ❖ 連點 5 下開啟題庫答案校驗表
+    document.getElementById("secret-verify-trigger").addEventListener("click", () => {
+      verifyClickCount++;
+      if (verifyClickCount >= 5) {
+        verifyClickCount = 0;
+        openVerifyModal();
+      }
+    });
+
+    // 啟動測驗
+    window.addEventListener("DOMContentLoaded", () => {
+      initQuiz(false);
+    });
+  </script>
+</body>
+</html>
