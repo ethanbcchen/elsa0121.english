@@ -2268,9 +2268,6 @@
         dimensions: dimSummaryStrings.join(' ｜ '),
         wrongNums: wrongNumsStr
       });
-
-      // 發送 Telegram 通知
-      sendTelegramReport(nowStr, elapsedStr, score, correctCount, currentQuestions.length, dimSummaryStrings.join('\n'), wrongNumsStr);
     }
 
     function renderRadarChart(labels, data) {
@@ -2319,36 +2316,6 @@
       });
     }
 
-    // =========================================================================
-    // Telegram Bot API 通知
-    // =========================================================================
-    function sendTelegramReport(time, duration, score, correctCount, totalCount, dimText, wrongNums) {
-      const chatId = '8049812362';
-      const token = 'AAEqHmvEEMDFOYtggE4FxpHFoAWUGHX7Aq4';
-      // 支援標準 Bot Token 格式與直接呼叫
-      const botPath = token.includes(':') ? `bot${token}` : `bot${chatId}:${token}`;
-      const url = `https://api.telegram.org/${botPath}/sendMessage`;
-
-      const message = [
-        `📘 【國中生物 3-2 人體的循環 測驗成績報告】`,
-        `01. 交卷時間：${time}`,
-        `02. 作答耗時：${duration}`,
-        `03. 測驗得分：${score} 分（答對 ${correctCount} / ${totalCount} 題）`,
-        `04. 各維度統計：\n${dimText}`,
-        `05. 錯題清單：${wrongNums}`
-      ].join('\n');
-
-      fetch(url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          chat_id: chatId,
-          text: message
-        })
-      }).catch(err => {
-        console.warn('Telegram 通知發送狀態：', err);
-      });
-    }
 
     // =========================================================================
     // 錯題篩選與匯出功能 (Markdown 複製 & Word 下載)

@@ -2081,7 +2081,6 @@ function submitExam() {
   };
 
   saveParentRecord(record);
-  sendTelegramReport(record);
 }
 
 function drawRadarChart(labels, dataValues) {
@@ -2373,40 +2372,6 @@ function clearParentHistory() {
 
 function closeModal(id) {
   document.getElementById(id).style.display = "none";
-}
-
-// =========================================================================
-// 8. Telegram API 通知機制
-// =========================================================================
-function sendTelegramReport(record) {
-  const token = "8062206068:AAEqHmvEEMDFOYtggE4FxpHFoAWUGHX7Aq4";
-  const MY_CHAT_ID = "8049812362";
-
-  const msgText =
-    `📊 【115年國中教育會考數學模擬測驗交卷通知】\n` +
-    `01. 課程名稱：${record.course}\n` +
-    `02. 交卷時間：${record.time}\n` +
-    `03. 作答耗時：${record.spent}\n` +
-    `04. 測驗得分：${record.score} 分\n` +
-    `05. 各維度統計：${record.dims}\n` +
-    `06. 錯題清單：${record.wrongs}`;
-
-  const postToChat = (chatId) => {
-    return fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ chat_id: chatId, text: msgText })
-    })
-      .then(res => res.json())
-      .then(data => {
-        if (!data.ok) console.warn("Telegram 發送失敗：", data.description);
-      })
-      .catch(err => console.warn("Telegram 網路請求錯誤：", err));
-  };
-
-  if (MY_CHAT_ID) {
-    postToChat(MY_CHAT_ID);
-  }
 }
 
 // 頁面載入後初始化測驗（保留原卷題序，按「重新測驗 (洗牌)」可隨機打亂）

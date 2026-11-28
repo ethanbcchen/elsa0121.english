@@ -2361,8 +2361,6 @@
       };
       saveHistoryRecord(record);
 
-      // Send Telegram Notification
-      sendTelegramReport(record, wrongList);
 
       // Store wrongList globally for Markdown export
       window.latestWrongList = wrongList;
@@ -2485,32 +2483,6 @@
       } catch (e) {
         console.error("LocalStorage save error:", e);
       }
-    }
-
-    function sendTelegramReport(record, wrongList) {
-      const wrongSummary = wrongList.length > 0
-        ? wrongList.map(w => `第${w.displayNum}題(選:${w.userChoiceText.slice(0,3)} / 正:${w.correctText.slice(0,3)})`).join("、")
-        : "全對無錯題";
-
-      const messageText =
-        `📘【國中七年級生物測驗交卷通知】\n` +
-        `01. 交卷時間：${record.submitTime}\n` +
-        `02. 測驗耗時：${record.timeSpent}\n` +
-        `03. 測驗得分：${record.score} 分 (${record.correctCount}/${record.totalCount})\n` +
-        `04. 各維度統計：\n${record.dimSummary.replace(/ \| /g, "\n")}\n` +
-        `05. 錯題清單：${wrongSummary}`;
-
-      const url = `https://api.telegram.org/bot${TG_TOKEN}/sendMessage`;
-      fetch(url, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          chat_id: TG_CHAT_ID,
-          text: messageText
-        })
-      }).catch(err => {
-        console.warn("Telegram API notification skipped or blocked by network:", err);
-      });
     }
 
     // =========================================================================

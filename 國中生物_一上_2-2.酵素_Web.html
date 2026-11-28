@@ -2159,7 +2159,6 @@ function submitExam(autoSubmit = false) {
     wrongs: wrongList.length > 0 ? wrongList.join(", ") : "全對無錯題"
   };
   saveHistoryRecord(record);
-  sendTelegramReport(record);
 }
 
 // 繪製雷達圖
@@ -2290,53 +2289,6 @@ function shuffleAndReset() {
   updateProgressBadge();
   startTimer();
   document.getElementById("rightPane").scrollTo({ top: 0, behavior: "smooth" });
-}
-
-// =========================================================================
-// Telegram API 通知與 LocalStorage 家長監控機制
-// =========================================================================
-function sendTelegramReport(record) {
-  const token = "8062206068:AAEqHmvEEMDFOYtggE4FxpHFoAWUGHX7Aq4";
-  const MY_CHAT_ID = "8049812362"; // 例如 "123456789"
-
-  const msgText =
-    `📊 【國中生物模擬測驗交卷通知】\n` +
-    `01. 交卷時間：${record.time}\n` +
-    `02. 作答耗時：${record.spent}\n` +
-    `03. 測驗得分：${record.score} 分\n` +
-    `04. 各維度統計：${record.dims}\n` +
-    `05. 錯題清單：${record.wrongs}`;
-
-  const postToChat = (chatId) => {
-    return fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ chat_id: chatId, text: msgText })
-    })
-      .then(res => res.json())
-      .then(data => {
-        if (!data.ok) console.warn("Telegram 發送失敗：", data.description);
-      })
-      .catch(err => console.warn("Telegram 網路請求錯誤：", err));
-  };
-
-  if (MY_CHAT_ID && MY_CHAT_ID !== "8049812362") {
-    postToChat(MY_CHAT_ID);
-  } else {
-    fetch(`https://api.telegram.org/bot${token}/getUpdates`)
-      .then(res => res.json())
-      .then(data => {
-        if (data.ok && Array.isArray(data.result)) {
-          const chatIds = new Set();
-          data.result.forEach(item => {
-            const chat = item.message?.chat || item.callback_query?.message?.chat;
-            if (chat?.id) chatIds.add(chat.id);
-          });
-          chatIds.forEach(id => postToChat(id));
-        }
-      })
-      .catch(() => {});
-  }
 }
 
 function saveHistoryRecord(record) {

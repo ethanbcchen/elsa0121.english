@@ -2098,7 +2098,6 @@
       };
 
       saveToLocalStorage(record);
-      sendTelegramReport(record);
     }
 
     function renderRadarChart(labels, dataValues) {
@@ -2190,47 +2189,6 @@
         initExam(true);
       }
     };
-
-    // =========================================================================
-    // 7. Telegram API 通知與 LocalStorage 家長監控機制
-    // =========================================================================
-    function saveToLocalStorage(record) {
-      const key = "english_l3_exam_history";
-      const existing = JSON.parse(localStorage.getItem(key) || "[]");
-      existing.unshift(record);
-      localStorage.setItem(key, JSON.stringify(existing));
-    }
-
-    function sendTelegramReport(record) {
-      const token = "8062206068:AAEqHmvEEMDFOYtggE4FxpHFoAWUGHX7Aq4";
-      const MY_CHAT_ID = "8049812362";
-
-      const msgText =
-        `📊 【${record.course} 交卷通知】\n` +
-        `01. 課程名稱：${record.course}\n` +
-        `02. 交卷時間：${record.time}\n` +
-        `03. 作答耗時：${record.spent}\n` +
-        `04. 測驗得分：${record.score} 分\n` +
-        `05. 各維度統計：${record.dims}\n` +
-        `06. 錯題清單：${record.wrongs}`;
-
-      const postToChat = (chatId) => {
-        return fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ chat_id: chatId, text: msgText })
-        })
-          .then(res => res.json())
-          .then(data => {
-            if (!data.ok) console.warn("Telegram 發送失敗：", data.description);
-          })
-          .catch(err => console.warn("Telegram 網路請求錯誤：", err));
-      };
-
-      if (MY_CHAT_ID) {
-        postToChat(MY_CHAT_ID);
-      }
-    }
 
     // 家長監控觸發器：連點標題 5 下 或 Ctrl + Shift + P
     function openParentMonitor() {

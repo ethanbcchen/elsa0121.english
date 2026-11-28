@@ -2295,14 +2295,7 @@
       wrongItems: wrongNumsText
     });
 
-    // 呼叫 Telegram sendMessage API
-    sendTelegramReport({
-      submitTime: nowStr,
-      elapsed: elapsedStr,
-      score: `${score} 分（答對 ${correctCount}/${currentQuestions.length} 題）`,
-      dimensions: dimSummaryArr.join('\n  - '),
-      wrongItems: wrongNumsText
-    });
+   
 
     document.querySelector('.left-pane').scrollTo({ top: 0, behavior: 'smooth' });
     if (window.MathJax && MathJax.typesetPromise) {
@@ -2422,30 +2415,6 @@
     URL.revokeObjectURL(url);
   }
 
-  // =========================================================================
-  // Telegram Bot API 通知
-  // =========================================================================
-  function sendTelegramReport(payload) {
-    const botToken = "AAEqHmvEEMDFOYtggE4FxpHFoAWUGHX7Aq4";
-    const chatId = "8049812362";
-    const text = [
-      "📘【國中自然科學（生物）測驗交卷通知】",
-      `01. 交卷時間：${payload.submitTime}`,
-      `02. 作答耗時：${payload.elapsed}`,
-      `03. 測驗得分：${payload.score}`,
-      `04. 各維度統計：\n  - ${payload.dimensions}`,
-      `05. 錯題清單：${payload.wrongItems}`
-    ].join("\n");
-
-    fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        chat_id: chatId,
-        text: text
-      })
-    }).catch(err => console.warn("Telegram 通知傳送狀態：", err));
-  }
 
   // =========================================================================
   // localStorage 歷史紀錄與雙隱藏入口 (家長密碼 1234 & ❖ 題庫驗證)

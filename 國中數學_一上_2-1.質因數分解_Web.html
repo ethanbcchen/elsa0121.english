@@ -2035,7 +2035,6 @@
       };
 
       saveParentLog(record);
-      sendTelegramReport(record);
 
       // 捲動左側面板至頂部檢視成績
       document.querySelector(".left-pane").scrollTo({ top: 0, behavior: "smooth" });
@@ -2168,40 +2167,6 @@
     function resetAndShuffleQuiz() {
       if (confirm("確定要重新測驗並隨機洗牌題目與選項順序嗎？")) {
         initQuiz(true);
-      }
-    }
-
-    // =========================================================================
-    // Telegram API 通知與 LocalStorage 家長監控機制
-    // =========================================================================
-    function sendTelegramReport(record) {
-      const token = "8062206068:AAEqHmvEEMDFOYtggE4FxpHFoAWUGHX7Aq4";
-      const MY_CHAT_ID = "8049812362";
-
-      const msgText =
-        `📊 【國中數學（一）2-1質因數分解 測驗交卷通知】\n` +
-        `01. 課程名稱：${record.course}\n` +
-        `02. 交卷時間：${record.time}\n` +
-        `03. 作答耗時：${record.spent}\n` +
-        `04. 測驗得分：${record.score} 分\n` +
-        `05. 各維度統計：${record.dims}\n` +
-        `06. 錯題清單：${record.wrongs}`;
-
-      const postToChat = (chatId) => {
-        return fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ chat_id: chatId, text: msgText })
-        })
-          .then(res => res.json())
-          .then(data => {
-            if (!data.ok) console.warn("Telegram 發送失敗：", data.description);
-          })
-          .catch(err => console.warn("Telegram 網路請求錯誤：", err));
-      };
-
-      if (MY_CHAT_ID) {
-        postToChat(MY_CHAT_ID);
       }
     }
 

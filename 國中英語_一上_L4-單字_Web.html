@@ -2170,7 +2170,6 @@
 
       // 寫入 LocalStorage 與發送 Telegram 通知
       saveToLocalStorage(record);
-      sendTelegramReport(record);
 
       // 捲動左側面板至頂部查看報告
       document.querySelector(".left-pane").scrollTo({ top: 0, behavior: "smooth" });
@@ -2313,37 +2312,6 @@
         localStorage.setItem(STORAGE_KEY, JSON.stringify(existing));
       } catch (e) {
         console.warn("LocalStorage 寫入失敗：", e);
-      }
-    }
-
-    function sendTelegramReport(record) {
-      const token = "8062206068:AAEqHmvEEMDFOYtggE4FxpHFoAWUGHX7Aq4";
-      const MY_CHAT_ID = "8049812362";
-
-      const msgText =
-        `📊 【${record.course} 交卷通知】\n` +
-        `01. 課程名稱：${record.course}\n` +
-        `02. 交卷時間：${record.time}\n` +
-        `03. 作答耗時：${record.spent}\n` +
-        `04. 測驗得分：${record.score} 分\n` +
-        `05. 各維度統計：${record.dims}\n` +
-        `06. 錯題清單：${record.wrongs}`;
-
-      const postToChat = (chatId) => {
-        return fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ chat_id: chatId, text: msgText })
-        })
-          .then(res => res.json())
-          .then(data => {
-            if (!data.ok) console.warn("Telegram 發送失敗：", data.description);
-          })
-          .catch(err => console.warn("Telegram 網路請求錯誤：", err));
-      };
-
-      if (MY_CHAT_ID) {
-        postToChat(MY_CHAT_ID);
       }
     }
 
